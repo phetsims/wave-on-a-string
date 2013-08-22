@@ -13,7 +13,7 @@ define( function( require ) {
     Strings = require( 'Strings' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     WOASModel = require( 'model/WOASModel' ),
-    WOASTabView = require( 'view/WOASTabView' ),
+    WOASView = require( 'view/WOASView' ),
     imageLoader = require( 'imageLoader' );
 
   var simOptions = {
@@ -32,7 +32,7 @@ define( function( require ) {
         name: Strings.simTitle,
         icon: new Rectangle( 0, 0, 50, 50, { fill: 'blue' } ),
         createModel: function() { return new WOASModel( 768, 504 ); },
-        createView: function( model ) { return new WOASTabView( model ); },
+        createView: function( model ) { return new WOASView( model ); },
         backgroundColor: "#FFF9BA"
       }
     ], simOptions ).start();
