@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1"/>
+  <title>Test Wave on a String model</title>
+  <style>
+    input[type="range"] {
+      margin-left: 30px;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="640" height="240"></canvas><br>
+  
+  <input type="radio" name="end" checked="checked" id="radioFixed"></input><label for="radioFixed">Fixed</label>
+  <input type="radio" name="end" id="radioLoose"></input><label for="radioLoose">Loose</label>
+  <input type="radio" name="end" id="radioNone"></input><label for="radioNone">None</label>
+  <input type="checkbox" id="oldModel" checked="checked"></input><label for="oldModel">Old model</label>
+  <input type="checkbox" id="fixedDt" checked="checked"></input><label for="fixedDt">Fixed dt</label>
+  <br>
+  <input type="range" id="timeSpeed" min="25" max="175" value="100"></input><label for="timeSpeed">Time Speed</label>
+  <input type="range" id="waveSpeed" min="25" max="100" value="100"></input><label for="waveSpeed">Wave Speed</label>
+  <input type="range" id="friction" min="0" max="100" value="50"></input><label for="friction">Friction</label>
+  <br>
+  <button type="button" id="clear">clear</button>
+  <button type="button" id="reset">reset</button>
+  <input type="range" id="resolution" min="32" max="640" value="128"></input><label for="resolution">Resolution</label>
+  
+  <script type="text/javascript">
+  
+  // laziest polyfill ever
+  if ( !window.requestAnimationFrame ) {
+    var vendors = [ 'ms', 'moz', 'webkit', 'o' ];
+    for ( var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x ) {
+      window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+  }
+  
+  var canvas = document.getElementById( 'canvas' );
+  var context = canvas.getContext( '2d' );
+  context.strokeStyle = 'black';
+  context.lineWidth = 1;
+  
+  var radioFixed = document.getElementById( 'radioFixed' );
+  var radioLoose = document.getElementById( 'radioLoose' );
+  var radioNone = document.getElementById( 'radioNone' );
+  
+  var oldModelCheck = document.getElementById( 'oldModel' );
+  var fixedDtCheck = document.getElementById( 'fixedDt' );
+  
+  var timeSlider = document.getElementById( 'timeSpeed' );
+  var waveSlider = document.getElementById( 'waveSpeed' );
+  var frictionSlider = document.getElementById( 'friction' );
+  var resolutionSlider = document.getElementById( 'resolution' );
+  
+  var n = 128;
+  var last = new Float64Array( n );
+  var now = new Float64Array( n );
+  var next = new Float64Array( n );
+  var lastTimestep = 0.017; // guess at a 60fps framerate for initialization
+  var leftValue = 0;
+  var isDown = false;
+  
+  // touch support not yet needed
+  document.addEventListener( 'mousedown', function( evt ) { isDown = true; } );
+  document.addEventListener( 'mouseup',   function( evt ) { isDown = false; } );
+  canvas.addEventListener( 'mousemove',   function( evt ) { if ( isDown ) { leftValue = evt.clientY - canvas.height / 2; evt.preventDefault(); } } );
+  
+  function clear() {
+    leftValue = 0;
+    n = resolutionSlider.valueAsNumber;
+    last = new Float64Array( n );
+    now = new Float64Array( n );
+    next = new Float64Array( n );
+  }
+  document.getElementById( 'clear' ).addEventListener( 'click', clear );
+  resolutionSlider.addEventListener( 'input', clear );
+  
+  function reset() {
+    radioFixed.checked = true;
+    oldModelCheck.checked = true;
+    fixedDtCheck.checked = true;
+    timeSlider.valueAsNumber = 100;
+    waveSlider.valueAsNumber = 100;
+    frictionSlider.valueAsNumber = 50;
+    resolutionSlider.valueAsNumber = 128;
+    clear();
+  }
+  document.getElementById( 'reset' ).addEventListener( 'click', reset );
+  
+  function step( dt ) {
+    // cap the dt, so we don't jump into an unreasonable state
+    if ( dt > 0.5 ) { dt = 0.5; }
+    
+    // constants for this frame
+    var b = frictionSlider.valueAsNumber * 0.02;
+    var v = waveSpeed.valueAsNumber / 10;
+    var timestep = dt * timeSlider.valueAsNumber / 100;
+    var t0 = lastTimestep;
+    var t1 = timestep;
+    var dx = 1;
+    
+    // old shortcuts
+    if ( fixedDtCheck.checked ) {
+      dt = 0.10;
+      t0 = dt;
+      t1 = dt;
+      timestep = dt;
+    }
+    
+    // console.log( 'dt: ' + dt );
+    // console.log( 'v: ' + v );
+    // console.log( 'dx: ' + dx );
+    // console.log( 'b: ' + b );
+    // console.log( 'alpha: ' + alpha );
+    // console.log( 'beta: ' + beta );
+    
+    now[0] = next[0] = leftValue;
+    if ( radioFixed.checked ) {
+      now[n-1] = 0;
+    } else if ( radioLoose.checked ) {
+      now[n-1] = now[n-2];
+    } else if ( radioNone.checked ) {
+      now[n-1] = last[n-2];
+    }
+    var k;
+    if ( oldModelCheck.checked ) {
+      var beta = b * dt / 2;
+      var alpha = v * dt / dx;
+      for ( k = 1; k < n-1; k++ ) {
+        next[k] = (1 / (beta + 1)) * ((beta - 1) * last[k] + 2 * (1 - (alpha * alpha)) * now[k] + (alpha * alpha) * (now[k + 1] + now[k - 1])   );
+      }
+    } else {
+      var VX = v * v / ( dx * dx );
+      var T = t0 * t1 * ( t0 + t1 );
+      
+      var mul = T / ( 2 * t0 + b * t0 * t0 );
+      var forNow = ( 2 * t0 + 2 * t1 - b * ( t1 * t1 - t0 * t0 ) ) / T - 2 * VX;
+      var forBefore = ( -2 * t1 + b * t1 * t1 ) / T;
+      for ( k = 1; k < n-1; k++ ) {
+        next[k] = mul * ( forNow * now[k] + forBefore * last[k] + VX * ( now[k+1] + now[k-1] ) );
+      }
+    }
+    lastTimestep = timestep;
+    
+    // rotate the arrays
+    var tmpArray = last;
+    last = now;
+    now = next;
+    next = tmpArray;
+    
+    if ( radioFixed.checked ) {
+      last[n-1] = now[n-1] = 0;
+    } else if ( radioLoose.checked ) {
+      last[n-1] = now[n-1];
+      now[n-1] = now[n-2];
+    } else if ( radioNone.checked ) {
+      last[n-1] = now[n-2]; // TODO: note this potential bug in the normal code?
+    }
+    
+    // draw the line
+    var width = canvas.width;
+    var height = canvas.height;
+    context.clearRect( 0, 0, width, height );
+    context.setTransform( width / ( n - 1 ), 0, 0, 1, 0, height / 2 ); // scale to the available region
+    
+    context.beginPath();
+    context.moveTo( 0, now[0] );
+    for ( var i = 1; i < n; i++ ) {
+      context.lineTo( i, now[i] );
+    }
+    context.setTransform( 1, 0, 0, 1, 0, 0 );
+    context.stroke();
+  }
+  
+  var lastTime = 0;
+  var timeElapsed = 0;
+  function tick() {
+    window.requestAnimationFrame( tick, canvas );
+    
+    var timeNow = new Date().getTime();
+    if ( lastTime != 0 ) {
+      timeElapsed = (timeNow - lastTime) / 1000.0;
+    }
+    lastTime = timeNow;
+    
+    step( timeElapsed );
+  }
+  window.requestAnimationFrame( tick, canvas );
+  
+  </script>
+</body>
+</html>
