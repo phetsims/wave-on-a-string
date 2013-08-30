@@ -103,7 +103,7 @@
   
   function step( dt ) {
     // cap the dt, so we don't jump into an unreasonable state
-    if ( dt > 0.5 ) { dt = 0.5; }
+    if ( dt > 0.1 ) { dt = 0.1; }
     
     // constants for this frame
     var b = frictionSlider.valueAsNumber * 0.02;
