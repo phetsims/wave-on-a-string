@@ -24,6 +24,7 @@
   <input type="radio" name="end" id="radioNone"></input><label for="radioNone">None</label>
   <input type="checkbox" id="oldModel" checked="checked"></input><label for="oldModel">Old model</label>
   <input type="checkbox" id="fixedDt" checked="checked"></input><label for="fixedDt">Fixed dt</label>
+  <input type="checkbox" id="filter"></input><label for="filter">Filter</label>
   <input type="checkbox" id="random"></input><label for="random">Random</label>
   <br>
   <input type="range" id="timeSpeed" min="25" max="175" value="100"></input><label for="timeSpeed">Time Speed</label>
@@ -56,6 +57,7 @@
   
   var oldModelCheck = document.getElementById( 'oldModel' );
   var fixedDtCheck = document.getElementById( 'fixedDt' );
+  var filterCheck = document.getElementById( 'filter' );
   var randomCheck = document.getElementById( 'random' );
   
   var timeSlider = document.getElementById( 'timeSpeed' );
@@ -154,6 +156,28 @@
       var forBefore = ( -2 * t1 + b * t1 * t1 ) / T;
       for ( k = 1; k < n-1; k++ ) {
         next[k] = mul * ( forNow * now[k] + forBefore * last[k] + VX * ( now[k+1] + now[k-1] ) );
+      }
+    }
+    if ( filterCheck.checked ) {
+      // see http://www.me.jhu.edu/fsag/Publications/Papers/JCP92.pdf
+      for ( k = 1; k < n-1; k++ ) {
+        var da = next[k+1] - next[k];
+        var db = next[k-1] - next[k];
+        if ( da * db > 0 ) {
+          // it's a local extremum
+          var aLarger = Math.abs( da ) > Math.abs( db );
+          var dLarge = aLarger ? da : db;
+          var dSmall = aLarger ? db : da;
+          var ea = 0.25 * dLarge;
+          var eb = 0.5 * dSmall;
+          var correction = Math.abs( ea ) > Math.abs( eb ) ? eb : ea; // choose the smaller correction
+          next[k] += correction;
+          if ( aLarger ) {
+            next[k+1] -= correction;
+          } else {
+            next[k-1] -= correction;
+          }
+        }
       }
     }
     lastTimestep = timestep;
