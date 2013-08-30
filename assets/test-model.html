@@ -183,9 +183,9 @@
       
       for ( k = 1; k < n-1; k++ ) {
         next[k] = (
-                    -( tt[3]*now[k-1] + tt[4]*now[k] + tt[5]*now[k+1] + tt[6]*last[k-1] + tt[7]*last[k] + tt[8]*last[k+1] )
+                    -(      tt[3]*now[k-1] + tt[4]*now[k] + tt[5]*now[k+1] + tt[6]*last[k-1] + tt[7]*last[k] + tt[8]*last[k+1] )
                     + v*v*( xx[3]*now[k-1] + xx[4]*now[k] + xx[5]*now[k+1] + xx[6]*last[k-1] + xx[7]*last[k] + xx[8]*last[k+1] )
-                    - b*( t[3]*now[k-1] + t[4]*now[k] + t[5]*now[k+1] + t[6]*last[k-1] + t[7]*last[k] + t[8]*last[k+1] )
+                    - b*(    t[3]*now[k-1] +  t[4]*now[k] +  t[5]*now[k+1] +  t[6]*last[k-1] +  t[7]*last[k] +  t[8]*last[k+1] )
                   ) / ( tt[1] - v*v*xx[1] + b*t[1] );
       }
     }
