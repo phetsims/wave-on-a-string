@@ -22,7 +22,11 @@
   <input type="radio" name="end" checked="checked" id="radioFixed"></input><label for="radioFixed">Fixed</label>
   <input type="radio" name="end" id="radioLoose"></input><label for="radioLoose">Loose</label>
   <input type="radio" name="end" id="radioNone"></input><label for="radioNone">None</label>
-  <input type="checkbox" id="oldModel" checked="checked"></input><label for="oldModel">Old model</label>
+  <br>
+  <input type="radio" name="model" id="oldModel" checked="checked"></input><label for="oldModel">Old model</label>
+  <input type="radio" name="model" id="variableModel"></input><label for="variableModel">Variable model</label>
+  <input type="radio" name="model" id="customModel"></input><label for="customModel">Custom model</label>
+  <br>
   <input type="checkbox" id="fixedDt" checked="checked"></input><label for="fixedDt">Fixed dt</label>
   <input type="checkbox" id="filter"></input><label for="filter">Filter</label>
   <input type="checkbox" id="random"></input><label for="random">Random</label>
@@ -56,6 +60,9 @@
   var radioNone = document.getElementById( 'radioNone' );
   
   var oldModelCheck = document.getElementById( 'oldModel' );
+  var variableModelCheck = document.getElementById( 'variableModel' );
+  var customModelCheck = document.getElementById( 'customModel' );
+  
   var fixedDtCheck = document.getElementById( 'fixedDt' );
   var filterCheck = document.getElementById( 'filter' );
   var randomCheck = document.getElementById( 'random' );
@@ -147,7 +154,7 @@
       for ( k = 1; k < n-1; k++ ) {
         next[k] = (1 / (beta + 1)) * ((beta - 1) * last[k] + 2 * (1 - (alpha * alpha)) * now[k] + (alpha * alpha) * (now[k + 1] + now[k - 1])   );
       }
-    } else {
+    } else if ( variableModelCheck.checked ) {
       var VX = v * v / ( dx * dx );
       var T = t0 * t1 * ( t0 + t1 );
       
@@ -156,6 +163,30 @@
       var forBefore = ( -2 * t1 + b * t1 * t1 ) / T;
       for ( k = 1; k < n-1; k++ ) {
         next[k] = mul * ( forNow * now[k] + forBefore * last[k] + VX * ( now[k+1] + now[k-1] ) );
+      }
+    } else if ( customModelCheck.checked ) {
+      var t = [
+        0, -1/(2*dt), 0,
+        0,  0,        0,
+        0,  1/(2*dt), 0
+      ];
+      var tt = [
+        0,  1/(dt*dt), 0,
+        0, -2/(dt*dt), 0,
+        0,  1/(dt*dt), 0
+      ];
+      var xx = [
+        0,          0,         0,
+        1/(dx*dx), -2/(dx*dx), 1/(dx*dx),
+        0,          0,         0
+      ];
+      
+      for ( k = 1; k < n-1; k++ ) {
+        next[k] = (
+                    -( tt[3]*now[k-1] + tt[4]*now[k] + tt[5]*now[k+1] + tt[6]*last[k-1] + tt[7]*last[k] + tt[8]*last[k+1] )
+                    + v*v*( xx[3]*now[k-1] + xx[4]*now[k] + xx[5]*now[k+1] + xx[6]*last[k-1] + xx[7]*last[k] + xx[8]*last[k+1] )
+                    + b*( t[3]*now[k-1] + t[4]*now[k] + t[5]*now[k+1] + t[6]*last[k-1] + t[7]*last[k] + t[8]*last[k+1] )
+                  ) / ( tt[1] - v*v*xx[1] - b*t[1] );
       }
     }
     if ( filterCheck.checked ) {
