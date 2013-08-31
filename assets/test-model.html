@@ -76,6 +76,9 @@
   var last = new Float64Array( n );
   var now = new Float64Array( n );
   var next = new Float64Array( n );
+  var aRow = new Float64Array( n );
+  var bRow = new Float64Array( n );
+  var cRow = new Float64Array( n );
   var lastTimestep = 0.017; // guess at a 60fps framerate for initialization
   var leftValue = 0;
   var isDown = false;
@@ -91,6 +94,9 @@
     last = new Float64Array( n );
     now = new Float64Array( n );
     next = new Float64Array( n );
+    aRow = new Float64Array( n );
+    bRow = new Float64Array( n );
+    cRow = new Float64Array( n );
   }
   document.getElementById( 'clear' ).addEventListener( 'click', clear );
   resolutionSlider.addEventListener( 'input', clear );
@@ -186,13 +192,54 @@
         0,          0,         0
       ];
       
-      for ( k = 1; k < n-1; k++ ) {
-        next[k] = (
-                    -(      tt[3]*now[k-1] + tt[4]*now[k] + tt[5]*now[k+1] + tt[6]*last[k-1] + tt[7]*last[k] + tt[8]*last[k+1] )
-                    + v*v*( xx[3]*now[k-1] + xx[4]*now[k] + xx[5]*now[k+1] + xx[6]*last[k-1] + xx[7]*last[k] + xx[8]*last[k+1] )
-                    - b*(    t[3]*now[k-1] +  t[4]*now[k] +  t[5]*now[k+1] +  t[6]*last[k-1] +  t[7]*last[k] +  t[8]*last[k+1] )
-                  ) / ( tt[1] - v*v*xx[1] + b*t[1] );
+      var prevNext0 = next[0];
+      var prevNextN1 = next[n-1];
+      
+      // run http://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm
+      for ( k = 0; k < n; k++ ) {
+        // next is used for the vector v (depending on diagram), on the right side, where Ax=v. It later will turn into x
+        // TODO: we can distribute here to optimize computation
+        next[k] = -( tt[4]*now[k] + tt[7]*last[k] ) + v * v * ( xx[4]*now[k] + xx[7]*last[k] ) - b * ( t[4]*now[k] + t[7]*last[k] );
+        if ( k > 0 ) {
+          next[k] += -( tt[3]*now[k-1] + tt[6]*last[k-1] ) + v * v * ( xx[3]*now[k-1] + xx[6]*last[k-1] ) - b * ( t[3]*now[k-1] + t[6]*last[k-1] );
+        }
+        // TODO: a/b are constants here except for the endpoints, try tooptimize them out (we still need the c array however)
+        aRow[k] = tt[0] - v*v*xx[0] + b*t[0];
+        bRow[k] = tt[1] - v*v*xx[1] + b*t[1];
+        cRow[k] = tt[2] - v*v*xx[2] + b*t[2];
+        if ( k < n - 1 ) {
+          next[k] += -( tt[5]*now[k+1] + tt[8]*last[k+1] ) + v * v * ( xx[5]*now[k+1] + xx[8]*last[k+1] ) - b * ( t[5]*now[k+1] + t[8]*last[k+1] );
+        }
       }
+      // TODO: figure out how to gracefully handle bRow[0],cRow[0] and aRow[n-1],bRow[n-1]. since d[0] and d[n-1] doesn't have the influence, perhaps it works out nicely right now?
+      // console.log( 'a: ' + aRow[0] + ' ' + aRow[1] + ' ... ' + aRow[n-1] );
+      // console.log( 'b: ' + bRow[0] + ' ' + bRow[1] + ' ... ' + bRow[n-1] );
+      // console.log( 'c: ' + cRow[0] + ' ' + cRow[1] + ' ... ' + cRow[n-1] );
+      // console.log( 'd: ' + next[0] + ' ' + next[1] + ' ... ' + next[n-1] );
+      // forward pass
+      cRow[0] /= bRow[0];
+      next[0] /= bRow[0];
+      for ( k = 1; k < n; k++ ) {
+        var divisor = bRow[k] - cRow[k-1] * aRow[k];
+        cRow[k] /= divisor;
+        next[k] = ( next[k] - next[k-1] * aRow[k] ) / divisor;
+      }
+      // back substitution
+      for ( k = n - 2; k >= 0; k-- ) {
+        next[k] = next[k] - cRow[k] * next[k+1];
+      }
+      
+      // fill in first/last next values to match the other algorithmic style
+      next[0] = prevNext0;
+      next[n-1] = prevNextN1;
+      
+      // for ( k = 1; k < n-1; k++ ) {
+      //   next[k] = (
+      //               -(      tt[3]*now[k-1] + tt[4]*now[k] + tt[5]*now[k+1] + tt[6]*last[k-1] + tt[7]*last[k] + tt[8]*last[k+1] )
+      //               + v*v*( xx[3]*now[k-1] + xx[4]*now[k] + xx[5]*now[k+1] + xx[6]*last[k-1] + xx[7]*last[k] + xx[8]*last[k+1] )
+      //               - b*(    t[3]*now[k-1] +  t[4]*now[k] +  t[5]*now[k+1] +  t[6]*last[k-1] +  t[7]*last[k] +  t[8]*last[k+1] )
+      //             ) / ( tt[1] - v*v*xx[1] + b*t[1] );
+      // }
     }
     if ( filterCheck.checked ) {
       // see http://www.me.jhu.edu/fsag/Publications/Papers/JCP92.pdf
