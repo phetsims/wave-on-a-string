@@ -32,8 +32,8 @@
   <input type="checkbox" id="random"></input><label for="random">Random</label>
   <br>
   <input type="range" id="timeSpeed" min="25" max="175" value="100"></input><label for="timeSpeed">Time Speed</label>
-  <input type="range" id="waveSpeed" min="25" max="100" value="100"></input><label for="waveSpeed">Wave Speed</label>
-  <input type="range" id="friction" min="0" max="100" value="50"></input><label for="friction">Friction</label>
+  <input type="range" id="waveSpeed" min="25" max="175" value="100"></input><label for="waveSpeed">Wave Speed</label>
+  <input type="range" id="friction" min="0" max="100" value="0"></input><label for="friction">Friction</label>
   <br>
   <button type="button" id="clear">clear</button>
   <button type="button" id="reset">reset</button>
@@ -189,7 +189,10 @@
       var xx = [
         0,          0,         0,
         1/(dx*dx), -2/(dx*dx), 1/(dx*dx),
+        // 1/(2*dx*dx), -2/(2*dx*dx), 1/(2*dx*dx),
         0,          0,         0
+        // 0,          0,         0,
+        // 1/(2*dx*dx), -2/(2*dx*dx), 1/(2*dx*dx)
       ];
       
       var prevNext0 = next[0];
@@ -203,7 +206,7 @@
         if ( k > 0 ) {
           next[k] += -( tt[3]*now[k-1] + tt[6]*last[k-1] ) + v * v * ( xx[3]*now[k-1] + xx[6]*last[k-1] ) - b * ( t[3]*now[k-1] + t[6]*last[k-1] );
         }
-        // TODO: a/b are constants here except for the endpoints, try tooptimize them out (we still need the c array however)
+        // TODO: a/b are constants here except for the endpoints, try to optimize them out (we still need the c array however)
         aRow[k] = tt[0] - v*v*xx[0] + b*t[0];
         bRow[k] = tt[1] - v*v*xx[1] + b*t[1];
         cRow[k] = tt[2] - v*v*xx[2] + b*t[2];
@@ -216,6 +219,29 @@
       // console.log( 'b: ' + bRow[0] + ' ' + bRow[1] + ' ... ' + bRow[n-1] );
       // console.log( 'c: ' + cRow[0] + ' ' + cRow[1] + ' ... ' + cRow[n-1] );
       // console.log( 'd: ' + next[0] + ' ' + next[1] + ' ... ' + next[n-1] );
+      
+      // console.log( aRow[0], bRow[0], cRow[0] );
+      // log the tridiagonal matrix
+      // var str = 'A = {';
+      // for ( var row = 0; row < n; row++ ) {
+      //   if ( row > 0 ) { str += '},{'; }
+      //   for ( var col = 0; col < n; col++ ) {
+      //     if ( col > 0 ) { str += ','; }
+      //     if ( row - col === 1 ) {
+      //       str += aRow[row];
+      //     } else if ( row - col === 0 ) {
+      //       str += bRow[row];
+      //     } else if ( row - col === -1 ) {
+      //       str += cRow[row];
+      //     } else {
+      //       str += '0';
+      //     }
+      //   }
+      // }
+      // str += '}';
+      // console.log( str );
+      // console.log( 'b = {' + Array.apply( [], next ).join( ',' ) + '}' );
+      
       // forward pass
       cRow[0] /= bRow[0];
       next[0] /= bRow[0];
@@ -228,6 +254,9 @@
       for ( k = n - 2; k >= 0; k-- ) {
         next[k] = next[k] - cRow[k] * next[k+1];
       }
+      
+      //log result
+      // console.log( 'x = {' + Array.apply( [], next ).join( ',' ) + '}' );
       
       // fill in first/last next values to match the other algorithmic style
       next[0] = prevNext0;
