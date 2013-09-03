@@ -24,8 +24,7 @@ define( function( require ) {
       window;
     arrowShape.moveTo( 0, 0 );
     arrowShape.lineTo( 605, 0 );
-    this.addChild( new Path( {
-      shape: arrowShape,
+    this.addChild( new Path( arrowShape, {
       stroke: "#FFA91D",
       lineDash: [8, 8],
       lineWidth: 2,

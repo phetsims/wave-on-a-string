@@ -24,7 +24,7 @@ define( function( require ) {
     for ( ; i < length; i++ ) {
       this.addChild( new Node( {children: [new Rectangle( 0, ((i + 1) * 33 - 22), 22, 22, 5, 5, {fill: "#FFF"} ), new CheckBox( new Text( options.check[i].text, { fontSize: 15 } ), options.check[i].property, {y: (i + 1) * 33} )]} ) );
     }
-    this.addChild( new Path( { shape: Shape.lineSegment( -10, 10, -10, this.height ), stroke: 'gray', lineWidth: 1 } ) );
+    this.addChild( new Path( Shape.lineSegment( -10, 10, -10, this.height ), { stroke: 'gray', lineWidth: 1 } ) );
   }
 
   inherit( Node, CheckBoxGroup );

@@ -19,13 +19,11 @@ define( function( require ) {
     var color,
       theStringShape = new Shape(),
       theStringRectShape = new Shape(),
-      theStringPath = new Path( {
-        shape: theStringShape,
+      theStringPath = new Path( theStringShape, {
         stroke: "#F00",
         lineWidth: 1, renderer: 'svg', layerSplit: true
       } ),
-      theStringRectPath = new Path( {
-        shape: theStringRectShape,
+      theStringRectPath = new Path( theStringRectShape, {
         fill: "#FFFFB7", renderer: 'svg', layerSplit: true
       } ),
       theString = [];

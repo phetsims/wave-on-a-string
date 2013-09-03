@@ -34,8 +34,7 @@ define( function( require ) {
     postShape.lineTo( -5, 130 );
     postShape.close();
 
-    var post = new Path( {
-      shape: postShape,
+    var post = new Path( postShape, {
       stroke: "#000",
       fill: postGradient,
       lineWidth: 1,

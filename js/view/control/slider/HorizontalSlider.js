@@ -36,7 +36,7 @@ define( function( require ) {
       positionToValue = new LinearFunction( xMin, xMax, value.min, value.max, true ),
       nodeTick = new Node();
 
-    this.addChild( new Path( { shape: Shape.lineSegment( 0, 0, w - track.width, 0 ), stroke: 'black', lineWidth: 3 } ) );
+    this.addChild( new Path( Shape.lineSegment( 0, 0, w - track.width, 0 ), { stroke: 'black', lineWidth: 3 } ) );
 
     if ( tick && tick.step ) {
       var i = value.min,
@@ -47,7 +47,7 @@ define( function( require ) {
         if ( i === value.max || i === value.min || i === (value.min + value.max) / 2 ) {
           tickHeight = 30;
         }
-        nodeTick.addChild( new Path( { shape: Shape.lineSegment( valueToPosition( i ), -5, valueToPosition( i ), -tickHeight ), stroke: 'black', lineWidth: 1 } ) );
+        nodeTick.addChild( new Path( Shape.lineSegment( valueToPosition( i ), -5, valueToPosition( i ), -tickHeight ), { stroke: 'black', lineWidth: 1 } ) );
       }
       nodeTick.addChild( new Text( tick.minText, {centerX: xMin, bottom: -33, fontSize: 15} ) );
       nodeTick.addChild( new Text( tick.maxText, {centerX: xMax, bottom: -33, fontSize: 15} ) );

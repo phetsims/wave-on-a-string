@@ -16,8 +16,7 @@ define( function( require ) {
   function TheStringNodeRect( x, y, model, options ) {
     Node.call( this, {x: x, y: y, scale: 1, renderer: 'svg', layerSplit: true } );
     var theStringRectShape = new Shape(),
-      theStringRectPath = new Path( {
-        shape: theStringRectShape,
+      theStringRectPath = new Path( theStringRectShape, {
         fill: "#FFFFB7", renderer: 'svg', layerSplit: true
       } );
     this.addChild( theStringRectPath );

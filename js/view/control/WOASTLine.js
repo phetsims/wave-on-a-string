@@ -29,8 +29,7 @@ define( function( require ) {
     this.addChild( new Rectangle( 0, -5, 750, 10, {} ) );
     this.addChild( new Rectangle( 740 * 2, -10, 40, 20, {fill: lineGradient, scale: 0.5, stroke: '#000', lineWidth: 0.5} ) );
     this.addChild( new Rectangle( 750, -10, 20, 20, {fill: lineGradient, stroke: '#000', lineWidth: 0.5} ) );
-    this.addChild( new Path( {
-      shape: arrowShape,
+    this.addChild( new Path( arrowShape, {
       stroke: "#F00",
       lineDash: [15, 15],
       lineWidth: 2

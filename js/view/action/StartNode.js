@@ -28,8 +28,7 @@ define( function( require ) {
         .addColorStop( 0, "#666" )
         .addColorStop( 0.3, "#FFF" )
         .addColorStop( 1, "#666" ),
-      post = new Path( {
-        shape: postShape,
+      post = new Path( postShape, {
         stroke: "#000",
         fill: postGradient,
         lineWidth: 1
