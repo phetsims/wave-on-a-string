@@ -24,7 +24,7 @@ define( function( require ) {
             'Conversation of this simulation to HTML5 was funded by the Royal Society of Chemistry.'
   };
 
-  SimLauncher.launch( {imageNames: []}, function() {
+  SimLauncher.launch( function() {
     //Create and start the sim
     new Sim( Strings.simTitle, [
       {
