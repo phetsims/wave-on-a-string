@@ -12,7 +12,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var HorizontalSlider = require( 'view/control/slider/HorizontalSlider' );
-  var imageLoader = require( 'imageLoader' );
   var ArrowButton = require( 'view/control/slider/ArrowButton' );
 
   function Slider( x, y, options ) {
@@ -54,7 +53,7 @@ define( function( require ) {
     if ( options.type === 'button' ) {
       this.addChild( buttonNode );
     }
-    this.addChild( new HorizontalSlider( 5, options.height - 20, options.width - 10, options.property, imageLoader.getImage( 'slider.png' ), options.scope, options.rounding, tick ) );
+    this.addChild( new HorizontalSlider( 5, options.height - 20, options.width - 10, options.property, require( 'image!WOAS/../images/slider.png' ), options.scope, options.rounding, tick ) );
     this.addChild( new Text( options.title, {centerX: options.width / 2, top: 3, fontSize: 18} ) );
 
     options.property.link( function updateMass( value ) {

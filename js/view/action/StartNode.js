@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var imageLoader = require( 'imageLoader' );
   var Image = require( 'SCENERY/nodes/Image' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -21,8 +20,8 @@ define( function( require ) {
 
     Node.call( this, {x: x, y: y, scale: 1, renderer: 'svg', layerSplit: true } );
     var thisNode = this,
-      key = new Node( {children: [new Image( imageLoader.getImage( 'wrench_2.png' ), {x: -40, y: -25, scale: 0.9} )], cursor: 'pointer'} ),
-      wheel = new Node( {children: [new Image( imageLoader.getImage( 'oscillator_wheel.png' ), {x: -90 * 0.4, y: -90 * 0.4, scale: 0.4} )], y: 0} ),
+      key = new Node( {children: [new Image( require( 'image!WOAS/../images/wrench_2.png' ), {x: -40, y: -25, scale: 0.9} )], cursor: 'pointer'} ),
+      wheel = new Node( {children: [new Image( require( 'image!WOAS/../images/oscillator_wheel.png' ), {x: -90 * 0.4, y: -90 * 0.4, scale: 0.4} )], y: 0} ),
       postShape = new Shape(),
       postGradient = new LinearGradient( -5, 0, 5, 0 )
         .addColorStop( 0, "#666" )

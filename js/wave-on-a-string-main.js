@@ -13,8 +13,7 @@ define( function( require ) {
     Strings = require( 'Strings' ),
     Rectangle = require( 'SCENERY/nodes/Rectangle' ),
     WOASModel = require( 'model/WOASModel' ),
-    WOASView = require( 'view/WOASView' ),
-    imageLoader = require( 'imageLoader' );
+    WOASView = require( 'view/WOASView' );
 
   var simOptions = {
     credits: 'PhET Development Team -\n' +
@@ -25,7 +24,7 @@ define( function( require ) {
             'Conversation of this simulation to HTML5 was funded by the Royal Society of Chemistry.'
   };
 
-  SimLauncher.launch( imageLoader, function() {
+  SimLauncher.launch( {imageNames: []}, function() {
     //Create and start the sim
     new Sim( Strings.simTitle, [
       {

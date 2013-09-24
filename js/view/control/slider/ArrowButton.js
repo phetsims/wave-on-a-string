@@ -11,7 +11,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PushButton = require( 'SUN/PushButton' );
-  var imageLoader = require( 'imageLoader' );
   var Image = require( 'SCENERY/nodes/Image' );
 
   /**
@@ -23,10 +22,10 @@ define( function( require ) {
   function ArrowButton( direction, callback, options ) {
 
     var button = new PushButton(
-      new Node( {children: [new Image( imageLoader.getImage( 'tweaker_right_unpressed.png' ) )]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'tweaker_right_hover.png' ) )]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'tweaker_right_pressed.png' ) )]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'tweaker_right_disabled.png' ) )]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/tweaker_right_unpressed.png' ) )]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/tweaker_right_hover.png' ) )]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/tweaker_right_pressed.png' ) )]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/tweaker_right_disabled.png' ) )]} ),
       callback, {scale: 1.3, centerX: 0, centerY: 0} );
     if ( direction === 'left' ) {
       button.scale( -1, 1 );

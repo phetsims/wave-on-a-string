@@ -14,7 +14,6 @@ define( function( require ) {
   var EndNode = require( 'view/action/EndNode' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
-  var imageLoader = require( 'imageLoader' );
   var Image = require( 'SCENERY/nodes/Image' );
 
   function ActionView( model ) {
@@ -35,7 +34,7 @@ define( function( require ) {
     this.addChild( new EndNode( 70 + 600, 215, model, {max: 120, min: -120} ) );
     this.addChild( new TheStringNode( 70, 215, model, {radius: 5, max: 120, min: -120} ) );
     this.addChild( new StartNode( 70, 215, model, {max: 120, min: -120} ) );
-    this.addChild( window = new Node( {children: [new Image( imageLoader.getImage( 'window_edge.png' ), {x: -19, y: -210 / 2, scale: 1} )], x: 90 + 600, y: 215} ) );
+    this.addChild( window = new Node( {children: [new Image( require( 'image!WOAS/../images/window_edge.png' ), {x: -19, y: -210 / 2, scale: 1} )], x: 90 + 600, y: 215} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {
       window.setVisible( value === 'noEnd' );

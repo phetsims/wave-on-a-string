@@ -15,7 +15,6 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PushButton = require( 'SUN/PushButton' );
-  var imageLoader = require( 'imageLoader' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ToggleButton = require( 'SUN/ToggleButton' );
 
@@ -47,15 +46,15 @@ define( function( require ) {
     var label = new Text( Strings.resetTimer, {fontSize: 17, centerX: 40, centerY: 20} );
 
     timer.addChild( new PushButton(
-      new Node( {children: [new Image( imageLoader.getImage( 'button_timer_reset_unpressed.png' ) ), label]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'button_timer_reset_hover.png' ) ), label]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'button_timer_reset_pressed.png' ) ), label]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'button_timer_reset_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_timer_reset_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_timer_reset_hover.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_timer_reset_pressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_timer_reset_unpressed.png' ) ), label]} ),
       resetTimer, {scale: 0.7, y: 30, x: 3} ) );
 
     timer.addChild( new ToggleButton(
-      new Image( imageLoader.getImage( 'button_timer_pause_unpressed.png' ) ),
-      new Image( imageLoader.getImage( 'button_timer_start_unpressed.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_timer_pause_unpressed.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_timer_start_unpressed.png' ) ),
       model.timerStartProperty,
       {scale: 0.7, y: 26, x: 64} ) );
 

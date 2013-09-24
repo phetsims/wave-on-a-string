@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var imageLoader = require( 'imageLoader' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
@@ -18,10 +17,10 @@ define( function( require ) {
   function EndNode( x, y, model ) {
 
     Node.call( this, {x: x, y: y } );
-    var clamp = new Node( {children: [new Image( imageLoader.getImage( 'clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )]} ),
-      ring_back = new Node( {children: [new Image( imageLoader.getImage( 'ring_back.png' ), {x: -15, y: -15 / 2, scale: 0.5} )], x: 20} ),
-      ring_front = new Node( {children: [new Image( imageLoader.getImage( 'ring_front.png' ), {x: -15, y: 0, scale: 0.5} )], x: 20} ),
-      window = new Node( {children: [new Image( imageLoader.getImage( 'window_back.png' ), {x: -101, y: -219 / 2, scale: 1} )], x: 20} ),
+    var clamp = new Node( {children: [new Image( require( 'image!WOAS/../images/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )]} ),
+      ring_back = new Node( {children: [new Image( require( 'image!WOAS/../images/ring_back.png' ), {x: -15, y: -15 / 2, scale: 0.5} )], x: 20} ),
+      ring_front = new Node( {children: [new Image( require( 'image!WOAS/../images/ring_front.png' ), {x: -15, y: 0, scale: 0.5} )], x: 20} ),
+      window = new Node( {children: [new Image( require( 'image!WOAS/../images/window_back.png' ), {x: -101, y: -219 / 2, scale: 1} )], x: 20} ),
       postShape = new Shape(),
       postGradient = new LinearGradient( -5, 0, 5, 0 )
         .addColorStop( 0, "#666" )

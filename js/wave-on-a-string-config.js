@@ -21,6 +21,8 @@ require.config( {
 
     // third-party libs
     i18n: '../../sherpa/i18n-2.0.4',
+    image: '../../chipper/requirejs-plugins/image',
+    audio: '../../chipper/requirejs-plugins/audio',
 
     // PhET libs, uppercase names to identify them in require.js imports
     ASSERT: '../../assert/js',
@@ -35,7 +37,9 @@ require.config( {
     SCENERY_PHET: '../../scenery-phet/js',
     SUN: '../../sun/js',
     // contrib dependencies required by common directories
-    stats: '../../phetcommon/contrib/stats-r11'
+    stats: '../../phetcommon/contrib/stats-r11',
+    
+    WOAS: '.'
   },
   // Configure the dependencies and exports for older, traditional 'browser globals' scripts
   // that do not use define() to declare the dependencies and set a module value.

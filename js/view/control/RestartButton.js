@@ -14,7 +14,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Strings = require( 'Strings' );
   var PushButton = require( 'SUN/PushButton' );
-  var imageLoader = require( 'imageLoader' );
   var Image = require( 'SCENERY/nodes/Image' );
 
   function RestartButton( model, options ) {
@@ -26,10 +25,10 @@ define( function( require ) {
     var label = new Text( Strings.restart, {fontSize: 17, centerX: 40, centerY: 20} );
 
     this.addChild( new PushButton(
-      new Node( {children: [new Image( imageLoader.getImage( 'button_restart_unpressed.png' ) ), label]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'button_restart_hover.png' ) ), label]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'button_restart_pressed.png' ) ), label]} ),
-      new Node( {children: [new Image( imageLoader.getImage( 'button_restart_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_hover.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_pressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_unpressed.png' ) ), label]} ),
       restart, {scale: 0.7} ) );
   }
 

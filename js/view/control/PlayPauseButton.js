@@ -12,7 +12,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PushButton = require( 'SUN/PushButton' );
-  var imageLoader = require( 'imageLoader' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ToggleButton = require( 'SUN/ToggleButton' );
 
@@ -25,16 +24,16 @@ define( function( require ) {
     };
 
     this.addChild( playPauseButton = new ToggleButton(
-      new Image( imageLoader.getImage( 'button_sim_pause.png' ) ),
-      new Image( imageLoader.getImage( 'button_sim_play.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_sim_pause.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_sim_play.png' ) ),
       model.playProperty,
       {scale: 0.7} ) );
 
     this.addChild( stepButton = new PushButton(
-      new Image( imageLoader.getImage( 'button_step_unpressed.png' ) ),
-      new Image( imageLoader.getImage( 'button_step_hover.png' ) ),
-      new Image( imageLoader.getImage( 'button_step_pressed.png' ) ),
-      new Image( imageLoader.getImage( 'button_step_deactivated.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_step_unpressed.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_step_hover.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_step_pressed.png' ) ),
+      new Image( require( 'image!WOAS/../images/button_step_deactivated.png' ) ),
       step, {scale: 0.7, x: 50, y: 7} ) );
     stepButton.enabled = false;
 
