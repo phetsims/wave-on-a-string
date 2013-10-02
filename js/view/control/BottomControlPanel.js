@@ -60,7 +60,16 @@ define( function( require ) {
     this.addChild( panel2 = new Panel( elements2, {fill: '#D9FCC5', xMargin: 10, yMargin: 5} ) );
     this.addChild( panel3 = new Panel( elements3, {fill: '#D9FCC5', xMargin: 10, yMargin: 5} ) );
 
-    panel3.right = panel2.right = panel1.right;
+    if (panel3.width > 1000){
+      panel3.scale(1000/panel3.width);
+    }
+    if (panel2.width > 1000){
+      panel2.scale(1000/panel2.width);
+    }
+    if (panel1.width > 1000){
+      panel1.scale(1000/panel1.width);
+    }
+    panel3.right = panel2.right = panel1.right = 1000;
 
     model.modeProperty.link( function updateBottomControlPanel( value ) {
       panel1.setVisible( value === 'oscillate' );
