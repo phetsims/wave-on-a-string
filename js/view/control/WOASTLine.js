@@ -31,7 +31,7 @@ define( function( require ) {
     this.addChild( new Rectangle( 750, -10, 20, 20, {fill: lineGradient, stroke: '#000', lineWidth: 0.5} ) );
     this.addChild( new Path( arrowShape, {
       stroke: "#F00",
-      lineDash: [15, 15],
+      lineDash: [10, 6],
       lineWidth: 2
     } ) );
 

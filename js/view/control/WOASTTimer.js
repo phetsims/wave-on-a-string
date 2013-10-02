@@ -17,6 +17,7 @@ define( function( require ) {
   var PushButton = require( 'SUN/PushButton' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ToggleButton = require( 'SUN/ToggleButton' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: "pointer" } );
@@ -29,9 +30,9 @@ define( function( require ) {
       model.timerSecond = 0;
     };
     var secondToString = function( second ) {
-      var _minutes = (Math.round( second / 60 ) % 60),
-        _seconds = (Math.round( second ) % 60),
-        _milliseconds = (Math.round( second * 100 ) % 100);
+      var _minutes = (Math.floor( second / 60 ) % 60),
+        _seconds = (Math.floor( second ) % 60),
+        _milliseconds = Math.floor( second % 1 * 100 );
       if ( _milliseconds < 10 ) {
         _milliseconds = "0" + _milliseconds;
       }
@@ -43,7 +44,7 @@ define( function( require ) {
       }
       return   _minutes + ":" + _seconds + ":" + _milliseconds;
     };
-    var label = new Text( Strings.resetTimer, {fontSize: 17, centerX: 40, centerY: 20} );
+    var label = new Text( Strings.resetTimer, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
 
     timer.addChild( new PushButton(
       new Node( {children: [new Image( require( 'image!WOAS/../images/button_timer_reset_unpressed.png' ) ), label]} ),
@@ -59,7 +60,7 @@ define( function( require ) {
       {scale: 0.7, y: 26, x: 64} ) );
 
     timer.addChild( new Rectangle( 0, 0, 100, 24, 5, 5, {fill: '#FFF', stroke: '#000', lineWidth: 1} ) );
-    timer.addChild( textTimer = new Text( "00:00:00", {fontSize: 20, centerX: 50, top: 0} ) );
+    timer.addChild( textTimer = new Text( "00:00:00", {font: new PhetFont( 20 ), centerX: 50, top: 0} ) );
     this.addChild( new Panel( timer, { fill: '#FFFF06', stroke: '#F7941E', lineWidth: 2, xMargin: 10, yMargin: 5} ) );
 
     model.timerProperty.link( function updateVisible( value ) {

@@ -38,7 +38,7 @@ require.config( {
     SUN: '../../sun/js',
     // contrib dependencies required by common directories
     stats: '../../phetcommon/contrib/stats-r11',
-    
+
     WOAS: '.'
   },
   // Configure the dependencies and exports for older, traditional 'browser globals' scripts

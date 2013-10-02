@@ -21,17 +21,19 @@ define( function( require ) {
   var WOASTRulers = require( 'view/control/WOASTRulers' );
   var WOASTLine = require( 'view/control/WOASTLine' );
   var WOASTTimer = require( 'view/control/WOASTTimer' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function ControlPanel( model ) {
     Node.call( this, { scale: 1, renderer: 'svg' } );
-
-    this.addChild( new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], property: model.modeProperty, x: 5, y: 5} ) );
-    this.addChild( new RestartButton( model, {x: 100, y: 25} ) );
+    var typeRadio, endTypeRadio;
+    this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], property: model.modeProperty, x: 5, y: 5} ) );
+    this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 25} ) );
     this.addChild( new PulseButton( model, {x: 130, y: model.height - 135} ) );
-    this.addChild( new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], property: model.typeEndProperty, x: model.width - 100, y: 5} ) );
+    this.addChild( endTypeRadio = new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], property: model.typeEndProperty, x: model.width - 100, y: 5} ) );
+    endTypeRadio.right = model.width - 5;
     this.addChild( new Node( {scale: 0.7, x: 210, y: model.height - 120, children: [
-      new AquaRadioButton( model.speedProperty, 0.25, new Text( Strings.speedSlow, {fontSize: 15} ), {radius: 12} ),
-      new AquaRadioButton( model.speedProperty, 1, new Text( Strings.speedNormal, {fontSize: 15} ), {radius: 12, x: 130} )
+      new AquaRadioButton( model.speedProperty, 0.25, new Text( Strings.speedSlow, {font: new PhetFont( 15 )} ), {radius: 12} ),
+      new AquaRadioButton( model.speedProperty, 1, new Text( Strings.speedNormal, {font: new PhetFont( 15 )} ), {radius: 12, x: 130} )
     ]} ) );
     this.addChild( new BottomControlPanel( model ) );
     this.addChild( new PlayPauseButton( model, {x: 360, y: model.height - 145} ) );

@@ -16,13 +16,14 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function CheckBoxGroup( options ) {
     Node.call( this, {x: options.x, y: options.y} );
     var i = 0,
       length = options.check.length;
     for ( ; i < length; i++ ) {
-      this.addChild( new Node( {children: [new Rectangle( 0, ((i + 1) * 33 - 22), 22, 22, 5, 5, {fill: "#FFF"} ), new CheckBox( new Text( options.check[i].text, { fontSize: 15 } ), options.check[i].property, {y: (i + 1) * 33} )]} ) );
+      this.addChild( new Node( {children: [new Rectangle( 0, ((i + 1) * 33 - 22), 22, 22, 5, 5, {fill: "#FFF"} ), new CheckBox( new Text( options.check[i].text, { font: new PhetFont( 15 ) } ), options.check[i].property, {y: (i + 1) * 33} )]} ) );
     }
     this.addChild( new Path( Shape.lineSegment( -10, 10, -10, this.height ), { stroke: 'gray', lineWidth: 1 } ) );
   }

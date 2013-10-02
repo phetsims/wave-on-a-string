@@ -10,17 +10,15 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
 
   var NSEGS = 61,
-    fps = 30;
+    fps = 48;
 
   function WOASModel( width, height ) {
     this.width = width;
     this.height = height;
+    this.customDt = 0;
     this.yNow = new Array( NSEGS );
     this.yLast = new Array( NSEGS );
     this.yNext = new Array( NSEGS );
-    this.yLongNow = new Array( NSEGS );
-    this.yLongLast = new Array( NSEGS );
-    this.yLongNext = new Array( NSEGS );
     this.dotPerCm = 80;
     this.pulseSign = 1;
     PropertySet.call( this, {
@@ -30,9 +28,10 @@ define( function( require ) {
       'rulers': false, // visible rulers
       'timer': false,  // visible timer
       'referenceLine': false, // visible referenceLine
-      'tension': 10, // tension 8..10
+      'tension': 2, // tension 0..2
       'damping': 50, // dumping 0..100
       'frequency': 1.50, // frequency 0.00 .. 3.00
+      'pulseWidth': 2, // pulse width 0.0 .. 4.0
       'amplitude': 1.5, // amplitude 0.0 .. 3.0
       'play': true, // play/pause state
       'yNowChanged': false, // yNow array changed flag
@@ -47,7 +46,6 @@ define( function( require ) {
       'timerLoc': {x: 475, y: 318} // position timer
     } );
     this.nSegs = NSEGS;
-    this.nSegsK = 0;
     this.beta = 0.05;
     this.alpha = 1;
     this.manualRestart();
@@ -57,7 +55,11 @@ define( function( require ) {
   inherit( PropertySet, WOASModel, {
     step: function( dt ) {
       if ( this.play ) {
-        this.manualStep( dt );
+        this.customDt += dt;
+        if ( this.customDt >= 1 / (fps * this.speed) ) {
+          this.manualStep( this.customDt );
+          this.customDt = 0;
+        }
       }
     },
     reset: function() {
@@ -80,102 +82,54 @@ define( function( require ) {
       this.timerLocProperty.reset();
       this.manualRestart();
     },
-    //find middle value in array
-    middleValue: function( arr, n ) {
-      var n1 = Math.min( Math.floor( n ), (arr.length - 1) ),
-        n2 = Math.min( Math.ceil( n ), (arr.length - 1) );
-      return arr[n1] + (arr[n2] - arr[n1]) * (n - n1);
-    },
-    //elongation strings array
-    longStrings: function( arr, k ) {
-      if ( k === 1 ) {
-        return arr.slice( 0 );
-      }
-      var nSize = Math.round( arr.length * k ),
-        nArr = new Array( nSize ),
-        i = 1;
-      for ( i = 0; i < nSize; i++ ) {
-        nArr[i] = this.middleValue( arr, i / k );
-      }
-      nArr[0] = arr[0];
-      nArr[nSize - 1] = arr[arr.length - 1];
-      return nArr;
-    },
-    //shortening strings array
-    shortStrings: function( arr, k ) {
-      if ( k === 1 ) {
-        return arr.slice( 0 );
-      }
-      var nSize = Math.round( arr.length / k ),
-        nArr = new Array( nSize ),
-        i = 0;
-      for ( i = 0; i < nSize; i++ ) {
-        nArr[i] = this.middleValue( arr, i * k );
-      }
-      nArr[0] = arr[0];
-      nArr[nSize - 1] = arr[arr.length - 1];
-      return nArr;
-    },
     //next step strings array calculated
     evolve: function() {
-      var dt = this.speed,
-        v = 1 - (10 - this.tension) * 0.3 ,
+      var dt = 1,
+        v = 1,
         dx = dt * v,
-        b = this.damping * 0.002,
-        k = 1 / dx;
+        b = this.damping * 0.002;
       this.beta = b * dt / 2;
       this.alpha = v * dt / dx;
-      // generation new lenght array for the strings
-      if ( this.nSegsK !== Math.round( this.nSegs * k ) ) {
-        this.manualRestart();
-        this.nSegsK = Math.round( this.nSegs * k );
-        this.yLongLast = this.longStrings( this.yLast, k );
-        this.yLongNow = this.longStrings( this.yNow, k );
-        this.yLongNext = this.longStrings( this.yNext, k );
-      }
-      this.yLongNow[0] = this.yLongNext[0] = this.yNext[0] = this.yNow[0];
+
+      this.yNext[0] = this.yNow[0];
       if ( this.typeEnd === 'fixedEnd' ) {			//if fixedEnd, then fix the end
-        this.yLongNow[this.nSegsK - 1] = 0;
+        this.yNow[this.nSegs - 1] = 0;
       }
       else if ( this.typeEnd === 'looseEnd' ) {		//else if looseEnd
-        this.yLongNow[this.nSegsK - 1] = this.yLongNow[this.nSegsK - 2];
+        this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
       }
       else if ( this.typeEnd === 'noEnd' ) {		//else if noEnd
-        this.yLongNow[this.nSegsK - 1] = this.yLongLast[this.nSegsK - 2];
+        this.yNow[this.nSegs - 1] = this.yLast[this.nSegs - 2];
       }
       //main formula for calculating
-      for ( var i = 1; i < (this.nSegsK - 1); i++ ) {
-        this.yLongNext[i] = (1 / (this.beta + 1)) * ((this.beta - 1) * this.yLongLast[i] + 2 * (1 - (this.alpha * this.alpha)) * this.yLongNow[i] + (this.alpha * this.alpha) * (this.yLongNow[i + 1] + this.yLongNow[i - 1])   );
+      for ( var i = 1; i < (this.nSegs - 1); i++ ) {
+        this.yNext[i] = (1 / (this.beta + 1)) * ((this.beta - 1) * this.yLast[i] + 2 * (1 - (this.alpha * this.alpha)) * this.yNow[i] + (this.alpha * this.alpha) * (this.yNow[i + 1] + this.yNow[i - 1])   );
       }
 
-      for ( var j = 1; j < (this.nSegsK - 1); j++ ) {
-        this.yLongLast[j] = this.yLongNow[j];
-        this.yLongNow[j] = this.yLongNext[j];
+      for ( var j = 1; j < (this.nSegs - 1); j++ ) {
+        this.yLast[j] = this.yNow[j];
+        this.yNow[j] = this.yNext[j];
       }
       if ( this.typeEnd === 'fixedEnd' ) {
-        this.yLongLast[this.nSegsK - 1] = 0;
-        this.yLongNow[this.nSegsK - 1] = 0;
+        this.yLast[this.nSegs - 1] = 0;
+        this.yNow[this.nSegs - 1] = 0;
       }
       if ( this.typeEnd === 'looseEnd' ) {
-        this.yLongLast[this.nSegsK - 1] = this.yLongNow[this.nSegsK - 1];
-        this.yLongNow[this.nSegsK - 1] = this.yLongNow[this.nSegsK - 2];
+        this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
+        this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
       }
       if ( this.typeEnd === 'noEnd' ) {
-        this.yLongLast[this.nSegsK - 1] = this.yLongNow[this.nSegsK - 1];
-        this.yLongNow[this.nSegsK - 1] = this.yLongNow[this.nSegsK - 1];
+        this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
+        this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];
       }
-      //shortening array for view
-      this.yLast = this.shortStrings( this.yLongLast, k );
-      this.yNow = this.shortStrings( this.yLongNow, k );
-      this.yNext = this.shortStrings( this.yLongNext, k );
     },
     manualStep: function( dt ) {
-      dt = dt || (1 / fps);
+      dt = dt || (1 / fps * this.speed);
       this.time += dt;
       if ( this.timerStart ) {
         this.timerSecond += dt * this.speed;
       }
-      if ( this.time >= (1 / fps) ) {
+      if ( this.time >= (1 / (fps * (0.2 + this.tension * 0.4) * this.speed)) ) {
 
         if ( this.mode === 'oscillate' ) {
           this.angle += Math.PI * 2 * this.frequency * this.time * this.speed;
@@ -185,8 +139,8 @@ define( function( require ) {
           }
         }
         if ( this.mode === 'pulse' && this.pulse ) {
-
-          var da = Math.PI * 2 * this.frequency * this.time * this.speed;
+          var k = 1 / this.pulseWidth * this.speed;
+          var da = Math.PI * k * this.time;
           if ( this.angle + da >= Math.PI / 2 ) {
             this.pulseSign = -1;
           }
@@ -209,10 +163,10 @@ define( function( require ) {
       this.angleProperty.reset();
       this.timeProperty.reset();
       this.pulseProperty.reset();
+      this.customDt = 0;
       for ( var i = 0; i < this.yNow.length; i++ ) {
         this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
       }
-      this.nSegsK = 0;
       this.yNowChanged = !this.yNowChanged;
     },
     manualPulse: function() {

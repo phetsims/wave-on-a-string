@@ -13,6 +13,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var HorizontalSlider = require( 'view/control/slider/HorizontalSlider' );
   var ArrowButton = require( 'view/control/slider/ArrowButton' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   function Slider( x, y, options ) {
     options = _.extend(
@@ -20,6 +22,7 @@ define( function( require ) {
         type: 'simple',
         tick: {step: 0, minText: '', maxText: ''},
         unit: '',
+        patternValueUnit: '',
         title: '',
         property: null,
         scope: {min: 0, max: 100},
@@ -47,21 +50,23 @@ define( function( require ) {
     buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {right: options.width - 15, centerY: 15} ) );
     buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), {left: 15, centerY: 15} ) );
     buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, {fill: "#FFF", stroke: "#000", lineWidth: 1, centerX: options.width / 2, top: 0} ) );
-    buttonNode.addChild( valueLabel = new Text( "0", {fontSize: 18, centerX: options.width / 2, top: 5} ) );
+    buttonNode.addChild( valueLabel = new Text( "0", {font: new PhetFont( 18 ), centerX: options.width / 2, top: 5} ) );
 
     this.addChild( new Rectangle( 0, 0, options.width, options.height, {} ) );
     if ( options.type === 'button' ) {
       this.addChild( buttonNode );
     }
     this.addChild( new HorizontalSlider( 5, options.height - 20, options.width - 10, options.property, require( 'image!WOAS/../images/slider.png' ), options.scope, options.rounding, tick ) );
-    this.addChild( new Text( options.title, {centerX: options.width / 2, top: 3, fontSize: 18} ) );
+    this.addChild( new Text( options.title, {centerX: options.width / 2, top: 3, font: new PhetFont( 18 )} ) );
 
     options.property.link( function updateMass( value ) {
       var text = options.property.get();
       if ( options.rounding !== false && options.rounding >= 0 ) {
         text = options.property.get().toFixed( options.rounding );
       }
-      valueLabel.text = text + " " + options.unit;
+      //valueLabel.text = text + " " + options.unit;
+      //patternValueUnitHz
+      valueLabel.text = StringUtils.format( options.patternValueUnit, text );
       valueLabel.centerX = options.width / 2;
       plusButton.setEnabled( options.property.get() < options.scope.max );
       minusButton.setEnabled( options.property.get() > options.scope.min );

@@ -14,6 +14,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function HorizontalSlider( x, y, w, targetProperty, img, value, rounding, tick ) {
     var thisNode = this;
@@ -49,8 +50,8 @@ define( function( require ) {
         }
         nodeTick.addChild( new Path( Shape.lineSegment( valueToPosition( i ), -5, valueToPosition( i ), -tickHeight ), { stroke: 'black', lineWidth: 1 } ) );
       }
-      nodeTick.addChild( new Text( tick.minText, {centerX: xMin, bottom: -33, fontSize: 15} ) );
-      nodeTick.addChild( new Text( tick.maxText, {centerX: xMax, bottom: -33, fontSize: 15} ) );
+      nodeTick.addChild( new Text( tick.minText, {centerX: xMin, bottom: -33, font: new PhetFont( 15 )} ) );
+      nodeTick.addChild( new Text( tick.maxText, {centerX: xMax, bottom: -33, font: new PhetFont( 15 )} ) );
     }
     this.addChild( nodeTick );
     this.addChild( track );

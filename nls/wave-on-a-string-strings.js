@@ -4,7 +4,7 @@ define( {
     "timer": "Timer",
     "amplitude": "Amplitude",
     "frequency": "Frequency",
-    //"pulseWidth": "Pulse Width",
+    "pulseWidth": "Pulse Width",
     "damping": "Damping",
     "tension": "Tension",
     "low": "Low",
@@ -16,7 +16,7 @@ define( {
     "oscillate": "Oscillate",
     "pulse": "Pulse",
     "restart": "Restart", // there was "reset" before
-    "pulse2": "Pulse",
+    "pulse2": "Pulse",  //pulse button
     "paused": "Paused",
     "fixedEnd": "Fixed End",
     "looseEnd": "Loose End",
@@ -36,7 +36,10 @@ define( {
     "none": "None",
     "lots": "Lots",
     "unitHz":"Hz",
-    "unitCm":"cm"
+    "unitCm":"cm",
+    "patternValueUnitHz": "{0} Hz",
+    "patternValueUnitCm": "{0} cm",
+    "patternValueUnitS": "{0} s"
   },
   "ar": true,
   "ar-sa": true,
