@@ -16,6 +16,7 @@ define( function( require ) {
     this.width = width;
     this.height = height;
     this.customDt = 0;
+    this.yDraw = new Array( NSEGS );
     this.yNow = new Array( NSEGS );
     this.yLast = new Array( NSEGS );
     this.yNext = new Array( NSEGS );
@@ -59,6 +60,12 @@ define( function( require ) {
         if ( this.customDt >= 1 / (fps * this.speed) ) {
           this.manualStep( this.customDt );
           this.customDt = 0;
+        }
+        else {
+          for ( var i = 1; i < this.nSegs; i++ ) {
+            //var yPresent = (1-ratio)*myString.yLast[i]+ratio*myString.yNow[i];
+            this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.customDt / 1 / (fps * this.speed)));
+          }
         }
       }
     },
@@ -106,7 +113,7 @@ define( function( require ) {
         this.yNext[i] = (1 / (this.beta + 1)) * ((this.beta - 1) * this.yLast[i] + 2 * (1 - (this.alpha * this.alpha)) * this.yNow[i] + (this.alpha * this.alpha) * (this.yNow[i + 1] + this.yNow[i - 1])   );
       }
 
-      for ( var j = 1; j < (this.nSegs - 1); j++ ) {
+      for ( var j = 0; j < (this.nSegs - 1); j++ ) {
         this.yLast[j] = this.yNow[j];
         this.yNow[j] = this.yNext[j];
       }
@@ -129,33 +136,41 @@ define( function( require ) {
       if ( this.timerStart ) {
         this.timerSecond += dt * this.speed;
       }
-      if ( this.time >= (1 / (fps * (0.2 + this.tension * 0.4) * this.speed)) ) {
-
-        if ( this.mode === 'oscillate' ) {
-          this.angle += Math.PI * 2 * this.frequency * this.time * this.speed;
-          this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
-          if ( this.angle >= Math.PI * 2 ) {
-            this.angle = Math.PI * 2 * this.frequency * this.time * this.speed;
-          }
+      var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
+      if ( this.mode === 'oscillate' ) {
+        this.angle += Math.PI * 2 * this.frequency * dt * this.speed;
+        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
+        if ( this.angle >= Math.PI * 2 ) {
+          this.angle = Math.PI * 2 * this.frequency * dt * this.speed;
         }
-        if ( this.mode === 'pulse' && this.pulse ) {
-          var k = 1 / this.pulseWidth * this.speed;
-          var da = Math.PI * k * this.time;
-          if ( this.angle + da >= Math.PI / 2 ) {
-            this.pulseSign = -1;
-          }
-          if ( this.angle + da * this.pulseSign > 0 ) {
-            this.angle += da * this.pulseSign;
-          }
-          else {
-            this.pulseSign = 1;
-            this.angle = 0;
-            this.pulse = false;
-          }
-          this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
+      }
+      if ( this.mode === 'pulse' && this.pulse ) {
+        var k = 1 / this.pulseWidth * this.speed;
+        var da = Math.PI * k * dt;
+        if ( this.angle + da >= Math.PI / 2 ) {
+          this.pulseSign = -1;
         }
+        if ( this.angle + da * this.pulseSign > 0 ) {
+          this.angle += da * this.pulseSign;
+        }
+        else {
+          this.pulseSign = 1;
+          this.angle = 0;
+          this.pulse = false;
+        }
+        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
+      }
+      if ( this.time >= minDt ) {
         this.time = 0;
         this.evolve();
+        for ( var i = 0; i < this.nSegs; i++ ) {
+          this.yDraw[i] = this.yLast[i];
+        }
+      }
+      else {
+        for ( var i = 1; i < this.nSegs; i++ ) {
+          this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.time / minDt));
+        }
       }
       this.yNowChanged = !this.yNowChanged;
     },
@@ -165,7 +180,7 @@ define( function( require ) {
       this.pulseProperty.reset();
       this.customDt = 0;
       for ( var i = 0; i < this.yNow.length; i++ ) {
-        this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
+        this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
       }
       this.yNowChanged = !this.yNowChanged;
     },

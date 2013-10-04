@@ -15,7 +15,7 @@ define( function( require ) {
 
 
   function TheStringNode( x, y, model, options ) {
-    Node.call( this, {x: x, y: y, scale: 1/*, renderer: 'svg', layerSplit: true*/ } );
+    Node.call( this, {x: x, y: y, scale: 1 } );
     var color,
       theStringShape = new Shape(),
       theStringRectShape = new Shape(),
@@ -27,10 +27,9 @@ define( function( require ) {
         fill: "#FFFFB7", renderer: 'svg', layerSplit: true
       } ),
       theString = [];
-    //this.addChild( theStringRectPath );
     this.addChild( theStringPath );
 
-    for ( var i = 0; i < model.yNow.length; i++ ) {
+    for ( var i = 0; i < model.yDraw.length; i++ ) {
       color = 'red';
       if ( i % 10 === 0 ) {
         color = 'lime';
@@ -43,12 +42,12 @@ define( function( require ) {
       theStringShape = new Shape();
       theStringRectShape = new Shape();
       var maxY = 0, minY = 0;
-      theStringShape.moveTo( 0, model.yNow[0] || 0 );
-      for ( var i = 0; i < model.yNow.length; i++ ) {
-        maxY = Math.max( maxY, model.yNow[i] + options.radius || 0 );
-        minY = Math.min( minY, model.yNow[i] - options.radius || 0 );
-        theString[i].y = model.yNow[i] || 0;
-        theStringShape.lineTo( i * options.radius * 2, model.yNow[i] || 0 );
+      theStringShape.moveTo( 0, model.yDraw[0] || 0 );
+      for ( var i = 0; i < model.yDraw.length; i++ ) {
+        maxY = Math.max( maxY, model.yDraw[i] + options.radius || 0 );
+        minY = Math.min( minY, model.yDraw[i] - options.radius || 0 );
+        theString[i].y = model.yDraw[i] || 0;
+        theStringShape.lineTo( i * options.radius * 2, model.yDraw[i] || 0 );
       }
       theStringPath.shape = theStringShape;
       theStringRectShape.moveTo( 0, minY );
