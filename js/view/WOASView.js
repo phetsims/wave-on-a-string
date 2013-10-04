@@ -11,11 +11,9 @@ define( function( require ) {
   var ActionView = require( 'view/ActionView' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var TheStringNodeRect = require( 'view/action/TheStringNodeRect' );
 
   function WOASView( model ) {
     ScreenView.call( this, {renderer: 'svg'} );
-    this.addChild( new TheStringNodeRect( 70, 215, model, {radius: 5, max: 120, min: -120} ) );
     this.addChild( new ControlPanel( model ) );
     this.addChild( new ActionView( model ) );
 

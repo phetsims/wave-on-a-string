@@ -32,7 +32,7 @@ define( function( require ) {
         icon: new Rectangle( 0, 0, 50, 50, { fill: 'blue' } ),
         createModel: function() { return new WOASModel( 768, 504 ); },
         createView: function( model ) { return new WOASView( model ); },
-        backgroundColor: "#FFF9BA"
+        backgroundColor: "#FFFFB7"
       }
     ], simOptions ).start();
   } );
