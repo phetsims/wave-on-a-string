@@ -9,7 +9,21 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Strings = require( 'Strings' );
+  var rulersString = require( 'string!WOAS/rulers' );
+  var timerString = require( 'string!WOAS/timer' );
+  var referenceLineString = require( 'string!WOAS/referenceLine' );
+  var tensionString = require( 'string!WOAS/tension' );
+  var dampingString = require( 'string!WOAS/damping' );
+  var lowString = require( 'string!WOAS/low' );
+  var highString = require( 'string!WOAS/high' );
+  var noneString = require( 'string!WOAS/none' );
+  var lotsString = require( 'string!WOAS/lots' );
+  var frequencyString = require( 'string!WOAS/frequency' );
+  var patternValueUnitHzString = require( 'string!WOAS/patternValueUnitHz' );
+  var pulseWidthString = require( 'string!WOAS/pulseWidth' );
+  var patternValueUnitSString = require( 'string!WOAS/patternValueUnitS' );
+  var amplitudeString = require( 'string!WOAS/amplitude' );
+  var patternValueUnitCmString = require( 'string!WOAS/patternValueUnitCm' );
   var Panel = require( 'SUN/Panel' );
   var CheckBoxGroup = require( 'view/control/CheckBoxGroup' );
   var Slider = require( 'view/control/slider/Slider' );
@@ -29,16 +43,16 @@ define( function( require ) {
       elements3 = new Node(),
       panel1, panel2, panel3;
     var checkBox = new CheckBoxGroup( {check: [
-      {text: Strings.rulers, property: model.rulersProperty},
-      {text: Strings.timer, property: model.timerProperty},
-      {text: Strings.referenceLine, property: model.referenceLineProperty}
+      {text: rulersString, property: model.rulersProperty},
+      {text: timerString, property: model.timerProperty},
+      {text: referenceLineString, property: model.referenceLineProperty}
     ], x: 0, y: 0} );
 
-    var slider = new Slider( -210, 0, {title: Strings.tension, property: model.tensionProperty, rounding: 0, scope: tension, tick: {step: 1, minText: Strings.low, maxText: Strings.high} } );
-    var slider2 = new Slider( -420, 0, {title: Strings.damping, property: model.dampingProperty, rounding: -1, scope: damping, tick: {step: 10, minText: Strings.none, maxText: Strings.lots} } );
-    var slider3 = new Slider( -630, 0, {type: 'button', buttonStep: 0.01, title: Strings.frequency, property: model.frequencyProperty, patternValueUnit: Strings.patternValueUnitHz, rounding: 2, scope: frequency } );
-    var slider5 = new Slider( -630, 0, {type: 'button', buttonStep: 0.1, title: Strings.pulseWidth, property: model.pulseWidthProperty, patternValueUnit: Strings.patternValueUnitS, rounding: 1, scope: pulseWidth } );
-    var slider4 = new Slider( -840, 0, {type: 'button', buttonStep: 0.1, title: Strings.amplitude, property: model.amplitudeProperty, patternValueUnit: Strings.patternValueUnitCm, rounding: 1, scope: amplitude } );
+    var slider = new Slider( -210, 0, {title: tensionString, property: model.tensionProperty, rounding: 0, scope: tension, tick: {step: 1, minText: lowString, maxText: highString} } );
+    var slider2 = new Slider( -420, 0, {title: dampingString, property: model.dampingProperty, rounding: -1, scope: damping, tick: {step: 10, minText: noneString, maxText: lotsString} } );
+    var slider3 = new Slider( -630, 0, {type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, scope: frequency } );
+    var slider5 = new Slider( -630, 0, {type: 'button', buttonStep: 0.1, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 1, scope: pulseWidth } );
+    var slider4 = new Slider( -840, 0, {type: 'button', buttonStep: 0.1, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 1, scope: amplitude } );
 
     elements1.addChild( checkBox );
     elements1.addChild( slider );

@@ -7,7 +7,6 @@
 
 define( function( require ) {
   "use strict";
-  var Strings = require( 'Strings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );

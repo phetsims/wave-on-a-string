@@ -7,17 +7,17 @@
 
 define( function( require ) {
   "use strict";
-  var Strings = require( 'Strings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var unitCmString = require( 'string!WOAS/unitCm' );
 
   function WOASTRulers( model ) {
     Node.call( this, { cursor: "pointer" } );
-    var rulerH = new RulerNode( 800, 50, 80, ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], Strings.unitCm, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } ),
-      rulerV = new RulerNode( 400, 50, 80, ["0", "1", "2", "3", "4", "5"], Strings.unitCm, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } );
+    var rulerH = new RulerNode( 800, 50, 80, ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } ),
+      rulerV = new RulerNode( 400, 50, 80, ["0", "1", "2", "3", "4", "5"], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } );
     rulerV.rotate( -Math.PI / 2 );
     this.addChild( rulerH );
     this.addChild( rulerV );

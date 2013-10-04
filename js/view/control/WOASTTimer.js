@@ -7,7 +7,6 @@
 
 define( function( require ) {
   "use strict";
-  var Strings = require( 'Strings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -18,6 +17,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var ToggleButton = require( 'SUN/ToggleButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var resetTimerString = require( 'string!WOAS/resetTimer' );
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: "pointer" } );
@@ -44,7 +44,7 @@ define( function( require ) {
       }
       return   _minutes + ":" + _seconds + ":" + _milliseconds;
     };
-    var label = new Text( Strings.resetTimer, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
+    var label = new Text( resetTimerString, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
 
     timer.addChild( new PushButton(
       new Node( {children: [new Image( require( 'image!WOAS/../images/button_timer_reset_unpressed.png' ) ), label]} ),

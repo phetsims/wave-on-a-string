@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Strings = require( 'Strings' );
+  var pulse2String = require( 'string!WOAS/pulse2' );
   var PushButton = require( 'SUN/PushButton' );
   var Image = require( 'SCENERY/nodes/Image' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -23,7 +23,7 @@ define( function( require ) {
     var restart = function() {
       model.manualPulse();
     };
-    var label = new Text( Strings.pulse2, {font: new PhetFont( 17 ), centerX: 39, centerY: 20} );
+    var label = new Text( pulse2String, {font: new PhetFont( 17 ), centerX: 39, centerY: 20} );
     this.addChild( new PushButton(
       new Node( {children: [new Image( require( 'image!WOAS/../images/button_pulse_unpressed.png' ) ), label]} ),
       new Node( {children: [new Image( require( 'image!WOAS/../images/button_pulse_hover.png' ) ), label]} ),

@@ -6,14 +6,13 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( [
+  'string!WOAS/simTitle',
+  'JOIST/SimLauncher', 'JOIST/Sim',
+  'SCENERY/nodes/Rectangle',
+  'model/WOASModel',
+  'view/WOASView'], function( titleString, SimLauncher, Sim, Rectangle, WOASModel, WOASView ) {
   'use strict';
-  var SimLauncher = require( 'JOIST/SimLauncher' ),
-    Sim = require( 'JOIST/Sim' ),
-    Strings = require( 'Strings' ),
-    Rectangle = require( 'SCENERY/nodes/Rectangle' ),
-    WOASModel = require( 'model/WOASModel' ),
-    WOASView = require( 'view/WOASView' );
 
   var simOptions = {
     credits: 'PhET Development Team -\n' +
@@ -26,9 +25,9 @@ define( function( require ) {
 
   SimLauncher.launch( function() {
     //Create and start the sim
-    new Sim( Strings.simTitle, [
+    new Sim( titleString, [
       {
-        name: Strings.simTitle,
+        name: titleString,
         icon: new Rectangle( 0, 0, 50, 50, { fill: 'blue' } ),
         createModel: function() { return new WOASModel( 768, 504 ); },
         createView: function( model ) { return new WOASView( model ); },

@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Strings = require( 'Strings' );
+  var restartString = require( 'string!WOAS/restart' );
   var PushButton = require( 'SUN/PushButton' );
   var Image = require( 'SCENERY/nodes/Image' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -23,7 +23,7 @@ define( function( require ) {
     var restart = function() {
       model.manualRestart();
     };
-    var label = new Text( Strings.restart, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
+    var label = new Text( restartString, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
 
     this.addChild( new PushButton(
       new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_unpressed.png' ) ), label]} ),
