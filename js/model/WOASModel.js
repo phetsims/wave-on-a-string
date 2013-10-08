@@ -131,6 +131,7 @@ define( function( require ) {
       }
     },
     manualStep: function( dt ) {
+      var i;
       dt = dt || (1 / fps * this.speed);
       this.time += dt;
       if ( this.timerStart ) {
@@ -163,12 +164,12 @@ define( function( require ) {
       if ( this.time >= minDt ) {
         this.time = 0;
         this.evolve();
-        for ( var i = 0; i < this.nSegs; i++ ) {
+        for ( i = 0; i < this.nSegs; i++ ) {
           this.yDraw[i] = this.yLast[i];
         }
       }
       else {
-        for ( var i = 1; i < this.nSegs; i++ ) {
+        for ( i = 1; i < this.nSegs; i++ ) {
           this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.time / minDt));
         }
       }
