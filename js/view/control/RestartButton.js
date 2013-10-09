@@ -26,10 +26,10 @@ define( function( require ) {
     var label = new Text( restartString, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
 
     this.addChild( new PushButton(
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_unpressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_hover.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_pressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_restart_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_restart_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_restart_hover.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_restart_pressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_restart_unpressed.png' ) ), label]} ),
       restart, {scale: 0.7} ) );
   }
 

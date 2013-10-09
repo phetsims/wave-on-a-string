@@ -24,16 +24,16 @@ define( function( require ) {
     };
 
     this.addChild( playPauseButton = new ToggleButton(
-      new Image( require( 'image!WOAS/../images/button_sim_pause.png' ) ),
-      new Image( require( 'image!WOAS/../images/button_sim_play.png' ) ),
+      new Image( require( 'image!WOAS/button_sim_pause.png' ) ),
+      new Image( require( 'image!WOAS/button_sim_play.png' ) ),
       model.playProperty,
       {scale: 0.7} ) );
 
     this.addChild( stepButton = new PushButton(
-      new Image( require( 'image!WOAS/../images/button_step_unpressed.png' ) ),
-      new Image( require( 'image!WOAS/../images/button_step_hover.png' ) ),
-      new Image( require( 'image!WOAS/../images/button_step_pressed.png' ) ),
-      new Image( require( 'image!WOAS/../images/button_step_deactivated.png' ) ),
+      new Image( require( 'image!WOAS/button_step_unpressed.png' ) ),
+      new Image( require( 'image!WOAS/button_step_hover.png' ) ),
+      new Image( require( 'image!WOAS/button_step_pressed.png' ) ),
+      new Image( require( 'image!WOAS/button_step_deactivated.png' ) ),
       step, {scale: 0.7, x: 50, y: 7} ) );
     stepButton.enabled = false;
 

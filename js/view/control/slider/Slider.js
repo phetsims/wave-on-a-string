@@ -56,7 +56,7 @@ define( function( require ) {
     if ( options.type === 'button' ) {
       this.addChild( buttonNode );
     }
-    this.addChild( new HorizontalSlider( 5, options.height - 20, options.width - 10, options.property, require( 'image!WOAS/../images/slider.png' ), options.scope, options.rounding, tick ) );
+    this.addChild( new HorizontalSlider( 5, options.height - 20, options.width - 10, options.property, require( 'image!WOAS/slider.png' ), options.scope, options.rounding, tick ) );
     this.addChild( new Text( options.title, {centerX: options.width / 2, top: 3, font: new PhetFont( 18 )} ) );
 
     options.property.link( function updateMass( value ) {

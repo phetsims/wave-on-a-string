@@ -25,10 +25,10 @@ define( function( require ) {
     };
     var label = new Text( pulse2String, {font: new PhetFont( 17 ), centerX: 39, centerY: 20} );
     this.addChild( new PushButton(
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_pulse_unpressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_pulse_hover.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_pulse_pressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/../images/button_pulse_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_unpressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_hover.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_pressed.png' ) ), label]} ),
+      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_unpressed.png' ) ), label]} ),
       restart, {scale: 0.7} ) );
 
     model.modeProperty.link( function updatePulseButton( value ) {
