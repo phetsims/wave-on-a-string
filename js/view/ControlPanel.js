@@ -32,13 +32,13 @@ define( function( require ) {
 
   function ControlPanel( model ) {
     Node.call( this, { scale: 1, renderer: 'svg' } );
-    var typeRadio, endTypeRadio, speedSlow, speedGroup;
+    var typeRadio, endTypeRadio, speedSlow, speedGroup, pulseButton;
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 25} ) );
-    this.addChild( new PulseButton( model, {x: 130, y: model.height - 135} ) );
+    this.addChild( pulseButton = new PulseButton( model, {x: 130, y: model.height - 135} ) );
     this.addChild( endTypeRadio = new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], text: [fixedEndString, looseEndString, noEndString], property: model.typeEndProperty, x: model.width - 100, y: 5} ) );
     endTypeRadio.right = model.width - 5;
-    this.addChild( speedGroup = new Node( {scale: 0.7, x: 210, y: model.height - 120, children: [
+    this.addChild( speedGroup = new Node( {scale: 0.7, x: pulseButton.right + 20, y: model.height - 120, children: [
       speedSlow = new AquaRadioButton( model.speedProperty, 0.25, new Text( speedSlowString, {font: new PhetFont( 15 )} ), {radius: 12} ),
       new AquaRadioButton( model.speedProperty, 1, new Text( speedNormalString, {font: new PhetFont( 15 )} ), {radius: 12, x: speedSlow.width + 20} )
     ]} ) );

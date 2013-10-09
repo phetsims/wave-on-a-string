@@ -10,26 +10,18 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var Node = require( 'SCENERY/nodes/Node' );
   var pulse2String = require( 'string!WOAS/pulse2' );
-  var PushButton = require( 'SUN/PushButton' );
-  var Image = require( 'SCENERY/nodes/Image' );
+  var TextButton = require( 'SUN/TextButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function PulseButton( model, options ) {
     Node.call( this, {x: options.x, y: options.y, scale: 1} );
     var self = this;
-    var restart = function() {
+    var pulse = function() {
       model.manualPulse();
     };
-    var label = new Text( pulse2String, {font: new PhetFont( 17 ), centerX: 39, centerY: 20} );
-    this.addChild( new PushButton(
-      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_unpressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_hover.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_pressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_pulse_unpressed.png' ) ), label]} ),
-      restart, {scale: 0.7} ) );
+    this.addChild(new TextButton( pulse2String, pulse, {font: new PhetFont( 12 ),rectangleFillUp:"#7CAF3A",rectangleFillDown:"#7CAF3A",rectangleFillOver:"#91B634"} ), {scale: 1});
 
     model.modeProperty.link( function updatePulseButton( value ) {
       self.setVisible( value === 'pulse' );

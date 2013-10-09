@@ -10,11 +10,9 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var Node = require( 'SCENERY/nodes/Node' );
   var restartString = require( 'string!WOAS/restart' );
-  var PushButton = require( 'SUN/PushButton' );
-  var Image = require( 'SCENERY/nodes/Image' );
+  var TextButton = require( 'SUN/TextButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function RestartButton( model, options ) {
@@ -23,14 +21,8 @@ define( function( require ) {
     var restart = function() {
       model.manualRestart();
     };
-    var label = new Text( restartString, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
 
-    this.addChild( new PushButton(
-      new Node( {children: [new Image( require( 'image!WOAS/button_restart_unpressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_restart_hover.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_restart_pressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_restart_unpressed.png' ) ), label]} ),
-      restart, {scale: 0.7} ) );
+    this.addChild(new TextButton( restartString, restart, {font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ), {scale: 1});
   }
 
   inherit( Node, RestartButton );
