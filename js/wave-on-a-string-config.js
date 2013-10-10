@@ -38,12 +38,14 @@ require.config( {
     SCENERY_PHET: '../../scenery-phet/js',
     SUN: '../../sun/js',
     // contrib dependencies required by common directories
+    //REVIEW: if the stats code isn't being used to measure performance, this should be removed
     stats: '../../phetcommon/contrib/stats-r11',
 
     WOAS: '.'
   },
   // Configure the dependencies and exports for older, traditional 'browser globals' scripts
   // that do not use define() to declare the dependencies and set a module value.
+  //REVIEW: if the stats code isn't being used to measure performance, this should be removed
   shim: {
     stats: {
       exports: 'Stats'
