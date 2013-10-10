@@ -11,12 +11,6 @@ require.config( {
 
   deps: ['wave-on-a-string-main'],
 
-  config: {
-      i18n: {
-        locale: 'en_us'
-      }
-    },
-
   paths: {
 
     // third-party libs
