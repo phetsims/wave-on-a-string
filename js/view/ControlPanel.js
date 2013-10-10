@@ -31,6 +31,8 @@ define( function( require ) {
   var noEndString = require( 'string!WOAS/noEnd' );
 
   function ControlPanel( model ) {
+    //REVIEW: renderer: 'svg' is not necessary, since it is already set in WOASView
+    //REVIEW: scale: 1 is not necessary, that is the default
     Node.call( this, { scale: 1, renderer: 'svg' } );
     var typeRadio, endTypeRadio, speedSlow, speedGroup, pulseButton;
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );

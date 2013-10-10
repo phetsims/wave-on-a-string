@@ -17,10 +17,12 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
 
   function ActionView( model ) {
-
+    //REVIEW: renderer: 'svg' is not necessary, since it is already set in WOASView
+    //REVIEW: scale: 1 is not necessary, that is the default
     Node.call( this, { scale: 1, renderer: 'svg', layerSplit: true } );
     var arrowShape = new Shape(),
       windowImage;
+    //REVIEW: why is this called arrowShape? maybe 'referenceLine' would be more appropriate?
     arrowShape.moveTo( 0, 0 );
     arrowShape.lineTo( 605, 0 );
     this.addChild( new Path( arrowShape, {
@@ -31,6 +33,11 @@ define( function( require ) {
       y: 215
     } ) );
 
+    /*REVIEW:
+     * There are many constants here which should not be duplicated. I would recommend a 'Constants.js' file, similar to
+     * https://github.com/phetsims/build-a-molecule/blob/master/js/Constants.js, where the x,y resting values of the left/right side of the string are stored,
+     * and any constants used for large-scale layout. I'd also recommend putting colors in this area.
+     */
     this.addChild( new EndNode( 70 + 600, 215, model, {max: 120, min: -120} ) );
     this.addChild( new TheStringNode( 70, 215, model, {radius: 5, max: 120, min: -120} ) );
     this.addChild( new StartNode( 70, 215, model, {max: 120, min: -120} ) );
