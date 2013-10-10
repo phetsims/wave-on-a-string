@@ -20,7 +20,7 @@ define( [
              'Software Development: Michael Dubson\n' +
              'Interviews: Wendy Adams, Danielle Harlow\n',
     thanks: 'Thanks -\n' +
-            'Conversation of this simulation to HTML5 was funded by the Royal Society of Chemistry.'
+            'Thanks to Mobile Learner Labs for working with the PhET development team to convert this simulation to HTML5.'
   };
 
   SimLauncher.launch( function() {
