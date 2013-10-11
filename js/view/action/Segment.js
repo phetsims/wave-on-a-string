@@ -1,6 +1,7 @@
 /**
  * Copyright 2002-2013, University of Colorado
  * Segment view
+ *REVIEW: doc: View for a single segment of the string
  *
  * @author Anton Ulyanov (Mlearner)
  */
