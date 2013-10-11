@@ -34,6 +34,7 @@ define( function( require ) {
       //REVIEW: 'window' may be an inconvenient name, since it hides the ability to directly access the global window name. consider windowNode?
       window = new Node( {children: [new Image( require( 'image!WOAS/window_back.png' ), {x: -101, y: -219 / 2, scale: 1} )], x: 20} ),
       postShape = new Shape(),
+      //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
       postGradient = new LinearGradient( -5, 0, 5, 0 )
         .addColorStop( 0, "#666" )
         .addColorStop( 0.3, "#FFF" )

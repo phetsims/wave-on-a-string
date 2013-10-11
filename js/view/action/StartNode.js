@@ -17,12 +17,24 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
   function StartNode( x, y, model, options ) {
-
+    //REVIEW: scale: 1 not necessary, that's the default
+    //REVIEW: renderer: 'svg' not necessary, it's always specified in the main WOASView
+    /*REVIEW
+     * We generally prefer the style where the x/y is passed into the options in the constructor, and is
+     * fowarded to the Node constructor by using something like:
+     * Node.call( this, _.extend( { layerSplit: true }, options ) );
+     * where instead of new StartNode( x, y, model, { ... } ), we use new StartNode( model, { x: x, y: y, ... } )
+     *
+     * This is essentially like adding layerSplit: true to options, and passing them to the supertype. Although
+     * technically if options' layerSplit is set, that value is used instead. Reading up on underscore's _.extend
+     * is beneficial, as it's a function we use a lot.
+     */
     Node.call( this, {x: x, y: y, scale: 1, renderer: 'svg', layerSplit: true } );
     var thisNode = this,
       key = new Node( {children: [new Image( require( 'image!WOAS/wrench_2.png' ), {x: -40, y: -25, scale: 0.9} )], cursor: 'pointer'} ),
       wheel = new Node( {children: [new Image( require( 'image!WOAS/oscillator_wheel.png' ), {x: -90 * 0.4, y: -90 * 0.4, scale: 0.4} )], y: 0} ),
       postShape = new Shape(),
+      //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
       postGradient = new LinearGradient( -5, 0, 5, 0 )
         .addColorStop( 0, "#666" )
         .addColorStop( 0.3, "#FFF" )
@@ -65,6 +77,14 @@ define( function( require ) {
     //REVIEW: please replace with model.on( 'yNowChanged', function updateKey() { ... } ) as suggested in WOASModel.js review notes
     model.yNowChangedProperty.link( function updateKey() {
       key.y = model.yNow[0] || 0;
+      /*REVIEW:
+       * Instead of creating a new shape, SCENERY/nodes/Rectangle (the subtype of Node) should be used in
+       * place of the Path with a shape.
+       * Thus here, we would be calling post.setRect( ... ), a method of Rectangle.
+       *
+       * In addition, this will allow Scenery in the future to obtain faster performance, particularly after
+       * https://github.com/phetsims/scenery/issues/144 is completed.
+       */
       postShape = new Shape();
       postShape.moveTo( -5, key.y + 7 );
       postShape.lineTo( 5, key.y + 7 );
