@@ -31,6 +31,7 @@ define( function( require ) {
     var clamp = new Node( {children: [new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )]} ),
       ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: -15, y: -15 / 2, scale: 0.5} )], x: 20} ),
       ring_front = new Node( {children: [new Image( require( 'image!WOAS/ring_front.png' ), {x: -15, y: 0, scale: 0.5} )], x: 20} ),
+      //REVIEW: 'window' may be an inconvenient name, since it hides the ability to directly access the global window name. consider windowNode?
       window = new Node( {children: [new Image( require( 'image!WOAS/window_back.png' ), {x: -101, y: -219 / 2, scale: 1} )], x: 20} ),
       postShape = new Shape(),
       postGradient = new LinearGradient( -5, 0, 5, 0 )
