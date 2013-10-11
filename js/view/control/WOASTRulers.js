@@ -16,6 +16,7 @@ define( function( require ) {
 
   function WOASTRulers( model ) {
     Node.call( this, { cursor: "pointer" } );
+    //REVIEW: optional, but DOT/Util.rangeInclusive( 0, 10 ).map( function( n ) { return n+''; } ) is a general way of creating string ranges
     var rulerH = new RulerNode( 800, 50, 80, ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } ),
       rulerV = new RulerNode( 400, 50, 80, ["0", "1", "2", "3", "4", "5"], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } );
     rulerV.rotate( -Math.PI / 2 );
@@ -27,23 +28,28 @@ define( function( require ) {
       rulerV.setVisible( value );
     } );
     model.rulerLocHProperty.link( function updateRulerHLocation( value ) {
+      //REVIEW: once rulerLocH is a Vector2, just use "rulerH.translation = model.rulerLocH"
       rulerH.x = model.rulerLocH.x;
       rulerH.y = model.rulerLocH.y;
-
     } );
     model.rulerLocVProperty.link( function updateRulerVLocation( value ) {
+      //REVIEW: once rulerLocV is a Vector2, just use "rulerV.translation = model.rulerLocV"
       rulerV.x = model.rulerLocV.x;
       rulerV.y = model.rulerLocV.y;
     } );
+    //REVIEW: best to use Vector2 for 2D numeric data here
     var rulerHClickOffset = {x: 0, y: 0},
       rulerVClickOffset = {x: 0, y: 0};
+    //REVIEW: a lot of this code is duplicated between WOASTLine / WOASTRulers / WOASTTimer. reduce duplication?
     rulerV.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
+          //REVIEW: see comments in WOASTLine.js
           rulerVClickOffset.x = rulerV.globalToParentPoint( event.pointer.point ).x - event.currentTarget.x;
           rulerVClickOffset.y = rulerV.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
         },
         drag: function( event ) {
+          //REVIEW: see comments in WOASTLine.js
           var x = rulerV.globalToParentPoint( event.pointer.point ).x - rulerVClickOffset.x,
             y = rulerV.globalToParentPoint( event.pointer.point ).y - rulerVClickOffset.y;
           model.rulerLocV = { x: x, y: y };
@@ -55,10 +61,12 @@ define( function( require ) {
     rulerH.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
+          //REVIEW: see comments in WOASTLine.js
           rulerHClickOffset.x = rulerH.globalToParentPoint( event.pointer.point ).x - event.currentTarget.x;
           rulerHClickOffset.y = rulerH.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
         },
         drag: function( event ) {
+          //REVIEW: see comments in WOASTLine.js
           var x = rulerH.globalToParentPoint( event.pointer.point ).x - rulerHClickOffset.x,
             y = rulerH.globalToParentPoint( event.pointer.point ).y - rulerHClickOffset.y;
           model.rulerLocH = { x: x, y: y };

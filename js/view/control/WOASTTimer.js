@@ -70,17 +70,22 @@ define( function( require ) {
       textTimer.text = secondToString( value );
     } );
     model.timerLocProperty.link( function updateLocation( value ) {
+      //REVIEW: once using Vector2, this will be "thisNode.translation = value"
       thisNode.x = value.x;
       thisNode.y = value.y;
     } );
+    //REVIEW: Use Vector2 for 2d numeric data
     var clickOffset = {x: 0, y: 0};
+    //REVIEW: a lot of this code is duplicated between WOASTLine / WOASTRulers / WOASTTimer. reduce duplication?
     thisNode.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
+          //REVIEW: see comments in WOASTLine.js
           clickOffset.x = thisNode.globalToParentPoint( event.pointer.point ).x - event.currentTarget.x;
           clickOffset.y = thisNode.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
         },
         drag: function( event ) {
+          //REVIEW: see comments in WOASTLine.js
           var x = thisNode.globalToParentPoint( event.pointer.point ).x - clickOffset.x,
             y = thisNode.globalToParentPoint( event.pointer.point ).y - clickOffset.y;
           model.timerLoc = { x: x, y: y };

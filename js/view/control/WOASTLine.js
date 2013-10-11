@@ -45,6 +45,7 @@ define( function( require ) {
     } );
     //REVIEW: please use DOT/Vector2 for 2D data
     var lineClickOffset = {x: 0, y: 0};
+    //REVIEW: a lot of this code is duplicated between WOASTLine / WOASTRulers / WOASTTimer. reduce duplication?
     thisNode.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
