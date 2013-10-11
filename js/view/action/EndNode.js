@@ -15,8 +15,19 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
   function EndNode( x, y, model ) {
+    //REVIEW: x: 20 seems to be duplicated in this file, should be generally separated out as a constant
 
     Node.call( this, {x: x, y: y } );
+    /*REVIEW:
+     * I'm not sure why wrapping some of these in an extra Node is necessary. Scenery's Image is a subtype of Node,
+     * so for the clamp, it can be replaced with:
+     * var clamp = new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )
+     *
+     * The x values can be combined, so for the window:
+     * rwindow = new Image( require( 'image!WOAS/window_back.png' ), {x: -81, y: -219 / 2, scale: 1} )
+     *
+     * I see how ring_back and ring_front have y values modified later, so keeping them wrapped with the Node is helpful
+     */
     var clamp = new Node( {children: [new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )]} ),
       ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: -15, y: -15 / 2, scale: 0.5} )], x: 20} ),
       ring_front = new Node( {children: [new Image( require( 'image!WOAS/ring_front.png' ), {x: -15, y: 0, scale: 0.5} )], x: 20} ),
@@ -27,6 +38,24 @@ define( function( require ) {
         .addColorStop( 0.3, "#FFF" )
         .addColorStop( 1, "#666" );
 
+    /*REVIEW:
+     * For rectangular shapes, please use SCENERY/nodes/Rectangle.
+     *
+     * In this instance:
+     * var post = new Rectangle( -5, -130, 10, 260, {
+     *   stroke: '#000',
+     *   fill: new LinearGradient( -5, 0, 5, 0 )
+     *              .addColorStop( 0, "#666" )
+     *              .addColorStop( 0.3, "#FFF" )
+     *              .addColorStop( 1, "#666" ),
+     *   x: 20
+     * } );
+     *
+     * Also note that lineWidth: 1 is the default, and when specified does nothing
+     *
+     * It's generally easier and more concise, and it will be faster both to create and to render, since
+     * it uses more accelerated graphics for Canvas and SVG
+     */
     postShape.moveTo( -5, -130 );
     postShape.lineTo( 5, -130 );
     postShape.lineTo( 5, 130 );
@@ -36,7 +65,7 @@ define( function( require ) {
     var post = new Path( postShape, {
       stroke: "#000",
       fill: postGradient,
-      lineWidth: 1,
+      lineWidth: 1, //REVIEW: 1 is the default, this line is unnecessary
       x: 20
     } );
 
