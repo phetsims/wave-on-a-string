@@ -28,6 +28,7 @@ define( function( require ) {
   var CheckBoxGroup = require( 'view/control/CheckBoxGroup' );
   var Slider = require( 'view/control/slider/Slider' );
 
+  //REVIEW: DOT/Range should probably be used here, and I would name variables like 'tensionRange', 'dampingRange'.
   var tension = {min: 0, max: 2};
   var damping = {min: 0, max: 100};
   var frequency = {min: 0.00, max: 3.00};
@@ -46,7 +47,7 @@ define( function( require ) {
       {text: rulersString, property: model.rulersProperty},
       {text: timerString, property: model.timerProperty},
       {text: referenceLineString, property: model.referenceLineProperty}
-    ], x: 0, y: 0} );
+    ], x: 0, y: 0} ); //REVIEW: I don't see why x: 0, and y: 0 is necessary, should be removed. See note in CheckBoxGroup
 
     var slider = new Slider( -210, 0, {title: tensionString, property: model.tensionProperty, rounding: 0, scope: tension, tick: {step: 1, minText: lowString, maxText: highString} } );
     var slider2 = new Slider( -420, 0, {title: dampingString, property: model.dampingProperty, rounding: -1, scope: damping, tick: {step: 10, minText: noneString, maxText: lotsString} } );

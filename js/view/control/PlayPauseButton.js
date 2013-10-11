@@ -16,9 +16,12 @@ define( function( require ) {
   var ToggleButton = require( 'SUN/ToggleButton' );
 
   function PlayPauseButton( model, options ) {
+    //REVIEW: prefer passing options directly down to Node
+    //REVIEW: scale: 1 is the default, should be removed
     Node.call( this, {x: options.x, y: options.y, scale: 1} );
     var stepButton, playPauseButton;
 
+    //REVIEW: optional, but this is identical to "var step = model.manualStep.bind( model );" without the extra anonymous function
     var step = function() {
       model.manualStep();
     };

@@ -17,6 +17,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function RadioGroup( options ) {
+    //REVIEW: prefer passing x,y through options, and passing those options to the Node supertype
     Node.call( this, {x: options.x, y: options.y, scale: 0.7} );
     var i = 0,
       length = options.radio.length,

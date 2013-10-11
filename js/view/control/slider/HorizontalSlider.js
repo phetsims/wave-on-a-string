@@ -16,6 +16,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
+  //REVIEW: please see other notes about including x,y in an options object passed to the Node supertype
+  //REVIEW: doc: is 'w' width? is rounding a number or false? what type is value?
   function HorizontalSlider( x, y, w, targetProperty, img, value, rounding, tick ) {
     var thisNode = this;
     Node.call( this, {x: x, y: y} );
@@ -29,6 +31,7 @@ define( function( require ) {
       }
     };
 
+    //REVIEW: optional, but center: Vector2.ZERO is more concise
     var track = new Node( {children: [new Image( img, {centerX: 0, centerY: 0} )], cursor: "pointer"} ),
       clickXOffset,
       xMin = 0,
