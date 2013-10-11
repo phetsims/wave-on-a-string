@@ -54,6 +54,7 @@ define( function( require ) {
           y = Math.max( Math.min( y, options.max ), options.min );
           model.yNow[0] = y;
           model.play = true;
+          //REVIEW: please replace with model.trigger( 'yNowChanged' ) as suggested in WOASModel.js review notes
           model.yNowChanged = !model.yNowChanged;
         },
         translate: function() {
@@ -61,7 +62,7 @@ define( function( require ) {
         }
       } ) );
 
-
+    //REVIEW: please replace with model.on( 'yNowChanged', function updateKey() { ... } ) as suggested in WOASModel.js review notes
     model.yNowChangedProperty.link( function updateKey() {
       key.y = model.yNow[0] || 0;
       postShape = new Shape();

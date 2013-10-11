@@ -75,6 +75,7 @@ define( function( require ) {
     this.addChild( ring_front );
     this.addChild( window );
 
+    //REVIEW: please replace with model.on( 'yNowChanged', function updateKey() { ... } ) as suggested in WOASModel.js review notes
     model.yNowChangedProperty.link( function updateKey() {
       ring_front.y = ring_back.y = model.yNow[model.yNow.length - 1] || 0;
     } );

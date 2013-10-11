@@ -38,6 +38,21 @@ define( function( require ) {
       'pulseWidth': 2, // pulse width 0.0 .. 4.0
       'amplitude': 1.5, // amplitude 0.0 .. 3.0
       'play': true, // play/pause state
+      /*REVIEW:
+       * yNowChanged property should be replaced with trigger/on:
+       *
+       * To send the "yNow changed event", call:
+       * model.trigger( 'yNowChanged' ); // or this.trigger( 'yNowChanged' ) within WOASModel.js
+       *
+       * To add a function to run whenever the "yNow changed event" is triggered:
+       * model.on( 'yNowChanged', callback ); // callback called on trigger
+       *
+       * Or to remove the listener:
+       * model.off( 'yNowChanged', callback );
+       *
+       * Also notably, arguments can be passed (although not necessary in this case):
+       * model.trigger( 'someName', a, b ) will run callback( a, b )
+       */
       'yNowChanged': false, // yNow array changed flag
       'time': 0, // base time
       'angle': 0, // angle for 'oscillate' and 'pulse' mode
@@ -229,7 +244,7 @@ define( function( require ) {
         }
       }
       
-      //REVIEW: Please explain why we can't set this to true always, similarly to the line in manualRestart()
+      //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
       this.yNowChanged = !this.yNowChanged;
     },
     manualRestart: function() {
@@ -242,7 +257,7 @@ define( function( require ) {
         this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
       }
       
-      //REVIEW: Please explain why we can't set this.yNowChanged = true, or replace with that. Not sure why we would ever want this function to exit with it being false.
+      //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
       this.yNowChanged = !this.yNowChanged;
     },
     manualPulse: function() {

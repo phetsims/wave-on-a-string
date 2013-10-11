@@ -38,6 +38,7 @@ define( function( require ) {
     }
     theString[0].scale( 1.2 );
     this.addChild( new Node( {children: theString, renderer: 'svg', layerSplit: true} ) );
+    //REVIEW: please replace with model.on( 'yNowChanged', function updateTheString() { ... } ) as suggested in WOASModel.js review notes
     model.yNowChangedProperty.link( function updateTheString() {
       theStringShape = new Shape();
       theStringRectShape = new Shape();
