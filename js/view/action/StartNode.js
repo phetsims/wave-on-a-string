@@ -32,6 +32,7 @@ define( function( require ) {
     Node.call( this, {x: x, y: y, scale: 1, renderer: 'svg', layerSplit: true } );
     var thisNode = this,
       key = new Node( {children: [new Image( require( 'image!WOAS/wrench_2.png' ), {x: -40, y: -25, scale: 0.9} )], cursor: 'pointer'} ),
+      //REVIEW: 'y: 0' does nothing, that is the default
       wheel = new Node( {children: [new Image( require( 'image!WOAS/oscillator_wheel.png' ), {x: -90 * 0.4, y: -90 * 0.4, scale: 0.4} )], y: 0} ),
       postShape = new Shape(),
       //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
@@ -50,10 +51,12 @@ define( function( require ) {
     this.addChild( post );
     this.addChild( new Node( {children: [wheel], y: 165} ) );
 
+    //REVIEW: good use if extracting constants here, looks good :)
     var dx = 0.25 * key.width,
       dy = 0.25 * key.height,
       clickYOffset = 0;
 
+    //REVIEW: new way to create this shape: Shape.bounds( Bounds2.point( 0, 0 ).dilated( key.width / 2 + dx, key.height / 2 + dy ) )
     key.touchArea = Shape.rectangle( ( -key.width / 2 ) - dx, ( -key.height / 2 ) - dy, key.width + dx + dx, key.height + dy + dy );
     key.addInputListener( new SimpleDragHandler(
       {
@@ -94,6 +97,18 @@ define( function( require ) {
       post.shape = postShape;
     } );
     model.angleProperty.link( function updateWheel( value ) {
+      /*REVIEW:
+       * Efficient way to set the wheel's rotation and also avoid needing to wrap the wheel image with an extra Node:
+       *
+       * wheel.rotation = value;
+       *
+       * This operation won't affect the wheel's scale (I see the image has a scale of 0.4 above), and it updates
+       * the transform in one operation (which currently is much faster than two separate transform operations).
+       * In the Scenery future (next few months) this optimization won't be as needed, but it will definitely help.
+       *
+       * Additionally, to reset the transform matrix to the identity matrix, you can use node.resetTransform(). It
+       * doesn't create an extra Matrix3 object, so it's a bit more garbage-collection friendly.
+       */
       wheel.matrix = new Matrix3();
       wheel.rotate( value );
     } );
