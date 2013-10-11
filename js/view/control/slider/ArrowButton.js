@@ -22,10 +22,12 @@ define( function( require ) {
   function ArrowButton( direction, callback, options ) {
 
     var button = new PushButton(
+      //REVIEW: there is no need to create additional Nodes with children, Images are already Nodes
       new Node( {children: [new Image( require( 'image!WOAS/tweaker_right_unpressed.png' ) )]} ),
       new Node( {children: [new Image( require( 'image!WOAS/tweaker_right_hover.png' ) )]} ),
       new Node( {children: [new Image( require( 'image!WOAS/tweaker_right_pressed.png' ) )]} ),
       new Node( {children: [new Image( require( 'image!WOAS/tweaker_right_disabled.png' ) )]} ),
+      //REVIEW: totally optional, but center: Vector2.ZERO could replace centerX,centerY
       callback, {scale: 1.3, centerX: 0, centerY: 0} );
     if ( direction === 'left' ) {
       button.scale( -1, 1 );
