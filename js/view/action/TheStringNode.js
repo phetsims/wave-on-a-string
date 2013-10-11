@@ -34,6 +34,9 @@ define( function( require ) {
       if ( i % 10 === 0 ) {
         color = 'lime';
       }
+      /*REVIEW: consider Segment API change from Segment.js, as this would then be:
+       * theString.push( new Segment( color, options.radius, { x: i * options.radius * 2 } ) );
+       */
       theString.push( new Segment( i * options.radius * 2, 0, color, options.radius ) );
     }
     theString[0].scale( 1.2 );
