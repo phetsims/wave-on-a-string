@@ -25,6 +25,7 @@ define( function( require ) {
         .addColorStop( 1, "#78571C" );
     arrowShape.moveTo( 0, 0 );
     arrowShape.lineTo( 750, 0 );
+    //REVIEW: this rectangle has no stroke or fill, so isn't displayed. please document its purpose (is it to change the line's bounds? is it the 'clickable' area?)
     this.addChild( new Rectangle( 0, -5, 750, 10, {} ) );
     this.addChild( new Rectangle( 740 * 2, -10, 40, 20, {fill: lineGradient, scale: 0.5, stroke: '#000', lineWidth: 0.5} ) );
     this.addChild( new Rectangle( 750, -10, 20, 20, {fill: lineGradient, stroke: '#000', lineWidth: 0.5} ) );
@@ -38,17 +39,21 @@ define( function( require ) {
       thisNode.setVisible( value );
     } );
     model.referenceLineLocProperty.link( function updateLineLocation( value ) {
+      //REVIEW: once model.referenceLineLoc is a Vector2, you can actually just type "thisNode.translation = model.referenceLineLoc" here
       thisNode.x = model.referenceLineLoc.x;
       thisNode.y = model.referenceLineLoc.y;
     } );
+    //REVIEW: please use DOT/Vector2 for 2D data
     var lineClickOffset = {x: 0, y: 0};
     thisNode.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
+          //REVIEW: equivalent to "lineClickOffset = thisNode.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation )", although result will be a Vector2
           lineClickOffset.x = thisNode.globalToParentPoint( event.pointer.point ).x - event.currentTarget.x;
           lineClickOffset.y = thisNode.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
         },
         drag: function( event ) {
+          //REVIEW: should use "model.referenceLineLoc = thisNode.globalToParentPoint( event.pointer.point ).minus( lineClickOffset )"
           var x = thisNode.globalToParentPoint( event.pointer.point ).x - lineClickOffset.x,
             y = thisNode.globalToParentPoint( event.pointer.point ).y - lineClickOffset.y;
           model.referenceLineLoc = { x: x, y: y };
