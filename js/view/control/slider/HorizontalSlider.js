@@ -71,9 +71,6 @@ define( function( require ) {
           var x = thisNode.globalToParentPoint( event.pointer.point ).x - clickXOffset;
           x = Math.max( Math.min( x, xMax ), xMin );
           targetProperty.set( round( positionToValue( x ), rounding ) );
-        },
-        translate: function() {
-          // do nothing, override default behavior
         }
       } ) );
     targetProperty.link( function( value ) {

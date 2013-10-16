@@ -58,9 +58,6 @@ define( function( require ) {
           var x = thisNode.globalToParentPoint( event.pointer.point ).x - lineClickOffset.x,
             y = thisNode.globalToParentPoint( event.pointer.point ).y - lineClickOffset.y;
           model.referenceLineLoc = { x: x, y: y };
-        },
-        translate: function() {
-          // do nothing, override default behavior
         }
       } ) );
   }

@@ -71,9 +71,6 @@ define( function( require ) {
           model.play = true;
           //REVIEW: please replace with model.trigger( 'yNowChanged' ) as suggested in WOASModel.js review notes
           model.yNowChanged = !model.yNowChanged;
-        },
-        translate: function() {
-          // do nothing, override default behavior
         }
       } ) );
 

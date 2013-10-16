@@ -53,9 +53,6 @@ define( function( require ) {
           var x = rulerV.globalToParentPoint( event.pointer.point ).x - rulerVClickOffset.x,
             y = rulerV.globalToParentPoint( event.pointer.point ).y - rulerVClickOffset.y;
           model.rulerLocV = { x: x, y: y };
-        },
-        translate: function() {
-          // do nothing, override default behavior
         }
       } ) );
     rulerH.addInputListener( new SimpleDragHandler(
@@ -70,9 +67,6 @@ define( function( require ) {
           var x = rulerH.globalToParentPoint( event.pointer.point ).x - rulerHClickOffset.x,
             y = rulerH.globalToParentPoint( event.pointer.point ).y - rulerHClickOffset.y;
           model.rulerLocH = { x: x, y: y };
-        },
-        translate: function() {
-          // do nothing, override default behavior
         }
       } ) );
   }

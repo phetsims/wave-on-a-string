@@ -89,9 +89,6 @@ define( function( require ) {
           var x = thisNode.globalToParentPoint( event.pointer.point ).x - clickOffset.x,
             y = thisNode.globalToParentPoint( event.pointer.point ).y - clickOffset.y;
           model.timerLoc = { x: x, y: y };
-        },
-        translate: function() {
-          // do nothing, override default behavior
         }
       } ) );
   }
