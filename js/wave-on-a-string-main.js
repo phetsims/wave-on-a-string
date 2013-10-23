@@ -8,10 +8,10 @@
 
 define( [
   'string!WOAS/simTitle',
-  'JOIST/SimLauncher', 'JOIST/Sim',
+  'JOIST/SimLauncher', 'JOIST/Sim', 'JOIST/Screen',
   'SCENERY/nodes/Rectangle',
   'model/WOASModel',
-  'view/WOASView'], function( titleString, SimLauncher, Sim, Rectangle, WOASModel, WOASView ) {
+  'view/WOASView'], function( titleString, SimLauncher, Sim, Screen, Rectangle, WOASModel, WOASView ) {
   'use strict';
 
   var simOptions = {
@@ -26,13 +26,11 @@ define( [
   SimLauncher.launch( function() {
     //Create and start the sim
     new Sim( titleString, [
-      {
-        name: titleString,
-        icon: new Rectangle( 0, 0, 50, 50, { fill: 'blue' } ),
-        createModel: function() { return new WOASModel( 768, 504 ); },
-        createView: function( model ) { return new WOASView( model ); },
-        backgroundColor: "#FFFFB7"
-      }
+      new Screen( titleString, null, /* single-screen sim, no icon */
+        function() { return new WOASModel( 768, 504 ); },
+        function( model ) { return new WOASView( model ); },
+        { backgroundColor: "#FFFFB7" }
+      )
     ], simOptions ).start();
   } );
 } );
