@@ -15,12 +15,12 @@ define( [
   'use strict';
 
   var simOptions = {
-    credits: 'PhET Development Team -\n' +
-             'Lead Design: Michael Dubson\n' +
-             'Software Development: Michael Dubson\n' +
-             'Interviews: Wendy Adams, Danielle Harlow\n',
-    thanks: 'Thanks -\n' +
-            'Thanks to Mobile Learner Labs for working with the PhET development team to convert this simulation to HTML5.'
+    credits: {
+      leadDesign: 'Michael Dubson',
+      softwareDevelopment: 'Michael Dubson',
+      interviews: 'Wendy Adams, Danielle Harlow',
+      thanks: 'Thanks to Mobile Learner Labs for working with the PhET development team\nto convert this simulation to HTML5.'
+    }
   };
 
   SimLauncher.launch( function() {
