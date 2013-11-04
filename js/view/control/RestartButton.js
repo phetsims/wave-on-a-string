@@ -25,7 +25,7 @@ define( function( require ) {
     };
 
     //REVIEW: scale: 1 is the default, should be removed
-    this.addChild(new TextButton( restartString, restart, {font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ), {scale: 1});
+    this.addChild(new TextButton( restartString, {callback: restart, font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ), {scale: 1});
   }
 
   inherit( Node, RestartButton );

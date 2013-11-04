@@ -28,7 +28,7 @@ define( function( require ) {
       new Node( {children: [new Image( require( 'image!WOAS/tweaker_right_pressed.png' ) )]} ),
       new Node( {children: [new Image( require( 'image!WOAS/tweaker_right_disabled.png' ) )]} ),
       //REVIEW: totally optional, but center: Vector2.ZERO could replace centerX,centerY
-      callback, {scale: 1.3, centerX: 0, centerY: 0} );
+      {scale: 1.3, centerX: 0, centerY: 0, callback: callback} );
     if ( direction === 'left' ) {
       button.scale( -1, 1 );
     }
