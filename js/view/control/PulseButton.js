@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var pulse2String = require( 'string!WOAS/pulse2' );
-  var TextButton = require( 'SUN/TextButton' );
+  var TextPushButton = require( 'SUN/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function PulseButton( model, options ) {
@@ -24,7 +24,7 @@ define( function( require ) {
       model.manualPulse();
     };
     //REVIEW: scale: 1 is the default, should be removed
-    this.addChild(new TextButton( pulse2String, {listener: pulse, font: new PhetFont( 12 ),rectangleFillUp:"#7CAF3A",rectangleFillDown:"#7CAF3A",rectangleFillOver:"#91B634"} ), {scale: 1});
+    this.addChild(new TextPushButton( pulse2String, {listener: pulse, font: new PhetFont( 12 ),rectangleFillUp:"#7CAF3A",rectangleFillDown:"#7CAF3A",rectangleFillOver:"#91B634"} ), {scale: 1});
 
     model.modeProperty.link( function updatePulseButton( value ) {
       self.setVisible( value === 'pulse' );

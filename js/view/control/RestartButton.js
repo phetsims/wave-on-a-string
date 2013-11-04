@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var restartString = require( 'string!WOAS/restart' );
-  var TextButton = require( 'SUN/TextButton' );
+  var TextPushButton = require( 'SUN/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function RestartButton( model, options ) {
@@ -25,7 +25,7 @@ define( function( require ) {
     };
 
     //REVIEW: scale: 1 is the default, should be removed
-    this.addChild(new TextButton( restartString, {listener: restart, font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ), {scale: 1});
+    this.addChild(new TextPushButton( restartString, {listener: restart, font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ), {scale: 1});
   }
 
   inherit( Node, RestartButton );
