@@ -51,7 +51,7 @@ define( function( require ) {
       new Node( {children: [new Image( require( 'image!WOAS/button_timer_reset_hover.png' ) ), label]} ),
       new Node( {children: [new Image( require( 'image!WOAS/button_timer_reset_pressed.png' ) ), label]} ),
       new Node( {children: [new Image( require( 'image!WOAS/button_timer_reset_unpressed.png' ) ), label]} ),
-      {scale: 0.7, y: 30, x: 3, callback: resetTimer} ) );
+      {scale: 0.7, y: 30, x: 3, listener: resetTimer} ) );
 
     timer.addChild( new ToggleButton(
       new Image( require( 'image!WOAS/button_timer_pause_unpressed.png' ) ),

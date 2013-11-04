@@ -37,7 +37,7 @@ define( function( require ) {
       new Image( require( 'image!WOAS/button_step_hover.png' ) ),
       new Image( require( 'image!WOAS/button_step_pressed.png' ) ),
       new Image( require( 'image!WOAS/button_step_deactivated.png' ) ),
-      {scale: 0.7, x: 50, y: 7, callback: step} ) );
+      {scale: 0.7, x: 50, y: 7, listener: step} ) );
     stepButton.enabled = false;
 
     model.playProperty.link( function updatePlayPauseButton( value ) {
