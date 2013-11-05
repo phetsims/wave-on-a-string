@@ -173,11 +173,7 @@ define( function( require ) {
       if ( this.mode === 'oscillate' ) {
         this.angle += Math.PI * 2 * this.frequency * dt * this.speed;
         this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
-
-        if ( this.angle >= Math.PI * 2 ) {
-          //REVIEW: shouldn't this be "this.angle %= Math.PI * 2"?   (referenced by https://github.com/phetsims/wave-on-a-string/issues/17)
-          this.angle = Math.PI * 2 * this.frequency * dt * this.speed;
-        }
+        this.angle %= Math.PI * 2;
       }
       if ( this.mode === 'pulse' && this.pulse ) {
         var k = 1 / this.pulseWidth * this.speed;
