@@ -187,7 +187,7 @@ define( function( require ) {
           this.angle = 0;
           this.pulse = false;
         }
-        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
+        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle/(Math.PI / 2));
       }
       if ( this.time >= minDt ) {
         //REVIEW: wouldn't this be "this.time % minDt"? Otherwise we don't go as far forward in our interpolation as we should
