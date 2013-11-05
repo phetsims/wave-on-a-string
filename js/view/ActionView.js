@@ -17,9 +17,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
 
   function ActionView( model ) {
-    //REVIEW: renderer: 'svg' is not necessary, since it is already set in WOASView
-    //REVIEW: scale: 1 is not necessary, that is the default
-    Node.call( this, { scale: 1, renderer: 'svg', layerSplit: true } );
+    Node.call( this, { layerSplit: true } );
     var arrowShape = new Shape(),
       windowImage;
     //REVIEW: why is this called arrowShape? maybe 'referenceLine' would be more appropriate?
@@ -38,9 +36,9 @@ define( function( require ) {
      * https://github.com/phetsims/build-a-molecule/blob/master/js/Constants.js, where the x,y resting values of the left/right side of the string are stored,
      * and any constants used for large-scale layout. I'd also recommend putting colors in this area.
      */
-    this.addChild( new EndNode( 70 + 600, 215, model, {max: 120, min: -120} ) );
-    this.addChild( new TheStringNode( 70, 215, model, {radius: 5, max: 120, min: -120} ) );
-    this.addChild( new StartNode( 70, 215, model, {max: 120, min: -120} ) );
+    this.addChild( new EndNode( model, {x: 670, y: 215, max: 120, min: -120} ) );
+    this.addChild( new TheStringNode( model, {x: 70, y: 215, radius: 5, max: 120, min: -120} ) );
+    this.addChild( new StartNode( model, {x: 70, y: 215, max: 120, min: -120} ) );
     this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: -19, y: -210 / 2, scale: 1} )], x: 90 + 600, y: 215} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {

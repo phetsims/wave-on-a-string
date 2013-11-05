@@ -16,16 +16,14 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   function RestartButton( model, options ) {
-    //REVIEW: prefer passing options directly down to Node
-    //REVIEW: scale: 1 is the default, should be removed
-    Node.call( this, {x: options.x, y: options.y, scale: 1} );
+    Node.call( this );
 
     var restart = function() {
       model.manualRestart();
     };
 
-    //REVIEW: scale: 1 is the default, should be removed
-    this.addChild(new TextPushButton( restartString, {listener: restart, font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ), {scale: 1});
+    this.addChild(new TextPushButton( restartString, {listener: restart, font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ));
+    this.mutate( options );
   }
 
   inherit( Node, RestartButton );

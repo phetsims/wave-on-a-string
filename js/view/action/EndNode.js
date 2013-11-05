@@ -14,10 +14,10 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
-  function EndNode( x, y, model ) {
+  function EndNode(model, options ) {
     //REVIEW: x: 20 seems to be duplicated in this file, should be generally separated out as a constant
 
-    Node.call( this, {x: x, y: y } );
+    Node.call( this );
     /*REVIEW:
      * I'm not sure why wrapping some of these in an extra Node is necessary. Scenery's Image is a subtype of Node,
      * so for the clamp, it can be replaced with:
@@ -77,6 +77,7 @@ define( function( require ) {
     this.addChild( ring_front );
     this.addChild( window );
 
+    this.mutate( options );
     //REVIEW: please replace with model.on( 'yNowChanged', function updateKey() { ... } ) as suggested in WOASModel.js review notes
     model.yNowChangedProperty.link( function updateKey() {
       ring_front.y = ring_back.y = model.yNow[model.yNow.length - 1] || 0;

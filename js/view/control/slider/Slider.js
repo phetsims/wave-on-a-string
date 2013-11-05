@@ -16,7 +16,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
-  function Slider( x, y, options ) {
+  function Slider(options ) {
     options = _.extend(
       {
         type: 'simple',
@@ -32,7 +32,7 @@ define( function( require ) {
         buttonStep: 1
       }, options );
 
-    Node.call( this, {x: x, y: y} );
+    Node.call( this );
 
     var tick = false;
     if ( options.type === 'simple' ) {
@@ -58,6 +58,8 @@ define( function( require ) {
     }
     this.addChild( new HorizontalSlider( 5, options.height - 20, options.width - 10, options.property, require( 'image!WOAS/slider.png' ), options.scope, options.rounding, tick ) );
     this.addChild( new Text( options.title, {centerX: options.width / 2, top: 3, font: new PhetFont( 18 )} ) );
+
+    this.mutate( options );
 
     options.property.link( function updateMass( value ) {
       var text = options.property.get();

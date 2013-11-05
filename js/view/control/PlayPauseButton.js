@@ -16,9 +16,7 @@ define( function( require ) {
   var ToggleButton = require( 'SUN/ToggleButton' );
 
   function PlayPauseButton( model, options ) {
-    //REVIEW: prefer passing options directly down to Node
-    //REVIEW: scale: 1 is the default, should be removed
-    Node.call( this, {x: options.x, y: options.y, scale: 1} );
+    Node.call( this );
     var stepButton, playPauseButton;
 
     //REVIEW: optional, but this is identical to "var step = model.manualStep.bind( model );" without the extra anonymous function
@@ -39,7 +37,7 @@ define( function( require ) {
       new Image( require( 'image!WOAS/button_step_deactivated.png' ) ),
       {scale: 0.7, x: 50, y: 7, listener: step} ) );
     stepButton.enabled = false;
-
+    this.mutate( options );
     model.playProperty.link( function updatePlayPauseButton( value ) {
       stepButton.enabled = !value;
     } );
