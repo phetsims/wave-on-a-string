@@ -38,6 +38,7 @@ define( function( require ) {
       'pulseWidth': 2, // pulse width 0.0 .. 4.0
       'amplitude': 1.5, // amplitude 0.0 .. 3.0
       'play': true, // play/pause state
+      'lastDt': 0.03,
       /*REVIEW:
        * yNowChanged property should be replaced with trigger/on:
        *
@@ -74,6 +75,11 @@ define( function( require ) {
 
   inherit( PropertySet, WOASModel, {
     step: function( dt ) {
+      if ( Math.abs( dt - this.lastDt ) > this.lastDt * 0.3 ) {
+        dt = this.lastDt + ((dt - this.lastDt)<0?-1:1) * this.lastDt * 0.3;
+      }
+      this.lastDt = dt;
+
       if ( this.play ) {
         this.customDt += dt;
         if ( this.customDt >= 1 / (fps * this.speed) ) {
@@ -82,7 +88,6 @@ define( function( require ) {
         }
         else {
           for ( var i = 1; i < this.nSegs; i++ ) {
-            //var yPresent = (1-ratio)*myString.yLast[i]+ratio*myString.yNow[i];
             this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.customDt / 1 / (fps * this.speed)));
           }
         }
@@ -157,14 +162,6 @@ define( function( require ) {
       //REVIEW: although manualStep is never called with dt === 0 right now, it's best practice to handle this case (check if dt is undefined, since it would replace 0 with 1 / fps * this.speed)
       dt = dt || (1 / fps * this.speed);
 
-      /*REVIEW:
-       * This is currently not working well for large dts (in seconds, which happens when a tab freezes for a bit, or if a user switches away from the sim and comes back).
-       *
-       * For a large dt, we still only run one evolve() step, so the wave can't progress very far. However, the angle for the oscillation/pulse
-       * will cover multiple steps' worth of radians. This results in discontinuities.
-       *
-       * Please see https://github.com/phetsims/wave-on-a-string/issues/18 for more details on how to trigger this for testing, and the main approach for fixing it.
-       */
       this.time += dt;
       if ( this.timerStart ) {
         this.timerSecond += dt * this.speed;
