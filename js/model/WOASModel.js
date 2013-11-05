@@ -11,7 +11,7 @@ define( function( require ) {
 
   var NSEGS = 61,
     fps = 48;
-  
+
   //REVIEW: doc: is the width/height passed in here mainly used as the bounds of the model area? I don't see it being used in the actual model itself anywhere
   function WOASModel( width, height ) {
     this.width = width;
@@ -89,41 +89,7 @@ define( function( require ) {
       }
     },
     reset: function() {
-      //REVIEW: pulseWidth is not reset here!
-      /*REVIEW:
-       * In order to simplify the code, PropertySet has a neat function reset() of its own. We are overriding this reset()
-       * behavior, but we can still call it. The more convenient way would be to just:
-       *
-       * PropertySet.prototype.reset.call( this ); // every property gets .reset() called on it!
-       * this.manualRestart(); // since we have extra logic here for yDraw
-       *
-       * NOTE: this change would reset yNowChanged to false, and after this.manualRestart(), yNowChanged would always be true.
-       * I believe this is probably what is intended, I'm adding a note to below in manualRestart() also. If yNowChanged is
-       * true at the start of reset(), and you want it to be false after the reset() including manualRestart() like it will occur now,
-       * you will need to store the value first and change it after PropertySet.prototype.reset.call( this ).
-       *
-       * This is because currently if yNowChanged = true and reset() is called, the property is not currently reset, and in manualRestart()
-       * it would be toggled to false (probably not the desired behavior).
-       *
-       * Referenced by https://github.com/phetsims/wave-on-a-string/issues/16
-       */
-      this.modeProperty.reset();
-      this.typeEndProperty.reset();
-      this.speedProperty.reset();
-      this.tensionProperty.reset();
-      this.dampingProperty.reset();
-      this.frequencyProperty.reset();
-      this.amplitudeProperty.reset();
-      this.playProperty.reset();
-      this.rulerLocHProperty.reset();
-      this.rulerLocVProperty.reset();
-      this.referenceLineLocProperty.reset();
-      this.referenceLineProperty.reset();
-      this.timerStartProperty.reset();
-      this.timerSecondProperty.reset();
-      this.timerProperty.reset();
-      this.rulersProperty.reset();
-      this.timerLocProperty.reset();
+      PropertySet.prototype.reset.call( this );
       this.manualRestart();
     },
     //next step strings array calculated
@@ -148,7 +114,7 @@ define( function( require ) {
       else if ( this.typeEnd === 'noEnd' ) {		//else if noEnd
         this.yNow[this.nSegs - 1] = this.yLast[this.nSegs - 2];
       }
-      
+
       //main formula for calculating
       /*REVIEW: performance: constants involving alpha and beta do not change in this inner loop. please extract to a variable outside the loop.
        * For example: var a = 1 / ( this.beta + 1 ), alphaSq = this.alpha * this.alpha, b = 2 * ( 1 - alphaSq );
@@ -156,7 +122,7 @@ define( function( require ) {
       for ( var i = 1; i < (this.nSegs - 1); i++ ) {
         this.yNext[i] = (1 / (this.beta + 1)) * ((this.beta - 1) * this.yLast[i] + 2 * (1 - (this.alpha * this.alpha)) * this.yNow[i] + (this.alpha * this.alpha) * (this.yNow[i + 1] + this.yNow[i - 1])   );
       }
-      
+
       /*REVIEW: performance:
        * Instead of doing full array copies here, please do something like the following:
        *
@@ -190,7 +156,7 @@ define( function( require ) {
       var i;
       //REVIEW: although manualStep is never called with dt === 0 right now, it's best practice to handle this case (check if dt is undefined, since it would replace 0 with 1 / fps * this.speed)
       dt = dt || (1 / fps * this.speed);
-      
+
       /*REVIEW:
        * This is currently not working well for large dts (in seconds, which happens when a tab freezes for a bit, or if a user switches away from the sim and comes back).
        *
@@ -207,7 +173,7 @@ define( function( require ) {
       if ( this.mode === 'oscillate' ) {
         this.angle += Math.PI * 2 * this.frequency * dt * this.speed;
         this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
-        
+
         if ( this.angle >= Math.PI * 2 ) {
           //REVIEW: shouldn't this be "this.angle %= Math.PI * 2"?   (referenced by https://github.com/phetsims/wave-on-a-string/issues/17)
           this.angle = Math.PI * 2 * this.frequency * dt * this.speed;
@@ -243,7 +209,7 @@ define( function( require ) {
           this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.time / minDt));
         }
       }
-      
+
       //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
       this.yNowChanged = !this.yNowChanged;
     },
@@ -256,7 +222,7 @@ define( function( require ) {
       for ( var i = 0; i < this.yNow.length; i++ ) {
         this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
       }
-      
+
       //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
       this.yNowChanged = !this.yNowChanged;
     },
