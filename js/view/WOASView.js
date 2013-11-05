@@ -7,8 +7,8 @@
 
 define( function( require ) {
   "use strict";
-  var ControlPanel = require( 'view/ControlPanel' );
-  var ActionView = require( 'view/ActionView' );
+  var ControlPanel = require( 'WOAS/view/ControlPanel' );
+  var ActionView = require( 'WOAS/view/ActionView' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
 

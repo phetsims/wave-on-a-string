@@ -11,8 +11,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var HorizontalSlider = require( 'view/control/slider/HorizontalSlider' );
-  var ArrowButton = require( 'view/control/slider/ArrowButton' );
+  var HorizontalSlider = require( 'WOAS/view/control/slider/HorizontalSlider' );
+  var ArrowButton = require( 'WOAS/view/control/slider/ArrowButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 

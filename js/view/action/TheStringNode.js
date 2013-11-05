@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Segment = require( 'view/action/Segment' );
+  var Segment = require( 'WOAS/view/action/Segment' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 

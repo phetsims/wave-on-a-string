@@ -10,8 +10,8 @@ define( [
   'string!WOAS/simTitle',
   'JOIST/SimLauncher', 'JOIST/Sim', 'JOIST/Screen',
   'SCENERY/nodes/Rectangle',
-  'model/WOASModel',
-  'view/WOASView'], function( titleString, SimLauncher, Sim, Screen, Rectangle, WOASModel, WOASView ) {
+  'WOAS/model/WOASModel',
+  'WOAS/view/WOASView'], function( titleString, SimLauncher, Sim, Screen, Rectangle, WOASModel, WOASView ) {
   'use strict';
 
   var simOptions = {

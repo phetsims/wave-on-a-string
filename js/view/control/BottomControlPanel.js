@@ -25,8 +25,8 @@ define( function( require ) {
   var amplitudeString = require( 'string!WOAS/amplitude' );
   var patternValueUnitCmString = require( 'string!WOAS/patternValueUnitCm' );
   var Panel = require( 'SUN/Panel' );
-  var CheckBoxGroup = require( 'view/control/CheckBoxGroup' );
-  var Slider = require( 'view/control/slider/Slider' );
+  var CheckBoxGroup = require( 'WOAS/view/control/CheckBoxGroup' );
+  var Slider = require( 'WOAS/view/control/slider/Slider' );
 
   //REVIEW: DOT/Range should probably be used here, and I would name variables like 'tensionRange', 'dampingRange'.
   var tension = {min: 0, max: 2};
