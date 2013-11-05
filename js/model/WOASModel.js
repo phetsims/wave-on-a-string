@@ -35,7 +35,7 @@ define( function( require ) {
       'tension': 2, // tension 0..2
       'damping': 50, // dumping 0..100
       'frequency': 1.50, // frequency 0.00 .. 3.00
-      'pulseWidth': 2, // pulse width 0.0 .. 4.0
+      'pulseWidth': 0.5, // pulse width 0.00 .. 1.00
       'amplitude': 1.5, // amplitude 0.0 .. 3.0
       'play': true, // play/pause state
       'lastDt': 0.03,

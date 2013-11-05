@@ -32,7 +32,7 @@ define( function( require ) {
   var tension = {min: 0, max: 2};
   var damping = {min: 0, max: 100};
   var frequency = {min: 0.00, max: 3.00};
-  var pulseWidth = {min: 0.0, max: 4.0};
+  var pulseWidth = {min: 0.0, max: 1.0};
   var amplitude = {min: 0.0, max: 3.0};
 
   function BottomControlPanel( model ) {
@@ -52,7 +52,7 @@ define( function( require ) {
     var slider = new Slider( -210, 0, {title: tensionString, property: model.tensionProperty, rounding: 0, scope: tension, tick: {step: 1, minText: lowString, maxText: highString} } );
     var slider2 = new Slider( -420, 0, {title: dampingString, property: model.dampingProperty, rounding: -1, scope: damping, tick: {step: 10, minText: noneString, maxText: lotsString} } );
     var slider3 = new Slider( -630, 0, {type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, scope: frequency } );
-    var slider5 = new Slider( -630, 0, {type: 'button', buttonStep: 0.1, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 1, scope: pulseWidth } );
+    var slider5 = new Slider( -630, 0, {type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, scope: pulseWidth } );
     var slider4 = new Slider( -840, 0, {type: 'button', buttonStep: 0.1, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 1, scope: amplitude } );
 
     elements1.addChild( checkBox );
