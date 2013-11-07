@@ -44,7 +44,8 @@ define( function( require ) {
     this.mutate( options );
 
     //REVIEW: please replace with model.on( 'yNowChanged', function updateTheString() { ... } ) as suggested in WOASModel.js review notes
-    model.yNowChangedProperty.link( function updateTheString() {
+    //model.yNowChangedProperty.link(
+    model.on( 'yNowChanged', function updateTheString() {
       theStringShape = new Shape();
       theStringRectShape = new Shape();
       var maxY = 0, minY = 0;

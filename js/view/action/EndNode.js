@@ -14,7 +14,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
 
-  function EndNode(model, options ) {
+  function EndNode( model, options ) {
     //REVIEW: x: 20 seems to be duplicated in this file, should be generally separated out as a constant
 
     Node.call( this );
@@ -31,10 +31,10 @@ define( function( require ) {
     var clamp = new Node( {children: [new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )]} ),
       ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: -15, y: -15 / 2, scale: 0.5} )], x: 20} ),
       ring_front = new Node( {children: [new Image( require( 'image!WOAS/ring_front.png' ), {x: -15, y: 0, scale: 0.5} )], x: 20} ),
-      //REVIEW: 'window' may be an inconvenient name, since it hides the ability to directly access the global window name. consider windowNode?
+    //REVIEW: 'window' may be an inconvenient name, since it hides the ability to directly access the global window name. consider windowNode?
       window = new Node( {children: [new Image( require( 'image!WOAS/window_back.png' ), {x: -101, y: -219 / 2, scale: 1} )], x: 20} ),
       postShape = new Shape(),
-      //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
+    //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
       postGradient = new LinearGradient( -5, 0, 5, 0 )
         .addColorStop( 0, "#666" )
         .addColorStop( 0.3, "#FFF" )
@@ -79,7 +79,9 @@ define( function( require ) {
 
     this.mutate( options );
     //REVIEW: please replace with model.on( 'yNowChanged', function updateKey() { ... } ) as suggested in WOASModel.js review notes
-    model.yNowChangedProperty.link( function updateKey() {
+
+    //model.yNowChangedProperty.link(
+    model.on( 'yNowChanged', function updateKey() {
       ring_front.y = ring_back.y = model.yNow[model.yNow.length - 1] || 0;
     } );
 

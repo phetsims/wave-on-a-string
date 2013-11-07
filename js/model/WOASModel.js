@@ -54,7 +54,7 @@ define( function( require ) {
        * Also notably, arguments can be passed (although not necessary in this case):
        * model.trigger( 'someName', a, b ) will run callback( a, b )
        */
-      'yNowChanged': false, // yNow array changed flag
+      //'yNowChanged': false, // yNow array changed flag
       'time': 0, // base time
       'angle': 0, // angle for 'oscillate' and 'pulse' mode
       'pulse': false, // 'pulse' mode pulse active
@@ -66,6 +66,7 @@ define( function( require ) {
       'timerSecond': 0, // timer time in seconds
       'timerLoc': {x: 475, y: 318} // position timer
     } );
+
     this.nSegs = NSEGS;
     this.beta = 0.05;
     this.alpha = 1;
@@ -204,7 +205,8 @@ define( function( require ) {
       }
 
       //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
-      this.yNowChanged = !this.yNowChanged;
+      this.trigger( 'yNowChanged' );
+      //this.yNowChanged = !this.yNowChanged;
     },
     manualRestart: function() {
       //REVIEW: These 3 resets would be removed (unnecessary) with my above suggested modifications to reset()
@@ -217,7 +219,8 @@ define( function( require ) {
       }
 
       //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
-      this.yNowChanged = !this.yNowChanged;
+      this.trigger( 'yNowChanged' );
+      //this.yNowChanged = !this.yNowChanged;
     },
     manualPulse: function() {
       this.yNow[0] = 0;

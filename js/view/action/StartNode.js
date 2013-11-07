@@ -42,7 +42,7 @@ define( function( require ) {
 
     //REVIEW: good use if extracting constants here, looks good :)
     var clickYOffset = 0;
-    key.touchArea = Shape.bounds( Bounds2.point(-12, 70  ).dilatedXY( key.width / 2, key.height / 2 ) );
+    key.touchArea = Shape.bounds( Bounds2.point( -12, 70 ).dilatedXY( key.width / 2, key.height / 2 ) );
     key.addInputListener( new SimpleDragHandler(
       {
         allowTouchSnag: true,
@@ -60,7 +60,8 @@ define( function( require ) {
       } ) );
     this.mutate( options );
     //REVIEW: please replace with model.on( 'yNowChanged', function updateKey() { ... } ) as suggested in WOASModel.js review notes
-    model.yNowChangedProperty.link( function updateKey() {
+    //model.yNowChangedProperty.link(
+    model.on( 'yNowChanged', function updateKey() {
       key.y = model.yNow[0] || 0;
       /*REVIEW:
        * Instead of creating a new shape, SCENERY/nodes/Rectangle (the subtype of Node) should be used in
