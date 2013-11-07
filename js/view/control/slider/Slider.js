@@ -11,67 +11,103 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var HorizontalSlider = require( 'WOAS/view/control/slider/HorizontalSlider' );
-  var ArrowButton = require( 'WOAS/view/control/slider/ArrowButton' );
+  var HSlider = require( 'SUN/HSlider' );
+  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var Range = require( 'DOT/Range' );
+  var Property = require( 'AXON/Property' );
 
-  function Slider(options ) {
-    options = _.extend(
-      {
+  function Slider( options ) {
+    var thisNode = this,
+      defaultOptions = {
         type: 'simple',
-        tick: {step: 0, minText: '', maxText: ''},
-        unit: '',
-        patternValueUnit: '',
+        property: new Property( 0 ),
+        range: new Range( 0, 100 ),
+        sliderSize: new Dimension2( 200, 110 ),
+        tick: {step: 1, minText: '', maxText: ''},
         title: '',
-        property: null,
-        scope: {min: 0, max: 100},
+        patternValueUnit: '',
+        buttonStep: 1,
         rounding: false,
-        width: 200,
-        height: 100,
-        buttonStep: 1
-      }, options );
-
-    Node.call( this );
-
-    var tick = false;
-    if ( options.type === 'simple' ) {
-      tick = options.tick;
-    }
-    var buttonNode = new Node( {y: 25} ),
-      plusButton, minusButton, valueLabel
-      ;
-    var buttonPropertyUpdate = function( value ) {
-      return function() {
-        options.property.set( Math.max( Math.min( options.property.get() + value, options.scope.max ), options.scope.min ) );
+        // custom track
+        trackSize: new Dimension2( 140, 2 ),
+        trackFill: 'black',
+        // custom thumb
+        thumbSize: new Dimension2( 22, 38 ),
+        thumbFillEnabled: '#98BECF',
+        thumbFillHighlighted: '#B3D3E2',
+        // custom ticks
+        tickLabelSpacing: 4,
+        majorTickLength: 35,
+        minorTickLength: 25
       };
-    };
+    Node.call( thisNode );
+    options = _.extend( {}, defaultOptions, options );
+    if ( !options.endDrag && options.rounding !== false ) {
+      options.endDrag = function() {
+        options.property.set( Math.round( options.property.get() * Math.pow( 10, options.rounding ) ) / Math.pow( 10, options.rounding ) );
+      };
+    }
 
-    buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {right: options.width - 15, centerY: 15} ) );
-    buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), {left: 15, centerY: 15} ) );
-    buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, {fill: "#FFF", stroke: "#000", lineWidth: 1, centerX: options.width / 2, top: 0} ) );
-    buttonNode.addChild( valueLabel = new Text( "0", {font: new PhetFont( 18 ), centerX: options.width / 2, top: 5} ) );
+    thisNode.addChild( new Rectangle( 0, 0, options.sliderSize.width, options.sliderSize.height ) );
 
-    this.addChild( new Rectangle( 0, 0, options.width, options.height, {} ) );
+    this.addChild( new Text( options.title, {centerX: thisNode.width / 2, top: 0, font: new PhetFont( 18 )} ) );
+
+    var buttonNode, plusButton, minusButton, valueLabel;
+    var hSlider = new HSlider( options.property, options.range, options );
+    var hSliderNode = new Node( {children: [hSlider], x: (thisNode.width - options.trackSize.width) / 2, bottom: thisNode.height - 0} );
+    thisNode.addChild( hSliderNode );
+
+    if ( options.type === 'simple' && options.tick && options.tick.step ) {
+      var i = options.range.min;
+
+      for ( ; i <= options.range.max; i += options.tick.step ) {
+
+        if ( i === options.range.max ) {
+          hSlider.addMajorTick( i, new Text( options.tick.maxText, {font: new PhetFont( 15 )} ) );
+        }
+        else if ( i === options.range.min ) {
+          hSlider.addMajorTick( i, new Text( options.tick.minText, {font: new PhetFont( 15 )} ) );
+        }
+        else if ( i === (options.range.min + options.range.max) / 2 ) {
+          hSlider.addMajorTick( i );
+        }
+        else {
+          hSlider.addMinorTick( i );
+        }
+      }
+    }
+
     if ( options.type === 'button' ) {
+      buttonNode = new Node( {y: 25} );
+      var buttonPropertyUpdate = function( value ) {
+        return function() {
+          options.property.set( Math.max( Math.min( options.property.get() + value, options.range.max ), options.range.min ) );
+        };
+      };
+      buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {right: thisNode.width - 15, centerY: 15} ) );
+      buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), {left: 15, centerY: 15} ) );
+      buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, {fill: "#FFF", stroke: "#000", lineWidth: 1, centerX: thisNode.width / 2, top: 0} ) );
+      buttonNode.addChild( valueLabel = new Text( "0", {font: new PhetFont( 18 ), centerX: options.width / 2, top: 5} ) );
       this.addChild( buttonNode );
     }
-    this.addChild( new HorizontalSlider( 5, options.height - 20, options.width - 10, options.property, require( 'image!WOAS/slider.png' ), options.scope, options.rounding, tick ) );
-    this.addChild( new Text( options.title, {centerX: options.width / 2, top: 3, font: new PhetFont( 18 )} ) );
 
-    this.mutate( options );
 
-    options.property.link( function updateMass( value ) {
-      var text = options.property.get();
-      if ( options.rounding !== false && options.rounding >= 0 ) {
-        text = options.property.get().toFixed( options.rounding );
+    thisNode.mutate( _.omit( options, Object.keys( defaultOptions ) ) );
+
+    options.property.link( function updateProperty( value ) {
+      if ( options.type === 'button' ) {
+        var text = options.property.get();
+        if ( options.rounding !== false && options.rounding >= 0 ) {
+          text = options.property.get().toFixed( options.rounding );
+        }
+        valueLabel.text = StringUtils.format( options.patternValueUnit, text );
+        valueLabel.centerX = thisNode.width / 2;
+        plusButton.setEnabled( options.property.get() < options.range.max );
+        minusButton.setEnabled( options.property.get() > options.range.min );
       }
-      //valueLabel.text = text + " " + options.unit;
-      //patternValueUnitHz
-      valueLabel.text = StringUtils.format( options.patternValueUnit, text );
-      valueLabel.centerX = options.width / 2;
-      plusButton.setEnabled( options.property.get() < options.scope.max );
-      minusButton.setEnabled( options.property.get() > options.scope.min );
     } );
   }
 

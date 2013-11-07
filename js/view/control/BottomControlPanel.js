@@ -27,13 +27,15 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var CheckBoxGroup = require( 'WOAS/view/control/CheckBoxGroup' );
   var Slider = require( 'WOAS/view/control/slider/Slider' );
+  //var SliderOld = require( 'WOAS/view/control/slider/SliderOld' );
+  var Range = require( 'DOT/Range' );
 
-  //REVIEW: DOT/Range should probably be used here, and I would name variables like 'tensionRange', 'dampingRange'.
-  var tension = {min: 0, max: 2};
-  var damping = {min: 0, max: 100};
-  var frequency = {min: 0.00, max: 3.00};
-  var pulseWidth = {min: 0.0, max: 1.0};
-  var amplitude = {min: 0.0, max: 3.0};
+  //todo: move to constant
+  var tensionRange = new Range( 0, 2 );
+  var dampingRange = new Range( 0, 100 );
+  var frequencyRange = new Range( 0, 3 );
+  var pulseWidthRange = new Range( 0, 1 );
+  var amplitudeRange = new Range( 0, 3 );
 
   function BottomControlPanel( model ) {
 
@@ -49,11 +51,16 @@ define( function( require ) {
       {text: referenceLineString, property: model.referenceLineProperty}
     ], x: 0, y: 0} ); //REVIEW: I don't see why x: 0, and y: 0 is necessary, should be removed. See note in CheckBoxGroup
 
-    var slider = new Slider( {x:-210,title: tensionString, property: model.tensionProperty, rounding: 0, scope: tension, tick: {step: 1, minText: lowString, maxText: highString} } );
-    var slider2 = new Slider( {x:-420,title: dampingString, property: model.dampingProperty, rounding: -1, scope: damping, tick: {step: 10, minText: noneString, maxText: lotsString} } );
-    var slider3 = new Slider( {x:-630,type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, scope: frequency } );
-    var slider5 = new Slider( {x:-630,type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, scope: pulseWidth } );
-    var slider4 = new Slider( {x:-840,type: 'button', buttonStep: 0.1, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 1, scope: amplitude } );
+    var slider = new Slider( {x: -210, title: tensionString, property: model.tensionProperty, rounding: 0, range: tensionRange, tick: {step: 1, minText: lowString, maxText: highString} } );
+    //var slider = new SliderOld( {x: -210, title: tensionString, property: model.tensionProperty, rounding: 0, scope: tension, tick: {step: 1, minText: lowString, maxText: highString} } );
+    var slider2 = new Slider( {x:-420, title: dampingString, property: model.dampingProperty, rounding: -1, range: dampingRange, tick: {step: 10, minText: noneString, maxText: lotsString}} );
+    //var slider2 = new SliderOld( {x: -420, title: dampingString, property: model.dampingProperty, rounding: -1, scope: damping, tick: {step: 10, minText: noneString, maxText: lotsString} } );
+    var slider3 = new Slider( {x: -630, type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, range: frequencyRange } );
+    //var slider3 = new SliderOld( {x: -630, type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, scope: frequency } );
+    var slider5 = new Slider( {x: -630, type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, range: pulseWidthRange } );
+    //var slider5 = new SliderOld( {x: -630, type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, scope: pulseWidth } );
+    var slider4 = new Slider( {x: -840, type: 'button', buttonStep: 0.1, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 1, range: amplitudeRange } );
+    //var slider4 = new SliderOld( {x: -840, type: 'button', buttonStep: 0.1, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 1, scope: amplitude } );
 
     elements1.addChild( checkBox );
     elements1.addChild( slider );

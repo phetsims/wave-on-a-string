@@ -8,6 +8,7 @@ define( function( require ) {
   'use strict';
   var PropertySet = require( 'AXON/PropertySet' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   var NSEGS = 61,
     fps = 48;
@@ -26,45 +27,29 @@ define( function( require ) {
     this.pulseSign = 1;
     PropertySet.call( this, {
       //REVIEW: would prefer removal of unnecessary single quotes on left-hand-side. For example: mode: 'manual',
-      'mode': 'manual', // 'manual', 'oscillate', 'pulse'
-      'typeEnd': 'fixedEnd', // 'fixedEnd', 'looseEnd', 'noEnd'
-      'speed': 1, // 1, 0.25
-      'rulers': false, // visible rulers
-      'timer': false,  // visible timer
-      'referenceLine': false, // visible referenceLine
-      'tension': 2, // tension 0..2
-      'damping': 50, // dumping 0..100
-      'frequency': 1.50, // frequency 0.00 .. 3.00
-      'pulseWidth': 0.5, // pulse width 0.00 .. 1.00
-      'amplitude': 1.5, // amplitude 0.0 .. 3.0
-      'play': true, // play/pause state
-      'lastDt': 0.03,
-      /*REVIEW:
-       * yNowChanged property should be replaced with trigger/on:
-       *
-       * To send the "yNow changed event", call:
-       * model.trigger( 'yNowChanged' ); // or this.trigger( 'yNowChanged' ) within WOASModel.js
-       *
-       * To add a function to run whenever the "yNow changed event" is triggered:
-       * model.on( 'yNowChanged', callback ); // callback called on trigger
-       *
-       * Or to remove the listener:
-       * model.off( 'yNowChanged', callback );
-       *
-       * Also notably, arguments can be passed (although not necessary in this case):
-       * model.trigger( 'someName', a, b ) will run callback( a, b )
-       */
-      //'yNowChanged': false, // yNow array changed flag
-      'time': 0, // base time
-      'angle': 0, // angle for 'oscillate' and 'pulse' mode
-      'pulse': false, // 'pulse' mode pulse active
+      mode: 'manual', // 'manual', 'oscillate', 'pulse'
+      typeEnd: 'fixedEnd', // 'fixedEnd', 'looseEnd', 'noEnd'
+      speed: 1, // 1, 0.25
+      rulers: false, // visible rulers
+      timer: false,  // visible timer
+      referenceLine: false, // visible referenceLine
+      tension: 2, // tension 0..2
+      damping: 50, // dumping 0..100
+      frequency: 1.50, // frequency 0.00 .. 3.00
+      pulseWidth: 0.5, // pulse width 0.00 .. 1.00
+      amplitude: 1.5, // amplitude 0.0 .. 3.0
+      play: true, // play/pause state
+      lastDt: 0.03,
+      time: 0, // base time
+      angle: 0, // angle for 'oscillate' and 'pulse' mode
+      pulse: false, // 'pulse' mode pulse active
       //REVIEW: would prefer use of DOT/Vector2 for 2D points. for example: rulerLocH: new Vector2( 54, 117 )
-      'rulerLocH': {x: 54, y: 117}, //position horizontal ruler
-      'rulerLocV': {x: 13, y: 440}, //position vertical ruler
-      'referenceLineLoc': {x: 0, y: 120}, // position referenceLine
-      'timerStart': false, // timer start/pause status
-      'timerSecond': 0, // timer time in seconds
-      'timerLoc': {x: 475, y: 318} // position timer
+      rulerLocH: new Vector2( 54, 117 ),//{x: 54, y: 117}, //position horizontal ruler
+      rulerLocV: new Vector2( 13, 440 ),//{x: 13, y: 440}, //position vertical ruler
+      referenceLineLoc: new Vector2( 0, 120 ),//{x: 0, y: 120}, // position referenceLine
+      timerStart: false, // timer start/pause status
+      timerSecond: 0, // timer time in seconds
+      timerLoc: new Vector2( 475, 318 )//{x: 475, y: 318} // position timer
     } );
 
     this.nSegs = NSEGS;
@@ -204,11 +189,11 @@ define( function( require ) {
         }
       }
 
-      //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
       this.trigger( 'yNowChanged' );
-      //this.yNowChanged = !this.yNowChanged;
     },
+    //restart button
     manualRestart: function() {
+
       //REVIEW: These 3 resets would be removed (unnecessary) with my above suggested modifications to reset()
       this.angleProperty.reset();
       this.timeProperty.reset();
@@ -218,9 +203,7 @@ define( function( require ) {
         this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
       }
 
-      //REVIEW: Please use this.trigger( 'yNowChanged' ) as noted above
       this.trigger( 'yNowChanged' );
-      //this.yNowChanged = !this.yNowChanged;
     },
     manualPulse: function() {
       this.yNow[0] = 0;
