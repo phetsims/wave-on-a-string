@@ -28,11 +28,6 @@ define( function( require ) {
       textTimer,
       resetButton,
       startStopButton;
-
-    var resetTimer = function() {
-      model.timerStart = false;
-      model.timerSecond = 0;
-    };
     var secondToString = function( second ) {
       var _minutes = (Math.floor( second / 60 ) % 60),
         _seconds = (Math.floor( second ) % 60),
@@ -50,7 +45,10 @@ define( function( require ) {
     };
 
     timer.addChild( resetButton = new TextPushButton( resetTimerString, {
-      listener: resetTimer,
+      listener: function resetTimer() {
+        model.timerStart = false;
+        model.timerSecond = 0;
+      },
       font: new PhetFont( 13 ),
       rectangleXMargin: 10,
       rectangleFillUp: "#DFE0E1",
