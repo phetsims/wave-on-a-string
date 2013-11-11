@@ -18,6 +18,8 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var resetTimerString = require( 'string!WOAS/resetTimer' );
   var TextPushButton = require( 'SUN/TextPushButton' );
+  var Shape = require( 'KITE/Shape' );
+  //var Bounds2 = require( 'DOT/Bounds2' );
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: 'pointer' } );
@@ -84,6 +86,8 @@ define( function( require ) {
     } );
     //REVIEW: Use Vector2 for 2d numeric data
     var clickOffset = {x: 0, y: 0};
+    dragZone.touchArea = Shape.bounds( dragZone.bounds.dilated( 10 ) );
+    dragZone.mouseArea = Shape.bounds( dragZone.bounds );
     //REVIEW: a lot of this code is duplicated between WOASTLine / WOASTRulers / WOASTTimer. reduce duplication?
     dragZone.addInputListener( new SimpleDragHandler(
       {

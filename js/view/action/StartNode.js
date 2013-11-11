@@ -13,9 +13,10 @@ define( function( require ) {
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
-  var Matrix3 = require( 'DOT/Matrix3' );
+  //var Matrix3 = require( 'DOT/Matrix3' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+
 
   function StartNode( model, options ) {
     options = _.extend( { layerSplit: true }, options );
@@ -42,7 +43,8 @@ define( function( require ) {
 
     //REVIEW: good use if extracting constants here, looks good :)
     var clickYOffset = 0;
-    key.touchArea = Shape.bounds( Bounds2.point( -12, 70 ).dilatedXY( key.width / 2, key.height / 2 ) );
+    key.touchArea = Shape.bounds( Bounds2.point( -12, 70 ).dilatedXY( key.width / 2+10, key.height / 2+10 ) );
+    key.mouseArea = Shape.bounds( Bounds2.point( -12, 70 ).dilatedXY( key.width / 2, key.height / 2 ) );
     key.addInputListener( new SimpleDragHandler(
       {
         allowTouchSnag: true,

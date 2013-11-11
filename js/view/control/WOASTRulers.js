@@ -13,6 +13,8 @@ define( function( require ) {
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var unitCmString = require( 'string!WOAS/unitCm' );
+  var Shape = require( 'KITE/Shape' );
+  var Bounds2 = require( 'DOT/Bounds2' );
 
   function WOASTRulers( model ) {
     Node.call( this, { cursor: "pointer" } );
@@ -37,6 +39,10 @@ define( function( require ) {
       rulerV.x = model.rulerLocV.x;
       rulerV.y = model.rulerLocV.y;
     } );
+    /*rulerV.touchArea = Shape.bounds( Bounds2.rect(0,0,430,50).dilated(10) );
+    rulerV.mouseArea = Shape.bounds( Bounds2.rect(0,0,430,50) );
+    rulerH.touchArea = Shape.bounds( Bounds2.rect(0,0,830,50).dilated(10) );
+    rulerH.mouseArea = Shape.bounds( Bounds2.rect(0,0,830,50) );*/
     //REVIEW: best to use Vector2 for 2D numeric data here
     var rulerHClickOffset = {x: 0, y: 0},
       rulerVClickOffset = {x: 0, y: 0};
