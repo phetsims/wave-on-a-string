@@ -94,19 +94,18 @@ define( function( require ) {
       this.addChild( buttonNode );
     }
 
-
     thisNode.mutate( _.omit( options, Object.keys( defaultOptions ) ) );
 
     options.property.link( function updateProperty( value ) {
       if ( options.type === 'button' ) {
-        var text = options.property.get();
+        var text = value;
         if ( options.rounding !== false && options.rounding >= 0 ) {
           text = options.property.get().toFixed( options.rounding );
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
         valueLabel.centerX = thisNode.width / 2;
-        plusButton.setEnabled( options.property.get() < options.range.max );
-        minusButton.setEnabled( options.property.get() > options.range.min );
+        plusButton.setEnabled( value < options.range.max );
+        minusButton.setEnabled( value > options.range.min );
       }
     } );
   }

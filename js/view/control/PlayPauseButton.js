@@ -19,11 +19,6 @@ define( function( require ) {
     Node.call( this );
     var stepButton, playPauseButton;
 
-    //REVIEW: optional, but this is identical to 'var step = model.manualStep.bind( model );' without the extra anonymous function
-    var step = function() {
-      model.manualStep();
-    };
-
     this.addChild( playPauseButton = new ToggleButton(
       new Image( require( 'image!WOAS/button_sim_pause.png' ) ),
       new Image( require( 'image!WOAS/button_sim_play.png' ) ),
@@ -35,7 +30,7 @@ define( function( require ) {
       new Image( require( 'image!WOAS/button_step_hover.png' ) ),
       new Image( require( 'image!WOAS/button_step_pressed.png' ) ),
       new Image( require( 'image!WOAS/button_step_deactivated.png' ) ),
-      {scale: 0.7, x: 50, y: 7, listener: step} ) );
+      {scale: 0.7, x: 50, y: 7, listener: model.manualStep.bind( model )} ) );
     stepButton.enabled = false;
     this.mutate( options );
     model.playProperty.link( function updatePlayPauseButton( value ) {

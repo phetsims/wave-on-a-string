@@ -13,10 +13,7 @@ define( function( require ) {
   var NSEGS = 61,
     fps = 48;
 
-  //REVIEW: doc: is the width/height passed in here mainly used as the bounds of the model area? I don't see it being used in the actual model itself anywhere
-  function WOASModel( width, height ) {
-    this.width = width;
-    this.height = height;
+  function WOASModel() {
     this.customDt = 0;
     //REVIEW: performance: typed arrays may increase model performance where available? (Float32Array or Float64Array, but I believe they aren't available on IE9)
     this.yDraw = new Array( NSEGS );
@@ -26,7 +23,6 @@ define( function( require ) {
     this.dotPerCm = 80;
     this.pulseSign = 1;
     PropertySet.call( this, {
-      //REVIEW: would prefer removal of unnecessary single quotes on left-hand-side. For example: mode: 'manual',
       mode: 'manual', // 'manual', 'oscillate', 'pulse'
       typeEnd: 'fixedEnd', // 'fixedEnd', 'looseEnd', 'noEnd'
       speed: 1, // 1, 0.25
@@ -43,26 +39,24 @@ define( function( require ) {
       time: 0, // base time
       angle: 0, // angle for 'oscillate' and 'pulse' mode
       pulse: false, // 'pulse' mode pulse active
-      //REVIEW: would prefer use of DOT/Vector2 for 2D points. for example: rulerLocH: new Vector2( 54, 117 )
-      rulerLocH: new Vector2( 54, 117 ),//{x: 54, y: 117}, //position horizontal ruler
-      rulerLocV: new Vector2( 13, 440 ),//{x: 13, y: 440}, //position vertical ruler
-      referenceLineLoc: new Vector2( 0, 120 ),//{x: 0, y: 120}, // position referenceLine
+      rulerLocH: new Vector2( 54, 117 ), //position horizontal ruler
+      rulerLocV: new Vector2( 13, 440 ), //position vertical ruler
+      referenceLineLoc: new Vector2( -10, 120 ), // position referenceLine
       timerStart: false, // timer start/pause status
       timerSecond: 0, // timer time in seconds
-      timerLoc: new Vector2( 475, 318 )//{x: 475, y: 318} // position timer
+      timerLoc: new Vector2( 475, 318 ) // position timer
     } );
 
     this.nSegs = NSEGS;
     this.beta = 0.05;
     this.alpha = 1;
-    this.manualRestart();
     this.reset();
   }
 
   inherit( PropertySet, WOASModel, {
     step: function( dt ) {
       if ( Math.abs( dt - this.lastDt ) > this.lastDt * 0.3 ) {
-        dt = this.lastDt + ((dt - this.lastDt)<0?-1:1) * this.lastDt * 0.3;
+        dt = this.lastDt + ((dt - this.lastDt) < 0 ? -1 : 1) * this.lastDt * 0.3;
       }
       this.lastDt = dt;
 
@@ -79,6 +73,7 @@ define( function( require ) {
         }
       }
     },
+    // all reset button
     reset: function() {
       PropertySet.prototype.reset.call( this );
       this.manualRestart();
@@ -93,25 +88,23 @@ define( function( require ) {
       this.alpha = v * dt / dx;
 
       this.yNext[0] = this.yNow[0];
-      //REVIEW: switch most appropriate here, so that we can add a default case to throw an error if this.typeEnd isn't one of the three values?
-      if ( this.typeEnd === 'fixedEnd' ) {
-        //if fixedEnd, then fix the end
-        this.yNow[this.nSegs - 1] = 0;
-      }
-      //REVIEW: the '//else if looseEnd' and '//else if noEnd' can be discarded (not helpful), even though they were from the original AS3 Flash code.
-      else if ( this.typeEnd === 'looseEnd' ) {		//else if looseEnd
-        this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
-      }
-      else if ( this.typeEnd === 'noEnd' ) {		//else if noEnd
-        this.yNow[this.nSegs - 1] = this.yLast[this.nSegs - 2];
+      switch( this.typeEnd ) {
+        case'looseEnd':
+          this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
+          break;
+        case'noEnd':
+          this.yNow[this.nSegs - 1] = this.yLast[this.nSegs - 2];
+          break;
+        default: //'fixedEnd'
+          this.yNow[this.nSegs - 1] = 0;
       }
 
+
       //main formula for calculating
-      /*REVIEW: performance: constants involving alpha and beta do not change in this inner loop. please extract to a variable outside the loop.
-       * For example: var a = 1 / ( this.beta + 1 ), alphaSq = this.alpha * this.alpha, b = 2 * ( 1 - alphaSq );
-       */
+
+      var a = 1 / ( this.beta + 1 ), alphaSq = this.alpha * this.alpha, c = 2 * ( 1 - alphaSq );
       for ( var i = 1; i < (this.nSegs - 1); i++ ) {
-        this.yNext[i] = (1 / (this.beta + 1)) * ((this.beta - 1) * this.yLast[i] + 2 * (1 - (this.alpha * this.alpha)) * this.yNow[i] + (this.alpha * this.alpha) * (this.yNow[i + 1] + this.yNow[i - 1])   );
+        this.yNext[i] = a * ((this.beta - 1) * this.yLast[i] + c * this.yNow[i] + alphaSq * (this.yNow[i + 1] + this.yNow[i - 1]) );
       }
 
       /*REVIEW: performance:
@@ -124,22 +117,24 @@ define( function( require ) {
        *
        * This should improve the performance of the model fairly significantly, depending on the browser.
        */
+
       for ( var j = 0; j < (this.nSegs - 1); j++ ) {
         this.yLast[j] = this.yNow[j];
         this.yNow[j] = this.yNext[j];
       }
-      //REVIEW: switch most appropriate here, so that we can add a default case to throw an error if this.typeEnd isn't one of the three values?
-      if ( this.typeEnd === 'fixedEnd' ) {
-        this.yLast[this.nSegs - 1] = 0;
-        this.yNow[this.nSegs - 1] = 0;
-      }
-      if ( this.typeEnd === 'looseEnd' ) {
-        this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
-        this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
-      }
-      if ( this.typeEnd === 'noEnd' ) {
-        this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
-        this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];
+
+      switch( this.typeEnd ) {
+        case'looseEnd':
+          this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
+          this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
+          break;
+        case'noEnd':
+          this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
+          this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];
+          break;
+        default: //'fixedEnd'
+          this.yLast[this.nSegs - 1] = 0;
+          this.yNow[this.nSegs - 1] = 0;
       }
     },
     manualStep: function( dt ) {
@@ -173,11 +168,11 @@ define( function( require ) {
           this.angle = 0;
           this.pulse = false;
         }
-        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle/(Math.PI / 2));
+        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle / (Math.PI / 2));
       }
       if ( this.time >= minDt ) {
         //REVIEW: wouldn't this be 'this.time % minDt'? Otherwise we don't go as far forward in our interpolation as we should
-        this.time = 0;
+        this.time %= minDt;
         this.evolve();
         for ( i = 0; i < this.nSegs; i++ ) {
           this.yDraw[i] = this.yLast[i];
@@ -193,7 +188,6 @@ define( function( require ) {
     },
     //restart button
     manualRestart: function() {
-
       //REVIEW: These 3 resets would be removed (unnecessary) with my above suggested modifications to reset()
       this.angleProperty.reset();
       this.timeProperty.reset();
@@ -202,9 +196,9 @@ define( function( require ) {
       for ( var i = 0; i < this.yNow.length; i++ ) {
         this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
       }
-
       this.trigger( 'yNowChanged' );
     },
+    //pulse button
     manualPulse: function() {
       this.yNow[0] = 0;
       this.angle = 0;

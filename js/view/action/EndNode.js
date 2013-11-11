@@ -10,77 +10,28 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var Constants = require( 'WOAS/Constants' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   function EndNode( model, options ) {
-    //REVIEW: x: 20 seems to be duplicated in this file, should be generally separated out as a constant
-
     Node.call( this );
-    /*REVIEW:
-     * I'm not sure why wrapping some of these in an extra Node is necessary. Scenery's Image is a subtype of Node,
-     * so for the clamp, it can be replaced with:
-     * var clamp = new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )
-     *
-     * The x values can be combined, so for the window:
-     * rwindow = new Image( require( 'image!WOAS/window_back.png' ), {x: -81, y: -219 / 2, scale: 1} )
-     *
-     * I see how ring_back and ring_front have y values modified later, so keeping them wrapped with the Node is helpful
-     */
-    var clamp = new Node( {children: [new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} )]} ),
-      ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: -15, y: -15 / 2, scale: 0.5} )], x: 20} ),
-      ring_front = new Node( {children: [new Image( require( 'image!WOAS/ring_front.png' ), {x: -15, y: 0, scale: 0.5} )], x: 20} ),
-    //REVIEW: 'window' may be an inconvenient name, since it hides the ability to directly access the global window name. consider windowNode?
-      window = new Node( {children: [new Image( require( 'image!WOAS/window_back.png' ), {x: -101, y: -219 / 2, scale: 1} )], x: 20} ),
-      postShape = new Shape(),
-    //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
-      postGradient = new LinearGradient( -5, 0, 5, 0 )
-        .addColorStop( 0, '#666' )
-        .addColorStop( 0.3, '#FFF' )
-        .addColorStop( 1, '#666' );
-
-    /*REVIEW:
-     * For rectangular shapes, please use SCENERY/nodes/Rectangle.
-     *
-     * In this instance:
-     * var post = new Rectangle( -5, -130, 10, 260, {
-     *   stroke: '#000',
-     *   fill: new LinearGradient( -5, 0, 5, 0 )
-     *              .addColorStop( 0, '#666' )
-     *              .addColorStop( 0.3, '#FFF' )
-     *              .addColorStop( 1, '#666' ),
-     *   x: 20
-     * } );
-     *
-     * Also note that lineWidth: 1 is the default, and when specified does nothing
-     *
-     * It's generally easier and more concise, and it will be faster both to create and to render, since
-     * it uses more accelerated graphics for Canvas and SVG
-     */
-    postShape.moveTo( -5, -130 );
-    postShape.lineTo( 5, -130 );
-    postShape.lineTo( 5, 130 );
-    postShape.lineTo( -5, 130 );
-    postShape.close();
-
-    var post = new Path( postShape, {
-      stroke: '#000',
-      fill: postGradient,
-      lineWidth: 1, //REVIEW: 1 is the default, this line is unnecessary
-      x: 20
-    } );
+    var clamp = new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} ),
+      ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: 5, y: -15 / 2, scale: 0.5} )]} ),
+      ring_front = new Node( {children: [new Image( require( 'image!WOAS/ring_front.png' ), {x: 5, y: 0, scale: 0.5} )]} ),
+      windowImage = new Image( require( 'image!WOAS/window_back.png' ), {x: -81, y: -219 / 2} ),
+      post = new Rectangle( -5, -130, 10, 260, {
+        stroke: '#000',
+        fill: Constants.postGradient,
+        x: 20
+      } );
 
     this.addChild( clamp );
     this.addChild( ring_back );
     this.addChild( post );
     this.addChild( ring_front );
-    this.addChild( window );
+    this.addChild( windowImage );
 
     this.mutate( options );
-    //REVIEW: please replace with model.on( 'yNowChanged', function updateKey() { ... } ) as suggested in WOASModel.js review notes
-
-    //model.yNowChangedProperty.link(
     model.on( 'yNowChanged', function updateKey() {
       ring_front.y = ring_back.y = model.yNow[model.yNow.length - 1] || 0;
     } );
@@ -90,7 +41,7 @@ define( function( require ) {
       ring_back.setVisible( value === 'looseEnd' );
       post.setVisible( value === 'looseEnd' );
       ring_front.setVisible( value === 'looseEnd' );
-      window.setVisible( value === 'noEnd' );
+      windowImage.setVisible( value === 'noEnd' );
     } );
 
   }

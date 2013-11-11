@@ -12,34 +12,25 @@ define( function( require ) {
   var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
   var StartNode = require( 'WOAS/view/action/StartNode' );
   var EndNode = require( 'WOAS/view/action/EndNode' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var Line = require( 'SCENERY/nodes/Line' );
+  var Constants = require( 'WOAS/Constants' );
 
   function ActionView( model ) {
     Node.call( this, { layerSplit: true } );
-    var arrowShape = new Shape(),
-      windowImage;
-    //REVIEW: why is this called arrowShape? maybe 'referenceLine' would be more appropriate?
-    arrowShape.moveTo( 0, 0 );
-    arrowShape.lineTo( 605, 0 );
-    this.addChild( new Path( arrowShape, {
+    var windowImage;
+    //center line
+    this.addChild(new Line(0,0,605,0,{
       stroke: '#FFA91D',
       lineDash: [8, 5],
       lineWidth: 2,
-      x: 70,
-      y: 215
-    } ) );
-
-    /*REVIEW:
-     * There are many constants here which should not be duplicated. I would recommend a 'Constants.js' file, similar to
-     * https://github.com/phetsims/build-a-molecule/blob/master/js/Constants.js, where the x,y resting values of the left/right side of the string are stored,
-     * and any constants used for large-scale layout. I'd also recommend putting colors in this area.
-     */
-    this.addChild( new EndNode( model, {x: 670, y: 215, max: 120, min: -120} ) );
-    this.addChild( new TheStringNode( model, {x: 70, y: 215, radius: 5, max: 120, min: -120} ) );
-    this.addChild( new StartNode( model, {x: 70, y: 215, max: 120, min: -120} ) );
-    this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: -19, y: -210 / 2, scale: 1} )], x: 90 + 600, y: 215} ) );
+      x: Constants.startTheStringNode,
+      y: Constants.yTheStringNode
+    }));
+    this.addChild( new EndNode( model, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
+    this.addChild( new TheStringNode( model, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
+    this.addChild( new StartNode( model, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range:Constants.yKeyRange} ) );
+    this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {
       windowImage.setVisible( value === 'noEnd' );
