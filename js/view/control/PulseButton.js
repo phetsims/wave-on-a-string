@@ -22,7 +22,7 @@ define( function( require ) {
       model.manualPulse();
     };
     //REVIEW: scale: 1 is the default, should be removed
-    this.addChild(new TextPushButton( pulse2String, {listener: pulse, font: new PhetFont( 12 ),rectangleFillUp:"#7CAF3A",rectangleFillDown:"#7CAF3A",rectangleFillOver:"#91B634"} ), {scale: 1});
+    this.addChild(new TextPushButton( pulse2String, {listener: pulse, font: new PhetFont( 12 ),rectangleFillUp:'#7CAF3A',rectangleFillDown:'#7CAF3A',rectangleFillOver:'#91B634'} ), {scale: 1});
     this.mutate( options );
     model.modeProperty.link( function updatePulseButton( value ) {
       self.setVisible( value === 'pulse' );

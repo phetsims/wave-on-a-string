@@ -36,9 +36,9 @@ define( function( require ) {
       postShape = new Shape(),
     //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
       postGradient = new LinearGradient( -5, 0, 5, 0 )
-        .addColorStop( 0, "#666" )
-        .addColorStop( 0.3, "#FFF" )
-        .addColorStop( 1, "#666" );
+        .addColorStop( 0, '#666' )
+        .addColorStop( 0.3, '#FFF' )
+        .addColorStop( 1, '#666' );
 
     /*REVIEW:
      * For rectangular shapes, please use SCENERY/nodes/Rectangle.
@@ -47,9 +47,9 @@ define( function( require ) {
      * var post = new Rectangle( -5, -130, 10, 260, {
      *   stroke: '#000',
      *   fill: new LinearGradient( -5, 0, 5, 0 )
-     *              .addColorStop( 0, "#666" )
-     *              .addColorStop( 0.3, "#FFF" )
-     *              .addColorStop( 1, "#666" ),
+     *              .addColorStop( 0, '#666' )
+     *              .addColorStop( 0.3, '#FFF' )
+     *              .addColorStop( 1, '#666' ),
      *   x: 20
      * } );
      *
@@ -65,7 +65,7 @@ define( function( require ) {
     postShape.close();
 
     var post = new Path( postShape, {
-      stroke: "#000",
+      stroke: '#000',
       fill: postGradient,
       lineWidth: 1, //REVIEW: 1 is the default, this line is unnecessary
       x: 20

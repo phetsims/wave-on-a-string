@@ -27,11 +27,11 @@ define( function( require ) {
       postShape = new Shape(),
     //REVIEW: postGradient duplicated between StartNode and EndNode. It should only be specified in one place
       postGradient = new LinearGradient( -5, 0, 5, 0 )
-        .addColorStop( 0, "#666" )
-        .addColorStop( 0.3, "#FFF" )
-        .addColorStop( 1, "#666" ),
+        .addColorStop( 0, '#666' )
+        .addColorStop( 0.3, '#FFF' )
+        .addColorStop( 1, '#666' ),
       post = new Path( postShape, {
-        stroke: "#000",
+        stroke: '#000',
         fill: postGradient,
         lineWidth: 1
       } );

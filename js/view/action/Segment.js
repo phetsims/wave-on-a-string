@@ -21,7 +21,7 @@ define( function( require ) {
    * function Segment( color, radius, options ) {
    *   Circle.call( this, radius, _.extend( {
    *     fill: new RadialGradient( -radius * 0.5, -radius * 0.5, 1, -radius * 0.5, -radius * 0.5, radius )
-   *               .addColorStop( 0, "#FFF" )
+   *               .addColorStop( 0, '#FFF' )
    *               .addColorStop( 0.3, color ),
    *     stroke: 'black',
    *     lineWidth: 0.5
@@ -43,9 +43,9 @@ define( function( require ) {
     Node.call( this, {x: x, y: y} );
     this.addChild( new Circle( radius, {
       fill: new RadialGradient( -radius * 0.5, -radius * 0.5, 1, -radius * 0.5, -radius * 0.5, radius )
-        .addColorStop( 0, "#FFF" )
+        .addColorStop( 0, '#FFF' )
         .addColorStop( 0.3, color ),
-      stroke: "#000",
+      stroke: '#000',
       lineWidth: 0.5
     } ) );
   }

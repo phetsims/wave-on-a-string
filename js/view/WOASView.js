@@ -6,7 +6,7 @@
  */
 
 define( function( require ) {
-  "use strict";
+  'use strict';
   var ControlPanel = require( 'WOAS/view/ControlPanel' );
   var ActionView = require( 'WOAS/view/ActionView' );
   var ScreenView = require( 'JOIST/ScreenView' );

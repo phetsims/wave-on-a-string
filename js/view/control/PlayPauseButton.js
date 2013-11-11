@@ -19,7 +19,7 @@ define( function( require ) {
     Node.call( this );
     var stepButton, playPauseButton;
 
-    //REVIEW: optional, but this is identical to "var step = model.manualStep.bind( model );" without the extra anonymous function
+    //REVIEW: optional, but this is identical to 'var step = model.manualStep.bind( model );' without the extra anonymous function
     var step = function() {
       model.manualStep();
     };

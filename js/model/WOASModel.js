@@ -98,7 +98,7 @@ define( function( require ) {
         //if fixedEnd, then fix the end
         this.yNow[this.nSegs - 1] = 0;
       }
-      //REVIEW: the "//else if looseEnd" and "//else if noEnd" can be discarded (not helpful), even though they were from the original AS3 Flash code.
+      //REVIEW: the '//else if looseEnd' and '//else if noEnd' can be discarded (not helpful), even though they were from the original AS3 Flash code.
       else if ( this.typeEnd === 'looseEnd' ) {		//else if looseEnd
         this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
       }
@@ -176,7 +176,7 @@ define( function( require ) {
         this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle/(Math.PI / 2));
       }
       if ( this.time >= minDt ) {
-        //REVIEW: wouldn't this be "this.time % minDt"? Otherwise we don't go as far forward in our interpolation as we should
+        //REVIEW: wouldn't this be 'this.time % minDt'? Otherwise we don't go as far forward in our interpolation as we should
         this.time = 0;
         this.evolve();
         for ( i = 0; i < this.nSegs; i++ ) {

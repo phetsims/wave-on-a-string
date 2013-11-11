@@ -80,7 +80,7 @@ define( function( require ) {
       textTimer.text = secondToString( value );
     } );
     model.timerLocProperty.link( function updateLocation( value ) {
-      //REVIEW: once using Vector2, this will be "thisNode.translation = value"
+      //REVIEW: once using Vector2, this will be 'thisNode.translation = value'
       thisNode.x = value.x;
       thisNode.y = value.y;
     } );

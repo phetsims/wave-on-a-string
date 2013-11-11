@@ -22,7 +22,7 @@ define( function( require ) {
       model.manualRestart();
     };
 
-    this.addChild(new TextPushButton( restartString, {listener: restart, font: new PhetFont( 12 ),rectangleFillUp:"#DED322",rectangleFillDown:"#DED322",rectangleFillOver:"#E6D739"} ));
+    this.addChild(new TextPushButton( restartString, {listener: restart, font: new PhetFont( 12 ),rectangleFillUp:'#DED322',rectangleFillDown:'#DED322',rectangleFillOver:'#E6D739'} ));
     this.mutate( options );
   }
 

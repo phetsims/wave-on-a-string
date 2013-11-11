@@ -6,7 +6,7 @@
  */
 
 define( function( require ) {
-  "use strict";
+  'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
@@ -17,10 +17,10 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
 
   function WOASTRulers( model ) {
-    Node.call( this, { cursor: "pointer" } );
+    Node.call( this, { cursor: 'pointer' } );
     //REVIEW: optional, but DOT/Util.rangeInclusive( 0, 10 ).map( function( n ) { return n+''; } ) is a general way of creating string ranges
-    var rulerH = new RulerNode( 800, 50, 80, ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } ),
-      rulerV = new RulerNode( 400, 50, 80, ["0", "1", "2", "3", "4", "5"], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } );
+    var rulerH = new RulerNode( 800, 50, 80, ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } ),
+      rulerV = new RulerNode( 400, 50, 80, ['0', '1', '2', '3', '4', '5'], unitCmString, {minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ) } );
     rulerV.rotate( -Math.PI / 2 );
     this.addChild( rulerH );
     this.addChild( rulerV );
@@ -30,12 +30,12 @@ define( function( require ) {
       rulerV.setVisible( value );
     } );
     model.rulerLocHProperty.link( function updateRulerHLocation( value ) {
-      //REVIEW: once rulerLocH is a Vector2, just use "rulerH.translation = model.rulerLocH"
+      //REVIEW: once rulerLocH is a Vector2, just use 'rulerH.translation = model.rulerLocH'
       rulerH.x = model.rulerLocH.x;
       rulerH.y = model.rulerLocH.y;
     } );
     model.rulerLocVProperty.link( function updateRulerVLocation( value ) {
-      //REVIEW: once rulerLocV is a Vector2, just use "rulerV.translation = model.rulerLocV"
+      //REVIEW: once rulerLocV is a Vector2, just use 'rulerV.translation = model.rulerLocV'
       rulerV.x = model.rulerLocV.x;
       rulerV.y = model.rulerLocV.y;
     } );

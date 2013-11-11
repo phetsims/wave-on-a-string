@@ -19,10 +19,10 @@ define( function( require ) {
       theStringShape = new Shape(),
       theStringRectShape = new Shape(),
       theStringPath = new Path( theStringShape, {
-        stroke: "#F00", layerSplit: true
+        stroke: '#F00', layerSplit: true
       } ),
       theStringRectPath = new Path( theStringRectShape, {
-        fill: "#FFFFB7", layerSplit: true
+        fill: '#FFFFB7', layerSplit: true
       } ),
       theString = [];
     this.addChild( theStringPath );

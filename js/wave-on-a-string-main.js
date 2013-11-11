@@ -29,7 +29,7 @@ define( [
       new Screen( titleString, null, /* single-screen sim, no icon */
         function() { return new WOASModel( 768, 504 ); },
         function( model ) { return new WOASView( model ); },
-        { backgroundColor: "#FFFFB7" }
+        { backgroundColor: '#FFFFB7' }
       )
     ], simOptions ).start();
   } );
