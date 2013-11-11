@@ -18,12 +18,16 @@ define( function( require ) {
   var ToggleButton = require( 'SUN/ToggleButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var resetTimerString = require( 'string!WOAS/resetTimer' );
+  var TextPushButton = require( 'SUN/TextPushButton' );
+  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: "pointer" } );
     var thisNode = this,
       timer = new Node(),
-      textTimer;
+      textTimer,
+      resetButton,
+      startStopButton;
 
     var resetTimer = function() {
       model.timerStart = false;
@@ -44,23 +48,26 @@ define( function( require ) {
       }
       return   _minutes + ":" + _seconds + ":" + _milliseconds;
     };
-    var label = new Text( resetTimerString, {font: new PhetFont( 17 ), centerX: 40, centerY: 20} );
 
-    timer.addChild( new PushButton(
-      new Node( {children: [new Image( require( 'image!WOAS/button_timer_reset_unpressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_timer_reset_hover.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_timer_reset_pressed.png' ) ), label]} ),
-      new Node( {children: [new Image( require( 'image!WOAS/button_timer_reset_unpressed.png' ) ), label]} ),
-      {scale: 0.7, y: 30, x: 3, listener: resetTimer} ) );
-
-    timer.addChild( new ToggleButton(
+    timer.addChild( resetButton = new TextPushButton( resetTimerString, {
+      listener: resetTimer,
+      font: new PhetFont( 13 ),
+      rectangleXMargin: 10,
+      rectangleFillUp: "#DFE0E1",
+      rectangleFillDown: "#DFE0E1",
+      rectangleFillOver: "#D1D2D2",
+      y: 31,
+      x: 5
+    } ) );
+    timer.addChild( startStopButton = new ToggleButton(
       new Image( require( 'image!WOAS/button_timer_pause_unpressed.png' ) ),
       new Image( require( 'image!WOAS/button_timer_start_unpressed.png' ) ),
       model.timerStartProperty,
-      {scale: 0.7, y: 26, x: 64} ) );
+      {scale: 0.7, y: 26, x: resetButton.right + 5} ) );
+    var timerWidth = Math.max(84,(resetButton.width + startStopButton.width) + 10);
 
-    timer.addChild( new Rectangle( 0, 0, 100, 24, 5, 5, {fill: '#FFF', stroke: '#000', lineWidth: 1} ) );
-    timer.addChild( textTimer = new Text( "00:00:00", {font: new PhetFont( 20 ), centerX: 50, top: 0} ) );
+    timer.addChild( new Rectangle( 0, 0, timerWidth, 24, 5, 5, {fill: '#FFF', stroke: '#000', lineWidth: 1} ) );
+    timer.addChild( textTimer = new Text( "00:00:00", {font: new PhetFont( 20 ), centerX: timerWidth/2, top: 0} ) );
     this.addChild( new Panel( timer, { fill: '#FFFF06', stroke: '#F7941E', lineWidth: 2, xMargin: 10, yMargin: 5} ) );
 
     model.timerProperty.link( function updateVisible( value ) {
