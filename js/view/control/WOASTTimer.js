@@ -19,7 +19,7 @@ define( function( require ) {
   var resetTimerString = require( 'string!WOAS/resetTimer' );
   var TextPushButton = require( 'SUN/TextPushButton' );
   var Shape = require( 'KITE/Shape' );
-  //var Bounds2 = require( 'DOT/Bounds2' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: 'pointer' } );
@@ -69,7 +69,7 @@ define( function( require ) {
     timer.addChild( new Rectangle( 0, 0, timerWidth, 24, 5, 5, {fill: '#FFF', stroke: '#000', lineWidth: 1} ) );
     timer.addChild( textTimer = new Text( '00:00:00', {font: new PhetFont( 20 ), centerX: timerWidth / 2, top: 0} ) );
 
-    thisNode.addChild(dragZone = new Rectangle(0,0,timerWidth+20, startStopButton.bottom+10));
+    thisNode.addChild( dragZone = new Rectangle( 0, 0, timerWidth + 20, startStopButton.bottom + 10 ) );
 
     thisNode.addChild( new Panel( timer, { fill: '#FFFF06', stroke: '#F7941E', lineWidth: 2, xMargin: 10, yMargin: 5} ) );
 
@@ -80,27 +80,18 @@ define( function( require ) {
       textTimer.text = secondToString( value );
     } );
     model.timerLocProperty.link( function updateLocation( value ) {
-      //REVIEW: once using Vector2, this will be 'thisNode.translation = value'
-      thisNode.x = value.x;
-      thisNode.y = value.y;
+      thisNode.translation = value;
     } );
-    //REVIEW: Use Vector2 for 2d numeric data
-    var clickOffset = {x: 0, y: 0};
     dragZone.touchArea = Shape.bounds( dragZone.bounds.dilated( 10 ) );
     dragZone.mouseArea = Shape.bounds( dragZone.bounds );
-    //REVIEW: a lot of this code is duplicated between WOASTLine / WOASTRulers / WOASTTimer. reduce duplication?
+    var clickOffset = new Vector2();
     dragZone.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
-          //REVIEW: see comments in WOASTLine.js
-          clickOffset.x = dragZone.globalToParentPoint( event.pointer.point ).x - event.currentTarget.x;
-          clickOffset.y = dragZone.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
+          clickOffset = dragZone.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
         },
         drag: function( event ) {
-          //REVIEW: see comments in WOASTLine.js
-          var x = thisNode.globalToParentPoint( event.pointer.point ).x - clickOffset.x,
-            y = thisNode.globalToParentPoint( event.pointer.point ).y - clickOffset.y;
-          model.timerLoc = { x: x, y: y };
+          model.timerLoc = thisNode.globalToParentPoint( event.pointer.point ).minus( clickOffset );
         }
       } ) );
   }

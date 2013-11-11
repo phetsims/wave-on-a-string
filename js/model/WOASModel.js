@@ -21,7 +21,6 @@ define( function( require ) {
     this.yLast = new Array( NSEGS );
     this.yNext = new Array( NSEGS );
     this.dotPerCm = 80;
-    this.pulseSign = 1;
     PropertySet.call( this, {
       mode: 'manual', // 'manual', 'oscillate', 'pulse'
       typeEnd: 'fixedEnd', // 'fixedEnd', 'looseEnd', 'noEnd'
@@ -44,7 +43,8 @@ define( function( require ) {
       referenceLineLoc: new Vector2( -10, 120 ), // position referenceLine
       timerStart: false, // timer start/pause status
       timerSecond: 0, // timer time in seconds
-      timerLoc: new Vector2( 475, 318 ) // position timer
+      timerLoc: new Vector2( 475, 318 ), // position timer
+      pulseSign: 1 // sign [-1, 1] for pulse mode
     } );
 
     this.nSegs = NSEGS;
@@ -138,18 +138,16 @@ define( function( require ) {
       }
     },
     manualStep: function( dt ) {
-      //REVIEW: performance: many constants don't change in thus function, and are reused (for instance, dt * this.speed). Would be best to compute these once and reuse them.
       var i;
-      //REVIEW: although manualStep is never called with dt === 0 right now, it's best practice to handle this case (check if dt is undefined, since it would replace 0 with 1 / fps * this.speed)
-      dt = dt || (1 / fps * this.speed);
-
+      dt = (dt !== undefined && dt > 0 ) ? dt : (1 / fps * this.speed);
+      var dt_speed = dt * this.speed;
       this.time += dt;
       if ( this.timerStart ) {
-        this.timerSecond += dt * this.speed;
+        this.timerSecond += dt_speed;
       }
       var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
       if ( this.mode === 'oscillate' ) {
-        this.angle += Math.PI * 2 * this.frequency * dt * this.speed;
+        this.angle += Math.PI * 2 * this.frequency * dt_speed;
         this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
         this.angle %= Math.PI * 2;
       }
@@ -163,15 +161,14 @@ define( function( require ) {
           this.angle += da * this.pulseSign;
         }
         else {
-          //REVIEW: doc: end of pulse
-          this.pulseSign = 1;
-          this.angle = 0;
-          this.pulse = false;
+          //end pulse and reset
+          this.angleProperty.reset();
+          this.pulseSignProperty.reset();
+          this.pulseProperty.reset();
         }
         this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle / (Math.PI / 2));
       }
       if ( this.time >= minDt ) {
-        //REVIEW: wouldn't this be 'this.time % minDt'? Otherwise we don't go as far forward in our interpolation as we should
         this.time %= minDt;
         this.evolve();
         for ( i = 0; i < this.nSegs; i++ ) {
@@ -188,10 +185,11 @@ define( function( require ) {
     },
     //restart button
     manualRestart: function() {
-      //REVIEW: These 3 resets would be removed (unnecessary) with my above suggested modifications to reset()
+      //only soft reset
       this.angleProperty.reset();
       this.timeProperty.reset();
       this.pulseProperty.reset();
+      this.pulseSignProperty.reset();
       this.customDt = 0;
       for ( var i = 0; i < this.yNow.length; i++ ) {
         this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
