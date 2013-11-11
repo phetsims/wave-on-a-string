@@ -6,42 +6,41 @@
  */
 
 define( function( require ) {
-  "use strict";
+  'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var PushButton = require( 'SUN/PushButton' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ToggleButton = require( 'SUN/ToggleButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var resetTimerString = require( 'string!WOAS/resetTimer' );
   var TextPushButton = require( 'SUN/TextPushButton' );
-  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
 
   function WOASTTimer( model ) {
-    Node.call( this, { cursor: "pointer" } );
+    Node.call( this, { cursor: 'pointer' } );
     var thisNode = this,
       timer = new Node(),
       textTimer,
       resetButton,
-      startStopButton;
+      startStopButton,
+      dragZone;
     var secondToString = function( second ) {
       var _minutes = (Math.floor( second / 60 ) % 60),
         _seconds = (Math.floor( second ) % 60),
         _milliseconds = Math.floor( second % 1 * 100 );
       if ( _milliseconds < 10 ) {
-        _milliseconds = "0" + _milliseconds;
+        _milliseconds = '0' + _milliseconds;
       }
       if ( _seconds < 10 ) {
-        _seconds = "0" + _seconds;
+        _seconds = '0' + _seconds;
       }
       if ( _minutes < 10 ) {
-        _minutes = "0" + _minutes;
+        _minutes = '0' + _minutes;
       }
-      return   _minutes + ":" + _seconds + ":" + _milliseconds;
+      return   _minutes + ':' + _seconds + ':' + _milliseconds;
     };
 
     timer.addChild( resetButton = new TextPushButton( resetTimerString, {
@@ -51,9 +50,9 @@ define( function( require ) {
       },
       font: new PhetFont( 13 ),
       rectangleXMargin: 10,
-      rectangleFillUp: "#DFE0E1",
-      rectangleFillDown: "#DFE0E1",
-      rectangleFillOver: "#D1D2D2",
+      rectangleFillUp: '#DFE0E1',
+      rectangleFillDown: '#DFE0E1',
+      rectangleFillOver: '#D1D2D2',
       y: 31,
       x: 5
     } ) );
@@ -62,11 +61,15 @@ define( function( require ) {
       new Image( require( 'image!WOAS/button_timer_start_unpressed.png' ) ),
       model.timerStartProperty,
       {scale: 0.7, y: 26, x: resetButton.right + 5} ) );
-    var timerWidth = Math.max(84,(resetButton.width + startStopButton.width) + 10);
+    var timerWidth = Math.max( 84, (resetButton.width + startStopButton.width) + 10 );
+
 
     timer.addChild( new Rectangle( 0, 0, timerWidth, 24, 5, 5, {fill: '#FFF', stroke: '#000', lineWidth: 1} ) );
-    timer.addChild( textTimer = new Text( "00:00:00", {font: new PhetFont( 20 ), centerX: timerWidth/2, top: 0} ) );
-    this.addChild( new Panel( timer, { fill: '#FFFF06', stroke: '#F7941E', lineWidth: 2, xMargin: 10, yMargin: 5} ) );
+    timer.addChild( textTimer = new Text( '00:00:00', {font: new PhetFont( 20 ), centerX: timerWidth / 2, top: 0} ) );
+
+    thisNode.addChild(dragZone = new Rectangle(0,0,timerWidth+20, startStopButton.bottom+10));
+
+    thisNode.addChild( new Panel( timer, { fill: '#FFFF06', stroke: '#F7941E', lineWidth: 2, xMargin: 10, yMargin: 5} ) );
 
     model.timerProperty.link( function updateVisible( value ) {
       thisNode.setVisible( value );
@@ -82,12 +85,12 @@ define( function( require ) {
     //REVIEW: Use Vector2 for 2d numeric data
     var clickOffset = {x: 0, y: 0};
     //REVIEW: a lot of this code is duplicated between WOASTLine / WOASTRulers / WOASTTimer. reduce duplication?
-    thisNode.addInputListener( new SimpleDragHandler(
+    dragZone.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
           //REVIEW: see comments in WOASTLine.js
-          clickOffset.x = thisNode.globalToParentPoint( event.pointer.point ).x - event.currentTarget.x;
-          clickOffset.y = thisNode.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
+          clickOffset.x = dragZone.globalToParentPoint( event.pointer.point ).x - event.currentTarget.x;
+          clickOffset.y = dragZone.globalToParentPoint( event.pointer.point ).y - event.currentTarget.y;
         },
         drag: function( event ) {
           //REVIEW: see comments in WOASTLine.js
