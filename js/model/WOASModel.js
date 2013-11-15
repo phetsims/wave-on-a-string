@@ -16,6 +16,7 @@ define( function( require ) {
   function WOASModel() {
     this.customDt = 0;
     //REVIEW: performance: typed arrays may increase model performance where available? (Float32Array or Float64Array, but I believe they aren't available on IE9)
+    //MLL: Float32Array or Float64Array are not available on IE9
     this.yDraw = new Array( NSEGS );
     this.yNow = new Array( NSEGS );
     this.yLast = new Array( NSEGS );
@@ -106,17 +107,6 @@ define( function( require ) {
       for ( var i = 1; i < (this.nSegs - 1); i++ ) {
         this.yNext[i] = a * ((this.beta - 1) * this.yLast[i] + c * this.yNow[i] + alphaSq * (this.yNow[i + 1] + this.yNow[i - 1]) );
       }
-
-      /*REVIEW: performance:
-       * Instead of doing full array copies here, please do something like the following:
-       *
-       * this.yLast = this.yNow;
-       * this.yNow = this.yNext;
-       *
-       * And change the way of setting this.yLast[this.nSegs - 1] and this.yNow[this.nSegs - 1] to be compatible with this change.
-       *
-       * This should improve the performance of the model fairly significantly, depending on the browser.
-       */
 
       for ( var j = 0; j < (this.nSegs - 1); j++ ) {
         this.yLast[j] = this.yNow[j];
