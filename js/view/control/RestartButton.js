@@ -10,23 +10,20 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var restartString = require( 'string!WOAS/restart' );
   var TextPushButton = require( 'SUN/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Shape = require( 'KITE/Shape' );
+  var Bounds2 = require( 'DOT/Bounds2' );
 
   function RestartButton( model, options ) {
-    Node.call( this );
-
-    var restart = function() {
-      model.manualRestart();
-    };
-
-    this.addChild(new TextPushButton( restartString, {listener: restart, font: new PhetFont( 12 ),rectangleFillUp:'#DED322',rectangleFillDown:'#DED322',rectangleFillOver:'#E6D739'} ));
+    TextPushButton.call( this ,restartString, {listener: model.manualRestart.bind( model ), font: new PhetFont( 12 ),rectangleFillUp:'#DED322',rectangleFillDown:'#DED322',rectangleFillOver:'#E6D739'});
+    this.touchArea = Shape.bounds( Bounds2.rect(0,0,this.width,this.height).dilatedXY( 5, 10 ) );
+    this.mouseArea = Shape.bounds( Bounds2.rect(0,0,this.width,this.height) );
     this.mutate( options );
   }
 
-  inherit( Node, RestartButton );
+  inherit( TextPushButton, RestartButton );
 
   return RestartButton;
 } );
