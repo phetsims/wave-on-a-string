@@ -129,48 +129,54 @@ define( function( require ) {
     },
     manualStep: function( dt ) {
       var i;
-      dt = (dt !== undefined && dt > 0 ) ? dt : (1 / fps * this.speed);
-      var dt_speed = dt * this.speed;
-      this.time += dt;
+      var fixDt = 1 / fps;
+      dt = (dt !== undefined && dt > 0 ) ? dt : fixDt;
+
       if ( this.timerStart ) {
-        this.timerSecond += dt_speed;
-      }
-      var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
-      if ( this.mode === 'oscillate' ) {
-        this.angle += Math.PI * 2 * this.frequency * dt_speed;
-        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
-        this.angle %= Math.PI * 2;
-      }
-      if ( this.mode === 'pulse' && this.pulse ) {
-        var k = 1 / this.pulseWidth * this.speed;
-        var da = Math.PI * k * dt;
-        if ( this.angle + da >= Math.PI / 2 ) {
-          this.pulseSign = -1;
-        }
-        if ( this.angle + da * this.pulseSign > 0 ) {
-          this.angle += da * this.pulseSign;
-        }
-        else {
-          //end pulse and reset
-          this.angleProperty.reset();
-          this.pulseSignProperty.reset();
-          this.pulseProperty.reset();
-        }
-        this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle / (Math.PI / 2));
-      }
-      if ( this.time >= minDt ) {
-        this.time %= minDt;
-        this.evolve();
-        for ( i = 0; i < this.nSegs; i++ ) {
-          this.yDraw[i] = this.yLast[i];
-        }
-      }
-      else {
-        for ( i = 1; i < this.nSegs; i++ ) {
-          this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.time / minDt));
-        }
+        this.timerSecond += dt * this.speed;
       }
 
+      var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
+      // for dt > 1 / fps
+      while ( dt >= fixDt ) {
+        this.time += fixDt;
+
+        if ( this.mode === 'oscillate' ) {
+          this.angle += Math.PI * 2 * this.frequency * fixDt * this.speed;
+          this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
+          this.angle %= Math.PI * 2;
+        }
+        if ( this.mode === 'pulse' && this.pulse ) {
+          var k = 1 / this.pulseWidth * this.speed;
+          var da = Math.PI * k * fixDt;
+          if ( this.angle + da >= Math.PI / 2 ) {
+            this.pulseSign = -1;
+          }
+          if ( this.angle + da * this.pulseSign > 0 ) {
+            this.angle += da * this.pulseSign;
+          }
+          else {
+            //end pulse and reset
+            this.angleProperty.reset();
+            this.pulseSignProperty.reset();
+            this.pulseProperty.reset();
+          }
+          this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle / (Math.PI / 2));
+        }
+        if ( this.time >= minDt ) {
+          this.time %= minDt;
+          this.evolve();
+          for ( i = 0; i < this.nSegs; i++ ) {
+            this.yDraw[i] = this.yLast[i];
+          }
+        }
+        else {
+          for ( i = 1; i < this.nSegs; i++ ) {
+            this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.time / minDt));
+          }
+        }
+        dt -= fixDt;
+      }
       this.trigger( 'yNowChanged' );
     },
     //restart button
