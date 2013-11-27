@@ -16,7 +16,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   function StartNode( model, options ) {
-    options = _.extend( {renderer:'canvas', layerSplit: true }, options );
+    options = _.extend( { layerSplit: true }, options );
 
     Node.call( this );
     var thisNode = this,

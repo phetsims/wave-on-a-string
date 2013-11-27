@@ -15,7 +15,7 @@ define( function( require ) {
   var Constants = require( 'WOAS/Constants' );
 
   function TheStringNode( model, options ) {
-    Node.call( this ,{renderer:'canvas', layerSplit: true});
+    Node.call( this, {layerSplit: true} );
     var color,
       theStringShape = new Shape(),
       theStringPath = new Path( theStringShape, {
@@ -29,7 +29,7 @@ define( function( require ) {
       if ( i % 10 === 0 ) {
         color = 'lime';
       }
-      theString.push( new Circle(options.radius, {x:i * options.radius * 2,fill:Constants.segmentTheStringNodeGradient({radius:options.radius,color: color}), stroke: 'black',lineWidth: 0.5}));
+      theString.push( new Circle( options.radius, {x: i * options.radius * 2, fill: Constants.segmentTheStringNodeGradient( {radius: options.radius, color: color} ), stroke: 'black', lineWidth: 0.5} ) );
     }
     theString[0].scale( 1.2 );
     this.addChild( new Node( {children: theString} ) );
