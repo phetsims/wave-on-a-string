@@ -17,6 +17,8 @@ define( function( require ) {
     this.stepDt = 0;
     //REVIEW: performance: typed arrays may increase model performance where available? (Float32Array or Float64Array, but I believe they aren't available on IE9)
     //MLL: Float32Array or Float64Array are not available on IE9
+    var Array = window.Float64Array || window.Array;
+
     this.yDraw = new Array( NSEGS );
     this.yNow = new Array( NSEGS );
     this.yLast = new Array( NSEGS );
@@ -98,18 +100,28 @@ define( function( require ) {
           this.yNow[this.nSegs - 1] = 0;
       }
 
-
       //main formula for calculating
-
       var a = 1 / ( this.beta + 1 ), alphaSq = this.alpha * this.alpha, c = 2 * ( 1 - alphaSq );
       for ( var i = 1; i < (this.nSegs - 1); i++ ) {
         this.yNext[i] = a * ((this.beta - 1) * this.yLast[i] + c * this.yNow[i] + alphaSq * (this.yNow[i + 1] + this.yNow[i - 1]) );
       }
-
-      for ( var j = 0; j < (this.nSegs - 1); j++ ) {
-        this.yLast[j] = this.yNow[j];
-        this.yNow[j] = this.yNext[j];
-      }
+      
+      // store old values for the very last point
+      var lastIndex = this.nSegs - 1;
+      var oldLast = this.yLast[lastIndex];
+      var oldNow = this.yNow[lastIndex];
+      var oldNext = this.yNext[lastIndex];
+      
+      // rotate arrays instead of copying elements (for speed)
+      var old = this.yLast;
+      this.yLast = this.yNow;
+      this.yNow = this.yNext;
+      this.yNext = old;
+      
+      // restore the old values for the very last point for every array (potentially not needed for a few?)
+      this.yLast[lastIndex] = oldLast;
+      this.yNow[lastIndex] = oldNow;
+      this.yNext[lastIndex] = oldNext;
 
       switch( this.typeEnd ) {
         case'looseEnd':
@@ -173,7 +185,6 @@ define( function( require ) {
           }
         }
         dt -= fixDt;
-
       }
       this.trigger( 'yNowChanged' );
     },
