@@ -11,10 +11,10 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   var NSEGS = 61,
-    fps = 48;
+    fps = 50;
 
   function WOASModel() {
-    this.customDt = 0;
+    this.stepDt = 0;
     //REVIEW: performance: typed arrays may increase model performance where available? (Float32Array or Float64Array, but I believe they aren't available on IE9)
     //MLL: Float32Array or Float64Array are not available on IE9
     this.yDraw = new Array( NSEGS );
@@ -56,21 +56,19 @@ define( function( require ) {
 
   inherit( PropertySet, WOASModel, {
     step: function( dt ) {
+      var fixDt = 1 / fps;
+      // limit changes dt
       if ( Math.abs( dt - this.lastDt ) > this.lastDt * 0.3 ) {
         dt = this.lastDt + ((dt - this.lastDt) < 0 ? -1 : 1) * this.lastDt * 0.3;
       }
       this.lastDt = dt;
 
       if ( this.play ) {
-        this.customDt += dt;
-        if ( this.customDt >= 1 / (fps * this.speed) ) {
-          this.manualStep( this.customDt );
-          this.customDt = 0;
-        }
-        else {
-          for ( var i = 1; i < this.nSegs; i++ ) {
-            this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.customDt / 1 / (fps * this.speed)));
-          }
+        this.stepDt += dt;
+        //limit min dt
+        if ( this.stepDt >= fixDt ) {
+          this.manualStep( this.stepDt );
+          this.stepDt %= fixDt;
         }
       }
     },
@@ -135,20 +133,19 @@ define( function( require ) {
       if ( this.timerStart ) {
         this.timerSecond += dt * this.speed;
       }
-
+      //dt for tension effect
       var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
-      // for dt > 1 / fps
+      // limit max dt
       while ( dt >= fixDt ) {
         this.time += fixDt;
 
         if ( this.mode === 'oscillate' ) {
           this.angle += Math.PI * 2 * this.frequency * fixDt * this.speed;
-          this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
           this.angle %= Math.PI * 2;
+          this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
         }
         if ( this.mode === 'pulse' && this.pulse ) {
-          var k = 1 / this.pulseWidth * this.speed;
-          var da = Math.PI * k * fixDt;
+          var da = Math.PI * fixDt * this.speed / this.pulseWidth;
           if ( this.angle + da >= Math.PI / 2 ) {
             this.pulseSign = -1;
           }
@@ -176,6 +173,7 @@ define( function( require ) {
           }
         }
         dt -= fixDt;
+
       }
       this.trigger( 'yNowChanged' );
     },
