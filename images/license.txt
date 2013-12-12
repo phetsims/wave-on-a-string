@@ -1,0 +1,16 @@
+button_sim_pause.png author=PhET
+button_sim_play.png author=PhET
+button_step_unpressed.png author=PhET
+button_step_hover.png author=PhET
+button_step_pressed.png author=PhET
+button_step_deactivated.png author=PhET
+button_timer_pause_unpressed.png author=PhET
+button_timer_start_unpressed.png author=PhET
+wrench_2.svg author=PhET notes=Sharon
+oscillator_wheel.png author=PhET
+clamp_2.png author=PhET notes=Sharon
+ring_back.png author=PhET
+ring_front.png author=PhET
+window_back.png author=PhET
+window_edge.png author=PhET
+
