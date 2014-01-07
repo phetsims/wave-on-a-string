@@ -5,14 +5,12 @@ define( function( require ) {
 
   var Dimension2 = require( 'DOT/Dimension2' );
   var Vector2 = require( 'DOT/Vector2' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Range = require( 'DOT/Range' );
 
   var clickOffset = new Vector2();
-  var mvt = ModelViewTransform2.createIdentity();
   var Constants = {
     projectName: 'wave-on-a-string',
     viewSize: new Dimension2( 768, 504 ),
