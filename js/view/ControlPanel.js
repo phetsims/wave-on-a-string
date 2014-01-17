@@ -16,7 +16,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var BottomControlPanel = require( 'WOAS/view/control/BottomControlPanel' );
   var RadioGroup = require( 'WOAS/view/control/RadioGroup' );
-  var PlayPauseButton = require( 'WOAS/view/control/PlayPauseButton' );
+  var PlayPauseButton = require( 'SCENERY_PHET/PlayPauseButton' );
+  var StepButton = require( 'SCENERY_PHET/StepButton' );
   var RestartButton = require( 'WOAS/view/control/RestartButton' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
   var WOASTRulers = require( 'WOAS/view/control/WOASTRulers' );
@@ -50,7 +51,8 @@ define( function( require ) {
     speedFast.touchArea = Shape.bounds( Bounds2.rect(-14,-speedFast.height/2,speedFast.width+5,speedFast.height).dilatedXY( 5, 15 ) );
     speedFast.mouseArea = Shape.bounds( Bounds2.rect(-14,-speedFast.height/2,speedFast.width+5,speedFast.height) );
     this.addChild( new BottomControlPanel( model ) );
-    this.addChild( new PlayPauseButton( model, {x: speedGroup.right + 20, y: Constants.viewSize.height - 145} ) );
+    this.addChild( new PlayPauseButton( model.playProperty, {x: speedGroup.right + 45, y: speedGroup.centerY, scale: 0.6 } ) );
+    this.addChild( new StepButton( model.manualStep.bind( model ), model.playProperty, {x: speedGroup.right + 88, y: speedGroup.centerY, scale: 0.6, touchAreaRadius: 30 } ) );
     this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, y: 430, children: [new ResetAllButton( function() { model.reset(); } )] } ) );
     this.addChild( new WOASTLine( model ) );
     this.addChild( new WOASTTimer( model ) );
