@@ -20,6 +20,7 @@ define( function( require ) {
   var TextPushButton = require( 'SUN/TextPushButton' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Color = require( 'SCENERY/util/Color' );
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: 'pointer' } );
@@ -52,9 +53,9 @@ define( function( require ) {
       },
       font: new PhetFont( 13 ),
       rectangleXMargin: 10,
-      rectangleFillUp: '#DFE0E1',
-      rectangleFillDown: '#DFE0E1',
-      rectangleFillOver: '#D1D2D2',
+      rectangleFillUp: new Color( '#DFE0E1' ),
+      rectangleFillDown: new Color( '#DFE0E1' ),
+      rectangleFillOver: new Color( '#D1D2D2' ),
       y: 31,
       x: 5
     } ) );

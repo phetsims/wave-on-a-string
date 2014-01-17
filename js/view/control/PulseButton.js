@@ -15,12 +15,19 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Color = require( 'SCENERY/util/Color' );
 
   function PulseButton( model, options ) {
-    TextPushButton.call(this,pulse2String,{listener: model.manualPulse.bind( model ), font: new PhetFont( 12 ),rectangleFillUp:'#7CAF3A',rectangleFillDown:'#7CAF3A',rectangleFillOver:'#91B634'});
+    TextPushButton.call( this,pulse2String, {
+      listener: model.manualPulse.bind( model ),
+      font: new PhetFont( 12 ),
+      rectangleFillUp: new Color( '#7CAF3A' ),
+      rectangleFillDown: new Color( '#7CAF3A' ),
+      rectangleFillOver: new Color( '#91B634' )
+    } );
     var self = this;
-    this.touchArea = Shape.bounds( Bounds2.rect(0,0,this.width,this.height).dilatedXY( 5, 10 ) );
-    this.mouseArea = Shape.bounds( Bounds2.rect(0,0,this.width,this.height) );
+    this.touchArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ).dilatedXY( 5, 10 ) );
+    this.mouseArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ) );
     this.mutate( options );
     model.modeProperty.link( function updatePulseButton( value ) {
       self.setVisible( value === 'pulse' );
