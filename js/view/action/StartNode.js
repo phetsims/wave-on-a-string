@@ -13,19 +13,24 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Constants = require( 'WOAS/Constants' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Matrix3 = require( 'DOT/Matrix3' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   function StartNode( model, options ) {
     options = _.extend( { layerSplit: true }, options );
+    
+    var postNodeHeight = 158;
 
     Node.call( this );
     var thisNode = this,
       wheelImg,
       key = new Node( {children: [new Image( require( 'image!WOAS/wrench_2.svg' ), {x: -40, y: -25, scale: 0.9} )], cursor: 'pointer'} ),
       wheel = new Node( {children: [wheelImg = new Image( require( 'image!WOAS/oscillator_wheel.png' ), {scale: 0.4} )]} ),
-      post = new Rectangle( Constants.offsetWheel.x - 5, Constants.offsetWheel.y, 10, 0, {
+      post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
         stroke: '#000',
-        fill: Constants.postGradient
+        fill: Constants.postGradient,
+        x: Constants.offsetWheel.x - 5,
+        y: Constants.offsetWheel.y
       } );
     wheelImg.center = new Vector2();
     thisNode.addChild( key );
@@ -42,17 +47,42 @@ define( function( require ) {
     } ) );
 
     thisNode.mutate( options );
-    model.on( 'yNowChanged', function updateKey() {
-      key.y = model.yNow[0];
-      post.setRect( Constants.offsetWheel.x - 5, key.y + 7, 10, Constants.offsetWheel.y - (key.y + 7) );
+    function updateKey() {
+      if ( key.isVisible() ) {
+        key.y = model.yNow[0];
+      }
+    }
+    function updatePost() {
+      var y = model.yNow[0];
+      if ( post.isVisible() ) {
+        // TODO: reduce garbage allocation here
+        post.setMatrix( new Matrix3( 1, 0,                                                      0,
+                                     0, ( Constants.offsetWheel.y - (y + 7) ) / postNodeHeight, y + 7,
+                                     0, 0,                                                      1 ) );
+      }
+    }
+    model.on( 'yNowChanged', function() {
+      updateKey();
+      updatePost();
     } );
     model.angleProperty.link( function updateWheel( value ) {
-      wheel.rotation = value;
+      // wheel.rotation = value;
+      wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.modeProperty.link( function updateVisible( value ) {
-      key.setVisible( value === 'manual' );
-      wheel.setVisible( value !== 'manual' );
-      post.setVisible( value !== 'manual' );
+      var keyIsVisible = value === 'manual';
+      if ( key.isVisible() !== keyIsVisible ) {
+        key.setVisible( keyIsVisible );
+        
+        updateKey();
+      }
+      
+      if ( post.isVisible() !== !keyIsVisible ) {
+        wheel.setVisible( !keyIsVisible );
+        post.setVisible( !keyIsVisible );
+        
+        updatePost();
+      }
     } );
   }
 
