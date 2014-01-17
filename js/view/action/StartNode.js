@@ -77,7 +77,7 @@ define( function( require ) {
         updateKey();
       }
       
-      if ( post.isVisible() !== !keyIsVisible ) {
+      if ( post.isVisible() === keyIsVisible ) {
         wheel.setVisible( !keyIsVisible );
         post.setVisible( !keyIsVisible );
         
