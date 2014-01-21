@@ -48,6 +48,7 @@ define( function( require ) {
       pulseSign: 1 // sign [-1, 1] for pulse mode
     } );
 
+    this.nextLeftY = 0;
     this.nSegs = NSEGS;
     this.beta = 0.05;
     this.alpha = 1;
@@ -71,6 +72,7 @@ define( function( require ) {
           this.stepDt %= fixDt;
         }
       }
+      this.nextLeftY = this.yNow[0];
     },
     // all reset button
     reset: function() {
@@ -139,6 +141,11 @@ define( function( require ) {
       var i;
       var fixDt = 1 / fps;
       dt = (dt !== undefined && dt > 0 ) ? dt : fixDt;
+      
+      // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
+      var startingLeftY = this.yNow[0];
+      var numSteps = Math.floor( dt / fixDt );
+      var perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
       if ( this.timerStart ) {
         this.timerSecond += dt * this.speed;
@@ -170,6 +177,10 @@ define( function( require ) {
           }
           this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle / (Math.PI / 2));
         }
+        if ( this.mode === 'manual' ) {
+          // interpolate the yNow across steps for manual (between frames)
+          this.yNow[0] += perStepDelta;
+        }
         if ( this.time >= minDt ) {
           this.time %= minDt;
           this.evolve();
@@ -184,6 +195,10 @@ define( function( require ) {
         }
         dt -= fixDt;
       }
+      if ( this.mode === 'manual' ) {
+        // sanity check for our yNow
+        this.yNow[0] = this.nextLeftY;
+      }
       this.trigger( 'yNowChanged' );
     },
     //restart button
@@ -197,6 +212,7 @@ define( function( require ) {
       for ( var i = 0; i < this.yNow.length; i++ ) {
         this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
       }
+      this.nextLeftY = 0;
       this.trigger( 'yNowChanged' );
     },
     //pulse button

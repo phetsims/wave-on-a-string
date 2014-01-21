@@ -48,7 +48,7 @@ define( function( require ) {
     key.mouseArea = Shape.bounds( key.bounds );
 
     key.addInputListener( Constants.dragAndDropHandler( key, function( point ) {
-      model.yNow[0] = Math.max( Math.min( point.y, options.range.max ), options.range.min );
+      model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
       model.play = true;
       model.trigger( 'yNowChanged' );
     } ) );
