@@ -15,8 +15,6 @@ define( function( require ) {
 
   function WOASModel() {
     this.stepDt = 0;
-    //REVIEW: performance: typed arrays may increase model performance where available? (Float32Array or Float64Array, but I believe they aren't available on IE9)
-    //MLL: Float32Array or Float64Array are not available on IE9
     var Array = window.Float64Array || window.Array;
 
     this.yDraw = new Array( NSEGS );
