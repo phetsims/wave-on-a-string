@@ -16,7 +16,7 @@ define( function( require ) {
   var Matrix3 = require( 'DOT/Matrix3' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  function StartNode( model, options ) {
+  function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );
     
     var postNodeHeight = 158;
@@ -61,10 +61,17 @@ define( function( require ) {
                                      0, 0,                                                      1 ) );
       }
     }
-    model.on( 'yNowChanged', function() {
-      updateKey();
-      updatePost();
+    
+    var dirty = true;
+    model.on( 'yNowChanged', function() { dirty = true; } );
+    events.on( 'frame', function() {
+      if ( dirty ) {
+        updateKey();
+        updatePost();
+        dirty = false;
+      }
     } );
+    
     model.angleProperty.link( function updateWheel( value ) {
       // wheel.rotation = value;
       wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication

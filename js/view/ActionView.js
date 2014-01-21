@@ -27,9 +27,9 @@ define( function( require ) {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
     }));
-    this.addChild( new EndNode( model, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
+    this.addChild( new EndNode( model, events, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
     this.addChild( new TheStringNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
-    this.addChild( new StartNode( model, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range:Constants.yKeyRange} ) );
+    this.addChild( new StartNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range:Constants.yKeyRange} ) );
     this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {

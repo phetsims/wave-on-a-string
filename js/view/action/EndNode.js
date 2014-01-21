@@ -13,7 +13,7 @@ define( function( require ) {
   var Constants = require( 'WOAS/Constants' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  function EndNode( model, options ) {
+  function EndNode( model, events, options ) {
     Node.call( this );
     var clamp = new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} ),
       ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: 5, y: -15 / 2, scale: 0.5} )]} ),
@@ -32,8 +32,18 @@ define( function( require ) {
     this.addChild( windowImage );
 
     this.mutate( options );
-    model.on( 'yNowChanged', function updateKey() {
+    
+    function updateKey() {
       ring_front.y = ring_back.y = model.yNow[model.yNow.length - 1] || 0;
+    }
+    
+    var dirty = true;
+    model.on( 'yNowChanged', function() { dirty = true; } );
+    events.on( 'frame', function() {
+      if ( dirty ) {
+        updateKey();
+        dirty = false;
+      }
     } );
 
     model.typeEndProperty.link( function updateVisible( value ) {
