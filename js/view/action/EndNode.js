@@ -16,8 +16,8 @@ define( function( require ) {
   function EndNode( model, events, options ) {
     Node.call( this );
     var clamp = new Image( require( 'image!WOAS/clamp_2.png' ), {x: -18, y: -34, scale: 0.4} ),
-      ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: 5, y: -15 / 2, scale: 0.5} )]} ),
-      ring_front = new Node( {children: [new Image( require( 'image!WOAS/ring_front.png' ), {x: 5, y: 0, scale: 0.5} )]} ),
+      ring_back = new Node( {children: [new Image( require( 'image!WOAS/ring_back.png' ), {x: 5, y: -14 / 2, scale: 0.5} )]} ),
+      ring_front = new Node( {children: [new Image( require( 'image!WOAS/ring_front.png' ), {x: 4.7, y: 0, scale: 0.5} )]} ),
       windowImage = new Image( require( 'image!WOAS/window_back.png' ), {x: -81, y: -219 / 2} ),
       post = new Rectangle( -5, -130, 10, 260, {
         stroke: '#000',
