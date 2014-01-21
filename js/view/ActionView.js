@@ -16,7 +16,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Constants = require( 'WOAS/Constants' );
 
-  function ActionView( model ) {
+  function ActionView( model, events ) {
     Node.call( this, { layerSplit: true } );
     var windowImage;
     //center line
@@ -28,7 +28,7 @@ define( function( require ) {
       y: Constants.yTheStringNode
     }));
     this.addChild( new EndNode( model, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
-    this.addChild( new TheStringNode( model, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
+    this.addChild( new TheStringNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
     this.addChild( new StartNode( model, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range:Constants.yKeyRange} ) );
     this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 

@@ -14,7 +14,7 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Constants = require( 'WOAS/Constants' );
 
-  function TheStringNode( model, options ) {
+  function TheStringNode( model, events, options ) {
     Node.call( this, {layerSplit: true} );
     var color,
       theStringShape = new Shape(),
@@ -39,8 +39,8 @@ define( function( require ) {
     this.addChild( new Node( {children: theString} ) );
 
     this.mutate( options );
-
-    model.on( 'yNowChanged', function updateTheString() {
+    
+    function updateTheString() {
       theStringShape = new Shape();
       for ( var i = 0; i < model.yDraw.length; i++ ) {
         theString[i].y = model.yDraw[i];
@@ -51,6 +51,15 @@ define( function( require ) {
         theStringShape.lineTo( i * options.radius * 2, model.yDraw[i] || 0 );
       }
       theStringPath.shape = theStringShape;
+    }
+    
+    var dirty = true;
+    model.on( 'yNowChanged', function() { dirty = true; } );
+    events.on( 'frame', function() {
+      if ( dirty ) {
+        updateTheString();
+        dirty = false;
+      }
     } );
   }
 

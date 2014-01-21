@@ -11,14 +11,21 @@ define( function( require ) {
   var ActionView = require( 'WOAS/view/ActionView' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Events = require( 'AXON/Events' );
 
   function WOASView( model ) {
     ScreenView.call( this, {renderer: 'svg'} );
+    
+    this.events = new Events();
+    
     this.addChild( new ControlPanel( model ) );
-    this.addChild( new ActionView( model ) );
-
+    this.addChild( new ActionView( model, this.events ) );
   }
 
-  inherit( ScreenView, WOASView );
+  inherit( ScreenView, WOASView, {
+    step: function( time ) {
+      this.events.trigger( 'frame' );
+    }
+  } );
   return WOASView;
 } );
