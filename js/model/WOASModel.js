@@ -48,7 +48,7 @@ define( function( require ) {
       pulseSign: 1 // sign [-1, 1] for pulse mode
     } );
 
-    this.nextLeftY = 0;
+    this.nextLeftY = 0; // used to interpolate the left-most y value of the string while the wrench is moved in manual mode, for low-FPS browsers
     this.nSegs = NSEGS;
     this.beta = 0.05;
     this.alpha = 1;
