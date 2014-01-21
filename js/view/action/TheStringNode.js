@@ -23,6 +23,10 @@ define( function( require ) {
       } ),
       theString = [];
     this.addChild( theStringPath );
+    
+    theStringPath.computeShapeBounds = function() {
+      return this.getShape().bounds.dilated( 20 ); // miterLimit should cut off with the normal stroke before this
+    };
 
     for ( var i = 0; i < model.yDraw.length; i++ ) {
       color = 'red';
