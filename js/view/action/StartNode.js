@@ -20,6 +20,7 @@ define( function( require ) {
     options = _.extend( { layerSplit: true }, options );
     
     var postNodeHeight = 158;
+    var postScale = 3;
 
     Node.call( this );
     var thisNode = this,
@@ -28,10 +29,16 @@ define( function( require ) {
       wheel = new Node( {children: [wheelImg = new Image( require( 'image!WOAS/oscillator_wheel.png' ), {scale: 0.4} )]} ),
       post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
         stroke: '#000',
-        fill: Constants.postGradient,
-        x: Constants.offsetWheel.x - 5,
-        y: Constants.offsetWheel.y
+        fill: Constants.postGradient
       } );
+    
+    // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
+    var postCache = new Node( { scale: 1/postScale } );
+    new Node( { children: [post], scale: postScale } ).toImageNodeAsynchronous( function( image ) {
+      postCache.addChild( image );
+    } );
+    post = new Node( { children: [postCache] } );
+    
     wheelImg.center = new Vector2();
     thisNode.addChild( key );
     thisNode.addChild( post );
