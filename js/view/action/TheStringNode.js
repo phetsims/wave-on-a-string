@@ -28,11 +28,21 @@ define( function( require ) {
     };
     
     var highlightCircle = new Circle( options.radius * 0.3, { fill: '#fff', x: -0.45 * options.radius, y: -0.45 * options.radius } );
-    var redBead = new Circle( options.radius, { fill: 'red', stroke: 'black', lineWidth: 0.5, children: [highlightCircle] } );
-    var limeBead = new Circle( options.radius, { fill: 'lime', stroke: 'black', lineWidth: 0.5, children: [highlightCircle] } );
+    var scale = 3;
+    var redBead = new Circle( options.radius, { fill: 'red', stroke: 'black', lineWidth: 0.5, children: [highlightCircle], scale: scale } );
+    var limeBead = new Circle( options.radius, { fill: 'lime', stroke: 'black', lineWidth: 0.5, children: [highlightCircle], scale: scale } );
+    
+    var redBase = new Node( { scale: 1/scale } );
+    var limeBase = new Node( { scale: 1/scale } );
+    redBead.toImageNodeAsynchronous( function( image ) {
+      redBase.addChild( image );
+    } );
+    limeBead.toImageNodeAsynchronous( function( image ) {
+      limeBase.addChild( image );
+    } );
 
     for ( var i = 0; i < model.yDraw.length; i++ ) {
-      var bead = ( i % 10 === 0 ) ? limeBead : redBead;
+      var bead = ( i % 10 === 0 ) ? limeBase : redBase;
       theString.push( new Node( { x: i * options.radius * 2, children: [bead] } ) );
     }
     theString[0].scale( 1.2 );
