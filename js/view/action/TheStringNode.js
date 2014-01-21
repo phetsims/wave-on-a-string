@@ -13,11 +13,10 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Constants = require( 'WOAS/Constants' );
-
+  
   function TheStringNode( model, events, options ) {
     Node.call( this, {layerSplit: true} );
-    var color,
-      theStringShape = new Shape(),
+    var theStringShape = new Shape(),
       theStringPath = new Path( theStringShape, {
         stroke: '#F00'
       } ),
@@ -27,13 +26,14 @@ define( function( require ) {
     theStringPath.computeShapeBounds = function() {
       return this.getShape().bounds.dilated( 20 ); // miterLimit should cut off with the normal stroke before this
     };
+    
+    var highlightCircle = new Circle( options.radius * 0.3, { fill: '#fff', x: -0.45 * options.radius, y: -0.45 * options.radius } );
+    var redBead = new Circle( options.radius, { fill: 'red', stroke: 'black', lineWidth: 0.5, children: [highlightCircle] } );
+    var limeBead = new Circle( options.radius, { fill: 'lime', stroke: 'black', lineWidth: 0.5, children: [highlightCircle] } );
 
     for ( var i = 0; i < model.yDraw.length; i++ ) {
-      color = 'red';
-      if ( i % 10 === 0 ) {
-        color = 'lime';
-      }
-      theString.push( new Circle( options.radius, {x: i * options.radius * 2, fill: Constants.segmentTheStringNodeGradient( {radius: options.radius, color: color} ), stroke: 'black', lineWidth: 0.5} ) );
+      var bead = ( i % 10 === 0 ) ? limeBead : redBead;
+      theString.push( new Node( { x: i * options.radius * 2, children: [bead] } ) );
     }
     theString[0].scale( 1.2 );
     this.addChild( new Node( {children: theString} ) );
