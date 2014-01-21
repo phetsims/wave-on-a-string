@@ -12,7 +12,6 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var Constants = require( 'WOAS/Constants' );
   
   function TheStringNode( model, events, options ) {
     Node.call( this, {layerSplit: true} );
