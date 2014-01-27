@@ -37,6 +37,9 @@ define( function( require ) {
   function ControlPanel( model ) {
     Node.call( this );
     var typeRadio, endTypeRadio, speedSlow,speedFast, speedGroup, pulseButton;
+    this.addChild( new WOASTRulers( model ) );
+    this.addChild( new WOASTLine( model ) );
+    this.addChild( new WOASTTimer( model ) );
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 25} ) );
     this.addChild( pulseButton = new PulseButton( model, {x: 130, y: Constants.viewSize.height - 135} ) );
@@ -54,9 +57,6 @@ define( function( require ) {
     this.addChild( new PlayPauseButton( model.playProperty, {x: speedGroup.right + 45, y: speedGroup.centerY, scale: 0.6 } ) );
     this.addChild( new StepButton( model.manualStep.bind( model ), model.playProperty, {x: speedGroup.right + 88, y: speedGroup.centerY, scale: 0.6, touchAreaRadius: 30 } ) );
     this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, y: 430, children: [new ResetAllButton( function() { model.reset(); } )] } ) );
-    this.addChild( new WOASTLine( model ) );
-    this.addChild( new WOASTTimer( model ) );
-    this.addChild( new WOASTRulers( model ) );
   }
 
   inherit( Node, ControlPanel );
