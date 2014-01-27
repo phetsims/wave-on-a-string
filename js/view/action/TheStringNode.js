@@ -51,7 +51,9 @@ define( function( require ) {
     
     function updateTheString() {
       theStringShape = new Shape();
-      for ( var i = 0; i < model.yDraw.length; i++ ) {
+      theString[0].y = model.nextLeftY;
+      theStringShape.lineTo( 0, model.nextLeftY || 0 );
+      for ( var i = 1; i < model.yDraw.length; i++ ) {
         theString[i].y = model.yDraw[i];
         /*REVIEW:
          * A lot of the performance issues relate to this shape drawing. There's nothing you can do here,
