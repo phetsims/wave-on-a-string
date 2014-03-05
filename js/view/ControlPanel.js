@@ -41,7 +41,7 @@ define( function( require ) {
     this.addChild( new WOASTLine( model ) );
     this.addChild( new WOASTTimer( model ) );
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
-    this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 25} ) );
+    this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
     this.addChild( pulseButton = new PulseButton( model, {x: 130, y: Constants.viewSize.height - 135} ) );
     this.addChild( endTypeRadio = new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], text: [fixedEndString, looseEndString, noEndString], property: model.typeEndProperty, x: Constants.viewSize.width - 100, y: 5} ) );
     endTypeRadio.right = Constants.viewSize.width - 5;

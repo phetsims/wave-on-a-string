@@ -25,7 +25,7 @@ define( function( require ) {
       rectangleFillDown: new Color( '#DED322' ),
       rectangleFillOver: new Color( '#E6D739' )
     } );
-    this.touchArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ).dilatedXY( 5, 10 ) );
+    this.touchArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ).dilatedXY( 5, 20 ) );
     this.mouseArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ) );
     this.mutate( options );
   }
