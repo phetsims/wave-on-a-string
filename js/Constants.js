@@ -48,7 +48,7 @@ define( function( require ) {
       lineWidth: 2
     },
 
-    offsetWheel: new Vector2( 0, 165 ),
+    offsetWheel: new Vector2( 0, 156 ),
 
     dragAndDropHandler: function dnd( thisNode, callback ) {
       return new SimpleDragHandler( {
