@@ -40,8 +40,12 @@ define( function( require ) {
         thumbFillHighlighted: '#B3D3E2',
         // custom ticks
         tickLabelSpacing: 4,
-        majorTickLength: 35,
-        minorTickLength: 25
+        majorTickLength: 20,
+        minorTickLength: 8,
+        majorTickLineWidth: 1.5,
+        minorTickLineWidth: 1.5,
+        
+        titleVerticalOffset: 0
       };
     Node.call( thisNode );
     options = _.extend( {}, defaultOptions, options );
@@ -53,7 +57,7 @@ define( function( require ) {
 
     thisNode.addChild( new Rectangle( 0, 0, options.sliderSize.width, options.sliderSize.height ) );
 
-    this.addChild( new Text( options.title, {centerX: thisNode.width / 2, top: 0, font: new PhetFont( 18 )} ) );
+    this.addChild( new Text( options.title, {centerX: thisNode.width / 2, top: options.titleVerticalOffset, font: new PhetFont( 18 )} ) );
 
     var buttonNode, plusButton, minusButton, valueLabel;
     var hSlider = new HSlider( options.property, options.range, options );

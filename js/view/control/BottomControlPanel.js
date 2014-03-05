@@ -43,8 +43,8 @@ define( function( require ) {
       {text: referenceLineString, property: model.referenceLineProperty}
     ]} );
 
-    var slider = new Slider( {x: -210, title: tensionString, property: model.tensionProperty, rounding: 0, range: Constants.tensionRange, tick: {step: 1, minText: lowString, maxText: highString} } );
-    var slider2 = new Slider( {x:-420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, tick: {step: 10, minText: noneString, maxText: lotsString}} );
+    var slider = new Slider( {x: -210, title: tensionString, property: model.tensionProperty, rounding: 0, range: Constants.tensionRange, titleVerticalOffset: 15, tick: {step: 1, minText: lowString, maxText: highString} } );
+    var slider2 = new Slider( {x:-420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, titleVerticalOffset: 15, tick: {step: 10, minText: noneString, maxText: lotsString}} );
     var slider3 = new Slider( {x: -630, type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, range: Constants.frequencyRange } );
     var slider5 = new Slider( {x: -630, type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, range: Constants.pulseWidthRange } );
     var slider4 = new Slider( {x: -840, type: 'button', buttonStep: 0.1, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 1, range: Constants.amplitudeRange } );
