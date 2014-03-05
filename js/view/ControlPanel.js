@@ -56,7 +56,7 @@ define( function( require ) {
     this.addChild( new BottomControlPanel( model ) );
     this.addChild( new PlayPauseButton( model.playProperty, {x: speedGroup.right + 45, y: speedGroup.centerY, scale: 0.6 } ) );
     this.addChild( new StepButton( model.manualStep.bind( model ), model.playProperty, {x: speedGroup.right + 88, y: speedGroup.centerY, scale: 0.6, touchAreaRadius: 30 } ) );
-    this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, y: 430, children: [new ResetAllButton( function() { model.reset(); } )] } ) );
+    this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height-10, children: [new ResetAllButton( function() { model.reset(); } )] } ) );
   }
 
   inherit( Node, ControlPanel );
