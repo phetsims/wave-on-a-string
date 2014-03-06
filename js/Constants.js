@@ -7,6 +7,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var Color = require( 'SCENERY/util/Color' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Range = require( 'DOT/Range' );
 
@@ -14,6 +15,17 @@ define( function( require ) {
   var Constants = {
     projectName: 'wave-on-a-string',
     viewSize: new Dimension2( 768, 504 ),
+    
+    // prefer 200 hue
+    blueUpColor: new Color( 'hsl(210,70%,75%)' ),
+    blueOverColor: new Color( 'hsl(210,90%,80%)' ),
+    blueDisabledColor: new Color( 'rgb(180,180,180)' ),
+    blueDownColor: new Color( 'hsl(210,80%,70%)' ),
+    radioColor: new Color( 'hsl(210,90%,77%)' ),
+    sliderUp: new Color( 'hsl(210,50%,63%)' ),
+    sliderOver: new Color( 'hsl(210,70%,73%)' ),
+    buttonBorder0: new Color( 'transparent' ),
+    buttonBorder1: new Color( 'transparent' ),
 
     dilatedTouchArea: 10,
     dilatedReferenceLineTouchArea: 20,

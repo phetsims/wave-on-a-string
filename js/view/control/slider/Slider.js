@@ -18,6 +18,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Range = require( 'DOT/Range' );
   var Property = require( 'AXON/Property' );
+  var Constants = require( 'WOAS/Constants' );
 
   function Slider( options ) {
     var thisNode = this,
@@ -36,8 +37,8 @@ define( function( require ) {
         trackFill: 'black',
         // custom thumb
         thumbSize: new Dimension2( 22, 38 ),
-        thumbFillEnabled: '#98BECF',
-        thumbFillHighlighted: '#B3D3E2',
+        thumbFillEnabled: Constants.sliderUp,
+        thumbFillHighlighted: Constants.sliderOver,
         // custom ticks
         tickLabelSpacing: 4,
         majorTickLength: 20,

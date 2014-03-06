@@ -15,6 +15,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Constants = require( 'WOAS/Constants' );
 
   function RadioGroup( options ) {
     options = _.extend( { scale: 0.7 }, options );
@@ -25,7 +26,11 @@ define( function( require ) {
     for ( ; i < length; i++ ) {
       group.push( { node: new Text( options.text[i], {font: new PhetFont( 15 )} ), property: options.property, value: options.radio[i] } );
     }
-    var radioGroup = new Panel( new VerticalAquaRadioButtonGroup( group ), { fill: '#D9FCC5', xMargin: 10, yMargin: 5} );
+    var radioGroup = new Panel( new VerticalAquaRadioButtonGroup( group, {
+      radioButtonOptions: {
+        selectedColor: Constants.radioColor.toCSS()
+      }
+    } ), { fill: '#D9FCC5', xMargin: 10, yMargin: 5} );
     this.addChild( radioGroup );
     this.mutate( options );
   }
