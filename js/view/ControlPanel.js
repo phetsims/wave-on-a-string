@@ -21,7 +21,6 @@ define( function( require ) {
   var RestartButton = require( 'WOAS/view/control/RestartButton' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
   var WOASTRulers = require( 'WOAS/view/control/WOASTRulers' );
-  var WOASTLine = require( 'WOAS/view/control/WOASTLine' );
   var WOASTTimer = require( 'WOAS/view/control/WOASTTimer' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var manualString = require( 'string!WOAS/manual' );
@@ -38,8 +37,6 @@ define( function( require ) {
     Node.call( this );
     var typeRadio, endTypeRadio, speedSlow,speedFast, speedGroup, pulseButton;
     this.addChild( new WOASTRulers( model ) );
-    this.addChild( new WOASTLine( model ) );
-    this.addChild( new WOASTTimer( model ) );
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
     this.addChild( pulseButton = new PulseButton( model, {x: 130, y: Constants.viewSize.height - 135} ) );
@@ -90,6 +87,7 @@ define( function( require ) {
       backgroundGradientColorStop1: Constants.buttonBorder1
     } ) );
     this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height-10, children: [new ResetAllButton( function() { model.reset(); } )] } ) );
+    this.addChild( new WOASTTimer( model ) );
   }
 
   inherit( Node, ControlPanel );

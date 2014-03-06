@@ -29,7 +29,8 @@ define( function( require ) {
     this.addChild( ring_back );
     this.addChild( post );
     this.addChild( ring_front );
-    this.addChild( windowImage );
+    // this.addChild( windowImage );
+    this.windowImage = windowImage;
 
     this.mutate( options );
     

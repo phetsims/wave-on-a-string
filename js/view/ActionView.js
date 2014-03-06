@@ -12,6 +12,7 @@ define( function( require ) {
   var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
   var StartNode = require( 'WOAS/view/action/StartNode' );
   var EndNode = require( 'WOAS/view/action/EndNode' );
+  var WOASTLine = require( 'WOAS/view/control/WOASTLine' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Constants = require( 'WOAS/Constants' );
@@ -27,7 +28,12 @@ define( function( require ) {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
     }));
-    this.addChild( new EndNode( model, events, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
+    var endNode = new EndNode( model, events, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} );
+    endNode.windowImage.x += Constants.endTheStringNode;
+    endNode.windowImage.y += Constants.yTheStringNode;
+    this.addChild( endNode.windowImage );
+    this.addChild( new WOASTLine( model ) );
+    this.addChild( endNode );
     this.addChild( new TheStringNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
     this.addChild( new StartNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range:Constants.yKeyRange} ) );
     this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
