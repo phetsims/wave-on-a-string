@@ -25,7 +25,7 @@ define( function( require ) {
     Node.call( this );
     var thisNode = this,
       wheelImg,
-      key = new Node( {children: [new Image( require( 'image!WOAS/wrench_2.svg' ), {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} ),
+      key = new Node( {children: [new Image( require( 'image!WOAS/wrench_3.svg' ), {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} ),
       wheel = new Node( {children: [wheelImg = new Image( require( 'image!WOAS/oscillator_wheel.png' ), {scale: 0.4} )]} ),
       post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
         stroke: '#000',
