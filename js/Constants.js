@@ -39,7 +39,7 @@ define( function( require ) {
     dampingRange: new Range( 0, 100 ),
     frequencyRange: new Range( 0, 3 ),
     pulseWidthRange: new Range( 0, 1 ),
-    amplitudeRange: new Range( 0, 3 ),
+    amplitudeRange: new Range( 0, 1.5 ),
 
     postGradient: new LinearGradient( -5, 0, 5, 0 )
       .addColorStop( 0, '#666' )

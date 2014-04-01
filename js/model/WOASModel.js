@@ -33,7 +33,7 @@ define( function( require ) {
       damping: 50, // dumping 0..100
       frequency: 1.50, // frequency 0.00 .. 3.00
       pulseWidth: 0.5, // pulse width 0.00 .. 1.00
-      amplitude: 1.5, // amplitude 0.0 .. 3.0
+      amplitude: 0.75, // amplitude 0.0 .. 1.5
       play: true, // play/pause state
       lastDt: 0.03,
       time: 0, // base time
@@ -159,7 +159,7 @@ define( function( require ) {
         if ( this.mode === 'oscillate' ) {
           this.angle += Math.PI * 2 * this.frequency * fixDt * this.speed;
           this.angle %= Math.PI * 2;
-          this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * Math.sin( -this.angle );
+          this.yDraw[0] = this.yNow[0] = this.amplitude * this.dotPerCm * Math.sin( -this.angle );
         }
         if ( this.mode === 'pulse' && this.pulse ) {
           var da = Math.PI * fixDt * this.speed / this.pulseWidth;
@@ -175,7 +175,7 @@ define( function( require ) {
             this.pulseSignProperty.reset();
             this.pulseProperty.reset();
           }
-          this.yDraw[0] = this.yNow[0] = this.amplitude / 2 * this.dotPerCm * (-this.angle / (Math.PI / 2));
+          this.yDraw[0] = this.yNow[0] = this.amplitude * this.dotPerCm * (-this.angle / (Math.PI / 2));
         }
         if ( this.mode === 'manual' ) {
           // interpolate the yNow across steps for manual (between frames)
