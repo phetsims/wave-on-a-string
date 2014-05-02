@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
+  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
   var speedSlowString = require( 'string!WOAS/speedSlow' );
   var speedNormalString = require( 'string!WOAS/speedNormal' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
@@ -86,7 +86,7 @@ define( function( require ) {
       backgroundGradientColorStop0: Constants.buttonBorder0,
       backgroundGradientColorStop1: Constants.buttonBorder1
     } ) );
-    this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height-10, children: [new ResetAllButton( function() { model.reset(); } )] } ) );
+    this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height - 10, children: [new ResetAllButtonDeprecated( function() { model.reset(); } )] } ) );
     this.addChild( new WOASTTimer( model ) );
   }
 
