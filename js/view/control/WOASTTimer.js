@@ -17,7 +17,7 @@ define( function( require ) {
   var ToggleButton = require( 'SUN/ToggleButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var resetTimerString = require( 'string!WOAS/resetTimer' );
-  var TextPushButton = require( 'SUN/TextPushButton' );
+  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
   var Color = require( 'SCENERY/util/Color' );
@@ -46,7 +46,7 @@ define( function( require ) {
       return   _minutes + ':' + _seconds + ':' + _milliseconds;
     };
 
-    timer.addChild( resetButton = new TextPushButton( resetTimerString, {
+    timer.addChild( resetButton = new TextPushButtonDeprecated( resetTimerString, {
       listener: function resetTimer() {
         model.timerStart = false;
         model.timerSecond = 0;

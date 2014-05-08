@@ -11,14 +11,14 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
   var pulse2String = require( 'string!WOAS/pulse2' );
-  var TextPushButton = require( 'SUN/TextPushButton' );
+  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
 
   function PulseButton( model, options ) {
-    TextPushButton.call( this,pulse2String, {
+    TextPushButtonDeprecated.call( this, pulse2String, {
       listener: model.manualPulse.bind( model ),
       font: new PhetFont( 12 ),
       rectangleFillUp: new Color( '#7CAF3A' ),
@@ -34,7 +34,7 @@ define( function( require ) {
     } );
   }
 
-  inherit( TextPushButton, PulseButton );
+  inherit( TextPushButtonDeprecated, PulseButton );
 
   return PulseButton;
 } );

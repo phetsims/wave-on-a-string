@@ -11,14 +11,14 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
   var restartString = require( 'string!WOAS/restart' );
-  var TextPushButton = require( 'SUN/TextPushButton' );
+  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
 
   function RestartButton( model, options ) {
-    TextPushButton.call( this, restartString, {
+    TextPushButtonDeprecated.call( this, restartString, {
       listener: model.manualRestart.bind( model ),
       font: new PhetFont( 12 ),
       rectangleFillUp: new Color( '#DED322' ),
@@ -30,7 +30,7 @@ define( function( require ) {
     this.mutate( options );
   }
 
-  inherit( TextPushButton, RestartButton );
+  inherit( TextPushButtonDeprecated, RestartButton );
 
   return RestartButton;
 } );
