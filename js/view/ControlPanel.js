@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var speedSlowString = require( 'string!WOAS/speedSlow' );
   var speedNormalString = require( 'string!WOAS/speedNormal' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
@@ -35,7 +35,7 @@ define( function( require ) {
 
   function ControlPanel( model ) {
     Node.call( this );
-    var typeRadio, endTypeRadio, speedSlow,speedFast, speedGroup, pulseButton;
+    var typeRadio, endTypeRadio, speedSlow, speedFast, speedGroup, pulseButton;
     this.addChild( new WOASTRulers( model ) );
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
@@ -46,10 +46,10 @@ define( function( require ) {
       speedSlow = new AquaRadioButton( model.speedProperty, 0.25, new Text( speedSlowString, {font: new PhetFont( 15 )} ), {radius: 12, selectedColor: Constants.radioColor} ),
       speedFast = new AquaRadioButton( model.speedProperty, 1, new Text( speedNormalString, {font: new PhetFont( 15 )} ), {radius: 12, x: speedSlow.width + 20, selectedColor: Constants.radioColor} )
     ]} ) );
-    speedSlow.touchArea = Shape.bounds( Bounds2.rect(-14,-speedSlow.height/2,speedSlow.width+5,speedSlow.height).dilatedXY( 5, 15 ) );
-    speedSlow.mouseArea = Shape.bounds( Bounds2.rect(-14,-speedSlow.height/2,speedSlow.width+5,speedSlow.height) );
-    speedFast.touchArea = Shape.bounds( Bounds2.rect(-14,-speedFast.height/2,speedFast.width+5,speedFast.height).dilatedXY( 5, 15 ) );
-    speedFast.mouseArea = Shape.bounds( Bounds2.rect(-14,-speedFast.height/2,speedFast.width+5,speedFast.height) );
+    speedSlow.touchArea = Shape.bounds( Bounds2.rect( -14, -speedSlow.height / 2, speedSlow.width + 5, speedSlow.height ).dilatedXY( 5, 15 ) );
+    speedSlow.mouseArea = Shape.bounds( Bounds2.rect( -14, -speedSlow.height / 2, speedSlow.width + 5, speedSlow.height ) );
+    speedFast.touchArea = Shape.bounds( Bounds2.rect( -14, -speedFast.height / 2, speedFast.width + 5, speedFast.height ).dilatedXY( 5, 15 ) );
+    speedFast.mouseArea = Shape.bounds( Bounds2.rect( -14, -speedFast.height / 2, speedFast.width + 5, speedFast.height ) );
     this.addChild( new BottomControlPanel( model ) );
     this.addChild( new PlayPauseButton( model.playProperty, {
       x: speedGroup.right + 45,
@@ -86,7 +86,12 @@ define( function( require ) {
       backgroundGradientColorStop0: Constants.buttonBorder0,
       backgroundGradientColorStop1: Constants.buttonBorder1
     } ) );
-    this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height - 10, children: [new ResetAllButtonDeprecated( function() { model.reset(); } )] } ) );
+    this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height - 10, children: [
+      new ResetAllButton( {
+        scale: 1.32,
+        listener: function() { model.reset(); }
+      } )
+    ] } ) );
     this.addChild( new WOASTTimer( model ) );
   }
 
