@@ -14,7 +14,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var ToggleButton = require( 'SUN/ToggleButton' );
+  var ToggleButtonDeprecated = require( 'SUN/ToggleButtonDeprecated' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var resetTimerString = require( 'string!WOAS/resetTimer' );
   var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
@@ -59,7 +59,7 @@ define( function( require ) {
       y: 31,
       x: 5
     } ) );
-    timer.addChild( startStopButton = new ToggleButton(
+    timer.addChild( startStopButton = new ToggleButtonDeprecated(
       new Image( require( 'image!WOAS/button_timer_pause_unpressed.png' ) ),
       new Image( require( 'image!WOAS/button_timer_start_unpressed.png' ) ),
       model.timerStartProperty,
