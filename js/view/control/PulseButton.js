@@ -8,22 +8,22 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var pulse2String = require( 'string!WOAS/pulse2' );
-  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
 
+  // strings
+  var pulse2String = require( 'string!WOAS/pulse2' );
+
   function PulseButton( model, options ) {
-    TextPushButtonDeprecated.call( this, pulse2String, {
+    TextPushButton.call( this, pulse2String, {
       listener: model.manualPulse.bind( model ),
       font: new PhetFont( 12 ),
-      rectangleFillUp: new Color( '#7CAF3A' ),
-      rectangleFillDown: new Color( '#7CAF3A' ),
-      rectangleFillOver: new Color( '#91B634' )
+      baseColor: '#7CAF3A'
     } );
     var self = this;
     this.touchArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ).dilatedXY( 5, 10 ) );
@@ -34,7 +34,7 @@ define( function( require ) {
     } );
   }
 
-  inherit( TextPushButtonDeprecated, PulseButton );
+  inherit( TextPushButton, PulseButton );
 
   return PulseButton;
 } );

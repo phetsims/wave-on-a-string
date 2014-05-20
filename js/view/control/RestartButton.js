@@ -8,29 +8,29 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var restartString = require( 'string!WOAS/restart' );
-  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
 
+  // strings
+  var restartString = require( 'string!WOAS/restart' );
+
   function RestartButton( model, options ) {
-    TextPushButtonDeprecated.call( this, restartString, {
+    TextPushButton.call( this, restartString, {
       listener: model.manualRestart.bind( model ),
       font: new PhetFont( 12 ),
-      rectangleFillUp: new Color( '#DED322' ),
-      rectangleFillDown: new Color( '#DED322' ),
-      rectangleFillOver: new Color( '#E6D739' )
+      baseColor: '#DED322'
     } );
     this.touchArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ).dilatedXY( 5, 20 ) );
     this.mouseArea = Shape.bounds( Bounds2.rect( 0, 0, this.width, this.height ) );
     this.mutate( options );
   }
 
-  inherit( TextPushButtonDeprecated, RestartButton );
+  inherit( TextPushButton, RestartButton );
 
   return RestartButton;
 } );

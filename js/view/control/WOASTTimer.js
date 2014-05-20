@@ -7,6 +7,8 @@
 
 define( function( require ) {
   'use strict';
+
+  // modules
   var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -16,11 +18,13 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var ToggleButtonDeprecated = require( 'SUN/ToggleButtonDeprecated' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var resetTimerString = require( 'string!WOAS/resetTimer' );
-  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
   var Color = require( 'SCENERY/util/Color' );
+
+  // strings
+  var resetTimerString = require( 'string!WOAS/resetTimer' );
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: 'pointer' } );
@@ -46,16 +50,14 @@ define( function( require ) {
       return   _minutes + ':' + _seconds + ':' + _milliseconds;
     };
 
-    timer.addChild( resetButton = new TextPushButtonDeprecated( resetTimerString, {
+    timer.addChild( resetButton = new TextPushButton( resetTimerString, {
       listener: function resetTimer() {
         model.timerStart = false;
         model.timerSecond = 0;
       },
       font: new PhetFont( 13 ),
-      rectangleXMargin: 10,
-      rectangleFillUp: new Color( '#DFE0E1' ),
-      rectangleFillDown: new Color( '#DFE0E1' ),
-      rectangleFillOver: new Color( '#D1D2D2' ),
+      xMargin: 10,
+      baseColor: '#DFE0E1',
       y: 31,
       x: 5
     } ) );
