@@ -21,7 +21,6 @@ define( function( require ) {
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var resetTimerString = require( 'string!WOAS/resetTimer' );
