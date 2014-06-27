@@ -44,7 +44,7 @@ define( function( require ) {
     ]} );
 
     var slider = new Slider( {x: -210, title: tensionString, property: model.tensionProperty, rounding: 0, range: Constants.tensionRange, titleVerticalOffset: 15, tick: {step: 1, minText: lowString, maxText: highString} } );
-    var slider2 = new Slider( {x:-420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, titleVerticalOffset: 15, tick: {step: 10, minText: noneString, maxText: lotsString}} );
+    var slider2 = new Slider( {x: -420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, titleVerticalOffset: 15, tick: {step: 10, minText: noneString, maxText: lotsString}} );
     var slider3 = new Slider( {x: -630, type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, range: Constants.frequencyRange } );
     var slider5 = new Slider( {x: -630, type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, range: Constants.pulseWidthRange } );
     var slider4 = new Slider( {x: -840, type: 'button', buttonStep: 0.1, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 1, range: Constants.amplitudeRange } );
@@ -79,7 +79,7 @@ define( function( require ) {
       panel1.scale( Constants.maxWidthBottomControlPanel / panel1.width );
     }
     panel3.right = panel2.right = panel1.right = Constants.maxWidthBottomControlPanel;
-    this.bottom = Constants.viewSize.height-10;
+    this.bottom = Constants.viewSize.height - 10;
     model.modeProperty.link( function updateBottomControlPanel( value ) {
       panel1.setVisible( value === 'oscillate' );
       panel2.setVisible( value === 'manual' );

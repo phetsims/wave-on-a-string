@@ -45,7 +45,7 @@ define( function( require ) {
         minorTickLength: 8,
         majorTickLineWidth: 1.5,
         minorTickLineWidth: 1.5,
-        
+
         titleVerticalOffset: 0
       };
     Node.call( thisNode );

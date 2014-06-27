@@ -33,8 +33,8 @@ define( function( require ) {
     model.rulerLocVProperty.link( function updateRulerVLocation( value ) {
       rulerV.translation = value;
     } );
-    rulerV.addInputListener(Constants.dragAndDropHandler(rulerV,function(point){model.rulerLocV = point; }));
-    rulerH.addInputListener(Constants.dragAndDropHandler(rulerH,function(point){model.rulerLocH = point; }));
+    rulerV.addInputListener( Constants.dragAndDropHandler( rulerV, function( point ) {model.rulerLocV = point; } ) );
+    rulerH.addInputListener( Constants.dragAndDropHandler( rulerH, function( point ) {model.rulerLocH = point; } ) );
   }
 
   inherit( Node, WOASTRulers );

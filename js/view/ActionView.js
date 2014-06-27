@@ -21,13 +21,13 @@ define( function( require ) {
     Node.call( this, { layerSplit: true } );
     var windowImage;
     //center line
-    this.addChild(new Line(0,0,605,0,{
+    this.addChild( new Line( 0, 0, 605, 0, {
       stroke: '#FFA91D',
       lineDash: [8, 5],
       lineWidth: 2,
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
-    }));
+    } ) );
     var endNode = new EndNode( model, events, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} );
     endNode.windowImage.x += Constants.endTheStringNode;
     endNode.windowImage.y += Constants.yTheStringNode;
@@ -35,7 +35,7 @@ define( function( require ) {
     this.addChild( new WOASTLine( model ) );
     this.addChild( endNode );
     this.addChild( new TheStringNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
-    this.addChild( new StartNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range:Constants.yKeyRange} ) );
+    this.addChild( new StartNode( model, events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yKeyRange} ) );
     this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {

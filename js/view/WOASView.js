@@ -15,9 +15,9 @@ define( function( require ) {
 
   function WOASView( model ) {
     ScreenView.call( this, {renderer: 'svg'} );
-    
+
     this.events = new Events();
-    
+
     this.addChild( new ControlPanel( model ) );
     this.addChild( new ActionView( model, this.events ) );
   }

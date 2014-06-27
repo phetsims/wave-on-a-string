@@ -33,11 +33,11 @@ define( function( require ) {
     this.windowImage = windowImage;
 
     this.mutate( options );
-    
+
     function updateKey() {
       ring_front.y = ring_back.y = model.yNow[model.yNow.length - 1] || 0;
     }
-    
+
     var dirty = true;
     model.on( 'yNowChanged', function() { dirty = true; } );
     events.on( 'frame', function() {

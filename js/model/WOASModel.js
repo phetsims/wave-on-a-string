@@ -105,19 +105,19 @@ define( function( require ) {
       for ( var i = 1; i < (this.nSegs - 1); i++ ) {
         this.yNext[i] = a * ((this.beta - 1) * this.yLast[i] + c * this.yNow[i] + alphaSq * (this.yNow[i + 1] + this.yNow[i - 1]) );
       }
-      
+
       // store old values for the very last point
       var lastIndex = this.nSegs - 1;
       var oldLast = this.yLast[lastIndex];
       var oldNow = this.yNow[lastIndex];
       var oldNext = this.yNext[lastIndex];
-      
+
       // rotate arrays instead of copying elements (for speed)
       var old = this.yLast;
       this.yLast = this.yNow;
       this.yNow = this.yNext;
       this.yNext = old;
-      
+
       // restore the old values for the very last point for every array (potentially not needed for a few?)
       this.yLast[lastIndex] = oldLast;
       this.yNow[lastIndex] = oldNow;
@@ -141,7 +141,7 @@ define( function( require ) {
       var i;
       var fixDt = 1 / fps;
       dt = (dt !== undefined && dt > 0 ) ? dt : fixDt;
-      
+
       // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
       var startingLeftY = this.yNow[0];
       var numSteps = Math.floor( dt / fixDt );
