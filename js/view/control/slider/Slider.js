@@ -99,7 +99,9 @@ define( function( require ) {
       this.addChild( buttonNode );
     }
 
-    thisNode.mutate( _.omit( options, Object.keys( defaultOptions ) ) );
+    thisNode.mutate( _.extend( _.omit( options, Object.keys( defaultOptions ) ), {
+      x: options.sliderX
+    } ) );
 
     options.property.link( function updateProperty( value ) {
       if ( options.type === 'button' ) {
