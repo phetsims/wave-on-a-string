@@ -15,6 +15,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
 
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );
@@ -79,6 +80,9 @@ define( function( require ) {
         dirty = false;
       }
     } );
+
+    // workaround for image not being perfectly centered
+    wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
 
     model.angleProperty.link( function updateWheel( value ) {
       // wheel.rotation = value;
