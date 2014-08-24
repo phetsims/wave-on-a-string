@@ -138,6 +138,7 @@ define( function( require ) {
     } );
     model.timerSecondProperty.link( function updateTime( value ) {
       readoutText.text = timeToString( value );
+      resetButton.enabled = value > 0;
     } );
     model.timerLocProperty.link( function updateLocation( value ) {
       thisNode.translation = value;
