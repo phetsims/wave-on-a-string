@@ -147,14 +147,15 @@ define( function( require ) {
       var numSteps = Math.floor( dt / fixDt );
       var perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
-      if ( this.timerStart ) {
-        this.timerSecond += dt * this.speed;
-      }
       //dt for tension effect
       var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
       // limit max dt
       while ( dt >= fixDt ) {
         this.time += fixDt;
+
+        if ( this.timerStart ) {
+          this.timerSecond += fixDt * this.speed;
+        }
 
         if ( this.mode === 'oscillate' ) {
           this.angle += Math.PI * 2 * this.frequency * fixDt * this.speed;
