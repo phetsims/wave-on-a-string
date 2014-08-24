@@ -10,82 +10,109 @@ define( function( require ) {
 
   // modules
   var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var ToggleButtonDeprecated = require( 'SUN/ToggleButtonDeprecated' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  var ResetAllShape = require( 'SCENERY_PHET/ResetAllShape' );
+  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // strings
-  var resetTimerString = require( 'string!WOAS/resetTimer' );
+  function timeToString( timeInSeconds ) {
+    var minutes = Math.floor( timeInSeconds / 60 ) % 60;
+    var seconds = Math.floor( timeInSeconds ) % 60;
+    var centiseconds = Math.floor( timeInSeconds % 1 * 100 );
+    if ( centiseconds < 10 ) {
+      centiseconds = '0' + centiseconds;
+    }
+    if ( seconds < 10 ) {
+      seconds = '0' + seconds;
+    }
+    if ( minutes < 10 ) {
+      minutes = '0' + minutes;
+    }
+    return minutes + ':' + seconds + ':' + centiseconds;
+  }
 
   function WOASTTimer( model ) {
     Node.call( this, { cursor: 'pointer' } );
-    var thisNode = this,
-      timer = new Node(),
-      textTimer,
-      resetButton,
-      startStopButton,
-      dragZone;
-    var secondToString = function( second ) {
-      var _minutes = (Math.floor( second / 60 ) % 60),
-        _seconds = (Math.floor( second ) % 60),
-        _milliseconds = Math.floor( second % 1 * 100 );
-      if ( _milliseconds < 10 ) {
-        _milliseconds = '0' + _milliseconds;
-      }
-      if ( _seconds < 10 ) {
-        _seconds = '0' + _seconds;
-      }
-      if ( _minutes < 10 ) {
-        _minutes = '0' + _minutes;
-      }
-      return   _minutes + ':' + _seconds + ':' + _milliseconds;
-    };
+    var thisNode = this;
 
-    timer.addChild( resetButton = new TextPushButton( resetTimerString, {
+    var iconColor = '#333';
+    var buttonBaseColor = '#DFE0E1';
+
+    var resetAllShape = new ResetAllShape( 10 );
+    var playPauseHeight = resetAllShape.computeBounds().height;
+    var playPauseWidth = 0.8 * playPauseHeight;
+    var playShape = new Shape().moveTo( playPauseWidth, 0 ).lineTo( 0, playPauseHeight / 2 ).lineTo( 0, -playPauseHeight / 2 ).close();
+    var pauseShape = new Shape().rect( 0, -playPauseHeight / 2, playPauseWidth / 3, playPauseHeight ).rect( playPauseWidth * 2 / 3, -playPauseHeight / 2, playPauseWidth / 3, playPauseHeight );
+
+    var resetButton = new RectangularPushButton( {
       listener: function resetTimer() {
         model.timerStart = false;
         model.timerSecond = 0;
       },
-      font: new PhetFont( 13 ),
-      xMargin: 10,
-      baseColor: '#DFE0E1',
-      y: 31,
-      x: 5
-    } ) );
-    timer.addChild( startStopButton = new ToggleButtonDeprecated(
-      new Image( require( 'image!WOAS/button_timer_pause_unpressed.png' ) ),
-      new Image( require( 'image!WOAS/button_timer_start_unpressed.png' ) ),
-      model.timerStartProperty,
-      {scale: 0.7, y: 26, x: resetButton.right + 5} ) );
-    var timerWidth = Math.max( 84, (resetButton.width + startStopButton.width) + 10 );
+      content: new Path( resetAllShape, {
+        fill: iconColor
+      } ),
+      baseColor: buttonBaseColor
+    } );
 
 
-    timer.addChild( new Rectangle( 0, 0, timerWidth, 24, 5, 5, {fill: '#FFF', stroke: '#000', lineWidth: 1} ) );
-    timer.addChild( textTimer = new Text( '00:00:00', {font: new PhetFont( 20 ), centerX: timerWidth / 2, top: 0} ) );
+    var playPauseButton = new BooleanRectangularToggleButton( new Path( pauseShape, { fill: iconColor } ), new Path( playShape, { fill: iconColor } ), model.timerStartProperty, {
+      baseColor: buttonBaseColor
+    } );
 
-    thisNode.addChild( dragZone = new Rectangle( 0, 0, timerWidth + 20, startStopButton.bottom + 10 ) );
+    var readoutText = new Text( timeToString( 0 ), {
+      font: new PhetFont( 20 ),
+      top: 0,
+      centerX: 0
+    } );
 
-    thisNode.addChild( new Panel( timer, { fill: '#FFFF06', stroke: '#F7941E', lineWidth: 2, xMargin: 10, yMargin: 5} ) );
+    var textBackground = Rectangle.roundedBounds( readoutText.bounds.dilatedXY( 5, 2 ), 5, 5, {
+      fill: '#fff',
+      stroke: '#333'
+    } );
+
+    var timer = new Node();
+    timer.addChild( resetButton );
+    timer.addChild( playPauseButton );
+    timer.addChild( textBackground );
+    timer.addChild( readoutText );
+
+    // layout
+    resetButton.right = -5;
+    playPauseButton.left = 5;
+    resetButton.top = textBackground.bottom + 5;
+    playPauseButton.top = textBackground.bottom + 5;
+
+    var timerPanel = new Panel( timer, {
+      fill: '#FFFF06',
+      stroke: '#F7941E',
+      lineWidth: 1,
+      xMargin: 5,
+      yMargin: 5
+    } );
+    var dragZone = Rectangle.bounds( timerPanel.bounds, {} );
+
+    this.addChild( dragZone );
+    this.addChild( timerPanel );
 
     model.timerProperty.link( function updateVisible( value ) {
       thisNode.setVisible( value );
     } );
     model.timerSecondProperty.link( function updateTime( value ) {
-      textTimer.text = secondToString( value );
+      readoutText.text = timeToString( value );
     } );
     model.timerLocProperty.link( function updateLocation( value ) {
       thisNode.translation = value;
     } );
-    dragZone.touchArea = Shape.bounds( dragZone.bounds.dilated( 10 ) );
-    dragZone.mouseArea = Shape.bounds( dragZone.bounds );
+    dragZone.touchArea = dragZone.localBounds.dilated( 10 );
     var clickOffset = new Vector2();
     dragZone.addInputListener( new SimpleDragHandler(
       {

@@ -150,7 +150,6 @@ define( function( require ) {
 
       //dt for tension effect
       var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
-      console.log( minDt, fixDt );
       // limit max dt
       while ( dt >= fixDt ) {
         this.time += fixDt;
