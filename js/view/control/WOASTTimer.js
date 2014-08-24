@@ -11,10 +11,11 @@ define( function( require ) {
   // modules
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllShape = require( 'SCENERY_PHET/ResetAllShape' );
@@ -39,8 +40,8 @@ define( function( require ) {
     return minutes + ':' + seconds + ':' + centiseconds;
   }
 
-  function WOASTTimer( model ) {
-    Node.call( this, { cursor: 'pointer' } );
+  function WOASTTimer( model, options ) {
+    Node.call( this, _.extend( { cursor: 'pointer' }, options ) );
     var thisNode = this;
 
     var iconColor = '#333';
@@ -76,7 +77,7 @@ define( function( require ) {
 
     var textBackground = Rectangle.roundedBounds( readoutText.bounds.dilatedXY( 5, 2 ), 5, 5, {
       fill: '#fff',
-      stroke: '#333'
+      stroke: 'rgba(0,0,0,0.5)'
     } );
 
     var timer = new Node();
@@ -91,17 +92,46 @@ define( function( require ) {
     resetButton.top = textBackground.bottom + 5;
     playPauseButton.top = textBackground.bottom + 5;
 
-    var timerPanel = new Panel( timer, {
-      fill: '#FFFF06',
-      stroke: '#F7941E',
-      lineWidth: 1,
-      xMargin: 5,
-      yMargin: 5
-    } );
-    var dragZone = Rectangle.bounds( timerPanel.bounds, {} );
+    var panelPad = 5;
+    var panelRound = 10;
+    timer.left = panelPad;
+    timer.top = panelPad;
+
+    var panelBackground = Rectangle.roundedBounds( timer.bounds.dilated( panelPad ), panelRound, panelRound, {} );
+
+    // adds the extra 3D effect, and is draggable
+    var panelEffect = Rectangle.roundedBounds( timer.bounds.dilated( panelPad ), panelRound, panelRound, {} );
+
+    // other possible colors to demo
+    // var baseColor = new Color( 255, 220, 150 );
+    // var baseColor = new Color( 150, 220, 255 );
+    // var baseColor = new Color( 170, 230, 255 );
+    var baseColor = new Color( 190, 240, 255 );
+    var lightColor = baseColor.colorUtilsBrighter( 0.5 );
+    var darkColor = baseColor.colorUtilsDarker( 0.2 );
+
+    panelBackground.fill = new LinearGradient( panelBackground.left, 0, panelBackground.width, 0 )
+      .addColorStop( 0, lightColor )
+      .addColorStop( 0.07, baseColor )
+      .addColorStop( 0.95, baseColor )
+      .addColorStop( 1, darkColor );
+
+    panelEffect.fill = new LinearGradient( 0, panelEffect.top, 0, panelEffect.bottom )
+      .addColorStop( 0, lightColor )
+      .addColorStop( 0.07, lightColor.withAlpha( 0 ) )
+      .addColorStop( 0.95, darkColor.withAlpha( 0 ) )
+      .addColorStop( 1, darkColor );
+    panelEffect.stroke = 'rgba(0,0,0,0.4)';
+
+    panelEffect.touchArea = panelEffect.localBounds.dilated( 10 );
+
+    this.addChild( panelBackground );
+    this.addChild( panelEffect );
+
+    var dragZone = Rectangle.bounds( panelBackground.bounds, {} );
 
     this.addChild( dragZone );
-    this.addChild( timerPanel );
+    this.addChild( timer );
 
     model.timerProperty.link( function updateVisible( value ) {
       thisNode.setVisible( value );
@@ -112,12 +142,11 @@ define( function( require ) {
     model.timerLocProperty.link( function updateLocation( value ) {
       thisNode.translation = value;
     } );
-    dragZone.touchArea = dragZone.localBounds.dilated( 10 );
     var clickOffset = new Vector2();
-    dragZone.addInputListener( new SimpleDragHandler(
+    panelEffect.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
-          clickOffset = dragZone.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
+          clickOffset = panelEffect.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
         },
         drag: function( event ) {
           model.timerLoc = thisNode.globalToParentPoint( event.pointer.point ).minus( clickOffset );
