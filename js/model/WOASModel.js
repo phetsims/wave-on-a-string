@@ -38,6 +38,7 @@ define( function( require ) {
       lastDt: 0.03,
       time: 0, // base time
       angle: 0, // angle for 'oscillate' and 'pulse' mode
+      pulsePending: false, // whether a pulse will start at the next proper model step
       pulse: false, // 'pulse' mode pulse active
       rulerLocH: new Vector2( 54, 117 ), //position horizontal ruler
       rulerLocV: new Vector2( 13, 440 ), //position vertical ruler
@@ -149,6 +150,7 @@ define( function( require ) {
 
       //dt for tension effect
       var minDt = (1 / (fps * (0.2 + this.tension * 0.4) * this.speed));
+      console.log( minDt, fixDt );
       // limit max dt
       while ( dt >= fixDt ) {
         this.time += fixDt;
@@ -161,6 +163,10 @@ define( function( require ) {
           this.angle += Math.PI * 2 * this.frequency * fixDt * this.speed;
           this.angle %= Math.PI * 2;
           this.yDraw[0] = this.yNow[0] = this.amplitude * this.dotPerCm * Math.sin( -this.angle );
+        }
+        if ( this.mode === 'pulse' && this.pulsePending ) {
+          this.pulsePending = false;
+          this.pulse = true;
         }
         if ( this.mode === 'pulse' && this.pulse ) {
           var da = Math.PI * fixDt * this.speed / this.pulseWidth;
@@ -209,6 +215,7 @@ define( function( require ) {
       this.timeProperty.reset();
       this.pulseProperty.reset();
       this.pulseSignProperty.reset();
+      this.pulsePendingProperty.reset();
       this.customDt = 0;
       for ( var i = 0; i < this.yNow.length; i++ ) {
         this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
@@ -221,7 +228,8 @@ define( function( require ) {
       this.yNow[0] = 0;
       this.angle = 0;
       this.pulseSign = 1;
-      this.pulse = true;
+      this.pulsePending = true;
+      this.pulse = false;
     }
 
   } );
