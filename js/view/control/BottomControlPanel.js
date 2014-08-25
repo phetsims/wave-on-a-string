@@ -8,6 +8,7 @@
 define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var inherit = require( 'PHET_CORE/inherit' );
   var rulersString = require( 'string!WOAS/rulers' );
   var timerString = require( 'string!WOAS/timer' );
@@ -28,6 +29,7 @@ define( function( require ) {
   var CheckBoxGroup = require( 'WOAS/view/control/CheckBoxGroup' );
   var Slider = require( 'WOAS/view/control/slider/Slider' );
   var Constants = require( 'WOAS/Constants' );
+  var Dimension2 = require( 'DOT/Dimension2' );
 
   function BottomControlPanel( model ) {
 
@@ -43,27 +45,35 @@ define( function( require ) {
       {text: referenceLineString, property: model.referenceLineProperty}
     ]} );
 
-    var slider = new Slider( { sliderX: -210, title: tensionString, property: model.tensionProperty, rounding: 0, range: Constants.tensionRange, titleVerticalOffset: 15, tick: {step: 1, minText: lowString, maxText: highString} } );
-    var slider2 = new Slider( { sliderX: -420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, titleVerticalOffset: 15, tick: {step: 10, minText: noneString, maxText: lotsString}} );
-    var slider3 = new Slider( { sliderX: -630, type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, range: Constants.frequencyRange } );
-    var slider5 = new Slider( { sliderX: -630, type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, range: Constants.pulseWidthRange } );
-    var slider4 = new Slider( { sliderX: -840, type: 'button', buttonStep: 0.01, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 2, range: Constants.amplitudeRange } );
+    var checkBoxGroupOffset = 20;
+    checkBox.x = checkBoxGroupOffset;
 
-    elements1.addChild( checkBox );
+    var slider = new Slider( { sliderX: 60 - 240, title: tensionString, property: model.tensionProperty, trackSize: new Dimension2( 80, 2 ), rounding: 0, range: Constants.tensionRange, titleVerticalOffset: 15, tick: {step: 1, minText: lowString, maxText: highString} } );
+    var slider2 = new Slider( { sliderX: 60 - 420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, titleVerticalOffset: 15, tick: {step: 10, minText: noneString, maxText: lotsString}} );
+    var slider3 = new Slider( { sliderX: 60 - 630, type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, range: Constants.frequencyRange } );
+    var slider5 = new Slider( { sliderX: 60 - 630, type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, range: Constants.pulseWidthRange } );
+    var slider4 = new Slider( { sliderX: 60 - 840, type: 'button', buttonStep: 0.01, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 2, range: Constants.amplitudeRange } );
+
+    var separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
+
     elements1.addChild( slider );
     elements1.addChild( slider2 );
     elements1.addChild( slider3 );
     elements1.addChild( slider4 );
+    elements1.addChild( separator );
+    elements1.addChild( checkBox );
 
-    elements2.addChild( checkBox );
     elements2.addChild( slider );
     elements2.addChild( slider2 );
+    elements2.addChild( separator );
+    elements2.addChild( checkBox );
 
-    elements3.addChild( checkBox );
     elements3.addChild( slider );
     elements3.addChild( slider2 );
     elements3.addChild( slider5 );
     elements3.addChild( slider4 );
+    elements3.addChild( separator );
+    elements3.addChild( checkBox );
 
     this.addChild( panel1 = new Panel( elements1, {fill: '#D9FCC5', xMargin: 10, yMargin: 5} ) );
     this.addChild( panel2 = new Panel( elements2, {fill: '#D9FCC5', xMargin: 10, yMargin: 5} ) );
@@ -78,7 +88,7 @@ define( function( require ) {
     if ( panel1.width > Constants.maxWidthBottomControlPanel ) {
       panel1.scale( Constants.maxWidthBottomControlPanel / panel1.width );
     }
-    panel3.right = panel2.right = panel1.right = Constants.maxWidthBottomControlPanel;
+    panel3.right = panel2.right = panel1.right = Constants.maxWidthBottomControlPanel - 60 + checkBoxGroupOffset;
     this.bottom = Constants.viewSize.height - 10;
     model.modeProperty.link( function updateBottomControlPanel( value ) {
       panel1.setVisible( value === 'oscillate' );

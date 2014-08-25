@@ -34,7 +34,6 @@ define( function( require ) {
       checkBox.touchArea = Shape.bounds( Bounds2.rect( 0, -checkBox.height, checkBox.width, checkBox.height ).dilatedXY( 10, 5 ) );
       checkBox.mouseArea = Shape.bounds( Bounds2.rect( 0, -checkBox.height, checkBox.width, checkBox.height ) );
     }
-    this.addChild( new Path( Shape.lineSegment( -10, 10, -10, this.height ), { stroke: 'gray', lineWidth: 1 } ) );
     this.mutate( _.omit( options, Object.keys( defaultOptions ) ) );
   }
 
