@@ -92,7 +92,7 @@ define( function( require ) {
     resetButton.top = textBackground.bottom + 5;
     playPauseButton.top = textBackground.bottom + 5;
 
-    var panelPad = 5;
+    var panelPad = 8;
     var panelRound = 10;
     timer.left = panelPad;
     timer.top = panelPad;
@@ -106,9 +106,10 @@ define( function( require ) {
     // var baseColor = new Color( 255, 220, 150 );
     // var baseColor = new Color( 150, 220, 255 );
     // var baseColor = new Color( 170, 230, 255 );
-    var baseColor = new Color( 190, 240, 255 );
-    var lightColor = baseColor.colorUtilsBrighter( 0.5 );
-    var darkColor = baseColor.colorUtilsDarker( 0.2 );
+    // var baseColor = new Color( 190, 240, 255 );
+    var baseColor = new Color( 50, 80, 230 );
+    var lightColor = baseColor.colorUtilsBrighter( 0.4 );
+    var darkColor = baseColor.colorUtilsDarker( 0.5 );
 
     panelBackground.fill = new LinearGradient( panelBackground.left, 0, panelBackground.width, 0 )
       .addColorStop( 0, lightColor )
