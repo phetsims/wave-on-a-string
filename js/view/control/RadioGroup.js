@@ -31,7 +31,7 @@ define( function( require ) {
       radioButtonOptions: {
         selectedColor: Constants.radioColor.toCSS()
       }
-    } ), { fill: '#D9FCC5', xMargin: 10, yMargin: 5, scale: 0.9 } );
+    } ), { fill: '#D9FCC5', xMargin: 8, yMargin: 8 } );
     this.addChild( radioGroup );
     this.mutate( options );
   }

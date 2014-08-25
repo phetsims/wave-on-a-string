@@ -43,8 +43,8 @@ define( function( require ) {
     this.addChild( endTypeRadio = new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], text: [fixedEndString, looseEndString, noEndString], property: model.typeEndProperty, x: Constants.viewSize.width - 100, y: 5} ) );
     endTypeRadio.right = Constants.viewSize.width - 5;
     this.addChild( speedGroup = new Node( {scale: 0.7, x: pulseButton.right + 100, y: Constants.viewSize.height - 131, children: [
-      speedSlow = new AquaRadioButton( model.speedProperty, 0.25, new Text( speedSlowString, {font: new PhetFont( 15 )} ), {radius: 12, selectedColor: Constants.radioColor, scale: 0.9 } ),
-      speedFast = new AquaRadioButton( model.speedProperty, 1, new Text( speedNormalString, {font: new PhetFont( 15 )} ), {radius: 12, x: speedSlow.width + 20, selectedColor: Constants.radioColor, scale: 0.9 } )
+      speedSlow = new AquaRadioButton( model.speedProperty, 0.25, new Text( speedSlowString, {font: new PhetFont( 15 )} ), {radius: 12, selectedColor: Constants.radioColor } ),
+      speedFast = new AquaRadioButton( model.speedProperty, 1, new Text( speedNormalString, {font: new PhetFont( 15 )} ), {radius: 12, x: speedSlow.width + 20, selectedColor: Constants.radioColor } )
     ]} ) );
     speedSlow.touchArea = Shape.bounds( Bounds2.rect( -14, -speedSlow.height / 2, speedSlow.width + 5, speedSlow.height ).dilatedXY( 5, 15 ) );
     speedSlow.mouseArea = Shape.bounds( Bounds2.rect( -14, -speedSlow.height / 2, speedSlow.width + 5, speedSlow.height ) );
