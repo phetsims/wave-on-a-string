@@ -10,17 +10,13 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-
-  // strings
-  var pulse2String = require( 'string!WOAS/pulse2' );
+  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
   function PulseButton( model, options ) {
-    TextPushButton.call( this, pulse2String, {
+    RoundPushButton.call( this, {
       listener: model.manualPulse.bind( model ),
-      font: new PhetFont( 12 ),
-      baseColor: '#7CAF3A'
+      baseColor: '#33dd33',
+      radius: 15
     } );
     var self = this;
     this.touchArea = this.localBounds.dilatedXY( 5, 10 );
@@ -30,7 +26,7 @@ define( function( require ) {
     } );
   }
 
-  inherit( TextPushButton, PulseButton );
+  inherit( RoundPushButton, PulseButton );
 
   return PulseButton;
 } );
