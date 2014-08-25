@@ -21,8 +21,7 @@ define( function( require ) {
     TextPushButton.call( this, restartString, {
       listener: model.manualRestart.bind( model ),
       font: new PhetFont( 12 ),
-      textFill: '#fff',
-      baseColor: 'hsl(210,90%,40%)'
+      baseColor: 'hsl(210,0%,85%)'
     } );
     this.mutate( options );
     this.touchArea = this.localBounds.dilatedXY( 5, 20 );
