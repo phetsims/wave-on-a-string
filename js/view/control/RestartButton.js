@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Constants = require( 'WOAS/Constants' );
 
   // strings
   var restartString = require( 'string!WOAS/restart' );
@@ -20,7 +21,7 @@ define( function( require ) {
     TextPushButton.call( this, restartString, {
       listener: model.manualRestart.bind( model ),
       font: new PhetFont( 12 ),
-      baseColor: '#DED322'
+      baseColor: Constants.blueUpColor
     } );
     this.mutate( options );
     this.touchArea = this.localBounds.dilatedXY( 5, 20 );
