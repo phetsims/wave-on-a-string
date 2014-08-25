@@ -12,7 +12,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Constants = require( 'WOAS/Constants' );
 
   // strings
   var restartString = require( 'string!WOAS/restart' );
