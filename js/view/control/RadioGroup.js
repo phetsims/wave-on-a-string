@@ -27,10 +27,11 @@ define( function( require ) {
       group.push( { node: new Text( options.text[i], {font: new PhetFont( 15 )} ), property: options.property, value: options.radio[i] } );
     }
     var radioGroup = new Panel( new VerticalAquaRadioButtonGroup( group, {
+      spacing: 8,
       radioButtonOptions: {
         selectedColor: Constants.radioColor.toCSS()
       }
-    } ), { fill: '#D9FCC5', xMargin: 10, yMargin: 5} );
+    } ), { fill: '#D9FCC5', xMargin: 10, yMargin: 5, scale: 0.9 } );
     this.addChild( radioGroup );
     this.mutate( options );
   }
