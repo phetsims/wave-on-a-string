@@ -27,20 +27,24 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
 
-  function timeToString( timeInSeconds ) {
+  function timeToBigString( timeInSeconds ) {
     var minutes = Math.floor( timeInSeconds / 60 ) % 60;
     var seconds = Math.floor( timeInSeconds ) % 60;
-    var centiseconds = Math.floor( timeInSeconds % 1 * 100 );
-    if ( centiseconds < 10 ) {
-      centiseconds = '0' + centiseconds;
-    }
     if ( seconds < 10 ) {
       seconds = '0' + seconds;
     }
     if ( minutes < 10 ) {
       minutes = '0' + minutes;
     }
-    return minutes + ':' + seconds + ':' + centiseconds;
+    return minutes + ':' + seconds;
+  }
+
+  function timeToSmallString( timeInSeconds ) {
+    var centiseconds = Math.floor( timeInSeconds % 1 * 100 );
+    if ( centiseconds < 10 ) {
+      centiseconds = '0' + centiseconds;
+    }
+    return '.' + centiseconds;
   }
 
   function Timer( model, options ) {
@@ -83,11 +87,22 @@ define( function( require ) {
       baseColor: buttonBaseColor
     } );
 
-    var readoutText = new Text( timeToString( 0 ), {
+    var bigReadoutText = new Text( timeToBigString( 0 ), {
       font: new PhetFont( 20 ),
-      top: 0,
-      centerX: 0
+      top: 0
     } );
+    var smallReadoutText = new Text( timeToSmallString( 0 ), {
+      font: new PhetFont( 16 ),
+      left: bigReadoutText.right,
+      bottom: bigReadoutText.bottom
+    } );
+    var readoutText = new Node( {
+      children: [
+        bigReadoutText,
+        smallReadoutText
+      ]
+    } );
+    readoutText.centerX = 0;
 
     var textBackground = Rectangle.roundedBounds( readoutText.bounds.dilatedXY( 5, 2 ), 5, 5, {
       fill: '#fff',
@@ -185,7 +200,8 @@ define( function( require ) {
       thisNode.setVisible( value );
     } );
     model.timerSecondProperty.link( function updateTime( value ) {
-      readoutText.text = timeToString( value );
+      bigReadoutText.text = timeToBigString( value );
+      smallReadoutText.text = timeToSmallString( value );
       resetButton.enabled = value > 0;
     } );
     model.timerLocProperty.link( function updateLocation( value ) {
