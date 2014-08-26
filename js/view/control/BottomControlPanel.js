@@ -35,10 +35,6 @@ define( function( require ) {
 
     Node.call( this, { x: 5, scale: 0.7 } );
 
-    var oscillatePanel;
-    var manualPanel;
-    var pulsePanel;
-
     var checkBoxGroup = new CheckBoxGroup( {check: [
       {text: rulersString, property: model.rulersProperty},
       {text: timerString, property: model.timerProperty},
@@ -63,36 +59,20 @@ define( function( require ) {
     } );
     this.addChild( oscillatePanel );
 
-    var manualContainer = new Node();
-    manualContainer.addChild( dampingSlider );
-    manualContainer.addChild( tensionSlider );
-    manualContainer.addChild( separator );
-    manualContainer.addChild( checkBoxGroup );
-    this.addChild( manualPanel = new Panel( manualContainer, {
+    var manualPanel = new Panel( new Node( {
+      children: [dampingSlider, tensionSlider, separator, checkBoxGroup]
+    } ), {
       fill: '#D9FCC5', xMargin: 10, yMargin: 5
-    } ) );
+    } );
+    this.addChild( manualPanel );
 
-    var pulseContainer = new Node();
-    pulseContainer.addChild( amplitudeSlider );
-    pulseContainer.addChild( pulseWidthSlider );
-    pulseContainer.addChild( dampingSlider );
-    pulseContainer.addChild( tensionSlider );
-    pulseContainer.addChild( separator );
-    pulseContainer.addChild( checkBoxGroup );
-    this.addChild( pulsePanel = new Panel( pulseContainer, {
+    var pulsePanel = new Panel( new Node( {
+      children: [amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkBoxGroup]
+    } ), {
       fill: '#D9FCC5', xMargin: 10, yMargin: 5
-    } ) );
+    } );
+    this.addChild( pulsePanel );
 
-
-    if ( pulsePanel.width > Constants.maxWidthBottomControlPanel ) {
-      pulsePanel.scale( Constants.maxWidthBottomControlPanel / pulsePanel.width );
-    }
-    if ( manualPanel.width > Constants.maxWidthBottomControlPanel ) {
-      manualPanel.scale( Constants.maxWidthBottomControlPanel / manualPanel.width );
-    }
-    if ( oscillatePanel.width > Constants.maxWidthBottomControlPanel ) {
-      oscillatePanel.scale( Constants.maxWidthBottomControlPanel / oscillatePanel.width );
-    }
     pulsePanel.right = manualPanel.right = oscillatePanel.right = Constants.maxWidthBottomControlPanel - 60 + checkBoxGroupOffset;
     this.bottom = Constants.viewSize.height - 10;
     model.modeProperty.link( function updateBottomControlPanel( value ) {
