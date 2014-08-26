@@ -7,15 +7,15 @@
 
 define( function( require ) {
   'use strict';
-  var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var Shape = require( 'KITE/Shape' );
-  var Constants = require( 'WOAS/Constants' );
   var Vector2 = require( 'DOT/Vector2' );
   var Matrix3 = require( 'DOT/Matrix3' );
+  var Shape = require( 'KITE/Shape' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Circle = require( 'SCENERY/nodes/Circle' );
+  var Constants = require( 'WOAS/Constants' );
 
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );

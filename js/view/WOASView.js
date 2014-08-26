@@ -7,23 +7,36 @@
 
 define( function( require ) {
   'use strict';
-  var ScreenView = require( 'JOIST/ScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Events = require( 'AXON/Events' );
+  var Bounds2 = require( 'DOT/Bounds2' );
+  var Util = require( 'DOT/Util' );
+  var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
-  var speedSlowString = require( 'string!WOAS/speedSlow' );
-  var speedNormalString = require( 'string!WOAS/speedNormal' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var BottomControlPanel = require( 'WOAS/view/control/BottomControlPanel' );
-  var RadioGroup = require( 'WOAS/view/control/RadioGroup' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var Line = require( 'SCENERY/nodes/Line' );
+  var ScreenView = require( 'JOIST/ScreenView' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var PlayPauseButton = require( 'SCENERY_PHET/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/StepButton' );
+  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var BottomControlPanel = require( 'WOAS/view/control/BottomControlPanel' );
+  var RadioGroup = require( 'WOAS/view/control/RadioGroup' );
   var RestartButton = require( 'WOAS/view/control/RestartButton' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
   var Timer = require( 'WOAS/view/control/Timer' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Constants = require( 'WOAS/Constants' );
+  var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
+  var StartNode = require( 'WOAS/view/action/StartNode' );
+  var EndNode = require( 'WOAS/view/action/EndNode' );
+  var ReferenceLine = require( 'WOAS/view/control/ReferenceLine' );
+
+  // strings
+  var speedSlowString = require( 'string!WOAS/speedSlow' );
+  var speedNormalString = require( 'string!WOAS/speedNormal' );
   var manualString = require( 'string!WOAS/manual' );
   var oscillateString = require( 'string!WOAS/oscillate' );
   var pulseString = require( 'string!WOAS/pulse' );
@@ -31,17 +44,6 @@ define( function( require ) {
   var looseEndString = require( 'string!WOAS/looseEnd' );
   var noEndString = require( 'string!WOAS/noEnd' );
   var unitCmString = require( 'string!WOAS/unitCm' );
-  var Constants = require( 'WOAS/Constants' );
-  var Shape = require( 'KITE/Shape' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
-  var StartNode = require( 'WOAS/view/action/StartNode' );
-  var EndNode = require( 'WOAS/view/action/EndNode' );
-  var ReferenceLine = require( 'WOAS/view/control/ReferenceLine' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
-  var Util = require( 'DOT/Util' );
 
   function WOASView( model ) {
     ScreenView.call( this, { renderer: 'svg' } );

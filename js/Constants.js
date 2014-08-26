@@ -4,12 +4,12 @@ define( function( require ) {
   'use strict';
 
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Color = require( 'SCENERY/util/Color' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var Color = require( 'SCENERY/util/Color' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var Range = require( 'DOT/Range' );
 
   var clickOffset = new Vector2();
   var Constants = {

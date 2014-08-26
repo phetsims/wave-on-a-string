@@ -7,10 +7,12 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var WOASModel = require( 'WOAS/model/WOASModel' );
-  var WOASView = require( 'WOAS/view/WOASView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
+  var WOASModel = require( 'WOAS/model/WOASModel' );
+  var WOASView = require( 'WOAS/view/WOASView' );
+
+  // strings
   var simTitleString = require( 'string!WOAS/simTitle' );
 
   function WOASScreen() {

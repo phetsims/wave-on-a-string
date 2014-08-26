@@ -7,11 +7,11 @@
 
 define( function( require ) {
   'use strict';
-  var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var Constants = require( 'WOAS/Constants' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Constants = require( 'WOAS/Constants' );
 
   function EndNode( model, events, options ) {
     Node.call( this );

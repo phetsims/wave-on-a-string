@@ -7,11 +7,18 @@
 
 define( function( require ) {
   'use strict';
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Panel = require( 'SUN/Panel' );
+  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
+  var Slider = require( 'WOAS/view/control/slider/Slider' );
+  var Constants = require( 'WOAS/Constants' );
+
+  // strings
   var rulersString = require( 'string!WOAS/rulers' );
   var timerString = require( 'string!WOAS/timer' );
   var referenceLineString = require( 'string!WOAS/referenceLine' );
@@ -27,11 +34,6 @@ define( function( require ) {
   var patternValueUnitSString = require( 'string!WOAS/patternValueUnitS' );
   var amplitudeString = require( 'string!WOAS/amplitude' );
   var patternValueUnitCmString = require( 'string!WOAS/patternValueUnitCm' );
-  var Panel = require( 'SUN/Panel' );
-  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
-  var Slider = require( 'WOAS/view/control/slider/Slider' );
-  var Constants = require( 'WOAS/Constants' );
-  var Dimension2 = require( 'DOT/Dimension2' );
 
   function BottomControlPanel( model ) {
 

@@ -7,17 +7,17 @@
 
 define( function( require ) {
   'use strict';
-  var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var HSlider = require( 'SUN/HSlider' );
-  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Range = require( 'DOT/Range' );
   var Property = require( 'AXON/Property' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var HSlider = require( 'SUN/HSlider' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Constants = require( 'WOAS/Constants' );
 
   function Slider( options ) {
