@@ -34,6 +34,9 @@ define( function( require ) {
   var EndNode = require( 'WOAS/view/action/EndNode' );
   var ReferenceLine = require( 'WOAS/view/control/ReferenceLine' );
 
+  // images
+  var windowEdgeImage = require( 'image!WOAS/window_edge.png' );
+
   // strings
   var speedSlowString = require( 'string!WOAS/speedSlow' );
   var speedNormalString = require( 'string!WOAS/speedNormal' );
@@ -140,14 +143,14 @@ define( function( require ) {
       y: Constants.yTheStringNode
     } ) );
     var endNode = new EndNode( model, this.events, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} );
-    endNode.windowImage.x += Constants.endTheStringNode;
-    endNode.windowImage.y += Constants.yTheStringNode;
-    this.addChild( endNode.windowImage );
+    endNode.windowNode.x += Constants.endTheStringNode;
+    endNode.windowNode.y += Constants.yTheStringNode;
+    this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model ) );
     this.addChild( endNode );
     this.addChild( new TheStringNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
     this.addChild( new StartNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yKeyRange} ) );
-    this.addChild( windowImage = new Node( {children: [new Image( require( 'image!WOAS/window_edge.png' ), {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
+    this.addChild( windowImage = new Node( {children: [new Image( windowEdgeImage, {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {
       windowImage.setVisible( value === 'noEnd' );

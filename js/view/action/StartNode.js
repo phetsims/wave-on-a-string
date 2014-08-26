@@ -17,6 +17,9 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Constants = require( 'WOAS/Constants' );
 
+  var wrenchImage = require( 'image!WOAS/wrench_3.svg' );
+  var oscillatorWheelImage = require( 'image!WOAS/oscillator_wheel.png' );
+
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );
 
@@ -26,8 +29,8 @@ define( function( require ) {
     Node.call( this );
     var thisNode = this,
       wheelImg,
-      key = new Node( {children: [new Image( require( 'image!WOAS/wrench_3.svg' ), {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} ),
-      wheel = new Node( {children: [wheelImg = new Image( require( 'image!WOAS/oscillator_wheel.png' ), {scale: 0.4} )]} ),
+      key = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} ),
+      wheel = new Node( {children: [wheelImg = new Image( oscillatorWheelImage, {scale: 0.4} )]} ),
       post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
         stroke: '#000',
         fill: Constants.postGradient
