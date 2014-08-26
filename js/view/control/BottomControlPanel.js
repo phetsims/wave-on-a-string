@@ -35,17 +35,18 @@ define( function( require ) {
 
     Node.call( this, { x: 5, scale: 0.7 } );
 
-    var panel1;
-    var panel2;
-    var panel3;
-    var checkBox = new CheckBoxGroup( {check: [
+    var oscillatePanel;
+    var manualPanel;
+    var pulsePanel;
+
+    var checkBoxGroup = new CheckBoxGroup( {check: [
       {text: rulersString, property: model.rulersProperty},
       {text: timerString, property: model.timerProperty},
       {text: referenceLineString, property: model.referenceLineProperty}
     ]} );
 
     var checkBoxGroupOffset = 20;
-    checkBox.x = checkBoxGroupOffset;
+    checkBoxGroup.x = checkBoxGroupOffset;
 
     var tensionSlider = new Slider( { sliderX: 60 - 240, title: tensionString, property: model.tensionProperty, trackSize: new Dimension2( 80, 2 ), rounding: 0, range: Constants.tensionRange, titleVerticalOffset: 15, tick: {step: 1, minText: lowString, maxText: highString} } );
     var dampingSlider = new Slider( { sliderX: 60 - 420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, titleVerticalOffset: 15, tick: {step: 10, minText: noneString, maxText: lotsString}} );
@@ -55,21 +56,21 @@ define( function( require ) {
 
     var separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 
-    var oscillateContainer = new Node();
-    oscillateContainer.addChild( amplitudeSlider );
-    oscillateContainer.addChild( frequencySlider );
-    oscillateContainer.addChild( dampingSlider );
-    oscillateContainer.addChild( tensionSlider );
-    oscillateContainer.addChild( separator );
-    oscillateContainer.addChild( checkBox );
-    this.addChild( panel1 = new Panel( oscillateContainer, {fill: '#D9FCC5', xMargin: 10, yMargin: 5} ) );
+    var oscillatePanel = new Panel( new Node( {
+      children: [amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkBoxGroup]
+    } ), {
+      fill: '#D9FCC5', xMargin: 10, yMargin: 5
+    } );
+    this.addChild( oscillatePanel );
 
     var manualContainer = new Node();
     manualContainer.addChild( dampingSlider );
     manualContainer.addChild( tensionSlider );
     manualContainer.addChild( separator );
-    manualContainer.addChild( checkBox );
-    this.addChild( panel2 = new Panel( manualContainer, {fill: '#D9FCC5', xMargin: 10, yMargin: 5} ) );
+    manualContainer.addChild( checkBoxGroup );
+    this.addChild( manualPanel = new Panel( manualContainer, {
+      fill: '#D9FCC5', xMargin: 10, yMargin: 5
+    } ) );
 
     var pulseContainer = new Node();
     pulseContainer.addChild( amplitudeSlider );
@@ -77,25 +78,27 @@ define( function( require ) {
     pulseContainer.addChild( dampingSlider );
     pulseContainer.addChild( tensionSlider );
     pulseContainer.addChild( separator );
-    pulseContainer.addChild( checkBox );
-    this.addChild( panel3 = new Panel( pulseContainer, {fill: '#D9FCC5', xMargin: 10, yMargin: 5} ) );
+    pulseContainer.addChild( checkBoxGroup );
+    this.addChild( pulsePanel = new Panel( pulseContainer, {
+      fill: '#D9FCC5', xMargin: 10, yMargin: 5
+    } ) );
 
 
-    if ( panel3.width > Constants.maxWidthBottomControlPanel ) {
-      panel3.scale( Constants.maxWidthBottomControlPanel / panel3.width );
+    if ( pulsePanel.width > Constants.maxWidthBottomControlPanel ) {
+      pulsePanel.scale( Constants.maxWidthBottomControlPanel / pulsePanel.width );
     }
-    if ( panel2.width > Constants.maxWidthBottomControlPanel ) {
-      panel2.scale( Constants.maxWidthBottomControlPanel / panel2.width );
+    if ( manualPanel.width > Constants.maxWidthBottomControlPanel ) {
+      manualPanel.scale( Constants.maxWidthBottomControlPanel / manualPanel.width );
     }
-    if ( panel1.width > Constants.maxWidthBottomControlPanel ) {
-      panel1.scale( Constants.maxWidthBottomControlPanel / panel1.width );
+    if ( oscillatePanel.width > Constants.maxWidthBottomControlPanel ) {
+      oscillatePanel.scale( Constants.maxWidthBottomControlPanel / oscillatePanel.width );
     }
-    panel3.right = panel2.right = panel1.right = Constants.maxWidthBottomControlPanel - 60 + checkBoxGroupOffset;
+    pulsePanel.right = manualPanel.right = oscillatePanel.right = Constants.maxWidthBottomControlPanel - 60 + checkBoxGroupOffset;
     this.bottom = Constants.viewSize.height - 10;
     model.modeProperty.link( function updateBottomControlPanel( value ) {
-      panel1.setVisible( value === 'oscillate' );
-      panel2.setVisible( value === 'manual' );
-      panel3.setVisible( value === 'pulse' );
+      oscillatePanel.setVisible( value === 'oscillate' );
+      manualPanel.setVisible( value === 'manual' );
+      pulsePanel.setVisible( value === 'pulse' );
     } );
   }
 
