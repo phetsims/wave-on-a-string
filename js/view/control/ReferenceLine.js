@@ -15,7 +15,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var Constants = require( 'WOAS/Constants' );
 
-  function WOASTLine( model ) {
+  function ReferenceLine( model ) {
     Node.call( this, { cursor: 'pointer' } );
 
     var thisNode = this;
@@ -36,6 +36,6 @@ define( function( require ) {
     thisNode.addInputListener( Constants.dragAndDropHandler( thisNode, function( point ) {model.referenceLineLoc = point; } ) );
   }
 
-  inherit( Node, WOASTLine );
-  return WOASTLine;
+  inherit( Node, ReferenceLine );
+  return ReferenceLine;
 } );

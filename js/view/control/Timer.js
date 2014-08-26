@@ -40,7 +40,7 @@ define( function( require ) {
     return minutes + ':' + seconds + ':' + centiseconds;
   }
 
-  function WOASTTimer( model, options ) {
+  function Timer( model, options ) {
     Node.call( this, _.extend( { cursor: 'pointer' }, options ) );
     var thisNode = this;
 
@@ -157,6 +157,6 @@ define( function( require ) {
       } ) );
   }
 
-  inherit( Node, WOASTTimer );
-  return WOASTTimer;
+  inherit( Node, Timer );
+  return Timer;
 } );

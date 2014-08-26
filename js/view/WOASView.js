@@ -22,8 +22,7 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/StepButton' );
   var RestartButton = require( 'WOAS/view/control/RestartButton' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
-  var WOASTRulers = require( 'WOAS/view/control/WOASTRulers' );
-  var WOASTTimer = require( 'WOAS/view/control/WOASTTimer' );
+  var Timer = require( 'WOAS/view/control/Timer' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var manualString = require( 'string!WOAS/manual' );
   var oscillateString = require( 'string!WOAS/oscillate' );
@@ -31,16 +30,18 @@ define( function( require ) {
   var fixedEndString = require( 'string!WOAS/fixedEnd' );
   var looseEndString = require( 'string!WOAS/looseEnd' );
   var noEndString = require( 'string!WOAS/noEnd' );
+  var unitCmString = require( 'string!WOAS/unitCm' );
   var Constants = require( 'WOAS/Constants' );
   var Shape = require( 'KITE/Shape' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
   var StartNode = require( 'WOAS/view/action/StartNode' );
   var EndNode = require( 'WOAS/view/action/EndNode' );
-  var WOASTLine = require( 'WOAS/view/control/WOASTLine' );
+  var ReferenceLine = require( 'WOAS/view/control/ReferenceLine' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Line = require( 'SCENERY/nodes/Line' );
-
+  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  var Util = require( 'DOT/Util' );
 
   function WOASView( model ) {
     ScreenView.call( this, { renderer: 'svg' } );
@@ -48,7 +49,27 @@ define( function( require ) {
     this.events = new Events();
 
     var typeRadio, endTypeRadio, speedSlow, speedFast, speedGroup, pulseButton;
-    this.addChild( new WOASTRulers( model ) );
+
+    var rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
+    var rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
+    var rulerV = new RulerNode( 400, 50, 80, Util.rangeInclusive( 0, 5 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
+    rulerV.rotate( -Math.PI / 2 );
+    this.addChild( rulerH );
+    this.addChild( rulerV );
+
+    model.rulersProperty.link( function updateRulersVisible( value ) {
+      rulerH.setVisible( value );
+      rulerV.setVisible( value );
+    } );
+    model.rulerLocHProperty.link( function updateRulerHLocation( value ) {
+      rulerH.translation = value;
+    } );
+    model.rulerLocVProperty.link( function updateRulerVLocation( value ) {
+      rulerV.translation = value;
+    } );
+    rulerV.addInputListener( Constants.dragAndDropHandler( rulerV, function( point ) {model.rulerLocV = point; } ) );
+    rulerH.addInputListener( Constants.dragAndDropHandler( rulerH, function( point ) {model.rulerLocH = point; } ) );
+
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
     this.addChild( pulseButton = new PulseButton( model, {x: 120, y: Constants.viewSize.height - 133 } ) );
@@ -105,7 +126,7 @@ define( function( require ) {
         listener: function() { model.reset(); }
       } )
     ] } ) );
-    this.addChild( new WOASTTimer( model ) );
+    this.addChild( new Timer( model ) );
 
     var windowImage;
     //center line
@@ -120,7 +141,7 @@ define( function( require ) {
     endNode.windowImage.x += Constants.endTheStringNode;
     endNode.windowImage.y += Constants.yTheStringNode;
     this.addChild( endNode.windowImage );
-    this.addChild( new WOASTLine( model ) );
+    this.addChild( new ReferenceLine( model ) );
     this.addChild( endNode );
     this.addChild( new TheStringNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
     this.addChild( new StartNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yKeyRange} ) );
