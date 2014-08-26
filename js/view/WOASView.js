@@ -89,29 +89,22 @@ define( function( require ) {
     speedFast.touchArea = Shape.bounds( Bounds2.rect( -14, -speedFast.height / 2, speedFast.width + 5, speedFast.height ).dilatedXY( 5, 15 ) );
     speedFast.mouseArea = Shape.bounds( Bounds2.rect( -14, -speedFast.height / 2, speedFast.width + 5, speedFast.height ) );
     this.addChild( new BottomControlPanel( model ) );
+    var playPauseButtonOptions = {
+      upFill: Constants.blueUpColor,
+      overFill: Constants.blueOverColor,
+      disabledFill: Constants.blueDisabledColor,
+      downFill: Constants.blueDownColor,
+      backgroundGradientColorStop0: Constants.buttonBorder0,
+      backgroundGradientColorStop1: Constants.buttonBorder1,
+      innerButtonLineWidth: 1
+    };
     this.addChild( new PlayPauseButton( model.playProperty, {
       x: speedGroup.right + 45,
       y: speedGroup.centerY,
       scale: 0.6,
       touchExpansion: 12,
-      pauseOptions: {
-        upFill: Constants.blueUpColor,
-        overFill: Constants.blueOverColor,
-        disabledFill: Constants.blueDisabledColor,
-        downFill: Constants.blueDownColor,
-        backgroundGradientColorStop0: Constants.buttonBorder0,
-        backgroundGradientColorStop1: Constants.buttonBorder1,
-        innerButtonLineWidth: 1
-      },
-      playOptions: {
-        upFill: Constants.blueUpColor,
-        overFill: Constants.blueOverColor,
-        disabledFill: Constants.blueDisabledColor,
-        downFill: Constants.blueDownColor,
-        backgroundGradientColorStop0: Constants.buttonBorder0,
-        backgroundGradientColorStop1: Constants.buttonBorder1,
-        innerButtonLineWidth: 1
-      }
+      pauseOptions: playPauseButtonOptions,
+      playOptions: playPauseButtonOptions
     } ) );
     this.addChild( new StepButton( model.manualStep.bind( model ), model.playProperty, {
       x: speedGroup.right + 88,
