@@ -9,7 +9,9 @@ define( function( require ) {
   'use strict';
   var Node = require( 'SCENERY/nodes/Node' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var rulersString = require( 'string!WOAS/rulers' );
   var timerString = require( 'string!WOAS/timer' );
   var referenceLineString = require( 'string!WOAS/referenceLine' );
@@ -26,7 +28,7 @@ define( function( require ) {
   var amplitudeString = require( 'string!WOAS/amplitude' );
   var patternValueUnitCmString = require( 'string!WOAS/patternValueUnitCm' );
   var Panel = require( 'SUN/Panel' );
-  var CheckBoxGroup = require( 'WOAS/view/control/CheckBoxGroup' );
+  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var Slider = require( 'WOAS/view/control/slider/Slider' );
   var Constants = require( 'WOAS/Constants' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -35,11 +37,23 @@ define( function( require ) {
 
     Node.call( this, { x: 5, scale: 0.7 } );
 
-    var checkBoxGroup = new CheckBoxGroup( {check: [
-      {text: rulersString, property: model.rulersProperty},
-      {text: timerString, property: model.timerProperty},
-      {text: referenceLineString, property: model.referenceLineProperty}
-    ]} );
+    var checkBoxGroup = new VerticalCheckBoxGroup( [
+      {
+        content: new Text( rulersString, { font: new PhetFont( 15 ) } ),
+        property: model.rulersProperty,
+        indent: 0
+      },{
+        content: new Text( timerString, { font: new PhetFont( 15 ) } ),
+        property: model.timerProperty,
+        indent: 0
+      },{
+        content: new Text( referenceLineString, { font: new PhetFont( 15 ) } ),
+        property: model.referenceLineProperty,
+        indent: 0
+      },
+    ], {
+      centerY: 55
+    } );
 
     var checkBoxGroupOffset = 20;
     checkBoxGroup.x = checkBoxGroupOffset;
