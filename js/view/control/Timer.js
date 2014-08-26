@@ -11,7 +11,9 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
+  var LineStyles = require( 'KITE/util/LineStyles' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
@@ -49,9 +51,20 @@ define( function( require ) {
 
     var resetAllShape = new UTurnArrowShape( 10 );
     var playPauseHeight = resetAllShape.computeBounds().height;
-    var playPauseWidth = 0.8 * playPauseHeight;
-    var playShape = new Shape().moveTo( playPauseWidth, 0 ).lineTo( 0, playPauseHeight / 2 ).lineTo( 0, -playPauseHeight / 2 ).close();
-    var pauseShape = new Shape().rect( 0, -playPauseHeight / 2, playPauseWidth / 3, playPauseHeight ).rect( playPauseWidth * 2 / 3, -playPauseHeight / 2, playPauseWidth / 3, playPauseHeight );
+    var playPauseWidth = playPauseHeight;
+    var halfPlayStroke = 0.1 * playPauseWidth;
+    var playArrowX = 0.5 * playPauseWidth;
+    var playShape = new Shape().moveTo( halfPlayStroke, 0 )
+                               .lineTo( playPauseWidth - halfPlayStroke, 0 )
+                               .moveTo( playArrowX, -playPauseHeight / 2 + halfPlayStroke )
+                               .lineTo( playPauseWidth - halfPlayStroke, 0 )
+                               .lineTo( playArrowX, playPauseHeight / 2 - halfPlayStroke ).getStrokedShape( new LineStyles( {
+                                 lineWidth: halfPlayStroke * 2,
+                                 lineCap: 'round',
+                                 lineJoin: 'round'
+                               } ) );
+    // a stop symbol (square)
+    var pauseShape = Shape.bounds( new Bounds2( 0, -playPauseHeight / 2, playPauseWidth, playPauseHeight / 2 ).eroded( playPauseWidth * 0.1 ) );
 
     var resetButton = new RectangularPushButton( {
       listener: function resetTimer() {
