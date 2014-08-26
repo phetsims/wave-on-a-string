@@ -20,7 +20,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var ResetAllShape = require( 'SCENERY_PHET/ResetAllShape' );
+  var UTurnArrowShape = require( 'SCENERY_PHET/UTurnArrowShape' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
 
@@ -47,7 +47,7 @@ define( function( require ) {
     var iconColor = '#333';
     var buttonBaseColor = '#DFE0E1';
 
-    var resetAllShape = new ResetAllShape( 10 );
+    var resetAllShape = new UTurnArrowShape( 10 );
     var playPauseHeight = resetAllShape.computeBounds().height;
     var playPauseWidth = 0.8 * playPauseHeight;
     var playShape = new Shape().moveTo( playPauseWidth, 0 ).lineTo( 0, playPauseHeight / 2 ).lineTo( 0, -playPauseHeight / 2 ).close();
