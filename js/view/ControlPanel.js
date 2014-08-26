@@ -55,6 +55,7 @@ define( function( require ) {
       x: speedGroup.right + 45,
       y: speedGroup.centerY,
       scale: 0.6,
+      touchExpansion: 12,
       pauseOptions: {
         upFill: Constants.blueUpColor,
         overFill: Constants.blueOverColor,
@@ -78,7 +79,7 @@ define( function( require ) {
       x: speedGroup.right + 88,
       y: speedGroup.centerY,
       scale: 0.6,
-      touchAreaRadius: 30,
+      touchExpansion: 12,
       upFill: Constants.blueUpColor,
       overFill: Constants.blueOverColor,
       disabledFill: Constants.blueDisabledColor,
