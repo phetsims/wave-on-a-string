@@ -94,14 +94,15 @@ define( function( require ) {
     } );
 
     var bigReadoutText = new Text( timeToBigString( 0 ), {
-      font: new PhetFont( 20 ),
-      top: 0
+      font: new PhetFont( 20 )
     } );
     var smallReadoutText = new Text( timeToSmallString( 0 ), {
-      font: new PhetFont( 16 ),
-      left: bigReadoutText.right,
-      bottom: bigReadoutText.bottom
+      font: new PhetFont( 15 ),
+      left: bigReadoutText.right
     } );
+    // aligns the baselines of the big and small text
+    smallReadoutText.bottom = smallReadoutText.bounds.maxY - bigReadoutText.bounds.minY;
+    bigReadoutText.top = 0;
     var readoutText = new Node( {
       children: [
         bigReadoutText,
