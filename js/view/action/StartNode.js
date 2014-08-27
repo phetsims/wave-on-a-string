@@ -27,14 +27,18 @@ define( function( require ) {
     var postScale = 3;
 
     Node.call( this );
-    var thisNode = this,
-      wheelImg,
-      key = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} ),
-      wheel = new Node( {children: [wheelImg = new Image( oscillatorWheelImage, {scale: 0.4} )]} ),
-      post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
-        stroke: '#000',
-        fill: Constants.postGradient
-      } );
+    var thisNode = this;
+
+    var wheel = new Node( { children: [ new Image( oscillatorWheelImage, {
+      scale: 0.4,
+      center: Vector2.ZERO
+    } ) ] } );
+
+    var key = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
+    var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
+      stroke: '#000',
+      fill: Constants.postGradient
+    } );
 
     // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
     var postCache = new Node( { scale: 1 / postScale } );
@@ -43,7 +47,6 @@ define( function( require ) {
     } );
     post = new Node( { children: [postCache] } );
 
-    wheelImg.center = new Vector2();
     thisNode.addChild( key );
     thisNode.addChild( post );
     thisNode.addChild( new Node( {children: [wheel], translation: Constants.offsetWheel} ) );
