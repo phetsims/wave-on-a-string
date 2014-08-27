@@ -16,8 +16,6 @@ define( function( require ) {
   // var LineStyles = require( 'KITE/util/LineStyles' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var Color = require( 'SCENERY/util/Color' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -26,6 +24,7 @@ define( function( require ) {
   var UTurnArrowShape = require( 'SCENERY_PHET/UTurnArrowShape' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
+  var Pseudo3DRoundedRectangle = require( 'WOAS/view/control/Pseudo3DRoundedRectangle' );
 
   function timeToBigString( timeInSeconds ) {
     var minutes = Math.floor( timeInSeconds / 60 ) % 60;
@@ -129,76 +128,19 @@ define( function( require ) {
     playPauseButton.top = textBackground.bottom + 5;
 
     var panelPad = 8;
-    var panelRound = 10;
     timer.left = panelPad;
     timer.top = panelPad;
 
-    var panelBackground = Rectangle.roundedBounds( timer.bounds.dilated( panelPad ), panelRound, panelRound, {} );
-
-    // adds the extra 3D effect, and is draggable
-    var panelEffect = Rectangle.roundedBounds( timer.bounds.dilated( panelPad ), panelRound, panelRound, {} );
-
-    // other possible colors to demo
-    // var baseColor = new Color( 255, 220, 150 );
-    // var baseColor = new Color( 150, 220, 255 );
-    // var baseColor = new Color( 170, 230, 255 );
-    // var baseColor = new Color( 190, 240, 255 );
-    // var baseColor = new Color( 50, 80, 230 );
-    var baseColor = new Color( 80, 130, 230 );
-    var lighterColor = baseColor.colorUtilsBrighter( 0.6 );
-    var lightColor = baseColor.colorUtilsBrighter( 0.5 );
-    var darkColor = baseColor.colorUtilsDarker( 0.5 );
-    var darkerColor = baseColor.colorUtilsDarker( 0.6 );
-
-    var lightOffset = 0.07 * panelEffect.height;
-    var darkOffset = 0.05 * panelEffect.height;
-
-    panelBackground.fill = new LinearGradient( panelBackground.left, 0, panelBackground.width, 0 )
-      .addColorStop( 0, lightColor )
-      .addColorStop( lightOffset / panelEffect.width, baseColor )
-      .addColorStop( 1 - darkOffset / panelEffect.width, baseColor )
-      .addColorStop( 1, darkColor );
-
-    panelEffect.fill = new LinearGradient( 0, panelEffect.top, 0, panelEffect.bottom )
-      .addColorStop( 0, lighterColor )
-      .addColorStop( lightOffset / panelEffect.height, lighterColor.withAlpha( 0 ) )
-      .addColorStop( 1 - darkOffset / panelEffect.height, darkerColor.withAlpha( 0 ) )
-      .addColorStop( 1, darkerColor );
-
-    panelEffect.touchArea = panelEffect.localBounds.dilated( 10 );
-
-    var lightCorner = new Path( new Shape().moveTo( 0, 0 )
-                                           .arc( 0, 0, panelRound, -Math.PI, -Math.PI / 2, false )
-                                           .close(), {
-      x: panelEffect.left + panelRound,
-      y: panelEffect.top + panelRound,
-      fill: new RadialGradient( 0, 0, 0, 0, 0, panelRound ).addColorStop( 0, baseColor )
-                                                           .addColorStop( 1 - lightOffset / panelRound, baseColor )
-                                                           .addColorStop( 1, lighterColor )
+    var roundedRectangle = new Pseudo3DRoundedRectangle( timer.bounds.dilated( panelPad ), {
+      baseColor: new Color( 80, 130, 230 ),
+      cornerRadius: 10
     } );
 
-    var darkCorner = new Path( new Shape().moveTo( 0, 0 )
-                                          .arc( 0, 0, panelRound, 0, Math.PI / 2, false )
-                                          .close(), {
-      x: panelEffect.right - panelRound,
-      y: panelEffect.bottom - panelRound,
-      fill: new RadialGradient( 0, 0, 0, 0, 0, panelRound ).addColorStop( 0, baseColor )
-                                                           .addColorStop( 1 - darkOffset / panelRound, baseColor )
-                                                           .addColorStop( 1, darkerColor )
-    } );
+    roundedRectangle.touchArea = roundedRectangle.localBounds.dilated( 10 );
 
-    // the stroke around the outside
-    var panelStroke = Rectangle.roundedBounds( timer.bounds.dilated( panelPad ), panelRound, panelRound, {
-      stroke: darkColor.withAlpha( 0.4 )
-    } );
+    this.addChild( roundedRectangle );
 
-    this.addChild( panelBackground );
-    this.addChild( panelEffect );
-    this.addChild( lightCorner );
-    this.addChild( darkCorner );
-    this.addChild( panelStroke );
-
-    var dragZone = Rectangle.bounds( panelBackground.bounds, {} );
+    var dragZone = Rectangle.bounds( roundedRectangle.bounds, {} );
 
     this.addChild( dragZone );
     this.addChild( timer );
@@ -215,10 +157,10 @@ define( function( require ) {
       thisNode.translation = value;
     } );
     var clickOffset = new Vector2();
-    panelEffect.addInputListener( new SimpleDragHandler(
+    roundedRectangle.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
-          clickOffset = panelEffect.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
+          clickOffset = roundedRectangle.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
         },
         drag: function( event ) {
           model.timerLoc = thisNode.globalToParentPoint( event.pointer.point ).minus( clickOffset );
