@@ -15,6 +15,9 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Circle = require( 'SCENERY/nodes/Circle' );
+  // var Line = require( 'SCENERY/nodes/Line' );
+  // var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  // var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var Constants = require( 'WOAS/Constants' );
 
   var wrenchImage = require( 'image!WOAS/wrench_3.svg' );
@@ -33,6 +36,28 @@ define( function( require ) {
       scale: 0.4,
       center: Vector2.ZERO
     } ) ] } );
+    wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
+
+    // var wheelRadius = 29.5;
+    // var wheel = new Circle( wheelRadius, {
+    //   stroke: '#333',
+    //   lineWidth: 1.5,
+    //   fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(200,186,186)' ).addColorStop( 1, 'rgb(230,230,230)' )
+    // } );
+
+    // var innerWheelRadius = 4.8;
+    // wheel.addChild( new Circle( innerWheelRadius, {
+    //   stroke: '#333',
+    //   lineWidth: 1.5,
+    //   fill: '#fff'
+    // } ) );
+    // wheel.addChild( new Line( -innerWheelRadius, 0, innerWheelRadius, 0, { stroke: '#333', lineWidth: 1.5 } ) );
+    // wheel.addChild( new Circle( innerWheelRadius, {
+    //   x: innerWheelRadius * 1.5 - wheelRadius,
+    //   stroke: '#333',
+    //   lineWidth: 0.5,
+    //   fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#eee' ).addColorStop( 1, 'rgb(110,50,25)' )
+    // } ) );
 
     var key = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
     var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
@@ -88,7 +113,7 @@ define( function( require ) {
     } );
 
     // workaround for image not being perfectly centered
-    wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
+    // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
 
     model.angleProperty.link( function updateWheel( value ) {
       // wheel.rotation = value;
