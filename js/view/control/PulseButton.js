@@ -16,7 +16,7 @@ define( function( require ) {
     RoundPushButton.call( this, {
       listener: model.manualPulse.bind( model ),
       baseColor: '#33dd33',
-      radius: 15
+      radius: 17
     } );
     var self = this;
     this.touchArea = this.localBounds.dilatedXY( 5, 10 );

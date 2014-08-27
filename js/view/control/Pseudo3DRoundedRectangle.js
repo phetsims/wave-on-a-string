@@ -22,6 +22,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // TODO: better API, not just bounds? support Rectangle API, potentially extend.
+  // TODO: also accept color strings, not just Color objects.
   function Pseudo3DRoundedRectangle( rectBounds, options ) {
     Node.call( this );
 
@@ -51,7 +52,7 @@ define( function( require ) {
     var panelBackground = Rectangle.roundedBounds( rectBounds, cornerRadius, cornerRadius, {} );
     var panelEffect = Rectangle.roundedBounds( rectBounds, cornerRadius, cornerRadius, {} );
 
-    panelBackground.fill = new LinearGradient( panelBackground.left, 0, panelBackground.width, 0 )
+    panelBackground.fill = new LinearGradient( panelBackground.left, 0, panelBackground.right, 0 )
       .addColorStop( 0, lightColor )
       .addColorStop( lightOffset / panelEffect.width, baseColor )
       .addColorStop( 1 - darkOffset / panelEffect.width, baseColor )

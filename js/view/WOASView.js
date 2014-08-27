@@ -26,7 +26,6 @@ define( function( require ) {
   var BottomControlPanel = require( 'WOAS/view/control/BottomControlPanel' );
   var RadioGroup = require( 'WOAS/view/control/RadioGroup' );
   var RestartButton = require( 'WOAS/view/control/RestartButton' );
-  var PulseButton = require( 'WOAS/view/control/PulseButton' );
   var Timer = require( 'WOAS/view/control/Timer' );
   var Constants = require( 'WOAS/Constants' );
   var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
@@ -53,7 +52,7 @@ define( function( require ) {
 
     this.events = new Events();
 
-    var typeRadio, endTypeRadio, speedSlow, speedFast, speedGroup, pulseButton;
+    var typeRadio, endTypeRadio, speedSlow, speedFast, speedGroup;
 
     var rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
     var rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
@@ -77,10 +76,9 @@ define( function( require ) {
 
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
-    this.addChild( pulseButton = new PulseButton( model, {x: 120, y: Constants.viewSize.height - 133 } ) );
     this.addChild( endTypeRadio = new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], text: [fixedEndString, looseEndString, noEndString], property: model.typeEndProperty, x: Constants.viewSize.width - 100, y: 5} ) );
     endTypeRadio.right = Constants.viewSize.width - 5;
-    this.addChild( speedGroup = new Node( {scale: 0.7, x: pulseButton.right + 100, y: Constants.viewSize.height - 131, children: [
+    this.addChild( speedGroup = new Node( {scale: 0.7, x: 140 + 100, y: Constants.viewSize.height - 131, children: [
       speedSlow = new AquaRadioButton( model.speedProperty, 0.25, new Text( speedSlowString, {font: new PhetFont( 15 )} ), {radius: 12, selectedColor: Constants.radioColor } ),
       speedFast = new AquaRadioButton( model.speedProperty, 1, new Text( speedNormalString, {font: new PhetFont( 15 )} ), {radius: 12, x: speedSlow.width + 20, selectedColor: Constants.radioColor } )
     ]} ) );

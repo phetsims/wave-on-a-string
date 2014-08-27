@@ -10,15 +10,19 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
   var Matrix3 = require( 'DOT/Matrix3' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Circle = require( 'SCENERY/nodes/Circle' );
+  var Color = require( 'SCENERY/util/Color' );
   // var Line = require( 'SCENERY/nodes/Line' );
   // var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   // var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var Constants = require( 'WOAS/Constants' );
+  var Pseudo3DRoundedRectangle = require( 'WOAS/view/control/Pseudo3DRoundedRectangle' );
+  var PulseButton = require( 'WOAS/view/control/PulseButton' );
 
   var wrenchImage = require( 'image!WOAS/wrench_3.svg' );
   var oscillatorWheelImage = require( 'image!WOAS/oscillator_wheel.png' );
@@ -59,11 +63,22 @@ define( function( require ) {
     //   fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#eee' ).addColorStop( 1, 'rgb(110,50,25)' )
     // } ) );
 
-    var key = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
+    var wrench = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
     var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
       fill: Constants.postGradient
     } );
+
+    var pistonBox = new Pseudo3DRoundedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
+      baseColor: new Color( 200, 200, 200 ),
+      lightFactor: 0.5,
+      lighterFactor: 0.1,
+      darkFactor: 0.5,
+      darkerFactor: 0.1,
+      cornerRadius: 6
+    } );
+
+    pistonBox.addChild( new PulseButton( model, { center: pistonBox.center } ) );
 
     // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
     var postCache = new Node( { scale: 1 / postScale } );
@@ -72,14 +87,15 @@ define( function( require ) {
     } );
     post = new Node( { children: [postCache] } );
 
-    thisNode.addChild( key );
+    thisNode.addChild( wrench );
     thisNode.addChild( post );
     thisNode.addChild( new Node( {children: [wheel], translation: Constants.offsetWheel} ) );
+    thisNode.addChild( pistonBox );
 
-    key.touchArea = Shape.bounds( key.bounds.dilated( Constants.dilatedTouchArea ) );
-    key.mouseArea = Shape.bounds( key.bounds );
+    wrench.touchArea = Shape.bounds( wrench.bounds.dilated( Constants.dilatedTouchArea ) );
+    wrench.mouseArea = Shape.bounds( wrench.bounds );
 
-    key.addInputListener( Constants.dragAndDropHandler( key, function( point ) {
+    wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
       model.play = true;
       model.trigger( 'yNowChanged' );
@@ -87,8 +103,8 @@ define( function( require ) {
 
     thisNode.mutate( options );
     function updateKey() {
-      if ( key.isVisible() ) {
-        key.y = model.yNow[0];
+      if ( wrench.isVisible() ) {
+        wrench.y = model.yNow[0];
       }
     }
 
@@ -120,19 +136,22 @@ define( function( require ) {
       wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.modeProperty.link( function updateVisible( value ) {
-      var keyIsVisible = value === 'manual';
-      if ( key.isVisible() !== keyIsVisible ) {
-        key.setVisible( keyIsVisible );
+      var wrenchIsVisible = value === 'manual';
+      if ( wrench.isVisible() !== wrenchIsVisible ) {
+        wrench.setVisible( wrenchIsVisible );
 
         updateKey();
       }
 
-      if ( post.isVisible() === keyIsVisible ) {
-        wheel.setVisible( !keyIsVisible );
-        post.setVisible( !keyIsVisible );
+      var postIsVisible = value !== 'manual';
+      if ( post.isVisible() !== postIsVisible ) {
+        post.setVisible( postIsVisible );
 
         updatePost();
       }
+
+      wheel.setVisible( value === 'oscillate' );
+      pistonBox.setVisible( value === 'pulse' );
     } );
   }
 
