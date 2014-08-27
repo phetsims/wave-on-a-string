@@ -13,7 +13,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
-  var LineStyles = require( 'KITE/util/LineStyles' );
+  // var LineStyles = require( 'KITE/util/LineStyles' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
@@ -57,17 +57,21 @@ define( function( require ) {
     var resetAllShape = new UTurnArrowShape( 10 );
     var playPauseHeight = resetAllShape.computeBounds().height;
     var playPauseWidth = playPauseHeight;
-    var halfPlayStroke = 0.1 * playPauseWidth;
-    var playArrowX = 0.5 * playPauseWidth;
-    var playShape = new Shape().moveTo( halfPlayStroke, 0 )
-                               .lineTo( playPauseWidth - halfPlayStroke, 0 )
-                               .moveTo( playArrowX, -playPauseHeight / 2 + halfPlayStroke )
-                               .lineTo( playPauseWidth - halfPlayStroke, 0 )
-                               .lineTo( playArrowX, playPauseHeight / 2 - halfPlayStroke ).getStrokedShape( new LineStyles( {
-                                 lineWidth: halfPlayStroke * 2,
-                                 lineCap: 'round',
-                                 lineJoin: 'round'
-                               } ) );
+    var halfPlayStroke = 0.05 * playPauseWidth;
+    // var playArrowX = 0.5 * playPauseWidth;
+    // var playShape = new Shape().moveTo( halfPlayStroke, 0 )
+    //                            .lineTo( playPauseWidth - halfPlayStroke, 0 )
+    //                            .moveTo( playArrowX, -playPauseHeight / 2 + halfPlayStroke )
+    //                            .lineTo( playPauseWidth - halfPlayStroke, 0 )
+    //                            .lineTo( playArrowX, playPauseHeight / 2 - halfPlayStroke ).getStrokedShape( new LineStyles( {
+    //                              lineWidth: halfPlayStroke * 2,
+    //                              lineCap: 'round',
+    //                              lineJoin: 'round'
+    //                            } ) );
+    var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5, 0 )
+                               .lineTo( halfPlayStroke * 1.5, playPauseHeight / 2 - halfPlayStroke )
+                               .lineTo( halfPlayStroke * 1.5, -playPauseHeight / 2 + halfPlayStroke )
+                               .close();
     // a stop symbol (square)
     var pauseShape = Shape.bounds( new Bounds2( 0, -playPauseHeight / 2, playPauseWidth, playPauseHeight / 2 ).eroded( playPauseWidth * 0.1 ) );
 
@@ -83,8 +87,10 @@ define( function( require ) {
     } );
 
 
-    var playPauseButton = new BooleanRectangularToggleButton( new Path( pauseShape, { fill: iconColor } ), new Path( playShape, { fill: iconColor } ), model.timerStartProperty, {
-      baseColor: buttonBaseColor
+    var playPauseButton = new BooleanRectangularToggleButton(
+      new Path( pauseShape, { fill: iconColor } ),
+      new Path( playShape, { stroke: iconColor, fill: '#5a5', lineWidth: halfPlayStroke * 2, lineCap: 'round', lineJoin: 'round' } ), model.timerStartProperty, {
+        baseColor: buttonBaseColor
     } );
 
     var bigReadoutText = new Text( timeToBigString( 0 ), {
