@@ -24,6 +24,8 @@ define( function( require ) {
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
 
   var wrenchImage = require( 'image!WOAS/wrench_3.svg' );
+  wrenchImage.width = 60;
+  wrenchImage.height = 209;
 
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );
