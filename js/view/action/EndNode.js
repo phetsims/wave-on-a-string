@@ -17,14 +17,14 @@ define( function( require ) {
   var clampImage = require( 'image!WOAS/clamp_2.png' );
   var ringBackImage = require( 'image!WOAS/ring_back.png' );
   var ringFrontImage = require( 'image!WOAS/ring_front.png' );
-  var windowImage = require( 'image!WOAS/window_back.png' );
+  var windowImage = require( 'image!WOAS/window_back2.png' );
 
   function EndNode( model, events, options ) {
     Node.call( this );
     var clamp = new Image( clampImage, {x: -18, y: -34, scale: 0.4} ),
       ring_back = new Node( {children: [new Image( ringBackImage, {x: 5, y: -14 / 2, scale: 0.5} )]} ),
       ring_front = new Node( {children: [new Image( ringFrontImage, {x: 4.7, y: 0, scale: 0.5} )]} ),
-      windowNode = new Image( windowImage, {x: -81, y: -219 / 2} ),
+      windowNode = new Image( windowImage, {right: Constants.windowXOffset, centerY: 0, scale: Constants.windowScale } ),
       post = new Rectangle( -5, -130, 10, 260, {
         stroke: '#000',
         fill: Constants.postGradient,

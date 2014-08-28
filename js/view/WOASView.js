@@ -34,7 +34,7 @@ define( function( require ) {
   var ReferenceLine = require( 'WOAS/view/control/ReferenceLine' );
 
   // images
-  var windowEdgeImage = require( 'image!WOAS/window_edge.png' );
+  var windowEdgeImage = require( 'image!WOAS/window_front2.png' );
 
   // strings
   var speedSlowString = require( 'string!WOAS/speedSlow' );
@@ -141,7 +141,7 @@ define( function( require ) {
     this.addChild( endNode );
     this.addChild( new TheStringNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
     this.addChild( new StartNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yKeyRange} ) );
-    this.addChild( windowImage = new Node( {children: [new Image( windowEdgeImage, {x: 1, y: -105} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
+    this.addChild( windowImage = new Node( {children: [new Image( windowEdgeImage, {left: Constants.windowXOffset - 4, centerY: 0, scale: Constants.windowScale} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {
       windowImage.setVisible( value === 'noEnd' );

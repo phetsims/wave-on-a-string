@@ -60,6 +60,12 @@ define( function( require ) {
       lineWidth: 2
     },
 
+    // window image scale
+    windowScale: 0.6,
+
+    // how much the window front should overlap the window back
+    windowXOffset: 5,
+
     offsetWheel: new Vector2( 0, 156 ),
 
     dragAndDropHandler: function dnd( thisNode, callback ) {
