@@ -40,7 +40,7 @@ define( function( require ) {
     var wheel = new Circle( wheelRadius, {
       stroke: '#333',
       lineWidth: 1.5,
-      fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(200,186,186)' ).addColorStop( 1, 'rgb(230,230,230)' )
+      fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(215,210,210)' ).addColorStop( 1, 'rgb(215,210,210)' )
     } );
 
     var innerWheelRadius = 4.8;
@@ -54,7 +54,7 @@ define( function( require ) {
       x: innerWheelRadius * 1.5 - wheelRadius,
       stroke: '#333',
       lineWidth: 0.5,
-      fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#eee' ).addColorStop( 1, 'rgb(110,50,25)' )
+      fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#555' ).addColorStop( 1, '#555' )
     } ) );
 
     // var wheelImageScale = 3;
