@@ -8,7 +8,6 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
-  var Vector2 = require( 'DOT/Vector2' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
@@ -17,15 +16,14 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Color = require( 'SCENERY/util/Color' );
-  // var Line = require( 'SCENERY/nodes/Line' );
-  // var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  // var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var Line = require( 'SCENERY/nodes/Line' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var Constants = require( 'WOAS/Constants' );
   var Pseudo3DRoundedRectangle = require( 'WOAS/view/control/Pseudo3DRoundedRectangle' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
 
   var wrenchImage = require( 'image!WOAS/wrench_3.svg' );
-  var oscillatorWheelImage = require( 'image!WOAS/oscillator_wheel.png' );
 
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );
@@ -36,32 +34,30 @@ define( function( require ) {
     Node.call( this );
     var thisNode = this;
 
-    var wheel = new Node( { children: [ new Image( oscillatorWheelImage, {
-      scale: 0.4,
-      center: Vector2.ZERO
-    } ) ] } );
-    wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
+    var wheelRadius = 29.5;
+    var wheel = new Circle( wheelRadius, {
+      stroke: '#333',
+      lineWidth: 1.5,
+      fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(200,186,186)' ).addColorStop( 1, 'rgb(230,230,230)' )
+    } );
 
-    // var wheelRadius = 29.5;
-    // var wheel = new Circle( wheelRadius, {
-    //   stroke: '#333',
-    //   lineWidth: 1.5,
-    //   fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(200,186,186)' ).addColorStop( 1, 'rgb(230,230,230)' )
-    // } );
+    var innerWheelRadius = 4.8;
+    wheel.addChild( new Circle( innerWheelRadius, {
+      stroke: '#333',
+      lineWidth: 1.5,
+      fill: '#fff'
+    } ) );
+    wheel.addChild( new Line( -innerWheelRadius, 0, innerWheelRadius, 0, { stroke: '#333', lineWidth: 1.5 } ) );
+    wheel.addChild( new Circle( innerWheelRadius, {
+      x: innerWheelRadius * 1.5 - wheelRadius,
+      stroke: '#333',
+      lineWidth: 0.5,
+      fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#eee' ).addColorStop( 1, 'rgb(110,50,25)' )
+    } ) );
 
-    // var innerWheelRadius = 4.8;
-    // wheel.addChild( new Circle( innerWheelRadius, {
-    //   stroke: '#333',
-    //   lineWidth: 1.5,
-    //   fill: '#fff'
-    // } ) );
-    // wheel.addChild( new Line( -innerWheelRadius, 0, innerWheelRadius, 0, { stroke: '#333', lineWidth: 1.5 } ) );
-    // wheel.addChild( new Circle( innerWheelRadius, {
-    //   x: innerWheelRadius * 1.5 - wheelRadius,
-    //   stroke: '#333',
-    //   lineWidth: 0.5,
-    //   fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#eee' ).addColorStop( 1, 'rgb(110,50,25)' )
-    // } ) );
+    var wheelImageScale = 3;
+    wheel.scale( wheelImageScale );
+    wheel = wheel.toDataURLNodeSynchronous();
 
     var wrench = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
     var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
@@ -131,9 +127,10 @@ define( function( require ) {
     // workaround for image not being perfectly centered
     // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
 
+    var wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
     model.angleProperty.link( function updateWheel( value ) {
       // wheel.rotation = value;
-      wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
+      wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.modeProperty.link( function updateVisible( value ) {
       var wrenchIsVisible = value === 'manual';
