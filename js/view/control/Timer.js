@@ -57,6 +57,7 @@ define( function( require ) {
     var playPauseHeight = resetAllShape.computeBounds().height;
     var playPauseWidth = playPauseHeight;
     var halfPlayStroke = 0.05 * playPauseWidth;
+    var playOffset = 0.15 * playPauseWidth;
     // var playArrowX = 0.5 * playPauseWidth;
     // var playShape = new Shape().moveTo( halfPlayStroke, 0 )
     //                            .lineTo( playPauseWidth - halfPlayStroke, 0 )
@@ -67,10 +68,14 @@ define( function( require ) {
     //                              lineCap: 'round',
     //                              lineJoin: 'round'
     //                            } ) );
-    var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5, 0 )
-                               .lineTo( halfPlayStroke * 1.5, playPauseHeight / 2 - halfPlayStroke )
-                               .lineTo( halfPlayStroke * 1.5, -playPauseHeight / 2 + halfPlayStroke )
-                               .close();
+    // var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5, 0 )
+    //                            .lineTo( halfPlayStroke * 1.5, playPauseHeight / 2 - halfPlayStroke )
+    //                            .lineTo( halfPlayStroke * 1.5, -playPauseHeight / 2 + halfPlayStroke )
+    //                            .close();
+    var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5 - playOffset, 0 )
+                               .lineTo( halfPlayStroke * 1.5 + playOffset, playPauseHeight / 2 - halfPlayStroke - playOffset )
+                               .lineTo( halfPlayStroke * 1.5 + playOffset, -playPauseHeight / 2 + halfPlayStroke + playOffset )
+                               .close().getOffsetShape( -playOffset );
     // a stop symbol (square)
     var pauseShape = Shape.bounds( new Bounds2( 0, -playPauseHeight / 2, playPauseWidth, playPauseHeight / 2 ).eroded( playPauseWidth * 0.1 ) );
 
@@ -88,7 +93,7 @@ define( function( require ) {
 
     var playPauseButton = new BooleanRectangularToggleButton(
       new Path( pauseShape, { fill: iconColor } ),
-      new Path( playShape, { stroke: iconColor, fill: '#5a5', lineWidth: halfPlayStroke * 2, lineCap: 'round', lineJoin: 'round' } ), model.timerStartProperty, {
+      new Path( playShape, { stroke: iconColor, fill: '#eef', lineWidth: halfPlayStroke * 2 } ), model.timerStartProperty, {
         baseColor: buttonBaseColor
     } );
 
