@@ -57,9 +57,9 @@ define( function( require ) {
       fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#eee' ).addColorStop( 1, 'rgb(110,50,25)' )
     } ) );
 
-    var wheelImageScale = 3;
-    wheel.scale( wheelImageScale );
-    wheel = wheel.toDataURLNodeSynchronous();
+    // var wheelImageScale = 3;
+    // wheel.scale( wheelImageScale );
+    // wheel = wheel.toDataURLNodeSynchronous();
 
     var wrench = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
     var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
@@ -129,10 +129,11 @@ define( function( require ) {
     // workaround for image not being perfectly centered
     // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
 
-    var wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
+    // var wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
     model.angleProperty.link( function updateWheel( value ) {
       // wheel.rotation = value;
-      wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
+      wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
+      // wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.modeProperty.link( function updateVisible( value ) {
       var wrenchIsVisible = value === 'manual';
