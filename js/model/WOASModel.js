@@ -30,7 +30,7 @@ define( function( require ) {
       timer: false,  // visible timer
       referenceLine: false, // visible referenceLine
       tension: 2, // tension 0..2
-      damping: 50, // dumping 0..100
+      damping: 20, // dumping 0..100
       frequency: 1.50, // frequency 0.00 .. 3.00
       pulseWidth: 0.5, // pulse width 0.00 .. 1.00
       amplitude: 0.75, // amplitude 0.0 .. 1.5
