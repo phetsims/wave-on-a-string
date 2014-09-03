@@ -53,6 +53,8 @@ define( function( require ) {
     var iconColor = '#333';
     var buttonBaseColor = '#DFE0E1';
 
+    var paddingBetweenItems = 6;
+
     var resetAllShape = new UTurnArrowShape( 10 );
     var playPauseHeight = resetAllShape.computeBounds().height;
     var playPauseWidth = playPauseHeight;
@@ -79,24 +81,6 @@ define( function( require ) {
     // a stop symbol (square)
     var pauseShape = Shape.bounds( new Bounds2( 0, -playPauseHeight / 2, playPauseWidth, playPauseHeight / 2 ).eroded( playPauseWidth * 0.1 ) );
 
-    var resetButton = new RectangularPushButton( {
-      listener: function resetTimer() {
-        model.timerStart = false;
-        model.timerSecond = 0;
-      },
-      content: new Path( resetAllShape, {
-        fill: iconColor
-      } ),
-      baseColor: buttonBaseColor
-    } );
-
-
-    var playPauseButton = new BooleanRectangularToggleButton(
-      new Path( pauseShape, { fill: iconColor } ),
-      new Path( playShape, { stroke: iconColor, fill: '#eef', lineWidth: halfPlayStroke * 2 } ), model.timerStartProperty, {
-        baseColor: buttonBaseColor
-    } );
-
     var bigReadoutText = new Text( timeToBigString( 0 ), {
       font: new PhetFont( 20 )
     } );
@@ -119,6 +103,26 @@ define( function( require ) {
       fill: '#fff',
       stroke: 'rgba(0,0,0,0.5)'
     } );
+    var minimumButtonWidth = ( textBackground.width - paddingBetweenItems ) / 2 - 1; // -1 due to the stroke making it look mis-aligned
+
+    var resetButton = new RectangularPushButton( {
+      listener: function resetTimer() {
+        model.timerStart = false;
+        model.timerSecond = 0;
+      },
+      content: new Path( resetAllShape, {
+        fill: iconColor
+      } ),
+      baseColor: buttonBaseColor,
+      minWidth: minimumButtonWidth
+    } );
+
+    var playPauseButton = new BooleanRectangularToggleButton(
+      new Path( pauseShape, { fill: iconColor } ),
+      new Path( playShape, { stroke: iconColor, fill: '#eef', lineWidth: halfPlayStroke * 2 } ), model.timerStartProperty, {
+        baseColor: buttonBaseColor,
+        minWidth: minimumButtonWidth
+    } );
 
     var timer = new Node();
     timer.addChild( resetButton );
@@ -127,10 +131,10 @@ define( function( require ) {
     timer.addChild( readoutText );
 
     // layout
-    resetButton.right = -5;
-    playPauseButton.left = 5;
-    resetButton.top = textBackground.bottom + 5;
-    playPauseButton.top = textBackground.bottom + 5;
+    resetButton.right = -paddingBetweenItems / 2;
+    playPauseButton.left = paddingBetweenItems / 2;
+    resetButton.top = textBackground.bottom + paddingBetweenItems;
+    playPauseButton.top = textBackground.bottom + paddingBetweenItems;
 
     var panelPad = 8;
     timer.left = panelPad;
