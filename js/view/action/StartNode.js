@@ -19,8 +19,8 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var Pseudo3DRoundedRectangle = require( 'SCENERY_PHET/Pseudo3DRoundedRectangle' );
   var Constants = require( 'WOAS/Constants' );
-  var Pseudo3DRoundedRectangle = require( 'WOAS/view/control/Pseudo3DRoundedRectangle' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
 
   var wrenchImage = require( 'image!WOAS/wrench.svg' );

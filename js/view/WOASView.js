@@ -28,7 +28,7 @@ define( function( require ) {
   var BottomControlPanel = require( 'WOAS/view/control/BottomControlPanel' );
   var RadioGroup = require( 'WOAS/view/control/RadioGroup' );
   var RestartButton = require( 'WOAS/view/control/RestartButton' );
-  var Timer = require( 'WOAS/view/control/Timer' );
+  var Timer = require( 'SCENERY_PHET/Timer' );
   var Constants = require( 'WOAS/Constants' );
   var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
   var StartNode = require( 'WOAS/view/action/StartNode' );
