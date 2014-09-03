@@ -54,11 +54,6 @@ define( function( require ) {
         .addColorStop( 0, '#FFF' )
         .addColorStop( 0.3, options.color );
     },
-    referenceLineOptions: {
-      stroke: '#F00',
-      lineDash: [10, 6],
-      lineWidth: 2
-    },
 
     // window image scale
     windowScale: 0.6,

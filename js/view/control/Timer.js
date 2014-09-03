@@ -3,6 +3,7 @@
  * Timer Node.
  *
  * @author Anton Ulyanov (Mlearner)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 define( function( require ) {
@@ -13,7 +14,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
-  // var LineStyles = require( 'KITE/util/LineStyles' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Color = require( 'SCENERY/util/Color' );
@@ -25,26 +25,6 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
   var Pseudo3DRoundedRectangle = require( 'WOAS/view/control/Pseudo3DRoundedRectangle' );
-
-  function timeToBigString( timeInSeconds ) {
-    var minutes = Math.floor( timeInSeconds / 60 ) % 60;
-    var seconds = Math.floor( timeInSeconds ) % 60;
-    if ( seconds < 10 ) {
-      seconds = '0' + seconds;
-    }
-    if ( minutes < 10 ) {
-      minutes = '0' + minutes;
-    }
-    return minutes + ':' + seconds;
-  }
-
-  function timeToSmallString( timeInSeconds ) {
-    var centiseconds = Math.floor( timeInSeconds % 1 * 100 );
-    if ( centiseconds < 10 ) {
-      centiseconds = '0' + centiseconds;
-    }
-    return '.' + centiseconds;
-  }
 
   function Timer( model, options ) {
     Node.call( this, _.extend( { cursor: 'pointer' }, options ) );
@@ -60,20 +40,6 @@ define( function( require ) {
     var playPauseWidth = playPauseHeight;
     var halfPlayStroke = 0.05 * playPauseWidth;
     var playOffset = 0.15 * playPauseWidth;
-    // var playArrowX = 0.5 * playPauseWidth;
-    // var playShape = new Shape().moveTo( halfPlayStroke, 0 )
-    //                            .lineTo( playPauseWidth - halfPlayStroke, 0 )
-    //                            .moveTo( playArrowX, -playPauseHeight / 2 + halfPlayStroke )
-    //                            .lineTo( playPauseWidth - halfPlayStroke, 0 )
-    //                            .lineTo( playArrowX, playPauseHeight / 2 - halfPlayStroke ).getStrokedShape( new LineStyles( {
-    //                              lineWidth: halfPlayStroke * 2,
-    //                              lineCap: 'round',
-    //                              lineJoin: 'round'
-    //                            } ) );
-    // var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5, 0 )
-    //                            .lineTo( halfPlayStroke * 1.5, playPauseHeight / 2 - halfPlayStroke )
-    //                            .lineTo( halfPlayStroke * 1.5, -playPauseHeight / 2 + halfPlayStroke )
-    //                            .close();
     var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5 - playOffset, 0 )
                                .lineTo( halfPlayStroke * 1.5 + playOffset, playPauseHeight / 2 - halfPlayStroke - playOffset )
                                .lineTo( halfPlayStroke * 1.5 + playOffset, -playPauseHeight / 2 + halfPlayStroke + playOffset )
@@ -175,6 +141,26 @@ define( function( require ) {
           model.timerLoc = thisNode.globalToParentPoint( event.pointer.point ).minus( clickOffset );
         }
       } ) );
+  }
+
+  function timeToBigString( timeInSeconds ) {
+    var minutes = Math.floor( timeInSeconds / 60 ) % 60;
+    var seconds = Math.floor( timeInSeconds ) % 60;
+    if ( seconds < 10 ) {
+      seconds = '0' + seconds;
+    }
+    if ( minutes < 10 ) {
+      minutes = '0' + minutes;
+    }
+    return minutes + ':' + seconds;
+  }
+
+  function timeToSmallString( timeInSeconds ) {
+    var centiseconds = Math.floor( timeInSeconds % 1 * 100 );
+    if ( centiseconds < 10 ) {
+      centiseconds = '0' + centiseconds;
+    }
+    return '.' + centiseconds;
   }
 
   inherit( Node, Timer );

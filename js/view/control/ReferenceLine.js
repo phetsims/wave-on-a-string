@@ -25,7 +25,11 @@ define( function( require ) {
     thisNode.addChild( new Line( 0, 0, 750, 0, _.extend( {
       mouseArea: new Bounds2( 0, 0, 750, 0 ).dilated( 5 ),
       touchArea: new Bounds2( 0, 0, 750, 0 ).dilated( 10 )
-    }, Constants.referenceLineOptions ) ) );
+    }, {
+      stroke: '#F00',
+      lineDash: [10, 6],
+      lineWidth: 2
+    } ) ) );
 
     model.referenceLineProperty.link( function updateLineVisible( value ) {
       thisNode.setVisible( value );
