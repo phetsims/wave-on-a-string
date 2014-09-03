@@ -19,14 +19,14 @@ define( function( require ) {
     var pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -4, 0 ).lineTo( 0, -6 ).lineTo( 4, 0 ).lineTo( 9, 0 );
 
     var pulsePath = new Path( pulseShape, {
-      lineWidth: 1,
+      lineWidth: 1.5,
       stroke: '#333',
       lineCap: 'round'
     } );
 
     var pulsePath2 = new Path( pulseShape, {
       lineWidth: 3,
-      stroke: '#5f5',
+      stroke: '#eee',
       lineCap: 'round'
     } );
 
