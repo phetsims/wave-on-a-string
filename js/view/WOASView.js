@@ -142,7 +142,7 @@ define( function( require ) {
     this.addChild( new ReferenceLine( model ) );
     this.addChild( endNode );
     this.addChild( new TheStringNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
-    this.addChild( new StartNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yKeyRange} ) );
+    this.addChild( new StartNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yWrenchRange} ) );
     this.addChild( windowImage = new Node( {children: [new Image( windowEdgeImage, {left: Constants.windowXOffset - 4 + Constants.windowShift, centerY: 0, scale: Constants.windowScale} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {

@@ -33,7 +33,7 @@ define( function( require ) {
     yTheStringNode: 215,
     startTheStringNode: 70,
     endTheStringNode: 670,
-    yKeyRange: new Range( -120, 120 ),
+    yWrenchRange: new Range( -100, 100 ),
     maxWidthBottomControlPanel: 1000,
     tensionRange: new Range( 0, 2 ),
     dampingRange: new Range( 0, 100 ),
