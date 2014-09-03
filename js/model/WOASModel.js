@@ -87,7 +87,7 @@ define( function( require ) {
       PropertySet.prototype.reset.call( this );
       this.manualRestart();
     },
-    //next step strings array calculated
+    // NOTE TO FUTURE MAINTAINER: this is the fixed-timestep model step. We interpolate between these steps as needed
     evolve: function() {
       var dt = 1,
         v = 1,

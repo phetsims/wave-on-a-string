@@ -45,7 +45,7 @@ define( function( require ) {
 
     this.mutate( options );
 
-    function updateKey() {
+    function updateRing() {
       ring_front.y = ring_back.y = model.yNow[model.yNow.length - 1] || 0;
     }
 
@@ -53,7 +53,7 @@ define( function( require ) {
     model.on( 'yNowChanged', function() { dirty = true; } );
     events.on( 'frame', function() {
       if ( dirty ) {
-        updateKey();
+        updateRing();
         dirty = false;
       }
     } );

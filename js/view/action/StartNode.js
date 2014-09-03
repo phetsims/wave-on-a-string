@@ -36,6 +36,9 @@ define( function( require ) {
     Node.call( this );
     var thisNode = this;
 
+    /*---------------------------------------------------------------------------*
+    * Oscillation wheel
+    *----------------------------------------------------------------------------*/
     var wheelRadius = 29.5;
     var wheel = new Circle( wheelRadius, {
       stroke: '#333',
@@ -57,16 +60,27 @@ define( function( require ) {
       fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#555' ).addColorStop( 1, '#555' )
     } ) );
 
+    // toImage* style conversion of the wheel if necessary for performance
     // var wheelImageScale = 3;
     // wheel.scale( wheelImageScale );
     // wheel = wheel.toDataURLNodeSynchronous();
 
+    /*---------------------------------------------------------------------------*
+    * Wrench
+    *----------------------------------------------------------------------------*/
     var wrench = new Node( {children: [new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
+
+    /*---------------------------------------------------------------------------*
+    * Post
+    *----------------------------------------------------------------------------*/
     var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
       fill: Constants.postGradient
     } );
 
+    /*---------------------------------------------------------------------------*
+    * Piston Box
+    *----------------------------------------------------------------------------*/
     var pistonBox = new Pseudo3DRoundedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
       baseColor: new Color( 200, 200, 200 ),
       lightFactor: 0.5,
