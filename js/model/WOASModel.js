@@ -138,7 +138,8 @@ define( function( require ) {
           break;
         case'noEnd':
           this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
-          this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];
+          this.yNow[this.nSegs - 1] = this.yLast[this.nSegs - 2]; // from a comment in the old model code?
+          // from the Flash model: this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];//this.yLast[this.nSegs - 2];
           break;
         default: //'fixedEnd'
           this.yLast[this.nSegs - 1] = 0;
