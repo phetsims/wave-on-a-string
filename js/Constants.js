@@ -66,6 +66,9 @@ define( function( require ) {
     // how much the window front should overlap the window back
     windowXOffset: 5,
 
+    // how much to horizontally shift the window (to center)
+    windowShift: 1,
+
     offsetWheel: new Vector2( 0, 156 ),
 
     dragAndDropHandler: function dnd( thisNode, callback ) {

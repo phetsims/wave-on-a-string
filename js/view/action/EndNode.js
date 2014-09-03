@@ -16,10 +16,12 @@ define( function( require ) {
   // images
   var ringBackImage = require( 'image!WOAS/ring_back.png' );
   var ringFrontImage = require( 'image!WOAS/ring_front.png' );
-  var windowImage = require( 'image!WOAS/window_back2.png' );
+  var windowImage = require( 'image!WOAS/window-back.svg' );
   var clampImage = require( 'image!WOAS/clamp.svg' );
 
   // workaround, TODO: investigate why necessary
+  windowImage.width = 126;
+  windowImage.height = 395;
   clampImage.width = 214;
   clampImage.height = 354;
 
@@ -28,7 +30,7 @@ define( function( require ) {
     var clamp = new Image( clampImage, {x: -17, y: -31, scale: 0.4} ),
       ring_back = new Node( {children: [new Image( ringBackImage, {x: 5, y: -14 / 2, scale: 0.5} )]} ),
       ring_front = new Node( {children: [new Image( ringFrontImage, {x: 4.7, y: 0, scale: 0.5} )]} ),
-      windowNode = new Image( windowImage, {right: Constants.windowXOffset, centerY: 0, scale: Constants.windowScale } ),
+      windowNode = new Image( windowImage, {right: Constants.windowXOffset + Constants.windowShift, centerY: 0, scale: Constants.windowScale } ),
       post = new Rectangle( -5, -130, 10, 260, {
         stroke: '#000',
         fill: Constants.postGradient,
