@@ -14,14 +14,18 @@ define( function( require ) {
   var Constants = require( 'WOAS/Constants' );
 
   // images
-  var clampImage = require( 'image!WOAS/clamp_2.png' );
   var ringBackImage = require( 'image!WOAS/ring_back.png' );
   var ringFrontImage = require( 'image!WOAS/ring_front.png' );
   var windowImage = require( 'image!WOAS/window_back2.png' );
+  var clampImage = require( 'image!WOAS/clamp.svg' );
+
+  // workaround, TODO: investigate why necessary
+  clampImage.width = 214;
+  clampImage.height = 354;
 
   function EndNode( model, events, options ) {
     Node.call( this );
-    var clamp = new Image( clampImage, {x: -18, y: -34, scale: 0.4} ),
+    var clamp = new Image( clampImage, {x: -17, y: -31, scale: 0.4} ),
       ring_back = new Node( {children: [new Image( ringBackImage, {x: 5, y: -14 / 2, scale: 0.5} )]} ),
       ring_front = new Node( {children: [new Image( ringFrontImage, {x: 4.7, y: 0, scale: 0.5} )]} ),
       windowNode = new Image( windowImage, {right: Constants.windowXOffset, centerY: 0, scale: Constants.windowScale } ),
