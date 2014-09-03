@@ -10,12 +10,14 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Events = require( 'AXON/Events' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Vector2 = require( 'DOT/Vector2' );
   var Util = require( 'DOT/Util' );
   var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var PlayPauseButton = require( 'SCENERY_PHET/PlayPauseButton' );
@@ -124,7 +126,28 @@ define( function( require ) {
         listener: function() { model.reset(); }
       } )
     ] } ) );
-    this.addChild( new Timer( model ) );
+
+    /*---------------------------------------------------------------------------*
+    * Timer
+    *----------------------------------------------------------------------------*/
+    var timer = new Timer( model.timerSecondProperty, model.timerStartProperty, {} );
+    this.addChild( timer );
+    model.timerProperty.link( function updateVisible( value ) {
+      timer.setVisible( value );
+    } );
+    // timer drag handling
+    model.timerLocProperty.link( function updateLocation( value ) {
+      timer.translation = value;
+    } );
+    var clickOffset = new Vector2();
+    timer.dragTarget.addInputListener( new SimpleDragHandler( {
+      start: function( event ) {
+        clickOffset = timer.dragTarget.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
+      },
+      drag: function( event ) {
+        model.timerLoc = timer.globalToParentPoint( event.pointer.point ).minus( clickOffset );
+      }
+    } ) );
 
     var windowImage;
     //center line

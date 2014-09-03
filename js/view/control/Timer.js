@@ -11,13 +11,11 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Vector2 = require( 'DOT/Vector2' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Color = require( 'SCENERY/util/Color' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -26,27 +24,17 @@ define( function( require ) {
   var BooleanRectangularToggleButton = require( 'SUN/buttons/BooleanRectangularToggleButton' );
   var Pseudo3DRoundedRectangle = require( 'WOAS/view/control/Pseudo3DRoundedRectangle' );
 
-  function Timer( model, options ) {
+  function Timer( secondsProperty, runningProperty, options ) {
+    options = _.extend( {
+      iconColor: '#333',
+      buttonBaseColor: '#DFE0E1'
+    }, options );
+
     Node.call( this, _.extend( { cursor: 'pointer' }, options ) );
-    var thisNode = this;
 
-    var iconColor = '#333';
-    var buttonBaseColor = '#DFE0E1';
-
-    var paddingBetweenItems = 6;
-
-    var resetAllShape = new UTurnArrowShape( 10 );
-    var playPauseHeight = resetAllShape.computeBounds().height;
-    var playPauseWidth = playPauseHeight;
-    var halfPlayStroke = 0.05 * playPauseWidth;
-    var playOffset = 0.15 * playPauseWidth;
-    var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5 - playOffset, 0 )
-                               .lineTo( halfPlayStroke * 1.5 + playOffset, playPauseHeight / 2 - halfPlayStroke - playOffset )
-                               .lineTo( halfPlayStroke * 1.5 + playOffset, -playPauseHeight / 2 + halfPlayStroke + playOffset )
-                               .close().getOffsetShape( -playOffset );
-    // a stop symbol (square)
-    var pauseShape = Shape.bounds( new Bounds2( 0, -playPauseHeight / 2, playPauseWidth, playPauseHeight / 2 ).eroded( playPauseWidth * 0.1 ) );
-
+    /*---------------------------------------------------------------------------*
+    * Readout text
+    *----------------------------------------------------------------------------*/
     var bigReadoutText = new Text( timeToBigString( 0 ), {
       font: new PhetFont( 20 )
     } );
@@ -65,84 +53,96 @@ define( function( require ) {
     } );
     readoutText.centerX = 0;
 
+    /*---------------------------------------------------------------------------*
+    * Readout background
+    *----------------------------------------------------------------------------*/
     var textBackground = Rectangle.roundedBounds( readoutText.bounds.dilatedXY( 5, 2 ), 5, 5, {
       fill: '#fff',
       stroke: 'rgba(0,0,0,0.5)'
     } );
+
+    var paddingBetweenItems = 6;
     var minimumButtonWidth = ( textBackground.width - paddingBetweenItems ) / 2 - 1; // -1 due to the stroke making it look mis-aligned
+
+    /*---------------------------------------------------------------------------*
+    * Buttons
+    *----------------------------------------------------------------------------*/
+    var resetAllShape = new UTurnArrowShape( 10 );
+    var playPauseHeight = resetAllShape.computeBounds().height;
+    var playPauseWidth = playPauseHeight;
+    var halfPlayStroke = 0.05 * playPauseWidth;
+    var playOffset = 0.15 * playPauseWidth;
+    var playShape = new Shape().moveTo( playPauseWidth - halfPlayStroke * 0.5 - playOffset, 0 )
+                               .lineTo( halfPlayStroke * 1.5 + playOffset, playPauseHeight / 2 - halfPlayStroke - playOffset )
+                               .lineTo( halfPlayStroke * 1.5 + playOffset, -playPauseHeight / 2 + halfPlayStroke + playOffset )
+                               .close().getOffsetShape( -playOffset );
+    // a stop symbol (square)
+    var pauseShape = Shape.bounds( new Bounds2( 0, -playPauseHeight / 2, playPauseWidth, playPauseHeight / 2 ).eroded( playPauseWidth * 0.1 ) );
 
     var resetButton = new RectangularPushButton( {
       listener: function resetTimer() {
-        model.timerStart = false;
-        model.timerSecond = 0;
+        runningProperty.set( false );
+        secondsProperty.set( 0 );
       },
       content: new Path( resetAllShape, {
-        fill: iconColor
+        fill: options.iconColor
       } ),
-      baseColor: buttonBaseColor,
+      baseColor: options.buttonBaseColor,
       minWidth: minimumButtonWidth
     } );
 
     var playPauseButton = new BooleanRectangularToggleButton(
-      new Path( pauseShape, { fill: iconColor } ),
-      new Path( playShape, { stroke: iconColor, fill: '#eef', lineWidth: halfPlayStroke * 2 } ), model.timerStartProperty, {
-        baseColor: buttonBaseColor,
+      new Path( pauseShape, { fill: options.iconColor } ),
+      new Path( playShape, { stroke: options.iconColor, fill: '#eef', lineWidth: halfPlayStroke * 2 } ), runningProperty, {
+        baseColor: options.buttonBaseColor,
         minWidth: minimumButtonWidth
     } );
 
-    var timer = new Node();
-    timer.addChild( resetButton );
-    timer.addChild( playPauseButton );
-    timer.addChild( textBackground );
-    timer.addChild( readoutText );
+    /*---------------------------------------------------------------------------*
+    * Layout
+    *----------------------------------------------------------------------------*/
+    var container = new Node();
+    container.addChild( resetButton );
+    container.addChild( playPauseButton );
+    container.addChild( textBackground );
+    container.addChild( readoutText );
 
-    // layout
     resetButton.right = -paddingBetweenItems / 2;
     playPauseButton.left = paddingBetweenItems / 2;
     resetButton.top = textBackground.bottom + paddingBetweenItems;
     playPauseButton.top = textBackground.bottom + paddingBetweenItems;
 
     var panelPad = 8;
-    timer.left = panelPad;
-    timer.top = panelPad;
+    container.left = panelPad;
+    container.top = panelPad;
 
-    var roundedRectangle = new Pseudo3DRoundedRectangle( timer.bounds.dilated( panelPad ), {
+    /*---------------------------------------------------------------------------*
+    * Panel background
+    *----------------------------------------------------------------------------*/
+    var roundedRectangle = new Pseudo3DRoundedRectangle( container.bounds.dilated( panelPad ), {
       baseColor: new Color( 80, 130, 230 ),
       cornerRadius: 10
     } );
-
     roundedRectangle.touchArea = roundedRectangle.localBounds.dilated( 10 );
-
     this.addChild( roundedRectangle );
+    this.addChild( container );
 
-    var dragZone = Rectangle.bounds( roundedRectangle.bounds, {} );
-
-    this.addChild( dragZone );
-    this.addChild( timer );
-
-    model.timerProperty.link( function updateVisible( value ) {
-      thisNode.setVisible( value );
-    } );
-    model.timerSecondProperty.link( function updateTime( value ) {
+    /*---------------------------------------------------------------------------*
+    * Control logic
+    *----------------------------------------------------------------------------*/
+    secondsProperty.link( function updateTime( value ) {
       bigReadoutText.text = timeToBigString( value );
       smallReadoutText.text = timeToSmallString( value );
       resetButton.enabled = value > 0;
     } );
-    model.timerLocProperty.link( function updateLocation( value ) {
-      thisNode.translation = value;
-    } );
-    var clickOffset = new Vector2();
-    roundedRectangle.addInputListener( new SimpleDragHandler(
-      {
-        start: function( event ) {
-          clickOffset = roundedRectangle.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
-        },
-        drag: function( event ) {
-          model.timerLoc = thisNode.globalToParentPoint( event.pointer.point ).minus( clickOffset );
-        }
-      } ) );
+
+    /*---------------------------------------------------------------------------*
+    * Target for drag listeners
+    *----------------------------------------------------------------------------*/
+    this.dragTarget = roundedRectangle;
   }
 
+  // the full-sized minutes and seconds string
   function timeToBigString( timeInSeconds ) {
     var minutes = Math.floor( timeInSeconds / 60 ) % 60;
     var seconds = Math.floor( timeInSeconds ) % 60;
@@ -155,6 +155,7 @@ define( function( require ) {
     return minutes + ':' + seconds;
   }
 
+  // the smaller hundredths-of-a-second string
   function timeToSmallString( timeInSeconds ) {
     var centiseconds = Math.floor( timeInSeconds % 1 * 100 );
     if ( centiseconds < 10 ) {
