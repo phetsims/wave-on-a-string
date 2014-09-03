@@ -20,10 +20,9 @@ define( function( require ) {
   function RadioGroup( options ) {
     options = _.extend( { scale: 0.7 }, options );
     Node.call( this );
-    var i = 0,
-      length = options.radio.length,
-      group = [];
-    for ( ; i < length; i++ ) {
+    var length = options.radio.length;
+    var group = [];
+    for ( var i = 0; i < length; i++ ) {
       group.push( { node: new Text( options.text[i], {font: new PhetFont( 15 )} ), property: options.property, value: options.radio[i] } );
     }
     var radioGroup = new Panel( new VerticalAquaRadioButtonGroup( group, {
