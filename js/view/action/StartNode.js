@@ -23,7 +23,7 @@ define( function( require ) {
   var Pseudo3DRoundedRectangle = require( 'WOAS/view/control/Pseudo3DRoundedRectangle' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
 
-  var wrenchImage = require( 'image!WOAS/wrench_3.svg' );
+  var wrenchImage = require( 'image!WOAS/wrench.svg' );
   wrenchImage.width = 60;
   wrenchImage.height = 209;
 
@@ -61,7 +61,7 @@ define( function( require ) {
     // wheel.scale( wheelImageScale );
     // wheel = wheel.toDataURLNodeSynchronous();
 
-    var wrench = new Node( {children: [new Image( wrenchImage, {x: -40, y: -25, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
+    var wrench = new Node( {children: [new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
     var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
       fill: Constants.postGradient
