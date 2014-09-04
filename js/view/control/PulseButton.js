@@ -20,13 +20,13 @@ define( function( require ) {
 
     var pulsePath = new Path( pulseShape, {
       lineWidth: 1.5,
-      stroke: 'rgba(51,60,51,0.9)',
+      stroke: '#333',
       lineCap: 'round'
     } );
 
     var pulsePath2 = new Path( pulseShape, {
       lineWidth: 3,
-      stroke: 'rgba(238,238,238,0.8)',
+      stroke: '#eee',
       lineCap: 'round'
     } );
 
