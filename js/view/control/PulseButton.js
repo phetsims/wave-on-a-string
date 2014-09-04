@@ -31,7 +31,12 @@ define( function( require ) {
     } );
 
     RoundPushButton.call( this, {
-      listener: model.manualPulse.bind( model ),
+      listener: function() {
+        model.manualPulse();
+        model.play = true;
+        model.trigger( 'yNowChanged' );
+      },
+      // listener: model.manualPulse.bind( model ),
       baseColor: '#33dd33',
       content: new Node( { children: [pulsePath2, pulsePath] } ),
       radius: 17

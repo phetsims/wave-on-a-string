@@ -56,11 +56,11 @@ define( function( require ) {
     this.reset();
 
     var model = this;
-    this.link( 'mode', function() {
-      if ( model.mode === 'pulse' ) {
-        model.yNow[0] = 0;
-      }
-    } );
+    // this.link( 'mode', function() {
+    //   if ( model.mode === 'pulse' ) {
+    //     model.yNow[0] = 0;
+    //   }
+    // } );
   }
 
   inherit( PropertySet, WOASModel, {
@@ -174,6 +174,7 @@ define( function( require ) {
         if ( this.mode === 'pulse' && this.pulsePending ) {
           this.pulsePending = false;
           this.pulse = true;
+          this.yNow[0] = 0;
         }
         if ( this.mode === 'pulse' && this.pulse ) {
           var da = Math.PI * fixDt * this.speed / this.pulseWidth;
@@ -211,7 +212,7 @@ define( function( require ) {
       }
       if ( this.mode === 'manual' ) {
         // sanity check for our yNow
-        this.yNow[0] = this.nextLeftY;
+        // this.yNow[0] = this.nextLeftY;
       }
       this.trigger( 'yNowChanged' );
     },
