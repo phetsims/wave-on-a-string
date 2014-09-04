@@ -14,10 +14,10 @@ define( [
 
   var simOptions = {
     credits: {
-      leadDesign: 'Michael Dubson, Noah Podolefsky',
-      softwareDevelopment: 'Michael Dubson, Jonathan Olson',
-      designTeam: 'Trish Loeblein',
-      interviews: 'Wendy Adams, Danielle Harlow',
+      leadDesign: 'Michael Dubson, Ariel Paul',
+      softwareDevelopment: 'Jonathan Olson, Michael Dubson',
+      designTeam: 'Michael Dubson, Ariel Paul, Trish Loeblein, Kathy Perkins, Amy Rouinfar',
+      interviews: 'Amy Rouinfar',
       graphicArts: 'Sharon Siman-Tov',
       thanks: 'Thanks to Mobile Learner Labs for working with the PhET development team\n' +
               'to convert this simulation to HTML5.'
