@@ -39,7 +39,8 @@ define( function( require ) {
       // listener: model.manualPulse.bind( model ),
       baseColor: '#33dd33',
       content: new Node( { children: [pulsePath2, pulsePath] } ),
-      radius: 17
+      radius: 17,
+      yContentOffset: -1
     } );
     var self = this;
     this.touchArea = this.localBounds.dilatedXY( 5, 10 );
