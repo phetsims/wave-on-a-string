@@ -16,7 +16,7 @@ define( function( require ) {
   var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
   function PulseButton( model, options ) {
-    var pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -4, 0 ).lineTo( 0, -9 ).lineTo( 4, 0 ).lineTo( 9, 0 );
+    var pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
 
     var pulsePath = new Path( pulseShape, {
       lineWidth: 1.5,
