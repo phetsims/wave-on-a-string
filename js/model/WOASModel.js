@@ -55,7 +55,7 @@ define( function( require ) {
     this.alpha = 1;
     this.reset();
 
-    var model = this;
+    // var model = this;
     // this.link( 'mode', function() {
     //   if ( model.mode === 'pulse' ) {
     //     model.yNow[0] = 0;
