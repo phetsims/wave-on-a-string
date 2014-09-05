@@ -74,8 +74,8 @@ define( function( require ) {
     model.rulerLocVProperty.link( function updateRulerVLocation( value ) {
       rulerV.translation = value;
     } );
-    rulerV.addInputListener( Constants.dragAndDropHandler( rulerV, function( point ) {model.rulerLocV = point; } ) );
-    rulerH.addInputListener( Constants.dragAndDropHandler( rulerH, function( point ) {model.rulerLocH = point; } ) );
+    Constants.boundedDragHandler( rulerV, model.rulerLocVProperty, 30 );
+    Constants.boundedDragHandler( rulerH, model.rulerLocHProperty, 30 );
 
     this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
@@ -144,12 +144,25 @@ define( function( require ) {
       timer.translation = value;
     } );
     var clickOffset = new Vector2();
+    var restrictedBounds = Constants.viewBounds.eroded( 30 );
     timer.dragTarget.addInputListener( new SimpleDragHandler( {
       start: function( event ) {
         clickOffset = timer.dragTarget.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
       },
       drag: function( event ) {
         model.timerLoc = timer.globalToParentPoint( event.pointer.point ).minus( clickOffset );
+        if ( timer.right < restrictedBounds.minX ) {
+          model.timerLoc = new Vector2( model.timerLoc.x - timer.right + restrictedBounds.minX, model.timerLoc.y );
+        }
+        if ( timer.left > restrictedBounds.maxX ) {
+          model.timerLoc = new Vector2( model.timerLoc.x - timer.left + restrictedBounds.maxX, model.timerLoc.y );
+        }
+        if ( timer.bottom < restrictedBounds.minY ) {
+          model.timerLoc = new Vector2( model.timerLoc.x, model.timerLoc.y - timer.bottom + restrictedBounds.minY );
+        }
+        if ( timer.top > restrictedBounds.maxY ) {
+          model.timerLoc = new Vector2( model.timerLoc.x, model.timerLoc.y - timer.top + restrictedBounds.maxY );
+        }
       }
     } ) );
 

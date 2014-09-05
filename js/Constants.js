@@ -78,6 +78,34 @@ define( function( require ) {
     }
   };
 
+  Constants.viewBounds = Constants.viewSize.toBounds();
+
+  Constants.boundedDragHandler = function( node, positionProperty, padding ) {
+    var restrictedBounds = Constants.viewBounds.eroded( padding );
+    var clickOffset = new Vector2();
+    node.addInputListener( new SimpleDragHandler( {
+      start: function( event ) {
+        clickOffset = node.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
+      },
+      drag: function( event ) {
+        var point = node.globalToParentPoint( event.pointer.point ).minus( clickOffset );
+        positionProperty.set( point );
+        if ( node.right < restrictedBounds.minX ) {
+          positionProperty.set( new Vector2( positionProperty.get().x - node.right + restrictedBounds.minX, positionProperty.get().y ) );
+        }
+        if ( node.left > restrictedBounds.maxX ) {
+          positionProperty.set( new Vector2( positionProperty.get().x - node.left + restrictedBounds.maxX, positionProperty.get().y ) );
+        }
+        if ( node.bottom < restrictedBounds.minY ) {
+          positionProperty.set( new Vector2( positionProperty.get().x, positionProperty.get().y - node.bottom + restrictedBounds.minY ) );
+        }
+        if ( node.top > restrictedBounds.maxY ) {
+          positionProperty.set( new Vector2( positionProperty.get().x, positionProperty.get().y - node.top + restrictedBounds.maxY ) );
+        }
+      }
+    } ) );
+  };
+
   return Constants;
 } )
 ;

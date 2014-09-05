@@ -40,7 +40,7 @@ define( function( require ) {
     thisNode.touchArea = Shape.bounds( Bounds2.point( 755, 0 ).dilated( Constants.dilatedReferenceLineTouchArea ) );
     thisNode.mouseArea = Shape.bounds( Bounds2.point( 755, 0 ).dilatedXY( 15, 10 ) );
 
-    thisNode.addInputListener( Constants.dragAndDropHandler( thisNode, function( point ) {model.referenceLineLoc = point; } ) );
+    Constants.boundedDragHandler( thisNode, model.referenceLineLocProperty, 30 );
   }
 
   inherit( Node, ReferenceLine );
