@@ -25,13 +25,14 @@ define( function( require ) {
     for ( var i = 0; i < length; i++ ) {
       group.push( { node: new Text( options.text[i], {font: new PhetFont( 15 )} ), property: options.property, value: options.radio[i] } );
     }
-    var radioGroup = new Panel( new VerticalAquaRadioButtonGroup( group, {
+    var radioGroup = new VerticalAquaRadioButtonGroup( group, {
       spacing: 8,
       radioButtonOptions: {
         selectedColor: Constants.radioColor.toCSS()
       }
-    } ), { fill: '#D9FCC5', xMargin: 8, yMargin: 8 } );
-    this.addChild( radioGroup );
+    } );
+    var panel = new Panel( radioGroup, { fill: '#D9FCC5', xMargin: 8, yMargin: 8 } );
+    this.addChild( options.omitPanel ? radioGroup : panel );
     this.mutate( options );
   }
 

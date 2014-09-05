@@ -9,12 +9,9 @@ define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
   var Events = require( 'AXON/Events' );
-  var Bounds2 = require( 'DOT/Bounds2' );
   var Vector2 = require( 'DOT/Vector2' );
   var Util = require( 'DOT/Util' );
-  var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Line = require( 'SCENERY/nodes/Line' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -24,7 +21,6 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/StepButton' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var BottomControlPanel = require( 'WOAS/view/control/BottomControlPanel' );
   var RadioGroup = require( 'WOAS/view/control/RadioGroup' );
   var RestartButton = require( 'WOAS/view/control/RestartButton' );
@@ -56,7 +52,10 @@ define( function( require ) {
 
     this.events = new Events();
 
-    var typeRadio, endTypeRadio, speedSlow, speedFast, speedGroup;
+    var centerControlX = Constants.viewSize.width / 2;
+    var centerControlY = Constants.viewSize.height - 131;
+
+    var typeRadio, endTypeRadio;
 
     var rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
     var rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
@@ -82,14 +81,14 @@ define( function( require ) {
     this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
     this.addChild( endTypeRadio = new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], text: [fixedEndString, looseEndString, noEndString], property: model.typeEndProperty, x: Constants.viewSize.width - 100, y: 5} ) );
     endTypeRadio.right = Constants.viewSize.width - 5;
-    this.addChild( speedGroup = new Node( {scale: 0.7, x: 140 + 100, y: Constants.viewSize.height - 131, children: [
-      speedSlow = new AquaRadioButton( model.speedProperty, 0.25, new Text( speedSlowString, {font: new PhetFont( 15 )} ), {radius: 12, selectedColor: Constants.radioColor } ),
-      speedFast = new AquaRadioButton( model.speedProperty, 1, new Text( speedNormalString, {font: new PhetFont( 15 )} ), {radius: 12, x: speedSlow.width + 20, selectedColor: Constants.radioColor } )
-    ]} ) );
-    speedSlow.touchArea = Shape.bounds( Bounds2.rect( -14, -speedSlow.height / 2, speedSlow.width + 5, speedSlow.height ).dilatedXY( 5, 15 ) );
-    speedSlow.mouseArea = Shape.bounds( Bounds2.rect( -14, -speedSlow.height / 2, speedSlow.width + 5, speedSlow.height ) );
-    speedFast.touchArea = Shape.bounds( Bounds2.rect( -14, -speedFast.height / 2, speedFast.width + 5, speedFast.height ).dilatedXY( 5, 15 ) );
-    speedFast.mouseArea = Shape.bounds( Bounds2.rect( -14, -speedFast.height / 2, speedFast.width + 5, speedFast.height ) );
+    this.addChild( new RadioGroup( {
+      radio: [0.25, 1],
+      text: [speedSlowString, speedNormalString],
+      property: model.speedProperty,
+      omitPanel: true,
+      right: centerControlX - 30,
+      centerY: centerControlY
+    } ) );
     this.addChild( new BottomControlPanel( model ) );
     var playPauseButtonOptions = {
       upFill: Constants.blueUpColor,
@@ -101,16 +100,16 @@ define( function( require ) {
       innerButtonLineWidth: 1
     };
     this.addChild( new PlayPauseButton( model.playProperty, {
-      x: speedGroup.right + 45,
-      y: speedGroup.centerY,
+      x: centerControlX + 45,
+      centerY: centerControlY,
       scale: 0.6,
       touchExpansion: 12,
       pauseOptions: playPauseButtonOptions,
       playOptions: playPauseButtonOptions
     } ) );
     this.addChild( new StepButton( model.manualStep.bind( model ), model.playProperty, {
-      x: speedGroup.right + 88,
-      y: speedGroup.centerY,
+      x: centerControlX + 88,
+      centerY: centerControlY,
       scale: 0.6,
       touchExpansion: 12,
       upFill: Constants.blueUpColor,
