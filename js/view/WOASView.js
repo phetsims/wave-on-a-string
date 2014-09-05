@@ -99,16 +99,21 @@ define( function( require ) {
       backgroundGradientColorStop1: Constants.buttonBorder1,
       innerButtonLineWidth: 1
     };
-    this.addChild( new PlayPauseButton( model.playProperty, {
+    var playPauseButton = new PlayPauseButton( model.playProperty, {
       x: centerControlX + 45,
       centerY: centerControlY,
       scale: 0.6,
       touchExpansion: 12,
       pauseOptions: playPauseButtonOptions,
       playOptions: playPauseButtonOptions
-    } ) );
+    } );
+    this.addChild( playPauseButton );
+    var pauseSizeIncreaseFactor = 1.25;
+    model.playProperty.lazyLink( function( isPlaying ) {
+      playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
+    } );
     this.addChild( new StepButton( model.manualStep.bind( model ), model.playProperty, {
-      x: centerControlX + 88,
+      x: centerControlX + 94,
       centerY: centerControlY,
       scale: 0.6,
       touchExpansion: 12,
