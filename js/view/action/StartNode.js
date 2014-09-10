@@ -72,9 +72,9 @@ define( function( require ) {
     var wrenchImageNode = new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false} );
     var wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
-      tailWidth: 7,
-      headWidth: 15,
-      headHeight: 15
+      tailWidth: 10,
+      headWidth: 18,
+      headHeight: 18
     };
     var wrenchArrowXOffset = 8;
     var wrenchArrowYOffset = 10;
