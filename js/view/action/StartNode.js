@@ -20,6 +20,7 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var Pseudo3DRoundedRectangle = require( 'SCENERY_PHET/Pseudo3DRoundedRectangle' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Constants = require( 'WOAS/Constants' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
 
@@ -68,7 +69,30 @@ define( function( require ) {
     /*---------------------------------------------------------------------------*
     * Wrench
     *----------------------------------------------------------------------------*/
-    var wrench = new Node( {children: [new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false} )], cursor: 'pointer'} );
+    var wrenchImageNode = new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false} );
+    var wrenchArrowOptions = {
+      fill: 'hsl(210,90%,60%)',
+      tailWidth: 7,
+      headWidth: 15,
+      headHeight: 15
+    };
+    var wrenchArrowXOffset = 8;
+    var wrenchArrowYOffset = 10;
+    var wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
+                                        wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
+    var wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
+                                           wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
+    var wrench = new Node( {children: [
+      wrenchImageNode,
+      wrenchTopArrow,
+      wrenchBottomArrow
+    ], cursor: 'pointer'} );
+
+    wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
+    wrenchBottomArrow.touchArea = wrenchBottomArrow.localBounds.dilated( 6 );
+    wrench.touchArea = Shape.bounds( wrenchImageNode.bounds.dilated( Constants.dilatedTouchArea ) );
+    wrench.mouseArea = Shape.bounds( wrenchImageNode.bounds );
+
 
     /*---------------------------------------------------------------------------*
     * Post
@@ -104,13 +128,13 @@ define( function( require ) {
     thisNode.addChild( new Node( {children: [wheel], translation: Constants.offsetWheel} ) );
     thisNode.addChild( pistonBox );
 
-    wrench.touchArea = Shape.bounds( wrench.bounds.dilated( Constants.dilatedTouchArea ) );
-    wrench.mouseArea = Shape.bounds( wrench.bounds );
-
     wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
       model.play = true;
       model.trigger( 'yNowChanged' );
+    }, function endCallback( event, trail ) {
+      wrenchTopArrow.visible = false;
+      wrenchBottomArrow.visible = false;
     } ) );
 
     thisNode.mutate( options );
