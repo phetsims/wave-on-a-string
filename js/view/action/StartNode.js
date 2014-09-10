@@ -73,7 +73,7 @@ define( function( require ) {
     var wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,
-      headWidth: 18,
+      headWidth: 22,
       headHeight: 18
     };
     var wrenchArrowXOffset = 8;
