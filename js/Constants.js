@@ -66,10 +66,11 @@ define( function( require ) {
 
     offsetWheel: new Vector2( 0, 156 ),
 
-    dragAndDropHandler: function dnd( thisNode, callback, endCallback ) {
+    dragAndDropHandler: function dnd( thisNode, callback, startCallback, endCallback ) {
       return new SimpleDragHandler( {
-        start: function( event ) {
+        start: function( event, trail ) {
           clickOffset = thisNode.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
+          startCallback && startCallback( event, trail );
         },
         drag: function( event ) {
           callback( thisNode.globalToParentPoint( event.pointer.point ).minus( clickOffset ) );

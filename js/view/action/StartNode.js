@@ -133,9 +133,16 @@ define( function( require ) {
       model.play = true;
       model.trigger( 'yNowChanged' );
     }, function endCallback( event, trail ) {
-      wrenchTopArrow.visible = false;
-      wrenchBottomArrow.visible = false;
+      if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
+        model.wrenchArrowsVisible = false;
+      }
+    }, function endCallback( event, trail ) {
+      model.wrenchArrowsVisible = false;
     } ) );
+    model.link( 'wrenchArrowsVisible', function() {
+      wrenchTopArrow.visible = model.wrenchArrowsVisible;
+      wrenchBottomArrow.visible = model.wrenchArrowsVisible;
+    } );
 
     thisNode.mutate( options );
     function updateKey() {

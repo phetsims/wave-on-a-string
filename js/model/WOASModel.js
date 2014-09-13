@@ -46,7 +46,8 @@ define( function( require ) {
       timerStart: false, // timer start/pause status
       timerSecond: 0, // timer time in seconds
       timerLoc: new Vector2( 550, 330 ), // position timer
-      pulseSign: 1 // sign [-1, 1] for pulse mode
+      pulseSign: 1, // sign [-1, 1] for pulse mode
+      wrenchArrowsVisible: true
     } );
 
     this.nextLeftY = 0; // used to interpolate the left-most y value of the string while the wrench is moved in manual mode, for low-FPS browsers
