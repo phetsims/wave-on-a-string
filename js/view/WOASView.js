@@ -12,7 +12,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Util = require( 'DOT/Util' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var Line = require( 'SCENERY/nodes/Line' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -33,8 +32,6 @@ define( function( require ) {
 
   // images
   var windowEdgeImage = require( 'image!WOAS/window-front.svg' );
-  windowEdgeImage.width = 18;
-  windowEdgeImage.height = 395;
 
   // strings
   var speedSlowString = require( 'string!WOAS/speedSlow' );
@@ -183,7 +180,7 @@ define( function( require ) {
     this.addChild( endNode );
     this.addChild( new TheStringNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
     this.addChild( new StartNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yWrenchRange} ) );
-    this.addChild( windowImage = new Node( {children: [new Image( windowEdgeImage, {left: Constants.windowXOffset - 4 + Constants.windowShift, centerY: 0, scale: Constants.windowScale} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
+    this.addChild( windowImage = new Node( {children: [Constants.toImageNode( windowEdgeImage, 18, 395, 1, {left: Constants.windowXOffset - 4 + Constants.windowShift, centerY: 0, scale: Constants.windowScale} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {
       windowImage.setVisible( value === 'noEnd' );

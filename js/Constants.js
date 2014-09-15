@@ -4,12 +4,15 @@ define( function( require ) {
   'use strict';
 
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
   var Color = require( 'SCENERY/util/Color' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Image = require( 'SCENERY/nodes/Image' );
 
   var clickOffset = new Vector2();
   var Constants = {
@@ -108,6 +111,32 @@ define( function( require ) {
         }
       }
     } ) );
+  };
+
+  Constants.toImageNode = function( domImage, width, height, scale, options ) {
+    assert && assert( scale % 1 === 0, 'Only integral scales have been tested' );
+
+    domImage.width = width;
+    domImage.height = height;
+
+    var canvas = document.createElement( 'canvas' );
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    var context = canvas.getContext( '2d' );
+    context.scale( scale, scale );
+    context.drawImage( domImage, 0, 0 );
+
+    var url;
+    try {
+      url = canvas.toDataURL();
+    } catch ( e ) {
+      url = canvas;
+    }
+
+    var sceneryImage = new Image( url, { scale: 1 / scale } );
+    sceneryImage.localBounds = new Bounds2( 0, 0, width * scale, height * scale );
+
+    return new Node( _.extend( { children: [sceneryImage] }, options ) );
   };
 
   return Constants;

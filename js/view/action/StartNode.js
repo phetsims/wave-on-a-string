@@ -13,7 +13,6 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Color = require( 'SCENERY/util/Color' );
@@ -26,8 +25,6 @@ define( function( require ) {
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
 
   var wrenchImage = require( 'image!WOAS/wrench.svg' );
-  wrenchImage.width = 60;
-  wrenchImage.height = 209;
 
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );
@@ -74,13 +71,16 @@ define( function( require ) {
     /*---------------------------------------------------------------------------*
     * Wrench
     *----------------------------------------------------------------------------*/
-    var wrenchImageNode = new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false} );
+    var wrenchImageNode = Constants.toImageNode( wrenchImage, 60, 209, 2, {x: -40, y: -24, scale: 0.9, pickable: false } );
     var wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,
       headWidth: 22,
       headHeight: 18
     };
+    if ( platform.firefox ) {
+      wrenchImageNode.renderer = 'canvas';
+    }
     var wrenchArrowXOffset = 8;
     var wrenchArrowYOffset = 10;
     var wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
