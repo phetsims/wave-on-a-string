@@ -8,6 +8,7 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
+  var platform = require( 'PHET_CORE/platform' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
@@ -62,9 +63,13 @@ define( function( require ) {
     } ) );
 
     // toImage* style conversion of the wheel if necessary for performance
-    // var wheelImageScale = 3;
-    // wheel.scale( wheelImageScale );
-    // wheel = wheel.toDataURLNodeSynchronous();
+    var wheelImageScale = 3;
+    wheel.scale( wheelImageScale );
+    var wheelSize = Math.ceil( wheel.width / 2 ) + 2;
+    wheel = wheel.toDataURLNodeSynchronous( wheelSize, wheelSize, 2 * wheelSize, 2 * wheelSize );
+    if ( platform.firefox ) {
+      wheel.renderer = 'canvas';
+    }
 
     /*---------------------------------------------------------------------------*
     * Wrench
@@ -174,11 +179,11 @@ define( function( require ) {
     // workaround for image not being perfectly centered
     // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
 
-    // var wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
+    var wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
     model.angleProperty.link( function updateWheel( value ) {
       // wheel.rotation = value;
-      wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
-      // wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
+      // wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
+      wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.modeProperty.link( function updateVisible( value ) {
       var wrenchIsVisible = value === 'manual';
