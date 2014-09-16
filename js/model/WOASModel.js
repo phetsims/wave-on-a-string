@@ -58,13 +58,6 @@ define( function( require ) {
 
     // set the string to 0 on mode changes
     this.modeProperty.lazyLink( this.manualRestart.bind( this ) );
-
-    // var model = this;
-    // this.link( 'mode', function() {
-    //   if ( model.mode === 'pulse' ) {
-    //     model.yNow[0] = 0;
-    //   }
-    // } );
   }
 
   inherit( PropertySet, WOASModel, {
