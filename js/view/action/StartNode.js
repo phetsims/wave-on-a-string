@@ -25,7 +25,7 @@ define( function( require ) {
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
   var Image = require( 'SCENERY/nodes/Image' );
 
-  var wrenchImage = require( 'image!WOAS/wrench.svg' );
+  var wrenchImage = require( 'image!WOAS/wrench.png' );
 
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );
@@ -72,7 +72,7 @@ define( function( require ) {
     /*---------------------------------------------------------------------------*
     * Wrench
     *----------------------------------------------------------------------------*/
-    var wrenchImageNode = new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false } );
+    var wrenchImageNode = new Image( wrenchImage, {x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
     var wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,

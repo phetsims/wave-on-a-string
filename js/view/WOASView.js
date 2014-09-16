@@ -32,7 +32,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
 
   // images
-  var windowEdgeImage = require( 'image!WOAS/window-front.svg' );
+  var windowEdgeImage = require( 'image!WOAS/window-front.png' );
 
   // strings
   var speedSlowString = require( 'string!WOAS/speedSlow' );

@@ -16,8 +16,8 @@ define( function( require ) {
   // images
   var ringBackImage = require( 'image!WOAS/ring_back.png' );
   var ringFrontImage = require( 'image!WOAS/ring_front.png' );
-  var windowImage = require( 'image!WOAS/window-back.svg' );
-  var clampImage = require( 'image!WOAS/clamp.svg' );
+  var windowImage = require( 'image!WOAS/window-back.png' );
+  var clampImage = require( 'image!WOAS/clamp.png' );
 
   function EndNode( model, events, options ) {
     Node.call( this );
