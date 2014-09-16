@@ -56,6 +56,9 @@ define( function( require ) {
     this.alpha = 1;
     this.reset();
 
+    // set the string to 0 on mode changes
+    this.modeProperty.lazyLink( this.manualRestart.bind( this ) );
+
     // var model = this;
     // this.link( 'mode', function() {
     //   if ( model.mode === 'pulse' ) {
