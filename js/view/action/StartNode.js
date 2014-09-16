@@ -23,6 +23,7 @@ define( function( require ) {
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Constants = require( 'WOAS/Constants' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
+  var Image = require( 'SCENERY/nodes/Image' );
 
   var wrenchImage = require( 'image!WOAS/wrench.svg' );
 
@@ -71,16 +72,13 @@ define( function( require ) {
     /*---------------------------------------------------------------------------*
     * Wrench
     *----------------------------------------------------------------------------*/
-    var wrenchImageNode = Constants.toImageNode( wrenchImage, 60, 209, 2, {x: -40, y: -24, scale: 0.9, pickable: false } );
+    var wrenchImageNode = new Image( wrenchImage, {x: -40, y: -24, scale: 0.9, pickable: false } );
     var wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,
       headWidth: 22,
       headHeight: 18
     };
-    if ( platform.firefox ) {
-      wrenchImageNode.renderer = 'canvas';
-    }
     var wrenchArrowXOffset = 8;
     var wrenchArrowYOffset = 10;
     var wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
@@ -128,10 +126,10 @@ define( function( require ) {
     } );
     post = new Node( { children: [postCache] } );
 
-    thisNode.addChild( wrench );
     thisNode.addChild( post );
-    thisNode.addChild( new Node( {children: [wheel], translation: Constants.offsetWheel} ) );
     thisNode.addChild( pistonBox );
+    thisNode.addChild( wrench );
+    thisNode.addChild( new Node( {children: [wheel], translation: Constants.offsetWheel} ) );
 
     wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
