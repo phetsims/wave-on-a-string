@@ -10,6 +10,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Circle = require( 'SCENERY/nodes/Circle' );
 
@@ -31,17 +32,18 @@ define( function( require ) {
     var redBead = new Circle( options.radius, { fill: 'red', stroke: 'black', lineWidth: 0.5, children: [highlightCircle], scale: scale } );
     var limeBead = new Circle( options.radius, { fill: 'lime', stroke: 'black', lineWidth: 0.5, children: [highlightCircle], scale: scale } );
 
-    var redBase = new Node( { scale: 1 / scale } );
-    var limeBase = new Node( { scale: 1 / scale } );
-    redBead.toImageNodeAsynchronous( function( image ) {
-      redBase.addChild( image );
+    var redNode;
+    redBead.toDataURL( function( url, x, y ) {
+      redNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
-    limeBead.toImageNodeAsynchronous( function( image ) {
-      limeBase.addChild( image );
+
+    var limeNode;
+    limeBead.toDataURL( function( url, x, y ) {
+      limeNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
     for ( var i = 0; i < model.yDraw.length; i++ ) {
-      var bead = ( i % 10 === 0 ) ? limeBase : redBase;
+      var bead = ( i % 10 === 0 ) ? limeNode : redNode;
       theString.push( new Node( { x: i * options.radius * 2, children: [bead] } ) );
     }
     theString[0].scale( 1.2 );
