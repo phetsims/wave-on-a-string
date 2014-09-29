@@ -111,8 +111,8 @@ define( function( require ) {
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
         valueLabel.centerX = thisNode.width / 2;
-        plusButton.setEnabled( value < options.range.max );
-        minusButton.setEnabled( value > options.range.min );
+        plusButton.enabled = ( value < options.range.max );
+        minusButton.enabled = ( value > options.range.min );
       }
     } );
   }
