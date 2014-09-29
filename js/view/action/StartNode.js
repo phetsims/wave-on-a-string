@@ -19,7 +19,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var Pseudo3DRoundedRectangle = require( 'SCENERY_PHET/Pseudo3DRoundedRectangle' );
+  var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Constants = require( 'WOAS/Constants' );
   var PulseButton = require( 'WOAS/view/control/PulseButton' );
@@ -108,7 +108,7 @@ define( function( require ) {
     /*---------------------------------------------------------------------------*
     * Piston Box
     *----------------------------------------------------------------------------*/
-    var pistonBox = new Pseudo3DRoundedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
+    var pistonBox = new ShadedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
       baseColor: new Color( 200, 200, 200 ),
       lightFactor: 0.5,
       lighterFactor: 0.1,
