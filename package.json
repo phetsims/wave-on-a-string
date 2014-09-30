@@ -17,6 +17,5 @@
     "esprima": "~1.0.4",
     "escodegen": "~0.0.27"
   },
-  "requirejsNamespace": "WOAS",
   "simTitleStringKey": "WOAS/simTitle"
 }
