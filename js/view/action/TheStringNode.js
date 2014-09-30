@@ -1,5 +1,6 @@
+// Copyright 2002-2014, University of Colorado Boulder
+
 /**
- * Copyright 2002-2013, University of Colorado
  * the Strings node view
  *
  * Author: Anton Ulyanov (Mlearner)
