@@ -31,6 +31,7 @@ define( function( require ) {
   var EndNode = require( 'WOAS/view/action/EndNode' );
   var ReferenceLine = require( 'WOAS/view/control/ReferenceLine' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var Bounds2 = require( 'DOT/Bounds2' );
 
   // images
   var windowEdgeImage = require( 'image!WOAS/window-front.png' );
@@ -47,7 +48,7 @@ define( function( require ) {
   var unitCmString = require( 'string!WOAS/unitCm' );
 
   function WOASView( model ) {
-    ScreenView.call( this, { renderer: 'svg' } );
+    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     this.events = new Events();
 
