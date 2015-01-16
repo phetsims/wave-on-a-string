@@ -45,11 +45,11 @@ define( function( require ) {
         content: new Text( rulersString, { font: new PhetFont( 15 ) } ),
         property: model.rulersProperty,
         indent: 0
-      },{
+      }, {
         content: new Text( timerString, { font: new PhetFont( 15 ) } ),
         property: model.timerProperty,
         indent: 0
-      },{
+      }, {
         content: new Text( referenceLineString, { font: new PhetFont( 15 ) } ),
         property: model.referenceLineProperty,
         indent: 0
@@ -61,30 +61,74 @@ define( function( require ) {
     var checkBoxGroupOffset = 20;
     checkBoxGroup.x = checkBoxGroupOffset;
 
-    var tensionSlider = new Slider( { sliderX: 60 - 240, title: tensionString, property: model.tensionProperty, trackSize: new Dimension2( 80, 2 ), rounding: 0, range: Constants.tensionRange, titleVerticalOffset: 15, tick: {step: 1, minText: lowString, maxText: highString} } );
-    var dampingSlider = new Slider( { sliderX: 60 - 420, title: dampingString, property: model.dampingProperty, rounding: -1, range: Constants.dampingRange, titleVerticalOffset: 15, tick: {step: 10, minText: noneString, maxText: lotsString}} );
-    var frequencySlider = new Slider( { sliderX: 60 - 630, type: 'button', buttonStep: 0.01, title: frequencyString, property: model.frequencyProperty, patternValueUnit: patternValueUnitHzString, rounding: 2, range: Constants.frequencyRange } );
-    var pulseWidthSlider = new Slider( { sliderX: 60 - 630, type: 'button', buttonStep: 0.01, title: pulseWidthString, property: model.pulseWidthProperty, patternValueUnit: patternValueUnitSString, rounding: 2, range: Constants.pulseWidthRange } );
-    var amplitudeSlider = new Slider( { sliderX: 60 - 840, type: 'button', buttonStep: 0.01, title: amplitudeString, property: model.amplitudeProperty, patternValueUnit: patternValueUnitCmString, rounding: 2, range: Constants.amplitudeRange } );
+    var tensionSlider = new Slider( {
+      sliderX: 60 - 240,
+      title: tensionString,
+      property: model.tensionProperty,
+      trackSize: new Dimension2( 80, 2 ),
+      rounding: 0,
+      range: Constants.tensionRange,
+      titleVerticalOffset: 15,
+      tick: { step: 1, minText: lowString, maxText: highString }
+    } );
+    var dampingSlider = new Slider( {
+      sliderX: 60 - 420,
+      title: dampingString,
+      property: model.dampingProperty,
+      rounding: -1,
+      range: Constants.dampingRange,
+      titleVerticalOffset: 15,
+      tick: { step: 10, minText: noneString, maxText: lotsString }
+    } );
+    var frequencySlider = new Slider( {
+      sliderX: 60 - 630,
+      type: 'button',
+      buttonStep: 0.01,
+      title: frequencyString,
+      property: model.frequencyProperty,
+      patternValueUnit: patternValueUnitHzString,
+      rounding: 2,
+      range: Constants.frequencyRange
+    } );
+    var pulseWidthSlider = new Slider( {
+      sliderX: 60 - 630,
+      type: 'button',
+      buttonStep: 0.01,
+      title: pulseWidthString,
+      property: model.pulseWidthProperty,
+      patternValueUnit: patternValueUnitSString,
+      rounding: 2,
+      range: Constants.pulseWidthRange
+    } );
+    var amplitudeSlider = new Slider( {
+      sliderX: 60 - 840,
+      type: 'button',
+      buttonStep: 0.01,
+      title: amplitudeString,
+      property: model.amplitudeProperty,
+      patternValueUnit: patternValueUnitCmString,
+      rounding: 2,
+      range: Constants.amplitudeRange
+    } );
 
     var separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 
     var oscillatePanel = new Panel( new Node( {
-      children: [amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkBoxGroup]
+      children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkBoxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 10, yMargin: 5
     } );
     this.addChild( oscillatePanel );
 
     var manualPanel = new Panel( new Node( {
-      children: [dampingSlider, tensionSlider, separator, checkBoxGroup]
+      children: [ dampingSlider, tensionSlider, separator, checkBoxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 10, yMargin: 5
     } );
     this.addChild( manualPanel );
 
     var pulsePanel = new Panel( new Node( {
-      children: [amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkBoxGroup]
+      children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkBoxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 10, yMargin: 5
     } );

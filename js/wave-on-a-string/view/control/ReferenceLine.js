@@ -21,14 +21,19 @@ define( function( require ) {
 
     var thisNode = this;
 
-    thisNode.addChild( new Rectangle( 740 * 2, -10, 40, 20, {fill: Constants.referenceLineBlockGradient, scale: 0.5, stroke: '#000', lineWidth: 0.5} ) );
-    thisNode.addChild( new Rectangle( 750, -10, 20, 20, {fill: Constants.referenceLineBlockGradient, stroke: '#000', lineWidth: 0.5} ) );
+    thisNode.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
+      fill: Constants.referenceLineBlockGradient,
+      scale: 0.5,
+      stroke: '#000',
+      lineWidth: 0.5
+    } ) );
+    thisNode.addChild( new Rectangle( 750, -10, 20, 20, { fill: Constants.referenceLineBlockGradient, stroke: '#000', lineWidth: 0.5 } ) );
     thisNode.addChild( new Line( 0, 0, 750, 0, _.extend( {
       mouseArea: new Bounds2( 0, 0, 750, 0 ).dilated( 5 ),
       touchArea: new Bounds2( 0, 0, 750, 0 ).dilated( 10 )
     }, {
       stroke: '#F00',
-      lineDash: [10, 6],
+      lineDash: [ 10, 6 ],
       lineWidth: 2
     } ) ) );
 

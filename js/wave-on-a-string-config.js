@@ -10,7 +10,7 @@
 
 require.config( {
 
-  deps: ['wave-on-a-string-main'],
+  deps: [ 'wave-on-a-string-main' ],
 
   paths: {
 

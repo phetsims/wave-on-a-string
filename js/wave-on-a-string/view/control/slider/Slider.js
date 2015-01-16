@@ -28,7 +28,7 @@ define( function( require ) {
         property: new Property( 0 ),
         range: new Range( 0, 100 ),
         sliderSize: new Dimension2( 200, 110 ),
-        tick: {step: 1, minText: '', maxText: ''},
+        tick: { step: 1, minText: '', maxText: '' },
         title: '',
         patternValueUnit: '',
         buttonStep: 1,
@@ -59,11 +59,11 @@ define( function( require ) {
 
     thisNode.addChild( new Rectangle( 0, 0, options.sliderSize.width, options.sliderSize.height ) );
 
-    this.addChild( new Text( options.title, {centerX: thisNode.width / 2, top: options.titleVerticalOffset, font: new PhetFont( 18 )} ) );
+    this.addChild( new Text( options.title, { centerX: thisNode.width / 2, top: options.titleVerticalOffset, font: new PhetFont( 18 ) } ) );
 
     var buttonNode, plusButton, minusButton, valueLabel;
     var hSlider = new HSlider( options.property, options.range, options );
-    var hSliderNode = new Node( {children: [hSlider], x: (thisNode.width - options.trackSize.width) / 2, bottom: thisNode.height - 0} );
+    var hSliderNode = new Node( { children: [ hSlider ], x: (thisNode.width - options.trackSize.width) / 2, bottom: thisNode.height - 0 } );
     thisNode.addChild( hSliderNode );
 
     if ( options.type === 'simple' && options.tick && options.tick.step ) {
@@ -72,10 +72,10 @@ define( function( require ) {
       for ( ; i <= options.range.max; i += options.tick.step ) {
 
         if ( i === options.range.max ) {
-          hSlider.addMajorTick( i, new Text( options.tick.maxText, {font: new PhetFont( 15 )} ) );
+          hSlider.addMajorTick( i, new Text( options.tick.maxText, { font: new PhetFont( 15 ) } ) );
         }
         else if ( i === options.range.min ) {
-          hSlider.addMajorTick( i, new Text( options.tick.minText, {font: new PhetFont( 15 )} ) );
+          hSlider.addMajorTick( i, new Text( options.tick.minText, { font: new PhetFont( 15 ) } ) );
         }
         else if ( i === (options.range.min + options.range.max) / 2 ) {
           hSlider.addMajorTick( i );
@@ -87,16 +87,19 @@ define( function( require ) {
     }
 
     if ( options.type === 'button' ) {
-      buttonNode = new Node( {y: 25} );
+      buttonNode = new Node( { y: 25 } );
       var buttonPropertyUpdate = function( value ) {
         return function() {
           options.property.set( Math.max( Math.min( options.property.get() + value, options.range.max ), options.range.min ) );
         };
       };
-      buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {right: thisNode.width - 15, centerY: 15} ) );
-      buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), {left: 15, centerY: 15} ) );
-      buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, {fill: '#FFF', stroke: '#000', lineWidth: 1, centerX: thisNode.width / 2, top: 0} ) );
-      buttonNode.addChild( valueLabel = new Text( '0', {font: new PhetFont( 18 ), centerX: options.width / 2, top: 5} ) );
+      buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {
+        right: thisNode.width - 15,
+        centerY: 15
+      } ) );
+      buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), { left: 15, centerY: 15 } ) );
+      buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, { fill: '#FFF', stroke: '#000', lineWidth: 1, centerX: thisNode.width / 2, top: 0 } ) );
+      buttonNode.addChild( valueLabel = new Text( '0', { font: new PhetFont( 18 ), centerX: options.width / 2, top: 5 } ) );
       this.addChild( buttonNode );
     }
 

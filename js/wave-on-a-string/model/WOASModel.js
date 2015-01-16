@@ -78,7 +78,7 @@ define( function( require ) {
           this.stepDt %= fixDt;
         }
       }
-      this.nextLeftY = this.yNow[0];
+      this.nextLeftY = this.yNow[ 0 ];
     },
     // all reset button
     reset: function() {
@@ -94,29 +94,29 @@ define( function( require ) {
       this.beta = b * dt / 2;
       this.alpha = v * dt / dx;
 
-      this.yNext[0] = this.yNow[0];
+      this.yNext[ 0 ] = this.yNow[ 0 ];
       switch( this.typeEnd ) {
         case'looseEnd':
-          this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
+          this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
           break;
         case'noEnd':
-          this.yNow[this.nSegs - 1] = this.yLast[this.nSegs - 2];
+          this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ];
           break;
         default: //'fixedEnd'
-          this.yNow[this.nSegs - 1] = 0;
+          this.yNow[ this.nSegs - 1 ] = 0;
       }
 
       //main formula for calculating
       var a = 1 / ( this.beta + 1 ), alphaSq = this.alpha * this.alpha, c = 2 * ( 1 - alphaSq );
       for ( var i = 1; i < (this.nSegs - 1); i++ ) {
-        this.yNext[i] = a * ((this.beta - 1) * this.yLast[i] + c * this.yNow[i] + alphaSq * (this.yNow[i + 1] + this.yNow[i - 1]) );
+        this.yNext[ i ] = a * ((this.beta - 1) * this.yLast[ i ] + c * this.yNow[ i ] + alphaSq * (this.yNow[ i + 1 ] + this.yNow[ i - 1 ]) );
       }
 
       // store old values for the very last point
       var lastIndex = this.nSegs - 1;
-      var oldLast = this.yLast[lastIndex];
-      var oldNow = this.yNow[lastIndex];
-      var oldNext = this.yNext[lastIndex];
+      var oldLast = this.yLast[ lastIndex ];
+      var oldNow = this.yNow[ lastIndex ];
+      var oldNext = this.yNext[ lastIndex ];
 
       // rotate arrays instead of copying elements (for speed)
       var old = this.yLast;
@@ -125,23 +125,23 @@ define( function( require ) {
       this.yNext = old;
 
       // restore the old values for the very last point for every array (potentially not needed for a few?)
-      this.yLast[lastIndex] = oldLast;
-      this.yNow[lastIndex] = oldNow;
-      this.yNext[lastIndex] = oldNext;
+      this.yLast[ lastIndex ] = oldLast;
+      this.yNow[ lastIndex ] = oldNow;
+      this.yNext[ lastIndex ] = oldNext;
 
       switch( this.typeEnd ) {
         case'looseEnd':
-          this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
-          this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 2];
+          this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
+          this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
           break;
         case'noEnd':
-          this.yLast[this.nSegs - 1] = this.yNow[this.nSegs - 1];
-          this.yNow[this.nSegs - 1] = this.yLast[this.nSegs - 2]; // from a comment in the old model code?
+          this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
+          this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ]; // from a comment in the old model code?
           // from the Flash model: this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];//this.yLast[this.nSegs - 2];
           break;
         default: //'fixedEnd'
-          this.yLast[this.nSegs - 1] = 0;
-          this.yNow[this.nSegs - 1] = 0;
+          this.yLast[ this.nSegs - 1 ] = 0;
+          this.yNow[ this.nSegs - 1 ] = 0;
       }
     },
     manualStep: function( dt ) {
@@ -150,7 +150,7 @@ define( function( require ) {
       dt = (dt !== undefined && dt > 0 ) ? dt : fixDt;
 
       // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
-      var startingLeftY = this.yNow[0];
+      var startingLeftY = this.yNow[ 0 ];
       var numSteps = Math.floor( dt / fixDt );
       var perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
@@ -167,12 +167,12 @@ define( function( require ) {
         if ( this.mode === 'oscillate' ) {
           this.angle += Math.PI * 2 * this.frequency * fixDt * this.speed;
           this.angle %= Math.PI * 2;
-          this.yDraw[0] = this.yNow[0] = this.amplitude * this.dotPerCm * Math.sin( -this.angle );
+          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitude * this.dotPerCm * Math.sin( -this.angle );
         }
         if ( this.mode === 'pulse' && this.pulsePending ) {
           this.pulsePending = false;
           this.pulse = true;
-          this.yNow[0] = 0;
+          this.yNow[ 0 ] = 0;
         }
         if ( this.mode === 'pulse' && this.pulse ) {
           var da = Math.PI * fixDt * this.speed / this.pulseWidth;
@@ -188,22 +188,22 @@ define( function( require ) {
             this.pulseSignProperty.reset();
             this.pulseProperty.reset();
           }
-          this.yDraw[0] = this.yNow[0] = this.amplitude * this.dotPerCm * (-this.angle / (Math.PI / 2));
+          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitude * this.dotPerCm * (-this.angle / (Math.PI / 2));
         }
         if ( this.mode === 'manual' ) {
           // interpolate the yNow across steps for manual (between frames)
-          this.yNow[0] += perStepDelta;
+          this.yNow[ 0 ] += perStepDelta;
         }
         if ( this.time >= minDt ) {
           this.time %= minDt;
           this.evolve();
           for ( i = 0; i < this.nSegs; i++ ) {
-            this.yDraw[i] = this.yLast[i];
+            this.yDraw[ i ] = this.yLast[ i ];
           }
         }
         else {
           for ( i = 1; i < this.nSegs; i++ ) {
-            this.yDraw[i] = this.yLast[i] + ((this.yNow[i] - this.yLast[i]) * (this.time / minDt));
+            this.yDraw[ i ] = this.yLast[ i ] + ((this.yNow[ i ] - this.yLast[ i ]) * (this.time / minDt));
           }
         }
         dt -= fixDt;
@@ -224,14 +224,14 @@ define( function( require ) {
       this.pulsePendingProperty.reset();
       this.customDt = 0;
       for ( var i = 0; i < this.yNow.length; i++ ) {
-        this.yDraw[i] = this.yNext[i] = this.yNow[i] = this.yLast[i] = 0;
+        this.yDraw[ i ] = this.yNext[ i ] = this.yNow[ i ] = this.yLast[ i ] = 0;
       }
       this.nextLeftY = 0;
       this.trigger( 'yNowChanged' );
     },
     //pulse button
     manualPulse: function() {
-      this.yNow[0] = 0;
+      this.yNow[ 0 ] = 0;
       this.angle = 0;
       this.pulseSign = 1;
       this.pulsePending = true;

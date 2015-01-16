@@ -77,13 +77,25 @@ define( function( require ) {
     Constants.boundedDragHandler( rulerV, model.rulerLocVProperty, 30 );
     Constants.boundedDragHandler( rulerH, model.rulerLocHProperty, 30 );
 
-    this.addChild( typeRadio = new RadioGroup( {radio: ['manual', 'oscillate', 'pulse'], text: [manualString, oscillateString, pulseString], property: model.modeProperty, x: 5, y: 5} ) );
-    this.addChild( new RestartButton( model, {x: typeRadio.right + 10, y: 5} ) );
-    this.addChild( endTypeRadio = new RadioGroup( {radio: ['fixedEnd', 'looseEnd', 'noEnd'], text: [fixedEndString, looseEndString, noEndString], property: model.typeEndProperty, x: Constants.viewSize.width - 100, y: 5} ) );
+    this.addChild( typeRadio = new RadioGroup( {
+      radio: [ 'manual', 'oscillate', 'pulse' ],
+      text: [ manualString, oscillateString, pulseString ],
+      property: model.modeProperty,
+      x: 5,
+      y: 5
+    } ) );
+    this.addChild( new RestartButton( model, { x: typeRadio.right + 10, y: 5 } ) );
+    this.addChild( endTypeRadio = new RadioGroup( {
+      radio: [ 'fixedEnd', 'looseEnd', 'noEnd' ],
+      text: [ fixedEndString, looseEndString, noEndString ],
+      property: model.typeEndProperty,
+      x: Constants.viewSize.width - 100,
+      y: 5
+    } ) );
     endTypeRadio.right = Constants.viewSize.width - 5;
     this.addChild( new RadioGroup( {
-      radio: [0.25, 1],
-      text: [speedSlowString, speedNormalString],
+      radio: [ 0.25, 1 ],
+      text: [ speedSlowString, speedNormalString ],
       property: model.speedProperty,
       omitPanel: true,
       right: centerControlX - 30,
@@ -124,16 +136,18 @@ define( function( require ) {
       backgroundGradientColorStop0: Constants.buttonBorder0,
       backgroundGradientColorStop1: Constants.buttonBorder1
     } ) );
-    this.addChild( new Node( { scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height - 10, children: [
-      new ResetAllButton( {
-        scale: 1.32,
-        listener: function() { model.reset(); }
-      } )
-    ] } ) );
+    this.addChild( new Node( {
+      scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height - 10, children: [
+        new ResetAllButton( {
+          scale: 1.32,
+          listener: function() { model.reset(); }
+        } )
+      ]
+    } ) );
 
     /*---------------------------------------------------------------------------*
-    * Timer
-    *----------------------------------------------------------------------------*/
+     * Timer
+     *----------------------------------------------------------------------------*/
     var timer = new Timer( model.timerSecondProperty, model.timerStartProperty, {} );
     this.addChild( timer );
     model.timerProperty.link( function updateVisible( value ) {
@@ -170,20 +184,34 @@ define( function( require ) {
     //center line
     this.addChild( new Line( 0, 0, 605, 0, {
       stroke: '#FFA91D',
-      lineDash: [8, 5],
+      lineDash: [ 8, 5 ],
       lineWidth: 2,
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
     } ) );
-    var endNode = new EndNode( model, this.events, {x: Constants.endTheStringNode, y: Constants.yTheStringNode} );
+    var endNode = new EndNode( model, this.events, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
     endNode.windowNode.x += Constants.endTheStringNode;
     endNode.windowNode.y += Constants.yTheStringNode;
     this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model ) );
     this.addChild( endNode );
-    this.addChild( new TheStringNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, radius: Constants.segmentTheStringNodeRadius} ) );
-    this.addChild( new StartNode( model, this.events, {x: Constants.startTheStringNode, y: Constants.yTheStringNode, range: Constants.yWrenchRange} ) );
-    this.addChild( windowImage = new Node( {children: [new Image( windowEdgeImage, {left: Constants.windowXOffset - 4 + Constants.windowShift, centerY: 0, scale: Constants.windowScale} )], x: Constants.endTheStringNode, y: Constants.yTheStringNode} ) );
+    this.addChild( new TheStringNode( model, this.events, {
+      x: Constants.startTheStringNode,
+      y: Constants.yTheStringNode,
+      radius: Constants.segmentTheStringNodeRadius
+    } ) );
+    this.addChild( new StartNode( model, this.events, {
+      x: Constants.startTheStringNode,
+      y: Constants.yTheStringNode,
+      range: Constants.yWrenchRange
+    } ) );
+    this.addChild( windowImage = new Node( {
+      children: [ new Image( windowEdgeImage, {
+        left: Constants.windowXOffset - 4 + Constants.windowShift,
+        centerY: 0,
+        scale: Constants.windowScale
+      } ) ], x: Constants.endTheStringNode, y: Constants.yTheStringNode
+    } ) );
 
     model.typeEndProperty.link( function updateVisible( value ) {
       windowImage.setVisible( value === 'noEnd' );

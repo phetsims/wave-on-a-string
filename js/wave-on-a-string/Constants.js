@@ -129,14 +129,15 @@ define( function( require ) {
     var url;
     try {
       url = canvas.toDataURL();
-    } catch ( e ) {
+    }
+    catch( e ) {
       url = canvas;
     }
 
     var sceneryImage = new Image( url, { scale: 1 / scale } );
     sceneryImage.localBounds = new Bounds2( 0, 0, width * scale, height * scale );
 
-    return new Node( _.extend( { children: [sceneryImage] }, options ) );
+    return new Node( _.extend( { children: [ sceneryImage ] }, options ) );
   };
 
   return Constants;

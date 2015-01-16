@@ -39,7 +39,7 @@ define( function( require ) {
       },
       // listener: model.manualPulse.bind( model ),
       baseColor: '#33dd33',
-      content: new Node( { children: [pulsePath2, pulsePath] } ),
+      content: new Node( { children: [ pulsePath2, pulsePath ] } ),
       radius: 17,
       yContentOffset: -1
     } );

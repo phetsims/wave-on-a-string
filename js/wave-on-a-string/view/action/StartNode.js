@@ -38,8 +38,8 @@ define( function( require ) {
     var thisNode = this;
 
     /*---------------------------------------------------------------------------*
-    * Oscillation wheel
-    *----------------------------------------------------------------------------*/
+     * Oscillation wheel
+     *----------------------------------------------------------------------------*/
     var wheelRadius = 29.5;
     var wheel = new Circle( wheelRadius, {
       stroke: '#333',
@@ -71,9 +71,9 @@ define( function( require ) {
     }
 
     /*---------------------------------------------------------------------------*
-    * Wrench
-    *----------------------------------------------------------------------------*/
-    var wrenchImageNode = new Image( wrenchImage, {x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
+     * Wrench
+     *----------------------------------------------------------------------------*/
+    var wrenchImageNode = new Image( wrenchImage, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
     var wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,
@@ -83,14 +83,16 @@ define( function( require ) {
     var wrenchArrowXOffset = 8;
     var wrenchArrowYOffset = 10;
     var wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
-                                        wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
+      wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
     var wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
-                                           wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
-    var wrench = new Node( {children: [
-      wrenchImageNode,
-      wrenchTopArrow,
-      wrenchBottomArrow
-    ], cursor: 'pointer'} );
+      wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
+    var wrench = new Node( {
+      children: [
+        wrenchImageNode,
+        wrenchTopArrow,
+        wrenchBottomArrow
+      ], cursor: 'pointer'
+    } );
 
     wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
     wrenchBottomArrow.touchArea = wrenchBottomArrow.localBounds.dilated( 6 );
@@ -99,16 +101,16 @@ define( function( require ) {
 
 
     /*---------------------------------------------------------------------------*
-    * Post
-    *----------------------------------------------------------------------------*/
+     * Post
+     *----------------------------------------------------------------------------*/
     var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
       fill: Constants.postGradient
     } );
 
     /*---------------------------------------------------------------------------*
-    * Piston Box
-    *----------------------------------------------------------------------------*/
+     * Piston Box
+     *----------------------------------------------------------------------------*/
     var pistonBox = new ShadedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
       baseColor: new Color( 200, 200, 200 ),
       lightFactor: 0.5,
@@ -122,15 +124,15 @@ define( function( require ) {
 
     // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
     var postCache = new Node( { scale: 1 / postScale } );
-    new Node( { children: [post], scale: postScale } ).toImageNodeAsynchronous( function( image ) {
+    new Node( { children: [ post ], scale: postScale } ).toImageNodeAsynchronous( function( image ) {
       postCache.addChild( image );
     } );
-    post = new Node( { children: [postCache] } );
+    post = new Node( { children: [ postCache ] } );
 
     thisNode.addChild( post );
     thisNode.addChild( pistonBox );
     thisNode.addChild( wrench );
-    thisNode.addChild( new Node( {children: [wheel], translation: Constants.offsetWheel} ) );
+    thisNode.addChild( new Node( { children: [ wheel ], translation: Constants.offsetWheel } ) );
 
     wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
@@ -151,12 +153,12 @@ define( function( require ) {
     thisNode.mutate( options );
     function updateKey() {
       if ( wrench.isVisible() ) {
-        wrench.y = model.yNow[0];
+        wrench.y = model.yNow[ 0 ];
       }
     }
 
     function updatePost() {
-      var y = model.yNow[0];
+      var y = model.yNow[ 0 ];
       if ( post.isVisible() ) {
         // TODO: reduce garbage allocation here
         post.setMatrix( Matrix3.createFromPool( 1, 0, 0,
