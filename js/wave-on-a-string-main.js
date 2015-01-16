@@ -6,11 +6,19 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( [
-  'JOIST/SimLauncher', 'JOIST/Sim', 'JOIST/Screen', 'string!WOAS/simTitle',
-  'SCENERY/nodes/Rectangle',
-  'WOAS/view/WOASScreen'], function( SimLauncher, Sim, Screen, simTitleString, Rectangle, WOASScreen ) {
+define( function( require ) {
   'use strict';
+
+  // modules
+  var SimLauncher = require( 'JOIST/SimLauncher' );
+  var Sim = require( 'JOIST/Sim' );
+  var Screen = require( 'JOIST/Screen' );
+  var SimLauncher = require( 'JOIST/SimLauncher' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var WOASScreen = require( 'WOAS/view/WOASScreen' );
+
+  // strings
+  var simTitleString = require( 'string!WOAS/simTitle' );
 
   var simOptions = {
     credits: {
