@@ -15,7 +15,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // strings
-  var restartString = require( 'string!WOAS/restart' );
+  var restartString = require( 'string!WAVE_ON_A_STRING/restart' );
 
   function RestartButton( model, options ) {
     TextPushButton.call( this, restartString, {

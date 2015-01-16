@@ -21,31 +21,31 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var BottomControlPanel = require( 'WOAS/view/control/BottomControlPanel' );
-  var RadioGroup = require( 'WOAS/view/control/RadioGroup' );
-  var RestartButton = require( 'WOAS/view/control/RestartButton' );
+  var BottomControlPanel = require( 'WAVE_ON_A_STRING/view/control/BottomControlPanel' );
+  var RadioGroup = require( 'WAVE_ON_A_STRING/view/control/RadioGroup' );
+  var RestartButton = require( 'WAVE_ON_A_STRING/view/control/RestartButton' );
   var Timer = require( 'SCENERY_PHET/Timer' );
-  var Constants = require( 'WOAS/Constants' );
-  var TheStringNode = require( 'WOAS/view/action/TheStringNode' );
-  var StartNode = require( 'WOAS/view/action/StartNode' );
-  var EndNode = require( 'WOAS/view/action/EndNode' );
-  var ReferenceLine = require( 'WOAS/view/control/ReferenceLine' );
+  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
+  var TheStringNode = require( 'WAVE_ON_A_STRING/view/action/TheStringNode' );
+  var StartNode = require( 'WAVE_ON_A_STRING/view/action/StartNode' );
+  var EndNode = require( 'WAVE_ON_A_STRING/view/action/EndNode' );
+  var ReferenceLine = require( 'WAVE_ON_A_STRING/view/control/ReferenceLine' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Bounds2 = require( 'DOT/Bounds2' );
 
   // images
-  var windowEdgeImage = require( 'image!WOAS/window-front.png' );
+  var windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
 
   // strings
-  var speedSlowString = require( 'string!WOAS/speedSlow' );
-  var speedNormalString = require( 'string!WOAS/speedNormal' );
-  var manualString = require( 'string!WOAS/manual' );
-  var oscillateString = require( 'string!WOAS/oscillate' );
-  var pulseString = require( 'string!WOAS/pulse' );
-  var fixedEndString = require( 'string!WOAS/fixedEnd' );
-  var looseEndString = require( 'string!WOAS/looseEnd' );
-  var noEndString = require( 'string!WOAS/noEnd' );
-  var unitCmString = require( 'string!WOAS/unitCm' );
+  var speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
+  var speedNormalString = require( 'string!WAVE_ON_A_STRING/speedNormal' );
+  var manualString = require( 'string!WAVE_ON_A_STRING/manual' );
+  var oscillateString = require( 'string!WAVE_ON_A_STRING/oscillate' );
+  var pulseString = require( 'string!WAVE_ON_A_STRING/pulse' );
+  var fixedEndString = require( 'string!WAVE_ON_A_STRING/fixedEnd' );
+  var looseEndString = require( 'string!WAVE_ON_A_STRING/looseEnd' );
+  var noEndString = require( 'string!WAVE_ON_A_STRING/noEnd' );
+  var unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
 
   function WOASView( model ) {
     ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );

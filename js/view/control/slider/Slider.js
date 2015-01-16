@@ -19,7 +19,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var HSlider = require( 'SUN/HSlider' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Constants = require( 'WOAS/Constants' );
+  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
 
   function Slider( options ) {
     var thisNode = this,

@@ -35,7 +35,7 @@ require.config( {
     SUN: '../../sun/js',
 
     // this sim
-    WOAS: '.'
+    WAVE_ON_A_STRING: '.'
   },
 
   urlArgs: new Date().getTime()  // cache buster to make browser refresh load all included scripts

@@ -22,11 +22,11 @@ define( function( require ) {
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Constants = require( 'WOAS/Constants' );
-  var PulseButton = require( 'WOAS/view/control/PulseButton' );
+  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
+  var PulseButton = require( 'WAVE_ON_A_STRING/view/control/PulseButton' );
   var Image = require( 'SCENERY/nodes/Image' );
 
-  var wrenchImage = require( 'image!WOAS/wrench.png' );
+  var wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 
   function StartNode( model, events, options ) {
     options = _.extend( { layerSplit: true }, options );

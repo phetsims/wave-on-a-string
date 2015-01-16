@@ -9,11 +9,11 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
-  var WOASModel = require( 'WOAS/model/WOASModel' );
-  var WOASView = require( 'WOAS/view/WOASView' );
+  var WOASModel = require( 'WAVE_ON_A_STRING/model/WOASModel' );
+  var WOASView = require( 'WAVE_ON_A_STRING/view/WOASView' );
 
   // strings
-  var simTitleString = require( 'string!WOAS/simTitle' );
+  var simTitleString = require( 'string!WAVE_ON_A_STRING/simTitle' );
 
   function WOASScreen() {
 

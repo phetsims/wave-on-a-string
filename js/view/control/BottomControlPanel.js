@@ -16,25 +16,25 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Panel = require( 'SUN/Panel' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
-  var Slider = require( 'WOAS/view/control/slider/Slider' );
-  var Constants = require( 'WOAS/Constants' );
+  var Slider = require( 'WAVE_ON_A_STRING/view/control/slider/Slider' );
+  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
 
   // strings
-  var rulersString = require( 'string!WOAS/rulers' );
-  var timerString = require( 'string!WOAS/timer' );
-  var referenceLineString = require( 'string!WOAS/referenceLine' );
-  var tensionString = require( 'string!WOAS/tension' );
-  var dampingString = require( 'string!WOAS/damping' );
-  var lowString = require( 'string!WOAS/low' );
-  var highString = require( 'string!WOAS/high' );
-  var noneString = require( 'string!WOAS/none' );
-  var lotsString = require( 'string!WOAS/lots' );
-  var frequencyString = require( 'string!WOAS/frequency' );
-  var patternValueUnitHzString = require( 'string!WOAS/patternValueUnitHz' );
-  var pulseWidthString = require( 'string!WOAS/pulseWidth' );
-  var patternValueUnitSString = require( 'string!WOAS/patternValueUnitS' );
-  var amplitudeString = require( 'string!WOAS/amplitude' );
-  var patternValueUnitCmString = require( 'string!WOAS/patternValueUnitCm' );
+  var rulersString = require( 'string!WAVE_ON_A_STRING/rulers' );
+  var timerString = require( 'string!WAVE_ON_A_STRING/timer' );
+  var referenceLineString = require( 'string!WAVE_ON_A_STRING/referenceLine' );
+  var tensionString = require( 'string!WAVE_ON_A_STRING/tension' );
+  var dampingString = require( 'string!WAVE_ON_A_STRING/damping' );
+  var lowString = require( 'string!WAVE_ON_A_STRING/low' );
+  var highString = require( 'string!WAVE_ON_A_STRING/high' );
+  var noneString = require( 'string!WAVE_ON_A_STRING/none' );
+  var lotsString = require( 'string!WAVE_ON_A_STRING/lots' );
+  var frequencyString = require( 'string!WAVE_ON_A_STRING/frequency' );
+  var patternValueUnitHzString = require( 'string!WAVE_ON_A_STRING/patternValueUnitHz' );
+  var pulseWidthString = require( 'string!WAVE_ON_A_STRING/pulseWidth' );
+  var patternValueUnitSString = require( 'string!WAVE_ON_A_STRING/patternValueUnitS' );
+  var amplitudeString = require( 'string!WAVE_ON_A_STRING/amplitude' );
+  var patternValueUnitCmString = require( 'string!WAVE_ON_A_STRING/patternValueUnitCm' );
 
   function BottomControlPanel( model ) {
 

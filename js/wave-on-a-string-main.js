@@ -15,10 +15,10 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var WOASScreen = require( 'WOAS/view/WOASScreen' );
+  var WOASScreen = require( 'WAVE_ON_A_STRING/view/WOASScreen' );
 
   // strings
-  var simTitleString = require( 'string!WOAS/simTitle' );
+  var simTitleString = require( 'string!WAVE_ON_A_STRING/simTitle' );
 
   var simOptions = {
     credits: {

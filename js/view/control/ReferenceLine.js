@@ -14,7 +14,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var Constants = require( 'WOAS/Constants' );
+  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
 
   function ReferenceLine( model ) {
     Node.call( this, { cursor: 'pointer' } );

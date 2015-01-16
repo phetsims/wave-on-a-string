@@ -12,13 +12,13 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Constants = require( 'WOAS/Constants' );
+  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
 
   // images
-  var ringBackImage = require( 'image!WOAS/ring_back.png' );
-  var ringFrontImage = require( 'image!WOAS/ring_front.png' );
-  var windowImage = require( 'image!WOAS/window-back.png' );
-  var clampImage = require( 'image!WOAS/clamp.png' );
+  var ringBackImage = require( 'image!WAVE_ON_A_STRING/ring_back.png' );
+  var ringFrontImage = require( 'image!WAVE_ON_A_STRING/ring_front.png' );
+  var windowImage = require( 'image!WAVE_ON_A_STRING/window-back.png' );
+  var clampImage = require( 'image!WAVE_ON_A_STRING/clamp.png' );
 
   function EndNode( model, events, options ) {
     Node.call( this );
