@@ -21,15 +21,15 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var BottomControlPanel = require( 'WAVE_ON_A_STRING/view/control/BottomControlPanel' );
-  var RadioGroup = require( 'WAVE_ON_A_STRING/view/control/RadioGroup' );
-  var RestartButton = require( 'WAVE_ON_A_STRING/view/control/RestartButton' );
+  var BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
+  var RadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RadioGroup' );
+  var RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
   var Timer = require( 'SCENERY_PHET/Timer' );
-  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
-  var TheStringNode = require( 'WAVE_ON_A_STRING/view/action/TheStringNode' );
-  var StartNode = require( 'WAVE_ON_A_STRING/view/action/StartNode' );
-  var EndNode = require( 'WAVE_ON_A_STRING/view/action/EndNode' );
-  var ReferenceLine = require( 'WAVE_ON_A_STRING/view/control/ReferenceLine' );
+  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
+  var StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
+  var EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/EndNode' );
+  var ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/ReferenceLine' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Bounds2 = require( 'DOT/Bounds2' );
 

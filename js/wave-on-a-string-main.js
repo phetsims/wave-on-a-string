@@ -15,7 +15,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var WOASScreen = require( 'WAVE_ON_A_STRING/view/WOASScreen' );
+  var WOASScreen = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASScreen' );
 
   // strings
   var simTitleString = require( 'string!WAVE_ON_A_STRING/simTitle' );

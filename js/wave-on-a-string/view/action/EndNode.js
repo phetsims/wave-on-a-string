@@ -12,7 +12,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
+  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
 
   // images
   var ringBackImage = require( 'image!WAVE_ON_A_STRING/ring_back.png' );

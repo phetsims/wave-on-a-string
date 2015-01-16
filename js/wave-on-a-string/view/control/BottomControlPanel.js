@@ -16,8 +16,8 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Panel = require( 'SUN/Panel' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
-  var Slider = require( 'WAVE_ON_A_STRING/view/control/slider/Slider' );
-  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
+  var Slider = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/slider/Slider' );
+  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
 
   // strings
   var rulersString = require( 'string!WAVE_ON_A_STRING/rulers' );

@@ -9,8 +9,8 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
-  var WOASModel = require( 'WAVE_ON_A_STRING/model/WOASModel' );
-  var WOASView = require( 'WAVE_ON_A_STRING/view/WOASView' );
+  var WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
+  var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
 
   // strings
   var simTitleString = require( 'string!WAVE_ON_A_STRING/simTitle' );

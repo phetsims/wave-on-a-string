@@ -16,7 +16,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   var Panel = require( 'SUN/Panel' );
-  var Constants = require( 'WAVE_ON_A_STRING/Constants' );
+  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
 
   function RadioGroup( options ) {
     options = _.extend( { scale: 0.7 }, options );
