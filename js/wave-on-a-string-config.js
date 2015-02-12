@@ -18,9 +18,9 @@ require.config( {
     text: '../../sherpa/text',
 
     // PhET plugins
-    image: '../../chipper/requirejs-plugins/image',
-    audio: '../../chipper/requirejs-plugins/audio',
-    string: '../../chipper/requirejs-plugins/string',
+    image: '../../chipper/js/requirejs-plugins/image',
+    audio: '../../chipper/js/requirejs-plugins/audio',
+    string: '../../chipper/js/requirejs-plugins/string',
 
     // PhET libs, uppercase names to identify them in require.js imports
     AXON: '../../axon/js',
