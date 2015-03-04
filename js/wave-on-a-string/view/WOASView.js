@@ -48,7 +48,7 @@ define( function( require ) {
   var unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
 
   function WOASView( model ) {
-    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     this.events = new Events();
 
