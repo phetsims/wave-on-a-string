@@ -1,0 +1,86 @@
+{
+  "rulers": {
+    "value": "Rulers"
+  },
+  "timer": {
+    "value": "Timer"
+  },
+  "amplitude": {
+    "value": "Amplitude"
+  },
+  "frequency": {
+    "value": "Frequency"
+  },
+  "pulseWidth": {
+    "value": "Pulse Width"
+  },
+  "damping": {
+    "value": "Damping"
+  },
+  "tension": {
+    "value": "Tension"
+  },
+  "low": {
+    "value": "Low"
+  },
+  "high": {
+    "value": "High"
+  },
+  "manual": {
+    "value": "Manual"
+  },
+  "oscillate": {
+    "value": "Oscillate"
+  },
+  "pulse": {
+    "value": "Pulse"
+  },
+  "restart": {
+    "value": "Restart"
+  },
+  "paused": {
+    "value": "Paused"
+  },
+  "fixedEnd": {
+    "value": "Fixed End"
+  },
+  "looseEnd": {
+    "value": "Loose End"
+  },
+  "noEnd": {
+    "value": "No End"
+  },
+  "resetTimer": {
+    "value": "Reset"
+  },
+  "simTitle": {
+    "value": "Wave on a String"
+  },
+  "speedNormal": {
+    "value": "Normal"
+  },
+  "speedSlow": {
+    "value": "Slow Motion"
+  },
+  "referenceLine": {
+    "value": "Reference Line"
+  },
+  "none": {
+    "value": "None"
+  },
+  "lots": {
+    "value": "Lots"
+  },
+  "unitCm": {
+    "value": "cm"
+  },
+  "patternValueUnitHz": {
+    "value": "{0} Hz"
+  },
+  "patternValueUnitCm": {
+    "value": "{0} cm"
+  },
+  "patternValueUnitS": {
+    "value": "{0} s"
+  }
+}
