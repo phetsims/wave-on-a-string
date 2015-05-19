@@ -4,21 +4,7 @@
   "license": "GPLv3",
   "simTitleStringKey": "WAVE_ON_A_STRING/simTitle",
   "phetLibs": [
-    "wave-on-a-string",
-    "assert",
-    "axon",
-    "babel",
-    "brand",
-    "chipper",
-    "dot",
-    "joist",
-    "kite",
-    "phet-core",
-    "phetcommon",
-    "scenery",
-    "scenery-phet",
-    "sherpa",
-    "sun"
+    "wave-on-a-string"
   ],
   "repository": {
     "type": "git",
