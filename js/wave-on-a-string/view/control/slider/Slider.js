@@ -11,6 +11,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Range = require( 'DOT/Range' );
+  var Util = require( 'DOT/Util' );
   var Property = require( 'AXON/Property' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -53,7 +54,7 @@ define( function( require ) {
     options = _.extend( {}, defaultOptions, options );
     if ( !options.endDrag && options.rounding !== false ) {
       options.endDrag = function() {
-        options.property.set( Math.round( options.property.get() * Math.pow( 10, options.rounding ) ) / Math.pow( 10, options.rounding ) );
+        options.property.set( Util.roundSymmetric( options.property.get() * Math.pow( 10, options.rounding ) ) / Math.pow( 10, options.rounding ) );
       };
     }
 
