@@ -112,7 +112,7 @@ define( function( require ) {
       if ( options.type === 'button' ) {
         var text = value;
         if ( options.rounding !== false && options.rounding >= 0 ) {
-          text = options.property.get().toFixed( options.rounding );
+          text = Util.toFixed( options.property.get(), options.rounding );
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
         valueLabel.centerX = thisNode.width / 2;
