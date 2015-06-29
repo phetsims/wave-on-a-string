@@ -96,9 +96,16 @@ define( function( require ) {
       };
       buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {
         right: thisNode.width - 15,
-        centerY: 15
+        centerY: 15,
+        arrowHeight: 15,   //added by MD, to make pickers slightly smaller
+        arrowWidth: 15 * Math.sqrt( 3 ) / 2   //added by MD
       } ) );
-      buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), { left: 15, centerY: 15 } ) );
+      buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), {
+        left: 15,
+        centerY: 15,
+        arrowHeight: 15,   //added by MD
+        arrowWidth: 15 * Math.sqrt( 3 ) / 2   //added by MD}
+      } ) );
       buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, { fill: '#FFF', stroke: '#000', lineWidth: 1, centerX: thisNode.width / 2, top: 0 } ) );
       buttonNode.addChild( valueLabel = new Text( '0', { font: new PhetFont( 18 ), centerX: options.width / 2, top: 5 } ) );
       this.addChild( buttonNode );

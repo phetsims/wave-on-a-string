@@ -65,7 +65,6 @@ define( function( require ) {
     rulerH.opacity = 0.8;
     rulerV.opacity = 0.8;
     //this.addChild( rulerH );
-
     //this.addChild( rulerV );
 
     model.rulersProperty.link( function updateRulersVisible( value ) {
