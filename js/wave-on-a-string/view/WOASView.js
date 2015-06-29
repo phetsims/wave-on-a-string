@@ -57,12 +57,16 @@ define( function( require ) {
 
     var typeRadio, endTypeRadio;
 
-    var rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-    var rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
-    var rulerV = new RulerNode( 400, 50, 80, Util.rangeInclusive( 0, 5 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
+    var rulerOptions = { minorTicksPerMajorTick: 4, majorTickFont: new PhetFont( 14 ), unitsFont: new PhetFont( 14 ), cursor: 'pointer' };
+    //RulerNode( rulerWidth, rulerHeight, majorTickWidth, majorTickLabels, units, options )
+    var rulerH = new RulerNode( 800, 30, 40, Util.rangeInclusive( 0, 20 ).map( function( n ) { if(n%2 === 0){return n/2 + '';} } ), unitCmString, rulerOptions );
+    var rulerV = new RulerNode( 400, 30, 40, Util.rangeInclusive( 0, 10 ).map( function( n ) { if(n%2 === 0){return n/2 + '';} } ), unitCmString, rulerOptions );
     rulerV.rotate( -Math.PI / 2 );
-    this.addChild( rulerH );
-    this.addChild( rulerV );
+    rulerH.opacity = 0.8;
+    rulerV.opacity = 0.8;
+    //this.addChild( rulerH );
+
+    //this.addChild( rulerV );
 
     model.rulersProperty.link( function updateRulersVisible( value ) {
       rulerH.setVisible( value );
@@ -212,6 +216,9 @@ define( function( require ) {
         scale: Constants.windowScale
       } ) ], x: Constants.endTheStringNode, y: Constants.yTheStringNode
     } ) );
+
+    this.addChild( rulerH );
+    this.addChild( rulerV );
 
     model.typeEndProperty.link( function updateVisible( value ) {
       windowImage.setVisible( value === 'noEnd' );
