@@ -1,84 +1,4 @@
 {
-  "button_sim_pause.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "button_sim_play.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "button_step_unpressed.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "button_step_hover.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "button_step_pressed.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "button_step_deactivated.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "button_timer_pause_unpressed.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "button_timer_start_unpressed.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "wrench_2.svg": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "created by Sharon"
-  },
-  "oscillator_wheel.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
   "clamp.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
@@ -112,14 +32,6 @@
     "notes": "PhET"
   },
   "window-front.png": {
-    "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "PhET"
-  },
-  "window_edge.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
