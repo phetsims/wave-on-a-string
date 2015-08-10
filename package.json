@@ -2,6 +2,7 @@
   "name": "wave-on-a-string",
   "version": "1.0.0",
   "license": "GPLv3",
+  "requirejsNamespace": "WAVE_ON_A_STRING",
   "simTitleStringKey": "WAVE_ON_A_STRING/simTitle",
   "phetLibs": [
     "wave-on-a-string"
