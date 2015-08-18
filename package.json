@@ -15,9 +15,6 @@
   },
   "phet": {
     "requirejsNamespace": "WAVE_ON_A_STRING",
-    "simTitleStringKey": "WAVE_ON_A_STRING/simTitle",
-    "phetLibs": [
-      "wave-on-a-string"
-    ]
+    "simTitleStringKey": "WAVE_ON_A_STRING/simTitle"
   }
 }
