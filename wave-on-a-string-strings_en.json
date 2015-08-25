@@ -1,4 +1,7 @@
 {
+  "wave-on-a-string.name": {
+    "value": "Wave on a String"
+  },
   "rulers": {
     "value": "Rulers"
   },
@@ -52,9 +55,6 @@
   },
   "resetTimer": {
     "value": "Reset"
-  },
-  "simTitle": {
-    "value": "Wave on a String"
   },
   "speedNormal": {
     "value": "Normal"

@@ -15,7 +15,7 @@ define( function( require ) {
   var WOASScreen = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASScreen' );
 
   // strings
-  var simTitleString = require( 'string!WAVE_ON_A_STRING/simTitle' );
+  var simTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.name' );
 
   var simOptions = {
     credits: {
