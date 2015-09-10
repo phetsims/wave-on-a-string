@@ -13,7 +13,7 @@ define( function( require ) {
   var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
 
   // strings
-  var simTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.name' );
+  var simTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
 
   function WOASScreen() {
 
