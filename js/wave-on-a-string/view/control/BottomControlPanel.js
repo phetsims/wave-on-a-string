@@ -53,7 +53,7 @@ define( function( require ) {
         content: new Text( referenceLineString, { font: new PhetFont( 15 ) } ),
         property: model.referenceLineProperty,
         indent: 0
-      },
+      }
     ], {
       centerY: 55
     } );
