@@ -22,15 +22,15 @@ define( function( require ) {
 
   function EndNode( model, events, options ) {
     Node.call( this );
-    var clamp = new Image( clampImage, { x: -17, y: -31, scale: 0.4 } ),
-      ring_back = new Node( { children: [ new Image( ringBackImage, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } ),
-      ring_front = new Node( { children: [ new Image( ringFrontImage, { x: 4.7, y: 0, scale: 0.5 } ) ] } ),
-      windowNode = new Image( windowImage, { right: Constants.windowXOffset + Constants.windowShift, centerY: 0, scale: Constants.windowScale } ),
-      post = new Rectangle( -5, -130, 10, 260, {
-        stroke: '#000',
-        fill: Constants.postGradient,
-        x: 20
-      } );
+    var clamp = new Image( clampImage, { x: -17, y: -31, scale: 0.4 } );
+    var ring_back = new Node( { children: [ new Image( ringBackImage, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } );
+    var ring_front = new Node( { children: [ new Image( ringFrontImage, { x: 4.7, y: 0, scale: 0.5 } ) ] } );
+    var windowNode = new Image( windowImage, { right: Constants.windowXOffset + Constants.windowShift, centerY: 0, scale: Constants.windowScale } );
+    var post = new Rectangle( -5, -130, 10, 260, {
+      stroke: '#000',
+      fill: Constants.postGradient,
+      x: 20
+    } );
 
     this.addChild( clamp );
     this.addChild( ring_back );

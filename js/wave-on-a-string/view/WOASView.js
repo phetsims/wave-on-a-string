@@ -55,7 +55,8 @@ define( function( require ) {
     var centerControlX = Constants.viewSize.width / 2;
     var centerControlY = Constants.viewSize.height - 131;
 
-    var typeRadio, endTypeRadio;
+    var typeRadio;
+    var endTypeRadio;
 
     var rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
     var rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );

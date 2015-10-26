@@ -11,8 +11,8 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  var NSEGS = 61,
-    fps = 50;
+  var NSEGS = 61;
+  var fps = 50;
 
   function WOASModel() {
     this.stepDt = 0;
@@ -87,10 +87,10 @@ define( function( require ) {
     },
     // NOTE TO FUTURE MAINTAINER: this is the fixed-timestep model step. We interpolate between these steps as needed
     evolve: function() {
-      var dt = 1,
-        v = 1,
-        dx = dt * v,
-        b = this.damping * 0.002;
+      var dt = 1;
+      var v = 1;
+      var dx = dt * v;
+      var b = this.damping * 0.002;
       this.beta = b * dt / 2;
       this.alpha = v * dt / dx;
 
@@ -107,7 +107,9 @@ define( function( require ) {
       }
 
       //main formula for calculating
-      var a = 1 / ( this.beta + 1 ), alphaSq = this.alpha * this.alpha, c = 2 * ( 1 - alphaSq );
+      var a = 1 / ( this.beta + 1 );
+      var alphaSq = this.alpha * this.alpha;
+      var c = 2 * ( 1 - alphaSq );
       for ( var i = 1; i < (this.nSegs - 1); i++ ) {
         this.yNext[ i ] = a * ((this.beta - 1) * this.yLast[ i ] + c * this.yNow[ i ] + alphaSq * (this.yNow[ i + 1 ] + this.yNow[ i - 1 ]) );
       }

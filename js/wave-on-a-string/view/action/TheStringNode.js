@@ -17,11 +17,11 @@ define( function( require ) {
 
   function TheStringNode( model, events, options ) {
     Node.call( this, { layerSplit: true } );
-    var theStringShape = new Shape(),
-      theStringPath = new Path( theStringShape, {
-        stroke: '#F00'
-      } ),
-      theString = [];
+    var theStringShape = new Shape();
+    var theStringPath = new Path( theStringShape, {
+      stroke: '#F00'
+    } );
+    var theString = [];
     this.addChild( theStringPath );
 
     theStringPath.computeShapeBounds = function() {

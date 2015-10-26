@@ -23,33 +23,33 @@ define( function( require ) {
   var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
 
   function Slider( options ) {
-    var thisNode = this,
-      defaultOptions = {
-        type: 'simple',
-        property: new Property( 0 ),
-        range: new Range( 0, 100 ),
-        sliderSize: new Dimension2( 200, 110 ),
-        tick: { step: 1, minText: '', maxText: '' },
-        title: '',
-        patternValueUnit: '',
-        buttonStep: 1,
-        rounding: false,
-        // custom track
-        trackSize: new Dimension2( 140, 2 ),
-        trackFill: 'black',
-        // custom thumb
-        thumbSize: new Dimension2( 22, 38 ),
-        thumbFillEnabled: Constants.sliderUp,
-        thumbFillHighlighted: Constants.sliderOver,
-        // custom ticks
-        tickLabelSpacing: 4,
-        majorTickLength: 20,
-        minorTickLength: 8,
-        majorTickLineWidth: 1.5,
-        minorTickLineWidth: 1.5,
+    var thisNode = this;
+    var defaultOptions = {
+      type: 'simple',
+      property: new Property( 0 ),
+      range: new Range( 0, 100 ),
+      sliderSize: new Dimension2( 200, 110 ),
+      tick: { step: 1, minText: '', maxText: '' },
+      title: '',
+      patternValueUnit: '',
+      buttonStep: 1,
+      rounding: false,
+      // custom track
+      trackSize: new Dimension2( 140, 2 ),
+      trackFill: 'black',
+      // custom thumb
+      thumbSize: new Dimension2( 22, 38 ),
+      thumbFillEnabled: Constants.sliderUp,
+      thumbFillHighlighted: Constants.sliderOver,
+      // custom ticks
+      tickLabelSpacing: 4,
+      majorTickLength: 20,
+      minorTickLength: 8,
+      majorTickLineWidth: 1.5,
+      minorTickLineWidth: 1.5,
 
-        titleVerticalOffset: 0
-      };
+      titleVerticalOffset: 0
+    };
     Node.call( thisNode );
     options = _.extend( {}, defaultOptions, options );
     if ( !options.endDrag && options.rounding !== false ) {
@@ -62,7 +62,10 @@ define( function( require ) {
 
     this.addChild( new Text( options.title, { centerX: thisNode.width / 2, top: options.titleVerticalOffset, font: new PhetFont( 18 ) } ) );
 
-    var buttonNode, plusButton, minusButton, valueLabel;
+    var buttonNode;
+    var plusButton;
+    var minusButton;
+    var valueLabel;
     var hSlider = new HSlider( options.property, options.range, options );
     var hSliderNode = new Node( { children: [ hSlider ], x: (thisNode.width - options.trackSize.width) / 2, bottom: thisNode.height - 0 } );
     thisNode.addChild( hSliderNode );
