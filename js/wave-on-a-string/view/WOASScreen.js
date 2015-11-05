@@ -13,11 +13,11 @@ define( function( require ) {
   var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
 
   // strings
-  var simTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
+  var waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
 
   function WOASScreen() {
 
-    Screen.call( this, simTitleString, null, /* single-screen sim, no icon */
+    Screen.call( this, waveOnAStringTitleString, null, /* single-screen sim, no icon */
       function() { return new WOASModel( 768, 504 ); },
       function( model ) { return new WOASView( model ); },
       { backgroundColor: '#FFFFB7' }

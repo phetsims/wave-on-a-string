@@ -15,7 +15,7 @@ define( function( require ) {
   var WOASScreen = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASScreen' );
 
   // strings
-  var simTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
+  var waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
 
   var simOptions = {
     credits: {
@@ -30,7 +30,7 @@ define( function( require ) {
 
   SimLauncher.launch( function() {
     //Create and start the sim
-    new Sim( simTitleString, [
+    new Sim( waveOnAStringTitleString, [
       new WOASScreen()
     ], simOptions ).start();
   } );
