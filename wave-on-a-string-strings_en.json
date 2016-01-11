@@ -41,9 +41,6 @@
   "restart": {
     "value": "Restart"
   },
-  "paused": {
-    "value": "Paused"
-  },
   "fixedEnd": {
     "value": "Fixed End"
   },
@@ -52,9 +49,6 @@
   },
   "noEnd": {
     "value": "No End"
-  },
-  "resetTimer": {
-    "value": "Reset"
   },
   "speedNormal": {
     "value": "Normal"
