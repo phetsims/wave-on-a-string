@@ -28,7 +28,7 @@ define( function( require ) {
     }
     var radioGroup = new VerticalAquaRadioButtonGroup( group, {
       spacing: 8,
-      touchXPadding: 5,
+      touchAreaXDilation: 5,
       radioButtonOptions: {
         selectedColor: Constants.radioColor.toCSS()
       }
