@@ -116,7 +116,7 @@ define( function( require ) {
       x: centerControlX + 45,
       centerY: centerControlY,
       scale: 0.6,
-      touchExpansion: 12,
+      touchAreaDilation: 12,
       pauseOptions: playPauseButtonOptions,
       playOptions: playPauseButtonOptions
     } );
@@ -129,7 +129,7 @@ define( function( require ) {
       x: centerControlX + 94,
       centerY: centerControlY,
       scale: 0.6,
-      touchExpansion: 12,
+      touchAreaDilation: 12,
       upFill: Constants.blueUpColor,
       overFill: Constants.blueOverColor,
       disabledFill: Constants.blueDisabledColor,
