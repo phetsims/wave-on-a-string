@@ -38,19 +38,23 @@ define( function( require ) {
 
   function BottomControlPanel( model ) {
 
-    Node.call( this, { x: 5, scale: 0.7 } );
+    Node.call( this, { x: 30, scale: 0.7 } );
 
+    var checkBoxTextOptions = {
+      font: new PhetFont( 15 ),
+      maxWidth: 130
+    };
     var checkBoxGroup = new VerticalCheckBoxGroup( [
       {
-        content: new Text( rulersString, { font: new PhetFont( 15 ) } ),
+        content: new Text( rulersString, checkBoxTextOptions ),
         property: model.rulersProperty,
         indent: 0
       }, {
-        content: new Text( timerString, { font: new PhetFont( 15 ) } ),
+        content: new Text( timerString, checkBoxTextOptions ),
         property: model.timerProperty,
         indent: 0
       }, {
-        content: new Text( referenceLineString, { font: new PhetFont( 15 ) } ),
+        content: new Text( referenceLineString, checkBoxTextOptions ),
         property: model.referenceLineProperty,
         indent: 0
       }

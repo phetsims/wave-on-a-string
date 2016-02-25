@@ -24,7 +24,14 @@ define( function( require ) {
     var length = options.radio.length;
     var group = [];
     for ( var i = 0; i < length; i++ ) {
-      group.push( { node: new Text( options.text[ i ], { font: new PhetFont( 15 ) } ), property: options.property, value: options.radio[ i ] } );
+      group.push( {
+        node: new Text( options.text[ i ], {
+          font: new PhetFont( 15 ),
+          maxWidth: 250
+        } ),
+        property: options.property,
+        value: options.radio[ i ]
+      } );
     }
     var radioGroup = new VerticalAquaRadioButtonGroup( group, {
       spacing: 8,
