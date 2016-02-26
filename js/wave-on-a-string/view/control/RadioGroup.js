@@ -19,14 +19,14 @@ define( function( require ) {
   var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
 
   function RadioGroup( options ) {
-    options = _.extend( { scale: 0.7 }, options );
+    options = _.extend( { scale: 0.5 }, options );
     Node.call( this );
     var length = options.radio.length;
     var group = [];
     for ( var i = 0; i < length; i++ ) {
       group.push( {
         node: new Text( options.text[ i ], {
-          font: new PhetFont( 15 ),
+          font: new PhetFont( 20 ),
           maxWidth: 250
         } ),
         property: options.property,
@@ -34,13 +34,13 @@ define( function( require ) {
       } );
     }
     var radioGroup = new VerticalAquaRadioButtonGroup( group, {
-      spacing: 8,
-      touchAreaXDilation: 5,
+      spacing: 16,
+      touchAreaXDilation: 10,
       radioButtonOptions: {
         selectedColor: Constants.radioColor.toCSS()
       }
     } );
-    var panel = new Panel( radioGroup, { fill: '#D9FCC5', xMargin: 8, yMargin: 8 } );
+    var panel = new Panel( radioGroup, { fill: '#D9FCC5', xMargin: 14, yMargin: 14 } );
     this.addChild( options.omitPanel ? radioGroup : panel );
     this.mutate( options );
   }
