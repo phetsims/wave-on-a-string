@@ -1,63 +1,63 @@
 {
-  "comment": "# wave-on-a-string 1.1.0-rc.1 Thu Feb 25 2016 11:18:42 GMT-0700 (Mountain Standard Time)",
+  "comment": "# wave-on-a-string 1.1.0 Tue Mar 01 2016 14:36:10 GMT-0700 (MST)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "axon": {
     "sha": "9457f36aec22935c7b5f41a9d0777255dd5d9884",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "brand": {
     "sha": "ac9ccaa74427844b170dcd1582f3e9bb931edef4",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "b3a8a3c24b598badc3b1089aa0eb28c812c47fa0",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "da78031b6f080d20bc8346beaa1d37148188371e",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "joist": {
     "sha": "28f510089c0f5312ca58526b10ff063466ebbc5a",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phet-core": {
     "sha": "c48bf32035dc5a4ed092ad611012fcbdeb5c6351",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phetcommon": {
     "sha": "68270b86c92ddd0af0cca1885cd750d9c857796c",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "b34b4fea76b01c9b36a07c83ed6655930143f054",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "71a9c7634c1c59de38afc9e277154126fbd83256",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "bb68bbbc6e8e3ce98fc37a956f1e19fe8365c107",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sun": {
     "sha": "2b83e994039b2d33845d5e51d7735d144c188d97",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "tandem": {
     "sha": "2441eec6b422cb20e08682da02ab2bf7bf73250c",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "a0865794efd2835dc32b2b4b01f1288e64728a19",
+    "sha": "fe77d3d296fdd075db06c441c92eb229995d5f4c",
     "branch": "1.1"
   }
 }
