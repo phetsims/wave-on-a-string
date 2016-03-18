@@ -15,12 +15,17 @@ define( function( require ) {
   // strings
   var waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
 
-  function WOASScreen() {
-
+  /**
+   * @param {Tandem} tandem
+   * @constructor
+   */
+  function WOASScreen( tandem ) {
     Screen.call( this, waveOnAStringTitleString, null, /* single-screen sim, no icon */
       function() { return new WOASModel( 768, 504 ); },
-      function( model ) { return new WOASView( model ); },
-      { backgroundColor: '#FFFFB7' }
+      function( model ) { return new WOASView( model ); }, {
+        backgroundColor: '#FFFFB7',
+        tandem: tandem
+      }
     );
   }
 

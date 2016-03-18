@@ -13,9 +13,13 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Sim = require( 'JOIST/Sim' );
   var WOASScreen = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASScreen' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
+
+  // constants
+  var tandem = Tandem.createRootTandem();
 
   var simOptions = {
     credits: {
@@ -25,13 +29,14 @@ define( function( require ) {
       graphicArts: 'Sharon Siman-Tov',
       thanks: 'Thanks to Mobile Learner Labs for working with the PhET development team\n' +
               'to convert this simulation to HTML5.'
-    }
+    },
+    tandem: tandem
   };
 
   SimLauncher.launch( function() {
     //Create and start the sim
     new Sim( waveOnAStringTitleString, [
-      new WOASScreen()
+      new WOASScreen( tandem.createTandem( 'waveOnAStringScreen' ) )
     ], simOptions ).start();
   } );
 } );
