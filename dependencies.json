@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.1.1 Fri Apr 01 2016 14:34:53 GMT-0600 (MDT)",
+  "comment": "# wave-on-a-string 1.1.2-rc.1 Fri Apr 01 2016 16:00:59 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -10,7 +10,7 @@
   },
   "brand": {
     "sha": "d9e64f424ae3ca05f3d10964f5845460a6ccbce6",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "b3a8a3c24b598badc3b1089aa0eb28c812c47fa0",
@@ -22,7 +22,7 @@
   },
   "joist": {
     "sha": "c2998c16b418aebaae8da09278ecd2ea35863dc9",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
@@ -57,7 +57,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "c3d44eed5982b0bf904f9b66bdbca26cf41f3403",
+    "sha": "77e3a6c0fa43db14389bf4b2a5d8bcd5bb5517e9",
     "branch": "1.1"
   }
 }
