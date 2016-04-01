@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.1.1 Fri Apr 01 2016 13:26:37 GMT-0600 (MDT)",
+  "comment": "# wave-on-a-string 1.1.1 Fri Apr 01 2016 14:34:53 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,8 +9,8 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "ac9ccaa74427844b170dcd1582f3e9bb931edef4",
-    "branch": "HEAD"
+    "sha": "d9e64f424ae3ca05f3d10964f5845460a6ccbce6",
+    "branch": "wave-on-a-string-1.1"
   },
   "chipper": {
     "sha": "b3a8a3c24b598badc3b1089aa0eb28c812c47fa0",
@@ -21,8 +21,8 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "28f510089c0f5312ca58526b10ff063466ebbc5a",
-    "branch": "HEAD"
+    "sha": "c2998c16b418aebaae8da09278ecd2ea35863dc9",
+    "branch": "wave-on-a-string-1.1"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
@@ -34,7 +34,7 @@
   },
   "phetcommon": {
     "sha": "7aa12f8f50531e3180b9c38b52a25a53fee0a3de",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "b34b4fea76b01c9b36a07c83ed6655930143f054",
@@ -57,7 +57,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "791b91de58f41243bde0333102bfa1282a205dd2",
+    "sha": "c3d44eed5982b0bf904f9b66bdbca26cf41f3403",
     "branch": "1.1"
   }
 }
