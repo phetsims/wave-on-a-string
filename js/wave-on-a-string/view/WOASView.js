@@ -18,7 +18,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
+  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
@@ -125,7 +125,7 @@ define( function( require ) {
     model.playProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
     } );
-    this.addChild( new StepButton( model.manualStep.bind( model ), model.playProperty, {
+    this.addChild( new StepForwardButton( model.manualStep.bind( model ), model.playProperty, {
       x: centerControlX + 94,
       centerY: centerControlY,
       scale: 0.6,
