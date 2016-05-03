@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -50,6 +51,8 @@ define( function( require ) {
       self.setVisible( value === 'pulse' );
     } );
   }
+
+  waveOnAString.register( 'PulseButton', PulseButton );
 
   inherit( RoundPushButton, PulseButton );
 

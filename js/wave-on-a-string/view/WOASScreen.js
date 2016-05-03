@@ -8,6 +8,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Screen = require( 'JOIST/Screen' );
   var WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
   var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
@@ -28,6 +29,8 @@ define( function( require ) {
       }
     );
   }
+
+  waveOnAString.register( 'WOASScreen', WOASScreen );
 
   return inherit( Screen, WOASScreen );
 } );

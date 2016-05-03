@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Range = require( 'DOT/Range' );
   var Util = require( 'DOT/Util' );
@@ -134,6 +135,8 @@ define( function( require ) {
       }
     } );
   }
+
+  waveOnAString.register( 'Slider', Slider );
 
   inherit( Node, Slider );
 

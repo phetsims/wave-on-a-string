@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -44,6 +45,8 @@ define( function( require ) {
     this.addChild( options.omitPanel ? radioGroup : panel );
     this.mutate( options );
   }
+
+  waveOnAString.register( 'RadioGroup', RadioGroup );
 
   inherit( Node, RadioGroup );
 

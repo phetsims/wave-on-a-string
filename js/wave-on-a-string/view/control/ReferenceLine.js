@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -48,6 +49,8 @@ define( function( require ) {
 
     Constants.boundedDragHandler( thisNode, model.referenceLineLocProperty, 30 );
   }
+
+  waveOnAString.register( 'ReferenceLine', ReferenceLine );
 
   inherit( Node, ReferenceLine );
   return ReferenceLine;

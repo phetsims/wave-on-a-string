@@ -3,6 +3,7 @@
 define( function( require ) {
   'use strict';
 
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Range = require( 'DOT/Range' );
@@ -84,6 +85,8 @@ define( function( require ) {
       } );
     }
   };
+
+  waveOnAString.register( 'Constants', Constants );
 
   Constants.viewBounds = Constants.viewSize.toBounds();
 

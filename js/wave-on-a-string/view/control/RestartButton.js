@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
@@ -27,6 +28,8 @@ define( function( require ) {
     this.mutate( options );
     this.touchArea = this.localBounds.dilatedXY( 5, 20 );
   }
+
+  waveOnAString.register( 'RestartButton', RestartButton );
 
   inherit( TextPushButton, RestartButton );
 

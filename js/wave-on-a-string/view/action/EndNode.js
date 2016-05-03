@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -70,6 +71,8 @@ define( function( require ) {
     } );
 
   }
+
+  waveOnAString.register( 'EndNode', EndNode );
 
   inherit( Node, EndNode );
 

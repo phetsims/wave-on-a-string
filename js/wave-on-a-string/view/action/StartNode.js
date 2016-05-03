@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var platform = require( 'PHET_CORE/platform' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Bounds2 = require( 'DOT/Bounds2' );
@@ -205,6 +206,8 @@ define( function( require ) {
       pistonBox.setVisible( value === 'pulse' );
     } );
   }
+
+  waveOnAString.register( 'StartNode', StartNode );
 
   inherit( Node, StartNode );
   return StartNode;

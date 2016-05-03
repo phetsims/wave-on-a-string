@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Events = require( 'AXON/Events' );
   var Vector2 = require( 'DOT/Vector2' );
   var Util = require( 'DOT/Util' );
@@ -218,6 +219,8 @@ define( function( require ) {
       windowImage.setVisible( value === 'noEnd' );
     } );
   }
+
+  waveOnAString.register( 'WOASView', WOASView );
 
   inherit( ScreenView, WOASView, {
     step: function( time ) {
