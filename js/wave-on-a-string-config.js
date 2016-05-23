@@ -22,6 +22,7 @@ require.config( {
     image: '../../chipper/js/requirejs-plugins/image',
     mipmap: '../../chipper/js/requirejs-plugins/mipmap',
     string: '../../chipper/js/requirejs-plugins/string',
+    ifphetio: '../../chipper/js/requirejs-plugins/ifphetio',
 
     // PhET libs, uppercase names to identify them in require.js imports
     AXON: '../../axon/js',
@@ -30,6 +31,7 @@ require.config( {
     JOIST: '../../joist/js',
     KITE: '../../kite/js',
     PHET_CORE: '../../phet-core/js',
+    PHET_IO: '../../phet-io/js',
     PHETCOMMON: '../../phetcommon/js',
     REPOSITORY: '..',
     SCENERY: '../../scenery/js',
