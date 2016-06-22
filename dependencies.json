@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.1.3 Wed Jun 22 2016 13:21:15 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# wave-on-a-string 1.1.4-rc.1 Wed Jun 22 2016 13:28:13 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -14,7 +14,7 @@
   },
   "chipper": {
     "sha": "23ec53efca30d05cabd088a16e25aba17bab9b29",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "da78031b6f080d20bc8346beaa1d37148188371e",
@@ -22,7 +22,7 @@
   },
   "joist": {
     "sha": "110b8efaa2092b83b7f1299533e306f0fd34b8c4",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
@@ -46,7 +46,7 @@
   },
   "sherpa": {
     "sha": "b999987ecbc9d23c011e8114f41ea486397c9f1c",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "sun": {
     "sha": "2b83e994039b2d33845d5e51d7735d144c188d97",
@@ -57,7 +57,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "d305222d8998a57694e4f81bcfed4191a6a32562",
+    "sha": "2960f9f6a6e9af12cb6a84f3ffe30979656c28b1",
     "branch": "1.1"
   }
 }
