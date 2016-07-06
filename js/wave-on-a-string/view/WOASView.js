@@ -126,7 +126,8 @@ define( function( require ) {
     model.playProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
     } );
-    this.addChild( new StepForwardButton( model.playProperty, {
+    this.addChild( new StepForwardButton( {
+      playingProperty: model.playProperty,
       listener: model.manualStep.bind( model ),
       x: centerControlX + 94,
       centerY: centerControlY,
