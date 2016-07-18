@@ -11,7 +11,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Util = require( 'DOT/Util' );
   var Property = require( 'AXON/Property' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -28,7 +28,7 @@ define( function( require ) {
     var defaultOptions = {
       type: 'simple',
       property: new Property( 0 ),
-      range: new Range( 0, 100 ),
+      range: new RangeWithValue( 0, 100 ),
       sliderSize: new Dimension2( 200, 110 ),
       tick: { step: 1, minText: '', maxText: '' },
       title: '',
