@@ -17,7 +17,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
+  var ArrowButton = require( 'SUN/buttons/ArrowButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var HSlider = require( 'SUN/HSlider' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
