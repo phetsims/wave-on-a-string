@@ -11,11 +11,38 @@ define( function( require ) {
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Util = require( 'DOT/Util' );
 
   var NSEGS = 61;
   var fps = 50;
 
   function WOASModel() {
+
+    var self = this;
+
+    self.nexusOrienation = 0;
+
+    // HACK ALERT!
+    // Testing the nexus!
+    // http://169.254.86.49:9081/
+    var websocket = new WebSocket('ws://localhost:9081/bindModel/nexus.sensors/orientation');
+           websocket.onmessage = function (evt) {
+               var inputs = JSON.parse(evt.data);
+
+               var orientation = -inputs.betaAbs * 2;
+
+               // further transformation will occur here
+               orientation = Util.clamp( orientation, -100, 100 );
+
+               self.nexusOrienation = orientation;
+              //  console.log( orientation );
+               self.nextLeftY = orientation;
+               self.play = true;
+               this.trigger( 'yNowChanged' );
+
+           };
+
+
     this.stepDt = 0;
     var Array = window.Float64Array || window.Array;
 
