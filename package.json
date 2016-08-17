@@ -14,11 +14,6 @@
     "requirejs": "~2.1.8"
   },
   "phet": {
-    "requirejsNamespace": "WAVE_ON_A_STRING",
-    "phet-io": {
-      "preload": [
-        "../phet-io/js/api/wave-on-a-string-api.js"
-      ]
-    }
+    "requirejsNamespace": "WAVE_ON_A_STRING"
   }
 }
