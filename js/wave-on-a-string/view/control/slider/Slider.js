@@ -24,7 +24,7 @@ define( function( require ) {
   var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
 
   function Slider( options ) {
-    var thisNode = this;
+    var self = this;
     var defaultOptions = {
       type: 'simple',
       property: new Property( 0 ),
@@ -51,7 +51,7 @@ define( function( require ) {
 
       titleVerticalOffset: 0
     };
-    Node.call( thisNode );
+    Node.call( self );
     options = _.extend( {}, defaultOptions, options );
     if ( !options.endDrag && options.rounding !== false ) {
       options.endDrag = function() {
@@ -59,10 +59,10 @@ define( function( require ) {
       };
     }
 
-    thisNode.addChild( new Rectangle( 0, 0, options.sliderSize.width, options.sliderSize.height ) );
+    self.addChild( new Rectangle( 0, 0, options.sliderSize.width, options.sliderSize.height ) );
 
     this.addChild( new Text( options.title, {
-      centerX: thisNode.width / 2,
+      centerX: self.width / 2,
       centerY: options.titleVerticalOffset + 10,
       font: new PhetFont( 18 ),
       maxWidth: 150
@@ -73,8 +73,12 @@ define( function( require ) {
     var minusButton;
     var valueLabel;
     var hSlider = new HSlider( options.property, options.range, options );
-    var hSliderNode = new Node( { children: [ hSlider ], x: (thisNode.width - options.trackSize.width) / 2, bottom: thisNode.height - 0 } );
-    thisNode.addChild( hSliderNode );
+    var hSliderNode = new Node( {
+      children: [ hSlider ],
+      x: (self.width - options.trackSize.width) / 2,
+      bottom: self.height - 0
+    } );
+    self.addChild( hSliderNode );
 
     if ( options.type === 'simple' && options.tick && options.tick.step ) {
       var i = options.range.min;
@@ -104,11 +108,17 @@ define( function( require ) {
         };
       };
       buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {
-        right: thisNode.width - 15,
+        right: self.width - 15,
         centerY: 15
       } ) );
       buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), { left: 15, centerY: 15 } ) );
-      buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, { fill: '#FFF', stroke: '#000', lineWidth: 1, centerX: thisNode.width / 2, top: 0 } ) );
+      buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, {
+        fill: '#FFF',
+        stroke: '#000',
+        lineWidth: 1,
+        centerX: self.width / 2,
+        top: 0
+      } ) );
       buttonNode.addChild( valueLabel = new Text( '0', {
         font: new PhetFont( 18 ),
         centerX: options.width / 2,
@@ -118,7 +128,7 @@ define( function( require ) {
       this.addChild( buttonNode );
     }
 
-    thisNode.mutate( _.extend( _.omit( options, Object.keys( defaultOptions ) ), {
+    self.mutate( _.extend( _.omit( options, Object.keys( defaultOptions ) ), {
       x: options.sliderX
     } ) );
 
@@ -129,7 +139,7 @@ define( function( require ) {
           text = Util.toFixed( options.property.get(), options.rounding );
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
-        valueLabel.centerX = thisNode.width / 2;
+        valueLabel.centerX = self.width / 2;
         plusButton.enabled = ( value < options.range.max );
         minusButton.enabled = ( value > options.range.min );
       }

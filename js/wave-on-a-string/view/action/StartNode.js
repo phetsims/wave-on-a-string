@@ -36,7 +36,7 @@ define( function( require ) {
     var postScale = 3;
 
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     /*---------------------------------------------------------------------------*
      * Oscillation wheel
@@ -130,10 +130,10 @@ define( function( require ) {
     } );
     post = new Node( { children: [ postCache ] } );
 
-    thisNode.addChild( post );
-    thisNode.addChild( pistonBox );
-    thisNode.addChild( wrench );
-    thisNode.addChild( new Node( { children: [ wheel ], translation: Constants.offsetWheel } ) );
+    self.addChild( post );
+    self.addChild( pistonBox );
+    self.addChild( wrench );
+    self.addChild( new Node( { children: [ wheel ], translation: Constants.offsetWheel } ) );
 
     wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
@@ -151,7 +151,7 @@ define( function( require ) {
       wrenchBottomArrow.visible = model.wrenchArrowsVisible;
     } );
 
-    thisNode.mutate( options );
+    self.mutate( options );
     function updateKey() {
       if ( wrench.isVisible() ) {
         wrench.y = model.yNow[ 0 ];
