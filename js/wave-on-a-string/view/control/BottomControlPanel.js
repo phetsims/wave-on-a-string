@@ -36,6 +36,7 @@ define( function( require ) {
   var patternValueUnitSString = require( 'string!WAVE_ON_A_STRING/patternValueUnitS' );
   var amplitudeString = require( 'string!WAVE_ON_A_STRING/amplitude' );
   var patternValueUnitCmString = require( 'string!WAVE_ON_A_STRING/patternValueUnitCm' );
+  var patternValueUnitPercentageString = require( 'string!WAVE_ON_A_STRING/patternValueUnitPercentage' );
 
   function BottomControlPanel( model ) {
 
@@ -79,11 +80,12 @@ define( function( require ) {
     var dampingSlider = new Slider( {
       sliderX: 60 - 420,
       title: dampingString,
+      type: 'button',
+      buttonStep: 1,
       property: model.dampingProperty,
-      rounding: -1,
-      range: Constants.dampingRange,
-      titleVerticalOffset: 15,
-      tick: { step: 10, minText: noneString, maxText: lotsString }
+      patternValueUnit: patternValueUnitPercentageString,
+      rounding: 0,
+      range: Constants.dampingRange
     } );
     var frequencySlider = new Slider( {
       sliderX: 60 - 630,
