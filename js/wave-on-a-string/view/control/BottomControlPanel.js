@@ -28,8 +28,6 @@ define( function( require ) {
   var dampingString = require( 'string!WAVE_ON_A_STRING/damping' );
   var lowString = require( 'string!WAVE_ON_A_STRING/low' );
   var highString = require( 'string!WAVE_ON_A_STRING/high' );
-  var noneString = require( 'string!WAVE_ON_A_STRING/none' );
-  var lotsString = require( 'string!WAVE_ON_A_STRING/lots' );
   var frequencyString = require( 'string!WAVE_ON_A_STRING/frequency' );
   var patternValueUnitHzString = require( 'string!WAVE_ON_A_STRING/patternValueUnitHz' );
   var pulseWidthString = require( 'string!WAVE_ON_A_STRING/pulseWidth' );
