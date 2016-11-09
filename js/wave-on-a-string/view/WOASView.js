@@ -103,7 +103,7 @@ define( function( require ) {
       right: centerControlX - 30,
       centerY: centerControlY
     } ) );
-    this.addChild( new BottomControlPanel( model ) );
+
     var playPauseButtonOptions = {
       upFill: Constants.blueUpColor,
       overFill: Constants.blueOverColor,
@@ -140,15 +140,22 @@ define( function( require ) {
       backgroundGradientColorStop0: Constants.buttonBorder0,
       backgroundGradientColorStop1: Constants.buttonBorder1
     } ) );
-    this.addChild( new Node( {
-      scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height - 10, children: [
-        new ResetAllButton( {
-          scale: 1.32,
-          listener: function() { model.reset(); }
-        } )
-      ]
-    } ) );
 
+    var resetAllButton = new ResetAllButton( {
+      listener: function() {
+        model.reset();
+      },
+      right: this.layoutBounds.maxX - 10,
+      bottom: this.layoutBounds.maxY - 10
+    } );
+    resetAllButton.scale( 0.924 );
+    this.addChild( resetAllButton );
+
+    var bottomControlPanel = new BottomControlPanel( model );
+    this.addChild( bottomControlPanel );
+
+    bottomControlPanel.right = resetAllButton.left - 10;
+    bottomControlPanel.bottom = resetAllButton.bottom;
     /*---------------------------------------------------------------------------*
      * Timer
      *----------------------------------------------------------------------------*/

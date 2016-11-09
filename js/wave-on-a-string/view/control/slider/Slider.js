@@ -29,7 +29,7 @@ define( function( require ) {
       type: 'simple',
       property: new Property( 0 ),
       range: new RangeWithValue( 0, 100 ),
-      sliderSize: new Dimension2( 200, 110 ),
+      sliderSize: new Dimension2( 140 + 22, 110 ),
       tick: { step: 1, minText: '', maxText: '' },
       title: '',
       patternValueUnit: '',
@@ -86,10 +86,10 @@ define( function( require ) {
       for ( ; i <= options.range.max; i += options.tick.step ) {
 
         if ( i === options.range.max ) {
-          hSlider.addMajorTick( i, new Text( options.tick.maxText, { font: new PhetFont( 15 ), maxWidth: 55 } ) );
+          hSlider.addMajorTick( i, new Text( options.tick.maxText, { font: new PhetFont( 15 ), maxWidth: 40 } ) );
         }
         else if ( i === options.range.min ) {
-          hSlider.addMajorTick( i, new Text( options.tick.minText, { font: new PhetFont( 15 ), maxWidth: 55 } ) );
+          hSlider.addMajorTick( i, new Text( options.tick.minText, { font: new PhetFont( 15 ), maxWidth: 40 } ) );
         }
         else if ( i === (options.range.min + options.range.max) / 2 ) {
           hSlider.addMajorTick( i );
@@ -108,10 +108,13 @@ define( function( require ) {
         };
       };
       buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {
-        right: self.width - 15,
+        right: self.width,
         centerY: 15
       } ) );
-      buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), { left: 15, centerY: 15 } ) );
+      buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), {
+        left: 0,
+        centerY: 15
+      } ) );
       buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, {
         fill: '#FFF',
         stroke: '#000',
@@ -128,9 +131,7 @@ define( function( require ) {
       this.addChild( buttonNode );
     }
 
-    self.mutate( _.extend( _.omit( options, Object.keys( defaultOptions ) ), {
-      x: options.sliderX
-    } ) );
+    //self.mutate( _.extend( _.omit( options, Object.keys( defaultOptions ) ) ) );
 
     options.property.link( function updateProperty( value ) {
       if ( options.type === 'button' ) {
