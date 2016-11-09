@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Text = require( 'SCENERY/nodes/Text' );
