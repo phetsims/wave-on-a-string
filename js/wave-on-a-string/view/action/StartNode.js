@@ -29,7 +29,7 @@ define( function( require ) {
 
   var wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 
-  function StartNode( model, events, options ) {
+  function StartNode( model, frame, options ) {
     options = _.extend( { layerSplit: true }, options );
 
     var postNodeHeight = 158;
@@ -137,18 +137,18 @@ define( function( require ) {
 
     wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
-      model.play = true;
-      model.trigger( 'yNowChanged' );
+      model.playProperty.set( true );
+      model.yNowChanged.emit();
     }, function endCallback( event, trail ) {
       if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
-        model.wrenchArrowsVisible = false;
+        model.wrenchArrowsVisibleProperty.set( false );
       }
     }, function endCallback( event, trail ) {
-      model.wrenchArrowsVisible = false;
+      model.wrenchArrowsVisibleProperty.set( false );
     } ) );
-    model.link( 'wrenchArrowsVisible', function() {
-      wrenchTopArrow.visible = model.wrenchArrowsVisible;
-      wrenchBottomArrow.visible = model.wrenchArrowsVisible;
+    model.wrenchArrowsVisibleProperty.link( function( value ) {
+      wrenchTopArrow.visible = value;
+      wrenchBottomArrow.visible = value;
     } );
 
     self.mutate( options );
@@ -169,8 +169,8 @@ define( function( require ) {
     }
 
     var dirty = true;
-    model.on( 'yNowChanged', function() { dirty = true; } );
-    events.on( 'frame', function() {
+    model.yNowChanged.addListener( function() { dirty = true; } );
+    frame.addListener( function() {
       if ( dirty ) {
         updateKey();
         updatePost();

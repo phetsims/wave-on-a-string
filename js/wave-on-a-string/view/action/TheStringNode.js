@@ -16,7 +16,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Circle = require( 'SCENERY/nodes/Circle' );
 
-  function TheStringNode( model, events, options ) {
+  function TheStringNode( model, frame, options ) {
     Node.call( this, { layerSplit: true } );
     var theStringShape = new Shape();
     var theStringPath = new Path( theStringShape, {
@@ -69,8 +69,8 @@ define( function( require ) {
     }
 
     var dirty = true;
-    model.on( 'yNowChanged', function() { dirty = true; } );
-    events.on( 'frame', function() {
+    model.yNowChanged.addListener( function() { dirty = true; } );
+    frame.addListener( function() {
       if ( dirty ) {
         updateTheString();
         dirty = false;

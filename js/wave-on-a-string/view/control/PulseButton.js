@@ -35,8 +35,8 @@ define( function( require ) {
     RoundPushButton.call( this, {
       listener: function() {
         model.manualPulse();
-        model.play = true;
-        model.trigger( 'yNowChanged' );
+        model.playProperty.set( true );
+        model.yNowChanged.emit();
       },
       // listener: model.manualPulse.bind( model ),
       baseColor: '#33dd33',
