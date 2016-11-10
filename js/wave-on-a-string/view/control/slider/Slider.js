@@ -29,7 +29,7 @@ define( function( require ) {
       type: 'simple',
       property: new Property( 0 ),
       range: new RangeWithValue( 0, 100 ),
-      sliderSize: new Dimension2( 140 + 22, 110 ),
+      sliderSize: new Dimension2( 140 + 24, 110 ),
       tick: { step: 1, minText: '', maxText: '' },
       title: '',
       patternValueUnit: '',
@@ -125,7 +125,7 @@ define( function( require ) {
       buttonNode.addChild( valueLabel = new Text( '0', {
         font: new PhetFont( 18 ),
         centerX: options.width / 2,
-        centerY: 13,
+        centerY: 15,
         maxWidth: 80
       } ) );
       this.addChild( buttonNode );
