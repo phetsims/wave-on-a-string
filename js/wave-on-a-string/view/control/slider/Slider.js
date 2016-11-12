@@ -124,7 +124,7 @@ define( function( require ) {
       } ) );
       buttonNode.addChild( valueLabel = new Text( '0', {
         font: new PhetFont( 18 ),
-        centerX: options.width / 2,
+        centerX: self.width / 2,
         centerY: 15,
         maxWidth: 80
       } ) );
