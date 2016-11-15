@@ -39,7 +39,7 @@ define( function( require ) {
     endTheStringNode: 670,
     yWrenchRange: new RangeWithValue( -100, 100 ),
     maxWidthBottomControlPanel: 1000,
-    tensionRange: new RangeWithValue( 0, 6 ),
+    tensionRange: new RangeWithValue( 0, 2 ),
     dampingRange: new RangeWithValue( 0, 100 ),
     frequencyRange: new RangeWithValue( 0, 3 ),
     pulseWidthRange: new RangeWithValue( 0.2, 1 ),

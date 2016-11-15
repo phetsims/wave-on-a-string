@@ -70,10 +70,10 @@ define( function( require ) {
       title: tensionString,
       property: model.tensionProperty,
       //trackSize: new Dimension2( 80, 2 ),
-      rounding: 0,
+      rounding: 2,
       range: Constants.tensionRange,
       titleVerticalOffset: 15,
-      tick: { step: 1, minText: lowString, maxText: highString }
+      tick: { step: 0.25, minText: lowString, maxText: highString }
     } );
 
     tensionSlider.right = separator.left - 20;

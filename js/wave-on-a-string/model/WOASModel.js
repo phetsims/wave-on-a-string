@@ -32,7 +32,7 @@ define( function( require ) {
     this.rulersProperty = new Property( false ); // visible rulers
     this.timerProperty = new Property( false );  // visible timer
     this.referenceLineProperty = new Property( false ); // visible referenceLine
-    this.tensionProperty = new Property( 2 ); // tension 0..6
+    this.tensionProperty = new Property( 2 ); // tension 0..2
     this.dampingProperty = new Property( 20 ); // dumping 0..100
     this.frequencyProperty = new Property( 1.50 ); // frequency 0.00 .. 3.00
     this.pulseWidthProperty = new Property( 0.5 ); // pulse width 0.00 .. 1.00
