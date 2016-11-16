@@ -55,7 +55,7 @@ define( function( require ) {
     options = _.extend( {}, defaultOptions, options );
     if ( !options.endDrag && options.rounding !== false ) {
       options.endDrag = function() {
-        options.property.set( Util.roundSymmetric( options.property.get() * Math.pow( 10, options.rounding ) ) / Math.pow( 10, options.rounding ) );
+        options.property.set( Util.toFixed( options.property.get(), options.rounding ) );
       };
     }
 
