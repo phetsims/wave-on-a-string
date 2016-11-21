@@ -34,7 +34,8 @@ define( function( require ) {
       title: '',
       patternValueUnit: '',
       buttonStep: 1,
-      rounding: false,
+      round: true,
+      roundingDigits: 2,
       // custom track
       trackSize: new Dimension2( 140, 2 ),
       trackFill: 'black',
@@ -53,9 +54,9 @@ define( function( require ) {
     };
     Node.call( self );
     options = _.extend( {}, defaultOptions, options );
-    if ( !options.endDrag && options.rounding !== false ) {
+    if ( !options.endDrag && options.round ) {
       options.endDrag = function() {
-        options.property.set( Util.toFixed( options.property.get(), options.rounding ) );
+        options.property.set( Util.toFixed( options.property.get(), options.roundingDigits ) );
       };
     }
 
@@ -136,8 +137,8 @@ define( function( require ) {
     options.property.link( function updateProperty( value ) {
       if ( options.type === 'button' ) {
         var text = value;
-        if ( options.rounding !== false && options.rounding >= 0 ) {
-          text = Util.toFixed( options.property.get(), options.rounding );
+        if ( options.round && options.roundingDigits >= 0 ) {
+          text = Util.toFixed( options.property.get(), options.roundingDigits );
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
         valueLabel.centerX = self.width / 2;
