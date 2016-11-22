@@ -56,7 +56,7 @@ define( function( require ) {
     options = _.extend( {}, defaultOptions, options );
     if ( !options.endDrag && options.round ) {
       options.endDrag = function() {
-        options.property.set( Util.toFixed( options.property.get(), options.roundingDigits ) );
+        options.property.set( Util.toFixedNumber( options.property.get(), options.roundingDigits ) );
       };
     }
 
