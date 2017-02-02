@@ -13,7 +13,6 @@ define( function( require ) {
   var WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
   var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
   var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
 
   /**
    * @param {Tandem} tandem
@@ -23,7 +22,7 @@ define( function( require ) {
     Screen.call( this,
       function() { return new WOASModel( 768, 504 ); },
       function( model ) { return new WOASView( model ); }, {
-        backgroundColorProperty: new Property( Color.toColor( '#FFFFB7' ) ),
+        backgroundColorProperty: new Property( '#FFFFB7' ),
         tandem: tandem
       }
     );
