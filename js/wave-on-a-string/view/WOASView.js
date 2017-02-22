@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
   var inherit = require( 'PHET_CORE/inherit' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Events = require( 'AXON/Events' );
+  var Emitter = require( 'AXON/Emitter' );
   var Vector2 = require( 'DOT/Vector2' );
   var Util = require( 'DOT/Util' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -51,7 +51,7 @@ define( function( require ) {
   function WOASView( model ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
-    this.events = new Events();
+    this.frame = new Emitter();
 
     var centerControlX = Constants.viewSize.width / 2;
     var centerControlY = Constants.viewSize.height - 131;
@@ -103,7 +103,7 @@ define( function( require ) {
       right: centerControlX - 30,
       centerY: centerControlY
     } ) );
-    this.addChild( new BottomControlPanel( model ) );
+
     var playPauseButtonOptions = {
       upFill: Constants.blueUpColor,
       overFill: Constants.blueOverColor,
@@ -140,15 +140,22 @@ define( function( require ) {
       backgroundGradientColorStop0: Constants.buttonBorder0,
       backgroundGradientColorStop1: Constants.buttonBorder1
     } ) );
-    this.addChild( new Node( {
-      scale: 0.7, right: Constants.viewSize.width - 5, bottom: Constants.viewSize.height - 10, children: [
-        new ResetAllButton( {
-          scale: 1.32,
-          listener: function() { model.reset(); }
-        } )
-      ]
-    } ) );
 
+    var resetAllButton = new ResetAllButton( {
+      listener: function() {
+        model.reset();
+      },
+      right: this.layoutBounds.maxX - 10,
+      bottom: this.layoutBounds.maxY - 10
+    } );
+    resetAllButton.scale( 0.924 );
+    this.addChild( resetAllButton );
+
+    var bottomControlPanel = new BottomControlPanel( model );
+    this.addChild( bottomControlPanel );
+
+    bottomControlPanel.right = resetAllButton.left - 10;
+    bottomControlPanel.bottom = resetAllButton.bottom;
     /*---------------------------------------------------------------------------*
      * Timer
      *----------------------------------------------------------------------------*/
@@ -168,18 +175,22 @@ define( function( require ) {
         clickOffset = timer.dragTarget.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
       },
       drag: function( event ) {
-        model.timerLoc = timer.globalToParentPoint( event.pointer.point ).minus( clickOffset );
+        model.timerLocProperty.set( timer.globalToParentPoint( event.pointer.point ).minus( clickOffset ) );
         if ( timer.right < restrictedBounds.minX ) {
-          model.timerLoc = new Vector2( model.timerLoc.x - timer.right + restrictedBounds.minX, model.timerLoc.y );
+          model.timerLocProperty.set(
+            new Vector2( model.timerLocProperty.get().x - timer.right + restrictedBounds.minX, model.timerLocProperty.get().y ) );
         }
         if ( timer.left > restrictedBounds.maxX ) {
-          model.timerLoc = new Vector2( model.timerLoc.x - timer.left + restrictedBounds.maxX, model.timerLoc.y );
+          model.timerLocProperty.set( new Vector2( model.timerLocProperty.get().x -
+                                                   timer.left + restrictedBounds.maxX, model.timerLocProperty.get().y ) );
         }
         if ( timer.bottom < restrictedBounds.minY ) {
-          model.timerLoc = new Vector2( model.timerLoc.x, model.timerLoc.y - timer.bottom + restrictedBounds.minY );
+          model.timerLocProperty.set(
+            new Vector2( model.timerLocProperty.get().x, model.timerLocProperty.get().y - timer.bottom + restrictedBounds.minY ) );
         }
         if ( timer.top > restrictedBounds.maxY ) {
-          model.timerLoc = new Vector2( model.timerLoc.x, model.timerLoc.y - timer.top + restrictedBounds.maxY );
+          model.timerLocProperty.set(
+            new Vector2( model.timerLocProperty.get().x, model.timerLocProperty.get().y - timer.top + restrictedBounds.maxY ) );
         }
       }
     } ) );
@@ -193,18 +204,18 @@ define( function( require ) {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
     } ) );
-    var endNode = new EndNode( model, this.events, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
+    var endNode = new EndNode( model, this.frame, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
     endNode.windowNode.x += Constants.endTheStringNode;
     endNode.windowNode.y += Constants.yTheStringNode;
     this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model ) );
     this.addChild( endNode );
-    this.addChild( new TheStringNode( model, this.events, {
+    this.addChild( new TheStringNode( model, this.frame, {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode,
       radius: Constants.segmentTheStringNodeRadius
     } ) );
-    this.addChild( new StartNode( model, this.events, {
+    this.addChild( new StartNode( model, this.frame, {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode,
       range: Constants.yWrenchRange
@@ -226,7 +237,7 @@ define( function( require ) {
 
   inherit( ScreenView, WOASView, {
     step: function( time ) {
-      this.events.trigger( 'frame' );
+      this.frame.emit();
     }
   } );
   return WOASView;

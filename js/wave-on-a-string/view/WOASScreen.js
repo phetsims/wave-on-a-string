@@ -12,19 +12,17 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
   var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
-
-  // strings
-  var waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @param {Tandem} tandem
    * @constructor
    */
   function WOASScreen( tandem ) {
-    Screen.call( this, waveOnAStringTitleString, null, /* single-screen sim, no icon */
+    Screen.call( this,
       function() { return new WOASModel( 768, 504 ); },
       function( model ) { return new WOASView( model ); }, {
-        backgroundColor: '#FFFFB7',
+        backgroundColorProperty: new Property( '#FFFFB7' ),
         tandem: tandem
       }
     );

@@ -21,7 +21,7 @@ define( function( require ) {
   var windowImage = require( 'image!WAVE_ON_A_STRING/window-back.png' );
   var clampImage = require( 'image!WAVE_ON_A_STRING/clamp.png' );
 
-  function EndNode( model, events, options ) {
+  function EndNode( model, frame, options ) {
     Node.call( this );
     var clamp = new Image( clampImage, { x: -17, y: -31, scale: 0.4 } );
     var ring_back = new Node( { children: [ new Image( ringBackImage, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } );
@@ -46,8 +46,8 @@ define( function( require ) {
     }
 
     var dirty = true;
-    model.on( 'yNowChanged', function() { dirty = true; } );
-    events.on( 'frame', function() {
+    model.yNowChanged.addListener( function() { dirty = true; } );
+    frame.addListener( function() {
       if ( dirty ) {
         updateRing();
         dirty = false;
@@ -66,7 +66,7 @@ define( function( require ) {
         model.yNow[ model.nSegs - 1 ] = 0;
         model.yDraw[ model.nSegs - 1 ] = 0;
 
-        model.trigger( 'yNowChanged' );
+        model.yNowChanged.emit();
       }
     } );
 

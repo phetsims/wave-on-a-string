@@ -29,8 +29,7 @@ define( function( require ) {
       graphicArts: 'Sharon Siman-Tov',
       thanks: 'Thanks to Mobile Learner Labs for working with the PhET development team\n' +
               'to convert this simulation to HTML5.'
-    },
-    tandem: tandem
+    }
   };
 
   SimLauncher.launch( function() {

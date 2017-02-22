@@ -1,20 +1,20 @@
 Wave on a String
 =============
-"Wave on a String" is an educational simulation in HTML5, by <a href="http://phet.colorado.edu/" target="_blank">PhET Interactive Simulations</a>
+"Wave on a String" is an educational simulation in HTML5, by <a href="https://phet.colorado.edu/" target="_blank">PhET Interactive Simulations</a>
 at the University of Colorado Boulder.
 For a description of this simulation, associated resources, and a link to the published version,
-<a href="http://phet.colorado.edu/en/simulation/wave-on-a-string" target="_blank">visit the simulation's web page</a>.
+<a href="https://phet.colorado.edu/en/simulation/wave-on-a-string" target="_blank">visit the simulation's web page</a>.
 
 ### Try it!
 
-<a href="http://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">Click here to run "Wave on a String".</a>
+<a href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">Click here to run "Wave on a String".</a>
 
-<a href="http://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">
+<a href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">
 <img src="https://raw.githubusercontent.com/phetsims/wave-on-a-string/master/assets/wave-on-a-string-screenshot.png" alt="Screenshot" style="width: 400px;"/>
 </a>
 
 ### Documentation
-The <a href="http://bit.ly/phet-development-overview" target="_blank">PhET Development Overview</a> is the most complete guide to PhET Simulation
+The <a href="http://bit.ly/phet-html5-development-overview" target="_blank">PhET Development Overview</a> is the most complete guide to PhET Simulation
 Development. This guide includes how to obtain simulation code and its dependencies, notes about architecture & design, how to test and build
 the sims, as well as other important information.
 
@@ -31,6 +31,7 @@ git clone https://github.com/phetsims/joist.git
 git clone https://github.com/phetsims/kite.git
 git clone https://github.com/phetsims/phet-core.git
 git clone https://github.com/phetsims/phetcommon.git
+git clone https://github.com/phetsims/query-string-machine.git
 git clone https://github.com/phetsims/scenery.git
 git clone https://github.com/phetsims/scenery-phet.git
 git clone https://github.com/phetsims/sherpa.git

@@ -29,14 +29,14 @@ define( function( require ) {
 
   var wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 
-  function StartNode( model, events, options ) {
+  function StartNode( model, frame, options ) {
     options = _.extend( { layerSplit: true }, options );
 
     var postNodeHeight = 158;
     var postScale = 3;
 
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     /*---------------------------------------------------------------------------*
      * Oscillation wheel
@@ -130,28 +130,28 @@ define( function( require ) {
     } );
     post = new Node( { children: [ postCache ] } );
 
-    thisNode.addChild( post );
-    thisNode.addChild( pistonBox );
-    thisNode.addChild( wrench );
-    thisNode.addChild( new Node( { children: [ wheel ], translation: Constants.offsetWheel } ) );
+    self.addChild( post );
+    self.addChild( pistonBox );
+    self.addChild( wrench );
+    self.addChild( new Node( { children: [ wheel ], translation: Constants.offsetWheel } ) );
 
     wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
-      model.play = true;
-      model.trigger( 'yNowChanged' );
+      model.playProperty.set( true );
+      model.yNowChanged.emit();
     }, function endCallback( event, trail ) {
       if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
-        model.wrenchArrowsVisible = false;
+        model.wrenchArrowsVisibleProperty.set( false );
       }
     }, function endCallback( event, trail ) {
-      model.wrenchArrowsVisible = false;
+      model.wrenchArrowsVisibleProperty.set( false );
     } ) );
-    model.link( 'wrenchArrowsVisible', function() {
-      wrenchTopArrow.visible = model.wrenchArrowsVisible;
-      wrenchBottomArrow.visible = model.wrenchArrowsVisible;
+    model.wrenchArrowsVisibleProperty.link( function( value ) {
+      wrenchTopArrow.visible = value;
+      wrenchBottomArrow.visible = value;
     } );
 
-    thisNode.mutate( options );
+    self.mutate( options );
     function updateKey() {
       if ( wrench.isVisible() ) {
         wrench.y = model.yNow[ 0 ];
@@ -169,8 +169,8 @@ define( function( require ) {
     }
 
     var dirty = true;
-    model.on( 'yNowChanged', function() { dirty = true; } );
-    events.on( 'frame', function() {
+    model.yNowChanged.addListener( function() { dirty = true; } );
+    frame.addListener( function() {
       if ( dirty ) {
         updateKey();
         updatePost();
