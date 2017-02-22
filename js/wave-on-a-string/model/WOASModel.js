@@ -25,24 +25,33 @@ define( function( require ) {
 
     // HACK ALERT!
     // Testing the nexus!
-    // http://169.254.86.49:9081/
+    //
+    // Integration of the Nexus with Wave on a String.
+    //
+    // Ensure that a Nexus instance is running ( https://github.com/GPII/nexus ). May require
+    // a fix from the GPII-2167 branch ( https://github.com/simonbates/nexus/tree/GPII-2167 )
+    // for the vagrant VM to run correctly.
+    //
+    // Use the Orientation demo on an iPad or other capable device to control the wrench remotely.
+    // ( https://github.com/simonbates/nexus-demos )
+    //
+    // The websocket url below will work if the nexus is being run from on the same
+    // machine or through a vagrant vm hosted on the same machine that the sim is being
+    // served from.
     var websocket = new WebSocket('ws://localhost:9081/bindModel/nexus.sensors/orientation');
-           websocket.onmessage = function (evt) {
-               var inputs = JSON.parse(evt.data);
+    websocket.onmessage = function (evt) {
+      var inputs = JSON.parse(evt.data);
 
-               var orientation = -inputs.betaAbs * 2;
+      var orientation = -inputs.beta * 2;
 
-               // further transformation will occur here
-               orientation = Util.clamp( orientation, -100, 100 );
+      // further transformation will occur here
+      orientation = Util.clamp( orientation, -100, 100 );
 
-               self.nexusOrienation = orientation;
-              //  console.log( orientation );
-               self.nextLeftY = orientation;
-               self.play = true;
-               this.trigger( 'yNowChanged' );
-
-           };
-
+      self.nexusOrienation = orientation;
+      self.nextLeftY = orientation;
+      self.play = true;
+      self.yNowChanged.emit();
+    };
 
     this.stepDt = 0;
     var Array = window.Float64Array || window.Array;
