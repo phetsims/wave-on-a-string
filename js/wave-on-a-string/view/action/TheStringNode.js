@@ -16,7 +16,13 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Circle = require( 'SCENERY/nodes/Circle' );
 
-  function TheStringNode( model, frame, options ) {
+  /**
+   * @constructor
+   * @param {WOASModel} model
+   * @param {frameEmitter} frame - emits an event when the animation frame changes
+   * @param {object} options
+   */
+  function TheStringNode( model, frameEmitter, options ) {
     Node.call( this, { layerSplit: true } );
     var theStringShape = new Shape();
     var theStringPath = new Path( theStringShape, {
@@ -70,7 +76,7 @@ define( function( require ) {
 
     var dirty = true;
     model.yNowChanged.addListener( function() { dirty = true; } );
-    frame.addListener( function() {
+    frameEmitter.addListener( function() {
       if ( dirty ) {
         updateTheString();
         dirty = false;

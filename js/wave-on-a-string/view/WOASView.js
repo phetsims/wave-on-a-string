@@ -51,7 +51,7 @@ define( function( require ) {
   function WOASView( model ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
-    this.frame = new Emitter();
+    this.frameEmitter = new Emitter();
 
     var centerControlX = Constants.viewSize.width / 2;
     var centerControlY = Constants.viewSize.height - 131;
@@ -204,18 +204,18 @@ define( function( require ) {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
     } ) );
-    var endNode = new EndNode( model, this.frame, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
+    var endNode = new EndNode( model, this.frameEmitter, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
     endNode.windowNode.x += Constants.endTheStringNode;
     endNode.windowNode.y += Constants.yTheStringNode;
     this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model ) );
     this.addChild( endNode );
-    this.addChild( new TheStringNode( model, this.frame, {
+    this.addChild( new TheStringNode( model, this.frameEmitter, {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode,
       radius: Constants.segmentTheStringNodeRadius
     } ) );
-    this.addChild( new StartNode( model, this.frame, {
+    this.addChild( new StartNode( model, this.frameEmitter, {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode,
       range: Constants.yWrenchRange
@@ -237,7 +237,7 @@ define( function( require ) {
 
   inherit( ScreenView, WOASView, {
     step: function( time ) {
-      this.frame.emit();
+      this.frameEmitter.emit();
     }
   } );
   return WOASView;

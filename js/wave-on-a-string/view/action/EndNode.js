@@ -21,7 +21,13 @@ define( function( require ) {
   var windowImage = require( 'image!WAVE_ON_A_STRING/window-back.png' );
   var clampImage = require( 'image!WAVE_ON_A_STRING/clamp.png' );
 
-  function EndNode( model, frame, options ) {
+  /**
+   * @constructor
+   * @param {WOASModel} model
+   * @param {[type]} frameEmitter - emits an event when animation frame changes
+   * @param {object} options
+   */
+  function EndNode( model, frameEmitter, options ) {
     Node.call( this );
     var clamp = new Image( clampImage, { x: -17, y: -31, scale: 0.4 } );
     var ring_back = new Node( { children: [ new Image( ringBackImage, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } );
@@ -47,7 +53,7 @@ define( function( require ) {
 
     var dirty = true;
     model.yNowChanged.addListener( function() { dirty = true; } );
-    frame.addListener( function() {
+    frameEmitter.addListener( function() {
       if ( dirty ) {
         updateRing();
         dirty = false;
