@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.1.7 Fri Apr 07 2017 17:51:33 GMT-0600 (MDT)",
+  "comment": "# wave-on-a-string 1.1.7 Thu Apr 13 2017 16:01:34 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,8 +9,8 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "d9e64f424ae3ca05f3d10964f5845460a6ccbce6",
-    "branch": "HEAD"
+    "sha": "2cee80639e20e9673f3bd7d6f4a9dbe16c24fa42",
+    "branch": "wave-on-a-string-1.1"
   },
   "chipper": {
     "sha": "23ec53efca30d05cabd088a16e25aba17bab9b29",
@@ -33,8 +33,8 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "c472f6f8887487b49dbac231aafb79791215589f",
-    "branch": "HEAD"
+    "sha": "924a7c932936aecc865e1b3ea4c5bc14f0c7b5e5",
+    "branch": "wave-on-a-string-1.1"
   },
   "scenery": {
     "sha": "4ab9fc738e721e9e293042205c48a6d31505db98",
@@ -57,7 +57,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "e0cd2bf808e9af633304215899eb885c8e9bbc7a",
+    "sha": "19d64585c4f96daa405ccf5a2d5986e51ce2e5d0",
     "branch": "1.1"
   }
 }
