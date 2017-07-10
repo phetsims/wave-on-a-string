@@ -25,7 +25,7 @@ define( function( require ) {
   var BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
   var RadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RadioGroup' );
   var RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
-  var Timer = require( 'SCENERY_PHET/Timer' );
+  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   var TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
   var StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
@@ -157,9 +157,9 @@ define( function( require ) {
     bottomControlPanel.right = resetAllButton.left - 10;
     bottomControlPanel.bottom = resetAllButton.bottom;
     /*---------------------------------------------------------------------------*
-     * Timer
+     * TimerNode
      *----------------------------------------------------------------------------*/
-    var timer = new Timer( model.timerSecondProperty, model.timerStartProperty, {} );
+    var timer = new TimerNode( model.timerSecondProperty, model.timerStartProperty, {} );
     this.addChild( timer );
     model.timerProperty.link( function updateVisible( value ) {
       timer.setVisible( value );
