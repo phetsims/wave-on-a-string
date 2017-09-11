@@ -11,9 +11,9 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // strings
   var restartString = require( 'string!WAVE_ON_A_STRING/restart' );

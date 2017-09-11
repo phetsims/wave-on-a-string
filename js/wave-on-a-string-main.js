@@ -10,10 +10,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var SimLauncher = require( 'JOIST/SimLauncher' );
   var Sim = require( 'JOIST/Sim' );
-  var WOASScreen = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASScreen' );
+  var SimLauncher = require( 'JOIST/SimLauncher' );
   var Tandem = require( 'TANDEM/Tandem' );
+  var WOASScreen = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASScreen' );
 
   // strings
   var waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );

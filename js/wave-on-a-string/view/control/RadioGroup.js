@@ -10,14 +10,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
-  var Panel = require( 'SUN/Panel' );
   var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Panel = require( 'SUN/Panel' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function RadioGroup( options ) {
     options = _.extend( { scale: 0.5 }, options );

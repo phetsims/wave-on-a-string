@@ -8,11 +8,11 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
   var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
-  var Property = require( 'AXON/Property' );
 
   /**
    * @param {Tandem} tandem

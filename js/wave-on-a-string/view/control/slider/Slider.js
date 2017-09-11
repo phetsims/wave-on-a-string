@@ -8,20 +8,20 @@
 
 define( function( require ) {
   'use strict';
-  var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var Util = require( 'DOT/Util' );
-  var Property = require( 'AXON/Property' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var ArrowButton = require( 'SUN/buttons/ArrowButton' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var HSlider = require( 'SUN/HSlider' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var HSlider = require( 'SUN/HSlider' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Property = require( 'AXON/Property' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var Util = require( 'DOT/Util' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function Slider( options ) {
     var self = this;

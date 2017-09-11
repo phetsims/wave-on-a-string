@@ -11,11 +11,11 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Shape = require( 'KITE/Shape' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
+  var Shape = require( 'KITE/Shape' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function PulseButton( model, options ) {
     var pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );

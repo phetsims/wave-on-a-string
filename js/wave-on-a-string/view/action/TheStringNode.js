@@ -8,13 +8,13 @@
 
 define( function( require ) {
   'use strict';
-  var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Shape = require( 'KITE/Shape' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var Circle = require( 'SCENERY/nodes/Circle' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Shape = require( 'KITE/Shape' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   /**
    * @constructor

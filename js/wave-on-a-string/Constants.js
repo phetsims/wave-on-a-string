@@ -3,17 +3,17 @@
 define( function( require ) {
   'use strict';
 
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var Vector2 = require( 'DOT/Vector2' );
   var Color = require( 'SCENERY/util/Color' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var Node = require( 'SCENERY/nodes/Node' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var Vector2 = require( 'DOT/Vector2' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   var clickOffset = new Vector2();
   var Constants = {

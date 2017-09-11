@@ -8,14 +8,14 @@
 
 define( function( require ) {
   'use strict';
-  var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var Shape = require( 'KITE/Shape' );
+  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var Shape = require( 'KITE/Shape' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function ReferenceLine( model ) {
     Node.call( this, { cursor: 'pointer' } );

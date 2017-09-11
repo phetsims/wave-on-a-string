@@ -8,44 +8,44 @@
 
 define( function( require ) {
   'use strict';
-  var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var Emitter = require( 'AXON/Emitter' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var Util = require( 'DOT/Util' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
-  var RadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RadioGroup' );
-  var RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
-  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  var TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
-  var StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
-  var EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/EndNode' );
-  var ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/ReferenceLine' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var Emitter = require( 'AXON/Emitter' );
+  var EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/EndNode' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
+  var RadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RadioGroup' );
+  var ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/ReferenceLine' );
+  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
+  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  var ScreenView = require( 'JOIST/ScreenView' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
+  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
+  var TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
+  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // images
   var windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
 
   // strings
-  var speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
-  var speedNormalString = require( 'string!WAVE_ON_A_STRING/speedNormal' );
-  var manualString = require( 'string!WAVE_ON_A_STRING/manual' );
-  var oscillateString = require( 'string!WAVE_ON_A_STRING/oscillate' );
-  var pulseString = require( 'string!WAVE_ON_A_STRING/pulse' );
   var fixedEndString = require( 'string!WAVE_ON_A_STRING/fixedEnd' );
   var looseEndString = require( 'string!WAVE_ON_A_STRING/looseEnd' );
+  var manualString = require( 'string!WAVE_ON_A_STRING/manual' );
   var noEndString = require( 'string!WAVE_ON_A_STRING/noEnd' );
+  var oscillateString = require( 'string!WAVE_ON_A_STRING/oscillate' );
+  var pulseString = require( 'string!WAVE_ON_A_STRING/pulse' );
+  var speedNormalString = require( 'string!WAVE_ON_A_STRING/speedNormal' );
+  var speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
   var unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
 
   function WOASView( model ) {

@@ -8,24 +8,24 @@
 
 define( function( require ) {
   'use strict';
-  var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var platform = require( 'PHET_CORE/platform' );
-  var Matrix3 = require( 'DOT/Matrix3' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var Shape = require( 'KITE/Shape' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Color = require( 'SCENERY/util/Color' );
+  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  var Matrix3 = require( 'DOT/Matrix3' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var platform = require( 'PHET_CORE/platform' );
   var PulseButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/PulseButton' );
-  var Image = require( 'SCENERY/nodes/Image' );
+  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
+  var Shape = require( 'KITE/Shape' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   var wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 

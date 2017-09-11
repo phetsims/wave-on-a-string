@@ -9,9 +9,9 @@ define( function( require ) {
   'use strict';
   var Emitter = require( 'AXON/Emitter' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
+  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   var NSEGS = 61;
   var fps = 50;
