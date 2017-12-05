@@ -13,7 +13,8 @@
     "requirejsNamespace": "WAVE_ON_A_STRING",
     "runnable": true,
     "supportedBrands": [
-      "phet"
+      "phet",
+      "adapted-from-phet"
     ],
     "simulation": true
   }
