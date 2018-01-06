@@ -20,7 +20,7 @@ define( function( require ) {
    * @constructor
    * @param {WOASModel} model
    * @param {frameEmitter} frame - emits an event when the animation frame changes
-   * @param {object} options
+   * @param {Object} [options]
    */
   function TheStringNode( model, frameEmitter, options ) {
     Node.call( this, { layerSplit: true } );

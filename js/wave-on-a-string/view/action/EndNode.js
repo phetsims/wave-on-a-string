@@ -25,7 +25,7 @@ define( function( require ) {
    * @constructor
    * @param {WOASModel} model
    * @param {[type]} frameEmitter - emits an event when animation frame changes
-   * @param {object} options
+   * @param {Object} [options]
    */
   function EndNode( model, frameEmitter, options ) {
     Node.call( this );
