@@ -17,7 +17,7 @@ define( function( require ) {
   var Slider = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/slider/Slider' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
-  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
+  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // strings
@@ -42,28 +42,28 @@ define( function( require ) {
 
     Node.call( this, { scale: 0.7 } );
 
-    var checkBoxTextOptions = {
+    var checkboxTextOptions = {
       font: new PhetFont( 15 ),
       maxWidth: 130
     };
-    var checkBoxGroup = new VerticalCheckBoxGroup( [ {
-      content: new Text( rulersString, checkBoxTextOptions ),
+    var checkboxGroup = new VerticalCheckboxGroup( [ {
+      content: new Text( rulersString, checkboxTextOptions ),
       property: model.rulersProperty,
       indent: 0
     }, {
-      content: new Text( timerString, checkBoxTextOptions ),
+      content: new Text( timerString, checkboxTextOptions ),
       property: model.timerProperty,
       indent: 0
     }, {
-      content: new Text( referenceLineString, checkBoxTextOptions ),
+      content: new Text( referenceLineString, checkboxTextOptions ),
       property: model.referenceLineProperty,
       indent: 0
     } ] );
 
     var separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 
-    separator.right = checkBoxGroup.left - 20;
-    checkBoxGroup.centerY = separator.centerY;
+    separator.right = checkboxGroup.left - 20;
+    checkboxGroup.centerY = separator.centerY;
 
     var tensionSlider = new Slider( {
       title: tensionString,
@@ -134,21 +134,21 @@ define( function( require ) {
 
 
     var oscillatePanel = new Panel( new Node( {
-      children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkBoxGroup ]
+      children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
     this.addChild( oscillatePanel );
 
     var manualPanel = new Panel( new Node( {
-      children: [ dampingSlider, tensionSlider, separator, checkBoxGroup ]
+      children: [ dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
     this.addChild( manualPanel );
 
     var pulsePanel = new Panel( new Node( {
-      children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkBoxGroup ]
+      children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
