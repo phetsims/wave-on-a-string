@@ -35,6 +35,7 @@ define( function( require ) {
       } );
     }
     var radioGroup = new VerticalAquaRadioButtonGroup( group, {
+      radius: 12,
       spacing: 16,
       touchAreaXDilation: 10,
       radioButtonOptions: {
