@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.1.11 Fri Aug 10 2018 02:20:19 GMT-0600 (MDT)",
+  "comment": "# wave-on-a-string 1.1.12-rc.1 Fri Aug 10 2018 04:51:34 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -34,7 +34,7 @@
   },
   "phetcommon": {
     "sha": "eb4998190c4a3a91ea08f49af3d9af9cef4e9507",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "399e75739a66c81f38670af89c6941927ff6d0a9",
@@ -57,7 +57,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "b0de08d117f80163ba515c87f775ab87fcfb8ce1",
+    "sha": "11dc0a78cede558b931de78ac52bfff1d87db671",
     "branch": "1.1"
   }
 }
