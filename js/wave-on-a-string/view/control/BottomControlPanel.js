@@ -51,7 +51,7 @@ define( function( require ) {
       property: model.rulersProperty
     }, {
       node: new Text( timerString, checkboxTextOptions ),
-      property: model.timerProperty,
+      property: model.timerProperty
     }, {
       node: new Text( referenceLineString, checkboxTextOptions ),
       property: model.referenceLineProperty
