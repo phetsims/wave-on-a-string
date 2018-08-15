@@ -47,15 +47,15 @@ define( function( require ) {
       maxWidth: 130
     };
     var checkboxGroup = new VerticalCheckboxGroup( [ {
-      content: new Text( rulersString, checkboxTextOptions ),
+      node: new Text( rulersString, checkboxTextOptions ),
       property: model.rulersProperty,
       indent: 0
     }, {
-      content: new Text( timerString, checkboxTextOptions ),
+      node: new Text( timerString, checkboxTextOptions ),
       property: model.timerProperty,
       indent: 0
     }, {
-      content: new Text( referenceLineString, checkboxTextOptions ),
+      node: new Text( referenceLineString, checkboxTextOptions ),
       property: model.referenceLineProperty,
       indent: 0
     } ] );
