@@ -48,16 +48,13 @@ define( function( require ) {
     };
     var checkboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( rulersString, checkboxTextOptions ),
-      property: model.rulersProperty,
-      indent: 0
+      property: model.rulersProperty
     }, {
       node: new Text( timerString, checkboxTextOptions ),
       property: model.timerProperty,
-      indent: 0
     }, {
       node: new Text( referenceLineString, checkboxTextOptions ),
-      property: model.referenceLineProperty,
-      indent: 0
+      property: model.referenceLineProperty
     } ] );
 
     var separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
