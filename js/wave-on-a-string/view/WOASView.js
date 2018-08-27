@@ -127,7 +127,7 @@ define( function( require ) {
       playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
     } );
     this.addChild( new StepForwardButton( {
-      playingProperty: model.playProperty,
+      isPlayingProperty: model.playProperty,
       listener: model.manualStep.bind( model ),
       x: centerControlX + 94,
       centerY: centerControlY,
