@@ -10,7 +10,7 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Node = require( 'SCENERY/nodes/Node' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Vector2 = require( 'DOT/Vector2' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
@@ -37,13 +37,13 @@ define( function( require ) {
     yTheStringNode: 215,
     startTheStringNode: 70,
     endTheStringNode: 670,
-    yWrenchRange: new RangeWithValue( -100, 100 ),
+    yWrenchRange: new Range( -100, 100 ),
     maxWidthBottomControlPanel: 1000,
-    tensionRange: new RangeWithValue( 0, 2 ),
-    dampingRange: new RangeWithValue( 0, 100 ),
-    frequencyRange: new RangeWithValue( 0, 3 ),
-    pulseWidthRange: new RangeWithValue( 0.2, 1 ),
-    amplitudeRange: new RangeWithValue( 0, 1.25 ),
+    tensionRange: new Range( 0, 2 ),
+    dampingRange: new Range( 0, 100 ),
+    frequencyRange: new Range( 0, 3 ),
+    pulseWidthRange: new Range( 0.2, 1 ),
+    amplitudeRange: new Range( 0, 1.25 ),
 
     postGradient: new LinearGradient( -5, 0, 5, 0 )
       .addColorStop( 0, '#666' )

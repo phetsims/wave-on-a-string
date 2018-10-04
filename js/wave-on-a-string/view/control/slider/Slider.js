@@ -16,7 +16,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -28,7 +28,7 @@ define( function( require ) {
     var defaultOptions = {
       type: 'simple',
       property: new Property( 0 ),
-      range: new RangeWithValue( 0, 100 ),
+      range: new Range( 0, 100 ),
       sliderSize: new Dimension2( 140 + 24, 110 ),
       tick: { step: 1, minText: '', maxText: '' },
       title: '',
