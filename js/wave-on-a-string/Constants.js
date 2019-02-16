@@ -15,7 +15,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
-  var clickOffset = new Vector2();
+  var clickOffset = new Vector2( 0, 0 );
   var Constants = {
     projectName: 'wave-on-a-string',
     viewSize: new Dimension2( 768, 504 ),
@@ -92,7 +92,7 @@ define( function( require ) {
 
   Constants.boundedDragHandler = function( node, positionProperty, padding ) {
     var restrictedBounds = Constants.viewBounds.eroded( padding );
-    var clickOffset = new Vector2();
+    var clickOffset = new Vector2( 0, 0 );
     node.addInputListener( new SimpleDragHandler( {
       start: function( event ) {
         clickOffset = node.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );

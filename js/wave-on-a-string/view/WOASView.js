@@ -168,7 +168,7 @@ define( function( require ) {
     model.timerLocProperty.link( function updateLocation( value ) {
       timer.translation = value;
     } );
-    var clickOffset = new Vector2();
+    var clickOffset = new Vector2( 0, 0 );
     var restrictedBounds = Constants.viewBounds.eroded( 30 );
     timer.dragTarget.addInputListener( new SimpleDragHandler( {
       start: function( event ) {
