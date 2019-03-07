@@ -11,6 +11,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   var NSEGS = 61;
@@ -43,12 +44,12 @@ define( function( require ) {
     this.angleProperty = new Property( 0 ); // angle for 'oscillate' and 'pulse' mode
     this.pulsePendingProperty = new Property( false ); // whether a pulse will start at the next proper model step
     this.pulseProperty = new Property( false ); // 'pulse' mode pulse active
-    this.rulerLocHProperty = new Property( new Vector2( 54, 117 ) ); //position horizontal ruler
-    this.rulerLocVProperty = new Property( new Vector2( 13, 440 ) ); //position vertical ruler
-    this.referenceLineLocProperty = new Property ( new Vector2( -10, 120 ) ); // position referenceLine
+    this.rulerLocHProperty = new Vector2Property( new Vector2( 54, 117 ) ); //position horizontal ruler
+    this.rulerLocVProperty = new Vector2Property( new Vector2( 13, 440 ) ); //position vertical ruler
+    this.referenceLineLocProperty = new Vector2Property( new Vector2( -10, 120 ) ); // position referenceLine
     this.timerStartProperty = new Property( false ); // timer start/pause status
     this.timerSecondProperty = new Property( 0 ); // timer time in seconds
-    this.timerLocProperty =  new Property( new Vector2( 550, 330 ) ); // position timer
+    this.timerLocProperty = new Vector2Property( new Vector2( 550, 330 ) ); // position timer
     this.pulseSignProperty = new Property( 1 ); // sign [-1, 1] for pulse mode
     this.wrenchArrowsVisibleProperty = new Property( true );
 
@@ -70,7 +71,7 @@ define( function( require ) {
       var fixDt = 1 / fps;
       // limit changes dt
       if ( Math.abs( dt - this.lastDtProperty.get() ) > this.lastDtProperty.get() * 0.3 ) {
-        dt = this.lastDtProperty.get() + (( dt - this.lastDtProperty.get() ) < 0 ? -1 : 1) * this.lastDtProperty.get() * 0.3;
+        dt = this.lastDtProperty.get() + ( ( dt - this.lastDtProperty.get() ) < 0 ? -1 : 1 ) * this.lastDtProperty.get() * 0.3;
       }
       this.lastDtProperty.set( dt );
 
@@ -138,8 +139,8 @@ define( function( require ) {
       var a = 1 / ( this.beta + 1 );
       var alphaSq = this.alpha * this.alpha;
       var c = 2 * ( 1 - alphaSq );
-      for ( var i = 1; i < (this.nSegs - 1); i++ ) {
-        this.yNext[ i ] = a * ((this.beta - 1) * this.yLast[ i ] + c * this.yNow[ i ] + alphaSq * (this.yNow[ i + 1 ] + this.yNow[ i - 1 ]) );
+      for ( var i = 1; i < ( this.nSegs - 1 ); i++ ) {
+        this.yNext[ i ] = a * ( ( this.beta - 1 ) * this.yLast[ i ] + c * this.yNow[ i ] + alphaSq * ( this.yNow[ i + 1 ] + this.yNow[ i - 1 ] ) );
       }
 
       // store old values for the very last point
@@ -177,7 +178,7 @@ define( function( require ) {
     manualStep: function( dt ) {
       var i;
       var fixDt = 1 / fps;
-      dt = (dt !== undefined && dt > 0 ) ? dt : fixDt;
+      dt = ( dt !== undefined && dt > 0 ) ? dt : fixDt;
 
       // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
       var startingLeftY = this.yNow[ 0 ];
@@ -185,7 +186,7 @@ define( function( require ) {
       var perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
       //dt for tension effect
-      var minDt = (1 / (fps * (0.2 + this.tensionProperty.get() * 0.4) * this.speedProperty.get()));
+      var minDt = ( 1 / ( fps * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.get() ) );
       // limit max dt
       while ( dt >= fixDt ) {
         this.timeProperty.set( this.timeProperty.get() + fixDt );
@@ -219,7 +220,7 @@ define( function( require ) {
             this.pulseSignProperty.reset();
             this.pulseProperty.reset();
           }
-          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * this.dotPerCm * (-this.angleProperty.get() / (Math.PI / 2));
+          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * this.dotPerCm * ( -this.angleProperty.get() / ( Math.PI / 2 ) );
         }
         if ( this.modeProperty.get() === 'manual' ) {
           // interpolate the yNow across steps for manual (between frames)
@@ -234,7 +235,7 @@ define( function( require ) {
         }
         else {
           for ( i = 1; i < this.nSegs; i++ ) {
-            this.yDraw[ i ] = this.yLast[ i ] + ((this.yNow[ i ] - this.yLast[ i ]) * (this.timeProperty.get() / minDt));
+            this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeProperty.get() / minDt ) );
           }
         }
         dt -= fixDt;
