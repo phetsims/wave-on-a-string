@@ -59,5 +59,9 @@
   "wave-on-a-string": {
     "sha": "99c834dba59ceca2b32a770bfa9f2616b2be683d",
     "branch": "1.1"
+  },
+  "phetmarks": {
+    "branch": "master",
+    "sha": "3fdfece0fe0262594bb06856833b8b16be25deb8"
   }
 }
