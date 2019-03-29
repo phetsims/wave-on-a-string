@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.1.15-rc.1 Thu Mar 28 2019 12:58:18 GMT-0400 (EDT)",
+  "comment": "# wave-on-a-string 1.1.15-rc.2 Fri Mar 29 2019 15:09:40 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -10,7 +10,7 @@
   },
   "brand": {
     "sha": "78d99a4f0fefd28d3ccd1f221974a2735539f3fc",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "713138a71dede7da74edfcb25be8b4766c2d7df3",
@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "891f1f5c5550a40d6557e05480bda2b68301cdde",
+    "sha": "89e24447f185560b440bbc75ba3476dfa26e2983",
     "branch": "1.1"
   }
 }
