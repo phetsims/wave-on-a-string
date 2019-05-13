@@ -5,7 +5,6 @@
  *
  * @author Anton Ulyanov (Mlearner)
  */
-
 define( function( require ) {
   'use strict';
 
@@ -19,9 +18,17 @@ define( function( require ) {
   var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
-  function RadioGroup( options ) {
+  /**
+   * @param {Property} property
+   * @param {Object} [options]
+   * @constructor
+   */
+  function RadioGroup( property, options ) {
+
     options = _.extend( { scale: 0.5 }, options );
+
     Node.call( this );
+
     var length = options.radio.length;
     var group = [];
     for ( var i = 0; i < length; i++ ) {
@@ -30,11 +37,11 @@ define( function( require ) {
           font: new PhetFont( 20 ),
           maxWidth: 250
         } ),
-        property: options.property,
         value: options.radio[ i ]
       } );
     }
-    var radioGroup = new VerticalAquaRadioButtonGroup( group, {
+
+    var radioGroup = new VerticalAquaRadioButtonGroup( property, group, {
       spacing: 16,
       touchAreaXDilation: 10,
       radioButtonOptions: {
@@ -42,8 +49,11 @@ define( function( require ) {
         selectedColor: Constants.radioColor.toCSS()
       }
     } );
+
     var panel = new Panel( radioGroup, { fill: '#D9FCC5', xMargin: 14, yMargin: 14 } );
+
     this.addChild( options.omitPanel ? radioGroup : panel );
+
     this.mutate( options );
   }
 

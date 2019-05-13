@@ -79,26 +79,23 @@ define( function( require ) {
     Constants.boundedDragHandler( rulerV, model.rulerLocVProperty, 30 );
     Constants.boundedDragHandler( rulerH, model.rulerLocHProperty, 30 );
 
-    this.addChild( typeRadio = new RadioGroup( {
+    this.addChild( typeRadio = new RadioGroup( model.modeProperty, {
       radio: [ 'manual', 'oscillate', 'pulse' ],
       text: [ manualString, oscillateString, pulseString ],
-      property: model.modeProperty,
       x: 5,
       y: 5
     } ) );
     this.addChild( new RestartButton( model, { x: typeRadio.right + 10, y: 5 } ) );
-    this.addChild( endTypeRadio = new RadioGroup( {
+    this.addChild( endTypeRadio = new RadioGroup( model.typeEndProperty, {
       radio: [ 'fixedEnd', 'looseEnd', 'noEnd' ],
       text: [ fixedEndString, looseEndString, noEndString ],
-      property: model.typeEndProperty,
       x: Constants.viewSize.width - 100,
       y: 5
     } ) );
     endTypeRadio.right = Constants.viewSize.width - 5;
-    this.addChild( new RadioGroup( {
+    this.addChild( new RadioGroup( model.speedProperty, {
       radio: [ 0.25, 1 ],
       text: [ speedSlowString, speedNormalString ],
-      property: model.speedProperty,
       omitPanel: true,
       right: centerControlX - 30,
       centerY: centerControlY
