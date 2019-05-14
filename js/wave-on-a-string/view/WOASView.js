@@ -156,7 +156,8 @@ define( function( require ) {
     /*---------------------------------------------------------------------------*
      * TimerNode
      *----------------------------------------------------------------------------*/
-    var timer = new TimerNode( model.timerSecondProperty, model.timerStartProperty, {} );
+    var timer = new TimerNode( model.timerSecondProperty, model.timerStartProperty );
+    timer.touchArea = timer.localBounds.dilated( 5 );
     this.addChild( timer );
     model.timerProperty.link( function updateVisible( value ) {
       timer.setVisible( value );
