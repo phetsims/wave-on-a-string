@@ -18,9 +18,6 @@ define( function( require ) {
   // strings
   var waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
 
-  // constants
-  var tandem = Tandem.rootTandem;
-
   var simOptions = {
     credits: {
       leadDesign: 'Michael Dubson, Ariel Paul',
@@ -35,7 +32,7 @@ define( function( require ) {
   SimLauncher.launch( function() {
     //Create and start the sim
     new Sim( waveOnAStringTitleString, [
-      new WOASScreen( tandem.createTandem( 'waveOnAStringScreen' ) )
+      new WOASScreen( Tandem.rootTandem.createTandem( 'waveOnAStringScreen' ) )
     ], simOptions ).start();
   } );
 } );
