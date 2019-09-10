@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.1.19 Mon Sep 09 2019 13:12:51 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# wave-on-a-string 1.1.20-rc.1 Tue Sep 10 2019 01:09:56 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -22,7 +22,7 @@
   },
   "joist": {
     "sha": "559281c8d54af3050093ae68184701bd8c1c2d86",
-    "branch": "wave-on-a-string-1.1"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "ff6903844d16c158c16c494fe2db83a8d7187a3d",
+    "sha": "83aafcae498243ff513032d72839e480ec92e6d2",
     "branch": "1.1"
   }
 }
