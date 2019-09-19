@@ -6,22 +6,22 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
-  var ArrowButton = require( 'SUN/buttons/ArrowButton' );
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HSlider = require( 'SUN/HSlider' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const ArrowButton = require( 'SUN/buttons/ArrowButton' );
+  const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const HSlider = require( 'SUN/HSlider' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function Slider( options ) {
     var self = this;

@@ -6,15 +6,15 @@
  * Author: Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
-  var Circle = require( 'SCENERY/nodes/Circle' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Shape = require( 'KITE/Shape' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   /**
    * @constructor

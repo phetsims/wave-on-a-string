@@ -6,47 +6,47 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
-  var BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  var Emitter = require( 'AXON/Emitter' );
-  var EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/EndNode' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  var RadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RadioGroup' );
-  var ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/ReferenceLine' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
-  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
-  var TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
-  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
-  var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  const Emitter = require( 'AXON/Emitter' );
+  const EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/EndNode' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
+  const RadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RadioGroup' );
+  const ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/ReferenceLine' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
+  const RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  const StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
+  const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
+  const TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
+  const TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const Util = require( 'DOT/Util' );
+  const Vector2 = require( 'DOT/Vector2' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // images
-  var windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
+  const windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
 
   // strings
-  var fixedEndString = require( 'string!WAVE_ON_A_STRING/fixedEnd' );
-  var looseEndString = require( 'string!WAVE_ON_A_STRING/looseEnd' );
-  var manualString = require( 'string!WAVE_ON_A_STRING/manual' );
-  var noEndString = require( 'string!WAVE_ON_A_STRING/noEnd' );
-  var oscillateString = require( 'string!WAVE_ON_A_STRING/oscillate' );
-  var pulseString = require( 'string!WAVE_ON_A_STRING/pulse' );
-  var speedNormalString = require( 'string!WAVE_ON_A_STRING/speedNormal' );
-  var speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
-  var unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
+  const fixedEndString = require( 'string!WAVE_ON_A_STRING/fixedEnd' );
+  const looseEndString = require( 'string!WAVE_ON_A_STRING/looseEnd' );
+  const manualString = require( 'string!WAVE_ON_A_STRING/manual' );
+  const noEndString = require( 'string!WAVE_ON_A_STRING/noEnd' );
+  const oscillateString = require( 'string!WAVE_ON_A_STRING/oscillate' );
+  const pulseString = require( 'string!WAVE_ON_A_STRING/pulse' );
+  const speedNormalString = require( 'string!WAVE_ON_A_STRING/speedNormal' );
+  const speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
+  const unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
 
   function WOASView( model ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );

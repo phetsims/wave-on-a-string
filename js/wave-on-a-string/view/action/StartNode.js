@@ -6,28 +6,28 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var Circle = require( 'SCENERY/nodes/Circle' );
-  var Color = require( 'SCENERY/util/Color' );
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
-  var Matrix3 = require( 'DOT/Matrix3' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var platform = require( 'PHET_CORE/platform' );
-  var PulseButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/PulseButton' );
-  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
-  var Shape = require( 'KITE/Shape' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const Color = require( 'SCENERY/util/Color' );
+  const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const Matrix3 = require( 'DOT/Matrix3' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const platform = require( 'PHET_CORE/platform' );
+  const PulseButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/PulseButton' );
+  const RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
+  const Shape = require( 'KITE/Shape' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
-  var wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
+  const wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 
   function StartNode( model, frame, options ) {
     options = _.extend( { layerSplit: true }, options );

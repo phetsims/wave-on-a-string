@@ -6,16 +6,16 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Shape = require( 'KITE/Shape' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Shape = require( 'KITE/Shape' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function ReferenceLine( model ) {
     Node.call( this, { cursor: 'pointer' } );

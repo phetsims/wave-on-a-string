@@ -6,16 +6,16 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
-  var Shape = require( 'KITE/Shape' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
+  const Shape = require( 'KITE/Shape' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function PulseButton( model, options ) {
     var pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );

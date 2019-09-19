@@ -6,17 +6,17 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // strings
-  var restartString = require( 'string!WAVE_ON_A_STRING/restart' );
+  const restartString = require( 'string!WAVE_ON_A_STRING/restart' );
 
   function RestartButton( model, options ) {
     TextPushButton.call( this, restartString, {

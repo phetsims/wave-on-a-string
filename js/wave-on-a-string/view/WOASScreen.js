@@ -3,16 +3,16 @@
 /**
  * The main screen for Wave on a String
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  var WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
-  var WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Property = require( 'AXON/Property' );
+  const Screen = require( 'JOIST/Screen' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
+  const WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
 
   /**
    * @param {Tandem} tandem

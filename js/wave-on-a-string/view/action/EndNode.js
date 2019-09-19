@@ -6,20 +6,20 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
-  var Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // images
-  var clampImage = require( 'image!WAVE_ON_A_STRING/clamp.png' );
-  var ringBackImage = require( 'image!WAVE_ON_A_STRING/ring_back.png' );
-  var ringFrontImage = require( 'image!WAVE_ON_A_STRING/ring_front.png' );
-  var windowImage = require( 'image!WAVE_ON_A_STRING/window-back.png' );
+  const clampImage = require( 'image!WAVE_ON_A_STRING/clamp.png' );
+  const ringBackImage = require( 'image!WAVE_ON_A_STRING/ring_back.png' );
+  const ringFrontImage = require( 'image!WAVE_ON_A_STRING/ring_front.png' );
+  const windowImage = require( 'image!WAVE_ON_A_STRING/window-back.png' );
 
   /**
    * @constructor
