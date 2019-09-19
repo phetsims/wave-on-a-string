@@ -18,7 +18,7 @@ define( require => {
   // strings
   const waveOnAStringTitleString = require( 'string!WAVE_ON_A_STRING/wave-on-a-string.title' );
 
-  var simOptions = {
+  const simOptions = {
     credits: {
       leadDesign: 'Michael Dubson, Ariel Paul',
       softwareDevelopment: 'Jonathan Olson, Michael Dubson',

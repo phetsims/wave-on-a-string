@@ -15,8 +15,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
-  var clickOffset = new Vector2( 0, 0 );
-  var Constants = {
+  let clickOffset = new Vector2( 0, 0 );
+  const Constants = {
     projectName: 'wave-on-a-string',
     viewSize: new Dimension2( 768, 504 ),
 
@@ -91,14 +91,14 @@ define( require => {
   Constants.viewBounds = Constants.viewSize.toBounds();
 
   Constants.boundedDragHandler = function( node, positionProperty, padding ) {
-    var restrictedBounds = Constants.viewBounds.eroded( padding );
-    var clickOffset = new Vector2( 0, 0 );
+    const restrictedBounds = Constants.viewBounds.eroded( padding );
+    let clickOffset = new Vector2( 0, 0 );
     node.addInputListener( new SimpleDragHandler( {
       start: function( event ) {
         clickOffset = node.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
       },
       drag: function( event ) {
-        var point = node.globalToParentPoint( event.pointer.point ).minus( clickOffset );
+        const point = node.globalToParentPoint( event.pointer.point ).minus( clickOffset );
         positionProperty.set( point );
         if ( node.right < restrictedBounds.minX ) {
           positionProperty.set( new Vector2( positionProperty.get().x - node.right + restrictedBounds.minX, positionProperty.get().y ) );
@@ -122,14 +122,14 @@ define( require => {
     domImage.width = width;
     domImage.height = height;
 
-    var canvas = document.createElement( 'canvas' );
+    const canvas = document.createElement( 'canvas' );
     canvas.width = width * scale;
     canvas.height = height * scale;
-    var context = canvas.getContext( '2d' );
+    const context = canvas.getContext( '2d' );
     context.scale( scale, scale );
     context.drawImage( domImage, 0, 0 );
 
-    var url;
+    let url;
     try {
       url = canvas.toDataURL();
     }
@@ -137,7 +137,7 @@ define( require => {
       url = canvas;
     }
 
-    var sceneryImage = new Image( url, { scale: 1 / scale } );
+    const sceneryImage = new Image( url, { scale: 1 / scale } );
     sceneryImage.localBounds = new Bounds2( 0, 0, width * scale, height * scale );
 
     return new Node( _.extend( { children: [ sceneryImage ] }, options ) );

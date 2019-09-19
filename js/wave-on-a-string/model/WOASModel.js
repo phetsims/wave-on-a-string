@@ -14,12 +14,12 @@ define( require => {
   const Vector2Property = require( 'DOT/Vector2Property' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
-  var NSEGS = 61;
-  var fps = 50;
+  const NSEGS = 61;
+  const fps = 50;
 
   function WOASModel() {
     this.stepDt = 0;
-    var Array = window.Float64Array || window.Array;
+    const Array = window.Float64Array || window.Array;
 
     this.yDraw = new Array( NSEGS );
     this.yNow = new Array( NSEGS );
@@ -68,7 +68,7 @@ define( require => {
 
   inherit( Object, WOASModel, {
     step: function( dt ) {
-      var fixDt = 1 / fps;
+      const fixDt = 1 / fps;
       // limit changes dt
       if ( Math.abs( dt - this.lastDtProperty.get() ) > this.lastDtProperty.get() * 0.3 ) {
         dt = this.lastDtProperty.get() + ( ( dt - this.lastDtProperty.get() ) < 0 ? -1 : 1 ) * this.lastDtProperty.get() * 0.3;
@@ -116,10 +116,10 @@ define( require => {
     },
     // NOTE TO FUTURE MAINTAINER: this is the fixed-timestep model step. We interpolate between these steps as needed
     evolve: function() {
-      var dt = 1;
-      var v = 1;
-      var dx = dt * v;
-      var b = this.dampingProperty.get() * 0.002;
+      const dt = 1;
+      const v = 1;
+      const dx = dt * v;
+      const b = this.dampingProperty.get() * 0.002;
       this.beta = b * dt / 2;
       this.alpha = v * dt / dx;
 
@@ -136,21 +136,21 @@ define( require => {
       }
 
       //main formula for calculating
-      var a = 1 / ( this.beta + 1 );
-      var alphaSq = this.alpha * this.alpha;
-      var c = 2 * ( 1 - alphaSq );
-      for ( var i = 1; i < ( this.nSegs - 1 ); i++ ) {
+      const a = 1 / ( this.beta + 1 );
+      const alphaSq = this.alpha * this.alpha;
+      const c = 2 * ( 1 - alphaSq );
+      for ( let i = 1; i < ( this.nSegs - 1 ); i++ ) {
         this.yNext[ i ] = a * ( ( this.beta - 1 ) * this.yLast[ i ] + c * this.yNow[ i ] + alphaSq * ( this.yNow[ i + 1 ] + this.yNow[ i - 1 ] ) );
       }
 
       // store old values for the very last point
-      var lastIndex = this.nSegs - 1;
-      var oldLast = this.yLast[ lastIndex ];
-      var oldNow = this.yNow[ lastIndex ];
-      var oldNext = this.yNext[ lastIndex ];
+      const lastIndex = this.nSegs - 1;
+      const oldLast = this.yLast[ lastIndex ];
+      const oldNow = this.yNow[ lastIndex ];
+      const oldNext = this.yNext[ lastIndex ];
 
       // rotate arrays instead of copying elements (for speed)
-      var old = this.yLast;
+      const old = this.yLast;
       this.yLast = this.yNow;
       this.yNow = this.yNext;
       this.yNext = old;
@@ -176,17 +176,17 @@ define( require => {
       }
     },
     manualStep: function( dt ) {
-      var i;
-      var fixDt = 1 / fps;
+      let i;
+      const fixDt = 1 / fps;
       dt = ( dt !== undefined && dt > 0 ) ? dt : fixDt;
 
       // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
-      var startingLeftY = this.yNow[ 0 ];
-      var numSteps = Math.floor( dt / fixDt );
-      var perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
+      const startingLeftY = this.yNow[ 0 ];
+      const numSteps = Math.floor( dt / fixDt );
+      const perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
       //dt for tension effect
-      var minDt = ( 1 / ( fps * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.get() ) );
+      const minDt = ( 1 / ( fps * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.get() ) );
       // limit max dt
       while ( dt >= fixDt ) {
         this.timeProperty.set( this.timeProperty.get() + fixDt );
@@ -207,7 +207,7 @@ define( require => {
           this.yNow[ 0 ] = 0;
         }
         if ( this.modeProperty.get() === 'pulse' && this.pulseProperty.get() ) {
-          var da = Math.PI * fixDt * this.speedProperty.get() / this.pulseWidthProperty.get();
+          const da = Math.PI * fixDt * this.speedProperty.get() / this.pulseWidthProperty.get();
           if ( this.angleProperty.get() + da >= Math.PI / 2 ) {
             this.pulseSignProperty.set( -1 );
           }
@@ -255,7 +255,7 @@ define( require => {
       this.pulseSignProperty.reset();
       this.pulsePendingProperty.reset();
       this.customDt = 0;
-      for ( var i = 0; i < this.yNow.length; i++ ) {
+      for ( let i = 0; i < this.yNow.length; i++ ) {
         this.yDraw[ i ] = this.yNext[ i ] = this.yNow[ i ] = this.yLast[ i ] = 0;
       }
       this.nextLeftY = 0;

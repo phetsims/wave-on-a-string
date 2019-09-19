@@ -29,9 +29,9 @@ define( require => {
 
     Node.call( this );
 
-    var length = options.radio.length;
-    var group = [];
-    for ( var i = 0; i < length; i++ ) {
+    const length = options.radio.length;
+    const group = [];
+    for ( let i = 0; i < length; i++ ) {
       group.push( {
         node: new Text( options.text[ i ], {
           font: new PhetFont( 20 ),
@@ -41,7 +41,7 @@ define( require => {
       } );
     }
 
-    var radioGroup = new VerticalAquaRadioButtonGroup( property, group, {
+    const radioGroup = new VerticalAquaRadioButtonGroup( property, group, {
       spacing: 16,
       touchAreaXDilation: 10,
       radioButtonOptions: {
@@ -50,7 +50,7 @@ define( require => {
       }
     } );
 
-    var panel = new Panel( radioGroup, { fill: '#D9FCC5', xMargin: 14, yMargin: 14 } );
+    const panel = new Panel( radioGroup, { fill: '#D9FCC5', xMargin: 14, yMargin: 14 } );
 
     this.addChild( options.omitPanel ? radioGroup : panel );
 

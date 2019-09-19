@@ -36,17 +36,17 @@ define( require => {
   const tensionString = require( 'string!WAVE_ON_A_STRING/tension' );
   const timerString = require( 'string!WAVE_ON_A_STRING/timer' );
 
-  var OFFSET = 35;
+  const OFFSET = 35;
 
   function BottomControlPanel( model ) {
 
     Node.call( this, { scale: 0.7 } );
 
-    var checkboxTextOptions = {
+    const checkboxTextOptions = {
       font: new PhetFont( 15 ),
       maxWidth: 130
     };
-    var checkboxGroup = new VerticalCheckboxGroup( [ {
+    const checkboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( rulersString, checkboxTextOptions ),
       property: model.rulersProperty
     }, {
@@ -57,12 +57,12 @@ define( require => {
       property: model.referenceLineProperty
     } ] );
 
-    var separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
+    const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 
     separator.right = checkboxGroup.left - 20;
     checkboxGroup.centerY = separator.centerY;
 
-    var tensionSlider = new Slider( {
+    const tensionSlider = new Slider( {
       title: tensionString,
       property: model.tensionProperty,
       round: false,
@@ -81,7 +81,7 @@ define( require => {
 
     tensionSlider.right = separator.left - 20;
 
-    var dampingSlider = new Slider( {
+    const dampingSlider = new Slider( {
       title: dampingString,
       type: 'button',
       buttonStep: 1,
@@ -93,7 +93,7 @@ define( require => {
 
     dampingSlider.right = tensionSlider.left - OFFSET;
 
-    var frequencySlider = new Slider( {
+    const frequencySlider = new Slider( {
       type: 'button',
       buttonStep: 0.01,
       title: frequencyString,
@@ -105,7 +105,7 @@ define( require => {
 
     frequencySlider.right = dampingSlider.left - OFFSET;
 
-    var pulseWidthSlider = new Slider( {
+    const pulseWidthSlider = new Slider( {
       type: 'button',
       buttonStep: 0.01,
       title: pulseWidthString,
@@ -117,7 +117,7 @@ define( require => {
 
     pulseWidthSlider.right = dampingSlider.left - OFFSET;
 
-    var amplitudeSlider = new Slider( {
+    const amplitudeSlider = new Slider( {
       type: 'button',
       buttonStep: 0.01,
       title: amplitudeString,
@@ -130,21 +130,21 @@ define( require => {
     amplitudeSlider.right = frequencySlider.left - OFFSET;
 
 
-    var oscillatePanel = new Panel( new Node( {
+    const oscillatePanel = new Panel( new Node( {
       children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
     this.addChild( oscillatePanel );
 
-    var manualPanel = new Panel( new Node( {
+    const manualPanel = new Panel( new Node( {
       children: [ dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
     this.addChild( manualPanel );
 
-    var pulsePanel = new Panel( new Node( {
+    const pulsePanel = new Panel( new Node( {
       children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5

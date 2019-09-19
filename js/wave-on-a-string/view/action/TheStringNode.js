@@ -24,34 +24,34 @@ define( require => {
    */
   function TheStringNode( model, frameEmitter, options ) {
     Node.call( this, { layerSplit: true } );
-    var theStringShape = new Shape();
-    var theStringPath = new Path( theStringShape, {
+    let theStringShape = new Shape();
+    const theStringPath = new Path( theStringShape, {
       stroke: '#F00'
     } );
-    var theString = [];
+    const theString = [];
     this.addChild( theStringPath );
 
     theStringPath.computeShapeBounds = function() {
       return this.getShape().bounds.dilated( 20 ); // miterLimit should cut off with the normal stroke before this
     };
 
-    var highlightCircle = new Circle( options.radius * 0.3, { fill: '#fff', x: -0.45 * options.radius, y: -0.45 * options.radius } );
-    var scale = 3;
-    var redBead = new Circle( options.radius, { fill: 'red', stroke: 'black', lineWidth: 0.5, children: [ highlightCircle ], scale: scale } );
-    var limeBead = new Circle( options.radius, { fill: 'lime', stroke: 'black', lineWidth: 0.5, children: [ highlightCircle ], scale: scale } );
+    const highlightCircle = new Circle( options.radius * 0.3, { fill: '#fff', x: -0.45 * options.radius, y: -0.45 * options.radius } );
+    const scale = 3;
+    const redBead = new Circle( options.radius, { fill: 'red', stroke: 'black', lineWidth: 0.5, children: [ highlightCircle ], scale: scale } );
+    const limeBead = new Circle( options.radius, { fill: 'lime', stroke: 'black', lineWidth: 0.5, children: [ highlightCircle ], scale: scale } );
 
-    var redNode;
+    let redNode;
     redBead.toDataURL( function( url, x, y ) {
       redNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
-    var limeNode;
+    let limeNode;
     limeBead.toDataURL( function( url, x, y ) {
       limeNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
-    for ( var i = 0; i < model.yDraw.length; i++ ) {
-      var bead = ( i % 10 === 0 ) ? limeNode : redNode;
+    for ( let i = 0; i < model.yDraw.length; i++ ) {
+      const bead = ( i % 10 === 0 ) ? limeNode : redNode;
       theString.push( new Node( { x: i * options.radius * 2, children: [ bead ] } ) );
     }
     theString[ 0 ].scale( 1.2 );
@@ -63,7 +63,7 @@ define( require => {
       theStringShape = new Shape();
       theString[ 0 ].y = model.nextLeftY;
       theStringShape.lineTo( 0, model.nextLeftY || 0 );
-      for ( var i = 1; i < model.yDraw.length; i++ ) {
+      for ( let i = 1; i < model.yDraw.length; i++ ) {
         theString[ i ].y = model.yDraw[ i ];
         /*REVIEW:
          * A lot of the performance issues relate to this shape drawing. There's nothing you can do here,
@@ -74,7 +74,7 @@ define( require => {
       theStringPath.shape = theStringShape;
     }
 
-    var dirty = true;
+    let dirty = true;
     model.yNowChanged.addListener( function() { dirty = true; } );
     frameEmitter.addListener( function() {
       if ( dirty ) {

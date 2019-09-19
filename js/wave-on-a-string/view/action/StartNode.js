@@ -32,23 +32,23 @@ define( require => {
   function StartNode( model, frame, options ) {
     options = _.extend( { layerSplit: true }, options );
 
-    var postNodeHeight = 158;
-    var postScale = 3;
+    const postNodeHeight = 158;
+    const postScale = 3;
 
     Node.call( this );
-    var self = this;
+    const self = this;
 
     /*---------------------------------------------------------------------------*
      * Oscillation wheel
      *----------------------------------------------------------------------------*/
-    var wheelRadius = 29.5;
-    var wheel = new Circle( wheelRadius, {
+    const wheelRadius = 29.5;
+    let wheel = new Circle( wheelRadius, {
       stroke: '#333',
       lineWidth: 1.5,
       fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(215,210,210)' ).addColorStop( 1, 'rgb(215,210,210)' )
     } );
 
-    var innerWheelRadius = 4.8;
+    const innerWheelRadius = 4.8;
     wheel.addChild( new Circle( innerWheelRadius, {
       stroke: '#333',
       lineWidth: 1.5,
@@ -63,9 +63,9 @@ define( require => {
     } ) );
 
     // toImage* style conversion of the wheel if necessary for performance
-    var wheelImageScale = 3;
+    const wheelImageScale = 3;
     wheel.scale( wheelImageScale );
-    var wheelSize = Math.ceil( wheel.width / 2 ) + 2;
+    const wheelSize = Math.ceil( wheel.width / 2 ) + 2;
     wheel = wheel.toDataURLNodeSynchronous( wheelSize, wheelSize, 2 * wheelSize, 2 * wheelSize );
     if ( platform.firefox ) {
       wheel.renderer = 'canvas';
@@ -74,20 +74,20 @@ define( require => {
     /*---------------------------------------------------------------------------*
      * Wrench
      *----------------------------------------------------------------------------*/
-    var wrenchImageNode = new Image( wrenchImage, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
-    var wrenchArrowOptions = {
+    const wrenchImageNode = new Image( wrenchImage, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
+    const wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,
       headWidth: 22,
       headHeight: 18
     };
-    var wrenchArrowXOffset = 8;
-    var wrenchArrowYOffset = 10;
-    var wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
+    const wrenchArrowXOffset = 8;
+    const wrenchArrowYOffset = 10;
+    const wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
       wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
-    var wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
+    const wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
       wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
-    var wrench = new Node( {
+    const wrench = new Node( {
       children: [
         wrenchImageNode,
         wrenchTopArrow,
@@ -104,7 +104,7 @@ define( require => {
     /*---------------------------------------------------------------------------*
      * Post
      *----------------------------------------------------------------------------*/
-    var post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
+    let post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
       fill: Constants.postGradient
     } );
@@ -112,7 +112,7 @@ define( require => {
     /*---------------------------------------------------------------------------*
      * Piston Box
      *----------------------------------------------------------------------------*/
-    var pistonBox = new ShadedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
+    const pistonBox = new ShadedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
       baseColor: new Color( 200, 200, 200 ),
       lightFactor: 0.5,
       lighterFactor: 0.1,
@@ -124,7 +124,7 @@ define( require => {
     pistonBox.addChild( new PulseButton( model, { center: pistonBox.center } ) );
 
     // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
-    var postCache = new Node( { scale: 1 / postScale } );
+    const postCache = new Node( { scale: 1 / postScale } );
     new Node( { children: [ post ], scale: postScale } ).toImageNodeAsynchronous( function( image ) {
       postCache.addChild( image );
     } );
@@ -159,7 +159,7 @@ define( require => {
     }
 
     function updatePost() {
-      var y = model.yNow[ 0 ];
+      const y = model.yNow[ 0 ];
       if ( post.isVisible() ) {
         // TODO: reduce garbage allocation here
         post.setMatrix( Matrix3.createFromPool( 1, 0, 0,
@@ -168,7 +168,7 @@ define( require => {
       }
     }
 
-    var dirty = true;
+    let dirty = true;
     model.yNowChanged.addListener( function() { dirty = true; } );
     frame.addListener( function() {
       if ( dirty ) {
@@ -181,21 +181,21 @@ define( require => {
     // workaround for image not being perfectly centered
     // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
 
-    var wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
+    const wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
     model.angleProperty.link( function updateWheel( value ) {
       // wheel.rotation = value;
       // wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
       wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.modeProperty.link( function updateVisible( value ) {
-      var wrenchIsVisible = value === 'manual';
+      const wrenchIsVisible = value === 'manual';
       if ( wrench.isVisible() !== wrenchIsVisible ) {
         wrench.setVisible( wrenchIsVisible );
 
         updateKey();
       }
 
-      var postIsVisible = value !== 'manual';
+      const postIsVisible = value !== 'manual';
       if ( post.isVisible() !== postIsVisible ) {
         post.setVisible( postIsVisible );
 

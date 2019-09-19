@@ -18,15 +18,15 @@ define( require => {
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function PulseButton( model, options ) {
-    var pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
+    const pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
 
-    var pulsePath = new Path( pulseShape, {
+    const pulsePath = new Path( pulseShape, {
       lineWidth: 1.5,
       stroke: '#333',
       lineCap: 'round'
     } );
 
-    var pulsePath2 = new Path( pulseShape, {
+    const pulsePath2 = new Path( pulseShape, {
       lineWidth: 3,
       stroke: '#eee',
       lineCap: 'round'
@@ -44,7 +44,7 @@ define( require => {
       radius: 17,
       yContentOffset: -1
     } );
-    var self = this;
+    const self = this;
     this.touchArea = this.localBounds.dilatedXY( 5, 10 );
     this.mutate( options );
     model.modeProperty.link( function updatePulseButton( value ) {

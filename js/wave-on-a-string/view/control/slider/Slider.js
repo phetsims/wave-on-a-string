@@ -24,8 +24,8 @@ define( require => {
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function Slider( options ) {
-    var self = this;
-    var defaultOptions = {
+    const self = this;
+    const defaultOptions = {
       type: 'simple',
       property: new Property( 0 ),
       range: new Range( 0, 100 ),
@@ -69,12 +69,12 @@ define( require => {
       maxWidth: 150
     } ) );
 
-    var buttonNode;
-    var plusButton;
-    var minusButton;
-    var valueLabel;
-    var hSlider = new HSlider( options.property, options.range, options );
-    var hSliderNode = new Node( {
+    let buttonNode;
+    let plusButton;
+    let minusButton;
+    let valueLabel;
+    const hSlider = new HSlider( options.property, options.range, options );
+    const hSliderNode = new Node( {
       children: [ hSlider ],
       x: (self.width - options.trackSize.width) / 2,
       bottom: self.height - 0
@@ -82,7 +82,7 @@ define( require => {
     self.addChild( hSliderNode );
 
     if ( options.type === 'simple' && options.tick && options.tick.step ) {
-      var i = options.range.min;
+      let i = options.range.min;
 
       for ( ; i <= options.range.max; i += options.tick.step ) {
 
@@ -103,7 +103,7 @@ define( require => {
 
     if ( options.type === 'button' ) {
       buttonNode = new Node( { y: 25 } );
-      var buttonPropertyUpdate = function( value ) {
+      const buttonPropertyUpdate = function( value ) {
         return function() {
           options.property.set( Math.max( Math.min( options.property.get() + value, options.range.max ), options.range.min ) );
         };
@@ -136,7 +136,7 @@ define( require => {
 
     options.property.link( function updateProperty( value ) {
       if ( options.type === 'button' ) {
-        var text = value;
+        let text = value;
         if ( options.round && options.roundingDigits >= 0 ) {
           text = Util.toFixed( options.property.get(), options.roundingDigits );
         }

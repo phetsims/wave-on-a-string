@@ -29,11 +29,11 @@ define( require => {
    */
   function EndNode( model, frameEmitter, options ) {
     Node.call( this );
-    var clamp = new Image( clampImage, { x: -17, y: -31, scale: 0.4 } );
-    var ring_back = new Node( { children: [ new Image( ringBackImage, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } );
-    var ring_front = new Node( { children: [ new Image( ringFrontImage, { x: 4.7, y: 0, scale: 0.5 } ) ] } );
-    var windowNode = new Image( windowImage, { right: Constants.windowXOffset + Constants.windowShift, centerY: 0, scale: Constants.windowScale } );
-    var post = new Rectangle( -5, -130, 10, 260, {
+    const clamp = new Image( clampImage, { x: -17, y: -31, scale: 0.4 } );
+    const ring_back = new Node( { children: [ new Image( ringBackImage, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } );
+    const ring_front = new Node( { children: [ new Image( ringFrontImage, { x: 4.7, y: 0, scale: 0.5 } ) ] } );
+    const windowNode = new Image( windowImage, { right: Constants.windowXOffset + Constants.windowShift, centerY: 0, scale: Constants.windowScale } );
+    const post = new Rectangle( -5, -130, 10, 260, {
       stroke: '#000',
       fill: Constants.postGradient,
       x: 20
@@ -51,7 +51,7 @@ define( require => {
       ring_front.y = ring_back.y = model.yNow[ model.yNow.length - 1 ] || 0;
     }
 
-    var dirty = true;
+    let dirty = true;
     model.yNowChanged.addListener( function() { dirty = true; } );
     frameEmitter.addListener( function() {
       if ( dirty ) {

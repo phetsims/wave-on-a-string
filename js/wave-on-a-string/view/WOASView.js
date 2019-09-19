@@ -53,15 +53,15 @@ define( require => {
 
     this.frameEmitter = new Emitter();
 
-    var centerControlX = Constants.viewSize.width / 2;
-    var centerControlY = Constants.viewSize.height - 131;
+    const centerControlX = Constants.viewSize.width / 2;
+    const centerControlY = Constants.viewSize.height - 131;
 
-    var typeRadio;
-    var endTypeRadio;
+    let typeRadio;
+    let endTypeRadio;
 
-    var rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-    var rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
-    var rulerV = new RulerNode( 400, 50, 80, Util.rangeInclusive( 0, 5 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
+    const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
+    const rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
+    const rulerV = new RulerNode( 400, 50, 80, Util.rangeInclusive( 0, 5 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
     rulerV.rotate( -Math.PI / 2 );
     this.addChild( rulerH );
     this.addChild( rulerV );
@@ -101,7 +101,7 @@ define( require => {
       centerY: centerControlY
     } ) );
 
-    var playPauseButtonOptions = {
+    const playPauseButtonOptions = {
       upFill: Constants.blueUpColor,
       overFill: Constants.blueOverColor,
       disabledFill: Constants.blueDisabledColor,
@@ -110,7 +110,7 @@ define( require => {
       backgroundGradientColorStop1: Constants.buttonBorder1,
       innerButtonLineWidth: 1
     };
-    var playPauseButton = new PlayPauseButton( model.playProperty, {
+    const playPauseButton = new PlayPauseButton( model.playProperty, {
       x: centerControlX + 45,
       centerY: centerControlY,
       scale: 0.6,
@@ -119,7 +119,7 @@ define( require => {
       playOptions: playPauseButtonOptions
     } );
     this.addChild( playPauseButton );
-    var pauseSizeIncreaseFactor = 1.25;
+    const pauseSizeIncreaseFactor = 1.25;
     model.playProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
     } );
@@ -138,7 +138,7 @@ define( require => {
       backgroundGradientColorStop1: Constants.buttonBorder1
     } ) );
 
-    var resetAllButton = new ResetAllButton( {
+    const resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
       },
@@ -148,7 +148,7 @@ define( require => {
     resetAllButton.scale( 0.924 );
     this.addChild( resetAllButton );
 
-    var bottomControlPanel = new BottomControlPanel( model );
+    const bottomControlPanel = new BottomControlPanel( model );
     this.addChild( bottomControlPanel );
 
     bottomControlPanel.right = resetAllButton.left - 10;
@@ -156,7 +156,7 @@ define( require => {
     /*---------------------------------------------------------------------------*
      * TimerNode
      *----------------------------------------------------------------------------*/
-    var timer = new TimerNode( model.timerSecondProperty, model.timerStartProperty );
+    const timer = new TimerNode( model.timerSecondProperty, model.timerStartProperty );
     timer.touchArea = timer.localBounds.dilated( 5 );
     this.addChild( timer );
     model.timerProperty.link( function updateVisible( value ) {
@@ -166,8 +166,8 @@ define( require => {
     model.timerLocProperty.link( function updateLocation( value ) {
       timer.translation = value;
     } );
-    var clickOffset = new Vector2( 0, 0 );
-    var restrictedBounds = Constants.viewBounds.eroded( 30 );
+    let clickOffset = new Vector2( 0, 0 );
+    const restrictedBounds = Constants.viewBounds.eroded( 30 );
     timer.dragTarget.addInputListener( new SimpleDragHandler( {
       start: function( event ) {
         clickOffset = timer.dragTarget.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
@@ -193,7 +193,7 @@ define( require => {
       }
     } ) );
 
-    var windowImage;
+    let windowImage;
     //center line
     this.addChild( new Line( 0, 0, 605, 0, {
       stroke: '#FFA91D',
@@ -202,7 +202,7 @@ define( require => {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
     } ) );
-    var endNode = new EndNode( model, this.frameEmitter, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
+    const endNode = new EndNode( model, this.frameEmitter, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
     endNode.windowNode.x += Constants.endTheStringNode;
     endNode.windowNode.y += Constants.yTheStringNode;
     this.addChild( endNode.windowNode );

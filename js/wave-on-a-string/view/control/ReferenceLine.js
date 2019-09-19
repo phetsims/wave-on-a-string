@@ -20,7 +20,7 @@ define( require => {
   function ReferenceLine( model ) {
     Node.call( this, { cursor: 'pointer' } );
 
-    var self = this;
+    const self = this;
 
     self.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
       fill: Constants.referenceLineBlockGradient,
