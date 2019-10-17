@@ -12,6 +12,7 @@ define( require => {
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Shape = require( 'KITE/Shape' );
@@ -33,7 +34,7 @@ define( require => {
       stroke: '#000',
       lineWidth: 0.5
     } ) );
-    self.addChild( new Line( 0, 0, 750, 0, _.extend( {
+    self.addChild( new Line( 0, 0, 750, 0, merge( {
       mouseArea: new Bounds2( 0, 0, 750, 0 ).dilated( 5 ),
       touchArea: new Bounds2( 0, 0, 750, 0 ).dilated( 10 )
     }, {

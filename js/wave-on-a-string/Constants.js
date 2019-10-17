@@ -8,6 +8,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const Image = require( 'SCENERY/nodes/Image' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const RadialGradient = require( 'SCENERY/util/RadialGradient' );
   const Range = require( 'DOT/Range' );
@@ -140,7 +141,7 @@ define( require => {
     const sceneryImage = new Image( url, { scale: 1 / scale } );
     sceneryImage.localBounds = new Bounds2( 0, 0, width * scale, height * scale );
 
-    return new Node( _.extend( { children: [ sceneryImage ] }, options ) );
+    return new Node( merge( { children: [ sceneryImage ] }, options ) );
   };
 
   return Constants;

@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -25,7 +26,7 @@ define( require => {
    */
   function RadioGroup( property, options ) {
 
-    options = _.extend( { scale: 0.5 }, options );
+    options = merge( { scale: 0.5 }, options );
 
     Node.call( this );
 

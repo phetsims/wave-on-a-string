@@ -18,6 +18,7 @@ define( require => {
   const Line = require( 'SCENERY/nodes/Line' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Matrix3 = require( 'DOT/Matrix3' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const platform = require( 'PHET_CORE/platform' );
   const PulseButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/PulseButton' );
@@ -30,7 +31,7 @@ define( require => {
   const wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 
   function StartNode( model, frame, options ) {
-    options = _.extend( { layerSplit: true }, options );
+    options = merge( { layerSplit: true }, options );
 
     const postNodeHeight = 158;
     const postScale = 3;

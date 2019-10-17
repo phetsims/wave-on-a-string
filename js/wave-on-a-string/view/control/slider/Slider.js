@@ -13,6 +13,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const HSlider = require( 'SUN/HSlider' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
@@ -53,7 +54,7 @@ define( require => {
       titleVerticalOffset: 0
     };
     Node.call( self );
-    options = _.extend( {}, defaultOptions, options );
+    options = merge( {}, defaultOptions, options );
     if ( !options.endDrag && options.round ) {
       options.endDrag = function() {
         options.property.set( Util.toFixedNumber( options.property.get(), options.roundingDigits ) );
