@@ -133,7 +133,7 @@ define( require => {
       this.addChild( buttonNode );
     }
 
-    //self.mutate( _.extend( _.omit( options, Object.keys( defaultOptions ) ) ) );
+    //self.mutate( merge( _.omit( options, Object.keys( defaultOptions ) ) ) );
 
     options.property.link( function updateProperty( value ) {
       if ( options.type === 'button' ) {
