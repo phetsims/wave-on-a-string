@@ -40,6 +40,7 @@ require.config( {
     SUN: '../../sun/js',
     TAMBO: '../../tambo/js',
     TANDEM: '../../tandem/js',
+    UTTERANCE_QUEUE: '../../utterance-queue/js',
     WAVE_ON_A_STRING: '.'
   },
 
