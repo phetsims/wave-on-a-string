@@ -114,15 +114,13 @@ define( require => {
       x: centerControlX + 45,
       centerY: centerControlY,
       scale: 0.6,
+      playButtonScaleFactor: 1.25,
       touchAreaDilation: 12,
       pauseOptions: playPauseButtonOptions,
       playOptions: playPauseButtonOptions
     } );
     this.addChild( playPauseButton );
-    const pauseSizeIncreaseFactor = 1.25;
-    model.playProperty.lazyLink( function( isPlaying ) {
-      playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
-    } );
+
     this.addChild( new StepForwardButton( {
       isPlayingProperty: model.playProperty,
       listener: model.manualStep.bind( model ),
