@@ -32,7 +32,7 @@ define( require => {
   SimLauncher.launch( function() {
     //Create and start the sim
     new Sim( waveOnAStringTitleString, [
-      new WOASScreen( Tandem.rootTandem.createTandem( 'waveOnAStringScreen' ) )
+      new WOASScreen( Tandem.ROOT.createTandem( 'waveOnAStringScreen' ) )
     ], simOptions ).start();
   } );
 } );
