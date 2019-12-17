@@ -25,13 +25,11 @@ define( require => {
   const RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
   const RulerNode = require( 'SCENERY_PHET/RulerNode' );
   const ScreenView = require( 'JOIST/ScreenView' );
-  const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   const StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
   const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   const TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
-  const TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
   const Util = require( 'DOT/Util' );
-  const Vector2 = require( 'DOT/Vector2' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // images
@@ -152,45 +150,16 @@ define( require => {
     bottomControlPanel.right = resetAllButton.left - 10;
     bottomControlPanel.bottom = resetAllButton.bottom;
     /*---------------------------------------------------------------------------*
-     * TimerNode
+     * StopwatchNode
      *----------------------------------------------------------------------------*/
-    const timer = new TimerNode( model.timerSecondProperty, model.timerStartProperty );
-    timer.touchArea = timer.localBounds.dilated( 5 );
-    this.addChild( timer );
+    const stopwatchNode = new StopwatchNode( model.stopwatch, {
+      visibleBoundsProperty: this.visibleBoundsProperty
+    } );
+    stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
+    this.addChild( stopwatchNode );
     model.timerProperty.link( function updateVisible( value ) {
-      timer.setVisible( value );
+      stopwatchNode.setVisible( value );
     } );
-    // timer drag handling
-    model.timerLocProperty.link( function updateLocation( value ) {
-      timer.translation = value;
-    } );
-    let clickOffset = new Vector2( 0, 0 );
-    const restrictedBounds = Constants.viewBounds.eroded( 30 );
-    timer.dragTarget.addInputListener( new SimpleDragHandler( {
-      start: function( event ) {
-        clickOffset = timer.dragTarget.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
-      },
-      drag: function( event ) {
-        model.timerLocProperty.set( timer.globalToParentPoint( event.pointer.point ).minus( clickOffset ) );
-        if ( timer.right < restrictedBounds.minX ) {
-          model.timerLocProperty.set(
-            new Vector2( model.timerLocProperty.get().x - timer.right + restrictedBounds.minX, model.timerLocProperty.get().y ) );
-        }
-        if ( timer.left > restrictedBounds.maxX ) {
-          model.timerLocProperty.set( new Vector2( model.timerLocProperty.get().x -
-                                                   timer.left + restrictedBounds.maxX, model.timerLocProperty.get().y ) );
-        }
-        if ( timer.bottom < restrictedBounds.minY ) {
-          model.timerLocProperty.set(
-            new Vector2( model.timerLocProperty.get().x, model.timerLocProperty.get().y - timer.bottom + restrictedBounds.minY ) );
-        }
-        if ( timer.top > restrictedBounds.maxY ) {
-          model.timerLocProperty.set(
-            new Vector2( model.timerLocProperty.get().x, model.timerLocProperty.get().y - timer.top + restrictedBounds.maxY ) );
-        }
-      }
-    } ) );
-
     let windowImage;
     //center line
     this.addChild( new Line( 0, 0, 605, 0, {
@@ -200,7 +169,10 @@ define( require => {
       x: Constants.startTheStringNode,
       y: Constants.yTheStringNode
     } ) );
-    const endNode = new EndNode( model, this.frameEmitter, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
+    const endNode = new EndNode( model, this.frameEmitter, {
+      x: Constants.endTheStringNode,
+      y: Constants.yTheStringNode
+    } );
     endNode.windowNode.x += Constants.endTheStringNode;
     endNode.windowNode.y += Constants.yTheStringNode;
     this.addChild( endNode.windowNode );

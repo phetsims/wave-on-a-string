@@ -10,6 +10,7 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Property = require( 'AXON/Property' );
+  const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
@@ -47,9 +48,9 @@ define( require => {
     this.rulerLocHProperty = new Vector2Property( new Vector2( 54, 117 ) ); //position horizontal ruler
     this.rulerLocVProperty = new Vector2Property( new Vector2( 13, 440 ) ); //position vertical ruler
     this.referenceLineLocProperty = new Vector2Property( new Vector2( -10, 120 ) ); // position referenceLine
-    this.timerStartProperty = new Property( false ); // timer start/pause status
-    this.timerSecondProperty = new Property( 0 ); // timer time in seconds
-    this.timerLocProperty = new Vector2Property( new Vector2( 550, 330 ) ); // position timer
+    this.stopwatch = new Stopwatch( {
+      location: new Vector2( 550, 330 ) // position timer
+    } );
     this.pulseSignProperty = new Property( 1 ); // sign [-1, 1] for pulse mode
     this.wrenchArrowsVisibleProperty = new Property( true );
 
@@ -107,9 +108,7 @@ define( require => {
       this.rulerLocHProperty.reset();
       this.rulerLocVProperty.reset();
       this.referenceLineLocProperty.reset();
-      this.timerStartProperty.reset();
-      this.timerSecondProperty.reset();
-      this.timerLocProperty.reset();
+      this.stopwatch.reset();
       this.pulseSignProperty.reset();
       this.wrenchArrowsVisibleProperty.reset();
       this.manualRestart();
@@ -190,10 +189,7 @@ define( require => {
       // limit max dt
       while ( dt >= fixDt ) {
         this.timeProperty.set( this.timeProperty.get() + fixDt );
-
-        if ( this.timerStartProperty.get() ) {
-          this.timerSecondProperty.set( this.timerSecondProperty.get() + fixDt * this.speedProperty.get() );
-        }
+        this.stopwatch.step( fixDt * this.speedProperty.get() );
 
         if ( this.modeProperty.get() === 'oscillate' ) {
           this.angleProperty.set( this.angleProperty.get() +
