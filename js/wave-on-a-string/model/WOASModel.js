@@ -49,7 +49,7 @@ define( require => {
     this.rulerLocVProperty = new Vector2Property( new Vector2( 13, 440 ) ); //position vertical ruler
     this.referenceLineLocProperty = new Vector2Property( new Vector2( -10, 120 ) ); // position referenceLine
     this.stopwatch = new Stopwatch( {
-      location: new Vector2( 550, 330 ) // position timer
+      position: new Vector2( 550, 330 ) // position timer
     } );
     this.pulseSignProperty = new Property( 1 ); // sign [-1, 1] for pulse mode
     this.wrenchArrowsVisibleProperty = new Property( true );
