@@ -112,7 +112,7 @@ define( require => {
       x: centerControlX + 45,
       centerY: centerControlY,
       scale: 0.6,
-      playButtonScaleFactor: 1.25,
+      scaleFactorWhenPaused: 1.25,
       touchAreaDilation: 12,
       pauseOptions: playPauseButtonOptions,
       playOptions: playPauseButtonOptions
