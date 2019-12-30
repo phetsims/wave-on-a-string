@@ -21,7 +21,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   function Slider( options ) {
@@ -57,7 +57,7 @@ define( require => {
     options = merge( {}, defaultOptions, options );
     if ( !options.endDrag && options.round ) {
       options.endDrag = function() {
-        options.property.set( Util.toFixedNumber( options.property.get(), options.roundingDigits ) );
+        options.property.set( Utils.toFixedNumber( options.property.get(), options.roundingDigits ) );
       };
     }
 
@@ -139,7 +139,7 @@ define( require => {
       if ( options.type === 'button' ) {
         let text = value;
         if ( options.round && options.roundingDigits >= 0 ) {
-          text = Util.toFixed( options.property.get(), options.roundingDigits );
+          text = Utils.toFixed( options.property.get(), options.roundingDigits );
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
         valueLabel.centerX = self.width / 2;

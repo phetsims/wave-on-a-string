@@ -29,7 +29,7 @@ define( require => {
   const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   const TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
   const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // images
@@ -58,8 +58,8 @@ define( require => {
     let endTypeRadio;
 
     const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-    const rulerH = new RulerNode( 800, 50, 80, Util.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
-    const rulerV = new RulerNode( 400, 50, 80, Util.rangeInclusive( 0, 5 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
+    const rulerH = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
+    const rulerV = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
     rulerV.rotate( -Math.PI / 2 );
     this.addChild( rulerH );
     this.addChild( rulerV );

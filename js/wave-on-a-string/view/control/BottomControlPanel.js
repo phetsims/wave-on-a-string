@@ -16,7 +16,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Slider = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/slider/Slider' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
@@ -71,9 +71,9 @@ define( require => {
       tick: { step: 0.25, minText: lowString, maxText: highString },
       constrainValue: function( value ) {
         // logic to round the value to nearest .25 to have snap behaviour
-        value = Util.toFixedNumber( value, 2 );
+        value = Utils.toFixedNumber( value, 2 );
         value = value * 100;
-        value = Util.roundSymmetric( value / 25 ) * 25;
+        value = Utils.roundSymmetric( value / 25 ) * 25;
         value = value / 100;
         return value;
       }
