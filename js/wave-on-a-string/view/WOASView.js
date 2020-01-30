@@ -10,29 +10,29 @@ define( require => {
   'use strict';
 
   // modules
-  const BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
+  const BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/BottomControlPanel' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const Emitter = require( 'AXON/Emitter' );
-  const EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/EndNode' );
+  const EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/EndNode' );
   const Image = require( 'SCENERY/nodes/Image' );
   const Line = require( 'SCENERY/nodes/Line' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  const ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/ReferenceLine' );
+  const ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/ReferenceLine' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  const RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
+  const RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/RestartButton' );
   const RulerNode = require( 'SCENERY_PHET/RulerNode' );
   const ScreenView = require( 'JOIST/ScreenView' );
-  const StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
+  const StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/StartNode' );
   const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
-  const StringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StringNode' );
+  const StringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/StringNode' );
   const Utils = require( 'DOT/Utils' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
-  const WOASRadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/WOASRadioGroup' );
+  const WOASRadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASRadioGroup' );
 
   // images
   const windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
