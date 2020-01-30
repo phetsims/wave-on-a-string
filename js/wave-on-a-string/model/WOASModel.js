@@ -17,19 +17,21 @@ define( require => {
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
   // constants
-  const NSEGS = 61;
-  const fps = 50;
+  const NUMBER_OF_SEGMENTS = 61;
+  const LAST_INDEX = NUMBER_OF_SEGMENTS - 1;
+  const NEXT_TO_LAST_INDEX = NUMBER_OF_SEGMENTS - 2;
+  const AMPLITUDE_MULTIPLIER = 80;
+  const FRAMES_PER_SECOND = 50;
 
   class WOASModel {
     constructor() {
+      // @private {number}
       this.stepDt = 0;
-      const Array = window.Float64Array || window.Array;
 
-      this.yDraw = new Array( NSEGS );
-      this.yNow = new Array( NSEGS );
-      this.yLast = new Array( NSEGS );
-      this.yNext = new Array( NSEGS );
-      this.dotPerCm = 80;
+      this.yDraw = new Float64Array( NUMBER_OF_SEGMENTS );
+      this.yNow = new Float64Array( NUMBER_OF_SEGMENTS );
+      this.yLast = new Float64Array( NUMBER_OF_SEGMENTS );
+      this.yNext = new Float64Array( NUMBER_OF_SEGMENTS );
 
       this.modeProperty = new Property( 'manual' ); // 'manual', 'oscillate', 'pulse'
       this.typeEndProperty = new Property( 'fixedEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
@@ -61,7 +63,7 @@ define( require => {
       this.yNowChanged = new Emitter();
 
       this.nextLeftY = 0; // used to interpolate the left-most y value of the string while the wrench is moved in manual mode, for low-FPS browsers
-      this.nSegs = NSEGS;
+      this.nSegs = NUMBER_OF_SEGMENTS;
       this.beta = 0.05;
       this.alpha = 1;
       this.reset();
@@ -77,7 +79,7 @@ define( require => {
      * @param {number} dt
      */
     step( dt ) {
-      const fixDt = 1 / fps;
+      const fixDt = 1 / FRAMES_PER_SECOND;
 
       // limit changes dt
       if ( Math.abs( dt - this.lastDtProperty.get() ) > this.lastDtProperty.get() * 0.3 ) {
@@ -108,13 +110,13 @@ define( require => {
       this.yNext[ 0 ] = this.yNow[ 0 ];
       switch( this.typeEndProperty.get() ) {
         case'looseEnd':
-          this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
+          this.yNow[ LAST_INDEX ] = this.yNow[ NEXT_TO_LAST_INDEX ];
           break;
         case'noEnd':
-          this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ];
+          this.yNow[ LAST_INDEX ] = this.yLast[ NEXT_TO_LAST_INDEX ];
           break;
         default: //'fixedEnd'
-          this.yNow[ this.nSegs - 1 ] = 0;
+          this.yNow[ LAST_INDEX ] = 0;
       }
 
       //main formula for calculating
@@ -126,10 +128,9 @@ define( require => {
       }
 
       // store old values for the very last point
-      const lastIndex = this.nSegs - 1;
-      const oldLast = this.yLast[ lastIndex ];
-      const oldNow = this.yNow[ lastIndex ];
-      const oldNext = this.yNext[ lastIndex ];
+      const oldLast = this.yLast[ LAST_INDEX ];
+      const oldNow = this.yNow[ LAST_INDEX ];
+      const oldNext = this.yNext[ LAST_INDEX ];
 
       // rotate arrays instead of copying elements (for speed)
       const old = this.yLast;
@@ -138,29 +139,29 @@ define( require => {
       this.yNext = old;
 
       // restore the old values for the very last point for every array (potentially not needed for a few?)
-      this.yLast[ lastIndex ] = oldLast;
-      this.yNow[ lastIndex ] = oldNow;
-      this.yNext[ lastIndex ] = oldNext;
+      this.yLast[ LAST_INDEX ] = oldLast;
+      this.yNow[ LAST_INDEX ] = oldNow;
+      this.yNext[ LAST_INDEX ] = oldNext;
 
       switch( this.typeEndProperty.value ) {
         case 'looseEnd':
-          this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
-          this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
+          this.yLast[ LAST_INDEX ] = this.yNow[ LAST_INDEX ];
+          this.yNow[ LAST_INDEX ] = this.yNow[ NEXT_TO_LAST_INDEX ];
           break;
         case 'noEnd':
-          this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
-          this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ]; // from a comment in the old model code?
-          // from the Flash model: this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];//this.yLast[this.nSegs - 2];
+          this.yLast[ LAST_INDEX ] = this.yNow[ LAST_INDEX ];
+          this.yNow[ LAST_INDEX ] = this.yLast[ NEXT_TO_LAST_INDEX ]; // from a comment in the old model code?
+          // from the Flash model: this.yNow[ LAST_INDEX ] = this.yNow[ LAST_INDEX ]; //this.yLast[ NEXT_TO_LAST_INDEX ];
           break;
         default: // 'fixedEnd'
-          this.yLast[ this.nSegs - 1 ] = 0;
-          this.yNow[ this.nSegs - 1 ] = 0;
+          this.yLast[ LAST_INDEX ] = 0;
+          this.yNow[ LAST_INDEX ] = 0;
       }
     }
 
     manualStep( dt ) {
       let i;
-      const fixDt = 1 / fps;
+      const fixDt = 1 / FRAMES_PER_SECOND;
       dt = ( dt !== undefined && dt > 0 ) ? dt : fixDt;
 
       // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
@@ -169,7 +170,7 @@ define( require => {
       const perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
       //dt for tension effect
-      const minDt = ( 1 / ( fps * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.get() ) );
+      const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.get() ) );
       // limit max dt
       while ( dt >= fixDt ) {
         this.timeProperty.set( this.timeProperty.get() + fixDt );
@@ -179,7 +180,7 @@ define( require => {
           this.angleProperty.set( this.angleProperty.get() +
                                   Math.PI * 2 * this.frequencyProperty.get() * fixDt * this.speedProperty.get() );
           this.angleProperty.set( this.angleProperty.get() % ( Math.PI * 2 ) );
-          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * this.dotPerCm * Math.sin( -this.angleProperty.get() );
+          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.get() );
         }
         if ( this.modeProperty.get() === 'pulse' && this.pulsePendingProperty.get() ) {
           this.pulsePendingProperty.set( false );
@@ -200,7 +201,7 @@ define( require => {
             this.pulseSignProperty.reset();
             this.pulseProperty.reset();
           }
-          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * this.dotPerCm * ( -this.angleProperty.get() / ( Math.PI / 2 ) );
+          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * AMPLITUDE_MULTIPLIER * ( -this.angleProperty.get() / ( Math.PI / 2 ) );
         }
         if ( this.modeProperty.get() === 'manual' ) {
           // interpolate the yNow across steps for manual (between frames)
@@ -209,12 +210,12 @@ define( require => {
         if ( this.timeProperty.get() >= minDt ) {
           this.timeProperty.set( this.timeProperty.get() % minDt );
           this.evolve();
-          for ( i = 0; i < this.nSegs; i++ ) {
+          for ( i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
             this.yDraw[ i ] = this.yLast[ i ];
           }
         }
         else {
-          for ( i = 1; i < this.nSegs; i++ ) {
+          for ( i = 1; i < NUMBER_OF_SEGMENTS; i++ ) {
             this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeProperty.get() / minDt ) );
           }
         }
@@ -224,6 +225,14 @@ define( require => {
         // sanity check for our yNow
         // this.yNow[0] = this.nextLeftY;
       }
+      this.yNowChanged.emit();
+    }
+
+    zeroOutEndPoint() {
+      // when moving to fixed, zero out the very end point
+      this.yNow[ LAST_INDEX ] = 0;
+      this.yDraw[ LAST_INDEX ] = 0;
+
       this.yNowChanged.emit();
     }
 

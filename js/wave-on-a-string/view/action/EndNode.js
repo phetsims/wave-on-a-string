@@ -70,11 +70,7 @@ define( require => {
       windowNode.setVisible( value === 'noEnd' );
 
       if ( value === 'fixedEnd' ) {
-        // when moving to fixed, zero out the very end point
-        model.yNow[ model.nSegs - 1 ] = 0;
-        model.yDraw[ model.nSegs - 1 ] = 0;
-
-        model.yNowChanged.emit();
+        model.zeroOutEndPoint();
       }
     } );
 
