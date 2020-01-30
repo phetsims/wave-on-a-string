@@ -109,11 +109,14 @@ define( require => {
         position: new Vector2( 550, 330 )
       } );
 
-      // @public - events emitted by instances of this type
+      // @public {Emitter} - Events emitted by instances of this type
       this.yNowChangedEmitter = new Emitter();
 
-      this.nextLeftY = 0; // used to interpolate the left-most y value of the string while the wrench is moved in manual mode, for low-FPS browsers
-      this.nSegs = NUMBER_OF_SEGMENTS;
+      // @public {number} - used to interpolate the left-most y value of the string while the wrench is moved in manual
+      // mode, for low-FPS browsers
+      this.nextLeftY = 0;
+
+      // @private {number}
       this.beta = 0.05;
       this.alpha = 1;
 
@@ -133,15 +136,16 @@ define( require => {
       const fixDt = 1 / FRAMES_PER_SECOND;
 
       // limit changes dt
-      if ( Math.abs( dt - this.lastDtProperty.value ) > this.lastDtProperty.value * 0.3 ) {
-        dt = this.lastDtProperty.value + ( ( dt - this.lastDtProperty.value ) < 0 ? -1 : 1 ) * this.lastDtProperty.value * 0.3;
+      const lastDt = this.lastDtProperty.value;
+      if ( Math.abs( dt - lastDt ) > lastDt * 0.3 ) {
+        dt = lastDt + ( ( dt - lastDt ) < 0 ? -1 : 1 ) * lastDt * 0.3;
       }
       this.lastDtProperty.value = dt;
 
       if ( this.isPlayingProperty.value ) {
         this.stepDt += dt;
 
-        //limit min dt
+        // limit min dt
         if ( this.stepDt >= fixDt ) {
           this.manualStep( this.stepDt );
           this.stepDt %= fixDt;
@@ -150,12 +154,16 @@ define( require => {
       this.nextLeftY = this.yNow[ 0 ];
     }
 
-    // NOTE TO FUTURE MAINTAINER: this is the fixed-timestep model step. We interpolate between these steps as needed
+    /**
+     * This runs a fixed-timestep model step. Elsewhere we interpolate between these.
+     * @public
+     */
     evolve() {
       const dt = 1;
       const v = 1;
       const dx = dt * v;
       const b = this.dampingProperty.value * 0.002;
+
       this.beta = b * dt / 2;
       this.alpha = v * dt / dx;
 
@@ -175,11 +183,11 @@ define( require => {
           throw new Error( `unknown end type: ${this.endTypeProperty.value}` );
       }
 
-      //main formula for calculating
+      // main formula for calculating
       const a = 1 / ( this.beta + 1 );
       const alphaSq = this.alpha * this.alpha;
       const c = 2 * ( 1 - alphaSq );
-      for ( let i = 1; i < ( this.nSegs - 1 ); i++ ) {
+      for ( let i = 1; i < LAST_INDEX; i++ ) {
         this.yNext[ i ] = a * ( ( this.beta - 1 ) * this.yLast[ i ] + c * this.yNow[ i ] + alphaSq * ( this.yNow[ i + 1 ] + this.yNow[ i - 1 ] ) );
       }
 
@@ -218,6 +226,12 @@ define( require => {
       }
     }
 
+    /**
+     * Manual step?
+     * @public
+     *
+     * @param {number} dt
+     */
     manualStep( dt ) {
       let i;
       const fixDt = 1 / FRAMES_PER_SECOND;
@@ -287,12 +301,21 @@ define( require => {
       this.yNowChangedEmitter.emit();
     }
 
+    /**
+     * Returns the y position for the end of the string (location for the ring).
+     * @public
+     *
+     * @returns {number}
+     */
     getRingY() {
-      return this.yNow[ LAST_INDEX ] || 0; // TODO: why the conditional fallback?
+      return this.yNow[ LAST_INDEX ] || 0;
     }
 
+    /**
+     * When we move to a fixed point, we want to zero out the very end.
+     * @public
+     */
     zeroOutEndPoint() {
-      // when moving to fixed, zero out the very end point
       this.yNow[ LAST_INDEX ] = 0;
       this.yDraw[ LAST_INDEX ] = 0;
 
