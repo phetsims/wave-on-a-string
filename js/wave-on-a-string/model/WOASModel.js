@@ -245,6 +245,10 @@ define( require => {
       this.yNowChanged.emit();
     }
 
+    getRingY() {
+      return this.yNow[ LAST_INDEX ] || 0; // TODO: why the conditional fallback?
+    }
+
     zeroOutEndPoint() {
       // when moving to fixed, zero out the very end point
       this.yNow[ LAST_INDEX ] = 0;

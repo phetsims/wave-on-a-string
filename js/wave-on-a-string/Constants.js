@@ -60,13 +60,13 @@ define( require => {
         .addColorStop( 0.3, options.color );
     },
 
-    // window image scale
+    // {number} - window image scale
     windowScale: 0.6,
 
-    // how much the window front should overlap the window back
+    // {number} - how much the window front should overlap the window back
     windowXOffset: 5,
 
-    // how much to horizontally shift the window (to center)
+    // {number} - how much to horizontally shift the window (to center)
     windowShift: 1,
 
     offsetWheel: new Vector2( 0, 156 ),
