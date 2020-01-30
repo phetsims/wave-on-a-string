@@ -8,6 +8,8 @@
 
 define( require => {
   'use strict';
+
+  // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const Circle = require( 'SCENERY/nodes/Circle' );

@@ -1,75 +1,84 @@
 // Copyright 2013-2019, University of Colorado Boulder
 
 /**
- * main Model container.
+ * Model object for Wave on a String
  *
  * @author Anton Ulyanov (Mlearner)
  */
 define( require => {
   'use strict';
+
+  // modules
   const Emitter = require( 'AXON/Emitter' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Property = require( 'AXON/Property' );
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
+  // constants
   const NSEGS = 61;
   const fps = 50;
 
-  function WOASModel() {
-    this.stepDt = 0;
-    const Array = window.Float64Array || window.Array;
+  class WOASModel {
+    constructor() {
+      this.stepDt = 0;
+      const Array = window.Float64Array || window.Array;
 
-    this.yDraw = new Array( NSEGS );
-    this.yNow = new Array( NSEGS );
-    this.yLast = new Array( NSEGS );
-    this.yNext = new Array( NSEGS );
-    this.dotPerCm = 80;
+      this.yDraw = new Array( NSEGS );
+      this.yNow = new Array( NSEGS );
+      this.yLast = new Array( NSEGS );
+      this.yNext = new Array( NSEGS );
+      this.dotPerCm = 80;
 
-    this.modeProperty = new Property( 'manual' ); // 'manual', 'oscillate', 'pulse'
-    this.typeEndProperty = new Property( 'fixedEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
-    this.speedProperty = new Property( 1 ); // 1, 0.25
-    this.rulersProperty = new Property( false ); // visible rulers
-    this.timerProperty = new Property( false );  // visible timer
-    this.referenceLineProperty = new Property( false ); // visible referenceLine
-    this.tensionProperty = new Property( 2 ); // tension 0..2
-    this.dampingProperty = new Property( 20 ); // dumping 0..100
-    this.frequencyProperty = new Property( 1.50 ); // frequency 0.00 .. 3.00
-    this.pulseWidthProperty = new Property( 0.5 ); // pulse width 0.00 .. 1.00
-    this.amplitudeProperty = new Property( 0.75 ); // amplitude 0.0 .. 1.5
-    this.playProperty = new Property( true ); // play/pause state
-    this.lastDtProperty = new Property( 0.03 );
-    this.timeProperty = new Property( 0 ); // base time
-    this.angleProperty = new Property( 0 ); // angle for 'oscillate' and 'pulse' mode
-    this.pulsePendingProperty = new Property( false ); // whether a pulse will start at the next proper model step
-    this.pulseProperty = new Property( false ); // 'pulse' mode pulse active
-    this.rulerLocHProperty = new Vector2Property( new Vector2( 54, 117 ) ); //position horizontal ruler
-    this.rulerLocVProperty = new Vector2Property( new Vector2( 13, 440 ) ); //position vertical ruler
-    this.referenceLineLocProperty = new Vector2Property( new Vector2( -10, 120 ) ); // position referenceLine
-    this.stopwatch = new Stopwatch( {
-      position: new Vector2( 550, 330 ) // position timer
-    } );
-    this.pulseSignProperty = new Property( 1 ); // sign [-1, 1] for pulse mode
-    this.wrenchArrowsVisibleProperty = new Property( true );
+      this.modeProperty = new Property( 'manual' ); // 'manual', 'oscillate', 'pulse'
+      this.typeEndProperty = new Property( 'fixedEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
+      this.speedProperty = new Property( 1 ); // 1, 0.25
+      this.rulersProperty = new Property( false ); // visible rulers
+      this.timerProperty = new Property( false );  // visible timer
+      this.referenceLineProperty = new Property( false ); // visible referenceLine
+      this.tensionProperty = new Property( 2 ); // tension 0..2
+      this.dampingProperty = new Property( 20 ); // dumping 0..100
+      this.frequencyProperty = new Property( 1.50 ); // frequency 0.00 .. 3.00
+      this.pulseWidthProperty = new Property( 0.5 ); // pulse width 0.00 .. 1.00
+      this.amplitudeProperty = new Property( 0.75 ); // amplitude 0.0 .. 1.5
+      this.playProperty = new Property( true ); // play/pause state
+      this.lastDtProperty = new Property( 0.03 );
+      this.timeProperty = new Property( 0 ); // base time
+      this.angleProperty = new Property( 0 ); // angle for 'oscillate' and 'pulse' mode
+      this.pulsePendingProperty = new Property( false ); // whether a pulse will start at the next proper model step
+      this.pulseProperty = new Property( false ); // 'pulse' mode pulse active
+      this.rulerLocHProperty = new Vector2Property( new Vector2( 54, 117 ) ); //position horizontal ruler
+      this.rulerLocVProperty = new Vector2Property( new Vector2( 13, 440 ) ); //position vertical ruler
+      this.referenceLineLocProperty = new Vector2Property( new Vector2( -10, 120 ) ); // position referenceLine
+      this.stopwatch = new Stopwatch( {
+        position: new Vector2( 550, 330 ) // position timer
+      } );
+      this.pulseSignProperty = new Property( 1 ); // sign [-1, 1] for pulse mode
+      this.wrenchArrowsVisibleProperty = new Property( true );
 
-    // @public - events emitted by instances of this type
-    this.yNowChanged = new Emitter();
+      // @public - events emitted by instances of this type
+      this.yNowChanged = new Emitter();
 
-    this.nextLeftY = 0; // used to interpolate the left-most y value of the string while the wrench is moved in manual mode, for low-FPS browsers
-    this.nSegs = NSEGS;
-    this.beta = 0.05;
-    this.alpha = 1;
-    this.reset();
+      this.nextLeftY = 0; // used to interpolate the left-most y value of the string while the wrench is moved in manual mode, for low-FPS browsers
+      this.nSegs = NSEGS;
+      this.beta = 0.05;
+      this.alpha = 1;
+      this.reset();
 
-    // set the string to 0 on mode changes
-    this.modeProperty.lazyLink( this.manualRestart.bind( this ) );
-  }
+      // set the string to 0 on mode changes
+      this.modeProperty.lazyLink( this.manualRestart.bind( this ) );
+    }
 
-  inherit( Object, WOASModel, {
-    step: function( dt ) {
+    /**
+     * Steps forward in time.
+     * @public
+     *
+     * @param {number} dt
+     */
+    step( dt ) {
       const fixDt = 1 / fps;
+
       // limit changes dt
       if ( Math.abs( dt - this.lastDtProperty.get() ) > this.lastDtProperty.get() * 0.3 ) {
         dt = this.lastDtProperty.get() + ( ( dt - this.lastDtProperty.get() ) < 0 ? -1 : 1 ) * this.lastDtProperty.get() * 0.3;
@@ -85,36 +94,10 @@ define( require => {
         }
       }
       this.nextLeftY = this.yNow[ 0 ];
-    },
-    // all reset button
-    reset: function() {
-      this.modeProperty.reset();
-      this.typeEndProperty.reset();
-      this.speedProperty.reset();
-      this.rulersProperty.reset();
-      this.timerProperty.reset();
-      this.referenceLineProperty.reset();
-      this.tensionProperty.reset();
-      this.dampingProperty.reset();
-      this.frequencyProperty.reset();
-      this.pulseWidthProperty.reset();
-      this.amplitudeProperty.reset();
-      this.playProperty.reset();
-      this.lastDtProperty.reset();
-      this.timeProperty.reset();
-      this.angleProperty.reset();
-      this.pulsePendingProperty.reset();
-      this.pulseProperty.reset();
-      this.rulerLocHProperty.reset();
-      this.rulerLocVProperty.reset();
-      this.referenceLineLocProperty.reset();
-      this.stopwatch.reset();
-      this.pulseSignProperty.reset();
-      this.wrenchArrowsVisibleProperty.reset();
-      this.manualRestart();
-    },
+    }
+
     // NOTE TO FUTURE MAINTAINER: this is the fixed-timestep model step. We interpolate between these steps as needed
-    evolve: function() {
+    evolve() {
       const dt = 1;
       const v = 1;
       const dx = dt * v;
@@ -159,22 +142,23 @@ define( require => {
       this.yNow[ lastIndex ] = oldNow;
       this.yNext[ lastIndex ] = oldNext;
 
-      switch( this.typeEndProperty.get() ) {
-        case'looseEnd':
+      switch( this.typeEndProperty.value ) {
+        case 'looseEnd':
           this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
           this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
           break;
-        case'noEnd':
+        case 'noEnd':
           this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
           this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ]; // from a comment in the old model code?
           // from the Flash model: this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];//this.yLast[this.nSegs - 2];
           break;
-        default: //'fixedEnd'
+        default: // 'fixedEnd'
           this.yLast[ this.nSegs - 1 ] = 0;
           this.yNow[ this.nSegs - 1 ] = 0;
       }
-    },
-    manualStep: function( dt ) {
+    }
+
+    manualStep( dt ) {
       let i;
       const fixDt = 1 / fps;
       dt = ( dt !== undefined && dt > 0 ) ? dt : fixDt;
@@ -241,9 +225,10 @@ define( require => {
         // this.yNow[0] = this.nextLeftY;
       }
       this.yNowChanged.emit();
-    },
+    }
+
     //restart button
-    manualRestart: function() {
+    manualRestart() {
       //only soft reset
       this.angleProperty.reset();
       this.timeProperty.reset();
@@ -256,9 +241,10 @@ define( require => {
       }
       this.nextLeftY = 0;
       this.yNowChanged.emit();
-    },
+    }
+
     //pulse button
-    manualPulse: function() {
+    manualPulse() {
       this.yNow[ 0 ] = 0;
       this.angleProperty.set( 0 );
       this.pulseSignProperty.set( 1 );
@@ -266,9 +252,34 @@ define( require => {
       this.pulseProperty.set( false );
     }
 
-  } );
+    // all reset button
+    reset() {
+      this.modeProperty.reset();
+      this.typeEndProperty.reset();
+      this.speedProperty.reset();
+      this.rulersProperty.reset();
+      this.timerProperty.reset();
+      this.referenceLineProperty.reset();
+      this.tensionProperty.reset();
+      this.dampingProperty.reset();
+      this.frequencyProperty.reset();
+      this.pulseWidthProperty.reset();
+      this.amplitudeProperty.reset();
+      this.playProperty.reset();
+      this.lastDtProperty.reset();
+      this.timeProperty.reset();
+      this.angleProperty.reset();
+      this.pulsePendingProperty.reset();
+      this.pulseProperty.reset();
+      this.rulerLocHProperty.reset();
+      this.rulerLocVProperty.reset();
+      this.referenceLineLocProperty.reset();
+      this.stopwatch.reset();
+      this.pulseSignProperty.reset();
+      this.wrenchArrowsVisibleProperty.reset();
+      this.manualRestart();
+    }
+  }
 
-  waveOnAString.register( 'WOASModel', WOASModel );
-
-  return WOASModel;
+  return waveOnAString.register( 'WOASModel', WOASModel );
 } );

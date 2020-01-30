@@ -1,13 +1,15 @@
 // Copyright 2013-2019, University of Colorado Boulder
 
 /**
- * Main view.
+ * ScreenView for Wave on a String
  *
  * @author Anton Ulyanov (Mlearner)
  */
 
 define( require => {
   'use strict';
+
+  // modules
   const BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/BottomControlPanel' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );

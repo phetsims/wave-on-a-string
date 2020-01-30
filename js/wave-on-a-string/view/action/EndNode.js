@@ -8,6 +8,8 @@
 
 define( require => {
   'use strict';
+
+  // modules
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const Image = require( 'SCENERY/nodes/Image' );
   const inherit = require( 'PHET_CORE/inherit' );

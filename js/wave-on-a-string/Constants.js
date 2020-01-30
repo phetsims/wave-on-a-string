@@ -3,6 +3,7 @@
 define( require => {
   'use strict';
 
+  // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const Color = require( 'SCENERY/util/Color' );
   const Dimension2 = require( 'DOT/Dimension2' );
@@ -18,7 +19,6 @@ define( require => {
 
   let clickOffset = new Vector2( 0, 0 );
   const Constants = {
-    projectName: 'wave-on-a-string',
     viewSize: new Dimension2( 768, 504 ),
 
     // prefer 200 hue

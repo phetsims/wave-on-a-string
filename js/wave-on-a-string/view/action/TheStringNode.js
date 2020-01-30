@@ -8,6 +8,8 @@
 
 define( require => {
   'use strict';
+
+  // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
   const Image = require( 'SCENERY/nodes/Image' );
   const inherit = require( 'PHET_CORE/inherit' );

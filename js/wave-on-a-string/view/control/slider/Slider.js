@@ -8,6 +8,8 @@
 
 define( require => {
   'use strict';
+
+  // modules
   const ArrowButton = require( 'SUN/buttons/ArrowButton' );
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const Dimension2 = require( 'DOT/Dimension2' );

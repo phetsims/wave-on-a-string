@@ -8,6 +8,8 @@
 
 define( require => {
   'use strict';
+
+  // modules
   const Bounds2 = require( 'DOT/Bounds2' );
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const inherit = require( 'PHET_CORE/inherit' );
