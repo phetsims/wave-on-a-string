@@ -131,7 +131,7 @@ define( require => {
         backgroundGradientColorStop1: Constants.buttonBorder1,
         innerButtonLineWidth: 1
       };
-      const playPauseButton = new PlayPauseButton( model.playProperty, {
+      const playPauseButton = new PlayPauseButton( model.isPlayingProperty, {
         x: centerControlX + 45,
         centerY: centerControlY,
         scale: 0.6,
@@ -143,7 +143,7 @@ define( require => {
       this.addChild( playPauseButton );
 
       this.addChild( new StepForwardButton( {
-        isPlayingProperty: model.playProperty,
+        isPlayingProperty: model.isPlayingProperty,
         listener: model.manualStep.bind( model ),
         x: centerControlX + 94,
         centerY: centerControlY,

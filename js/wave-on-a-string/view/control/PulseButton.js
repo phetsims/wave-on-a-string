@@ -28,8 +28,8 @@ define( require => {
       super( {
         listener: () => {
           model.manualPulse();
-          model.playProperty.value = true;
-          model.yNowChanged.emit();
+          model.isPlayingProperty.value = true;
+          model.yNowChangedEmitter.emit();
         },
         baseColor: '#33dd33',
         content: new Node( {

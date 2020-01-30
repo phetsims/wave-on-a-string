@@ -77,7 +77,7 @@ define( require => {
     }
 
     let dirty = true;
-    model.yNowChanged.addListener( () => {
+    model.yNowChangedEmitter.addListener( () => {
       dirty = true;
     } );
     frameEmitter.addListener( () => {

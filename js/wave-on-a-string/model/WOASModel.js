@@ -14,7 +14,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
@@ -32,6 +32,7 @@ define( require => {
       // @private {number}
       this.stepDt = 0;
 
+      // @public {Float64Array}
       this.yDraw = new Float64Array( NUMBER_OF_SEGMENTS );
       this.yNow = new Float64Array( NUMBER_OF_SEGMENTS );
       this.yLast = new Float64Array( NUMBER_OF_SEGMENTS );
@@ -43,39 +44,73 @@ define( require => {
       // @public {Property.<WOASModel.EndType}
       this.endTypeProperty = new EnumerationProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END );
 
+      // @public {Property.<boolean>}
+      this.isPlayingProperty = new BooleanProperty( true );
+
       // @public {Property.<number>} - Speed multiplier
       this.speedProperty = new NumberProperty( 1 );
 
       // @public {Property.<boolean>} - Visibilities
       this.rulersVisibleProperty = new BooleanProperty( false );
-      this.timerVisibleProperty = new Property( false );
-      this.referenceLineVisibleProperty = new Property( false );
+      this.timerVisibleProperty = new BooleanProperty( false );
+      this.referenceLineVisibleProperty = new BooleanProperty( false );
+      this.wrenchArrowsVisibleProperty = new BooleanProperty( true );
 
       // @public {Property.<Vector2>}
       this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( 54, 117 ) );
       this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ) );
       this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ) );
 
-      this.tensionProperty = new Property( 2 ); // tension 0..2
-      this.dampingProperty = new Property( 20 ); // dumping 0..100
-      this.frequencyProperty = new Property( 1.50 ); // frequency 0.00 .. 3.00
-      this.pulseWidthProperty = new Property( 0.5 ); // pulse width 0.00 .. 1.00
-      this.amplitudeProperty = new Property( 0.75 ); // amplitude 0.0 .. 1.5
-      this.playProperty = new Property( true ); // play/pause state
-      this.lastDtProperty = new Property( 0.03 );
-      this.timeProperty = new Property( 0 ); // base time
-      this.angleProperty = new Property( 0 ); // angle for OSCILLATE/PULSE mode
-      this.pulsePendingProperty = new Property( false ); // whether a pulse will start at the next proper model step
-      this.pulseProperty = new Property( false ); // 'pulse' mode pulse active
-
-      this.stopwatch = new Stopwatch( {
-        position: new Vector2( 550, 330 ) // position timer
+      // @public {Property.<number>}
+      this.tensionProperty = new NumberProperty( 2, {
+        range: new Range( 0, 2 )
       } );
-      this.pulseSignProperty = new Property( 1 ); // sign [-1, 1] for pulse mode
-      this.wrenchArrowsVisibleProperty = new Property( true );
+
+      // @public {Property.<number>}
+      this.dampingProperty = new NumberProperty( 20, {
+        range: new Range( 0, 100 )
+      } );
+
+      // @public {Property.<number>}
+      this.frequencyProperty = new NumberProperty( 1.50, {
+        range: new Range( 0, 3 )
+      } );
+
+      // @public {Property.<number>}
+      this.pulseWidthProperty = new NumberProperty( 0.5, {
+        range: new Range( 0, 1 )
+      } );
+
+      // @public {Property.<number>}
+      this.amplitudeProperty = new NumberProperty( 0.75, {
+        range: new Range( 0, 1.5 )
+      } );
+
+      // @public {Property.<number>}
+      this.lastDtProperty = new NumberProperty( 0.03 );
+
+      // @public {Property.<number>} - Base time??
+      this.timeProperty = new NumberProperty( 0 );
+
+      // @public {Property.<number>} - Angle for OSCILLATE/PULSE mode
+      this.angleProperty = new NumberProperty( 0 );
+
+      // @public {Property.<boolean>} - Whether a pulse will start at the next proper model step
+      this.pulsePendingProperty = new BooleanProperty( false );
+
+      // @public {Property.<number>} - sign [-1, 1] for pulse mode
+      this.pulseSignProperty = new NumberProperty( 1 );
+
+      // @public {Property.<boolean>} - Whether a pulse is currently active
+      this.pulseProperty = new BooleanProperty( false );
+
+      // @public {Stopwatch}
+      this.stopwatch = new Stopwatch( {
+        position: new Vector2( 550, 330 )
+      } );
 
       // @public - events emitted by instances of this type
-      this.yNowChanged = new Emitter();
+      this.yNowChangedEmitter = new Emitter();
 
       this.nextLeftY = 0; // used to interpolate the left-most y value of the string while the wrench is moved in manual mode, for low-FPS browsers
       this.nSegs = NUMBER_OF_SEGMENTS;
@@ -103,8 +138,9 @@ define( require => {
       }
       this.lastDtProperty.value = dt;
 
-      if ( this.playProperty.value ) {
+      if ( this.isPlayingProperty.value ) {
         this.stepDt += dt;
+
         //limit min dt
         if ( this.stepDt >= fixDt ) {
           this.manualStep( this.stepDt );
@@ -248,7 +284,7 @@ define( require => {
         // sanity check for our yNow
         // this.yNow[0] = this.nextLeftY;
       }
-      this.yNowChanged.emit();
+      this.yNowChangedEmitter.emit();
     }
 
     getRingY() {
@@ -260,7 +296,7 @@ define( require => {
       this.yNow[ LAST_INDEX ] = 0;
       this.yDraw[ LAST_INDEX ] = 0;
 
-      this.yNowChanged.emit();
+      this.yNowChangedEmitter.emit();
     }
 
     /**
@@ -292,7 +328,7 @@ define( require => {
       }
 
       this.nextLeftY = 0;
-      this.yNowChanged.emit();
+      this.yNowChangedEmitter.emit();
     }
 
     /**
@@ -311,7 +347,7 @@ define( require => {
       this.frequencyProperty.reset();
       this.pulseWidthProperty.reset();
       this.amplitudeProperty.reset();
-      this.playProperty.reset();
+      this.isPlayingProperty.reset();
       this.lastDtProperty.reset();
       this.horizontalRulerPositionProperty.reset();
       this.verticalRulerPositionProperty.reset();

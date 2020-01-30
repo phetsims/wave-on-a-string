@@ -150,8 +150,8 @@ define( require => {
 
       wrench.addInputListener( Constants.dragAndDropHandler( wrench, point => {
         model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
-        model.playProperty.value = true;
-        model.yNowChanged.emit();
+        model.isPlayingProperty.value = true;
+        model.yNowChangedEmitter.emit();
       }, function endCallback( event, trail ) {
         if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
           model.wrenchArrowsVisibleProperty.value = false;
@@ -183,7 +183,7 @@ define( require => {
       }
 
       let dirty = true;
-      model.yNowChanged.addListener( () => {
+      model.yNowChangedEmitter.addListener( () => {
         dirty = true;
       } );
       frameEmitter.addListener( () => {

@@ -57,7 +57,7 @@ define( require => {
       this.mutate( options );
 
       let dirty = true;
-      model.yNowChanged.addListener( () => {
+      model.yNowChangedEmitter.addListener( () => {
         dirty = true;
       } );
 
