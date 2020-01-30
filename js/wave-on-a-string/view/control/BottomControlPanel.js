@@ -16,12 +16,12 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Slider = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/slider/Slider' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Utils = require( 'DOT/Utils' );
   const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
+  const WOASSlider = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASSlider' );
 
   // strings
   const amplitudeString = require( 'string!WAVE_ON_A_STRING/amplitude' );
@@ -66,7 +66,7 @@ define( require => {
     separator.right = checkboxGroup.left - 20;
     checkboxGroup.centerY = separator.centerY;
 
-    const tensionSlider = new Slider( {
+    const tensionSlider = new WOASSlider( {
       title: tensionString,
       property: model.tensionProperty,
       round: false,
@@ -85,7 +85,7 @@ define( require => {
 
     tensionSlider.right = separator.left - 20;
 
-    const dampingSlider = new Slider( {
+    const dampingSlider = new WOASSlider( {
       title: dampingString,
       type: 'button',
       buttonStep: 1,
@@ -97,7 +97,7 @@ define( require => {
 
     dampingSlider.right = tensionSlider.left - OFFSET;
 
-    const frequencySlider = new Slider( {
+    const frequencySlider = new WOASSlider( {
       type: 'button',
       buttonStep: 0.01,
       title: frequencyString,
@@ -109,7 +109,7 @@ define( require => {
 
     frequencySlider.right = dampingSlider.left - OFFSET;
 
-    const pulseWidthSlider = new Slider( {
+    const pulseWidthSlider = new WOASSlider( {
       type: 'button',
       buttonStep: 0.01,
       title: pulseWidthString,
@@ -121,7 +121,7 @@ define( require => {
 
     pulseWidthSlider.right = dampingSlider.left - OFFSET;
 
-    const amplitudeSlider = new Slider( {
+    const amplitudeSlider = new WOASSlider( {
       type: 'button',
       buttonStep: 0.01,
       title: amplitudeString,
