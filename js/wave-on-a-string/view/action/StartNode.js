@@ -1,7 +1,7 @@
 // Copyright 2013-2019, University of Colorado Boulder
 
 /**
- * start object view
+ * Left-side "start" view (wrench/oscillator/pulse)
  *
  * @author Anton Ulyanov (Mlearner)
  */
@@ -16,7 +16,6 @@ define( require => {
   const Color = require( 'SCENERY/util/Color' );
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Matrix3 = require( 'DOT/Matrix3' );
@@ -31,188 +30,199 @@ define( require => {
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
 
+  // images
   const wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 
-  function StartNode( model, frame, options ) {
-    options = merge( { layerSplit: true }, options );
+  class StartNode extends Node {
+    /**
+     * @param {WOASModel} model
+     * @param {Emitter} frameEmitter
+     * @param {Object} [options]
+     */
+    constructor( model, frameEmitter, options ) {
+      options = merge( {
+        layerSplit: true
+      }, options );
 
-    const postNodeHeight = 158;
-    const postScale = 3;
+      const postNodeHeight = 158;
+      const postScale = 3;
 
-    Node.call( this );
-    const self = this;
+      super();
 
-    /*---------------------------------------------------------------------------*
-     * Oscillation wheel
-     *----------------------------------------------------------------------------*/
-    const wheelRadius = 29.5;
-    let wheel = new Circle( wheelRadius, {
-      stroke: '#333',
-      lineWidth: 1.5,
-      fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(215,210,210)' ).addColorStop( 1, 'rgb(215,210,210)' )
-    } );
+      /*---------------------------------------------------------------------------*
+       * Oscillation wheel
+       *----------------------------------------------------------------------------*/
+      const wheelRadius = 29.5;
+      let wheel = new Circle( wheelRadius, {
+        stroke: '#333',
+        lineWidth: 1.5,
+        fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(215,210,210)' ).addColorStop( 1, 'rgb(215,210,210)' )
+      } );
 
-    const innerWheelRadius = 4.8;
-    wheel.addChild( new Circle( innerWheelRadius, {
-      stroke: '#333',
-      lineWidth: 1.5,
-      fill: '#fff'
-    } ) );
-    wheel.addChild( new Line( -innerWheelRadius, 0, innerWheelRadius, 0, { stroke: '#333', lineWidth: 1.5 } ) );
-    wheel.addChild( new Circle( innerWheelRadius, {
-      x: innerWheelRadius * 1.5 - wheelRadius,
-      stroke: '#333',
-      lineWidth: 0.5,
-      fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#555' ).addColorStop( 1, '#555' )
-    } ) );
+      const innerWheelRadius = 4.8;
+      wheel.addChild( new Circle( innerWheelRadius, {
+        stroke: '#333',
+        lineWidth: 1.5,
+        fill: '#fff'
+      } ) );
+      wheel.addChild( new Line( -innerWheelRadius, 0, innerWheelRadius, 0, { stroke: '#333', lineWidth: 1.5 } ) );
+      wheel.addChild( new Circle( innerWheelRadius, {
+        x: innerWheelRadius * 1.5 - wheelRadius,
+        stroke: '#333',
+        lineWidth: 0.5,
+        fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#555' ).addColorStop( 1, '#555' )
+      } ) );
 
-    // toImage* style conversion of the wheel if necessary for performance
-    const wheelImageScale = 3;
-    wheel.scale( wheelImageScale );
-    const wheelSize = Math.ceil( wheel.width / 2 ) + 2;
-    wheel = wheel.toDataURLNodeSynchronous( wheelSize, wheelSize, 2 * wheelSize, 2 * wheelSize );
-    if ( platform.firefox ) {
-      wheel.renderer = 'canvas';
-    }
+      // toImage* style conversion of the wheel if necessary for performance
+      const wheelImageScale = 3;
+      wheel.scale( wheelImageScale );
+      const wheelSize = Math.ceil( wheel.width / 2 ) + 2;
+      wheel = wheel.toDataURLNodeSynchronous( wheelSize, wheelSize, 2 * wheelSize, 2 * wheelSize );
+      if ( platform.firefox ) {
+        wheel.renderer = 'canvas';
+      }
 
-    /*---------------------------------------------------------------------------*
-     * Wrench
-     *----------------------------------------------------------------------------*/
-    const wrenchImageNode = new Image( wrenchImage, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
-    const wrenchArrowOptions = {
-      fill: 'hsl(210,90%,60%)',
-      tailWidth: 10,
-      headWidth: 22,
-      headHeight: 18
-    };
-    const wrenchArrowXOffset = 8;
-    const wrenchArrowYOffset = 10;
-    const wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
-      wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
-    const wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
-      wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
-    const wrench = new Node( {
-      children: [
-        wrenchImageNode,
-        wrenchTopArrow,
-        wrenchBottomArrow
-      ], cursor: 'pointer'
-    } );
+      /*---------------------------------------------------------------------------*
+       * Wrench
+       *----------------------------------------------------------------------------*/
+      const wrenchImageNode = new Image( wrenchImage, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
+      const wrenchArrowOptions = {
+        fill: 'hsl(210,90%,60%)',
+        tailWidth: 10,
+        headWidth: 22,
+        headHeight: 18
+      };
+      const wrenchArrowXOffset = 8;
+      const wrenchArrowYOffset = 10;
+      const wrenchTopArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - wrenchArrowYOffset,
+        wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
+      const wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
+        wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
+      const wrench = new Node( {
+        children: [
+          wrenchImageNode,
+          wrenchTopArrow,
+          wrenchBottomArrow
+        ], cursor: 'pointer'
+      } );
 
-    wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
-    wrenchBottomArrow.touchArea = wrenchBottomArrow.localBounds.dilated( 6 );
-    wrench.touchArea = Shape.bounds( wrenchImageNode.bounds.dilated( Constants.dilatedTouchArea ) );
-    wrench.mouseArea = Shape.bounds( wrenchImageNode.bounds );
+      wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
+      wrenchBottomArrow.touchArea = wrenchBottomArrow.localBounds.dilated( 6 );
+      wrench.touchArea = Shape.bounds( wrenchImageNode.bounds.dilated( Constants.dilatedTouchArea ) );
+      wrench.mouseArea = Shape.bounds( wrenchImageNode.bounds );
 
 
-    /*---------------------------------------------------------------------------*
-     * Post
-     *----------------------------------------------------------------------------*/
-    let post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
-      stroke: '#000',
-      fill: Constants.postGradient
-    } );
+      /*---------------------------------------------------------------------------*
+       * Post
+       *----------------------------------------------------------------------------*/
+      let post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
+        stroke: '#000',
+        fill: Constants.postGradient
+      } );
 
-    /*---------------------------------------------------------------------------*
-     * Piston Box
-     *----------------------------------------------------------------------------*/
-    const pistonBox = new ShadedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
-      baseColor: new Color( 200, 200, 200 ),
-      lightFactor: 0.5,
-      lighterFactor: 0.1,
-      darkFactor: 0.5,
-      darkerFactor: 0.1,
-      cornerRadius: 6
-    } );
+      /*---------------------------------------------------------------------------*
+       * Piston Box
+       *----------------------------------------------------------------------------*/
+      const pistonBox = new ShadedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
+        baseColor: new Color( 200, 200, 200 ),
+        lightFactor: 0.5,
+        lighterFactor: 0.1,
+        darkFactor: 0.5,
+        darkerFactor: 0.1,
+        cornerRadius: 6
+      } );
 
-    pistonBox.addChild( new PulseButton( model, { center: pistonBox.center } ) );
+      pistonBox.addChild( new PulseButton( model, { center: pistonBox.center } ) );
 
-    // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
-    const postCache = new Node( { scale: 1 / postScale } );
-    new Node( { children: [ post ], scale: postScale } ).toImageNodeAsynchronous( function( image ) {
-      postCache.addChild( image );
-    } );
-    post = new Node( { children: [ postCache ] } );
+      // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
+      const postCache = new Node( { scale: 1 / postScale } );
+      new Node( { children: [ post ], scale: postScale } ).toImageNodeAsynchronous( image => {
+        postCache.addChild( image );
+      } );
+      post = new Node( { children: [ postCache ] } );
 
-    self.addChild( post );
-    self.addChild( pistonBox );
-    self.addChild( wrench );
-    self.addChild( new Node( { children: [ wheel ], translation: Constants.offsetWheel } ) );
+      this.children = [
+        post,
+        pistonBox,
+        wrench,
+        new Node( { children: [ wheel ], translation: Constants.offsetWheel } )
+      ];
 
-    wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
-      model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
-      model.playProperty.value = true;
-      model.yNowChanged.emit();
-    }, function endCallback( event, trail ) {
-      if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
+      wrench.addInputListener( Constants.dragAndDropHandler( wrench, point => {
+        model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
+        model.playProperty.value = true;
+        model.yNowChanged.emit();
+      }, function endCallback( event, trail ) {
+        if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
+          model.wrenchArrowsVisibleProperty.value = false;
+        }
+      }, function endCallback( event, trail ) {
         model.wrenchArrowsVisibleProperty.value = false;
-      }
-    }, function endCallback( event, trail ) {
-      model.wrenchArrowsVisibleProperty.value = false;
-    } ) );
-    model.wrenchArrowsVisibleProperty.link( function( value ) {
-      wrenchTopArrow.visible = value;
-      wrenchBottomArrow.visible = value;
-    } );
+      } ) );
+      model.wrenchArrowsVisibleProperty.link( visible => {
+        wrenchTopArrow.visible = visible;
+        wrenchBottomArrow.visible = visible;
+      } );
 
-    self.mutate( options );
-    function updateKey() {
-      if ( wrench.isVisible() ) {
-        wrench.y = model.yNow[ 0 ];
+      this.mutate( options );
+
+      function updateKey() {
+        if ( wrench.isVisible() ) {
+          wrench.y = model.yNow[ 0 ];
+        }
       }
+
+      function updatePost() {
+        const y = model.yNow[ 0 ];
+        if ( post.isVisible() ) {
+          // TODO: reduce garbage allocation here
+          post.setMatrix( Matrix3.createFromPool( 1, 0, 0,
+            0, ( Constants.offsetWheel.y - (y + 7) ) / postNodeHeight, y + 7,
+            0, 0, 1 ) );
+        }
+      }
+
+      let dirty = true;
+      model.yNowChanged.addListener( () => {
+        dirty = true;
+      } );
+      frameEmitter.addListener( () => {
+        if ( dirty ) {
+          updateKey();
+          updatePost();
+          dirty = false;
+        }
+      } );
+
+      // workaround for image not being perfectly centered
+      // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
+
+      const wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
+      model.angleProperty.link( function updateWheel( value ) {
+        // wheel.rotation = value;
+        // wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
+        wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
+      } );
+      model.modeProperty.link( function updateVisible( value ) {
+        const wrenchIsVisible = value === WOASModel.Mode.MANUAL;
+        if ( wrench.isVisible() !== wrenchIsVisible ) {
+          wrench.setVisible( wrenchIsVisible );
+
+          updateKey();
+        }
+
+        const postIsVisible = value !== WOASModel.Mode.MANUAL;
+        if ( post.isVisible() !== postIsVisible ) {
+          post.setVisible( postIsVisible );
+
+          updatePost();
+        }
+
+        wheel.setVisible( value === WOASModel.Mode.OSCILLATE );
+        pistonBox.setVisible( value === WOASModel.Mode.PULSE );
+      } );
     }
-
-    function updatePost() {
-      const y = model.yNow[ 0 ];
-      if ( post.isVisible() ) {
-        // TODO: reduce garbage allocation here
-        post.setMatrix( Matrix3.createFromPool( 1, 0, 0,
-          0, ( Constants.offsetWheel.y - (y + 7) ) / postNodeHeight, y + 7,
-          0, 0, 1 ) );
-      }
-    }
-
-    let dirty = true;
-    model.yNowChanged.addListener( function() { dirty = true; } );
-    frame.addListener( function() {
-      if ( dirty ) {
-        updateKey();
-        updatePost();
-        dirty = false;
-      }
-    } );
-
-    // workaround for image not being perfectly centered
-    // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
-
-    const wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
-    model.angleProperty.link( function updateWheel( value ) {
-      // wheel.rotation = value;
-      // wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
-      wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
-    } );
-    model.modeProperty.link( function updateVisible( value ) {
-      const wrenchIsVisible = value === WOASModel.Mode.MANUAL;
-      if ( wrench.isVisible() !== wrenchIsVisible ) {
-        wrench.setVisible( wrenchIsVisible );
-
-        updateKey();
-      }
-
-      const postIsVisible = value !== WOASModel.Mode.MANUAL;
-      if ( post.isVisible() !== postIsVisible ) {
-        post.setVisible( postIsVisible );
-
-        updatePost();
-      }
-
-      wheel.setVisible( value === WOASModel.Mode.OSCILLATE );
-      pistonBox.setVisible( value === WOASModel.Mode.PULSE );
-    } );
   }
 
-  waveOnAString.register( 'StartNode', StartNode );
-
-  inherit( Node, StartNode );
-  return StartNode;
+  return waveOnAString.register( 'StartNode', StartNode );
 } );

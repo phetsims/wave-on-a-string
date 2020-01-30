@@ -29,7 +29,7 @@ define( require => {
     }
   };
 
-  SimLauncher.launch( function() {
+  SimLauncher.launch( () => {
     //Create and start the sim
     new Sim( waveOnAStringTitleString, [
       new WOASScreen( Tandem.ROOT.createTandem( 'waveOnAStringScreen' ) )

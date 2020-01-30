@@ -43,12 +43,12 @@ define( require => {
     const limeBead = new Circle( options.radius, { fill: 'lime', stroke: 'black', lineWidth: 0.5, children: [ highlightCircle ], scale: scale } );
 
     let redNode;
-    redBead.toDataURL( function( url, x, y ) {
+    redBead.toDataURL( ( url, x, y ) => {
       redNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
     let limeNode;
-    limeBead.toDataURL( function( url, x, y ) {
+    limeBead.toDataURL( ( url, x, y ) => {
       limeNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
@@ -77,8 +77,10 @@ define( require => {
     }
 
     let dirty = true;
-    model.yNowChanged.addListener( function() { dirty = true; } );
-    frameEmitter.addListener( function() {
+    model.yNowChanged.addListener( () => {
+      dirty = true;
+    } );
+    frameEmitter.addListener( () => {
       if ( dirty ) {
         updateTheString();
         dirty = false;

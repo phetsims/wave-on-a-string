@@ -16,7 +16,6 @@ define( require => {
   const Emitter = require( 'AXON/Emitter' );
   const EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/EndNode' );
   const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -49,181 +48,190 @@ define( require => {
   const speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
   const unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
 
-  function WOASView( model ) {
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+  class WOASView extends ScreenView {
+    /**
+     * @param {WOASModel} model
+     */
+    constructor( model ) {
+      super( {
+        layoutBounds: new Bounds2( 0, 0, 768, 504 )
+      } );
 
-    this.frameEmitter = new Emitter();
+      // @private {Emitter} - Fired when a view frame occurs
+      this.frameEmitter = new Emitter();
 
-    const centerControlX = Constants.viewSize.width / 2;
-    const centerControlY = Constants.viewSize.height - 131;
+      const centerControlX = Constants.viewSize.width / 2;
+      const centerControlY = Constants.viewSize.height - 131;
 
-    let typeRadio;
-    let endTypeRadio;
+      let typeRadio;
+      let endTypeRadio;
 
-    const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-    const rulerH = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
-    const rulerV = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( function( n ) { return n + ''; } ), unitCmString, rulerOptions );
-    rulerV.rotate( -Math.PI / 2 );
-    this.addChild( rulerH );
-    this.addChild( rulerV );
+      const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
+      const rulerH = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, rulerOptions );
+      const rulerV = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => n + '' ), unitCmString, rulerOptions );
+      rulerV.rotate( -Math.PI / 2 );
+      this.addChild( rulerH );
+      this.addChild( rulerV );
 
-    model.rulersProperty.link( function updateRulersVisible( value ) {
-      rulerH.setVisible( value );
-      rulerV.setVisible( value );
-    } );
-    model.rulerLocHProperty.link( function updateRulerHLocation( value ) {
-      rulerH.translation = value;
-    } );
-    model.rulerLocVProperty.link( function updateRulerVLocation( value ) {
-      rulerV.translation = value;
-    } );
-    Constants.boundedDragHandler( rulerV, model.rulerLocVProperty, 30 );
-    Constants.boundedDragHandler( rulerH, model.rulerLocHProperty, 30 );
+      model.rulersVisibleProperty.link( rulersVisible => {
+        rulerH.setVisible( rulersVisible );
+        rulerV.setVisible( rulersVisible );
+      } );
+      model.horizontalRulerPositionProperty.link( position => {
+        rulerH.translation = position;
+      } );
+      model.verticalRulerPositionProperty.link( position => {
+        rulerV.translation = position;
+      } );
+      Constants.boundedDragHandler( rulerV, model.verticalRulerPositionProperty, 30 );
+      Constants.boundedDragHandler( rulerH, model.horizontalRulerPositionProperty, 30 );
 
-    this.addChild( typeRadio = new RadioGroup( model.modeProperty, {
-      radio: [
-        WOASModel.Mode.MANUAL,
-        WOASModel.Mode.OSCILLATE,
-        WOASModel.Mode.PULSE
-      ],
-      text: [ manualString, oscillateString, pulseString ],
-      x: 5,
-      y: 5
-    } ) );
-    this.addChild( new RestartButton( model.manualRestart.bind( model ), {
-      x: typeRadio.right + 10,
-      y: 5
-    } ) );
-    this.addChild( endTypeRadio = new RadioGroup( model.endTypeProperty, {
-      radio: [
-        WOASModel.EndType.FIXED_END,
-        WOASModel.EndType.LOOSE_END,
-        WOASModel.EndType.NO_END
-      ],
-      text: [ fixedEndString, looseEndString, noEndString ],
-      x: Constants.viewSize.width - 100,
-      y: 5
-    } ) );
-    endTypeRadio.right = Constants.viewSize.width - 5;
-    this.addChild( new RadioGroup( model.speedProperty, {
-      radio: [
-        0.25,
-        1
-      ],
-      text: [ speedSlowString, speedNormalString ],
-      omitPanel: true,
-      right: centerControlX - 30,
-      centerY: centerControlY
-    } ) );
+      this.addChild( typeRadio = new RadioGroup( model.modeProperty, {
+        radio: [
+          WOASModel.Mode.MANUAL,
+          WOASModel.Mode.OSCILLATE,
+          WOASModel.Mode.PULSE
+        ],
+        text: [ manualString, oscillateString, pulseString ],
+        x: 5,
+        y: 5
+      } ) );
+      this.addChild( new RestartButton( model.manualRestart.bind( model ), {
+        x: typeRadio.right + 10,
+        y: 5
+      } ) );
+      this.addChild( endTypeRadio = new RadioGroup( model.endTypeProperty, {
+        radio: [
+          WOASModel.EndType.FIXED_END,
+          WOASModel.EndType.LOOSE_END,
+          WOASModel.EndType.NO_END
+        ],
+        text: [ fixedEndString, looseEndString, noEndString ],
+        x: Constants.viewSize.width - 100,
+        y: 5
+      } ) );
+      endTypeRadio.right = Constants.viewSize.width - 5;
+      this.addChild( new RadioGroup( model.speedProperty, {
+        radio: [
+          0.25,
+          1
+        ],
+        text: [ speedSlowString, speedNormalString ],
+        omitPanel: true,
+        right: centerControlX - 30,
+        centerY: centerControlY
+      } ) );
 
-    const playPauseButtonOptions = {
-      upFill: Constants.blueUpColor,
-      overFill: Constants.blueOverColor,
-      disabledFill: Constants.blueDisabledColor,
-      downFill: Constants.blueDownColor,
-      backgroundGradientColorStop0: Constants.buttonBorder0,
-      backgroundGradientColorStop1: Constants.buttonBorder1,
-      innerButtonLineWidth: 1
-    };
-    const playPauseButton = new PlayPauseButton( model.playProperty, {
-      x: centerControlX + 45,
-      centerY: centerControlY,
-      scale: 0.6,
-      scaleFactorWhenPaused: 1.25,
-      touchAreaDilation: 12,
-      pauseOptions: playPauseButtonOptions,
-      playOptions: playPauseButtonOptions
-    } );
-    this.addChild( playPauseButton );
+      const playPauseButtonOptions = {
+        upFill: Constants.blueUpColor,
+        overFill: Constants.blueOverColor,
+        disabledFill: Constants.blueDisabledColor,
+        downFill: Constants.blueDownColor,
+        backgroundGradientColorStop0: Constants.buttonBorder0,
+        backgroundGradientColorStop1: Constants.buttonBorder1,
+        innerButtonLineWidth: 1
+      };
+      const playPauseButton = new PlayPauseButton( model.playProperty, {
+        x: centerControlX + 45,
+        centerY: centerControlY,
+        scale: 0.6,
+        scaleFactorWhenPaused: 1.25,
+        touchAreaDilation: 12,
+        pauseOptions: playPauseButtonOptions,
+        playOptions: playPauseButtonOptions
+      } );
+      this.addChild( playPauseButton );
 
-    this.addChild( new StepForwardButton( {
-      isPlayingProperty: model.playProperty,
-      listener: model.manualStep.bind( model ),
-      x: centerControlX + 94,
-      centerY: centerControlY,
-      scale: 0.6,
-      touchAreaDilation: 12,
-      upFill: Constants.blueUpColor,
-      overFill: Constants.blueOverColor,
-      disabledFill: Constants.blueDisabledColor,
-      downFill: Constants.blueDownColor,
-      backgroundGradientColorStop0: Constants.buttonBorder0,
-      backgroundGradientColorStop1: Constants.buttonBorder1
-    } ) );
+      this.addChild( new StepForwardButton( {
+        isPlayingProperty: model.playProperty,
+        listener: model.manualStep.bind( model ),
+        x: centerControlX + 94,
+        centerY: centerControlY,
+        scale: 0.6,
+        touchAreaDilation: 12,
+        upFill: Constants.blueUpColor,
+        overFill: Constants.blueOverColor,
+        disabledFill: Constants.blueDisabledColor,
+        downFill: Constants.blueDownColor,
+        backgroundGradientColorStop0: Constants.buttonBorder0,
+        backgroundGradientColorStop1: Constants.buttonBorder1
+      } ) );
 
-    const resetAllButton = new ResetAllButton( {
-      listener: function() {
-        model.reset();
-      },
-      right: this.layoutBounds.maxX - 10,
-      bottom: this.layoutBounds.maxY - 10
-    } );
-    resetAllButton.scale( 0.924 );
-    this.addChild( resetAllButton );
+      const resetAllButton = new ResetAllButton( {
+        listener: () => model.reset(),
+        right: this.layoutBounds.maxX - 10,
+        bottom: this.layoutBounds.maxY - 10
+      } );
+      resetAllButton.scale( 0.924 );
+      this.addChild( resetAllButton );
 
-    const bottomControlPanel = new BottomControlPanel( model );
-    this.addChild( bottomControlPanel );
+      const bottomControlPanel = new BottomControlPanel( model );
+      this.addChild( bottomControlPanel );
 
-    bottomControlPanel.right = resetAllButton.left - 10;
-    bottomControlPanel.bottom = resetAllButton.bottom;
-    /*---------------------------------------------------------------------------*
-     * StopwatchNode
-     *----------------------------------------------------------------------------*/
-    const stopwatchNode = new StopwatchNode( model.stopwatch, {
-      visibleBoundsProperty: this.visibleBoundsProperty
-    } );
-    stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
-    this.addChild( stopwatchNode );
-    model.timerProperty.link( function updateVisible( value ) {
-      stopwatchNode.setVisible( value );
-    } );
-    let windowImage;
-    //center line
-    this.addChild( new Line( 0, 0, 605, 0, {
-      stroke: '#FFA91D',
-      lineDash: [ 8, 5 ],
-      lineWidth: 2,
-      x: Constants.startTheStringNode,
-      y: Constants.yTheStringNode
-    } ) );
-    const endNode = new EndNode( model, this.frameEmitter, {
-      x: Constants.endTheStringNode,
-      y: Constants.yTheStringNode
-    } );
-    endNode.windowNode.x += Constants.endTheStringNode;
-    endNode.windowNode.y += Constants.yTheStringNode;
-    this.addChild( endNode.windowNode );
-    this.addChild( new ReferenceLine( model ) );
-    this.addChild( endNode );
-    this.addChild( new TheStringNode( model, this.frameEmitter, {
-      x: Constants.startTheStringNode,
-      y: Constants.yTheStringNode,
-      radius: Constants.segmentTheStringNodeRadius
-    } ) );
-    this.addChild( new StartNode( model, this.frameEmitter, {
-      x: Constants.startTheStringNode,
-      y: Constants.yTheStringNode,
-      range: Constants.yWrenchRange
-    } ) );
-    this.addChild( windowImage = new Node( {
-      children: [ new Image( windowEdgeImage, {
-        left: Constants.windowXOffset - 4 + Constants.windowShift,
-        centerY: 0,
-        scale: Constants.windowScale
-      } ) ], x: Constants.endTheStringNode, y: Constants.yTheStringNode
-    } ) );
+      bottomControlPanel.right = resetAllButton.left - 10;
+      bottomControlPanel.bottom = resetAllButton.bottom;
+      /*---------------------------------------------------------------------------*
+       * StopwatchNode
+       *----------------------------------------------------------------------------*/
+      const stopwatchNode = new StopwatchNode( model.stopwatch, {
+        visibleBoundsProperty: this.visibleBoundsProperty
+      } );
+      stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
+      this.addChild( stopwatchNode );
+      model.timerVisibleProperty.link( visible => {
+        stopwatchNode.visible = visible;
+      } );
+      let windowImage;
+      //center line
+      this.addChild( new Line( 0, 0, 605, 0, {
+        stroke: '#FFA91D',
+        lineDash: [ 8, 5 ],
+        lineWidth: 2,
+        x: Constants.startTheStringNode,
+        y: Constants.yTheStringNode
+      } ) );
+      const endNode = new EndNode( model, this.frameEmitter, {
+        x: Constants.endTheStringNode,
+        y: Constants.yTheStringNode
+      } );
+      endNode.windowNode.x += Constants.endTheStringNode;
+      endNode.windowNode.y += Constants.yTheStringNode;
+      this.addChild( endNode.windowNode );
+      this.addChild( new ReferenceLine( model ) );
+      this.addChild( endNode );
+      this.addChild( new TheStringNode( model, this.frameEmitter, {
+        x: Constants.startTheStringNode,
+        y: Constants.yTheStringNode,
+        radius: Constants.segmentTheStringNodeRadius
+      } ) );
+      this.addChild( new StartNode( model, this.frameEmitter, {
+        x: Constants.startTheStringNode,
+        y: Constants.yTheStringNode,
+        range: Constants.yWrenchRange
+      } ) );
+      this.addChild( windowImage = new Node( {
+        children: [ new Image( windowEdgeImage, {
+          left: Constants.windowXOffset - 4 + Constants.windowShift,
+          centerY: 0,
+          scale: Constants.windowScale
+        } ) ], x: Constants.endTheStringNode, y: Constants.yTheStringNode
+      } ) );
 
-    model.endTypeProperty.link( endType => {
-      windowImage.visible = endType === WOASModel.EndType.NO_END;
-    } );
-  }
+      model.endTypeProperty.link( endType => {
+        windowImage.visible = endType === WOASModel.EndType.NO_END;
+      } );
+    }
 
-  waveOnAString.register( 'WOASView', WOASView );
-
-  inherit( ScreenView, WOASView, {
-    step: function( time ) {
+    /**
+     * Steps forward in time.
+     * @public
+     *
+     * @param {number} dt
+     */
+    step( dt ) {
       this.frameEmitter.emit();
     }
-  } );
-  return WOASView;
+  }
+
+  return waveOnAString.register( 'WOASView', WOASView );
 } );

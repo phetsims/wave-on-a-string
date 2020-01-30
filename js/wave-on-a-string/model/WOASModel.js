@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Emitter = require( 'AXON/Emitter' );
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
@@ -45,9 +46,16 @@ define( require => {
       // @public {Property.<number>} - Speed multiplier
       this.speedProperty = new NumberProperty( 1 );
 
-      this.rulersProperty = new Property( false ); // visible rulers
-      this.timerProperty = new Property( false );  // visible timer
-      this.referenceLineProperty = new Property( false ); // visible referenceLine
+      // @public {Property.<boolean>} - Visibilities
+      this.rulersVisibleProperty = new BooleanProperty( false );
+      this.timerVisibleProperty = new Property( false );
+      this.referenceLineVisibleProperty = new Property( false );
+
+      // @public {Property.<Vector2>}
+      this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( 54, 117 ) );
+      this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ) );
+      this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ) );
+
       this.tensionProperty = new Property( 2 ); // tension 0..2
       this.dampingProperty = new Property( 20 ); // dumping 0..100
       this.frequencyProperty = new Property( 1.50 ); // frequency 0.00 .. 3.00
@@ -59,9 +67,7 @@ define( require => {
       this.angleProperty = new Property( 0 ); // angle for OSCILLATE/PULSE mode
       this.pulsePendingProperty = new Property( false ); // whether a pulse will start at the next proper model step
       this.pulseProperty = new Property( false ); // 'pulse' mode pulse active
-      this.rulerLocHProperty = new Vector2Property( new Vector2( 54, 117 ) ); //position horizontal ruler
-      this.rulerLocVProperty = new Vector2Property( new Vector2( 13, 440 ) ); //position vertical ruler
-      this.referenceLineLocProperty = new Vector2Property( new Vector2( -10, 120 ) ); // position referenceLine
+
       this.stopwatch = new Stopwatch( {
         position: new Vector2( 550, 330 ) // position timer
       } );
@@ -257,23 +263,10 @@ define( require => {
       this.yNowChanged.emit();
     }
 
-    //restart button
-    manualRestart() {
-      //only soft reset
-      this.angleProperty.reset();
-      this.timeProperty.reset();
-      this.pulseProperty.reset();
-      this.pulseSignProperty.reset();
-      this.pulsePendingProperty.reset();
-      this.customDt = 0;
-      for ( let i = 0; i < this.yNow.length; i++ ) {
-        this.yDraw[ i ] = this.yNext[ i ] = this.yNow[ i ] = this.yLast[ i ] = 0;
-      }
-      this.nextLeftY = 0;
-      this.yNowChanged.emit();
-    }
-
-    //pulse button
+    /**
+     * Triggers the start of a pulse.
+     * @public
+     */
     manualPulse() {
       this.yNow[ 0 ] = 0;
       this.angleProperty.value = 0;
@@ -282,14 +275,37 @@ define( require => {
       this.pulseProperty.value = false;
     }
 
-    // all reset button
+    /**
+     * Triggers a reset (kind of a partial reset).
+     * @public
+     */
+    manualRestart() {
+      this.angleProperty.reset();
+      this.timeProperty.reset();
+      this.pulseProperty.reset();
+      this.pulseSignProperty.reset();
+      this.pulsePendingProperty.reset();
+      this.customDt = 0;
+
+      for ( let i = 0; i < this.yNow.length; i++ ) {
+        this.yDraw[ i ] = this.yNext[ i ] = this.yNow[ i ] = this.yLast[ i ] = 0;
+      }
+
+      this.nextLeftY = 0;
+      this.yNowChanged.emit();
+    }
+
+    /**
+     * Resets everything in the model.
+     * @public
+     */
     reset() {
       this.modeProperty.reset();
       this.endTypeProperty.reset();
       this.speedProperty.reset();
-      this.rulersProperty.reset();
-      this.timerProperty.reset();
-      this.referenceLineProperty.reset();
+      this.rulersVisibleProperty.reset();
+      this.timerVisibleProperty.reset();
+      this.referenceLineVisibleProperty.reset();
       this.tensionProperty.reset();
       this.dampingProperty.reset();
       this.frequencyProperty.reset();
@@ -297,15 +313,10 @@ define( require => {
       this.amplitudeProperty.reset();
       this.playProperty.reset();
       this.lastDtProperty.reset();
-      this.timeProperty.reset();
-      this.angleProperty.reset();
-      this.pulsePendingProperty.reset();
-      this.pulseProperty.reset();
-      this.rulerLocHProperty.reset();
-      this.rulerLocVProperty.reset();
-      this.referenceLineLocProperty.reset();
+      this.horizontalRulerPositionProperty.reset();
+      this.verticalRulerPositionProperty.reset();
+      this.referenceLinePositionProperty.reset();
       this.stopwatch.reset();
-      this.pulseSignProperty.reset();
       this.wrenchArrowsVisibleProperty.reset();
       this.manualRestart();
     }

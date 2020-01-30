@@ -26,7 +26,7 @@ define( require => {
       const pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
 
       super( {
-        listener: function() {
+        listener: () => {
           model.manualPulse();
           model.playProperty.value = true;
           model.yNowChanged.emit();

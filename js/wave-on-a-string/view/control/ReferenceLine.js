@@ -23,20 +23,18 @@ define( require => {
   function ReferenceLine( model ) {
     Node.call( this, { cursor: 'pointer' } );
 
-    const self = this;
-
-    self.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
+    this.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
       fill: Constants.referenceLineBlockGradient,
       scale: 0.5,
       stroke: '#000',
       lineWidth: 0.5
     } ) );
-    self.addChild( new Rectangle( 750, -10, 20, 20, {
+    this.addChild( new Rectangle( 750, -10, 20, 20, {
       fill: Constants.referenceLineBlockGradient,
       stroke: '#000',
       lineWidth: 0.5
     } ) );
-    self.addChild( new Line( 0, 0, 750, 0, merge( {
+    this.addChild( new Line( 0, 0, 750, 0, merge( {
       mouseArea: new Bounds2( 0, 0, 750, 0 ).dilated( 5 ),
       touchArea: new Bounds2( 0, 0, 750, 0 ).dilated( 10 )
     }, {
@@ -45,16 +43,17 @@ define( require => {
       lineWidth: 2
     } ) ) );
 
-    model.referenceLineProperty.link( function updateLineVisible( value ) {
-      self.setVisible( value );
+    model.referenceLineVisibleProperty.link( visible => {
+      this.visible = visible;
     } );
-    model.referenceLineLocProperty.link( function updateLineLocation( value ) {
-      self.translation = value;
+    model.referenceLinePositionProperty.link( position => {
+      this.translation = position;
     } );
-    self.touchArea = Shape.bounds( Bounds2.point( 755, 0 ).dilated( Constants.dilatedReferenceLineTouchArea ) );
-    self.mouseArea = Shape.bounds( Bounds2.point( 755, 0 ).dilatedXY( 15, 10 ) );
 
-    Constants.boundedDragHandler( self, model.referenceLineLocProperty, 30 );
+    this.touchArea = Shape.bounds( Bounds2.point( 755, 0 ).dilated( Constants.dilatedReferenceLineTouchArea ) );
+    this.mouseArea = Shape.bounds( Bounds2.point( 755, 0 ).dilatedXY( 15, 10 ) );
+
+    Constants.boundedDragHandler( this, model.referenceLinePositionProperty, 30 );
   }
 
   waveOnAString.register( 'ReferenceLine', ReferenceLine );

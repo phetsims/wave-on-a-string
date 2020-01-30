@@ -58,7 +58,7 @@ define( require => {
     Node.call( self );
     options = merge( {}, defaultOptions, options );
     if ( !options.endDrag && options.round ) {
-      options.endDrag = function() {
+      options.endDrag = () => {
         options.property.value = Utils.toFixedNumber( options.property.value, options.roundingDigits );
       };
     }
@@ -106,8 +106,8 @@ define( require => {
 
     if ( options.type === 'button' ) {
       buttonNode = new Node( { y: 25 } );
-      const buttonPropertyUpdate = function( value ) {
-        return function() {
+      const buttonPropertyUpdate = value => {
+        return () => {
           options.property.value = Math.max( Math.min( options.property.value + value, options.range.max ), options.range.min );
         };
       };

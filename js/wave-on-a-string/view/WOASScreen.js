@@ -20,8 +20,8 @@ define( require => {
    */
   function WOASScreen( tandem ) {
     Screen.call( this,
-      function() { return new WOASModel( 768, 504 ); },
-      function( model ) { return new WOASView( model ); }, {
+      () => new WOASModel( 768, 504 ),
+      model => new WOASView( model ), {
         backgroundColorProperty: new Property( '#FFFFB7' ),
         tandem: tandem
       }

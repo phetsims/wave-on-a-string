@@ -51,13 +51,13 @@ define( require => {
     };
     const checkboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( rulersString, checkboxTextOptions ),
-      property: model.rulersProperty
+      property: model.rulersVisibleProperty
     }, {
       node: new Text( timerString, checkboxTextOptions ),
-      property: model.timerProperty
+      property: model.timerVisibleProperty
     }, {
       node: new Text( referenceLineString, checkboxTextOptions ),
-      property: model.referenceLineProperty
+      property: model.referenceLineVisibleProperty
     } ] );
 
     const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
@@ -72,7 +72,7 @@ define( require => {
       range: Constants.tensionRange,
       titleVerticalOffset: 15,
       tick: { step: 0.25, minText: lowString, maxText: highString },
-      constrainValue: function( value ) {
+      constrainValue: value => {
         // logic to round the value to nearest .25 to have snap behaviour
         value = Utils.toFixedNumber( value, 2 );
         value = value * 100;
