@@ -137,7 +137,7 @@ define( require => {
 
     //self.mutate( merge( _.omit( options, Object.keys( defaultOptions ) ) ) );
 
-    options.property.link( function updateProperty( value ) {
+    options.property.link( value => {
       if ( options.type === 'button' ) {
         let text = value;
         if ( options.round && options.roundingDigits >= 0 ) {

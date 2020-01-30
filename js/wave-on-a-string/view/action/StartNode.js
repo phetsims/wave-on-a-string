@@ -152,11 +152,11 @@ define( require => {
         model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
         model.isPlayingProperty.value = true;
         model.yNowChangedEmitter.emit();
-      }, function endCallback( event, trail ) {
+      }, event => {
         if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
           model.wrenchArrowsVisibleProperty.value = false;
         }
-      }, function endCallback( event, trail ) {
+      }, event => {
         model.wrenchArrowsVisibleProperty.value = false;
       } ) );
       model.wrenchArrowsVisibleProperty.link( visible => {
@@ -166,13 +166,13 @@ define( require => {
 
       this.mutate( options );
 
-      function updateKey() {
+      const updateKey = () => {
         if ( wrench.isVisible() ) {
           wrench.y = model.yNow[ 0 ];
         }
-      }
+      };
 
-      function updatePost() {
+      const updatePost = () => {
         const y = model.yNow[ 0 ];
         if ( post.isVisible() ) {
           // TODO: reduce garbage allocation here
@@ -180,7 +180,7 @@ define( require => {
             0, ( Constants.offsetWheel.y - (y + 7) ) / postNodeHeight, y + 7,
             0, 0, 1 ) );
         }
-      }
+      };
 
       let dirty = true;
       model.yNowChangedEmitter.addListener( () => {
@@ -194,32 +194,27 @@ define( require => {
         }
       } );
 
-      // workaround for image not being perfectly centered
-      // wheel.addChild( new Circle( 29.4, { stroke: '#333', lineWidth: 1.4 } ) );
-
       const wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
-      model.angleProperty.link( function updateWheel( value ) {
-        // wheel.rotation = value;
-        // wheel.setMatrix( Matrix3.rotation2( value ) ); // doesn't need to compute current transform, or do matrix multiplication
-        wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
+      model.angleProperty.link( angle => {
+        wheel.setMatrix( Matrix3.rotation2( angle ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
       } );
-      model.modeProperty.link( function updateVisible( value ) {
-        const wrenchIsVisible = value === WOASModel.Mode.MANUAL;
+      model.modeProperty.link( mode => {
+        const wrenchIsVisible = mode === WOASModel.Mode.MANUAL;
         if ( wrench.isVisible() !== wrenchIsVisible ) {
           wrench.setVisible( wrenchIsVisible );
 
           updateKey();
         }
 
-        const postIsVisible = value !== WOASModel.Mode.MANUAL;
+        const postIsVisible = mode !== WOASModel.Mode.MANUAL;
         if ( post.isVisible() !== postIsVisible ) {
           post.setVisible( postIsVisible );
 
           updatePost();
         }
 
-        wheel.setVisible( value === WOASModel.Mode.OSCILLATE );
-        pistonBox.setVisible( value === WOASModel.Mode.PULSE );
+        wheel.setVisible( mode === WOASModel.Mode.OSCILLATE );
+        pistonBox.setVisible( mode === WOASModel.Mode.PULSE );
       } );
     }
   }

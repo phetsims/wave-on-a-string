@@ -39,6 +39,7 @@ define( require => {
   const tensionString = require( 'string!WAVE_ON_A_STRING/tension' );
   const timerString = require( 'string!WAVE_ON_A_STRING/timer' );
 
+  // constants
   const OFFSET = 35;
 
   function BottomControlPanel( model ) {
