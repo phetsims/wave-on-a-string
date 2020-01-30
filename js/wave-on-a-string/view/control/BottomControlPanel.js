@@ -1,7 +1,7 @@
 // Copyright 2013-2019, University of Colorado Boulder
 
 /**
- * buttons and model control elements view
+ * Control panel on the bottom of the screen, with many controls in it
  *
  * @author Anton Ulyanov (Mlearner)
  */
@@ -11,7 +11,6 @@ define( require => {
 
   // modules
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
@@ -42,131 +41,131 @@ define( require => {
   // constants
   const OFFSET = 35;
 
-  function BottomControlPanel( model ) {
+  class BottomControlPanel extends Node {
+    /**
+     * @param {WOASModel} model
+     */
+    constructor( model ) {
+      super( { scale: 0.7 } );
 
-    Node.call( this, { scale: 0.7 } );
+      const checkboxTextOptions = {
+        font: new PhetFont( 15 ),
+        maxWidth: 130
+      };
+      const checkboxGroup = new VerticalCheckboxGroup( [ {
+        node: new Text( rulersString, checkboxTextOptions ),
+        property: model.rulersVisibleProperty
+      }, {
+        node: new Text( timerString, checkboxTextOptions ),
+        property: model.timerVisibleProperty
+      }, {
+        node: new Text( referenceLineString, checkboxTextOptions ),
+        property: model.referenceLineVisibleProperty
+      } ] );
 
-    const checkboxTextOptions = {
-      font: new PhetFont( 15 ),
-      maxWidth: 130
-    };
-    const checkboxGroup = new VerticalCheckboxGroup( [ {
-      node: new Text( rulersString, checkboxTextOptions ),
-      property: model.rulersVisibleProperty
-    }, {
-      node: new Text( timerString, checkboxTextOptions ),
-      property: model.timerVisibleProperty
-    }, {
-      node: new Text( referenceLineString, checkboxTextOptions ),
-      property: model.referenceLineVisibleProperty
-    } ] );
+      const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 
-    const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
+      separator.right = checkboxGroup.left - 20;
+      checkboxGroup.centerY = separator.centerY;
 
-    separator.right = checkboxGroup.left - 20;
-    checkboxGroup.centerY = separator.centerY;
+      const tensionSlider = new WOASSlider( {
+        title: tensionString,
+        property: model.tensionProperty,
+        round: false,
+        range: Constants.tensionRange,
+        titleVerticalOffset: 15,
+        tick: { step: 0.25, minText: lowString, maxText: highString },
+        constrainValue: value => {
+          // logic to round the value to nearest .25 to have snap behaviour
+          value = Utils.toFixedNumber( value, 2 );
+          value = value * 100;
+          value = Utils.roundSymmetric( value / 25 ) * 25;
+          value = value / 100;
+          return value;
+        }
+      } );
 
-    const tensionSlider = new WOASSlider( {
-      title: tensionString,
-      property: model.tensionProperty,
-      round: false,
-      range: Constants.tensionRange,
-      titleVerticalOffset: 15,
-      tick: { step: 0.25, minText: lowString, maxText: highString },
-      constrainValue: value => {
-        // logic to round the value to nearest .25 to have snap behaviour
-        value = Utils.toFixedNumber( value, 2 );
-        value = value * 100;
-        value = Utils.roundSymmetric( value / 25 ) * 25;
-        value = value / 100;
-        return value;
-      }
-    } );
+      tensionSlider.right = separator.left - 20;
 
-    tensionSlider.right = separator.left - 20;
+      const dampingSlider = new WOASSlider( {
+        title: dampingString,
+        type: 'button',
+        buttonStep: 1,
+        property: model.dampingProperty,
+        patternValueUnit: patternValueUnitPercentageString,
+        roundingDigits: 0,
+        range: Constants.dampingRange
+      } );
 
-    const dampingSlider = new WOASSlider( {
-      title: dampingString,
-      type: 'button',
-      buttonStep: 1,
-      property: model.dampingProperty,
-      patternValueUnit: patternValueUnitPercentageString,
-      roundingDigits: 0,
-      range: Constants.dampingRange
-    } );
+      dampingSlider.right = tensionSlider.left - OFFSET;
 
-    dampingSlider.right = tensionSlider.left - OFFSET;
+      const frequencySlider = new WOASSlider( {
+        type: 'button',
+        buttonStep: 0.01,
+        title: frequencyString,
+        property: model.frequencyProperty,
+        patternValueUnit: patternValueUnitHzString,
+        roundingDigits: 2,
+        range: Constants.frequencyRange
+      } );
 
-    const frequencySlider = new WOASSlider( {
-      type: 'button',
-      buttonStep: 0.01,
-      title: frequencyString,
-      property: model.frequencyProperty,
-      patternValueUnit: patternValueUnitHzString,
-      roundingDigits: 2,
-      range: Constants.frequencyRange
-    } );
+      frequencySlider.right = dampingSlider.left - OFFSET;
 
-    frequencySlider.right = dampingSlider.left - OFFSET;
+      const pulseWidthSlider = new WOASSlider( {
+        type: 'button',
+        buttonStep: 0.01,
+        title: pulseWidthString,
+        property: model.pulseWidthProperty,
+        patternValueUnit: patternValueUnitSString,
+        roundingDigits: 2,
+        range: Constants.pulseWidthRange
+      } );
 
-    const pulseWidthSlider = new WOASSlider( {
-      type: 'button',
-      buttonStep: 0.01,
-      title: pulseWidthString,
-      property: model.pulseWidthProperty,
-      patternValueUnit: patternValueUnitSString,
-      roundingDigits: 2,
-      range: Constants.pulseWidthRange
-    } );
+      pulseWidthSlider.right = dampingSlider.left - OFFSET;
 
-    pulseWidthSlider.right = dampingSlider.left - OFFSET;
+      const amplitudeSlider = new WOASSlider( {
+        type: 'button',
+        buttonStep: 0.01,
+        title: amplitudeString,
+        property: model.amplitudeProperty,
+        patternValueUnit: patternValueUnitCmString,
+        roundingDigits: 2,
+        range: Constants.amplitudeRange
+      } );
 
-    const amplitudeSlider = new WOASSlider( {
-      type: 'button',
-      buttonStep: 0.01,
-      title: amplitudeString,
-      property: model.amplitudeProperty,
-      patternValueUnit: patternValueUnitCmString,
-      roundingDigits: 2,
-      range: Constants.amplitudeRange
-    } );
-
-    amplitudeSlider.right = frequencySlider.left - OFFSET;
+      amplitudeSlider.right = frequencySlider.left - OFFSET;
 
 
-    const oscillatePanel = new Panel( new Node( {
-      children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
-    } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5
-    } );
-    this.addChild( oscillatePanel );
+      const oscillatePanel = new Panel( new Node( {
+        children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
+      } ), {
+        fill: '#D9FCC5', xMargin: 15, yMargin: 5
+      } );
+      this.addChild( oscillatePanel );
 
-    const manualPanel = new Panel( new Node( {
-      children: [ dampingSlider, tensionSlider, separator, checkboxGroup ]
-    } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5
-    } );
-    this.addChild( manualPanel );
+      const manualPanel = new Panel( new Node( {
+        children: [ dampingSlider, tensionSlider, separator, checkboxGroup ]
+      } ), {
+        fill: '#D9FCC5', xMargin: 15, yMargin: 5
+      } );
+      this.addChild( manualPanel );
 
-    const pulsePanel = new Panel( new Node( {
-      children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
-    } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5
-    } );
-    this.addChild( pulsePanel );
+      const pulsePanel = new Panel( new Node( {
+        children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
+      } ), {
+        fill: '#D9FCC5', xMargin: 15, yMargin: 5
+      } );
+      this.addChild( pulsePanel );
 
-    oscillatePanel.right = manualPanel.right;
-    pulsePanel.right = manualPanel.right;
-    model.modeProperty.link( function updateBottomControlPanel( value ) {
-      oscillatePanel.setVisible( value === WOASModel.Mode.OSCILLATE );
-      manualPanel.setVisible( value === WOASModel.Mode.MANUAL );
-      pulsePanel.setVisible( value === WOASModel.Mode.PULSE );
-    } );
+      oscillatePanel.right = manualPanel.right;
+      pulsePanel.right = manualPanel.right;
+      model.modeProperty.link( function updateBottomControlPanel( value ) {
+        oscillatePanel.setVisible( value === WOASModel.Mode.OSCILLATE );
+        manualPanel.setVisible( value === WOASModel.Mode.MANUAL );
+        pulsePanel.setVisible( value === WOASModel.Mode.PULSE );
+      } );
+    }
   }
 
-  waveOnAString.register( 'BottomControlPanel', BottomControlPanel );
-
-  inherit( Node, BottomControlPanel );
-
-  return BottomControlPanel;
+  return waveOnAString.register( 'BottomControlPanel', BottomControlPanel );
 } );
