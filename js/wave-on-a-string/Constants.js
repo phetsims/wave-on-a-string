@@ -100,19 +100,21 @@ define( require => {
       },
       drag: function( event ) {
         const point = node.globalToParentPoint( event.pointer.point ).minus( clickOffset );
-        positionProperty.set( point );
+
         if ( node.right < restrictedBounds.minX ) {
-          positionProperty.set( new Vector2( positionProperty.get().x - node.right + restrictedBounds.minX, positionProperty.get().y ) );
+          point.x += -node.right + restrictedBounds.minX;
         }
         if ( node.left > restrictedBounds.maxX ) {
-          positionProperty.set( new Vector2( positionProperty.get().x - node.left + restrictedBounds.maxX, positionProperty.get().y ) );
+          point.x += -node.left + restrictedBounds.maxX;
         }
         if ( node.bottom < restrictedBounds.minY ) {
-          positionProperty.set( new Vector2( positionProperty.get().x, positionProperty.get().y - node.bottom + restrictedBounds.minY ) );
+          point.y += -node.bottom + restrictedBounds.minY;
         }
         if ( node.top > restrictedBounds.maxY ) {
-          positionProperty.set( new Vector2( positionProperty.get().x, positionProperty.get().y - node.top + restrictedBounds.maxY ) );
+          point.y += -node.top + restrictedBounds.maxY;
         }
+
+        positionProperty.value = point;
       }
     } ) );
   };

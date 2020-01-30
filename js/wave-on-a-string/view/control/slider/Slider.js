@@ -59,7 +59,7 @@ define( require => {
     options = merge( {}, defaultOptions, options );
     if ( !options.endDrag && options.round ) {
       options.endDrag = function() {
-        options.property.set( Utils.toFixedNumber( options.property.get(), options.roundingDigits ) );
+        options.property.value = Utils.toFixedNumber( options.property.value, options.roundingDigits );
       };
     }
 
@@ -108,7 +108,7 @@ define( require => {
       buttonNode = new Node( { y: 25 } );
       const buttonPropertyUpdate = function( value ) {
         return function() {
-          options.property.set( Math.max( Math.min( options.property.get() + value, options.range.max ), options.range.min ) );
+          options.property.value = Math.max( Math.min( options.property.value + value, options.range.max ), options.range.min );
         };
       };
       buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {
@@ -141,7 +141,7 @@ define( require => {
       if ( options.type === 'button' ) {
         let text = value;
         if ( options.round && options.roundingDigits >= 0 ) {
-          text = Utils.toFixed( options.property.get(), options.roundingDigits );
+          text = Utils.toFixed( options.property.value, options.roundingDigits );
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
         valueLabel.centerX = self.width / 2;

@@ -92,12 +92,12 @@ define( require => {
       const fixDt = 1 / FRAMES_PER_SECOND;
 
       // limit changes dt
-      if ( Math.abs( dt - this.lastDtProperty.get() ) > this.lastDtProperty.get() * 0.3 ) {
-        dt = this.lastDtProperty.get() + ( ( dt - this.lastDtProperty.get() ) < 0 ? -1 : 1 ) * this.lastDtProperty.get() * 0.3;
+      if ( Math.abs( dt - this.lastDtProperty.value ) > this.lastDtProperty.value * 0.3 ) {
+        dt = this.lastDtProperty.value + ( ( dt - this.lastDtProperty.value ) < 0 ? -1 : 1 ) * this.lastDtProperty.value * 0.3;
       }
-      this.lastDtProperty.set( dt );
+      this.lastDtProperty.value = dt;
 
-      if ( this.playProperty.get() ) {
+      if ( this.playProperty.value ) {
         this.stepDt += dt;
         //limit min dt
         if ( this.stepDt >= fixDt ) {
@@ -113,7 +113,7 @@ define( require => {
       const dt = 1;
       const v = 1;
       const dx = dt * v;
-      const b = this.dampingProperty.get() * 0.002;
+      const b = this.dampingProperty.value * 0.002;
       this.beta = b * dt / 2;
       this.alpha = v * dt / dx;
 
@@ -187,30 +187,30 @@ define( require => {
       const perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
       //dt for tension effect
-      const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.value ) );
+      const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.value * 0.4 ) * this.speedProperty.value ) );
       // limit max dt
       while ( dt >= fixDt ) {
-        this.timeProperty.set( this.timeProperty.get() + fixDt );
+        this.timeProperty.value = this.timeProperty.value + fixDt;
         this.stopwatch.step( fixDt * this.speedProperty.value );
 
         if ( this.modeProperty.value === WOASModel.Mode.OSCILLATE ) {
-          this.angleProperty.set( this.angleProperty.get() +
-                                  Math.PI * 2 * this.frequencyProperty.get() * fixDt * this.speedProperty.value );
-          this.angleProperty.set( this.angleProperty.get() % ( Math.PI * 2 ) );
-          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.get() );
+          this.angleProperty.value = this.angleProperty.value +
+                                     Math.PI * 2 * this.frequencyProperty.value * fixDt * this.speedProperty.value ;
+          this.angleProperty.value = this.angleProperty.value % ( Math.PI * 2 );
+          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.value );
         }
-        if ( this.modeProperty.get() === WOASModel.Mode.PULSE && this.pulsePendingProperty.get() ) {
-          this.pulsePendingProperty.set( false );
-          this.pulseProperty.set( true );
+        if ( this.modeProperty.value === WOASModel.Mode.PULSE && this.pulsePendingProperty.value ) {
+          this.pulsePendingProperty.value = false;
+          this.pulseProperty.value = true;
           this.yNow[ 0 ] = 0;
         }
-        if ( this.modeProperty.get() === WOASModel.Mode.PULSE && this.pulseProperty.get() ) {
-          const da = Math.PI * fixDt * this.speedProperty.value / this.pulseWidthProperty.get();
-          if ( this.angleProperty.get() + da >= Math.PI / 2 ) {
-            this.pulseSignProperty.set( -1 );
+        if ( this.modeProperty.value === WOASModel.Mode.PULSE && this.pulseProperty.value ) {
+          const da = Math.PI * fixDt * this.speedProperty.value / this.pulseWidthProperty.value;
+          if ( this.angleProperty.value + da >= Math.PI / 2 ) {
+            this.pulseSignProperty.value = -1;
           }
-          if ( this.angleProperty.get() + da * this.pulseSignProperty.get() > 0 ) {
-            this.angleProperty.set( this.angleProperty.get() + da * this.pulseSignProperty.get() );
+          if ( this.angleProperty.value + da * this.pulseSignProperty.value > 0 ) {
+            this.angleProperty.value = this.angleProperty.value + da * this.pulseSignProperty.value;
           }
           else {
             //end pulse and reset
@@ -218,14 +218,14 @@ define( require => {
             this.pulseSignProperty.reset();
             this.pulseProperty.reset();
           }
-          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * AMPLITUDE_MULTIPLIER * ( -this.angleProperty.get() / ( Math.PI / 2 ) );
+          this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * ( -this.angleProperty.value / ( Math.PI / 2 ) );
         }
-        if ( this.modeProperty.get() === WOASModel.Mode.MANUAL ) {
+        if ( this.modeProperty.value === WOASModel.Mode.MANUAL ) {
           // interpolate the yNow across steps for manual (between frames)
           this.yNow[ 0 ] += perStepDelta;
         }
-        if ( this.timeProperty.get() >= minDt ) {
-          this.timeProperty.set( this.timeProperty.get() % minDt );
+        if ( this.timeProperty.value >= minDt ) {
+          this.timeProperty.value = this.timeProperty.value % minDt;
           this.evolve();
           for ( i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
             this.yDraw[ i ] = this.yLast[ i ];
@@ -233,12 +233,12 @@ define( require => {
         }
         else {
           for ( i = 1; i < NUMBER_OF_SEGMENTS; i++ ) {
-            this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeProperty.get() / minDt ) );
+            this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeProperty.value / minDt ) );
           }
         }
         dt -= fixDt;
       }
-      if ( this.modeProperty.get() === WOASModel.Mode.MANUAL ) {
+      if ( this.modeProperty.value === WOASModel.Mode.MANUAL ) {
         // sanity check for our yNow
         // this.yNow[0] = this.nextLeftY;
       }
@@ -272,10 +272,10 @@ define( require => {
     //pulse button
     manualPulse() {
       this.yNow[ 0 ] = 0;
-      this.angleProperty.set( 0 );
-      this.pulseSignProperty.set( 1 );
-      this.pulsePendingProperty.set( true );
-      this.pulseProperty.set( false );
+      this.angleProperty.value = 0;
+      this.pulseSignProperty.value = 1;
+      this.pulsePendingProperty.value = true;
+      this.pulseProperty.value = false;
     }
 
     // all reset button

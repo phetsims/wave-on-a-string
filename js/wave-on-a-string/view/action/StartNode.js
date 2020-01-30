@@ -141,14 +141,14 @@ define( require => {
 
     wrench.addInputListener( Constants.dragAndDropHandler( wrench, function( point ) {
       model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
-      model.playProperty.set( true );
+      model.playProperty.value = true;
       model.yNowChanged.emit();
     }, function endCallback( event, trail ) {
       if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
-        model.wrenchArrowsVisibleProperty.set( false );
+        model.wrenchArrowsVisibleProperty.value = false;
       }
     }, function endCallback( event, trail ) {
-      model.wrenchArrowsVisibleProperty.set( false );
+      model.wrenchArrowsVisibleProperty.value = false;
     } ) );
     model.wrenchArrowsVisibleProperty.link( function( value ) {
       wrenchTopArrow.visible = value;
