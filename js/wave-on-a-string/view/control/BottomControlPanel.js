@@ -21,6 +21,7 @@ define( require => {
   const Utils = require( 'DOT/Utils' );
   const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
 
   // strings
   const amplitudeString = require( 'string!WAVE_ON_A_STRING/amplitude' );
@@ -156,9 +157,9 @@ define( require => {
     oscillatePanel.right = manualPanel.right;
     pulsePanel.right = manualPanel.right;
     model.modeProperty.link( function updateBottomControlPanel( value ) {
-      oscillatePanel.setVisible( value === 'oscillate' );
-      manualPanel.setVisible( value === 'manual' );
-      pulsePanel.setVisible( value === 'pulse' );
+      oscillatePanel.setVisible( value === WOASModel.Mode.OSCILLATE );
+      manualPanel.setVisible( value === WOASModel.Mode.MANUAL );
+      pulsePanel.setVisible( value === WOASModel.Mode.PULSE );
     } );
   }
 

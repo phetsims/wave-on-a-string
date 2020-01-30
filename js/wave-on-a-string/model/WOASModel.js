@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const Emitter = require( 'AXON/Emitter' );
+  const Enumeration = require( 'PHET_CORE/Enumeration' );
   const Property = require( 'AXON/Property' );
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -33,7 +34,9 @@ define( require => {
       this.yLast = new Float64Array( NUMBER_OF_SEGMENTS );
       this.yNext = new Float64Array( NUMBER_OF_SEGMENTS );
 
-      this.modeProperty = new Property( 'manual' ); // 'manual', 'oscillate', 'pulse'
+      // @public {Property.<WOASModel.Mode>}
+      this.modeProperty = new Property( WOASModel.Mode.MANUAL );
+
       this.typeEndProperty = new Property( 'fixedEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
       this.speedProperty = new Property( 1 ); // 1, 0.25
       this.rulersProperty = new Property( false ); // visible rulers
@@ -47,7 +50,7 @@ define( require => {
       this.playProperty = new Property( true ); // play/pause state
       this.lastDtProperty = new Property( 0.03 );
       this.timeProperty = new Property( 0 ); // base time
-      this.angleProperty = new Property( 0 ); // angle for 'oscillate' and 'pulse' mode
+      this.angleProperty = new Property( 0 ); // angle for OSCILLATE/PULSE mode
       this.pulsePendingProperty = new Property( false ); // whether a pulse will start at the next proper model step
       this.pulseProperty = new Property( false ); // 'pulse' mode pulse active
       this.rulerLocHProperty = new Vector2Property( new Vector2( 54, 117 ) ); //position horizontal ruler
@@ -69,7 +72,7 @@ define( require => {
       this.reset();
 
       // set the string to 0 on mode changes
-      this.modeProperty.lazyLink( this.manualRestart.bind( this ) );
+      this.modeProperty.lazyLink( () => this.manualRestart() );
     }
 
     /**
@@ -176,18 +179,18 @@ define( require => {
         this.timeProperty.set( this.timeProperty.get() + fixDt );
         this.stopwatch.step( fixDt * this.speedProperty.get() );
 
-        if ( this.modeProperty.get() === 'oscillate' ) {
+        if ( this.modeProperty.value === WOASModel.Mode.OSCILLATE ) {
           this.angleProperty.set( this.angleProperty.get() +
                                   Math.PI * 2 * this.frequencyProperty.get() * fixDt * this.speedProperty.get() );
           this.angleProperty.set( this.angleProperty.get() % ( Math.PI * 2 ) );
           this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.get() );
         }
-        if ( this.modeProperty.get() === 'pulse' && this.pulsePendingProperty.get() ) {
+        if ( this.modeProperty.get() === WOASModel.Mode.PULSE && this.pulsePendingProperty.get() ) {
           this.pulsePendingProperty.set( false );
           this.pulseProperty.set( true );
           this.yNow[ 0 ] = 0;
         }
-        if ( this.modeProperty.get() === 'pulse' && this.pulseProperty.get() ) {
+        if ( this.modeProperty.get() === WOASModel.Mode.PULSE && this.pulseProperty.get() ) {
           const da = Math.PI * fixDt * this.speedProperty.get() / this.pulseWidthProperty.get();
           if ( this.angleProperty.get() + da >= Math.PI / 2 ) {
             this.pulseSignProperty.set( -1 );
@@ -203,7 +206,7 @@ define( require => {
           }
           this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * AMPLITUDE_MULTIPLIER * ( -this.angleProperty.get() / ( Math.PI / 2 ) );
         }
-        if ( this.modeProperty.get() === 'manual' ) {
+        if ( this.modeProperty.get() === WOASModel.Mode.MANUAL ) {
           // interpolate the yNow across steps for manual (between frames)
           this.yNow[ 0 ] += perStepDelta;
         }
@@ -221,7 +224,7 @@ define( require => {
         }
         dt -= fixDt;
       }
-      if ( this.modeProperty.get() === 'manual' ) {
+      if ( this.modeProperty.get() === WOASModel.Mode.MANUAL ) {
         // sanity check for our yNow
         // this.yNow[0] = this.nextLeftY;
       }
@@ -289,6 +292,12 @@ define( require => {
       this.manualRestart();
     }
   }
+
+  WOASModel.Mode = Enumeration.byKeys( [
+    'MANUAL',
+    'OSCILLATE',
+    'PULSE'
+  ] );
 
   return waveOnAString.register( 'WOASModel', WOASModel );
 } );

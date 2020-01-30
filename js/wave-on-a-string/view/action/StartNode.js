@@ -29,6 +29,7 @@ define( require => {
   const ShadedRectangle = require( 'SCENERY_PHET/ShadedRectangle' );
   const Shape = require( 'KITE/Shape' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
 
   const wrenchImage = require( 'image!WAVE_ON_A_STRING/wrench.png' );
 
@@ -191,22 +192,22 @@ define( require => {
       wheel.setMatrix( Matrix3.rotation2( value ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.modeProperty.link( function updateVisible( value ) {
-      const wrenchIsVisible = value === 'manual';
+      const wrenchIsVisible = value === WOASModel.Mode.MANUAL;
       if ( wrench.isVisible() !== wrenchIsVisible ) {
         wrench.setVisible( wrenchIsVisible );
 
         updateKey();
       }
 
-      const postIsVisible = value !== 'manual';
+      const postIsVisible = value !== WOASModel.Mode.MANUAL;
       if ( post.isVisible() !== postIsVisible ) {
         post.setVisible( postIsVisible );
 
         updatePost();
       }
 
-      wheel.setVisible( value === 'oscillate' );
-      pistonBox.setVisible( value === 'pulse' );
+      wheel.setVisible( value === WOASModel.Mode.OSCILLATE );
+      pistonBox.setVisible( value === WOASModel.Mode.PULSE );
     } );
   }
 

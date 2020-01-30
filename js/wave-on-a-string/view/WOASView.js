@@ -29,10 +29,11 @@ define( require => {
   const ScreenView = require( 'JOIST/ScreenView' );
   const StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
   const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
-  const TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
   const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
+  const TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
   const Utils = require( 'DOT/Utils' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
 
   // images
   const windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
@@ -80,7 +81,11 @@ define( require => {
     Constants.boundedDragHandler( rulerH, model.rulerLocHProperty, 30 );
 
     this.addChild( typeRadio = new RadioGroup( model.modeProperty, {
-      radio: [ 'manual', 'oscillate', 'pulse' ],
+      radio: [
+        WOASModel.Mode.MANUAL,
+        WOASModel.Mode.OSCILLATE,
+        WOASModel.Mode.PULSE
+      ],
       text: [ manualString, oscillateString, pulseString ],
       x: 5,
       y: 5
