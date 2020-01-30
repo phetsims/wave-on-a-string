@@ -91,8 +91,12 @@ define( require => {
       y: 5
     } ) );
     this.addChild( new RestartButton( model, { x: typeRadio.right + 10, y: 5 } ) );
-    this.addChild( endTypeRadio = new RadioGroup( model.typeEndProperty, {
-      radio: [ 'fixedEnd', 'looseEnd', 'noEnd' ],
+    this.addChild( endTypeRadio = new RadioGroup( model.endTypeProperty, {
+      radio: [
+        WOASModel.EndType.FIXED_END,
+        WOASModel.EndType.LOOSE_END,
+        WOASModel.EndType.NO_END
+      ],
       text: [ fixedEndString, looseEndString, noEndString ],
       x: Constants.viewSize.width - 100,
       y: 5
@@ -203,8 +207,8 @@ define( require => {
       } ) ], x: Constants.endTheStringNode, y: Constants.yTheStringNode
     } ) );
 
-    model.typeEndProperty.link( function updateVisible( value ) {
-      windowImage.setVisible( value === 'noEnd' );
+    model.endTypeProperty.link( endType => {
+      windowImage.visible = endType === WOASModel.EndType.NO_END;
     } );
   }
 

@@ -16,6 +16,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
 
   // images
   const clampImage = require( 'image!WAVE_ON_A_STRING/clamp.png' );
@@ -62,18 +63,17 @@ define( require => {
       }
     } );
 
-    model.typeEndProperty.link( function updateVisible( value ) {
-      clamp.setVisible( value === 'fixedEnd' );
-      ring_back.setVisible( value === 'looseEnd' );
-      post.setVisible( value === 'looseEnd' );
-      ring_front.setVisible( value === 'looseEnd' );
-      windowNode.setVisible( value === 'noEnd' );
+    model.endTypeProperty.link( function updateVisible( value ) {
+      clamp.setVisible( value === WOASModel.EndType.FIXED_END );
+      ring_back.setVisible( value === WOASModel.EndType.LOOSE_END );
+      post.setVisible( value === WOASModel.EndType.LOOSE_END );
+      ring_front.setVisible( value === WOASModel.EndType.LOOSE_END );
+      windowNode.setVisible( value === WOASModel.EndType.NO_END );
 
-      if ( value === 'fixedEnd' ) {
+      if ( value === WOASModel.EndType.FIXED_END ) {
         model.zeroOutEndPoint();
       }
     } );
-
   }
 
   waveOnAString.register( 'EndNode', EndNode );

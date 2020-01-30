@@ -37,7 +37,9 @@ define( require => {
       // @public {Property.<WOASModel.Mode>}
       this.modeProperty = new Property( WOASModel.Mode.MANUAL );
 
-      this.typeEndProperty = new Property( 'fixedEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
+      // @public {Property.<WOASModel.EndType}
+      this.endTypeProperty = new Property( WOASModel.EndType.FIXED_END );
+
       this.speedProperty = new Property( 1 ); // 1, 0.25
       this.rulersProperty = new Property( false ); // visible rulers
       this.timerProperty = new Property( false );  // visible timer
@@ -111,15 +113,19 @@ define( require => {
       this.alpha = v * dt / dx;
 
       this.yNext[ 0 ] = this.yNow[ 0 ];
-      switch( this.typeEndProperty.get() ) {
-        case'looseEnd':
+
+      switch ( this.endTypeProperty.value ) {
+        case WOASModel.EndType.FIXED_END:
+          this.yNow[ LAST_INDEX ] = 0;
+          break;
+        case WOASModel.EndType.LOOSE_END:
           this.yNow[ LAST_INDEX ] = this.yNow[ NEXT_TO_LAST_INDEX ];
           break;
-        case'noEnd':
+        case WOASModel.EndType.NO_END:
           this.yNow[ LAST_INDEX ] = this.yLast[ NEXT_TO_LAST_INDEX ];
           break;
-        default: //'fixedEnd'
-          this.yNow[ LAST_INDEX ] = 0;
+        default:
+          throw new Error( `unknown end type: ${this.endTypeProperty.value}` );
       }
 
       //main formula for calculating
@@ -146,19 +152,22 @@ define( require => {
       this.yNow[ LAST_INDEX ] = oldNow;
       this.yNext[ LAST_INDEX ] = oldNext;
 
-      switch( this.typeEndProperty.value ) {
-        case 'looseEnd':
+      switch ( this.endTypeProperty.value ) {
+        case WOASModel.EndType.FIXED_END:
+          this.yLast[ LAST_INDEX ] = 0;
+          this.yNow[ LAST_INDEX ] = 0;
+          break;
+        case WOASModel.EndType.LOOSE_END:
           this.yLast[ LAST_INDEX ] = this.yNow[ LAST_INDEX ];
           this.yNow[ LAST_INDEX ] = this.yNow[ NEXT_TO_LAST_INDEX ];
           break;
-        case 'noEnd':
+        case WOASModel.EndType.NO_END:
           this.yLast[ LAST_INDEX ] = this.yNow[ LAST_INDEX ];
           this.yNow[ LAST_INDEX ] = this.yLast[ NEXT_TO_LAST_INDEX ]; // from a comment in the old model code?
           // from the Flash model: this.yNow[ LAST_INDEX ] = this.yNow[ LAST_INDEX ]; //this.yLast[ NEXT_TO_LAST_INDEX ];
           break;
-        default: // 'fixedEnd'
-          this.yLast[ LAST_INDEX ] = 0;
-          this.yNow[ LAST_INDEX ] = 0;
+        default:
+          throw new Error( `unknown end type: ${this.endTypeProperty.value}` );
       }
     }
 
@@ -267,7 +276,7 @@ define( require => {
     // all reset button
     reset() {
       this.modeProperty.reset();
-      this.typeEndProperty.reset();
+      this.endTypeProperty.reset();
       this.speedProperty.reset();
       this.rulersProperty.reset();
       this.timerProperty.reset();
@@ -293,10 +302,18 @@ define( require => {
     }
   }
 
+  // @public {Enumeration}
   WOASModel.Mode = Enumeration.byKeys( [
     'MANUAL',
     'OSCILLATE',
     'PULSE'
+  ] );
+
+  // @public {Enumeration}
+  WOASModel.EndType = Enumeration.byKeys( [
+    'FIXED_END',
+    'LOOSE_END',
+    'NO_END'
   ] );
 
   return waveOnAString.register( 'WOASModel', WOASModel );
