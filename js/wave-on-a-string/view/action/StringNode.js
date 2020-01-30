@@ -24,7 +24,7 @@ define( require => {
    * @param {frameEmitter} frame - emits an event when the animation frame changes
    * @param {Object} [options]
    */
-  function TheStringNode( model, frameEmitter, options ) {
+  function StringNode( model, frameEmitter, options ) {
     Node.call( this, { layerSplit: true } );
     let theStringShape = new Shape();
     const theStringPath = new Path( theStringShape, {
@@ -88,9 +88,9 @@ define( require => {
     } );
   }
 
-  waveOnAString.register( 'TheStringNode', TheStringNode );
+  waveOnAString.register( 'StringNode', StringNode );
 
-  inherit( Node, TheStringNode );
+  inherit( Node, StringNode );
 
-  return TheStringNode;
+  return StringNode;
 } );

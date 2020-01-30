@@ -29,7 +29,7 @@ define( require => {
   const StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StartNode' );
   const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
-  const TheStringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/TheStringNode' );
+  const StringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/action/StringNode' );
   const Utils = require( 'DOT/Utils' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
@@ -187,26 +187,26 @@ define( require => {
         stroke: '#FFA91D',
         lineDash: [ 8, 5 ],
         lineWidth: 2,
-        x: Constants.startTheStringNode,
-        y: Constants.yTheStringNode
+        x: Constants.startStringNode,
+        y: Constants.yStringNode
       } ) );
       const endNode = new EndNode( model, this.frameEmitter, {
-        x: Constants.endTheStringNode,
-        y: Constants.yTheStringNode
+        x: Constants.endStringNode,
+        y: Constants.yStringNode
       } );
-      endNode.windowNode.x += Constants.endTheStringNode;
-      endNode.windowNode.y += Constants.yTheStringNode;
+      endNode.windowNode.x += Constants.endStringNode;
+      endNode.windowNode.y += Constants.yStringNode;
       this.addChild( endNode.windowNode );
       this.addChild( new ReferenceLine( model ) );
       this.addChild( endNode );
-      this.addChild( new TheStringNode( model, this.frameEmitter, {
-        x: Constants.startTheStringNode,
-        y: Constants.yTheStringNode,
-        radius: Constants.segmentTheStringNodeRadius
+      this.addChild( new StringNode( model, this.frameEmitter, {
+        x: Constants.startStringNode,
+        y: Constants.yStringNode,
+        radius: Constants.segmentStringNodeRadius
       } ) );
       this.addChild( new StartNode( model, this.frameEmitter, {
-        x: Constants.startTheStringNode,
-        y: Constants.yTheStringNode,
+        x: Constants.startStringNode,
+        y: Constants.yStringNode,
         range: Constants.yWrenchRange
       } ) );
       this.addChild( windowImage = new Node( {
@@ -214,7 +214,7 @@ define( require => {
           left: Constants.windowXOffset - 4 + Constants.windowShift,
           centerY: 0,
           scale: Constants.windowScale
-        } ) ], x: Constants.endTheStringNode, y: Constants.yTheStringNode
+        } ) ], x: Constants.endStringNode, y: Constants.yStringNode
       } ) );
 
       model.endTypeProperty.link( endType => {

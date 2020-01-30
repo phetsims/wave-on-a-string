@@ -34,10 +34,10 @@ define( require => {
 
     dilatedTouchArea: 10,
     dilatedReferenceLineTouchArea: 20,
-    segmentTheStringNodeRadius: 5,
-    yTheStringNode: 215,
-    startTheStringNode: 70,
-    endTheStringNode: 670,
+    segmentStringNodeRadius: 5,
+    yStringNode: 215,
+    startStringNode: 70,
+    endStringNode: 670,
     yWrenchRange: new Range( -100, 100 ),
     maxWidthBottomControlPanel: 1000,
     tensionRange: new Range( 0, 2 ),
@@ -54,7 +54,7 @@ define( require => {
       .addColorStop( 0, '#78571C' )
       .addColorStop( 0.3, '#D3B072' )
       .addColorStop( 1, '#78571C' ),
-    segmentTheStringNodeGradient: function( options ) {
+    segmentStringNodeGradient: function( options ) {
       return new RadialGradient( -options.radius * 0.5, -options.radius * 0.5, 1, -options.radius * 0.5, -options.radius * 0.5, options.radius )
         .addColorStop( 0, '#FFF' )
         .addColorStop( 0.3, options.color );
