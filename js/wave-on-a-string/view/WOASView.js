@@ -20,7 +20,6 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  const RadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RadioGroup' );
   const ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/ReferenceLine' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/RestartButton' );
@@ -33,6 +32,7 @@ define( require => {
   const Utils = require( 'DOT/Utils' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
+  const WOASRadioGroup = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/WOASRadioGroup' );
 
   // images
   const windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
@@ -86,7 +86,7 @@ define( require => {
       Constants.boundedDragHandler( rulerV, model.verticalRulerPositionProperty, 30 );
       Constants.boundedDragHandler( rulerH, model.horizontalRulerPositionProperty, 30 );
 
-      this.addChild( typeRadio = new RadioGroup( model.modeProperty, {
+      this.addChild( typeRadio = new WOASRadioGroup( model.modeProperty, {
         radio: [
           WOASModel.Mode.MANUAL,
           WOASModel.Mode.OSCILLATE,
@@ -100,7 +100,7 @@ define( require => {
         x: typeRadio.right + 10,
         y: 5
       } ) );
-      this.addChild( endTypeRadio = new RadioGroup( model.endTypeProperty, {
+      this.addChild( endTypeRadio = new WOASRadioGroup( model.endTypeProperty, {
         radio: [
           WOASModel.EndType.FIXED_END,
           WOASModel.EndType.LOOSE_END,
@@ -111,7 +111,7 @@ define( require => {
         y: 5
       } ) );
       endTypeRadio.right = Constants.viewSize.width - 5;
-      this.addChild( new RadioGroup( model.speedProperty, {
+      this.addChild( new WOASRadioGroup( model.speedProperty, {
         radio: [
           0.25,
           1
