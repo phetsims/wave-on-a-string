@@ -103,7 +103,10 @@ define( require => {
     } ) );
     endTypeRadio.right = Constants.viewSize.width - 5;
     this.addChild( new RadioGroup( model.speedProperty, {
-      radio: [ 0.25, 1 ],
+      radio: [
+        0.25,
+        1
+      ],
       text: [ speedSlowString, speedNormalString ],
       omitPanel: true,
       right: centerControlX - 30,

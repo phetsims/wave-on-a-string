@@ -11,6 +11,8 @@ define( require => {
   // modules
   const Emitter = require( 'AXON/Emitter' );
   const Enumeration = require( 'PHET_CORE/Enumeration' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -35,12 +37,14 @@ define( require => {
       this.yNext = new Float64Array( NUMBER_OF_SEGMENTS );
 
       // @public {Property.<WOASModel.Mode>}
-      this.modeProperty = new Property( WOASModel.Mode.MANUAL );
+      this.modeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL );
 
       // @public {Property.<WOASModel.EndType}
-      this.endTypeProperty = new Property( WOASModel.EndType.FIXED_END );
+      this.endTypeProperty = new EnumerationProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END );
 
-      this.speedProperty = new Property( 1 ); // 1, 0.25
+      // @public {Property.<number>} - Speed multiplier
+      this.speedProperty = new NumberProperty( 1 );
+
       this.rulersProperty = new Property( false ); // visible rulers
       this.timerProperty = new Property( false );  // visible timer
       this.referenceLineProperty = new Property( false ); // visible referenceLine
@@ -71,6 +75,7 @@ define( require => {
       this.nSegs = NUMBER_OF_SEGMENTS;
       this.beta = 0.05;
       this.alpha = 1;
+
       this.reset();
 
       // set the string to 0 on mode changes
@@ -182,15 +187,15 @@ define( require => {
       const perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
 
       //dt for tension effect
-      const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.get() ) );
+      const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.get() * 0.4 ) * this.speedProperty.value ) );
       // limit max dt
       while ( dt >= fixDt ) {
         this.timeProperty.set( this.timeProperty.get() + fixDt );
-        this.stopwatch.step( fixDt * this.speedProperty.get() );
+        this.stopwatch.step( fixDt * this.speedProperty.value );
 
         if ( this.modeProperty.value === WOASModel.Mode.OSCILLATE ) {
           this.angleProperty.set( this.angleProperty.get() +
-                                  Math.PI * 2 * this.frequencyProperty.get() * fixDt * this.speedProperty.get() );
+                                  Math.PI * 2 * this.frequencyProperty.get() * fixDt * this.speedProperty.value );
           this.angleProperty.set( this.angleProperty.get() % ( Math.PI * 2 ) );
           this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.get() );
         }
@@ -200,7 +205,7 @@ define( require => {
           this.yNow[ 0 ] = 0;
         }
         if ( this.modeProperty.get() === WOASModel.Mode.PULSE && this.pulseProperty.get() ) {
-          const da = Math.PI * fixDt * this.speedProperty.get() / this.pulseWidthProperty.get();
+          const da = Math.PI * fixDt * this.speedProperty.value / this.pulseWidthProperty.get();
           if ( this.angleProperty.get() + da >= Math.PI / 2 ) {
             this.pulseSignProperty.set( -1 );
           }
