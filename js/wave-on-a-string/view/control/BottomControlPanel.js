@@ -160,9 +160,9 @@ define( require => {
       oscillatePanel.right = manualPanel.right;
       pulsePanel.right = manualPanel.right;
       model.modeProperty.link( function updateBottomControlPanel( value ) {
-        oscillatePanel.setVisible( value === WOASModel.Mode.OSCILLATE );
-        manualPanel.setVisible( value === WOASModel.Mode.MANUAL );
-        pulsePanel.setVisible( value === WOASModel.Mode.PULSE );
+        oscillatePanel.visible = value === WOASModel.Mode.OSCILLATE;
+        manualPanel.visible = value === WOASModel.Mode.MANUAL;
+        pulsePanel.visible = value === WOASModel.Mode.PULSE;
       } );
     }
   }

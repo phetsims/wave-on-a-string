@@ -67,24 +67,24 @@ define( require => {
       let endTypeRadio;
 
       const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-      const rulerH = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, rulerOptions );
-      const rulerV = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => n + '' ), unitCmString, rulerOptions );
-      rulerV.rotate( -Math.PI / 2 );
-      this.addChild( rulerH );
-      this.addChild( rulerV );
+      const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, rulerOptions );
+      const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => n + '' ), unitCmString, rulerOptions );
+      verticalRulerNode.rotate( -Math.PI / 2 );
+      this.addChild( horizontalRulerNode );
+      this.addChild( verticalRulerNode );
 
       model.rulersVisibleProperty.link( rulersVisible => {
-        rulerH.setVisible( rulersVisible );
-        rulerV.setVisible( rulersVisible );
+        horizontalRulerNode.visible = rulersVisible;
+        verticalRulerNode.visible = rulersVisible;
       } );
       model.horizontalRulerPositionProperty.link( position => {
-        rulerH.translation = position;
+        horizontalRulerNode.translation = position;
       } );
       model.verticalRulerPositionProperty.link( position => {
-        rulerV.translation = position;
+        verticalRulerNode.translation = position;
       } );
-      Constants.boundedDragHandler( rulerV, model.verticalRulerPositionProperty, 30 );
-      Constants.boundedDragHandler( rulerH, model.horizontalRulerPositionProperty, 30 );
+      Constants.boundedDragHandler( verticalRulerNode, model.verticalRulerPositionProperty, 30 );
+      Constants.boundedDragHandler( horizontalRulerNode, model.horizontalRulerPositionProperty, 30 );
 
       this.addChild( typeRadio = new WOASRadioGroup( model.modeProperty, {
         radio: [

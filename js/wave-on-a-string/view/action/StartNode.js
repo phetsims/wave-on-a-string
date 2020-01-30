@@ -176,9 +176,11 @@ define( require => {
         const y = model.yNow[ 0 ];
         if ( post.isVisible() ) {
           // TODO: reduce garbage allocation here
-          post.setMatrix( Matrix3.createFromPool( 1, 0, 0,
-            0, ( Constants.offsetWheel.y - (y + 7) ) / postNodeHeight, y + 7,
-            0, 0, 1 ) );
+          post.matrix = Matrix3.createFromPool(
+            1, 0, 0,
+            0, ( Constants.offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
+            0, 0, 1
+          );
         }
       };
 
@@ -196,25 +198,25 @@ define( require => {
 
       const wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
       model.angleProperty.link( angle => {
-        wheel.setMatrix( Matrix3.rotation2( angle ).timesMatrix( wheelScaleMatrix ) ); // doesn't need to compute current transform, or do matrix multiplication
+        wheel.matrix = Matrix3.rotation2( angle ).timesMatrix( wheelScaleMatrix ); // doesn't need to compute current transform, or do matrix multiplication
       } );
       model.modeProperty.link( mode => {
         const wrenchIsVisible = mode === WOASModel.Mode.MANUAL;
         if ( wrench.isVisible() !== wrenchIsVisible ) {
-          wrench.setVisible( wrenchIsVisible );
+          wrench.visible = wrenchIsVisible;
 
           updateKey();
         }
 
         const postIsVisible = mode !== WOASModel.Mode.MANUAL;
         if ( post.isVisible() !== postIsVisible ) {
-          post.setVisible( postIsVisible );
+          post.visible = postIsVisible;
 
           updatePost();
         }
 
-        wheel.setVisible( mode === WOASModel.Mode.OSCILLATE );
-        pistonBox.setVisible( mode === WOASModel.Mode.PULSE );
+        wheel.visible = mode === WOASModel.Mode.OSCILLATE;
+        pistonBox.visible = mode === WOASModel.Mode.PULSE;
       } );
     }
   }
