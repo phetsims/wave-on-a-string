@@ -90,7 +90,10 @@ define( require => {
       x: 5,
       y: 5
     } ) );
-    this.addChild( new RestartButton( model, { x: typeRadio.right + 10, y: 5 } ) );
+    this.addChild( new RestartButton( model.manualRestart.bind( model ), {
+      x: typeRadio.right + 10,
+      y: 5
+    } ) );
     this.addChild( endTypeRadio = new RadioGroup( model.endTypeProperty, {
       radio: [
         WOASModel.EndType.FIXED_END,
