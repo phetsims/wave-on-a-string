@@ -47,6 +47,9 @@ define( require => {
 
       // @public {Property.<WOASModel.Mode>}
       this.modeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
+        // We want to control the order where this is set from state (so that it happens BEFORE the string float arrays
+        // are set), so we manually control its deserialization in WOASModelIO instead.
+        phetioState: false,
         tandem: tandem.createTandem( 'modeProperty' )
       } );
 
