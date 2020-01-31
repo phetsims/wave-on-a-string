@@ -309,9 +309,8 @@ define( require => {
         this.stopwatch.step( fixDt * this.speedProperty.value );
 
         if ( this.modeProperty.value === WOASModel.Mode.OSCILLATE ) {
-          this.angleProperty.value = this.angleProperty.value +
-                                     Math.PI * 2 * this.frequencyProperty.value * fixDt * this.speedProperty.value ;
-          this.angleProperty.value = this.angleProperty.value % ( Math.PI * 2 );
+          this.angleProperty.value = ( this.angleProperty.value +
+                                       Math.PI * 2 * this.frequencyProperty.value * fixDt * this.speedProperty.value ) % ( Math.PI * 2 );
           this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.value );
         }
         if ( this.modeProperty.value === WOASModel.Mode.PULSE && this.pulsePendingProperty.value ) {
