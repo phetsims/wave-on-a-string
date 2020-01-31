@@ -13,6 +13,7 @@ define( require => {
   const BottomControlPanel = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/BottomControlPanel' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
+  const DynamicProperty = require( 'AXON/DynamicProperty' );
   const Emitter = require( 'AXON/Emitter' );
   const EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/EndNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -22,16 +23,16 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
+  const Property = require( 'AXON/Property' );
   const ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/ReferenceLine' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const RestartButton = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/RestartButton' );
   const RulerNode = require( 'SCENERY_PHET/RulerNode' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const StartNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/StartNode' );
-  const StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
   const StringNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/StringNode' );
+  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const Utils = require( 'DOT/Utils' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
@@ -47,8 +48,6 @@ define( require => {
   const noEndString = require( 'string!WAVE_ON_A_STRING/noEnd' );
   const oscillateString = require( 'string!WAVE_ON_A_STRING/oscillate' );
   const pulseString = require( 'string!WAVE_ON_A_STRING/pulse' );
-  const speedNormalString = require( 'string!WAVE_ON_A_STRING/speedNormal' );
-  const speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
   const unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
 
   class WOASScreenView extends ScreenView {
@@ -63,9 +62,6 @@ define( require => {
 
       // @private {Emitter} - Fired when a view frame occurs
       this.frameEmitter = new Emitter();
-
-      const centerControlX = Constants.viewSize.width / 2;
-      const centerControlY = Constants.viewSize.height - 131;
 
       const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
       const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, merge( {
@@ -137,49 +133,41 @@ define( require => {
         tandem: endTypePanelTandem
       }, radioPanelOptions ) ) );
 
-      this.addChild( new WOASRadioGroup( model.speedProperty, tandem.createTandem( 'speedRadioGroup' ), {
-        radio: [
-          0.25,
-          1
-        ],
-        text: [ speedSlowString, speedNormalString ],
-        right: centerControlX - 30,
-        centerY: centerControlY
-      } ) );
+      this.addChild( new TimeControlNode( model.isPlayingProperty, {
+        isSlowMotionProperty: new DynamicProperty( new Property( model.speedProperty ), {
+          bidirectional: true,
+          map: speed => speed < 1,
+          inverseMap: slow => slow ? 0.25 : 1
+        } ),
 
-      const playPauseButtonOptions = {
-        upFill: Constants.blueUpColor,
-        overFill: Constants.blueOverColor,
-        disabledFill: Constants.blueDisabledColor,
-        downFill: Constants.blueDownColor,
-        backgroundGradientColorStop0: Constants.buttonBorder0,
-        backgroundGradientColorStop1: Constants.buttonBorder1,
-        innerButtonLineWidth: 1
-      };
-      const playPauseButton = new PlayPauseButton( model.isPlayingProperty, {
-        x: centerControlX + 45,
-        centerY: centerControlY,
-        scale: 0.6,
-        scaleFactorWhenPaused: 1.25,
-        touchAreaDilation: 12,
-        pauseOptions: playPauseButtonOptions,
-        playOptions: playPauseButtonOptions
-      } );
-      this.addChild( playPauseButton );
+        playPauseOptions: {
+          upFill: Constants.blueUpColor,
+          overFill: Constants.blueOverColor,
+          disabledFill: Constants.blueDisabledColor,
+          downFill: Constants.blueDownColor,
+          backgroundGradientColorStop0: Constants.buttonBorder0,
+          backgroundGradientColorStop1: Constants.buttonBorder1,
+          innerButtonLineWidth: 1,
+          scaleFactorWhenPaused: 1.25,
+          touchAreaDilation: 12
+        },
 
-      this.addChild( new StepForwardButton( {
-        isPlayingProperty: model.isPlayingProperty,
-        listener: model.manualStep.bind( model ),
-        x: centerControlX + 94,
-        centerY: centerControlY,
-        scale: 0.6,
-        touchAreaDilation: 12,
-        upFill: Constants.blueUpColor,
-        overFill: Constants.blueOverColor,
-        disabledFill: Constants.blueDisabledColor,
-        downFill: Constants.blueDownColor,
-        backgroundGradientColorStop0: Constants.buttonBorder0,
-        backgroundGradientColorStop1: Constants.buttonBorder1
+        stepForwardOptions: {
+          listener: model.manualStep.bind( model ),
+          touchAreaDilation: 12,
+          upFill: Constants.blueUpColor,
+          overFill: Constants.blueOverColor,
+          disabledFill: Constants.blueDisabledColor,
+          downFill: Constants.blueDownColor,
+          backgroundGradientColorStop0: Constants.buttonBorder0,
+          backgroundGradientColorStop1: Constants.buttonBorder1
+        },
+
+        scale: 0.75,
+        centerX: Constants.viewSize.width / 2,
+        centerY: Constants.viewSize.height - 131,
+
+        tandem: tandem.createTandem( 'timeControlNode' )
       } ) );
 
       const resetAllButton = new ResetAllButton( {

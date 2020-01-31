@@ -1317,6 +1317,16 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "NodeIO",
       "typeName": "TextIO"
     },
+    "ToggleButtonIO": {
+      "documentation": "A button that toggles state (in/out) when pressed",
+      "events": [
+        "toggled"
+      ],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "NodeIO",
+      "typeName": "ToggleButtonIO"
+    },
     "Vector2IO": {
       "documentation": "A numerical object with x and y properties, like {x:3,y:4}",
       "events": [],
