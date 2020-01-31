@@ -57,7 +57,7 @@ define( require => {
         property: model.rulersVisibleProperty
       }, {
         node: new Text( timerString, checkboxTextOptions ),
-        property: model.timerVisibleProperty
+        property: model.stopwatchVisibleProperty
       }, {
         node: new Text( referenceLineString, checkboxTextOptions ),
         property: model.referenceLineVisibleProperty

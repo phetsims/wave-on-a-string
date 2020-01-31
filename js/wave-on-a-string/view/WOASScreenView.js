@@ -48,11 +48,12 @@ define( require => {
   const speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
   const unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
 
-  class WOASView extends ScreenView {
+  class WOASScreenView extends ScreenView {
     /**
      * @param {WOASModel} model
+     * @param {Tandem} tandem
      */
-    constructor( model ) {
+    constructor( model, tandem ) {
       super( {
         layoutBounds: new Bounds2( 0, 0, 768, 504 )
       } );
@@ -178,7 +179,7 @@ define( require => {
       } );
       stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
       this.addChild( stopwatchNode );
-      model.timerVisibleProperty.link( visible => {
+      model.stopwatchVisibleProperty.link( visible => {
         stopwatchNode.visible = visible;
       } );
       let windowImage;
@@ -233,5 +234,5 @@ define( require => {
     }
   }
 
-  return waveOnAString.register( 'WOASView', WOASView );
+  return waveOnAString.register( 'WOASScreenView', WOASScreenView );
 } );

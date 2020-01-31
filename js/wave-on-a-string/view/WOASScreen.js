@@ -7,28 +7,24 @@ define( require => {
   'use strict';
 
   // modules
-  const inherit = require( 'PHET_CORE/inherit' );
   const Property = require( 'AXON/Property' );
   const Screen = require( 'JOIST/Screen' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
-  const WOASView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASView' );
+  const WOASScreenView = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASScreenView' );
 
-  /**
-   * @param {Tandem} tandem
-   * @constructor
-   */
-  function WOASScreen( tandem ) {
-    Screen.call( this,
-      () => new WOASModel( 768, 504 ),
-      model => new WOASView( model ), {
-        backgroundColorProperty: new Property( '#FFFFB7' ),
-        tandem: tandem
-      }
-    );
+  class WOASScreen extends Screen {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
+      super(
+        () => new WOASModel( tandem.createTandem( 'model' ) ),
+        model => new WOASScreenView( model, tandem.createTandem( 'view' ) ), {
+          backgroundColorProperty: new Property( '#FFFFB7' )
+      } );
+    }
   }
 
-  waveOnAString.register( 'WOASScreen', WOASScreen );
-
-  return inherit( Screen, WOASScreen );
+  return waveOnAString.register( 'WOASScreen', WOASScreen );
 } );

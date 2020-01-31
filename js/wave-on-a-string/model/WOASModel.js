@@ -28,7 +28,10 @@ define( require => {
   const FRAMES_PER_SECOND = 50;
 
   class WOASModel {
-    constructor() {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
       // @private {number}
       this.stepDt = 0;
 
@@ -39,74 +42,115 @@ define( require => {
       this.yNext = new Float64Array( NUMBER_OF_SEGMENTS );
 
       // @public {Property.<WOASModel.Mode>}
-      this.modeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL );
+      this.modeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
+        tandem: tandem.createTandem( 'modeProperty' )
+      } );
 
       // @public {Property.<WOASModel.EndType}
-      this.endTypeProperty = new EnumerationProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END );
+      this.endTypeProperty = new EnumerationProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END, {
+        tandem: tandem.createTandem( 'endTypeProperty' )
+      } );
 
       // @public {Property.<boolean>}
-      this.isPlayingProperty = new BooleanProperty( true );
+      this.isPlayingProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'isPlayingProperty' )
+      } );
 
       // @public {Property.<number>} - Speed multiplier
-      this.speedProperty = new NumberProperty( 1 );
+      this.speedProperty = new NumberProperty( 1, {
+        phetioStudioControl: false,
+        tandem: tandem.createTandem( 'speedProperty' )
+      } );
 
       // @public {Property.<boolean>} - Visibilities
-      this.rulersVisibleProperty = new BooleanProperty( false );
-      this.timerVisibleProperty = new BooleanProperty( false );
-      this.referenceLineVisibleProperty = new BooleanProperty( false );
-      this.wrenchArrowsVisibleProperty = new BooleanProperty( true );
+      this.rulersVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'rulersVisibleProperty' )
+      } );
+      this.stopwatchVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'stopwatchVisibleProperty' )
+      } );
+      this.referenceLineVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'referenceLineVisibleProperty' )
+      } );
+      this.wrenchArrowsVisibleProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'wrenchArrowsVisibleProperty' )
+      } );
 
       // @public {Property.<Vector2>}
-      this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( 54, 117 ) );
-      this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ) );
-      this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ) );
+      this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( 54, 117 ), {
+        tandem: tandem.createTandem( 'horizontalRulerPositionProperty' )
+      } );
+      this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ), {
+        tandem: tandem.createTandem( 'verticalRulerPositionProperty' )
+      } );
+      this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ), {
+        tandem: tandem.createTandem( 'referenceLinePositionProperty' )
+      } );
 
       // @public {Property.<number>}
       this.tensionProperty = new NumberProperty( 2, {
-        range: new Range( 0, 2 )
+        range: new Range( 0, 2 ),
+        tandem: tandem.createTandem( 'tensionProperty' )
       } );
 
       // @public {Property.<number>}
       this.dampingProperty = new NumberProperty( 20, {
-        range: new Range( 0, 100 )
+        range: new Range( 0, 100 ),
+        tandem: tandem.createTandem( 'dampingProperty' )
       } );
 
       // @public {Property.<number>}
       this.frequencyProperty = new NumberProperty( 1.50, {
-        range: new Range( 0, 3 )
+        range: new Range( 0, 3 ),
+        tandem: tandem.createTandem( 'frequencyProperty' )
       } );
 
       // @public {Property.<number>}
       this.pulseWidthProperty = new NumberProperty( 0.5, {
-        range: new Range( 0, 1 )
+        range: new Range( 0, 1 ),
+        tandem: tandem.createTandem( 'pulseWidthProperty' )
       } );
 
       // @public {Property.<number>}
       this.amplitudeProperty = new NumberProperty( 0.75, {
-        range: new Range( 0, 1.5 )
+        range: new Range( 0, 1.5 ),
+        tandem: tandem.createTandem( 'amplitudeProperty' )
       } );
 
       // @public {Property.<number>}
-      this.lastDtProperty = new NumberProperty( 0.03 );
+      this.lastDtProperty = new NumberProperty( 0.03, {
+        tandem: tandem.createTandem( 'lastDtProperty' )
+      } );
 
       // @public {Property.<number>} - Base time??
-      this.timeProperty = new NumberProperty( 0 );
+      this.timeProperty = new NumberProperty( 0, {
+        tandem: tandem.createTandem( 'timeProperty' )
+      } );
 
       // @public {Property.<number>} - Angle for OSCILLATE/PULSE mode
-      this.angleProperty = new NumberProperty( 0 );
+      this.angleProperty = new NumberProperty( 0, {
+        tandem: tandem.createTandem( 'angleProperty' )
+      } );
 
       // @public {Property.<boolean>} - Whether a pulse will start at the next proper model step
-      this.pulsePendingProperty = new BooleanProperty( false );
+      this.pulsePendingProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'pulsePendingProperty' )
+      } );
 
       // @public {Property.<number>} - sign [-1, 1] for pulse mode
-      this.pulseSignProperty = new NumberProperty( 1 );
+      this.pulseSignProperty = new NumberProperty( 1, {
+        tandem: tandem.createTandem( 'pulseSignProperty' )
+      } );
 
       // @public {Property.<boolean>} - Whether a pulse is currently active
-      this.pulseProperty = new BooleanProperty( false );
+      this.pulseProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'pulseProperty' )
+      } );
 
       // @public {Stopwatch}
       this.stopwatch = new Stopwatch( {
-        position: new Vector2( 550, 330 )
+        position: new Vector2( 550, 330 ),
+        tandem: tandem.createTandem( 'stopwatch' )
       } );
 
       // @public {Emitter} - Events emitted by instances of this type
@@ -363,7 +407,7 @@ define( require => {
       this.endTypeProperty.reset();
       this.speedProperty.reset();
       this.rulersVisibleProperty.reset();
-      this.timerVisibleProperty.reset();
+      this.stopwatchVisibleProperty.reset();
       this.referenceLineVisibleProperty.reset();
       this.tensionProperty.reset();
       this.dampingProperty.reset();
