@@ -183,7 +183,7 @@ define( require => {
       resetAllButton.scale( 0.924 );
       this.addChild( resetAllButton );
 
-      const bottomControlPanel = new BottomControlPanel( model, tandem );
+      const bottomControlPanel = new BottomControlPanel( model, tandem.createTandem( 'bottomControlPanel' ) );
       this.addChild( bottomControlPanel );
 
       bottomControlPanel.right = resetAllButton.left - 10;
@@ -213,7 +213,8 @@ define( require => {
       } ) );
       const endNode = new EndNode( model, this.frameEmitter, {
         x: Constants.endStringNode,
-        y: Constants.yStringNode
+        y: Constants.yStringNode,
+        tandem: tandem.createTandem( 'endNode' )
       } );
       endNode.windowNode.x += Constants.endStringNode;
       endNode.windowNode.y += Constants.yStringNode;
@@ -228,7 +229,8 @@ define( require => {
       this.addChild( new StartNode( model, this.frameEmitter, {
         x: Constants.startStringNode,
         y: Constants.yStringNode,
-        range: Constants.yWrenchRange
+        range: Constants.yWrenchRange,
+        tandem: tandem.createTandem( 'startNode' )
       } ) );
       this.addChild( windowImage = new Node( {
         children: [ new Image( windowEdgeImage, {

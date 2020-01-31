@@ -12,7 +12,6 @@ define( require => {
   // modules
   const Float64ArrayIO = require( 'TANDEM/types/Float64ArrayIO' );
   const ObjectIO = require( 'TANDEM/types/ObjectIO' );
-  const VoidIO = require( 'TANDEM/types/VoidIO' );
   const validate = require( 'AXON/validate' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
@@ -43,37 +42,21 @@ define( require => {
      * @override
      *
      * @param {WOASModel} model
-     * @param {{yDraw:Array.<number>,yNow:Array.<number>,yLast:Array.<number>,yNext:Array.<number>}} - fromStateObject
+     * @param {{yDraw:Array.<number>,yNow:Array.<number>,yLast:Array.<number>,yNext:Array.<number>}} - stateObject
      */
-    static setValue( model, fromStateObject ) {
+    static setValue( model, stateObject ) {
       validate( model, this.validator );
 
-      Float64ArrayIO.setValue( model.yDraw, fromStateObject.yDraw );
-      Float64ArrayIO.setValue( model.yNow, fromStateObject.yNow );
-      Float64ArrayIO.setValue( model.yLast, fromStateObject.yLast );
-      Float64ArrayIO.setValue( model.yNext, fromStateObject.yNext );
+      // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
+      // Float64Arrays. Instead we set the array values directly.
+      model.yDraw.set( stateObject.yDraw );
+      model.yNow.set( stateObject.yNow );
+      model.yLast.set( stateObject.yLast );
+      model.yNext.set( stateObject.yNext );
 
       model.yNowChangedEmitter.emit();
     }
   }
-
-  WOASModelIO.methods = {
-    setValue: {
-      returnType: VoidIO,
-      parameterTypes: [ ObjectIO ],
-      implementation: function( value ) {
-        // TODO: why are we duplicating setValue
-        Float64ArrayIO.setValue( this.phetioObject.yDraw, value.yDraw );
-        Float64ArrayIO.setValue( this.phetioObject.yNow, value.yNow );
-        Float64ArrayIO.setValue( this.phetioObject.yLast, value.yLast );
-        Float64ArrayIO.setValue( this.phetioObject.yNext, value.yNext );
-
-        this.phetioObject.yNowChangedEmitter.emit();
-      },
-      documentation: 'Load the numeric string position values into the model',
-      invocableForReadOnlyElements: false
-    }
-  };
 
   WOASModelIO.documentation = 'The main model for Wave on a String';
   WOASModelIO.validator = { isValidValue: v => v instanceof phet.waveOnAString.WOASModel };

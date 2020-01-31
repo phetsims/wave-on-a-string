@@ -71,7 +71,7 @@ define( require => {
 
     offsetWheel: new Vector2( 0, 156 ),
 
-    dragAndDropHandler( thisNode, callback, startCallback, endCallback ) {
+    dragAndDropHandler( thisNode, callback, startCallback, endCallback, tandem ) {
       return new SimpleDragHandler( {
         start: function( event, trail ) {
           clickOffset = thisNode.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
@@ -82,7 +82,8 @@ define( require => {
         },
         end: function( event, trail ) {
           endCallback && endCallback( event, trail );
-        }
+        },
+        tandem: tandem
       } );
     }
   };

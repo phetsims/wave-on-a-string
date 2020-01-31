@@ -53,16 +53,22 @@ define( require => {
         font: new PhetFont( 15 ),
         maxWidth: 130
       };
+      const checkboxTandem = tandem.createTandem( 'visibilityCheckboxGroup' );
       const checkboxGroup = new VerticalCheckboxGroup( [ {
         node: new Text( rulersString, checkboxTextOptions ),
-        property: model.rulersVisibleProperty
+        property: model.rulersVisibleProperty,
+        tandem: checkboxTandem.createTandem( 'rulersVisibleCheckbox' )
       }, {
         node: new Text( timerString, checkboxTextOptions ),
-        property: model.stopwatchVisibleProperty
+        property: model.stopwatchVisibleProperty,
+        tandem: checkboxTandem.createTandem( 'stopwatchVisibleCheckbox' )
       }, {
         node: new Text( referenceLineString, checkboxTextOptions ),
-        property: model.referenceLineVisibleProperty
-      } ] );
+        property: model.referenceLineVisibleProperty,
+        tandem: checkboxTandem.createTandem( 'referenceLineVisibleCheckbox' )
+      } ], {
+        tandem: checkboxTandem
+      } );
 
       const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 

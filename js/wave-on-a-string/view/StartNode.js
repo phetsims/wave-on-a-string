@@ -132,7 +132,7 @@ define( require => {
         cornerRadius: 6
       } );
 
-      pistonBox.addChild( new PulseButton( model, { center: pistonBox.center } ) );
+      pistonBox.addChild( new PulseButton( model, { center: pistonBox.center, tandem: options.tandem.createTandem( 'pulseButton' ) } ) );
 
       // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
       const postCache = new Node( { scale: 1 / postScale } );
@@ -158,7 +158,7 @@ define( require => {
         }
       }, event => {
         model.wrenchArrowsVisibleProperty.value = false;
-      } ) );
+      }, options.tandem.createTandem( 'wrenchDragAndDropHandler' ) ) );
       model.wrenchArrowsVisibleProperty.link( visible => {
         wrenchTopArrow.visible = visible;
         wrenchBottomArrow.visible = visible;
