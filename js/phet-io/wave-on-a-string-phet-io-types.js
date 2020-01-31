@@ -181,6 +181,28 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "ActionIO<Vector2IO, EventIO>"
     },
+    "ActionIO<Vector2IO>": {
+      "documentation": "Executes when an event occurs.",
+      "events": [
+        "emitted"
+      ],
+      "methodOrder": [],
+      "methods": {
+        "execute": {
+          "documentation": "Executes the function the Action is wrapping.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "Vector2IO"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "Vector2IO"
+      ],
+      "supertype": "ObjectIO",
+      "typeName": "ActionIO<Vector2IO>"
+    },
     "ArrayIO<StringIO>": {
       "documentation": "A wrapper for the built-in JS array type, with the element type specified.",
       "events": [],
@@ -196,6 +218,28 @@ window.phet.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": "ObjectIO",
       "typeName": "BooleanIO"
+    },
+    "DerivedPropertyIO<BooleanIO>": {
+      "documentation": "Like PropertyIO, but not settable.  Instead it is derived from other DerivedPropertyIO or PropertyIO instances",
+      "events": [
+        "changed"
+      ],
+      "methodOrder": [],
+      "methods": {
+        "setValue": {
+          "documentation": "Errors out when you try to set a derived property.",
+          "invocableForReadOnlyElements": false,
+          "parameterTypes": [
+            "BooleanIO"
+          ],
+          "returnType": "VoidIO"
+        }
+      },
+      "parameterTypes": [
+        "BooleanIO"
+      ],
+      "supertype": "PropertyIO<BooleanIO>",
+      "typeName": "DerivedPropertyIO<BooleanIO>"
     },
     "DialogIO": {
       "documentation": "A dialog panel",
@@ -1257,6 +1301,18 @@ window.phet.phetio.phetioTypes = assert &&
       "methods": {},
       "supertype": "ObjectIO",
       "typeName": "ReferenceIO"
+    },
+    "ResetAllButtonIO": {
+      "documentation": "Button that performs an action while it is being pressed, and stops the action when released",
+      "events": [
+        "pressed",
+        "released",
+        "releasedDisabled"
+      ],
+      "methodOrder": [],
+      "methods": {},
+      "supertype": "NodeIO",
+      "typeName": "ResetAllButtonIO"
     },
     "RichTextIO": {
       "documentation": "The tandem IO type for the scenery RichText node",

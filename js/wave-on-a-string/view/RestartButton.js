@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const merge = require( 'PHET_CORE/merge' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const TextPushButton = require( 'SUN/buttons/TextPushButton' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
@@ -23,14 +24,13 @@ define( require => {
      * @param {Object} [options]
      */
     constructor( callback, options ) {
-      super( restartString, {
+
+      super( restartString, merge( {
         listener: callback,
         font: new PhetFont( 12 ),
         baseColor: 'hsl(210,0%,85%)',
         maxWidth: 250
-      } );
-
-      this.mutate( options );
+      }, options ) );
 
       this.touchArea = this.localBounds.dilatedXY( 5, 20 );
     }

@@ -44,8 +44,9 @@ define( require => {
   class BottomControlPanel extends Node {
     /**
      * @param {WOASModel} model
+     * @param {Tandem} tandem
      */
-    constructor( model ) {
+    constructor( model, tandem ) {
       super( { scale: 0.7 } );
 
       const checkboxTextOptions = {

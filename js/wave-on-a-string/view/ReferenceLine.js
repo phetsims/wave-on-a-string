@@ -22,9 +22,10 @@ define( require => {
   class ReferenceLine extends Node {
     /**
      * @param {WOASModel} model
+     * @param {Tandem} tandem
      */
-    constructor( model ) {
-      super( { cursor: 'pointer' } );
+    constructor( model, tandem ) {
+      super( { cursor: 'pointer', tandem: tandem } );
 
       this.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
         fill: Constants.referenceLineBlockGradient,
@@ -56,7 +57,7 @@ define( require => {
       this.touchArea = Shape.bounds( Bounds2.point( 755, 0 ).dilated( Constants.dilatedReferenceLineTouchArea ) );
       this.mouseArea = Shape.bounds( Bounds2.point( 755, 0 ).dilatedXY( 15, 10 ) );
 
-      Constants.boundedDragHandler( this, model.referenceLinePositionProperty, 30 );
+      Constants.boundedDragHandler( this, model.referenceLinePositionProperty, 30, tandem.createTandem( 'inputListener' ) );
     }
   }
 

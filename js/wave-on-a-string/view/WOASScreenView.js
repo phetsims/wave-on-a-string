@@ -63,12 +63,15 @@ define( require => {
       // @private {Emitter} - Fired when a view frame occurs
       this.frameEmitter = new Emitter();
 
+      const horizontalRulerTandem = tandem.createTandem( 'horizontalRulerNode' );
+      const verticalRulerTandem = tandem.createTandem( 'verticalRulerNode' );
+
       const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
       const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, merge( {
-        tandem: tandem.createTandem( 'horizontalRulerNode' )
+        tandem: horizontalRulerTandem
       }, rulerOptions ) );
       const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => n + '' ), unitCmString, merge( {
-        tandem: tandem.createTandem( 'verticalRulerNode' )
+        tandem: verticalRulerTandem
       }, rulerOptions ) );
       verticalRulerNode.rotate( -Math.PI / 2 );
       this.addChild( horizontalRulerNode );
@@ -84,8 +87,8 @@ define( require => {
       model.verticalRulerPositionProperty.link( position => {
         verticalRulerNode.translation = position;
       } );
-      Constants.boundedDragHandler( verticalRulerNode, model.verticalRulerPositionProperty, 30 );
-      Constants.boundedDragHandler( horizontalRulerNode, model.horizontalRulerPositionProperty, 30 );
+      Constants.boundedDragHandler( horizontalRulerNode, model.horizontalRulerPositionProperty, 30, horizontalRulerTandem.createTandem( 'inputListener' ) );
+      Constants.boundedDragHandler( verticalRulerNode, model.verticalRulerPositionProperty, 30, verticalRulerTandem.createTandem( 'inputListener' ) );
 
       const radioPanelOptions = {
         fill: '#D9FCC5',
@@ -110,7 +113,8 @@ define( require => {
             tandem: modePanelTandem
           }, radioPanelOptions ) ),
           new RestartButton( model.manualRestart.bind( model ), {
-            y: 5
+            y: 5,
+            tandem: tandem.createTandem( 'restartButton' )
           } )
         ],
         spacing: 10,
@@ -173,12 +177,13 @@ define( require => {
       const resetAllButton = new ResetAllButton( {
         listener: () => model.reset(),
         right: this.layoutBounds.maxX - 10,
-        bottom: this.layoutBounds.maxY - 10
+        bottom: this.layoutBounds.maxY - 10,
+        tandem: tandem.createTandem( 'resetAllButton' )
       } );
       resetAllButton.scale( 0.924 );
       this.addChild( resetAllButton );
 
-      const bottomControlPanel = new BottomControlPanel( model );
+      const bottomControlPanel = new BottomControlPanel( model, tandem );
       this.addChild( bottomControlPanel );
 
       bottomControlPanel.right = resetAllButton.left - 10;
@@ -187,7 +192,8 @@ define( require => {
        * StopwatchNode
        *----------------------------------------------------------------------------*/
       const stopwatchNode = new StopwatchNode( model.stopwatch, {
-        visibleBoundsProperty: this.visibleBoundsProperty
+        visibleBoundsProperty: this.visibleBoundsProperty,
+        tandem: tandem.createTandem( 'stopwatchNode' )
       } );
       stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
       this.addChild( stopwatchNode );
@@ -195,13 +201,15 @@ define( require => {
         stopwatchNode.visible = visible;
       } );
       let windowImage;
+
       //center line
       this.addChild( new Line( 0, 0, 605, 0, {
         stroke: '#FFA91D',
         lineDash: [ 8, 5 ],
         lineWidth: 2,
         x: Constants.startStringNode,
-        y: Constants.yStringNode
+        y: Constants.yStringNode,
+        tandem: tandem.createTandem( 'centerLine' )
       } ) );
       const endNode = new EndNode( model, this.frameEmitter, {
         x: Constants.endStringNode,
@@ -210,9 +218,9 @@ define( require => {
       endNode.windowNode.x += Constants.endStringNode;
       endNode.windowNode.y += Constants.yStringNode;
       this.addChild( endNode.windowNode );
-      this.addChild( new ReferenceLine( model ) );
+      this.addChild( new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ) ) );
       this.addChild( endNode );
-      this.addChild( new StringNode( model, this.frameEmitter, {
+      this.addChild( new StringNode( model, this.frameEmitter, tandem.createTandem( 'stringNode' ), {
         x: Constants.startStringNode,
         y: Constants.yStringNode,
         radius: Constants.segmentStringNodeRadius

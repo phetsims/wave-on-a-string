@@ -91,7 +91,8 @@ define( require => {
 
   Constants.viewBounds = Constants.viewSize.toBounds();
 
-  Constants.boundedDragHandler = function( node, positionProperty, padding ) {
+  // TODO: doc
+  Constants.boundedDragHandler = function( node, positionProperty, padding, tandem ) {
     const restrictedBounds = Constants.viewBounds.eroded( padding );
     let clickOffset = new Vector2( 0, 0 );
     node.addInputListener( new SimpleDragHandler( {
@@ -115,7 +116,8 @@ define( require => {
         }
 
         positionProperty.value = point;
-      }
+      },
+      tandem: tandem
     } ) );
   };
 
