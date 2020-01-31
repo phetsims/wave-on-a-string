@@ -11,25 +11,18 @@ define( require => {
   // modules
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const merge = require( 'PHET_CORE/merge' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
 
-  class WOASRadioGroup extends Node {
+  class WOASRadioGroup extends VerticalAquaRadioButtonGroup {
     /**
      * @param {Property.<*>} property
+     * @param {Tandem} tandem
      * @param {Object} [options]
      */
-    constructor( property, options ) {
-      options = merge( {
-        scale: 0.5
-      }, options );
-
-      super();
-
+    constructor( property, tandem, options ) {
       const length = options.radio.length;
       const group = [];
 
@@ -43,18 +36,16 @@ define( require => {
         } );
       }
 
-      const radioGroup = new VerticalAquaRadioButtonGroup( property, group, {
+      super( property, group, merge( {
         spacing: 16,
         touchAreaXDilation: 10,
         radioButtonOptions: {
           radius: 12,
           selectedColor: Constants.radioColor.toCSS()
-        }
-      } );
-
-      this.addChild( options.omitPanel ? radioGroup : new Panel( radioGroup, { fill: '#D9FCC5', xMargin: 14, yMargin: 14 } ) );
-
-      this.mutate( options );
+        },
+        scale: 0.5,
+        tandem: tandem
+      }, options ) );
     }
   }
 

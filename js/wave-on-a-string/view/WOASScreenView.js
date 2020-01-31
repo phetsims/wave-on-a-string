@@ -15,9 +15,12 @@ define( require => {
   const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const Emitter = require( 'AXON/Emitter' );
   const EndNode = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/EndNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
   const Image = require( 'SCENERY/nodes/Image' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
+  const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   const ReferenceLine = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/ReferenceLine' );
@@ -64,12 +67,13 @@ define( require => {
       const centerControlX = Constants.viewSize.width / 2;
       const centerControlY = Constants.viewSize.height - 131;
 
-      let typeRadio;
-      let endTypeRadio;
-
       const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-      const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, rulerOptions );
-      const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => n + '' ), unitCmString, rulerOptions );
+      const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, merge( {
+        tandem: tandem.createTandem( 'horizontalRulerNode' )
+      }, rulerOptions ) );
+      const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => n + '' ), unitCmString, merge( {
+        tandem: tandem.createTandem( 'verticalRulerNode' )
+      }, rulerOptions ) );
       verticalRulerNode.rotate( -Math.PI / 2 );
       this.addChild( horizontalRulerNode );
       this.addChild( verticalRulerNode );
@@ -87,21 +91,39 @@ define( require => {
       Constants.boundedDragHandler( verticalRulerNode, model.verticalRulerPositionProperty, 30 );
       Constants.boundedDragHandler( horizontalRulerNode, model.horizontalRulerPositionProperty, 30 );
 
-      this.addChild( typeRadio = new WOASRadioGroup( model.modeProperty, {
-        radio: [
-          WOASModel.Mode.MANUAL,
-          WOASModel.Mode.OSCILLATE,
-          WOASModel.Mode.PULSE
+      const radioPanelOptions = {
+        fill: '#D9FCC5',
+        xMargin: 7,
+        yMargin: 7,
+        lineWidth: 0.5
+      };
+
+      const modePanelTandem = tandem.createTandem( 'modePanel' );
+      const endTypePanelTandem = tandem.createTandem( 'endTypePanel' );
+
+      this.addChild( new HBox( {
+        children: [
+          new Panel( new WOASRadioGroup( model.modeProperty, modePanelTandem.createTandem( 'modeRadioGroup' ), {
+            radio: [
+              WOASModel.Mode.MANUAL,
+              WOASModel.Mode.OSCILLATE,
+              WOASModel.Mode.PULSE
+            ],
+            text: [ manualString, oscillateString, pulseString ]
+          } ), merge( {
+            tandem: modePanelTandem
+          }, radioPanelOptions ) ),
+          new RestartButton( model.manualRestart.bind( model ), {
+            y: 5
+          } )
         ],
-        text: [ manualString, oscillateString, pulseString ],
-        x: 5,
-        y: 5
+        spacing: 10,
+        left: 5,
+        y: 5,
+        align: 'top'
       } ) );
-      this.addChild( new RestartButton( model.manualRestart.bind( model ), {
-        x: typeRadio.right + 10,
-        y: 5
-      } ) );
-      this.addChild( endTypeRadio = new WOASRadioGroup( model.endTypeProperty, {
+
+      this.addChild( new Panel( new WOASRadioGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'endTypeRadioGroup' ), {
         radio: [
           WOASModel.EndType.FIXED_END,
           WOASModel.EndType.LOOSE_END,
@@ -110,15 +132,17 @@ define( require => {
         text: [ fixedEndString, looseEndString, noEndString ],
         x: Constants.viewSize.width - 100,
         y: 5
-      } ) );
-      endTypeRadio.right = Constants.viewSize.width - 5;
-      this.addChild( new WOASRadioGroup( model.speedProperty, {
+      } ), merge( {
+        right: Constants.viewSize.width - 5,
+        tandem: endTypePanelTandem
+      }, radioPanelOptions ) ) );
+
+      this.addChild( new WOASRadioGroup( model.speedProperty, tandem.createTandem( 'speedRadioGroup' ), {
         radio: [
           0.25,
           1
         ],
         text: [ speedSlowString, speedNormalString ],
-        omitPanel: true,
         right: centerControlX - 30,
         centerY: centerControlY
       } ) );
