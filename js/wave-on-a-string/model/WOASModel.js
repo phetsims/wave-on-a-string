@@ -14,11 +14,13 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const NumberProperty = require( 'AXON/NumberProperty' );
+  const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Range = require( 'DOT/Range' );
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+  const WOASModelIO = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModelIO' );
 
   // constants
   const NUMBER_OF_SEGMENTS = 61;
@@ -27,11 +29,15 @@ define( require => {
   const AMPLITUDE_MULTIPLIER = 80;
   const FRAMES_PER_SECOND = 50;
 
-  class WOASModel {
+  class WOASModel extends PhetioObject {
     /**
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
+      super( {
+        tandem: tandem,
+        phetioType: WOASModelIO
+      } );
 
       // @public {Float64Array}
       this.yDraw = new Float64Array( NUMBER_OF_SEGMENTS );

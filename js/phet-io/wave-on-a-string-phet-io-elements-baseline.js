@@ -1392,6 +1392,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NumberIO>"
     },
+    "waveOnAString.waveOnAStringScreen.model": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
     "waveOnAString.waveOnAStringScreen.model.amplitudeProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
