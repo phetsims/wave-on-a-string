@@ -68,8 +68,8 @@ define( require => {
       frameEmitter.addListener( () => {
         if ( dirty ) {
           stringShape = new Shape();
-          beads[ 0 ].y = model.nextLeftY;
-          stringShape.lineTo( 0, model.nextLeftY || 0 );
+          beads[ 0 ].y = model.nextLeftYProperty.value;
+          stringShape.lineTo( 0, model.nextLeftYProperty.value || 0 );
           for ( let i = 1; i < model.yDraw.length; i++ ) {
             beads[ i ].y = model.yDraw[ i ];
             /*REVIEW:

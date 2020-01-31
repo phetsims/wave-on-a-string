@@ -149,7 +149,7 @@ define( require => {
       ];
 
       wrench.addInputListener( Constants.dragAndDropHandler( wrench, point => {
-        model.nextLeftY = Math.max( Math.min( point.y, options.range.max ), options.range.min );
+        model.nextLeftYProperty.value = Math.max( Math.min( point.y, options.range.max ), options.range.min );
         model.isPlayingProperty.value = true;
         model.yNowChangedEmitter.emit();
       }, event => {

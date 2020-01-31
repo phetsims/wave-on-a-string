@@ -32,8 +32,6 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
-      // @private {number}
-      this.stepDt = 0;
 
       // @public {Float64Array}
       this.yDraw = new Float64Array( NUMBER_OF_SEGMENTS );
@@ -119,31 +117,39 @@ define( require => {
 
       // @public {Property.<number>}
       this.lastDtProperty = new NumberProperty( 0.03, {
+        phetioReadOnly: true,
         tandem: tandem.createTandem( 'lastDtProperty' )
       } );
 
       // @public {Property.<number>} - Base time??
       this.timeProperty = new NumberProperty( 0, {
+        phetioReadOnly: true,
         tandem: tandem.createTandem( 'timeProperty' )
       } );
 
-      // @public {Property.<number>} - Angle for OSCILLATE/PULSE mode
+      // @public {Property.<number>} - Angle for OSCILLATE/PULSE mode, in radians
       this.angleProperty = new NumberProperty( 0, {
+        phetioReadOnly: true,
+        range: new Range( 0, 2 * Math.PI ),
         tandem: tandem.createTandem( 'angleProperty' )
       } );
 
       // @public {Property.<boolean>} - Whether a pulse will start at the next proper model step
       this.pulsePendingProperty = new BooleanProperty( false, {
+        phetioReadOnly: true,
         tandem: tandem.createTandem( 'pulsePendingProperty' )
       } );
 
-      // @public {Property.<number>} - sign [-1, 1] for pulse mode
+      // @public {Property.<number>} - for pulse mode
       this.pulseSignProperty = new NumberProperty( 1, {
+        phetioReadOnly: true,
+        validValues: [ -1, 1 ],
         tandem: tandem.createTandem( 'pulseSignProperty' )
       } );
 
       // @public {Property.<boolean>} - Whether a pulse is currently active
       this.pulseProperty = new BooleanProperty( false, {
+        phetioReadOnly: true,
         tandem: tandem.createTandem( 'pulseProperty' )
       } );
 
@@ -158,7 +164,16 @@ define( require => {
 
       // @public {number} - used to interpolate the left-most y value of the string while the wrench is moved in manual
       // mode, for low-FPS browsers
-      this.nextLeftY = 0;
+      this.nextLeftYProperty = new NumberProperty( 0, {
+        phetioReadOnly: true,
+        tandem: tandem.createTandem( 'nextLeftYProperty' )
+      } );
+
+      // @private {Property.<number>}
+      this.stepDtProperty = new NumberProperty( 0, {
+        phetioReadOnly: true,
+        tandem: tandem.createTandem( 'stepDtProperty' )
+      } );
 
       // @private {number}
       this.beta = 0.05;
@@ -187,15 +202,15 @@ define( require => {
       this.lastDtProperty.value = dt;
 
       if ( this.isPlayingProperty.value ) {
-        this.stepDt += dt;
+        this.stepDtProperty.value += dt;
 
         // limit min dt
-        if ( this.stepDt >= fixDt ) {
-          this.manualStep( this.stepDt );
-          this.stepDt %= fixDt;
+        if ( this.stepDtProperty.value >= fixDt ) {
+          this.manualStep( this.stepDtProperty.value );
+          this.stepDtProperty.value %= fixDt;
         }
       }
-      this.nextLeftY = this.yNow[ 0 ];
+      this.nextLeftYProperty.value = this.yNow[ 0 ];
     }
 
     /**
@@ -284,7 +299,7 @@ define( require => {
       // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
       const startingLeftY = this.yNow[ 0 ];
       const numSteps = Math.floor( dt / fixDt );
-      const perStepDelta = numSteps ? ( ( this.nextLeftY - startingLeftY ) / numSteps ) : 0;
+      const perStepDelta = numSteps ? ( ( this.nextLeftYProperty.value - startingLeftY ) / numSteps ) : 0;
 
       //dt for tension effect
       const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.value * 0.4 ) * this.speedProperty.value ) );
@@ -340,7 +355,7 @@ define( require => {
       }
       if ( this.modeProperty.value === WOASModel.Mode.MANUAL ) {
         // sanity check for our yNow
-        // this.yNow[0] = this.nextLeftY;
+        // this.yNow[0] = this.nextLeftYProperty.value;
       }
       this.yNowChangedEmitter.emit();
     }
@@ -394,7 +409,7 @@ define( require => {
         this.yDraw[ i ] = this.yNext[ i ] = this.yNow[ i ] = this.yLast[ i ] = 0;
       }
 
-      this.nextLeftY = 0;
+      this.nextLeftYProperty.value = 0;
       this.yNowChangedEmitter.emit();
     }
 
