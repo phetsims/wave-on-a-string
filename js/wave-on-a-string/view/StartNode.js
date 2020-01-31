@@ -175,7 +175,6 @@ define( require => {
       const updatePost = () => {
         const y = model.yNow[ 0 ];
         if ( post.isVisible() ) {
-          // TODO: reduce garbage allocation here
           post.matrix = Matrix3.createFromPool(
             1, 0, 0,
             0, ( Constants.offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
