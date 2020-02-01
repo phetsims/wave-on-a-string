@@ -1,4 +1,4 @@
-// Copyright 2017-2020, University of Colorado Boulder
+// Copyright 2020, University of Colorado Boulder
 
 /**
  * IO type for the main model, including the typed array information.
