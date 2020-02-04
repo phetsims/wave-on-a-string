@@ -47,9 +47,6 @@ define( require => {
 
       // @public {Property.<WOASModel.Mode>}
       this.modeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
-        // We want to control the order where this is set from state (so that it happens BEFORE the string float arrays
-        // are set), so we manually control its deserialization in WOASModelIO instead.
-        phetioState: false,
         tandem: tandem.createTandem( 'modeProperty' )
       } );
 
@@ -191,7 +188,15 @@ define( require => {
       this.reset();
 
       // set the string to 0 on mode changes
-      this.modeProperty.lazyLink( () => this.manualRestart() );
+      this.modeProperty.lazyLink( () => {
+        const isSettingState = _.hasIn( window, 'phet.phetIo.phetioEngine' ) &&
+                               phet.phetIo.phetioEngine.phetioStateEngine.isSettingState;
+
+        // Don't mess with phet-io, see https://github.com/phetsims/wave-on-a-string/issues/141
+        if ( !isSettingState ) {
+          this.manualRestart();
+        }
+      } );
     }
 
     /**

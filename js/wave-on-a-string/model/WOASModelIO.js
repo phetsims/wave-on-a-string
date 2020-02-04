@@ -10,7 +10,6 @@ define( require => {
   'use strict';
 
   // modules
-  const EnumerationIO = require( 'PHET_CORE/EnumerationIO' );
   const Float64ArrayIO = require( 'TANDEM/types/Float64ArrayIO' );
   const ObjectIO = require( 'TANDEM/types/ObjectIO' );
   const validate = require( 'AXON/validate' );
@@ -29,9 +28,6 @@ define( require => {
       validate( model, this.validator );
 
       return {
-        // We need to serialize and deserialize the mode here, since we want it to be set BEFORE the float arrays.
-        mode: EnumerationIO( phet.waveOnAString.WOASModel.Mode ).toStateObject( model.modeProperty.value ),
-
         yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
         yNow: Float64ArrayIO.toStateObject( model.yNow ),
         yLast: Float64ArrayIO.toStateObject( model.yLast ),
@@ -50,8 +46,6 @@ define( require => {
      */
     static setValue( model, stateObject ) {
       validate( model, this.validator );
-
-      model.modeProperty.value = EnumerationIO( phet.waveOnAString.WOASModel.Mode ).fromStateObject( stateObject.mode );
 
       // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
       // Float64Arrays. Instead we set the array values directly.
