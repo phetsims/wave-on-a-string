@@ -114,13 +114,13 @@ define( require => {
 
       // @public {Property.<number>}
       this.pulseWidthProperty = new NumberProperty( 0.5, {
-        range: new Range( 0, 1 ),
+        range: new Range( 0.2, 1 ),
         tandem: tandem.createTandem( 'pulseWidthProperty' )
       } );
 
       // @public {Property.<number>}
       this.amplitudeProperty = new NumberProperty( 0.75, {
-        range: new Range( 0, 1.5 ),
+        range: new Range( 0, 1.25 ),
         tandem: tandem.createTandem( 'amplitudeProperty' )
       } );
 

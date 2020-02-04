@@ -10,7 +10,6 @@ define( require => {
   'use strict';
 
   // modules
-  const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
   const Line = require( 'SCENERY/nodes/Line' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
@@ -20,6 +19,7 @@ define( require => {
   const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
   const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
+  const WOASNumberControl = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASNumberControl' );
   const WOASSlider = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/WOASSlider' );
 
   // strings
@@ -79,7 +79,7 @@ define( require => {
         title: tensionString,
         property: model.tensionProperty,
         round: false,
-        range: Constants.tensionRange,
+        range: model.tensionProperty.range,
         titleVerticalOffset: 15,
         tick: { step: 0.25, minText: lowString, maxText: highString },
         constrainValue: value => {
@@ -94,73 +94,71 @@ define( require => {
 
       tensionSlider.right = separator.left - 20;
 
-      const dampingSlider = new WOASSlider( {
-        title: dampingString,
-        type: 'button',
-        buttonStep: 1,
-        property: model.dampingProperty,
-        patternValueUnit: patternValueUnitPercentageString,
-        roundingDigits: 0,
-        range: Constants.dampingRange
+      const dampingSlider = new WOASNumberControl( dampingString, model.dampingProperty, {
+        delta: 1,
+        numberDisplayOptions: {
+          decimalPlaces: 0,
+          valuePattern: patternValueUnitPercentageString
+        },
+        tandem: tandem.createTandem( 'dampingSlider' )
       } );
 
       dampingSlider.right = tensionSlider.left - OFFSET;
 
-      const frequencySlider = new WOASSlider( {
-        type: 'button',
-        buttonStep: 0.01,
-        title: frequencyString,
-        property: model.frequencyProperty,
-        patternValueUnit: patternValueUnitHzString,
-        roundingDigits: 2,
-        range: Constants.frequencyRange
+      const frequencySlider = new WOASNumberControl( frequencyString, model.frequencyProperty, {
+        delta: 0.01,
+        numberDisplayOptions: {
+          decimalPlaces: 2,
+          valuePattern: patternValueUnitHzString
+        },
+        tandem: tandem.createTandem( 'frequencySlider' )
       } );
 
       frequencySlider.right = dampingSlider.left - OFFSET;
 
-      const pulseWidthSlider = new WOASSlider( {
-        type: 'button',
-        buttonStep: 0.01,
-        title: pulseWidthString,
-        property: model.pulseWidthProperty,
-        patternValueUnit: patternValueUnitSString,
-        roundingDigits: 2,
-        range: Constants.pulseWidthRange
+      const pulseWidthSlider = new WOASNumberControl( pulseWidthString, model.pulseWidthProperty, {
+        delta: 0.01,
+        numberDisplayOptions: {
+          decimalPlaces: 2,
+          valuePattern: patternValueUnitSString
+        },
+        tandem: tandem.createTandem( 'pulseWidthSlider' )
       } );
 
       pulseWidthSlider.right = dampingSlider.left - OFFSET;
 
-      const amplitudeSlider = new WOASSlider( {
-        type: 'button',
-        buttonStep: 0.01,
-        title: amplitudeString,
-        property: model.amplitudeProperty,
-        patternValueUnit: patternValueUnitCmString,
-        roundingDigits: 2,
-        range: Constants.amplitudeRange
+      const amplitudeSlider = new WOASNumberControl( amplitudeString, model.amplitudeProperty, {
+        delta: 0.01,
+        numberDisplayOptions: {
+          decimalPlaces: 2,
+          valuePattern: patternValueUnitCmString
+        },
+        tandem: tandem.createTandem( 'amplitudeSlider' )
       } );
 
       amplitudeSlider.right = frequencySlider.left - OFFSET;
 
-
       const oscillatePanel = new Panel( new Node( {
         children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
       } ), {
-        fill: '#D9FCC5', xMargin: 15, yMargin: 5
+        fill: '#D9FCC5', xMargin: 15, yMargin: 5,
+        tandem: tandem.createTandem( 'oscillatePanel' )
       } );
       this.addChild( oscillatePanel );
 
       const manualPanel = new Panel( new Node( {
         children: [ dampingSlider, tensionSlider, separator, checkboxGroup ]
       } ), {
-        fill: '#D9FCC5', xMargin: 15, yMargin: 5
+        fill: '#D9FCC5', xMargin: 15, yMargin: 5,
+        tandem: tandem.createTandem( 'manualPanel' )
       } );
       this.addChild( manualPanel );
 
       const pulsePanel = new Panel( new Node( {
         children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
       } ), {
-        fill: '#D9FCC5', xMargin: 15, yMargin: 5
+        fill: '#D9FCC5', xMargin: 15, yMargin: 5,
+        tandem: tandem.createTandem( 'pulsePanel' )
       } );
       this.addChild( pulsePanel );
 

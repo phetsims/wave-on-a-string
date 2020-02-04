@@ -40,11 +40,6 @@ define( require => {
     endStringNode: 670,
     yWrenchRange: new Range( -100, 100 ),
     maxWidthBottomControlPanel: 1000,
-    tensionRange: new Range( 0, 2 ),
-    dampingRange: new Range( 0, 100 ),
-    frequencyRange: new Range( 0, 3 ),
-    pulseWidthRange: new Range( 0.2, 1 ),
-    amplitudeRange: new Range( 0, 1.25 ),
 
     postGradient: new LinearGradient( -5, 0, 5, 0 )
       .addColorStop( 0, '#666' )
