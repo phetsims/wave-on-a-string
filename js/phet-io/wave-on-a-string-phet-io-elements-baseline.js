@@ -1419,7 +1419,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "ObjectIO"
     },
     "waveOnAString.waveOnAStringScreen.model.amplitudeProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the amplitude of the oscillation or pulses in centimeters",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1432,7 +1432,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.angleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the angle (in radians) of the oscillator or pulse",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1445,7 +1445,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.dampingProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the relative amount of damping (percentage) for the string",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1458,7 +1458,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.endTypeProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "what is on the right side of the string",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1471,7 +1471,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(FIXED_END|LOOSE_END|NO_END)>"
     },
     "waveOnAString.waveOnAStringScreen.model.frequencyProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the frequency of the oscillator, in hertz",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1484,7 +1484,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.horizontalRulerPositionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position of the horizontal ruler in view coordinates",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1497,7 +1497,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector2IO>"
     },
     "waveOnAString.waveOnAStringScreen.model.isPlayingProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether time is moving forward in the simulation (paused if false)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1510,7 +1510,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "waveOnAString.waveOnAStringScreen.model.lastDtProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the amount of time since the last manual internal step, in seconds",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1523,7 +1523,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.modeProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "what is on the left side of the string, controlling its motion",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1536,7 +1536,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<EnumerationIO(MANUAL|OSCILLATE|PULSE)>"
     },
     "waveOnAString.waveOnAStringScreen.model.nextLeftYProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "internal property used to interpolate the left-most y value of the string while the wrench is moved in manual mode - for low-fps browsers",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1549,7 +1549,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.pulsePendingProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether a pulse will start at the next internal model step",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1562,7 +1562,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "waveOnAString.waveOnAStringScreen.model.pulseProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether a pulse is currently active",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1575,7 +1575,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "waveOnAString.waveOnAStringScreen.model.pulseSignProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "which part of the pulse is being generated",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1588,7 +1588,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.pulseWidthProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the width of a pulse (generated with the pulse mode) in seconds",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1601,7 +1601,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.referenceLinePositionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position of the reference line in view coordinates",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1614,7 +1614,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector2IO>"
     },
     "waveOnAString.waveOnAStringScreen.model.referenceLineVisibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the reference line is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1627,7 +1627,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "waveOnAString.waveOnAStringScreen.model.rulersVisibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the rulers are visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1640,7 +1640,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "waveOnAString.waveOnAStringScreen.model.speedProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the speed of time moving forward (1 is at full speed, slow-motion is by default 0.25)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1731,7 +1731,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.stopwatchVisibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the stopwatch is visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1744,7 +1744,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "waveOnAString.waveOnAStringScreen.model.tensionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the relative amount of tension on the string",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1757,7 +1757,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.timeProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "the amount of time elapsed since the last evolution of the physics model, in seconds",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1770,7 +1770,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "NumberPropertyIO"
     },
     "waveOnAString.waveOnAStringScreen.model.verticalRulerPositionProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "position of the vertical ruler in view coordinates",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -1783,7 +1783,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<Vector2IO>"
     },
     "waveOnAString.waveOnAStringScreen.model.wrenchArrowsVisibleProperty": {
-      "phetioDocumentation": "",
+      "phetioDocumentation": "whether the up/down arrows on the wrench are visible",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,

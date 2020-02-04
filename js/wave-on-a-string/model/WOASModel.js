@@ -47,116 +47,138 @@ define( require => {
 
       // @public {Property.<WOASModel.Mode>}
       this.modeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
-        tandem: tandem.createTandem( 'modeProperty' )
+        tandem: tandem.createTandem( 'modeProperty' ),
+        phetioDocumentation: 'what is on the left side of the string, controlling its motion'
       } );
 
       // @public {Property.<WOASModel.EndType}
       this.endTypeProperty = new EnumerationProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END, {
-        tandem: tandem.createTandem( 'endTypeProperty' )
+        tandem: tandem.createTandem( 'endTypeProperty' ),
+        phetioDocumentation: 'what is on the right side of the string'
       } );
 
       // @public {Property.<boolean>}
       this.isPlayingProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'isPlayingProperty' )
+        tandem: tandem.createTandem( 'isPlayingProperty' ),
+        phetioDocumentation: 'whether time is moving forward in the simulation (paused if false)'
       } );
 
       // @public {Property.<number>} - Speed multiplier
       this.speedProperty = new NumberProperty( 1, {
         phetioStudioControl: false,
-        tandem: tandem.createTandem( 'speedProperty' )
+        tandem: tandem.createTandem( 'speedProperty' ),
+        phetioDocumentation: 'the speed of time moving forward (1 is at full speed, slow-motion is by default 0.25)'
       } );
 
       // @public {Property.<boolean>} - Visibilities
       this.rulersVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'rulersVisibleProperty' )
+        tandem: tandem.createTandem( 'rulersVisibleProperty' ),
+        phetioDocumentation: 'whether the rulers are visible'
       } );
       this.stopwatchVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'stopwatchVisibleProperty' )
+        tandem: tandem.createTandem( 'stopwatchVisibleProperty' ),
+        phetioDocumentation: 'whether the stopwatch is visible'
       } );
       this.referenceLineVisibleProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'referenceLineVisibleProperty' )
+        tandem: tandem.createTandem( 'referenceLineVisibleProperty' ),
+        phetioDocumentation: 'whether the reference line is visible'
       } );
       this.wrenchArrowsVisibleProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'wrenchArrowsVisibleProperty' )
+        tandem: tandem.createTandem( 'wrenchArrowsVisibleProperty' ),
+        phetioDocumentation: 'whether the up/down arrows on the wrench are visible'
       } );
 
       // @public {Property.<Vector2>}
       this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( 54, 117 ), {
-        tandem: tandem.createTandem( 'horizontalRulerPositionProperty' )
+        tandem: tandem.createTandem( 'horizontalRulerPositionProperty' ),
+        phetioDocumentation: 'position of the horizontal ruler in view coordinates'
       } );
       this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ), {
-        tandem: tandem.createTandem( 'verticalRulerPositionProperty' )
+        tandem: tandem.createTandem( 'verticalRulerPositionProperty' ),
+        phetioDocumentation: 'position of the vertical ruler in view coordinates'
       } );
       this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ), {
-        tandem: tandem.createTandem( 'referenceLinePositionProperty' )
+        tandem: tandem.createTandem( 'referenceLinePositionProperty' ),
+        phetioDocumentation: 'position of the reference line in view coordinates'
       } );
 
       // @public {Property.<number>}
       this.tensionProperty = new NumberProperty( 2, {
         range: new Range( 0, 2 ),
-        tandem: tandem.createTandem( 'tensionProperty' )
+        tandem: tandem.createTandem( 'tensionProperty' ),
+        phetioDocumentation: 'the relative amount of tension on the string'
       } );
 
       // @public {Property.<number>}
       this.dampingProperty = new NumberProperty( 20, {
         range: new Range( 0, 100 ),
-        tandem: tandem.createTandem( 'dampingProperty' )
+        tandem: tandem.createTandem( 'dampingProperty' ),
+        phetioDocumentation: 'the relative amount of damping (percentage) for the string'
       } );
 
       // @public {Property.<number>}
       this.frequencyProperty = new NumberProperty( 1.50, {
         range: new Range( 0, 3 ),
-        tandem: tandem.createTandem( 'frequencyProperty' )
+        tandem: tandem.createTandem( 'frequencyProperty' ),
+        phetioDocumentation: 'the frequency of the oscillator, in hertz'
       } );
 
       // @public {Property.<number>}
       this.pulseWidthProperty = new NumberProperty( 0.5, {
         range: new Range( 0.2, 1 ),
-        tandem: tandem.createTandem( 'pulseWidthProperty' )
+        tandem: tandem.createTandem( 'pulseWidthProperty' ),
+        phetioDocumentation: 'the width of a pulse (generated with the pulse mode) in seconds'
       } );
 
       // @public {Property.<number>}
       this.amplitudeProperty = new NumberProperty( 0.75, {
         range: new Range( 0, 1.25 ),
-        tandem: tandem.createTandem( 'amplitudeProperty' )
+        tandem: tandem.createTandem( 'amplitudeProperty' ),
+        phetioDocumentation: 'the amplitude of the oscillation or pulses in centimeters'
       } );
 
       // @public {Property.<number>}
       this.lastDtProperty = new NumberProperty( 0.03, {
         phetioReadOnly: true,
-        tandem: tandem.createTandem( 'lastDtProperty' )
+        tandem: tandem.createTandem( 'lastDtProperty' ),
+        phetioDocumentation: 'the amount of time since the last manual internal step, in seconds'
       } );
 
-      // @public {Property.<number>} - Base time??
+      // @public {Property.<number>}
       this.timeProperty = new NumberProperty( 0, {
         phetioReadOnly: true,
-        tandem: tandem.createTandem( 'timeProperty' )
+        tandem: tandem.createTandem( 'timeProperty' ),
+        phetioDocumentation: 'the amount of time elapsed since the last evolution of the physics model, in seconds'
       } );
 
-      // @public {Property.<number>} - Angle for OSCILLATE/PULSE mode, in radians
+      // @public {Property.<number>}
       this.angleProperty = new NumberProperty( 0, {
         phetioReadOnly: true,
         range: new Range( 0, 2 * Math.PI ),
-        tandem: tandem.createTandem( 'angleProperty' )
+        tandem: tandem.createTandem( 'angleProperty' ),
+        phetioDocumentation: 'the angle (in radians) of the oscillator or pulse'
       } );
 
-      // @public {Property.<boolean>} - Whether a pulse will start at the next proper model step
+      // @public {Property.<boolean>}
       this.pulsePendingProperty = new BooleanProperty( false, {
         phetioReadOnly: true,
-        tandem: tandem.createTandem( 'pulsePendingProperty' )
+        tandem: tandem.createTandem( 'pulsePendingProperty' ),
+        phetioDocumentation: 'whether a pulse will start at the next internal model step'
       } );
 
-      // @public {Property.<number>} - for pulse mode
+      // @public {Property.<number>}
       this.pulseSignProperty = new NumberProperty( 1, {
         phetioReadOnly: true,
         validValues: [ -1, 1 ],
-        tandem: tandem.createTandem( 'pulseSignProperty' )
+        tandem: tandem.createTandem( 'pulseSignProperty' ),
+        phetioDocumentation: 'which part of the pulse is being generated'
       } );
 
-      // @public {Property.<boolean>} - Whether a pulse is currently active
+      // @public {Property.<boolean>}
       this.pulseProperty = new BooleanProperty( false, {
         phetioReadOnly: true,
-        tandem: tandem.createTandem( 'pulseProperty' )
+        tandem: tandem.createTandem( 'pulseProperty' ),
+        phetioDocumentation: 'whether a pulse is currently active'
       } );
 
       // @public {Stopwatch}
@@ -168,11 +190,11 @@ define( require => {
       // @public {Emitter} - Events emitted by instances of this type
       this.yNowChangedEmitter = new Emitter();
 
-      // @public {number} - used to interpolate the left-most y value of the string while the wrench is moved in manual
-      // mode, for low-FPS browsers
+      // @public {number}
       this.nextLeftYProperty = new NumberProperty( 0, {
         phetioReadOnly: true,
-        tandem: tandem.createTandem( 'nextLeftYProperty' )
+        tandem: tandem.createTandem( 'nextLeftYProperty' ),
+        phetioDocumentation: 'internal property used to interpolate the left-most y value of the string while the wrench is moved in manual mode - for low-fps browsers'
       } );
 
       // @private {Property.<number>}
