@@ -1782,7 +1782,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1795,7 +1795,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberControlIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1808,7 +1808,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1821,7 +1821,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -1834,7 +1834,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1847,7 +1847,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1860,7 +1860,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -1873,7 +1873,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -1886,7 +1886,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.leftArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.leftArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1899,7 +1899,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1912,7 +1912,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberDisplayIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1925,7 +1925,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1938,7 +1938,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.valueText": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.valueText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1951,7 +1951,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.valueText.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.valueText.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1964,7 +1964,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.valueText.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.valueText.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1977,7 +1977,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.valueText.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.valueText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -1990,7 +1990,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.valueText.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.valueText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2003,7 +2003,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.numberDisplay.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.numberDisplay.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2016,7 +2016,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2029,7 +2029,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2042,7 +2042,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2055,7 +2055,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2068,7 +2068,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2081,7 +2081,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2094,7 +2094,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2107,7 +2107,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2120,7 +2120,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2133,7 +2133,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.rightArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.rightArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2146,7 +2146,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2159,7 +2159,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "SliderIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2172,7 +2172,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.enabledRangeProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.enabledRangeProperty": {
       "phetioDocumentation": "Sliders support two ranges: the outer range which specifies the min and max of the track and the enabledRangeProperty, which determines how low and high the thumb can be dragged within the track.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2185,7 +2185,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<RangeIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2198,7 +2198,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2211,7 +2211,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumb": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumb": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2224,7 +2224,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumb.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumb.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2237,7 +2237,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumb.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumb.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2250,7 +2250,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumb.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumb.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2263,7 +2263,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumbInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumbInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2276,7 +2276,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumbInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumbInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2289,7 +2289,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumbInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumbInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2302,7 +2302,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumbInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumbInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2315,7 +2315,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.thumbInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.thumbInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2328,7 +2328,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.track.trackInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.track.trackInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2341,7 +2341,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.track.trackInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.track.trackInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2354,7 +2354,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.track.trackInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.track.trackInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2367,7 +2367,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.track.trackInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.track.trackInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2380,7 +2380,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.track.trackInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.track.trackInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2393,7 +2393,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.valueProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.valueProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2406,7 +2406,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.slider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.slider.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2419,7 +2419,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.titleNode": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.titleNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2432,7 +2432,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.titleNode.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.titleNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2445,7 +2445,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.titleNode.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.titleNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2458,7 +2458,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.titleNode.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.titleNode.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2471,7 +2471,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.titleNode.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.titleNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2484,7 +2484,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeSlider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.amplitudeControl.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2497,7 +2497,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2510,7 +2510,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberControlIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2523,7 +2523,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2536,7 +2536,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2549,7 +2549,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2562,7 +2562,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2575,7 +2575,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2588,7 +2588,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2601,7 +2601,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.leftArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.leftArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2614,7 +2614,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2627,7 +2627,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberDisplayIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2640,7 +2640,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2653,7 +2653,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.valueText": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.valueText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2666,7 +2666,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.valueText.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.valueText.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2679,7 +2679,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.valueText.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.valueText.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2692,7 +2692,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.valueText.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.valueText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2705,7 +2705,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.valueText.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.valueText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2718,7 +2718,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.numberDisplay.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.numberDisplay.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2731,7 +2731,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2744,7 +2744,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2757,7 +2757,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2770,7 +2770,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2783,7 +2783,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2796,7 +2796,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2809,7 +2809,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2822,7 +2822,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2835,7 +2835,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2848,7 +2848,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.rightArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.rightArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2861,7 +2861,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2874,7 +2874,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "SliderIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2887,7 +2887,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.enabledRangeProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.enabledRangeProperty": {
       "phetioDocumentation": "Sliders support two ranges: the outer range which specifies the min and max of the track and the enabledRangeProperty, which determines how low and high the thumb can be dragged within the track.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2900,7 +2900,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<RangeIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2913,7 +2913,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2926,7 +2926,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumb": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumb": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2939,7 +2939,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumb.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumb.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2952,7 +2952,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumb.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumb.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2965,7 +2965,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumb.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumb.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -2978,7 +2978,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumbInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumbInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -2991,7 +2991,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumbInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumbInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3004,7 +3004,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumbInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumbInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3017,7 +3017,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumbInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumbInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3030,7 +3030,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.thumbInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.thumbInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3043,7 +3043,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.track.trackInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.track.trackInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3056,7 +3056,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.track.trackInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.track.trackInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3069,7 +3069,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.track.trackInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.track.trackInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3082,7 +3082,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.track.trackInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.track.trackInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3095,7 +3095,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.track.trackInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.track.trackInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3108,7 +3108,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.valueProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.valueProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3121,7 +3121,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.slider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.slider.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3134,7 +3134,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.titleNode": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.titleNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3147,7 +3147,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.titleNode.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.titleNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3160,7 +3160,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.titleNode.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.titleNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3173,7 +3173,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.titleNode.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.titleNode.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3186,7 +3186,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.titleNode.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.titleNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3199,7 +3199,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingSlider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.dampingControl.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3212,7 +3212,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3225,7 +3225,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberControlIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3238,7 +3238,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3251,7 +3251,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3264,7 +3264,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3277,7 +3277,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3290,7 +3290,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3303,7 +3303,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3316,7 +3316,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.leftArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.leftArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3329,7 +3329,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3342,7 +3342,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberDisplayIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3355,7 +3355,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3368,7 +3368,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.valueText": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.valueText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3381,7 +3381,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.valueText.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.valueText.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3394,7 +3394,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.valueText.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.valueText.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3407,7 +3407,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.valueText.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.valueText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3420,7 +3420,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.valueText.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.valueText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3433,7 +3433,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.numberDisplay.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.numberDisplay.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3446,7 +3446,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3459,7 +3459,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3472,7 +3472,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3485,7 +3485,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3498,7 +3498,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3511,7 +3511,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3524,7 +3524,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3537,7 +3537,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3550,7 +3550,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3563,7 +3563,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.rightArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.rightArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3576,7 +3576,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3589,7 +3589,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "SliderIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3602,7 +3602,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.enabledRangeProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.enabledRangeProperty": {
       "phetioDocumentation": "Sliders support two ranges: the outer range which specifies the min and max of the track and the enabledRangeProperty, which determines how low and high the thumb can be dragged within the track.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3615,7 +3615,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<RangeIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3628,7 +3628,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3641,7 +3641,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumb": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumb": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3654,7 +3654,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumb.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumb.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3667,7 +3667,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumb.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumb.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3680,7 +3680,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumb.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumb.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3693,7 +3693,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumbInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumbInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3706,7 +3706,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumbInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumbInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3719,7 +3719,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumbInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumbInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3732,7 +3732,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumbInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumbInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3745,7 +3745,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.thumbInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.thumbInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3758,7 +3758,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.track.trackInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.track.trackInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -3771,7 +3771,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.track.trackInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.track.trackInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3784,7 +3784,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.track.trackInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.track.trackInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3797,7 +3797,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.track.trackInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.track.trackInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3810,7 +3810,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.track.trackInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.track.trackInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3823,7 +3823,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.valueProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.valueProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3836,7 +3836,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.slider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.slider.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3849,7 +3849,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.titleNode": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.titleNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3862,7 +3862,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.titleNode.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.titleNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3875,7 +3875,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.titleNode.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.titleNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3888,7 +3888,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.titleNode.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.titleNode.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3901,7 +3901,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.titleNode.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.titleNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -3914,7 +3914,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencySlider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.frequencyControl.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4083,7 +4083,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4096,7 +4096,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberControlIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4109,7 +4109,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4122,7 +4122,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4135,7 +4135,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4148,7 +4148,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4161,7 +4161,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4174,7 +4174,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4187,7 +4187,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.leftArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.leftArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4200,7 +4200,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4213,7 +4213,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberDisplayIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4226,7 +4226,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4239,7 +4239,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.valueText": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.valueText": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4252,7 +4252,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.valueText.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.valueText.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4265,7 +4265,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.valueText.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.valueText.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4278,7 +4278,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.valueText.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.valueText.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4291,7 +4291,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.valueText.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.valueText.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4304,7 +4304,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.numberDisplay.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.numberDisplay.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4317,7 +4317,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4330,7 +4330,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4343,7 +4343,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4356,7 +4356,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton.enabledProperty": {
       "phetioDocumentation": "When disabled, the button is grayed out and cannot be pressed",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4369,7 +4369,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton.firedEmitter": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton.firedEmitter": {
       "phetioDocumentation": "Emits when the button is fired No arguments.",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4382,7 +4382,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "EmitterIO<>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4395,7 +4395,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4408,7 +4408,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton.pressListener.pressAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton.pressListener.pressAction": {
       "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4421,7 +4421,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<SceneryEventIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton.pressListener.releaseAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton.pressListener.releaseAction": {
       "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4434,7 +4434,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.rightArrowButton.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.rightArrowButton.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4447,7 +4447,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4460,7 +4460,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "SliderIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.enabledProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.enabledProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4473,7 +4473,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.enabledRangeProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.enabledRangeProperty": {
       "phetioDocumentation": "Sliders support two ranges: the outer range which specifies the min and max of the track and the enabledRangeProperty, which determines how low and high the thumb can be dragged within the track.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4486,7 +4486,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<RangeIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4499,7 +4499,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4512,7 +4512,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumb": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumb": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4525,7 +4525,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumb.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumb.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4538,7 +4538,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumb.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumb.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4551,7 +4551,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumb.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumb.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4564,7 +4564,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumbInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumbInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4577,7 +4577,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumbInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumbInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4590,7 +4590,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumbInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumbInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4603,7 +4603,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumbInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumbInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4616,7 +4616,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.thumbInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.thumbInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4629,7 +4629,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.track.trackInputListener": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.track.trackInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -4642,7 +4642,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.track.trackInputListener.dragAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.track.trackInputListener.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4655,7 +4655,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.track.trackInputListener.dragEndAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.track.trackInputListener.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4668,7 +4668,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.track.trackInputListener.dragStartAction": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.track.trackInputListener.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4681,7 +4681,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.track.trackInputListener.isDraggingProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.track.trackInputListener.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4694,7 +4694,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.valueProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.valueProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4707,7 +4707,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "LinkedElementIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.slider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.slider.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4720,7 +4720,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.titleNode": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.titleNode": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4733,7 +4733,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "TextIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.titleNode.opacityProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.titleNode.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4746,7 +4746,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.titleNode.pickableProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.titleNode.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4759,7 +4759,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.titleNode.textProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.titleNode.textProperty": {
       "phetioDocumentation": "Property for the displayed text",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4772,7 +4772,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<StringIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.titleNode.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.titleNode.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -4785,7 +4785,332 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthSlider.visibleProperty": {
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.pulseWidthControl.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "SliderIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.enabledProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.enabledRangeProperty": {
+      "phetioDocumentation": "Sliders support two ranges: the outer range which specifies the min and max of the track and the enabledRangeProperty, which determines how low and high the thumb can be dragged within the track.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<RangeIO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumb": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NodeIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumb.opacityProperty": {
+      "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumb.pickableProperty": {
+      "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumb.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumbInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumbInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumbInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumbInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.thumbInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.track.trackInputListener": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ObjectIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.track.trackInputListener.dragAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.track.trackInputListener.dragEndAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.track.trackInputListener.dragStartAction": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<Vector2IO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.track.trackInputListener.isDraggingProperty": {
+      "phetioDocumentation": "Indicates whether the object is dragging",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.valueProperty": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "LinkedElementIO"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.slider.visibleProperty": {
+      "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": true,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "waveOnAString.waveOnAStringScreen.view.bottomControlPanel.tensionControl.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
