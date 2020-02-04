@@ -32,7 +32,8 @@ define( require => {
             font: new PhetFont( 20 ),
             maxWidth: 250
           } ),
-          value: options.radio[ i ]
+          value: options.radio[ i ],
+          tandemName: options.tandemNames[ i ]
         } );
       }
 

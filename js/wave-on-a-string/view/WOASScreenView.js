@@ -108,7 +108,12 @@ define( require => {
               WOASModel.Mode.OSCILLATE,
               WOASModel.Mode.PULSE
             ],
-            text: [ manualString, oscillateString, pulseString ]
+            text: [ manualString, oscillateString, pulseString ],
+            tandemNames: [
+              'manualButton',
+              'oscillateButton',
+              'pulseButton'
+            ]
           } ), merge( {
             tandem: modePanelTandem
           }, radioPanelOptions ) ),
@@ -130,6 +135,11 @@ define( require => {
           WOASModel.EndType.NO_END
         ],
         text: [ fixedEndString, looseEndString, noEndString ],
+        tandemNames: [
+          'fixedEndButton',
+          'looseEndButton',
+          'noEndButton'
+        ],
         x: Constants.viewSize.width - 100,
         y: 5
       } ), merge( {
