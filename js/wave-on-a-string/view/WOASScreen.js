@@ -21,7 +21,8 @@ define( require => {
       super(
         () => new WOASModel( tandem.createTandem( 'model' ) ),
         model => new WOASScreenView( model, tandem.createTandem( 'view' ) ), {
-          backgroundColorProperty: new Property( '#FFFFB7' )
+          backgroundColorProperty: new Property( '#FFFFB7' ),
+        tandem: tandem
       } );
     }
   }
