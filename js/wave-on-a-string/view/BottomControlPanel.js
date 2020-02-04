@@ -10,10 +10,9 @@ define( require => {
   'use strict';
 
   // modules
-  const Constants = require( 'WAVE_ON_A_STRING/wave-on-a-string/Constants' );
-  const Dimension2 = require( 'DOT/Dimension2' );
   const HSlider = require( 'SUN/HSlider' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -79,14 +78,7 @@ define( require => {
       checkboxGroup.centerY = separator.centerY;
 
       const tensionControlTandem = tandem.createTandem( 'tensionControl' );
-      const tensionSlider = new HSlider( model.tensionProperty, model.tensionProperty.range, {
-        trackSize: new Dimension2( 140, 2 ),
-        trackFill: 'black',
-
-        thumbSize: new Dimension2( 22, 38 ),
-        thumbFillEnabled: Constants.sliderUp,
-        thumbFillHighlighted: Constants.sliderOver,
-
+      const tensionSlider = new HSlider( model.tensionProperty, model.tensionProperty.range, merge( {
         constrainValue: value => {
           // logic to round the value to nearest .25 to have snap behaviour
           value = Utils.toFixedNumber( value, 2 );
@@ -97,7 +89,7 @@ define( require => {
         },
 
         tandem: tensionControlTandem.createTandem( 'slider' )
-      } );
+      }, WOASNumberControl.getSliderOptions() ) );
 
       // tensionSlider ticks
       for ( let i = model.tensionProperty.range.min; i <= model.tensionProperty.range.max; i += 0.25 ) {

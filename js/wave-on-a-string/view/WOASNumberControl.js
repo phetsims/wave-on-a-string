@@ -50,14 +50,7 @@ define( require => {
           } );
         },
 
-        sliderOptions: {
-          trackSize: new Dimension2( 140, 2 ),
-          trackFill: 'black',
-
-          thumbSize: new Dimension2( 22, 38 ),
-          thumbFillEnabled: Constants.sliderUp,
-          thumbFillHighlighted: Constants.sliderOver
-        },
+        sliderOptions: WOASNumberControl.getSliderOptions(),
 
         numberDisplayOptions: {
           font: new PhetFont( 18 ),
@@ -75,6 +68,23 @@ define( require => {
       }, options );
 
       super( title, numberProperty, numberProperty.range, options );
+    }
+
+    /**
+     * Returns the default slider options.
+     * @public
+     *
+     * @returns {Object}
+     */
+    static getSliderOptions() {
+      return {
+        trackSize: new Dimension2( 140, 2 ),
+        trackFill: 'black',
+
+        thumbSize: new Dimension2( 22, 38 ),
+        thumbFillEnabled: Constants.sliderUp,
+        thumbFillHighlighted: Constants.sliderOver
+      };
     }
   }
 
