@@ -23,7 +23,7 @@ define( require => {
     /**
      * @param {string} title
      * @param {Property.<number>} numberProperty
-     * @param {Object} options
+     * @param {Object} [options]
      */
     constructor( title, numberProperty, options ) {
       options = merge( {
