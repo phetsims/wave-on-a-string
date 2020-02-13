@@ -39,7 +39,7 @@ define( require => {
 
       super( property, group, merge( {
         spacing: 16,
-        touchAreaXDilation: 10,
+        touchAreaDilation: 10,
         radioButtonOptions: {
           radius: 12,
           selectedColor: Constants.radioColor.toCSS()
