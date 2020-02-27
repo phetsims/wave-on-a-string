@@ -6,58 +6,54 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( require => {
-  'use strict';
+import Shape from '../../../../kite/js/Shape.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import RoundPushButton from '../../../../sun/js/buttons/RoundPushButton.js';
+import waveOnAString from '../../waveOnAString.js';
+import WOASModel from '../model/WOASModel.js';
 
-  // modules
-  const merge = require( 'PHET_CORE/merge' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
-  const Shape = require( 'KITE/Shape' );
-  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-  const WOASModel = require( 'WAVE_ON_A_STRING/wave-on-a-string/model/WOASModel' );
+class PulseButton extends RoundPushButton {
+  /**
+   * @param {WOASModel} model
+   * @param {Object} [options]
+   */
+  constructor( model, options ) {
+    const pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
 
-  class PulseButton extends RoundPushButton {
-    /**
-     * @param {WOASModel} model
-     * @param {Object} [options]
-     */
-    constructor( model, options ) {
-      const pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
+    super( merge( {
+      listener: () => {
+        model.manualPulse();
+        model.isPlayingProperty.value = true;
+        model.yNowChangedEmitter.emit();
+      },
+      baseColor: '#33dd33',
+      content: new Node( {
+        children: [
+          new Path( pulseShape, {
+            lineWidth: 3,
+            stroke: '#eee',
+            lineCap: 'round'
+          } ),
+          new Path( pulseShape, {
+            lineWidth: 1.5,
+            stroke: '#333',
+            lineCap: 'round'
+          } )
+        ]
+      } ),
+      radius: 17,
+      yContentOffset: -1
+    }, options ) );
 
-      super( merge( {
-        listener: () => {
-          model.manualPulse();
-          model.isPlayingProperty.value = true;
-          model.yNowChangedEmitter.emit();
-        },
-        baseColor: '#33dd33',
-        content: new Node( {
-          children: [
-            new Path( pulseShape, {
-              lineWidth: 3,
-              stroke: '#eee',
-              lineCap: 'round'
-            } ),
-            new Path( pulseShape, {
-              lineWidth: 1.5,
-              stroke: '#333',
-              lineCap: 'round'
-            } )
-          ]
-        } ),
-        radius: 17,
-        yContentOffset: -1
-      }, options ) );
+    this.touchArea = this.localBounds.dilatedXY( 5, 10 );
 
-      this.touchArea = this.localBounds.dilatedXY( 5, 10 );
-
-      model.modeProperty.link( mode => {
-        this.visible = mode === WOASModel.Mode.PULSE;
-      } );
-    }
+    model.modeProperty.link( mode => {
+      this.visible = mode === WOASModel.Mode.PULSE;
+    } );
   }
+}
 
-  return waveOnAString.register( 'PulseButton', PulseButton );
-} );
+waveOnAString.register( 'PulseButton', PulseButton );
+export default PulseButton;

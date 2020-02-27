@@ -6,35 +6,31 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-define( require => {
-  'use strict';
+import merge from '../../../../phet-core/js/merge.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
+import waveOnAStringStrings from '../../wave-on-a-string-strings.js';
+import waveOnAString from '../../waveOnAString.js';
 
-  // modules
-  const merge = require( 'PHET_CORE/merge' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const TextPushButton = require( 'SUN/buttons/TextPushButton' );
-  const waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
+const restartString = waveOnAStringStrings.restart;
 
-  // strings
-  const restartString = require( 'string!WAVE_ON_A_STRING/restart' );
+class RestartButton extends TextPushButton {
+  /**
+   * @param {function} callback
+   * @param {Object} [options]
+   */
+  constructor( callback, options ) {
 
-  class RestartButton extends TextPushButton {
-    /**
-     * @param {function} callback
-     * @param {Object} [options]
-     */
-    constructor( callback, options ) {
+    super( restartString, merge( {
+      listener: callback,
+      font: new PhetFont( 12 ),
+      baseColor: 'hsl(210,0%,85%)',
+      maxWidth: 250
+    }, options ) );
 
-      super( restartString, merge( {
-        listener: callback,
-        font: new PhetFont( 12 ),
-        baseColor: 'hsl(210,0%,85%)',
-        maxWidth: 250
-      }, options ) );
-
-      this.touchArea = this.localBounds.dilatedXY( 5, 20 );
-    }
+    this.touchArea = this.localBounds.dilatedXY( 5, 20 );
   }
+}
 
-  return waveOnAString.register( 'RestartButton', RestartButton );
-} );
+waveOnAString.register( 'RestartButton', RestartButton );
+export default RestartButton;
