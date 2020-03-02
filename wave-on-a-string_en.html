@@ -19,27 +19,8 @@
 
   window.phet = window.phet || {};
   window.phet.chipper = window.phet.chipper || {};
-  window.phet.chipper.packageObject = {
-    "name": "wave-on-a-string",
-    "version": "1.2.0-dev.2",
-    "license": "GPL-3.0",
-    "repository": { "type": "git", "url": "https://github.com/phetsims/wave-on-a-string.git" },
-    "devDependencies": { "grunt": "~1.0.0" },
-    "phet": {
-      "requirejsNamespace": "WAVE_ON_A_STRING",
-      "runnable": true,
-      "supportedBrands": [ "phet", "phet-io", "adapted-from-phet" ],
-      "simulation": true
-    },
-    "eslintConfig": { "extends": "../chipper/eslint/sim_eslintrc.js" }
-  };
-  window.phet.chipper.stringRepos = [ { "repo": "joist", "requirejsNamespace": "JOIST" }, {
-    "repo": "scenery-phet",
-    "requirejsNamespace": "SCENERY_PHET"
-  }, { "repo": "sun", "requirejsNamespace": "SUN" }, {
-    "repo": "tambo",
-    "requirejsNamespace": "TAMBO"
-  }, { "repo": "wave-on-a-string", "requirejsNamespace": "WAVE_ON_A_STRING" } ];
+  window.phet.chipper.packageObject = {"name":"wave-on-a-string","version":"1.2.0-dev.2","license":"GPL-3.0","repository":{"type":"git","url":"https://github.com/phetsims/wave-on-a-string.git"},"devDependencies":{"grunt":"~1.0.0"},"phet":{"requirejsNamespace":"WAVE_ON_A_STRING","runnable":true,"supportedBrands":["phet","phet-io","adapted-from-phet"],"simulation":true},"eslintConfig":{"extends":"../chipper/eslint/sim_eslintrc.js"}};
+  window.phet.chipper.stringRepos = [{"repo":"joist","requirejsNamespace":"JOIST"},{"repo":"scenery-phet","requirejsNamespace":"SCENERY_PHET"},{"repo":"sun","requirejsNamespace":"SUN"},{"repo":"tambo","requirejsNamespace":"TAMBO"},{"repo":"wave-on-a-string","requirejsNamespace":"WAVE_ON_A_STRING"}];
 
   // Identify the brand (assume generated brand if not provided with query parameters)
   const brandMatch = location.search.match( /brand=([^&]+)/ );
