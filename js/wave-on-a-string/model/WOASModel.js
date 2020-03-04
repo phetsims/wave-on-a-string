@@ -208,11 +208,9 @@ class WOASModel extends PhetioObject {
 
     // set the string to 0 on mode changes
     this.modeProperty.lazyLink( () => {
-      const isSettingPhetioState = _.hasIn( window, 'phet.phetIo.phetioEngine' ) &&
-                                   phet.phetIo.phetioEngine.phetioStateEngine.isSettingStateProperty.value;
 
       // Don't mess with phet-io, see https://github.com/phetsims/wave-on-a-string/issues/141
-      if ( !isSettingPhetioState ) {
+      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
         this.manualRestart();
       }
     } );
