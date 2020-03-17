@@ -6,9 +6,7 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -142,33 +140,30 @@ class WOASScreenView extends ScreenView {
     }, radioPanelOptions ) ) );
 
     this.addChild( new TimeControlNode( model.isPlayingProperty, {
-      isSlowMotionProperty: new DynamicProperty( new Property( model.speedProperty ), {
-        bidirectional: true,
-        map: speed => speed < 1,
-        inverseMap: slow => slow ? 0.25 : 1
-      } ),
+      timeControlSpeedProperty: model.timeControlSpeedProperty,
+      playPauseStepButtonOptions: {
+        playPauseButtonOptions: {
+          upFill: Constants.blueUpColor,
+          overFill: Constants.blueOverColor,
+          disabledFill: Constants.blueDisabledColor,
+          downFill: Constants.blueDownColor,
+          backgroundGradientColorStop0: Constants.buttonBorder0,
+          backgroundGradientColorStop1: Constants.buttonBorder1,
+          innerButtonLineWidth: 1,
+          scaleFactorWhenPaused: 1.25,
+          touchAreaDilation: 12
+        },
 
-      playPauseOptions: {
-        upFill: Constants.blueUpColor,
-        overFill: Constants.blueOverColor,
-        disabledFill: Constants.blueDisabledColor,
-        downFill: Constants.blueDownColor,
-        backgroundGradientColorStop0: Constants.buttonBorder0,
-        backgroundGradientColorStop1: Constants.buttonBorder1,
-        innerButtonLineWidth: 1,
-        scaleFactorWhenPaused: 1.25,
-        touchAreaDilation: 12
-      },
-
-      stepForwardOptions: {
-        listener: model.manualStep.bind( model ),
-        touchAreaDilation: 12,
-        upFill: Constants.blueUpColor,
-        overFill: Constants.blueOverColor,
-        disabledFill: Constants.blueDisabledColor,
-        downFill: Constants.blueDownColor,
-        backgroundGradientColorStop0: Constants.buttonBorder0,
-        backgroundGradientColorStop1: Constants.buttonBorder1
+        stepForwardButtonOptions: {
+          listener: model.manualStep.bind( model ),
+          touchAreaDilation: 12,
+          upFill: Constants.blueUpColor,
+          overFill: Constants.blueOverColor,
+          disabledFill: Constants.blueDisabledColor,
+          downFill: Constants.blueDownColor,
+          backgroundGradientColorStop0: Constants.buttonBorder0,
+          backgroundGradientColorStop1: Constants.buttonBorder1
+        }
       },
 
       scale: 0.75,

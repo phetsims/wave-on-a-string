@@ -15,6 +15,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import waveOnAString from '../../waveOnAString.js';
 import WOASModelIO from './WOASModelIO.js';
@@ -60,12 +61,17 @@ class WOASModel extends PhetioObject {
       phetioDocumentation: 'whether time is moving forward in the simulation (paused if false)'
     } );
 
-    // @public {Property.<number>} - Speed multiplier
-    this.speedProperty = new NumberProperty( 1, {
-      phetioStudioControl: false,
-      tandem: tandem.createTandem( 'speedProperty' ),
-      phetioDocumentation: 'the speed of time moving forward (1 is at full speed, slow-motion is by default 0.25)'
+    this.timeControlSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL, {
+      tandem: tandem.createTandem( 'timeControlSpeedProperty' ),
+      phetioDocumentation: 'the play speed for the simulation as it moves through times'
     } );
+
+    // // @public {Property.<number>} - Speed multiplier
+    // this.speedProperty = new NumberProperty( 1, {
+    //   phetioStudioControl: false,
+    //   tandem: tandem.createTandem( 'speedProperty' ),
+    //   phetioDocumentation: 'the speed of time moving forward (1 is at full speed, slow-motion is by default 0.25)'
+    // } );
 
     // @public {Property.<boolean>} - Visibilities
     this.rulersVisibleProperty = new BooleanProperty( false, {
@@ -327,21 +333,26 @@ class WOASModel extends PhetioObject {
     const fixDt = 1 / FRAMES_PER_SECOND;
     dt = ( dt !== undefined && dt > 0 ) ? dt : fixDt;
 
+    const speedMultiplier = this.timeControlSpeedProperty.value === TimeControlSpeed.NORMAL ? 1 :
+                            this.timeControlSpeedProperty.value === TimeControlSpeed.SLOW ? 0.25 :
+                            null;
+    assert && assert( speedMultiplier !== null, 'timeControlSpeedProperty has unsuported value' );
+
     // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
     const startingLeftY = this.yNow[ 0 ];
     const numSteps = Math.floor( dt / fixDt );
     const perStepDelta = numSteps ? ( ( this.nextLeftYProperty.value - startingLeftY ) / numSteps ) : 0;
 
     //dt for tension effect
-    const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.value * 0.4 ) * this.speedProperty.value ) );
+    const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.value * 0.4 ) * speedMultiplier ) );
     // limit max dt
     while ( dt >= fixDt ) {
       this.timeProperty.value = this.timeProperty.value + fixDt;
-      this.stopwatch.step( fixDt * this.speedProperty.value );
+      this.stopwatch.step( fixDt * speedMultiplier );
 
       if ( this.modeProperty.value === WOASModel.Mode.OSCILLATE ) {
         this.angleProperty.value = ( this.angleProperty.value +
-                                     Math.PI * 2 * this.frequencyProperty.value * fixDt * this.speedProperty.value ) % ( Math.PI * 2 );
+                                     Math.PI * 2 * this.frequencyProperty.value * fixDt * speedMultiplier ) % ( Math.PI * 2 );
         this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.value );
       }
       if ( this.modeProperty.value === WOASModel.Mode.PULSE && this.pulsePendingProperty.value ) {
@@ -350,7 +361,7 @@ class WOASModel extends PhetioObject {
         this.yNow[ 0 ] = 0;
       }
       if ( this.modeProperty.value === WOASModel.Mode.PULSE && this.pulseProperty.value ) {
-        const da = Math.PI * fixDt * this.speedProperty.value / this.pulseWidthProperty.value;
+        const da = Math.PI * fixDt * speedMultiplier / this.pulseWidthProperty.value;
         if ( this.angleProperty.value + da >= Math.PI / 2 ) {
           this.pulseSignProperty.value = -1;
         }
@@ -450,7 +461,7 @@ class WOASModel extends PhetioObject {
   reset() {
     this.modeProperty.reset();
     this.endTypeProperty.reset();
-    this.speedProperty.reset();
+    this.timeControlSpeedProperty.reset();
     this.rulersVisibleProperty.reset();
     this.stopwatchVisibleProperty.reset();
     this.referenceLineVisibleProperty.reset();
