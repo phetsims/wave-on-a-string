@@ -49,7 +49,9 @@ class WOASNumberControl extends NumberControl {
       sliderOptions: WOASNumberControl.getSliderOptions(),
 
       numberDisplayOptions: {
-        font: new PhetFont( 18 ),
+        textOptions: {
+          font: new PhetFont( 18 )
+        },
         maxWidth: 120,
         xMargin: 20,
         yMargin: 5,
