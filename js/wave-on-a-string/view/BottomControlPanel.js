@@ -16,7 +16,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
-import waveOnAStringStrings from '../../wave-on-a-string-strings.js';
+import waveOnAStringStrings from '../../waveOnAStringStrings.js';
 import waveOnAString from '../../waveOnAString.js';
 import WOASModel from '../model/WOASModel.js';
 import WOASNumberControl from './WOASNumberControl.js';

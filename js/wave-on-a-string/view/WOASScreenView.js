@@ -22,7 +22,7 @@ import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import windowEdgeImage from '../../../images/window-front_png.js';
-import waveOnAStringStrings from '../../wave-on-a-string-strings.js';
+import waveOnAStringStrings from '../../waveOnAStringStrings.js';
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
 import WOASModel from '../model/WOASModel.js';
