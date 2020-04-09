@@ -1702,7 +1702,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "waveOnAString.waveOnAStringScreen.model.stopwatch.isRunningProperty": {
       "phetioDocumentation": "",
