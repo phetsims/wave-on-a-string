@@ -25,10 +25,12 @@ class WOASModelIO extends ObjectIO {
     validate( model, this.validator );
 
     return {
-      yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
-      yNow: Float64ArrayIO.toStateObject( model.yNow ),
-      yLast: Float64ArrayIO.toStateObject( model.yLast ),
-      yNext: Float64ArrayIO.toStateObject( model.yNext )
+      private: {
+        yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
+        yNow: Float64ArrayIO.toStateObject( model.yNow ),
+        yLast: Float64ArrayIO.toStateObject( model.yLast ),
+        yNext: Float64ArrayIO.toStateObject( model.yNext )
+      }
     };
   }
 
@@ -46,10 +48,10 @@ class WOASModelIO extends ObjectIO {
 
     // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
     // Float64Arrays. Instead we set the array values directly.
-    model.yDraw.set( stateObject.yDraw );
-    model.yNow.set( stateObject.yNow );
-    model.yLast.set( stateObject.yLast );
-    model.yNext.set( stateObject.yNext );
+    model.yDraw.set( stateObject.private.yDraw );
+    model.yNow.set( stateObject.private.yNow );
+    model.yLast.set( stateObject.private.yLast );
+    model.yNext.set( stateObject.private.yNext );
 
     model.yNowChangedEmitter.emit();
   }
