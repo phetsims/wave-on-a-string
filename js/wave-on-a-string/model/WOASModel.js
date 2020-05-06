@@ -106,8 +106,8 @@ class WOASModel extends PhetioObject {
     } );
 
     // @public {Property.<number>}
-    this.tensionProperty = new NumberProperty( 2, {
-      range: new Range( 0, 2 ),
+    this.tensionProperty = new NumberProperty( 0.8, {
+      range: new Range( 0.2, 0.8 ),
       tandem: tandem.createTandem( 'tensionProperty' ),
       phetioDocumentation: 'the relative amount of tension on the string'
     } );
@@ -344,7 +344,7 @@ class WOASModel extends PhetioObject {
     const perStepDelta = numSteps ? ( ( this.nextLeftYProperty.value - startingLeftY ) / numSteps ) : 0;
 
     //dt for tension effect
-    const minDt = ( 1 / ( FRAMES_PER_SECOND * ( 0.2 + this.tensionProperty.value * 0.4 ) * speedMultiplier ) );
+    const minDt = ( 1 / ( FRAMES_PER_SECOND * ( ( this.tensionProperty.value - 0.2 ) * ( 0.8 / 0.6 ) + 0.2 ) * speedMultiplier ) );
     // limit max dt
     while ( dt >= fixDt ) {
       this.timeProperty.value = this.timeProperty.value + fixDt;
