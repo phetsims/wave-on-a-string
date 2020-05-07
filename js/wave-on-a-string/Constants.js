@@ -14,7 +14,6 @@ import LinearGradient from '../../../scenery/js/util/LinearGradient.js';
 import RadialGradient from '../../../scenery/js/util/RadialGradient.js';
 import waveOnAString from '../waveOnAString.js';
 
-let clickOffset = new Vector2( 0, 0 );
 const Constants = {
   viewSize: new Dimension2( 768, 504 ),
 
@@ -61,32 +60,17 @@ const Constants = {
   // {number} - how much to horizontally shift the window (to center)
   windowShift: 1,
 
-  offsetWheel: new Vector2( 0, 156 ),
-
-  dragAndDropHandler( thisNode, callback, startCallback, endCallback, tandem ) {
-    return new SimpleDragHandler( {
-      start: function( event, trail ) {
-        clickOffset = thisNode.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
-        startCallback && startCallback( event, trail );
-      },
-      drag: function( event ) {
-        callback( thisNode.globalToParentPoint( event.pointer.point ).minus( clickOffset ) );
-      },
-      end: function( event, trail ) {
-        endCallback && endCallback( event, trail );
-      },
-      tandem: tandem
-    } );
-  }
+  offsetWheel: new Vector2( 0, 156 )
 };
 
 waveOnAString.register( 'Constants', Constants );
 
-Constants.viewBounds = Constants.viewSize.toBounds();
+// @public {Bounds2}
+Constants.VIEW_BOUNDS = Constants.viewSize.toBounds();
 
 // TODO: doc
 Constants.boundedDragHandler = function( node, positionProperty, padding, tandem ) {
-  const restrictedBounds = Constants.viewBounds.eroded( padding );
+  const restrictedBounds = Constants.VIEW_BOUNDS.eroded( padding );
   let clickOffset = new Vector2( 0, 0 );
   node.addInputListener( new SimpleDragHandler( {
     start: function( event ) {

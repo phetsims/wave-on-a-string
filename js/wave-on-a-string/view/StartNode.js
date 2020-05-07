@@ -8,11 +8,13 @@
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import platform from '../../../../phet-core/js/platform.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
@@ -145,17 +147,28 @@ class StartNode extends Node {
       new Node( { children: [ wheel ], translation: Constants.offsetWheel } )
     ];
 
-    wrench.addInputListener( Constants.dragAndDropHandler( wrench, point => {
-      model.nextLeftYProperty.value = Math.max( Math.min( point.y, options.range.max ), options.range.min );
-      model.isPlayingProperty.value = true;
-      model.yNowChangedEmitter.emit();
-    }, event => {
-      if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
+    let clickOffset = new Vector2( 0, 0 );
+    wrench.addInputListener( new DragListener( {
+      tandem: options.tandem.createTandem( 'wrenchDragAndDropHandler' ),
+      start: event => {
+        clickOffset = wrench.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
+
+        if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
+          model.wrenchArrowsVisibleProperty.value = false;
+        }
+      },
+      drag: event => {
+        const point = wrench.globalToParentPoint( event.pointer.point ).minus( clickOffset );
+
+        model.nextLeftYProperty.value = Math.max( Math.min( point.y, options.range.max ), options.range.min );
+        model.isPlayingProperty.value = true;
+        model.yNowChangedEmitter.emit();
+      },
+      end: event => {
         model.wrenchArrowsVisibleProperty.value = false;
       }
-    }, event => {
-      model.wrenchArrowsVisibleProperty.value = false;
-    }, options.tandem.createTandem( 'wrenchDragAndDropHandler' ) ) );
+    } ) );
+
     model.wrenchArrowsVisibleProperty.link( visible => {
       wrenchTopArrow.visible = visible;
       wrenchBottomArrow.visible = visible;
