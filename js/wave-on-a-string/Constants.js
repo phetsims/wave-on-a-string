@@ -2,11 +2,9 @@
 
 
 import Bounds2 from '../../../dot/js/Bounds2.js';
-import Dimension2 from '../../../dot/js/Dimension2.js';
 import Range from '../../../dot/js/Range.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import merge from '../../../phet-core/js/merge.js';
-import SimpleDragHandler from '../../../scenery/js/input/SimpleDragHandler.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import Node from '../../../scenery/js/nodes/Node.js';
 import Color from '../../../scenery/js/util/Color.js';
@@ -15,7 +13,8 @@ import RadialGradient from '../../../scenery/js/util/RadialGradient.js';
 import waveOnAString from '../waveOnAString.js';
 
 const Constants = {
-  viewSize: new Dimension2( 768, 504 ),
+  // @public {Bounds2}
+  VIEW_BOUNDS: new Bounds2( 0, 0, 768, 504 ),
 
   // prefer 200 hue
   blueUpColor: new Color( 'hsl(210,70%,75%)' ),
@@ -64,39 +63,6 @@ const Constants = {
 };
 
 waveOnAString.register( 'Constants', Constants );
-
-// @public {Bounds2}
-Constants.VIEW_BOUNDS = Constants.viewSize.toBounds();
-
-// TODO: doc
-Constants.boundedDragHandler = function( node, positionProperty, padding, tandem ) {
-  const restrictedBounds = Constants.VIEW_BOUNDS.eroded( padding );
-  let clickOffset = new Vector2( 0, 0 );
-  node.addInputListener( new SimpleDragHandler( {
-    start: function( event ) {
-      clickOffset = node.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
-    },
-    drag: function( event ) {
-      const point = node.globalToParentPoint( event.pointer.point ).minus( clickOffset );
-
-      if ( node.right < restrictedBounds.minX ) {
-        point.x += -node.right + restrictedBounds.minX;
-      }
-      if ( node.left > restrictedBounds.maxX ) {
-        point.x += -node.left + restrictedBounds.maxX;
-      }
-      if ( node.bottom < restrictedBounds.minY ) {
-        point.y += -node.bottom + restrictedBounds.minY;
-      }
-      if ( node.top > restrictedBounds.maxY ) {
-        point.y += -node.top + restrictedBounds.maxY;
-      }
-
-      positionProperty.value = point;
-    },
-    tandem: tandem
-  } ) );
-};
 
 Constants.toImageNode = function( domImage, width, height, scale, options ) {
   assert && assert( scale % 1 === 0, 'Only integral scales have been tested' );

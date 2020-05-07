@@ -7,23 +7,24 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
-import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import windowEdgeImage from '../../../images/window-front_png.js';
-import waveOnAStringStrings from '../../waveOnAStringStrings.js';
 import waveOnAString from '../../waveOnAString.js';
+import waveOnAStringStrings from '../../waveOnAStringStrings.js';
 import Constants from '../Constants.js';
 import WOASModel from '../model/WOASModel.js';
 import BottomControlPanel from './BottomControlPanel.js';
@@ -49,7 +50,7 @@ class WOASScreenView extends ScreenView {
    */
   constructor( model, tandem ) {
     super( {
-      layoutBounds: new Bounds2( 0, 0, 768, 504 )
+      layoutBounds: Constants.VIEW_BOUNDS
     } );
 
     // @private {Emitter} - Fired when a view frame occurs
@@ -79,8 +80,18 @@ class WOASScreenView extends ScreenView {
     model.verticalRulerPositionProperty.link( position => {
       verticalRulerNode.translation = position;
     } );
-    Constants.boundedDragHandler( horizontalRulerNode, model.horizontalRulerPositionProperty, 30, horizontalRulerTandem.createTandem( 'inputListener' ) );
-    Constants.boundedDragHandler( verticalRulerNode, model.verticalRulerPositionProperty, 30, verticalRulerTandem.createTandem( 'inputListener' ) );
+
+    horizontalRulerNode.addInputListener( new DragListener( {
+      tandem: horizontalRulerTandem.createTandem( 'inputListener' ),
+      positionProperty: model.horizontalRulerPositionProperty,
+      dragBoundsProperty: new Property( Constants.VIEW_BOUNDS.dilated( 30 ).shiftedX( -Constants.VIEW_BOUNDS.width / 2 ).dilatedX( Constants.VIEW_BOUNDS.width * 0.4 ) )
+    } ) );
+
+    verticalRulerNode.addInputListener( new DragListener( {
+      tandem: verticalRulerTandem.createTandem( 'inputListener' ),
+      positionProperty: model.verticalRulerPositionProperty,
+      dragBoundsProperty: new Property( Constants.VIEW_BOUNDS.withMaxX( Constants.VIEW_BOUNDS.maxX - 50 ).withMaxY( Constants.VIEW_BOUNDS.maxY * 1.8 ) )
+    } ) );
 
     const radioPanelOptions = {
       fill: '#D9FCC5',
@@ -132,10 +143,10 @@ class WOASScreenView extends ScreenView {
         'looseEndButton',
         'noEndButton'
       ],
-      x: Constants.viewSize.width - 100,
+      x: Constants.VIEW_BOUNDS.width - 100,
       y: 5
     } ), merge( {
-      right: Constants.viewSize.width - 5,
+      right: Constants.VIEW_BOUNDS.width - 5,
       tandem: endTypePanelTandem
     }, radioPanelOptions ) ) );
 
@@ -167,8 +178,8 @@ class WOASScreenView extends ScreenView {
       },
 
       scale: 0.75,
-      centerX: Constants.viewSize.width / 2,
-      centerY: Constants.viewSize.height - 131,
+      centerX: Constants.VIEW_BOUNDS.width / 2,
+      centerY: Constants.VIEW_BOUNDS.height - 131,
 
       tandem: tandem.createTandem( 'timeControlNode' )
     } ) );
