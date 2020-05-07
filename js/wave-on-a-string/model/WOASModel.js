@@ -11,6 +11,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
+import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
@@ -344,7 +345,12 @@ class WOASModel extends PhetioObject {
     const perStepDelta = numSteps ? ( ( this.nextLeftYProperty.value - startingLeftY ) / numSteps ) : 0;
 
     //dt for tension effect
-    const minDt = ( 1 / ( FRAMES_PER_SECOND * ( ( this.tensionProperty.value - 0.2 ) * ( 0.8 / 0.6 ) + 0.2 ) * speedMultiplier ) );
+    const tensionFactor = Utils.linear(
+      Math.sqrt( 0.2 ), Math.sqrt( 0.8 ),
+      0.2, 1,
+      Math.sqrt( this.tensionProperty.value )
+    );
+    const minDt = ( 1 / ( FRAMES_PER_SECOND * tensionFactor * speedMultiplier ) );
     // limit max dt
     while ( dt >= fixDt ) {
       this.timeProperty.value = this.timeProperty.value + fixDt;
