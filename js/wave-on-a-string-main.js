@@ -7,7 +7,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import waveOnAStringStrings from './waveOnAStringStrings.js';
 import WOASScreen from './wave-on-a-string/view/WOASScreen.js';
@@ -25,7 +25,7 @@ const simOptions = {
   }
 };
 
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
   //Create and start the sim
   new Sim( waveOnAStringTitleString, [
     new WOASScreen( Tandem.ROOT.createTandem( 'waveOnAStringScreen' ) )
