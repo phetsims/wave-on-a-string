@@ -6,9 +6,11 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -53,7 +55,16 @@ class ReferenceLine extends Node {
     this.touchArea = Shape.bounds( Bounds2.point( 755, 0 ).dilated( Constants.dilatedReferenceLineTouchArea ) );
     this.mouseArea = Shape.bounds( Bounds2.point( 755, 0 ).dilatedXY( 15, 10 ) );
 
-    Constants.boundedDragHandler( this, model.referenceLinePositionProperty, 30, tandem.createTandem( 'inputListener' ) );
+    this.addInputListener( new DragListener( {
+      positionProperty: model.referenceLinePositionProperty,
+      tandem: tandem.createTandem( 'inputListener' ),
+      dragBoundsProperty: new Property( new Bounds2(
+        Constants.VIEW_BOUNDS.minX + 30 - Constants.VIEW_BOUNDS.width,
+        Constants.VIEW_BOUNDS.minY + 30,
+        Constants.VIEW_BOUNDS.maxX - Constants.VIEW_BOUNDS.width,
+        Constants.VIEW_BOUNDS.maxY - 30
+      ) )
+    } ) );
   }
 }
 
