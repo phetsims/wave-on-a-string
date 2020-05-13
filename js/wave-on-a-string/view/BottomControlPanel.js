@@ -91,7 +91,7 @@ class BottomControlPanel extends Node {
     tensionControl.right = separator.left - 20;
 
     const dampingControl = new WOASNumberControl( dampingString, model.dampingProperty, {
-      delta: 1,
+      delta: 5,
       numberDisplayOptions: {
         decimalPlaces: 0,
         valuePattern: patternValueUnitPercentageString
@@ -103,7 +103,7 @@ class BottomControlPanel extends Node {
     tensionControl.bottom = dampingControl.bottom;
 
     const frequencyControl = new WOASNumberControl( frequencyString, model.frequencyProperty, {
-      delta: 0.01,
+      delta: 0.1,
       numberDisplayOptions: {
         decimalPlaces: 2,
         valuePattern: patternValueUnitHzString
@@ -114,7 +114,7 @@ class BottomControlPanel extends Node {
     frequencyControl.right = dampingControl.left - OFFSET;
 
     const pulseWidthControl = new WOASNumberControl( pulseWidthString, model.pulseWidthProperty, {
-      delta: 0.01,
+      delta: 0.1,
       numberDisplayOptions: {
         decimalPlaces: 2,
         valuePattern: patternValueUnitSString
@@ -125,7 +125,7 @@ class BottomControlPanel extends Node {
     pulseWidthControl.right = dampingControl.left - OFFSET;
 
     const amplitudeControl = new WOASNumberControl( amplitudeString, model.amplitudeProperty, {
-      delta: 0.01,
+      delta: 0.1,
       numberDisplayOptions: {
         decimalPlaces: 2,
         valuePattern: patternValueUnitCmString

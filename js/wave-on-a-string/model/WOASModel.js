@@ -136,7 +136,7 @@ class WOASModel extends PhetioObject {
 
     // @public {Property.<number>}
     this.amplitudeProperty = new NumberProperty( 0.75, {
-      range: new Range( 0, 1.25 ),
+      range: new Range( 0, 1.3 ),
       tandem: tandem.createTandem( 'amplitudeProperty' ),
       phetioDocumentation: 'the amplitude of the oscillation or pulses in centimeters'
     } );
