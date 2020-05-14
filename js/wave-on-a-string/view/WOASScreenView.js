@@ -56,8 +56,11 @@ class WOASScreenView extends ScreenView {
     // @private {Emitter} - Fired when a view frame occurs
     this.frameEmitter = new Emitter();
 
-    const horizontalRulerTandem = tandem.createTandem( 'horizontalRulerNode' );
-    const verticalRulerTandem = tandem.createTandem( 'verticalRulerNode' );
+    const rulersTandem = tandem.createTandem( 'rulersNode' );
+    const wavePlayAreaTandem = tandem.createTandem( 'wavePlayArea' );
+
+    const horizontalRulerTandem = rulersTandem.createTandem( 'horizontalRulerNode' );
+    const verticalRulerTandem = rulersTandem.createTandem( 'verticalRulerNode' );
 
     const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
     const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, merge( {
@@ -219,19 +222,19 @@ class WOASScreenView extends ScreenView {
       lineWidth: 2,
       x: Constants.startStringNode,
       y: Constants.yStringNode,
-      tandem: tandem.createTandem( 'centerLine' )
+      tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
     } ) );
     const endNode = new EndNode( model, this.frameEmitter, {
       x: Constants.endStringNode,
       y: Constants.yStringNode,
-      tandem: tandem.createTandem( 'endNode' )
+      tandem: wavePlayAreaTandem.createTandem( 'endNode' )
     } );
     endNode.windowNode.x += Constants.endStringNode;
     endNode.windowNode.y += Constants.yStringNode;
     this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ) ) );
     this.addChild( endNode );
-    this.addChild( new StringNode( model, this.frameEmitter, tandem.createTandem( 'stringNode' ), {
+    this.addChild( new StringNode( model, this.frameEmitter, wavePlayAreaTandem.createTandem( 'stringNode' ), {
       x: Constants.startStringNode,
       y: Constants.yStringNode,
       radius: Constants.segmentStringNodeRadius
@@ -240,7 +243,7 @@ class WOASScreenView extends ScreenView {
       x: Constants.startStringNode,
       y: Constants.yStringNode,
       range: Constants.yWrenchRange,
-      tandem: tandem.createTandem( 'startNode' )
+      tandem: wavePlayAreaTandem.createTandem( 'startNode' )
     } ) );
     this.addChild( windowImage = new Node( {
       children: [ new Image( windowEdgeImage, {

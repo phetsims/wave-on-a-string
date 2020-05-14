@@ -62,17 +62,11 @@ class WOASModel extends PhetioObject {
       phetioDocumentation: 'whether time is moving forward in the simulation (paused if false)'
     } );
 
+    // @public {Property.<TimeControlSpeed>}
     this.timeControlSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL, {
       tandem: tandem.createTandem( 'timeControlSpeedProperty' ),
-      phetioDocumentation: 'the play speed for the simulation as it moves through times'
+      phetioDocumentation: 'the play speed for the simulation as it moves through time'
     } );
-
-    // // @public {Property.<number>} - Speed multiplier
-    // this.speedProperty = new NumberProperty( 1, {
-    //   phetioStudioControl: false,
-    //   tandem: tandem.createTandem( 'speedProperty' ),
-    //   phetioDocumentation: 'the speed of time moving forward (1 is at full speed, slow-motion is by default 0.25)'
-    // } );
 
     // @public {Property.<boolean>} - Visibilities
     this.rulersVisibleProperty = new BooleanProperty( false, {
@@ -124,21 +118,24 @@ class WOASModel extends PhetioObject {
     this.frequencyProperty = new NumberProperty( 1.50, {
       range: new Range( 0, 3 ),
       tandem: tandem.createTandem( 'frequencyProperty' ),
-      phetioDocumentation: 'the frequency of the oscillator, in hertz'
+      phetioDocumentation: 'the frequency of the oscillator, in hertz',
+      units: 'hertz'
     } );
 
     // @public {Property.<number>}
     this.pulseWidthProperty = new NumberProperty( 0.5, {
       range: new Range( 0.2, 1 ),
       tandem: tandem.createTandem( 'pulseWidthProperty' ),
-      phetioDocumentation: 'the width of a pulse (generated with the pulse mode) in seconds'
+      phetioDocumentation: 'the width of a pulse (generated with the pulse mode) in seconds',
+      units: 's'
     } );
 
     // @public {Property.<number>}
     this.amplitudeProperty = new NumberProperty( 0.75, {
       range: new Range( 0, 1.3 ),
       tandem: tandem.createTandem( 'amplitudeProperty' ),
-      phetioDocumentation: 'the amplitude of the oscillation or pulses in centimeters'
+      phetioDocumentation: 'the amplitude of the oscillation or pulses in centimeters',
+      units: 'cm'
     } );
 
     // @public {Property.<number>}
@@ -160,7 +157,8 @@ class WOASModel extends PhetioObject {
       phetioReadOnly: true,
       range: new Range( 0, 2 * Math.PI ),
       tandem: tandem.createTandem( 'angleProperty' ),
-      phetioDocumentation: 'the angle (in radians) of the oscillator or pulse'
+      phetioDocumentation: 'the angle (in radians) of the oscillator or pulse',
+      units: 'radians'
     } );
 
     // @public {Property.<boolean>}
