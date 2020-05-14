@@ -149,7 +149,7 @@ class StartNode extends Node {
 
     let clickOffset = new Vector2( 0, 0 );
     wrench.addInputListener( new DragListener( {
-      tandem: options.tandem.createTandem( 'wrenchDragAndDropHandler' ),
+      tandem: options.tandem.createTandem( 'wrenchDragListener' ),
       start: event => {
         clickOffset = wrench.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
 
