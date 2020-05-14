@@ -9,6 +9,7 @@
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
+import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -80,10 +81,13 @@ class BottomControlPanel extends Node {
     tensionProperty.range = new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 );
 
     const tensionControl = new WOASNumberControl( tensionString, tensionProperty, {
-      delta: 5,
+      delta: 1,
       numberDisplayOptions: {
         decimalPlaces: 0,
         valuePattern: patternValueUnitPercentageString
+      },
+      sliderOptions: {
+        constrainValue: value => tensionProperty.range.constrainValue( Utils.roundToInterval( value, 5 ) )
       },
       tandem: tandem.createTandem( 'tensionControl' )
     } );
@@ -91,10 +95,13 @@ class BottomControlPanel extends Node {
     tensionControl.right = separator.left - 20;
 
     const dampingControl = new WOASNumberControl( dampingString, model.dampingProperty, {
-      delta: 5,
+      delta: 1,
       numberDisplayOptions: {
         decimalPlaces: 0,
         valuePattern: patternValueUnitPercentageString
+      },
+      sliderOptions: {
+        constrainValue: value => model.dampingProperty.range.constrainValue( Utils.roundToInterval( value, 5 ) )
       },
       tandem: tandem.createTandem( 'dampingControl' )
     } );
@@ -103,10 +110,13 @@ class BottomControlPanel extends Node {
     tensionControl.bottom = dampingControl.bottom;
 
     const frequencyControl = new WOASNumberControl( frequencyString, model.frequencyProperty, {
-      delta: 0.1,
+      delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
         valuePattern: patternValueUnitHzString
+      },
+      sliderOptions: {
+        constrainValue: value => model.frequencyProperty.range.constrainValue( Utils.roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'frequencyControl' )
     } );
@@ -114,10 +124,13 @@ class BottomControlPanel extends Node {
     frequencyControl.right = dampingControl.left - OFFSET;
 
     const pulseWidthControl = new WOASNumberControl( pulseWidthString, model.pulseWidthProperty, {
-      delta: 0.1,
+      delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
         valuePattern: patternValueUnitSString
+      },
+      sliderOptions: {
+        constrainValue: value => model.pulseWidthProperty.range.constrainValue( Utils.roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'pulseWidthControl' )
     } );
@@ -125,10 +138,13 @@ class BottomControlPanel extends Node {
     pulseWidthControl.right = dampingControl.left - OFFSET;
 
     const amplitudeControl = new WOASNumberControl( amplitudeString, model.amplitudeProperty, {
-      delta: 0.1,
+      delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
         valuePattern: patternValueUnitCmString
+      },
+      sliderOptions: {
+        constrainValue: value => model.amplitudeProperty.range.constrainValue( Utils.roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'amplitudeControl' )
     } );
