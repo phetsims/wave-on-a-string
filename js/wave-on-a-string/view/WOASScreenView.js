@@ -11,11 +11,11 @@ import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -154,7 +154,7 @@ class WOASScreenView extends ScreenView {
     }, radioPanelOptions ) ) );
 
     this.addChild( new TimeControlNode( model.isPlayingProperty, {
-      timeControlSpeedProperty: model.timeControlSpeedProperty,
+      timeSpeedProperty: model.timeSpeedProperty,
       playPauseStepButtonOptions: {
         playPauseButtonOptions: {
           upFill: Constants.blueUpColor,

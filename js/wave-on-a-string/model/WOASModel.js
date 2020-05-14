@@ -16,7 +16,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
-import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import waveOnAString from '../../waveOnAString.js';
 import WOASModelIO from './WOASModelIO.js';
@@ -62,9 +62,9 @@ class WOASModel extends PhetioObject {
       phetioDocumentation: 'whether time is moving forward in the simulation (paused if false)'
     } );
 
-    // @public {Property.<TimeControlSpeed>}
-    this.timeControlSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL, {
-      tandem: tandem.createTandem( 'timeControlSpeedProperty' ),
+    // @public {Property.<TimeSpeed>}
+    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+      tandem: tandem.createTandem( 'timeSpeedProperty' ),
       phetioDocumentation: 'the play speed for the simulation as it moves through time'
     } );
 
@@ -332,10 +332,10 @@ class WOASModel extends PhetioObject {
     const fixDt = 1 / FRAMES_PER_SECOND;
     dt = ( dt !== undefined && dt > 0 ) ? dt : fixDt;
 
-    const speedMultiplier = this.timeControlSpeedProperty.value === TimeControlSpeed.NORMAL ? 1 :
-                            this.timeControlSpeedProperty.value === TimeControlSpeed.SLOW ? 0.25 :
+    const speedMultiplier = this.timeSpeedProperty.value === TimeSpeed.NORMAL ? 1 :
+                            this.timeSpeedProperty.value === TimeSpeed.SLOW ? 0.25 :
                             null;
-    assert && assert( speedMultiplier !== null, 'timeControlSpeedProperty has unsuported value' );
+    assert && assert( speedMultiplier !== null, 'timeSpeedProperty has unsuported value' );
 
     // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
     const startingLeftY = this.yNow[ 0 ];
@@ -465,7 +465,7 @@ class WOASModel extends PhetioObject {
   reset() {
     this.modeProperty.reset();
     this.endTypeProperty.reset();
-    this.timeControlSpeedProperty.reset();
+    this.timeSpeedProperty.reset();
     this.rulersVisibleProperty.reset();
     this.stopwatchVisibleProperty.reset();
     this.referenceLineVisibleProperty.reset();
