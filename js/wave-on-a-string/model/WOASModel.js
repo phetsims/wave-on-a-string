@@ -89,15 +89,15 @@ class WOASModel extends PhetioObject {
     // @public {Property.<Vector2>}
     this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( 54, 117 ), {
       tandem: tandem.createTandem( 'horizontalRulerPositionProperty' ),
-      phetioDocumentation: 'position of the horizontal ruler in view coordinates'
+      phetioDocumentation: 'position of the horizontal ruler in view coordinates (from the top-left of the ruler, initially 54,117)'
     } );
     this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ), {
       tandem: tandem.createTandem( 'verticalRulerPositionProperty' ),
-      phetioDocumentation: 'position of the vertical ruler in view coordinates'
+      phetioDocumentation: 'position of the vertical ruler in view coordinates (from the bottom-left of the ruler, initially 13,440)'
     } );
     this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ), {
       tandem: tandem.createTandem( 'referenceLinePositionProperty' ),
-      phetioDocumentation: 'position of the reference line in view coordinates'
+      phetioDocumentation: 'position of the reference line in view coordinates (from the left of the line, initially -10,120)'
     } );
 
     // @public {Property.<number>}
