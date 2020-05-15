@@ -406,7 +406,7 @@ class WOASModel extends PhetioObject {
   }
 
   /**
-   * Returns the y position for the end of the string (location for the ring).
+   * Returns the y position for the end of the string (position for the ring).
    * @public
    *
    * @returns {number}
