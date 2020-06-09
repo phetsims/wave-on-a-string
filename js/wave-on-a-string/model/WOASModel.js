@@ -77,10 +77,6 @@ class WOASModel extends PhetioObject {
       tandem: tandem.createTandem( 'rulersVisibleProperty' ),
       phetioDocumentation: 'whether the rulers are visible'
     } );
-    this.stopwatchVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'stopwatchVisibleProperty' ),
-      phetioDocumentation: 'whether the stopwatch is visible'
-    } );
     this.referenceLineVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'referenceLineVisibleProperty' ),
       phetioDocumentation: 'whether the reference line is visible'
@@ -482,7 +478,6 @@ class WOASModel extends PhetioObject {
     this.endTypeProperty.reset();
     this.timeSpeedProperty.reset();
     this.rulersVisibleProperty.reset();
-    this.stopwatchVisibleProperty.reset();
     this.referenceLineVisibleProperty.reset();
     this.tensionProperty.reset();
     this.dampingProperty.reset();

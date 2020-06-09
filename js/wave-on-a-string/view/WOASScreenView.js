@@ -210,9 +210,6 @@ class WOASScreenView extends ScreenView {
     } );
     stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
     this.addChild( stopwatchNode );
-    model.stopwatchVisibleProperty.link( visible => {
-      stopwatchNode.visible = visible;
-    } );
     let windowImage;
 
     //center line

@@ -56,7 +56,7 @@ class BottomControlPanel extends Node {
       tandem: checkboxTandem.createTandem( 'rulersVisibleCheckbox' )
     }, {
       node: new Text( timerString, checkboxTextOptions ),
-      property: model.stopwatchVisibleProperty,
+      property: model.stopwatch.isVisibleProperty,
       tandem: checkboxTandem.createTandem( 'stopwatchVisibleCheckbox' )
     }, {
       node: new Text( referenceLineString, checkboxTextOptions ),
