@@ -209,6 +209,8 @@ class WOASModel extends PhetioObject {
       units: 'cm',
       phetioType: PropertyIO( NumberIO )
     } );
+    // TODO: how to support range on dynamic properties?
+    this.waveStartPositionProperty.range = new Range( -1.3, 1.3 );
 
     // @private {Property.<number>}
     this.stepDtProperty = new NumberProperty( 0, {

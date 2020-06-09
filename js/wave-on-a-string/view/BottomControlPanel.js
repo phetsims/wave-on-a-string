@@ -11,8 +11,9 @@ import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
@@ -34,17 +35,12 @@ const rulersString = waveOnAStringStrings.rulers;
 const tensionString = waveOnAStringStrings.tension;
 const timerString = waveOnAStringStrings.timer;
 
-// constants
-const OFFSET = 35;
-
-class BottomControlPanel extends Node {
+class BottomControlPanel extends Panel {
   /**
    * @param {WOASModel} model
    * @param {Tandem} tandem
    */
   constructor( model, tandem ) {
-    super( { scale: 0.7, tandem: tandem } );
-
     const checkboxTextOptions = {
       font: new PhetFont( 15 ),
       maxWidth: 130
@@ -68,15 +64,11 @@ class BottomControlPanel extends Node {
 
     const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 
-    separator.right = checkboxGroup.left - 20;
-    checkboxGroup.centerY = separator.centerY;
-
     const tensionProperty = new DynamicProperty( new Property( model.tensionProperty ), {
       bidirectional: true,
       map: value => value * 100,
       inverseMap: value => value / 100
     } );
-
     // TODO: how to support range on dynamic properties?
     tensionProperty.range = new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 );
 
@@ -91,9 +83,6 @@ class BottomControlPanel extends Node {
       },
       tandem: tandem.createTandem( 'tensionControl' )
     } );
-
-    tensionControl.right = separator.left - 20;
-
     const dampingControl = new WOASNumberControl( dampingString, model.dampingProperty, {
       delta: 1,
       numberDisplayOptions: {
@@ -105,10 +94,6 @@ class BottomControlPanel extends Node {
       },
       tandem: tandem.createTandem( 'dampingControl' )
     } );
-
-    dampingControl.right = tensionControl.left - OFFSET;
-    tensionControl.bottom = dampingControl.bottom;
-
     const frequencyControl = new WOASNumberControl( frequencyString, model.frequencyProperty, {
       delta: 0.01,
       numberDisplayOptions: {
@@ -120,9 +105,6 @@ class BottomControlPanel extends Node {
       },
       tandem: tandem.createTandem( 'frequencyControl' )
     } );
-
-    frequencyControl.right = dampingControl.left - OFFSET;
-
     const pulseWidthControl = new WOASNumberControl( pulseWidthString, model.pulseWidthProperty, {
       delta: 0.01,
       numberDisplayOptions: {
@@ -134,9 +116,6 @@ class BottomControlPanel extends Node {
       },
       tandem: tandem.createTandem( 'pulseWidthControl' )
     } );
-
-    pulseWidthControl.right = dampingControl.left - OFFSET;
-
     const amplitudeControl = new WOASNumberControl( amplitudeString, model.amplitudeProperty, {
       delta: 0.01,
       numberDisplayOptions: {
@@ -149,38 +128,48 @@ class BottomControlPanel extends Node {
       tandem: tandem.createTandem( 'amplitudeControl' )
     } );
 
-    amplitudeControl.right = frequencyControl.left - OFFSET;
-
-    // 20 between separator and tensionControl
-    // 20 between checkboxGroup and separator
-
-    const oscillatePanel = new Panel( new Node( {
-      children: [ amplitudeControl, frequencyControl, dampingControl, tensionControl, separator, checkboxGroup ]
-    } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5
+    // We want the pulse-width and frequency controls to have the same bounds
+    const frequencyPulseWidthAlignGroup = new AlignGroup();
+    const frequencyAlignBox = frequencyPulseWidthAlignGroup.createBox( frequencyControl, {
+      visibleProperty: frequencyControl.visibleProperty
     } );
-    this.addChild( oscillatePanel );
-
-    const manualPanel = new Panel( new Node( {
-      children: [ dampingControl, tensionControl, separator, checkboxGroup ]
-    } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5
+    const pulseWidthAlignBox = frequencyPulseWidthAlignGroup.createBox( pulseWidthControl, {
+      visibleProperty: pulseWidthControl.visibleProperty
     } );
-    this.addChild( manualPanel );
 
-    const pulsePanel = new Panel( new Node( {
-      children: [ amplitudeControl, pulseWidthControl, dampingControl, tensionControl, separator, checkboxGroup ]
-    } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5
+    const controlBox = new HBox( {
+      spacing: 35
     } );
-    this.addChild( pulsePanel );
+    model.modeProperty.link( mode => {
+      if ( mode === WOASModel.Mode.OSCILLATE ) {
+        controlBox.children = [ amplitudeControl, frequencyAlignBox, dampingControl, tensionControl ];
+      }
+      else if ( mode === WOASModel.Mode.MANUAL ) {
+        controlBox.children = [ dampingControl, tensionControl ];
+      }
+      else if ( mode === WOASModel.Mode.PULSE ) {
+        controlBox.children = [ amplitudeControl, pulseWidthAlignBox, dampingControl, tensionControl ];
+      }
+      else {
+        throw new Error( `Unknown mode: ${mode}` );
+      }
+    } );
 
-    oscillatePanel.right = manualPanel.right;
-    pulsePanel.right = manualPanel.right;
-    model.modeProperty.link( function updateBottomControlPanel( value ) {
-      oscillatePanel.visible = value === WOASModel.Mode.OSCILLATE;
-      manualPanel.visible = value === WOASModel.Mode.MANUAL;
-      pulsePanel.visible = value === WOASModel.Mode.PULSE;
+    const contentBox = new HBox( {
+      spacing: 20,
+      children: [
+        controlBox,
+        separator,
+        checkboxGroup
+      ]
+    } );
+
+    super( contentBox, {
+      scale: 0.7,
+      tandem: tandem,
+      fill: '#D9FCC5',
+      xMargin: 15,
+      yMargin: 5
     } );
   }
 }

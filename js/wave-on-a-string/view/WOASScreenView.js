@@ -8,15 +8,17 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
-import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
@@ -200,11 +202,12 @@ class WOASScreenView extends ScreenView {
     resetAllButton.scale( 0.924 );
     this.addChild( resetAllButton );
 
-    const bottomControlPanel = new BottomControlPanel( model, tandem.createTandem( 'bottomControlPanel' ) );
-    this.addChild( bottomControlPanel );
+    this.addChild( new AlignBox( new BottomControlPanel( model, tandem.createTandem( 'bottomControlPanel' ) ), {
+      alignBounds: new Bounds2( 0, 0, resetAllButton.left - 10, resetAllButton.bottom ),
+      xAlign: 'right',
+      yAlign: 'bottom'
+    } ) );
 
-    bottomControlPanel.right = resetAllButton.left - 10;
-    bottomControlPanel.bottom = resetAllButton.bottom;
     /*---------------------------------------------------------------------------*
      * StopwatchNode
      *----------------------------------------------------------------------------*/
