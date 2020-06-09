@@ -157,24 +157,21 @@ class BottomControlPanel extends Node {
     const oscillatePanel = new Panel( new Node( {
       children: [ amplitudeControl, frequencyControl, dampingControl, tensionControl, separator, checkboxGroup ]
     } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5,
-      tandem: tandem.createTandem( 'oscillatePanel' )
+      fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
     this.addChild( oscillatePanel );
 
     const manualPanel = new Panel( new Node( {
       children: [ dampingControl, tensionControl, separator, checkboxGroup ]
     } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5,
-      tandem: tandem.createTandem( 'manualPanel' )
+      fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
     this.addChild( manualPanel );
 
     const pulsePanel = new Panel( new Node( {
       children: [ amplitudeControl, pulseWidthControl, dampingControl, tensionControl, separator, checkboxGroup ]
     } ), {
-      fill: '#D9FCC5', xMargin: 15, yMargin: 5,
-      tandem: tandem.createTandem( 'pulsePanel' )
+      fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
     this.addChild( pulsePanel );
 
