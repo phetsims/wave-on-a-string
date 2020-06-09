@@ -7,9 +7,12 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -18,6 +21,7 @@ import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import waveOnAString from '../../waveOnAString.js';
 import WOASModelIO from './WOASModelIO.js';
 
@@ -25,7 +29,7 @@ import WOASModelIO from './WOASModelIO.js';
 const NUMBER_OF_SEGMENTS = 61;
 const LAST_INDEX = NUMBER_OF_SEGMENTS - 1;
 const NEXT_TO_LAST_INDEX = NUMBER_OF_SEGMENTS - 2;
-const AMPLITUDE_MULTIPLIER = 80;
+const AMPLITUDE_MULTIPLIER = 80; // the number of model units (vertically) per cm
 const FRAMES_PER_SECOND = 50;
 
 class WOASModel extends PhetioObject {
@@ -192,11 +196,22 @@ class WOASModel extends PhetioObject {
     // @public {Emitter} - Events emitted by instances of this type
     this.yNowChangedEmitter = new Emitter();
 
-    // @public {number}
+    // @public {Property.<number>}
     this.nextLeftYProperty = new NumberProperty( 0, {
       phetioReadOnly: true,
       tandem: tandem.createTandem( 'nextLeftYProperty' ),
       phetioDocumentation: 'internal property used to interpolate the left-most y value of the string while the wrench is moved in manual mode - for low-fps browsers'
+    } );
+
+    // @public {Property.<number>}
+    this.waveStartPositionProperty = new DynamicProperty( new Property( this.nextLeftYProperty ), {
+      bidirectional: true,
+      map: y => -y / AMPLITUDE_MULTIPLIER,
+      inverseMap: y => -y * AMPLITUDE_MULTIPLIER,
+      tandem: tandem.createTandem( 'waveStartPositionProperty' ),
+      phetioDocumentation: 'the y-value of the 1st green dot measured with respect to the center line',
+      units: 'cm',
+      phetioType: PropertyIO( NumberIO )
     } );
 
     // @private {Property.<number>}
