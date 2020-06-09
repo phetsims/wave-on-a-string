@@ -70,13 +70,17 @@ class WOASScreenView extends ScreenView {
       tandem: verticalRulerTandem
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
-    this.addChild( horizontalRulerNode );
-    this.addChild( verticalRulerNode );
 
-    model.rulersVisibleProperty.link( rulersVisible => {
-      horizontalRulerNode.visible = rulersVisible;
-      verticalRulerNode.visible = rulersVisible;
+    const rulersNode = new Node( {
+      children: [
+        horizontalRulerNode,
+        verticalRulerNode
+      ],
+      tandem: rulersTandem,
+      visibleProperty: model.rulersVisibleProperty
     } );
+    this.addChild( rulersNode );
+
     model.horizontalRulerPositionProperty.link( position => {
       horizontalRulerNode.translation = position;
     } );
