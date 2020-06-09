@@ -45,19 +45,19 @@ class BottomControlPanel extends Panel {
       font: new PhetFont( 15 ),
       maxWidth: 130
     };
-    const checkboxTandem = tandem.createTandem( 'visibilityCheckboxGroup' );
+    const checkboxTandem = tandem.createTandem( 'checkboxGroup' );
     const checkboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( rulersString, checkboxTextOptions ),
       property: model.rulersVisibleProperty,
-      tandem: checkboxTandem.createTandem( 'rulersVisibleCheckbox' )
+      tandem: checkboxTandem.createTandem( 'rulersCheckbox' )
     }, {
       node: new Text( timerString, checkboxTextOptions ),
       property: model.stopwatch.isVisibleProperty,
-      tandem: checkboxTandem.createTandem( 'stopwatchVisibleCheckbox' )
+      tandem: checkboxTandem.createTandem( 'stopwatchCheckbox' )
     }, {
       node: new Text( referenceLineString, checkboxTextOptions ),
       property: model.referenceLineVisibleProperty,
-      tandem: checkboxTandem.createTandem( 'referenceLineVisibleCheckbox' )
+      tandem: checkboxTandem.createTandem( 'referenceLineCheckbox' )
     } ], {
       tandem: checkboxTandem
     } );

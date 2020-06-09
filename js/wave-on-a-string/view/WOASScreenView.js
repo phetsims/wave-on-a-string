@@ -109,12 +109,12 @@ class WOASScreenView extends ScreenView {
       lineWidth: 0.5
     };
 
-    const modePanelTandem = tandem.createTandem( 'modePanel' );
+    const modePanelTandem = tandem.createTandem( 'waveModePanel' );
     const endTypePanelTandem = tandem.createTandem( 'endTypePanel' );
 
     this.addChild( new HBox( {
       children: [
-        new Panel( new WOASRadioGroup( model.waveModeProperty, modePanelTandem.createTandem( 'modeRadioGroup' ), {
+        new Panel( new WOASRadioGroup( model.waveModeProperty, modePanelTandem.createTandem( 'radioButtonGroup' ), {
           radio: [
             WOASModel.Mode.MANUAL,
             WOASModel.Mode.OSCILLATE,
@@ -122,9 +122,9 @@ class WOASScreenView extends ScreenView {
           ],
           text: [ manualString, oscillateString, pulseString ],
           tandemNames: [
-            'manualButton',
-            'oscillateButton',
-            'pulseButton'
+            'manual',
+            'oscillate',
+            'pulse'
           ]
         } ), merge( {
           tandem: modePanelTandem
@@ -140,7 +140,7 @@ class WOASScreenView extends ScreenView {
       align: 'top'
     } ) );
 
-    this.addChild( new Panel( new WOASRadioGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'endTypeRadioGroup' ), {
+    this.addChild( new Panel( new WOASRadioGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'radioButtonGroup' ), {
       radio: [
         WOASModel.EndType.FIXED_END,
         WOASModel.EndType.LOOSE_END,
@@ -148,9 +148,9 @@ class WOASScreenView extends ScreenView {
       ],
       text: [ fixedEndString, looseEndString, noEndString ],
       tandemNames: [
-        'fixedEndButton',
-        'looseEndButton',
-        'noEndButton'
+        'fixedEnd',
+        'looseEnd',
+        'noEnd'
       ],
       x: Constants.VIEW_BOUNDS.width - 100,
       y: 5
