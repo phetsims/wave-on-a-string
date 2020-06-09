@@ -43,7 +43,7 @@ class BottomControlPanel extends Node {
    * @param {Tandem} tandem
    */
   constructor( model, tandem ) {
-    super( { scale: 0.7 } );
+    super( { scale: 0.7, tandem: tandem } );
 
     const checkboxTextOptions = {
       font: new PhetFont( 15 ),
