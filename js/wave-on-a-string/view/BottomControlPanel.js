@@ -140,7 +140,7 @@ class BottomControlPanel extends Panel {
     const controlBox = new HBox( {
       spacing: 35
     } );
-    model.modeProperty.link( mode => {
+    model.waveModeProperty.link( mode => {
       if ( mode === WOASModel.Mode.OSCILLATE ) {
         controlBox.children = [ amplitudeControl, frequencyAlignBox, dampingControl, tensionControl ];
       }

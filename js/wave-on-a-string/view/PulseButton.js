@@ -49,7 +49,7 @@ class PulseButton extends RoundPushButton {
 
     this.touchArea = this.localBounds.dilatedXY( 5, 10 );
 
-    model.modeProperty.link( mode => {
+    model.waveModeProperty.link( mode => {
       this.visible = mode === WOASModel.Mode.PULSE;
     } );
   }

@@ -114,7 +114,7 @@ class WOASScreenView extends ScreenView {
 
     this.addChild( new HBox( {
       children: [
-        new Panel( new WOASRadioGroup( model.modeProperty, modePanelTandem.createTandem( 'modeRadioGroup' ), {
+        new Panel( new WOASRadioGroup( model.waveModeProperty, modePanelTandem.createTandem( 'modeRadioGroup' ), {
           radio: [
             WOASModel.Mode.MANUAL,
             WOASModel.Mode.OSCILLATE,
@@ -202,7 +202,7 @@ class WOASScreenView extends ScreenView {
     resetAllButton.scale( 0.924 );
     this.addChild( resetAllButton );
 
-    this.addChild( new AlignBox( new BottomControlPanel( model, tandem.createTandem( 'bottomControlPanel' ) ), {
+    this.addChild( new AlignBox( new BottomControlPanel( model, tandem.createTandem( 'controlPanel' ) ), {
       alignBounds: new Bounds2( 0, 0, resetAllButton.left - 10, resetAllButton.bottom ),
       xAlign: 'right',
       yAlign: 'bottom'

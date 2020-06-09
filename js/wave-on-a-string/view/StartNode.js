@@ -209,7 +209,7 @@ class StartNode extends Node {
     model.angleProperty.link( angle => {
       wheel.matrix = Matrix3.rotation2( angle ).timesMatrix( wheelScaleMatrix ); // doesn't need to compute current transform, or do matrix multiplication
     } );
-    model.modeProperty.link( mode => {
+    model.waveModeProperty.link( mode => {
       const wrenchIsVisible = mode === WOASModel.Mode.MANUAL;
       if ( wrench.isVisible() !== wrenchIsVisible ) {
         wrench.visible = wrenchIsVisible;

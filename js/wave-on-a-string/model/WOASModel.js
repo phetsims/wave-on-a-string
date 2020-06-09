@@ -49,8 +49,8 @@ class WOASModel extends PhetioObject {
     this.yNext = new Float64Array( NUMBER_OF_SEGMENTS );
 
     // @public {Property.<WOASModel.Mode>}
-    this.modeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
-      tandem: tandem.createTandem( 'modeProperty' ),
+    this.waveModeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
+      tandem: tandem.createTandem( 'waveModeProperty' ),
       phetioDocumentation: 'what is on the left side of the string, controlling its motion'
     } );
 
@@ -146,9 +146,9 @@ class WOASModel extends PhetioObject {
     } );
 
     // @public {Property.<number>}
-    this.timeProperty = new NumberProperty( 0, {
+    this.timeElapsedProperty = new NumberProperty( 0, {
       phetioReadOnly: true,
-      tandem: tandem.createTandem( 'timeProperty' ),
+      tandem: tandem.createTandem( 'timeElapsedProperty' ),
       phetioDocumentation: 'the amount of time elapsed since the last evolution of the physics model, in seconds'
     } );
 
@@ -225,7 +225,7 @@ class WOASModel extends PhetioObject {
     this.reset();
 
     // set the string to 0 on mode changes
-    this.modeProperty.lazyLink( () => {
+    this.waveModeProperty.lazyLink( () => {
 
       // Don't mess with phet-io, see https://github.com/phetsims/wave-on-a-string/issues/141
       if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
@@ -364,20 +364,20 @@ class WOASModel extends PhetioObject {
     const minDt = ( 1 / ( FRAMES_PER_SECOND * tensionFactor * speedMultiplier ) );
     // limit max dt
     while ( dt >= fixDt ) {
-      this.timeProperty.value = this.timeProperty.value + fixDt;
+      this.timeElapsedProperty.value = this.timeElapsedProperty.value + fixDt;
       this.stopwatch.step( fixDt * speedMultiplier );
 
-      if ( this.modeProperty.value === WOASModel.Mode.OSCILLATE ) {
+      if ( this.waveModeProperty.value === WOASModel.Mode.OSCILLATE ) {
         this.angleProperty.value = ( this.angleProperty.value +
                                      Math.PI * 2 * this.frequencyProperty.value * fixDt * speedMultiplier ) % ( Math.PI * 2 );
         this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.value );
       }
-      if ( this.modeProperty.value === WOASModel.Mode.PULSE && this.pulsePendingProperty.value ) {
+      if ( this.waveModeProperty.value === WOASModel.Mode.PULSE && this.pulsePendingProperty.value ) {
         this.pulsePendingProperty.value = false;
         this.pulseProperty.value = true;
         this.yNow[ 0 ] = 0;
       }
-      if ( this.modeProperty.value === WOASModel.Mode.PULSE && this.pulseProperty.value ) {
+      if ( this.waveModeProperty.value === WOASModel.Mode.PULSE && this.pulseProperty.value ) {
         const da = Math.PI * fixDt * speedMultiplier / this.pulseWidthProperty.value;
         if ( this.angleProperty.value + da >= Math.PI / 2 ) {
           this.pulseSignProperty.value = -1;
@@ -393,12 +393,12 @@ class WOASModel extends PhetioObject {
         }
         this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * ( -this.angleProperty.value / ( Math.PI / 2 ) );
       }
-      if ( this.modeProperty.value === WOASModel.Mode.MANUAL ) {
+      if ( this.waveModeProperty.value === WOASModel.Mode.MANUAL ) {
         // interpolate the yNow across steps for manual (between frames)
         this.yNow[ 0 ] += perStepDelta;
       }
-      if ( this.timeProperty.value >= minDt ) {
-        this.timeProperty.value = this.timeProperty.value % minDt;
+      if ( this.timeElapsedProperty.value >= minDt ) {
+        this.timeElapsedProperty.value = this.timeElapsedProperty.value % minDt;
         this.evolve();
         for ( i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
           this.yDraw[ i ] = this.yLast[ i ];
@@ -406,12 +406,12 @@ class WOASModel extends PhetioObject {
       }
       else {
         for ( i = 1; i < NUMBER_OF_SEGMENTS; i++ ) {
-          this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeProperty.value / minDt ) );
+          this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeElapsedProperty.value / minDt ) );
         }
       }
       dt -= fixDt;
     }
-    if ( this.modeProperty.value === WOASModel.Mode.MANUAL ) {
+    if ( this.waveModeProperty.value === WOASModel.Mode.MANUAL ) {
       // sanity check for our yNow
       // this.yNow[0] = this.nextLeftYProperty.value;
     }
@@ -457,7 +457,7 @@ class WOASModel extends PhetioObject {
    */
   manualRestart() {
     this.angleProperty.reset();
-    this.timeProperty.reset();
+    this.timeElapsedProperty.reset();
     this.pulseProperty.reset();
     this.pulseSignProperty.reset();
     this.pulsePendingProperty.reset();
@@ -476,7 +476,7 @@ class WOASModel extends PhetioObject {
    * @public
    */
   reset() {
-    this.modeProperty.reset();
+    this.waveModeProperty.reset();
     this.endTypeProperty.reset();
     this.timeSpeedProperty.reset();
     this.rulersVisibleProperty.reset();
