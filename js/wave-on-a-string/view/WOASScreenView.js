@@ -227,23 +227,57 @@ class WOASScreenView extends ScreenView {
     const endNode = new EndNode( model, this.frameEmitter, {
       x: Constants.endStringNode,
       y: Constants.yStringNode,
-      tandem: wavePlayAreaTandem.createTandem( 'endNode' )
+      tandem: wavePlayAreaTandem.createTandem( 'endNode' ),
+      phetioComponentOptions: {
+        opacityProperty: {
+          phetioReadOnly: true
+        },
+        pickableProperty: {
+          phetioReadOnly: true
+        },
+        visibleProperty: {
+          phetioReadOnly: true
+        }
+      }
     } );
     endNode.windowNode.x += Constants.endStringNode;
     endNode.windowNode.y += Constants.yStringNode;
     this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ) ) );
     this.addChild( endNode );
-    this.addChild( new StringNode( model, this.frameEmitter, wavePlayAreaTandem.createTandem( 'stringNode' ), {
+    this.addChild( new StringNode( model, this.frameEmitter, {
       x: Constants.startStringNode,
       y: Constants.yStringNode,
-      radius: Constants.segmentStringNodeRadius
+      radius: Constants.segmentStringNodeRadius,
+      tandem: wavePlayAreaTandem.createTandem( 'stringNode' ),
+      phetioComponentOptions: {
+        opacityProperty: {
+          phetioReadOnly: true
+        },
+        pickableProperty: {
+          phetioReadOnly: true
+        },
+        visibleProperty: {
+          phetioReadOnly: true
+        }
+      }
     } ) );
     this.addChild( new StartNode( model, this.frameEmitter, {
       x: Constants.startStringNode,
       y: Constants.yStringNode,
       range: Constants.yWrenchRange,
-      tandem: wavePlayAreaTandem.createTandem( 'startNode' )
+      tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
+      phetioComponentOptions: {
+        opacityProperty: {
+          phetioReadOnly: true
+        },
+        pickableProperty: {
+          phetioReadOnly: true
+        },
+        visibleProperty: {
+          phetioReadOnly: true
+        }
+      }
     } ) );
     this.addChild( windowImage = new Node( {
       children: [ new Image( windowEdgeImage, {

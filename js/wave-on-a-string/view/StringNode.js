@@ -17,11 +17,10 @@ class StringNode extends Node {
   /**
    * @param {WOASModel} model
    * @param {Emitter} frameEmitter - Emits an event when the animation frame changes
-   * @param {Tandem} tandem
    * @param {Object} [options]
    */
-  constructor( model, frameEmitter, tandem, options ) {
-    super( { layerSplit: true, tandem: tandem } );
+  constructor( model, frameEmitter, options ) {
+    super( { layerSplit: true } );
 
     let stringShape = new Shape();
     const stringPath = new Path( stringShape, {
