@@ -41,9 +41,9 @@ class WOASModelIO extends ObjectIO {
    * @override
    *
    * @param {WOASModel} model
-   * @param {{yDraw:Array.<number>,yNow:Array.<number>,yLast:Array.<number>,yNext:Array.<number>}} - stateObject
+   * @param {{yDraw:Array.<number>,yNow:Array.<number>,yLast:Array.<number>,yNext:Array.<number>}} stateObject
    */
-  static setValue( model, stateObject ) {
+  static applyState( model, stateObject ) {
     validate( model, this.validator );
 
     // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
