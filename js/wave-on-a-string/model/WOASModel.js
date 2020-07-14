@@ -186,7 +186,10 @@ class WOASModel extends PhetioObject {
     // @public {Stopwatch}
     this.stopwatch = new Stopwatch( {
       position: new Vector2( 550, 330 ),
-      tandem: tandem.createTandem( 'stopwatch' )
+      tandem: tandem.createTandem( 'stopwatch' ),
+      timePropertyOptions: {
+        range: Stopwatch.ZERO_TO_ALMOST_SIXTY
+      }
     } );
 
     // @public {Emitter} - Events emitted by instances of this type
