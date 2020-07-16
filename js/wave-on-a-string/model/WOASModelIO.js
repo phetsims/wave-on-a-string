@@ -35,13 +35,12 @@ class WOASModelIO extends ObjectIO {
   }
 
   /**
-   * Set the position of the model using the value parsed in fromStateObject.  This method is automatically called by
-   * phetioEngine.js when setting the state.
+   * Set the position of the model.  This method is automatically called by phetioEngine.js when setting the state.
    * @public
    * @override
    *
    * @param {WOASModel} model
-   * @param {{yDraw:Array.<number>,yNow:Array.<number>,yLast:Array.<number>,yNext:Array.<number>}} stateObject
+   * @param {Object} stateObject
    */
   static applyState( model, stateObject ) {
     validate( model, this.validator );
