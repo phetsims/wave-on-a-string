@@ -13,6 +13,7 @@ import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import waveOnAString from '../../waveOnAString.js';
 
 class WOASModelIO extends ObjectIO {
+
   /**
    * Serializes an instance.
    * @public
