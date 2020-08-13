@@ -12,11 +12,11 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
@@ -35,7 +35,7 @@ import ReferenceLine from './ReferenceLine.js';
 import RestartButton from './RestartButton.js';
 import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
-import WOASRadioGroup from './WOASRadioGroup.js';
+import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
 
 const fixedEndString = waveOnAStringStrings.fixedEnd;
 const looseEndString = waveOnAStringStrings.looseEnd;
@@ -114,7 +114,7 @@ class WOASScreenView extends ScreenView {
 
     this.addChild( new HBox( {
       children: [
-        new Panel( new WOASRadioGroup( model.waveModeProperty, modePanelTandem.createTandem( 'radioButtonGroup' ), {
+        new Panel( new WOASRadioButtonGroup( model.waveModeProperty, modePanelTandem.createTandem( 'radioButtonGroup' ), {
           radio: [
             WOASModel.Mode.MANUAL,
             WOASModel.Mode.OSCILLATE,
@@ -122,9 +122,9 @@ class WOASScreenView extends ScreenView {
           ],
           text: [ manualString, oscillateString, pulseString ],
           tandemNames: [
-            'manual',
-            'oscillate',
-            'pulse'
+            'manualRadioButton',
+            'oscillateRadioButton',
+            'pulseRadioButton'
           ]
         } ), merge( {
           tandem: modePanelTandem
@@ -140,7 +140,7 @@ class WOASScreenView extends ScreenView {
       align: 'top'
     } ) );
 
-    this.addChild( new Panel( new WOASRadioGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'radioButtonGroup' ), {
+    this.addChild( new Panel( new WOASRadioButtonGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'radioButtonGroup' ), {
       radio: [
         WOASModel.EndType.FIXED_END,
         WOASModel.EndType.LOOSE_END,
@@ -148,9 +148,9 @@ class WOASScreenView extends ScreenView {
       ],
       text: [ fixedEndString, looseEndString, noEndString ],
       tandemNames: [
-        'fixedEnd',
-        'looseEnd',
-        'noEnd'
+        'fixedEndRadioButton',
+        'looseEndRadioButton',
+        'noEndRadioButton'
       ],
       x: Constants.VIEW_BOUNDS.width - 100,
       y: 5

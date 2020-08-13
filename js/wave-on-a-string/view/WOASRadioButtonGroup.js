@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Control WOASRadioGroup view
+ * Control WOASRadioButtonGroup view
  *
  * @author Anton Ulyanov (Mlearner)
  */
@@ -13,7 +13,7 @@ import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioBu
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
 
-class WOASRadioGroup extends VerticalAquaRadioButtonGroup {
+class WOASRadioButtonGroup extends VerticalAquaRadioButtonGroup {
   /**
    * @param {Property.<*>} property
    * @param {Tandem} tandem
@@ -47,5 +47,5 @@ class WOASRadioGroup extends VerticalAquaRadioButtonGroup {
   }
 }
 
-waveOnAString.register( 'WOASRadioGroup', WOASRadioGroup );
-export default WOASRadioGroup;
+waveOnAString.register( 'WOASRadioButtonGroup', WOASRadioButtonGroup );
+export default WOASRadioButtonGroup;
