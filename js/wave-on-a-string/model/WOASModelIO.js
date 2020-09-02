@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * IO type for the main model, including the typed array information.
+ * IO Type for the main model, including the typed array information.
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  * @author Chris Klusendorf
