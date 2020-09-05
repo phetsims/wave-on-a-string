@@ -59,6 +59,7 @@ class WOASModelIO extends ObjectIO {
 
 WOASModelIO.documentation = 'The main model for Wave on a String';
 WOASModelIO.validator = { isValidValue: v => v instanceof phet.waveOnAString.WOASModel };
+WOASModelIO.typeName = 'WOASModelIO';
 ObjectIO.validateSubtype( WOASModelIO );
 
 waveOnAString.register( 'WOASModelIO', WOASModelIO );
