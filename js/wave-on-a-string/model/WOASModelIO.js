@@ -14,35 +14,15 @@ import waveOnAString from '../../waveOnAString.js';
 const WOASModelIO = new IOType( 'WOASModelIO', {
   isValidValue: v => v instanceof phet.waveOnAString.WOASModel,
   documentation: 'The main model for Wave on a String',
-
-  /**
-   * Serializes an instance.
-   * @public
-   * @override
-   *
-   * @param {WOASModel} model
-   * @returns {{yDraw:Array.<number>,yNow:Array.<number>,yLast:Array.<number>,yNext:Array.<number>}}
-   */
-  toStateObject( model ) {
-    return {
-      private: {
-        yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
-        yNow: Float64ArrayIO.toStateObject( model.yNow ),
-        yLast: Float64ArrayIO.toStateObject( model.yLast ),
-        yNext: Float64ArrayIO.toStateObject( model.yNext )
-      }
-    };
-  },
-
-  /**
-   * Set the position of the model.  This method is automatically called by phetioEngine.js when setting the state.
-   * @public
-   * @override
-   *
-   * @param {WOASModel} model
-   * @param {Object} stateObject
-   */
-  applyState( model, stateObject ) {
+  toStateObject: model => ( {
+    private: {
+      yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
+      yNow: Float64ArrayIO.toStateObject( model.yNow ),
+      yLast: Float64ArrayIO.toStateObject( model.yLast ),
+      yNext: Float64ArrayIO.toStateObject( model.yNext )
+    }
+  } ),
+  applyState: ( model, stateObject ) => {
 
     // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
     // Float64Arrays. Instead we set the array values directly.
