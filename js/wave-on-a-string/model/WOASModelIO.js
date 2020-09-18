@@ -7,12 +7,13 @@
  * @author Chris Klusendorf
  */
 
-import validate from '../../../../axon/js/validate.js';
 import Float64ArrayIO from '../../../../tandem/js/types/Float64ArrayIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import waveOnAString from '../../waveOnAString.js';
 
-class WOASModelIO extends ObjectIO {
+const WOASModelIO = new IOType( 'WOASModelIO', {
+  isValidValue: v => v instanceof phet.waveOnAString.WOASModel,
+  documentation: 'The main model for Wave on a String',
 
   /**
    * Serializes an instance.
@@ -22,9 +23,7 @@ class WOASModelIO extends ObjectIO {
    * @param {WOASModel} model
    * @returns {{yDraw:Array.<number>,yNow:Array.<number>,yLast:Array.<number>,yNext:Array.<number>}}
    */
-  static toStateObject( model ) {
-    validate( model, this.validator );
-
+  toStateObject( model ) {
     return {
       private: {
         yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
@@ -33,7 +32,7 @@ class WOASModelIO extends ObjectIO {
         yNext: Float64ArrayIO.toStateObject( model.yNext )
       }
     };
-  }
+  },
 
   /**
    * Set the position of the model.  This method is automatically called by phetioEngine.js when setting the state.
@@ -43,8 +42,7 @@ class WOASModelIO extends ObjectIO {
    * @param {WOASModel} model
    * @param {Object} stateObject
    */
-  static applyState( model, stateObject ) {
-    validate( model, this.validator );
+  applyState( model, stateObject ) {
 
     // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
     // Float64Arrays. Instead we set the array values directly.
@@ -55,12 +53,7 @@ class WOASModelIO extends ObjectIO {
 
     model.yNowChangedEmitter.emit();
   }
-}
-
-WOASModelIO.documentation = 'The main model for Wave on a String';
-WOASModelIO.validator = { isValidValue: v => v instanceof phet.waveOnAString.WOASModel };
-WOASModelIO.typeName = 'WOASModelIO';
-ObjectIO.validateIOType( WOASModelIO );
+} );
 
 waveOnAString.register( 'WOASModelIO', WOASModelIO );
 export default WOASModelIO;
