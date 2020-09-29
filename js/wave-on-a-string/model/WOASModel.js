@@ -12,7 +12,6 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -211,7 +210,7 @@ class WOASModel extends PhetioObject {
       tandem: tandem.createTandem( 'waveStartPositionProperty' ),
       phetioDocumentation: 'the y-value of the 1st green dot measured with respect to the center line',
       units: 'cm',
-      phetioType: PropertyIO( NumberIO )
+      phetioType: Property.PropertyIO( NumberIO )
     } );
     // TODO: how to support range on dynamic properties?
     this.waveStartPositionProperty.range = new Range( -1.3, 1.3 );
