@@ -21,9 +21,10 @@ import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import Float64ArrayIO from '../../../../tandem/js/types/Float64ArrayIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import waveOnAString from '../../waveOnAString.js';
-import WOASModelIO from './WOASModelIO.js';
 
 // constants
 const NUMBER_OF_SEGMENTS = 61;
@@ -39,7 +40,7 @@ class WOASModel extends PhetioObject {
   constructor( tandem ) {
     super( {
       tandem: tandem,
-      phetioType: WOASModelIO
+      phetioType: WOASModel.WOASModelIO
     } );
 
     // @public {Float64Array}
@@ -512,6 +513,30 @@ WOASModel.EndType = Enumeration.byKeys( [
   'LOOSE_END',
   'NO_END'
 ] );
+
+WOASModel.WOASModelIO = new IOType( 'WOASModelIO', {
+  valueType: WOASModel,
+  documentation: 'The main model for Wave on a String',
+  toStateObject: model => ( {
+    private: {
+      yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
+      yNow: Float64ArrayIO.toStateObject( model.yNow ),
+      yLast: Float64ArrayIO.toStateObject( model.yLast ),
+      yNext: Float64ArrayIO.toStateObject( model.yNext )
+    }
+  } ),
+  applyState: ( model, stateObject ) => {
+
+    // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
+    // Float64Arrays. Instead we set the array values directly.
+    model.yDraw.set( stateObject.private.yDraw );
+    model.yNow.set( stateObject.private.yNow );
+    model.yLast.set( stateObject.private.yLast );
+    model.yNext.set( stateObject.private.yNext );
+
+    model.yNowChangedEmitter.emit();
+  }
+} );
 
 waveOnAString.register( 'WOASModel', WOASModel );
 export default WOASModel;
