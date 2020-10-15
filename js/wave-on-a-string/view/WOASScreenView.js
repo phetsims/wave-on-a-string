@@ -232,14 +232,13 @@ class WOASScreenView extends ScreenView {
       x: Constants.endStringNode,
       y: Constants.yStringNode,
       tandem: wavePlayAreaTandem.createTandem( 'endNode' ),
+      visiblePropertyOptions: { phetioReadOnly: true },
+
+      // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
+      pickablePropertyInstrumented: true,
+      pickablePropertyOptions: { phetioReadOnly: true },
       phetioComponentOptions: {
         opacityProperty: {
-          phetioReadOnly: true
-        },
-        pickableProperty: {
-          phetioReadOnly: true
-        },
-        visibleProperty: {
           phetioReadOnly: true
         }
       }
@@ -254,14 +253,13 @@ class WOASScreenView extends ScreenView {
       y: Constants.yStringNode,
       radius: Constants.segmentStringNodeRadius,
       tandem: wavePlayAreaTandem.createTandem( 'stringNode' ),
+      visiblePropertyOptions: { phetioReadOnly: true },
+
+      // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
+      pickablePropertyInstrumented: true,
+      pickablePropertyOptions: { phetioReadOnly: true },
       phetioComponentOptions: {
         opacityProperty: {
-          phetioReadOnly: true
-        },
-        pickableProperty: {
-          phetioReadOnly: true
-        },
-        visibleProperty: {
           phetioReadOnly: true
         }
       }
@@ -271,14 +269,13 @@ class WOASScreenView extends ScreenView {
       y: Constants.yStringNode,
       range: Constants.yWrenchRange,
       tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
+      visiblePropertyOptions: { phetioReadOnly: true },
+
+      // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
+      pickablePropertyInstrumented: true,
+      pickablePropertyOptions: { phetioReadOnly: true },
       phetioComponentOptions: {
         opacityProperty: {
-          phetioReadOnly: true
-        },
-        pickableProperty: {
-          phetioReadOnly: true
-        },
-        visibleProperty: {
           phetioReadOnly: true
         }
       }
