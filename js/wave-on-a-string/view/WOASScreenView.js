@@ -232,11 +232,7 @@ class WOASScreenView extends ScreenView {
       x: Constants.endStringNode,
       y: Constants.yStringNode,
       tandem: wavePlayAreaTandem.createTandem( 'endNode' ),
-      visiblePropertyOptions: { phetioReadOnly: true },
-
-      // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
-      pickablePropertyInstrumented: true,
-      pickablePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true }
     } );
     endNode.windowNode.x += Constants.endStringNode;
     endNode.windowNode.y += Constants.yStringNode;
@@ -248,22 +244,14 @@ class WOASScreenView extends ScreenView {
       y: Constants.yStringNode,
       radius: Constants.segmentStringNodeRadius,
       tandem: wavePlayAreaTandem.createTandem( 'stringNode' ),
-      visiblePropertyOptions: { phetioReadOnly: true },
-
-      // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
-      pickablePropertyInstrumented: true,
-      pickablePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true }
     } ) );
     this.addChild( new StartNode( model, this.frameEmitter, {
       x: Constants.startStringNode,
       y: Constants.yStringNode,
       range: Constants.yWrenchRange,
       tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
-      visiblePropertyOptions: { phetioReadOnly: true },
-
-      // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
-      pickablePropertyInstrumented: true,
-      pickablePropertyOptions: { phetioReadOnly: true }
+      visiblePropertyOptions: { phetioReadOnly: true }
     } ) );
     this.addChild( windowImage = new Node( {
       children: [ new Image( windowEdgeImage, {
