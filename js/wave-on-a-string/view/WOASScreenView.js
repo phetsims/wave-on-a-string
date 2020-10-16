@@ -236,12 +236,7 @@ class WOASScreenView extends ScreenView {
 
       // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
       pickablePropertyInstrumented: true,
-      pickablePropertyOptions: { phetioReadOnly: true },
-      phetioComponentOptions: {
-        opacityProperty: {
-          phetioReadOnly: true
-        }
-      }
+      pickablePropertyOptions: { phetioReadOnly: true }
     } );
     endNode.windowNode.x += Constants.endStringNode;
     endNode.windowNode.y += Constants.yStringNode;
@@ -257,12 +252,7 @@ class WOASScreenView extends ScreenView {
 
       // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
       pickablePropertyInstrumented: true,
-      pickablePropertyOptions: { phetioReadOnly: true },
-      phetioComponentOptions: {
-        opacityProperty: {
-          phetioReadOnly: true
-        }
-      }
+      pickablePropertyOptions: { phetioReadOnly: true }
     } ) );
     this.addChild( new StartNode( model, this.frameEmitter, {
       x: Constants.startStringNode,
@@ -273,12 +263,7 @@ class WOASScreenView extends ScreenView {
 
       // TODO: we likely don't need this, can we remove the pickableProperty? see https://github.com/phetsims/scenery/issues/1092
       pickablePropertyInstrumented: true,
-      pickablePropertyOptions: { phetioReadOnly: true },
-      phetioComponentOptions: {
-        opacityProperty: {
-          phetioReadOnly: true
-        }
-      }
+      pickablePropertyOptions: { phetioReadOnly: true }
     } ) );
     this.addChild( windowImage = new Node( {
       children: [ new Image( windowEdgeImage, {
