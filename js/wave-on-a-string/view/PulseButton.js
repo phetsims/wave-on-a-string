@@ -44,6 +44,8 @@ class PulseButton extends RoundPushButton {
         ]
       } ),
       radius: 17,
+      xMargin: 6,
+      yMargin: 6,
       yContentOffset: -1
     }, options ) );
 
