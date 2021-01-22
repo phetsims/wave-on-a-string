@@ -1,8 +1,8 @@
 /* eslint-disable */
-import simLauncher from '../../joist/js/simLauncher.js';
+import asyncLoader from '../../phet-core/js/asyncLoader.js';
 
 const image = new Image();
-const unlock = simLauncher.createLock( image );
+const unlock = asyncLoader.createLock( image );
 image.onload = unlock;
 image.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAPCAYAAAC4EqxxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAXVJREFUSEvllb1OQkEQRnkQSytLKztLKkorSxstbWy1oNVEW03oTeiJ9sYHML4AtqKooPg3cjYOWfbOblYkAa8kh8AwO/N9s8veioj8K8xgmTGDZcYMlhkzOCkf7Rt5vbiUl9Om9PcPHY8bW/Kwtp4FubqOGtSiZtjnN5jBHBDzfNyQp+0dua/W5HZhUTpLy9/CN6V/cORA+NswNwetY8Fv9KInvUM9uZhBCyZNM3ZhTMBJw4nVl4pXw73demEnYzCw0GgKtKDpJ6fADPqwQ4jRJpj87HYdg9a5MzWJ2GmDebSG+kPMILD4bmW1UJhY6ujNGvSljBcC71fXptFc9HiGl08OHE9dp3WsHjngAS+hv7EviLMWx1Bjg9bZ1G9TH2rTQwdhaYkR7vboAwWtBT5MrbdXd8113azgRKAl5zT6ekcFUpcOU50HkzHQltp5vGmue+O/YyUyPSapyfMOWmM7jkdyXKI+W324ifntL2I9RfAoIpUvSjjwYt5A+Y8AAAAASUVORK5CYII=';
 export default image;
