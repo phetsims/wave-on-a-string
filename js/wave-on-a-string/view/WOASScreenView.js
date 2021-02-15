@@ -170,7 +170,7 @@ class WOASScreenView extends ScreenView {
           backgroundGradientColorStop0: Constants.buttonBorder0,
           backgroundGradientColorStop1: Constants.buttonBorder1,
           innerButtonLineWidth: 1,
-          scaleFactorWhenPaused: 1.25,
+          scaleFactorWhenNotPlaying: 1.25,
           touchAreaDilation: 12
         },
 
