@@ -52,7 +52,8 @@ class WOASScreenView extends ScreenView {
    */
   constructor( model, tandem ) {
     super( {
-      layoutBounds: Constants.VIEW_BOUNDS
+      layoutBounds: Constants.VIEW_BOUNDS,
+      tandem: tandem
     } );
 
     // @private {Emitter} - Fired when a view frame occurs
