@@ -119,7 +119,7 @@ class WOASModel extends PhetioObject {
       range: new Range( 0, 3 ),
       tandem: tandem.createTandem( 'frequencyProperty' ),
       phetioDocumentation: 'the frequency of the oscillator, in hertz',
-      units: 'hertz'
+      units: 'Hz'
     } );
 
     // @public {Property.<number>}
