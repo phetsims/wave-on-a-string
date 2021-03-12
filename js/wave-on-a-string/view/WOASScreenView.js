@@ -66,10 +66,10 @@ class WOASScreenView extends ScreenView {
     const verticalRulerTandem = rulersTandem.createTandem( 'verticalRulerNode' );
 
     const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-    const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => n + '' ), unitCmString, merge( {
+    const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => `${n}` ), unitCmString, merge( {
       tandem: horizontalRulerTandem
     }, rulerOptions ) );
-    const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => n + '' ), unitCmString, merge( {
+    const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => `${n}` ), unitCmString, merge( {
       tandem: verticalRulerTandem
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
