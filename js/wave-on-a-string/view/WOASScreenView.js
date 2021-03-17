@@ -213,7 +213,7 @@ class WOASScreenView extends ScreenView {
      * StopwatchNode
      *----------------------------------------------------------------------------*/
     const stopwatchNode = new StopwatchNode( model.stopwatch, {
-      visibleBoundsProperty: this.visibleBoundsProperty,
+      dragBoundsProperty: this.visibleBoundsProperty,
       tandem: tandem.createTandem( 'stopwatchNode' )
     } );
     stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
