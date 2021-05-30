@@ -524,6 +524,14 @@ WOASModel.WOASModelIO = new IOType( 'WOASModelIO', {
       yNext: Float64ArrayIO.toStateObject( model.yNext )
     }
   } ),
+  stateSchema: {
+    private: {
+      yDraw: Float64ArrayIO,
+      yNow: Float64ArrayIO,
+      yLast: Float64ArrayIO,
+      yNext: Float64ArrayIO
+    }
+  },
   applyState: ( model, stateObject ) => {
 
     // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
