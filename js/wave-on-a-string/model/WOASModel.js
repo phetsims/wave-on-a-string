@@ -517,7 +517,7 @@ WOASModel.WOASModelIO = new IOType( 'WOASModelIO', {
   valueType: WOASModel,
   documentation: 'The main model for Wave on a String',
   toStateObject: model => ( {
-    private: {
+    _private: {
       yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
       yNow: Float64ArrayIO.toStateObject( model.yNow ),
       yLast: Float64ArrayIO.toStateObject( model.yLast ),
@@ -525,7 +525,7 @@ WOASModel.WOASModelIO = new IOType( 'WOASModelIO', {
     }
   } ),
   stateSchema: {
-    private: {
+    _private: {
       yDraw: Float64ArrayIO,
       yNow: Float64ArrayIO,
       yLast: Float64ArrayIO,
