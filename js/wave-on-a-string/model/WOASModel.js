@@ -536,10 +536,10 @@ WOASModel.WOASModelIO = new IOType( 'WOASModelIO', {
 
     // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
     // Float64Arrays. Instead we set the array values directly.
-    model.yDraw.set( stateObject.private.yDraw );
-    model.yNow.set( stateObject.private.yNow );
-    model.yLast.set( stateObject.private.yLast );
-    model.yNext.set( stateObject.private.yNext );
+    model.yDraw.set( stateObject._private.yDraw );
+    model.yNow.set( stateObject._private.yNow );
+    model.yLast.set( stateObject._private.yLast );
+    model.yNext.set( stateObject._private.yNext );
 
     model.yNowChangedEmitter.emit();
   }
