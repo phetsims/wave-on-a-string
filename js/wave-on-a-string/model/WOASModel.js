@@ -16,7 +16,7 @@ import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
@@ -499,15 +499,15 @@ class WOASModel extends PhetioObject {
   }
 }
 
-// @public {Enumeration}
-WOASModel.Mode = Enumeration.byKeys( [
+// @public {EnumerationDeprecated}
+WOASModel.Mode = EnumerationDeprecated.byKeys( [
   'MANUAL',
   'OSCILLATE',
   'PULSE'
 ] );
 
-// @public {Enumeration}
-WOASModel.EndType = Enumeration.byKeys( [
+// @public {EnumerationDeprecated}
+WOASModel.EndType = EnumerationDeprecated.byKeys( [
   'FIXED_END',
   'LOOSE_END',
   'NO_END'
