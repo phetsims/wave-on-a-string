@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
@@ -49,13 +49,13 @@ class WOASModel extends PhetioObject {
     this.yNext = new Float64Array( NUMBER_OF_SEGMENTS );
 
     // @public {Property.<WOASModel.Mode>}
-    this.waveModeProperty = new EnumerationProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
+    this.waveModeProperty = new EnumerationDeprecatedProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
       tandem: tandem.createTandem( 'waveModeProperty' ),
       phetioDocumentation: 'what is on the left side of the string, controlling its motion'
     } );
 
     // @public {Property.<WOASModel.EndType}
-    this.endTypeProperty = new EnumerationProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END, {
+    this.endTypeProperty = new EnumerationDeprecatedProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END, {
       tandem: tandem.createTandem( 'endTypeProperty' ),
       phetioDocumentation: 'what is on the right side of the string'
     } );
@@ -67,7 +67,7 @@ class WOASModel extends PhetioObject {
     } );
 
     // @public {Property.<TimeSpeed>}
-    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL, {
       tandem: tandem.createTandem( 'timeSpeedProperty' ),
       phetioDocumentation: 'the play speed for the simulation as it moves through time'
     } );
