@@ -9,10 +9,10 @@
 import { Image } from '../../../../scenery/js/imports.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import { Rectangle } from '../../../../scenery/js/imports.js';
-import clampImage from '../../../images/clamp_png.js';
-import ringBackImage from '../../../images/ring_back_png.js';
-import ringFrontImage from '../../../images/ring_front_png.js';
-import windowImage from '../../../images/window-back_png.js';
+import clamp_png from '../../../images/clamp_png.js';
+import ringBack_png from '../../../images/ringBack_png.js';
+import ringFront_png from '../../../images/ringFront_png.js';
+import windowBack_png from '../../../images/windowBack_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
 import WOASModel from '../model/WOASModel.js';
@@ -26,9 +26,9 @@ class EndNode extends Node {
   constructor( model, frameEmitter, options ) {
     super();
 
-    const clamp = new Image( clampImage, { x: -17, y: -31, scale: 0.4 } );
-    const ringBack = new Node( { children: [ new Image( ringBackImage, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } );
-    const ringFront = new Node( { children: [ new Image( ringFrontImage, { x: 4.7, y: 0, scale: 0.5 } ) ] } );
+    const clamp = new Image( clamp_png, { x: -17, y: -31, scale: 0.4 } );
+    const ringBack = new Node( { children: [ new Image( ringBack_png, { x: 5, y: -14 / 2, scale: 0.5 } ) ] } );
+    const ringFront = new Node( { children: [ new Image( ringFront_png, { x: 4.7, y: 0, scale: 0.5 } ) ] } );
     const post = new Rectangle( -5, -130, 10, 260, {
       stroke: '#000',
       fill: Constants.postGradient,
@@ -36,7 +36,7 @@ class EndNode extends Node {
     } );
 
     // @public {Node} - We need to visually stack this behind, so we can't add it as a child here
-    this.windowNode = new Image( windowImage, {
+    this.windowNode = new Image( windowBack_png, {
       right: Constants.windowXOffset + Constants.windowShift,
       centerY: 0,
       scale: Constants.windowScale

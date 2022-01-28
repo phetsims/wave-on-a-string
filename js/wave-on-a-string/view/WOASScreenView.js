@@ -24,7 +24,7 @@ import { Image } from '../../../../scenery/js/imports.js';
 import { Line } from '../../../../scenery/js/imports.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
-import windowEdgeImage from '../../../images/window-front_png.js';
+import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import waveOnAStringStrings from '../../waveOnAStringStrings.js';
 import Constants from '../Constants.js';
@@ -255,7 +255,7 @@ class WOASScreenView extends ScreenView {
       visiblePropertyOptions: { phetioReadOnly: true }
     } ) );
     this.addChild( windowImage = new Node( {
-      children: [ new Image( windowEdgeImage, {
+      children: [ new Image( windowFront_png, {
         left: Constants.windowXOffset - 4 + Constants.windowShift,
         centerY: 0,
         scale: Constants.windowScale

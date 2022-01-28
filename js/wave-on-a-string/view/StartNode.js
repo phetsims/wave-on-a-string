@@ -23,7 +23,7 @@ import { Rectangle } from '../../../../scenery/js/imports.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import { LinearGradient } from '../../../../scenery/js/imports.js';
 import { RadialGradient } from '../../../../scenery/js/imports.js';
-import wrenchImage from '../../../images/wrench_png.js';
+import wrench_png from '../../../images/wrench_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
 import WOASModel from '../model/WOASModel.js';
@@ -81,7 +81,7 @@ class StartNode extends Node {
     /*---------------------------------------------------------------------------*
      * Wrench
      *----------------------------------------------------------------------------*/
-    const wrenchImageNode = new Image( wrenchImage, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
+    const wrenchImageNode = new Image( wrench_png, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
     const wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,

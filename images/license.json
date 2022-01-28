@@ -7,7 +7,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "Sharon, PhET"
   },
-  "ring_back.png": {
+  "ringBack.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -15,7 +15,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "PhET"
   },
-  "ring_front.png": {
+  "ringFront.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -23,7 +23,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "PhET"
   },
-  "window-back.png": {
+  "windowBack.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -31,7 +31,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "PhET"
   },
-  "window-front.png": {
+  "windowFront.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
