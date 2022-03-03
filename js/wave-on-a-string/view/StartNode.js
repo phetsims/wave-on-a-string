@@ -185,7 +185,7 @@ class StartNode extends Node {
     const updatePost = () => {
       const y = model.yNow[ 0 ];
       if ( post.isVisible() ) {
-        post.matrix = Matrix3.createFromPool(
+        post.matrix = Matrix3.pool.create(
           1, 0, 0,
           0, ( Constants.offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
           0, 0, 1
