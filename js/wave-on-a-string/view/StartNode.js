@@ -164,7 +164,7 @@ class StartNode extends Node {
         model.isPlayingProperty.value = true;
         model.yNowChangedEmitter.emit();
       },
-      end: event => {
+      end: () => {
         model.wrenchArrowsVisibleProperty.value = false;
       }
     } ) );
