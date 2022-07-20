@@ -6,9 +6,7 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-import { Image } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import { Image, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import clamp_png from '../../../images/clamp_png.js';
 import ringBack_png from '../../../images/ringBack_png.js';
 import ringFront_png from '../../../images/ringFront_png.js';

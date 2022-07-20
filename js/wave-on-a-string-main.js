@@ -9,8 +9,8 @@
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import waveOnAStringStrings from './waveOnAStringStrings.js';
 import WOASScreen from './wave-on-a-string/view/WOASScreen.js';
+import waveOnAStringStrings from './waveOnAStringStrings.js';
 
 const waveOnAStringTitleString = waveOnAStringStrings[ 'wave-on-a-string' ].title;
 

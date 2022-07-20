@@ -9,8 +9,8 @@
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
-import waveOnAStringStrings from '../../waveOnAStringStrings.js';
 import waveOnAString from '../../waveOnAString.js';
+import waveOnAStringStrings from '../../waveOnAStringStrings.js';
 
 const restartString = waveOnAStringStrings.restart;
 

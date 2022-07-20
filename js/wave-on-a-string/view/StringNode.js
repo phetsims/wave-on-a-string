@@ -7,10 +7,7 @@
  */
 
 import { Shape } from '../../../../kite/js/imports.js';
-import { Circle } from '../../../../scenery/js/imports.js';
-import { Image } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import { Circle, Image, Node, Path } from '../../../../scenery/js/imports.js';
 import waveOnAString from '../../waveOnAString.js';
 
 class StringNode extends Node {
