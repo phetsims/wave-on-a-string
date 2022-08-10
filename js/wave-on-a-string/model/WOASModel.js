@@ -211,7 +211,7 @@ class WOASModel extends PhetioObject {
       tandem: tandem.createTandem( 'waveStartPositionProperty' ),
       phetioDocumentation: 'the y-value of the 1st green dot measured with respect to the center line',
       units: 'cm',
-      phetioType: Property.PropertyIO( NumberIO )
+      phetioValueType: NumberIO
     } );
     // TODO: how to support range on dynamic properties?
     this.waveStartPositionProperty.range = new Range( -1.3, 1.3 );
