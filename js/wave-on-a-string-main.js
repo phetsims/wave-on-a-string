@@ -12,7 +12,7 @@ import Tandem from '../../tandem/js/Tandem.js';
 import WOASScreen from './wave-on-a-string/view/WOASScreen.js';
 import waveOnAStringStrings from './waveOnAStringStrings.js';
 
-const waveOnAStringTitleString = waveOnAStringStrings[ 'wave-on-a-string' ].title;
+const waveOnAStringTitleStringProperty = waveOnAStringStrings[ 'wave-on-a-string' ].titleStringProperty;
 
 const simOptions = {
   credits: {
@@ -27,7 +27,7 @@ const simOptions = {
 
 simLauncher.launch( () => {
   //Create and start the sim
-  new Sim( waveOnAStringTitleString, [
+  new Sim( waveOnAStringTitleStringProperty, [
     new WOASScreen( Tandem.ROOT.createTandem( 'waveOnAStringScreen' ) )
   ], simOptions ).start();
 } );
