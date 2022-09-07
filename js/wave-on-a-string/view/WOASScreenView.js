@@ -21,7 +21,7 @@ import { AlignBox, DragListener, HBox, Image, Line, Node } from '../../../../sce
 import Panel from '../../../../sun/js/Panel.js';
 import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
-import waveOnAStringStrings from '../../waveOnAStringStrings.js';
+import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
 import Constants from '../Constants.js';
 import WOASModel from '../model/WOASModel.js';
 import BottomControlPanel from './BottomControlPanel.js';
@@ -32,13 +32,13 @@ import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
 
-const fixedEndString = waveOnAStringStrings.fixedEnd;
-const looseEndString = waveOnAStringStrings.looseEnd;
-const manualString = waveOnAStringStrings.manual;
-const noEndString = waveOnAStringStrings.noEnd;
-const oscillateString = waveOnAStringStrings.oscillate;
-const pulseString = waveOnAStringStrings.pulse;
-const unitCmString = waveOnAStringStrings.unitCm;
+const fixedEndString = WaveOnAStringStrings.fixedEnd;
+const looseEndString = WaveOnAStringStrings.looseEnd;
+const manualString = WaveOnAStringStrings.manual;
+const noEndString = WaveOnAStringStrings.noEnd;
+const oscillateString = WaveOnAStringStrings.oscillate;
+const pulseString = WaveOnAStringStrings.pulse;
+const unitCmString = WaveOnAStringStrings.unitCm;
 
 class WOASScreenView extends ScreenView {
   /**

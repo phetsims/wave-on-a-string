@@ -10,9 +10,9 @@ import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import waveOnAString from '../../waveOnAString.js';
-import waveOnAStringStrings from '../../waveOnAStringStrings.js';
+import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
 
-const restartString = waveOnAStringStrings.restart;
+const restartString = WaveOnAStringStrings.restart;
 
 class RestartButton extends TextPushButton {
   /**

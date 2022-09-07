@@ -10,9 +10,9 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import WOASScreen from './wave-on-a-string/view/WOASScreen.js';
-import waveOnAStringStrings from './waveOnAStringStrings.js';
+import WaveOnAStringStrings from './WaveOnAStringStrings.js';
 
-const waveOnAStringTitleStringProperty = waveOnAStringStrings[ 'wave-on-a-string' ].titleStringProperty;
+const waveOnAStringTitleStringProperty = WaveOnAStringStrings[ 'wave-on-a-string' ].titleStringProperty;
 
 const simOptions = {
   credits: {

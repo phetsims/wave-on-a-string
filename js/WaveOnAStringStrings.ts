@@ -63,8 +63,8 @@ type StringsType = {
   'patternValueUnitPercentageStringProperty': TReadOnlyProperty<string>;
 };
 
-const waveOnAStringStrings = getStringModule( 'WAVE_ON_A_STRING' ) as StringsType;
+const WaveOnAStringStrings = getStringModule( 'WAVE_ON_A_STRING' ) as StringsType;
 
-waveOnAString.register( 'waveOnAStringStrings', waveOnAStringStrings );
+waveOnAString.register( 'WaveOnAStringStrings', WaveOnAStringStrings );
 
-export default waveOnAStringStrings;
+export default WaveOnAStringStrings;

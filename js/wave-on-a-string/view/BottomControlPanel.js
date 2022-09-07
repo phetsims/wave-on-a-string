@@ -15,22 +15,22 @@ import { AlignGroup, HBox, Line, Text } from '../../../../scenery/js/imports.js'
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import waveOnAString from '../../waveOnAString.js';
-import waveOnAStringStrings from '../../waveOnAStringStrings.js';
+import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
 import WOASModel from '../model/WOASModel.js';
 import WOASNumberControl from './WOASNumberControl.js';
 
-const amplitudeString = waveOnAStringStrings.amplitude;
-const dampingString = waveOnAStringStrings.damping;
-const frequencyString = waveOnAStringStrings.frequency;
-const patternValueUnitCmString = waveOnAStringStrings.patternValueUnitCm;
-const patternValueUnitHzString = waveOnAStringStrings.patternValueUnitHz;
-const patternValueUnitPercentageString = waveOnAStringStrings.patternValueUnitPercentage;
-const patternValueUnitSString = waveOnAStringStrings.patternValueUnitS;
-const pulseWidthString = waveOnAStringStrings.pulseWidth;
-const referenceLineString = waveOnAStringStrings.referenceLine;
-const rulersString = waveOnAStringStrings.rulers;
-const tensionString = waveOnAStringStrings.tension;
-const timerString = waveOnAStringStrings.timer;
+const amplitudeString = WaveOnAStringStrings.amplitude;
+const dampingString = WaveOnAStringStrings.damping;
+const frequencyString = WaveOnAStringStrings.frequency;
+const patternValueUnitCmString = WaveOnAStringStrings.patternValueUnitCm;
+const patternValueUnitHzString = WaveOnAStringStrings.patternValueUnitHz;
+const patternValueUnitPercentageString = WaveOnAStringStrings.patternValueUnitPercentage;
+const patternValueUnitSString = WaveOnAStringStrings.patternValueUnitS;
+const pulseWidthString = WaveOnAStringStrings.pulseWidth;
+const referenceLineString = WaveOnAStringStrings.referenceLine;
+const rulersString = WaveOnAStringStrings.rulers;
+const tensionString = WaveOnAStringStrings.tension;
+const timerString = WaveOnAStringStrings.timer;
 
 class BottomControlPanel extends Panel {
   /**
