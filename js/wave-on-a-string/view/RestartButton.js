@@ -25,7 +25,7 @@ class RestartButton extends TextPushButton {
       listener: callback,
       font: new PhetFont( 12 ),
       baseColor: 'hsl(210,0%,85%)',
-      maxWidth: 250
+      maxTextWidth: 250
     }, options ) );
 
     this.touchArea = this.localBounds.dilatedXY( 5, 20 );

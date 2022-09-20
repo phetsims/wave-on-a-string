@@ -126,7 +126,6 @@ class WOASScreenView extends ScreenView {
           tandem: modePanelTandem
         }, radioPanelOptions ) ),
         new RestartButton( model.manualRestart.bind( model ), {
-          y: 5,
           tandem: tandem.createTandem( 'restartButton' )
         } )
       ],
