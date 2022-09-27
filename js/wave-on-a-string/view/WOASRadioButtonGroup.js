@@ -25,7 +25,7 @@ class WOASRadioButtonGroup extends VerticalAquaRadioButtonGroup {
 
     for ( let i = 0; i < length; i++ ) {
       group.push( {
-        node: new Text( options.text[ i ], {
+        createNode: tandem => new Text( options.text[ i ], {
           font: new PhetFont( 20 ),
           maxWidth: 250
         } ),
