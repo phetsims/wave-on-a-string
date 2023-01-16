@@ -213,7 +213,7 @@ class WOASModel extends PhetioObject {
       units: 'cm',
       phetioValueType: NumberIO
     } );
-    // TODO: how to support range on dynamic properties?
+    // TODO: how to support range on dynamic properties? https://github.com/phetsims/wave-on-a-string/issues/147
     this.waveStartPositionProperty.range = new Range( -1.3, 1.3 );
 
     // @private {Property.<number>}

@@ -66,7 +66,7 @@ class BottomControlPanel extends Panel {
       map: value => value * 100,
       inverseMap: value => value / 100
     } );
-    // TODO: how to support range on dynamic properties?
+    // TODO: how to support range on dynamic properties? https://github.com/phetsims/wave-on-a-string/issues/147
     tensionProperty.range = new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 );
 
     const tensionControl = new WOASNumberControl( tensionString, tensionProperty, {
