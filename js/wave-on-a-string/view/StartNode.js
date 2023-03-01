@@ -7,7 +7,7 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Matrix3 from '../../../../dot/js/Matrix3.js';
+import Matrix3, { m3 } from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -177,7 +177,7 @@ class StartNode extends Node {
     const updatePost = () => {
       const y = model.yNow[ 0 ];
       if ( post.isVisible() ) {
-        post.matrix = Matrix3.pool.create(
+        post.matrix = m3(
           1, 0, 0,
           0, ( Constants.offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
           0, 0, 1
