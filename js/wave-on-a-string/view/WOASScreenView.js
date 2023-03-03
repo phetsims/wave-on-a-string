@@ -87,13 +87,13 @@ class WOASScreenView extends ScreenView {
     } );
 
     horizontalRulerNode.addInputListener( new DragListener( {
-      tandem: horizontalRulerTandem.createTandem( 'inputListener' ),
+      tandem: horizontalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.horizontalRulerPositionProperty,
       dragBoundsProperty: new Property( Constants.VIEW_BOUNDS.dilated( 30 ).shiftedX( -Constants.VIEW_BOUNDS.width / 2 ).dilatedX( Constants.VIEW_BOUNDS.width * 0.4 ) )
     } ) );
 
     verticalRulerNode.addInputListener( new DragListener( {
-      tandem: verticalRulerTandem.createTandem( 'inputListener' ),
+      tandem: verticalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.verticalRulerPositionProperty,
       dragBoundsProperty: new Property( Constants.VIEW_BOUNDS.withMaxX( Constants.VIEW_BOUNDS.maxX - 50 ).withMaxY( Constants.VIEW_BOUNDS.maxY * 1.8 ) )
     } ) );

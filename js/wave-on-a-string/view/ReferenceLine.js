@@ -54,7 +54,7 @@ class ReferenceLine extends Node {
 
     this.addInputListener( new DragListener( {
       positionProperty: model.referenceLinePositionProperty,
-      tandem: tandem.createTandem( 'inputListener' ),
+      tandem: tandem.createTandem( 'dragListener' ),
       dragBoundsProperty: new Property( new Bounds2(
         Constants.VIEW_BOUNDS.minX + 30 - Constants.VIEW_BOUNDS.width,
         Constants.VIEW_BOUNDS.minY + 30,
