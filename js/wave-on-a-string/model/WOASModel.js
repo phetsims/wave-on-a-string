@@ -518,10 +518,10 @@ WOASModel.WOASModelIO = new IOType( 'WOASModelIO', {
   valueType: WOASModel,
   documentation: 'The main model for Wave on a String',
   toStateObject: model => ( {
-    yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
-    yNow: Float64ArrayIO.toStateObject( model.yNow ),
-    yLast: Float64ArrayIO.toStateObject( model.yLast ),
-    yNext: Float64ArrayIO.toStateObject( model.yNext )
+    _yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
+    _yNow: Float64ArrayIO.toStateObject( model.yNow ),
+    _yLast: Float64ArrayIO.toStateObject( model.yLast ),
+    _yNext: Float64ArrayIO.toStateObject( model.yNext )
   } ),
   stateSchema: {
     _yDraw: Float64ArrayIO,
@@ -533,10 +533,10 @@ WOASModel.WOASModelIO = new IOType( 'WOASModelIO', {
 
     // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
     // Float64Arrays. Instead we set the array values directly.
-    model.yDraw.set( stateObject.yDraw );
-    model.yNow.set( stateObject.yNow );
-    model.yLast.set( stateObject.yLast );
-    model.yNext.set( stateObject.yNext );
+    model.yDraw.set( stateObject._yDraw );
+    model.yNow.set( stateObject._yNow );
+    model.yLast.set( stateObject._yLast );
+    model.yNext.set( stateObject._yNext );
 
     model.yNowChangedEmitter.emit();
   }
