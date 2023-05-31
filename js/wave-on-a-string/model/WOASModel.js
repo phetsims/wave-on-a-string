@@ -20,6 +20,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
+import isSettingPhetioStateProperty from '../../../../tandem/js/isSettingPhetioStateProperty.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Float64ArrayIO from '../../../../tandem/js/types/Float64ArrayIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
@@ -231,7 +232,7 @@ class WOASModel extends PhetioObject {
     // set the string to 0 on mode changes
     this.waveModeProperty.lazyLink( () => {
       // Don't mess with phet-io, see https://github.com/phetsims/wave-on-a-string/issues/141
-      if ( !phet.joist.sim.isSettingPhetioStateProperty.value ) {
+      if ( !isSettingPhetioStateProperty.value ) {
         this.manualRestart();
       }
     } );
