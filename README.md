@@ -10,11 +10,11 @@ For a description of this simulation, associated resources, and a link to the pu
 <a href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">Click here to run "Wave on a String".</a>
 
 <a href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">
-<img src="https://raw.githubusercontent.com/phetsims/wave-on-a-string/master/assets/wave-on-a-string-screenshot.png" alt="Screenshot" style="width: 400px;"/>
+<img src="https://raw.githubusercontent.com/phetsims/wave-on-a-string/main/assets/wave-on-a-string-screenshot.png" alt="Screenshot" style="width: 400px;"/>
 </a>
 
 ### Documentation
-The <a href="https://github.com/phetsims/phet-info/blob/master/doc/phet-development-overview.md" target="_blank">PhET Development Overview</a> is the most complete guide to PhET Simulation
+The <a href="https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md" target="_blank">PhET Development Overview</a> is the most complete guide to PhET Simulation
 Development. This guide includes how to obtain simulation code and its dependencies, notes about architecture & design, how to test and build
 the sims, as well as other important information.
 
@@ -78,4 +78,4 @@ Contact us at our Google Group: <a href="http://groups.google.com/forum/#!forum/
 Help us improve, create a <a href="http://github.com/phetsims/wave-on-a-string/issues/new" target="_blank">New Issue</a>
 
 ### License
-See the <a href="https://github.com/phetsims/wave-on-a-string/blob/master/LICENSE" target="_blank">LICENSE</a>
+See the <a href="https://github.com/phetsims/wave-on-a-string/blob/main/LICENSE" target="_blank">LICENSE</a>
