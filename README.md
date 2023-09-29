@@ -8,8 +8,8 @@ published version,
 
 ### Try it!
 
-<a href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">Click
-here to run "Wave on a String".</a>
+<a href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">Click here to
+run "Wave on a String".</a>
 
 <a href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank">
 <img src="https://raw.githubusercontent.com/phetsims/wave-on-a-string/main/assets/wave-on-a-string-screenshot.png" alt="Screenshot" style="width: 400px;"/>
@@ -68,8 +68,8 @@ new or changed files.
 
 (4) In a new terminal/command prompt, start an http-server
 
-(5) Open in the browser: `http://localhost/wave-on-a-string/wave-on-a-string_en.html` (You will probably need to modify
-this URL based on your HTTP port and relative path.)
+(5) Open in the browser: `http://localhost/wave-on-a-string/wave-on-a-string_en.html` (You will probably need to modify this
+URL based on your HTTP port and relative path.)
 
 #### Optional: Build the simulation into a single file
 
@@ -80,8 +80,8 @@ like `>> WARNING404: Skipping potentially non-public dependency`, which indicate
 being included in the build.
 
 (3) Open in the
-browser: `http://localhost/wave-on-a-string/build/adapted-from-phet/wave-on-a-string_en_adapted-from-phet.html` (You
-will probably need to modify this URL based on your HTTP port and relative path.)
+browser: `http://localhost/wave-on-a-string/build/adapted-from-phet/wave-on-a-string_en_adapted-from-phet.html` (You will
+probably need to modify this URL based on your HTTP port and relative path.)
 
 ### Get Involved
 
