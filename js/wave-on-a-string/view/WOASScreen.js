@@ -2,6 +2,8 @@
 
 /**
  * The main screen for Wave on a String
+ *
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import Property from '../../../../axon/js/Property.js';

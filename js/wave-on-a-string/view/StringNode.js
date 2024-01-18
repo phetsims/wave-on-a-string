@@ -3,7 +3,7 @@
 /**
  * View for the string
  *
- * Author: Anton Ulyanov (Mlearner)
+ * @author Anton Ulyanov (Mlearner)
  */
 
 import { Shape } from '../../../../kite/js/imports.js';

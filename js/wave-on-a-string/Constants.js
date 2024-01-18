@@ -1,5 +1,8 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+/**
+ * @author Anton Ulyanov (Mlearner)
+ */
 
 import Bounds2 from '../../../dot/js/Bounds2.js';
 import Range from '../../../dot/js/Range.js';
