@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "1b80db1624eba34cc6f9f86108e4bcf2d0e30a52",
+    "sha": "d94dff2966f6c98b8963bff552e1248f24979cc8",
     "branch": "HEAD"
   },
   "phetmarks": {
@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "abdc8405820868a5f5ea70e2ce6cf82664bcd53a",
+    "sha": "5658f90211083df205630ce07d98d4357eef96c2",
     "branch": "1.1"
   }
 }
