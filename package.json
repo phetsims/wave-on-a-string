@@ -30,7 +30,7 @@
         ],
         "parserOptions": {
           "project": [
-            "../wave-on-a-string/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
