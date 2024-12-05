@@ -77,11 +77,13 @@ class WOASModel extends PhetioObject {
     // @public {Property.<boolean>} - Visibilities
     this.rulersVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'rulersVisibleProperty' ),
-      phetioDocumentation: 'whether the rulers are visible'
+      phetioDocumentation: 'whether the rulers are visible',
+      phetioFeatured: true
     } );
     this.referenceLineVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'referenceLineVisibleProperty' ),
-      phetioDocumentation: 'whether the reference line is visible'
+      phetioDocumentation: 'whether the reference line is visible',
+      phetioFeatured: true
     } );
     this.wrenchArrowsVisibleProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'wrenchArrowsVisibleProperty' ),
