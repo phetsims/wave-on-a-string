@@ -71,6 +71,7 @@ class WOASModel extends PhetioObject {
     // @public {Property.<TimeSpeed>}
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       tandem: tandem.createTandem( 'timeSpeedProperty' ),
+      validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ],
       phetioDocumentation: 'the play speed for the simulation as it moves through time'
     } );
 
