@@ -53,12 +53,14 @@ class WOASModel extends PhetioObject {
     // @public {Property.<WOASModel.Mode>}
     this.waveModeProperty = new EnumerationDeprecatedProperty( WOASModel.Mode, WOASModel.Mode.MANUAL, {
       tandem: tandem.createTandem( 'waveModeProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'what is on the left side of the string, controlling its motion'
     } );
 
     // @public {Property.<WOASModel.EndType}
     this.endTypeProperty = new EnumerationDeprecatedProperty( WOASModel.EndType, WOASModel.EndType.FIXED_END, {
       tandem: tandem.createTandem( 'endTypeProperty' ),
+      phetioFeatured: true,
       phetioDocumentation: 'what is on the right side of the string'
     } );
 
@@ -71,6 +73,7 @@ class WOASModel extends PhetioObject {
     // @public {Property.<TimeSpeed>}
     this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       tandem: tandem.createTandem( 'timeSpeedProperty' ),
+      phetioFeatured: true,
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ],
       phetioDocumentation: 'the play speed for the simulation as it moves through time'
     } );
