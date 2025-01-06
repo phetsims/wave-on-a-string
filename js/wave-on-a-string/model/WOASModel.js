@@ -67,7 +67,8 @@ class WOASModel extends PhetioObject {
     // @public {Property.<boolean>}
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isPlayingProperty' ),
-      phetioDocumentation: 'whether time is moving forward in the simulation (paused if false)'
+      phetioDocumentation: 'whether time is moving forward in the simulation (paused if false)',
+      phetioFeatured: true
     } );
 
     // @public {Property.<TimeSpeed>}
