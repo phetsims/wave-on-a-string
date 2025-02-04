@@ -14,7 +14,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import platform from '../../../../phet-core/js/platform.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
-import { Circle, Color, DragListener, Image, Line, LinearGradient, Node, RadialGradient, Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, Color, DragListener, Image, Line, LinearGradient, Node, RadialGradient, Rectangle, toDataURLNodeSynchronous, toImageNodeAsynchronous } from '../../../../scenery/js/imports.js';
 import wrench_png from '../../../images/wrench_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
@@ -65,7 +65,7 @@ class StartNode extends Node {
     const wheelImageScale = 3;
     wheel.scale( wheelImageScale );
     const wheelSize = Math.ceil( wheel.width / 2 ) + 2;
-    wheel = wheel.toDataURLNodeSynchronous( wheelSize, wheelSize, 2 * wheelSize, 2 * wheelSize );
+    wheel = toDataURLNodeSynchronous( wheel, wheelSize, wheelSize, 2 * wheelSize, 2 * wheelSize );
     if ( platform.firefox ) {
       wheel.renderer = 'canvas';
     }
@@ -127,7 +127,7 @@ class StartNode extends Node {
 
     // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
     const postCache = new Node( { scale: 1 / postScale } );
-    new Node( { children: [ post ], scale: postScale } ).toImageNodeAsynchronous( image => {
+    toImageNodeAsynchronous( new Node( { children: [ post ], scale: postScale } ), image => {
       postCache.addChild( image );
     } );
     post = new Node( { children: [ postCache ] } );
