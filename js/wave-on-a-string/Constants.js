@@ -8,7 +8,11 @@ import Bounds2 from '../../../dot/js/Bounds2.js';
 import Range from '../../../dot/js/Range.js';
 import Vector2 from '../../../dot/js/Vector2.js';
 import merge from '../../../phet-core/js/merge.js';
-import { Color, Image, LinearGradient, Node, RadialGradient } from '../../../scenery/js/imports.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import Node from '../../../scenery/js/nodes/Node.js';
+import Color from '../../../scenery/js/util/Color.js';
+import LinearGradient from '../../../scenery/js/util/LinearGradient.js';
+import RadialGradient from '../../../scenery/js/util/RadialGradient.js';
 import waveOnAString from '../waveOnAString.js';
 
 const Constants = {

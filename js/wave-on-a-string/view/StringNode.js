@@ -6,8 +6,11 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
-import { Circle, Image, Node, Path } from '../../../../scenery/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import waveOnAString from '../../waveOnAString.js';
 
 class StringNode extends Node {

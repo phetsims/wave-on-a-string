@@ -6,9 +6,10 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { Node, Path } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import RoundPushButton from '../../../../sun/js/buttons/RoundPushButton.js';
 import waveOnAString from '../../waveOnAString.js';
 import WOASModel from '../model/WOASModel.js';
