@@ -16,13 +16,11 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
+import type WOASModel from '../model/WOASModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
-class ReferenceLine extends Node {
-  /**
-   * @param {WOASModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
+export default class ReferenceLine extends Node {
+  public constructor( model: WOASModel, tandem: Tandem ) {
     super( { cursor: 'pointer', tandem: tandem } );
 
     this.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
@@ -69,4 +67,3 @@ class ReferenceLine extends Node {
 }
 
 waveOnAString.register( 'ReferenceLine', ReferenceLine );
-export default ReferenceLine;

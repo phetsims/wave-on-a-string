@@ -7,7 +7,7 @@
  */
 
 import Image from '../../../../scenery/js/nodes/Image.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import clamp_png from '../../../images/clamp_png.js';
 import ringBack_png from '../../../images/ringBack_png.js';
@@ -15,15 +15,20 @@ import ringFront_png from '../../../images/ringFront_png.js';
 import windowBack_png from '../../../images/windowBack_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
-import WOASModel from '../model/WOASModel.js';
+import type WOASModel from '../model/WOASModel.js';
+import Emitter from '../../../../axon/js/Emitter.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { WOASEndType } from '../model/WOASEndType.js';
 
-class EndNode extends Node {
-  /**
-   * @param {WOASModel} model
-   * @param {Emitter} frameEmitter - emits an event when animation frame changes
-   * @param {Object} [options]
-   */
-  constructor( model, frameEmitter, options ) {
+export default class EndNode extends Node {
+
+  public readonly windowNode: Node;
+
+  public constructor(
+    model: WOASModel,
+    frameEmitter: Emitter,
+    providedOptions?: NodeOptions
+  ) {
     super();
 
     const clamp = new Image( clamp_png, { x: -17, y: -31, scale: 0.4 } );
@@ -35,19 +40,26 @@ class EndNode extends Node {
       x: 20
     } );
 
-    // @public {Node} - We need to visually stack this behind, so we can't add it as a child here
+    // We need to visually stack this behind, so we can't add it as a child here
     this.windowNode = new Image( windowBack_png, {
       right: Constants.windowXOffset + Constants.windowShift,
       centerY: 0,
       scale: Constants.windowScale
     } );
 
-    this.children = [
-      clamp,
-      ringBack,
-      post,
-      ringFront
-    ];
+    // NOTE: Figure out better layout setup
+    this.windowNode.x += Constants.endStringNode;
+    this.windowNode.y += Constants.yStringNode;
+
+    const options = combineOptions<NodeOptions>( {
+      children: [
+        clamp,
+        ringBack,
+        post,
+        ringFront
+      ]
+    }, providedOptions );
+
     this.mutate( options );
 
     let dirty = true;
@@ -63,11 +75,11 @@ class EndNode extends Node {
     } );
 
     model.endTypeProperty.link( endType => {
-      clamp.visible = endType === WOASModel.EndType.FIXED_END;
-      ringBack.visible = post.visible = ringFront.visible = endType === WOASModel.EndType.LOOSE_END;
-      this.windowNode.visible = endType === WOASModel.EndType.NO_END;
+      clamp.visible = endType === WOASEndType.FIXED_END;
+      ringBack.visible = post.visible = ringFront.visible = endType === WOASEndType.LOOSE_END;
+      this.windowNode.visible = endType === WOASEndType.NO_END;
 
-      if ( endType === WOASModel.EndType.FIXED_END ) {
+      if ( endType === WOASEndType.FIXED_END ) {
         model.zeroOutEndPoint();
       }
     } );
@@ -75,4 +87,3 @@ class EndNode extends Node {
 }
 
 waveOnAString.register( 'EndNode', EndNode );
-export default EndNode;

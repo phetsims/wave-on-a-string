@@ -28,7 +28,8 @@ import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
 import Constants from '../Constants.js';
-import WOASModel from '../model/WOASModel.js';
+import { WOASEndType } from '../model/WOASEndType.js';
+import { WOASMode } from '../model/WOASMode.js';
 import BottomControlPanel from './BottomControlPanel.js';
 import EndNode from './EndNode.js';
 import ReferenceLine from './ReferenceLine.js';
@@ -36,28 +37,19 @@ import RestartButton from './RestartButton.js';
 import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
-
-const fixedEndString = WaveOnAStringStrings.fixedEnd;
-const looseEndString = WaveOnAStringStrings.looseEnd;
-const manualString = WaveOnAStringStrings.manual;
-const noEndString = WaveOnAStringStrings.noEnd;
-const oscillateString = WaveOnAStringStrings.oscillate;
-const pulseString = WaveOnAStringStrings.pulse;
-const unitCmString = WaveOnAStringStrings.unitCm;
+import type WOASModel from '../model/WOASModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 class WOASScreenView extends ScreenView {
-  /**
-   * @param {WOASModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
+
+  // Fired when a view frame occurs
+  private readonly frameEmitter: Emitter = new Emitter();
+
+  public constructor( model: WOASModel, tandem: Tandem ) {
     super( {
       layoutBounds: Constants.VIEW_BOUNDS,
       tandem: tandem
     } );
-
-    // @private {Emitter} - Fired when a view frame occurs
-    this.frameEmitter = new Emitter();
 
     const rulersTandem = tandem.createTandem( 'rulersNode' );
     const wavePlayAreaTandem = tandem.createTandem( 'wavePlayArea' );
@@ -66,10 +58,10 @@ class WOASScreenView extends ScreenView {
     const verticalRulerTandem = rulersTandem.createTandem( 'verticalRulerNode' );
 
     const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-    const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => `${n}` ), unitCmString, merge( {
+    const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
       tandem: horizontalRulerTandem
     }, rulerOptions ) );
-    const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => `${n}` ), unitCmString, merge( {
+    const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
       tandem: verticalRulerTandem
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
@@ -117,11 +109,15 @@ class WOASScreenView extends ScreenView {
       children: [
         new Panel( new WOASRadioButtonGroup( model.waveModeProperty, modePanelTandem.createTandem( 'radioButtonGroup' ), {
           radio: [
-            WOASModel.Mode.MANUAL,
-            WOASModel.Mode.OSCILLATE,
-            WOASModel.Mode.PULSE
+            WOASMode.MANUAL,
+            WOASMode.OSCILLATE,
+            WOASMode.PULSE
           ],
-          text: [ manualString, oscillateString, pulseString ],
+          text: [
+            WaveOnAStringStrings.manualStringProperty,
+            WaveOnAStringStrings.oscillateStringProperty,
+            WaveOnAStringStrings.pulseStringProperty
+          ],
           tandemNames: [
             'manualRadioButton',
             'oscillateRadioButton',
@@ -142,11 +138,15 @@ class WOASScreenView extends ScreenView {
 
     this.addChild( new Panel( new WOASRadioButtonGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'radioButtonGroup' ), {
       radio: [
-        WOASModel.EndType.FIXED_END,
-        WOASModel.EndType.LOOSE_END,
-        WOASModel.EndType.NO_END
+        WOASEndType.FIXED_END,
+        WOASEndType.LOOSE_END,
+        WOASEndType.NO_END
       ],
-      text: [ fixedEndString, looseEndString, noEndString ],
+      text: [
+        WaveOnAStringStrings.fixedEndStringProperty,
+        WaveOnAStringStrings.looseEndStringProperty,
+        WaveOnAStringStrings.noEndStringProperty
+      ],
       tandemNames: [
         'fixedEndRadioButton',
         'looseEndRadioButton',
@@ -163,26 +163,13 @@ class WOASScreenView extends ScreenView {
       timeSpeedProperty: model.timeSpeedProperty,
       playPauseStepButtonOptions: {
         playPauseButtonOptions: {
-          upFill: Constants.blueUpColor,
-          overFill: Constants.blueOverColor,
-          disabledFill: Constants.blueDisabledColor,
-          downFill: Constants.blueDownColor,
-          backgroundGradientColorStop0: Constants.buttonBorder0,
-          backgroundGradientColorStop1: Constants.buttonBorder1,
-          innerButtonLineWidth: 1,
           scaleFactorWhenNotPlaying: 1.25,
           touchAreaDilation: 12
         },
 
         stepForwardButtonOptions: {
           listener: model.manualStep.bind( model ),
-          touchAreaDilation: 12,
-          upFill: Constants.blueUpColor,
-          overFill: Constants.blueOverColor,
-          disabledFill: Constants.blueDisabledColor,
-          downFill: Constants.blueDownColor,
-          backgroundGradientColorStop0: Constants.buttonBorder0,
-          backgroundGradientColorStop1: Constants.buttonBorder1
+          touchAreaDilation: 12
         }
       },
 
@@ -234,8 +221,6 @@ class WOASScreenView extends ScreenView {
       tandem: wavePlayAreaTandem.createTandem( 'endNode' ),
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
-    endNode.windowNode.x += Constants.endStringNode;
-    endNode.windowNode.y += Constants.yStringNode;
     this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ) ) );
     this.addChild( endNode );
@@ -262,17 +247,14 @@ class WOASScreenView extends ScreenView {
     } ) );
 
     model.endTypeProperty.link( endType => {
-      windowImage.visible = endType === WOASModel.EndType.NO_END;
+      windowImage.visible = endType === WOASEndType.NO_END;
     } );
   }
 
   /**
    * Steps forward in time.
-   * @public
-   *
-   * @param {number} dt
    */
-  step( dt ) {
+  public override step( dt: number ): void {
     this.frameEmitter.emit();
   }
 }

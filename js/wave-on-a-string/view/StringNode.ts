@@ -6,31 +6,39 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
+import Emitter from '../../../../axon/js/Emitter.js';
 import Shape from '../../../../kite/js/Shape.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import waveOnAString from '../../waveOnAString.js';
+import type WOASModel from '../model/WOASModel.js';
 
-class StringNode extends Node {
-  /**
-   * @param {WOASModel} model
-   * @param {Emitter} frameEmitter - Emits an event when the animation frame changes
-   * @param {Object} [options]
-   */
-  constructor( model, frameEmitter, options ) {
-    super( { layerSplit: true } );
+type SelfOptions = {
+  radius: number;
+};
+
+export type StringNodeOptions = SelfOptions & NodeOptions;
+
+export default class StringNode extends Node {
+  public constructor( model: WOASModel, frameEmitter: Emitter, providedOptions?: StringNodeOptions ) {
+    super();
+
+    const options = optionize<StringNodeOptions, SelfOptions, NodeOptions>()( {
+      layerSplit: true
+    }, providedOptions );
 
     let stringShape = new Shape();
     const stringPath = new Path( stringShape, {
       stroke: '#F00'
     } );
-    const beads = [];
+    const beads: Node[] = [];
     this.addChild( stringPath );
 
     stringPath.computeShapeBounds = function() {
-      return this.getShape().bounds.dilated( 20 ); // miterLimit should cut off with the normal stroke before this
+      return this.getShape()!.bounds.dilated( 20 ); // miterLimit should cut off with the normal stroke before this
     };
 
     const highlightCircle = new Circle( options.radius * 0.3, {
@@ -54,12 +62,12 @@ class StringNode extends Node {
       scale: scale
     } );
 
-    let redNode;
+    let redNode!: Image;
     redBead.toDataURL( ( url, x, y ) => {
       redNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
-    let limeNode;
+    let limeNode!: Image;
     limeBead.toDataURL( ( url, x, y ) => {
       limeNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
@@ -99,4 +107,3 @@ class StringNode extends Node {
 }
 
 waveOnAString.register( 'StringNode', StringNode );
-export default StringNode;

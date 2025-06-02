@@ -7,22 +7,27 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
+import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import waveOnAString from '../../waveOnAString.js';
-import Constants from '../Constants.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import TRangedProperty from '../../../../axon/js/TRangedProperty.js';
+import WOASColors from './WOASColors.js';
+
+type SelfOptions = EmptySelfOptions;
+type SuperOptions = NumberControlOptions;
+export type WOASNumberControlOptions = SelfOptions & SuperOptions;
 
 class WOASNumberControl extends NumberControl {
-  /**
-   * @param {string} title
-   * @param {Property.<number>} numberProperty
-   * @param {Object} [options]
-   */
-  constructor( title, numberProperty, options ) {
-    options = merge( {
+  public constructor(
+    title: TReadOnlyProperty<string>,
+    numberProperty: TRangedProperty,
+    providedOptions?: WOASNumberControlOptions
+  ) {
+    const options = optionize<WOASNumberControlOptions, SelfOptions, SuperOptions>()( {
       layoutFunction: ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
         return new VBox( {
           spacing: 5,
@@ -37,7 +42,11 @@ class WOASNumberControl extends NumberControl {
               children: [
                 new HBox( {
                   spacing: 5,
-                  children: [ leftArrowButton, numberDisplay, rightArrowButton ]
+                  children: [
+                    ...( leftArrowButton ? [ leftArrowButton ] : [] ),
+                    numberDisplay,
+                    ...( rightArrowButton ? [ rightArrowButton ] : [] )
+                  ]
                 } ),
                 slider
               ]
@@ -46,7 +55,14 @@ class WOASNumberControl extends NumberControl {
         } );
       },
 
-      sliderOptions: WOASNumberControl.getSliderOptions(),
+      sliderOptions: {
+        trackSize: new Dimension2( 140, 2 ),
+        trackFillEnabled: WOASColors.sliderTrackFillProperty,
+
+        thumbSize: new Dimension2( 22, 38 ),
+        thumbFill: WOASColors.sliderThumbFillProperty,
+        thumbFillHighlighted: WOASColors.sliderThumbHighlightedFillProperty
+      },
 
       numberDisplayOptions: {
         textOptions: {
@@ -55,7 +71,7 @@ class WOASNumberControl extends NumberControl {
         maxWidth: 120,
         xMargin: 20,
         yMargin: 5,
-        backgroundStroke: 'black',
+        backgroundStroke: WOASColors.numberDisplayBackgroundStrokeProperty,
         cornerRadius: 5
       },
 
@@ -63,26 +79,9 @@ class WOASNumberControl extends NumberControl {
         font: new PhetFont( 18 ),
         maxWidth: 150
       }
-    }, options );
+    }, providedOptions );
 
     super( title, numberProperty, numberProperty.range, options );
-  }
-
-  /**
-   * Returns the default slider options.
-   * @public
-   *
-   * @returns {Object}
-   */
-  static getSliderOptions() {
-    return {
-      trackSize: new Dimension2( 140, 2 ),
-      trackFill: 'black',
-
-      thumbSize: new Dimension2( 22, 38 ),
-      thumbFillEnabled: Constants.sliderUp,
-      thumbFillHighlighted: Constants.sliderOver
-    };
   }
 }
 

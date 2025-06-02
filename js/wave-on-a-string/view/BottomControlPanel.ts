@@ -6,10 +6,9 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
+import RangedDynamicProperty from '../../../../axon/js/RangedDynamicProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
@@ -17,45 +16,31 @@ import Line from '../../../../scenery/js/nodes/Line.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
-import WOASModel from '../model/WOASModel.js';
+import type WOASModel from '../model/WOASModel.js';
 import WOASNumberControl from './WOASNumberControl.js';
+import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
+import { WOASMode } from '../model/WOASMode.js';
 
-const amplitudeString = WaveOnAStringStrings.amplitude;
-const dampingString = WaveOnAStringStrings.damping;
-const frequencyString = WaveOnAStringStrings.frequency;
-const patternValueUnitCmString = WaveOnAStringStrings.patternValueUnitCm;
-const patternValueUnitHzString = WaveOnAStringStrings.patternValueUnitHz;
-const patternValueUnitPercentageString = WaveOnAStringStrings.patternValueUnitPercentage;
-const patternValueUnitSString = WaveOnAStringStrings.patternValueUnitS;
-const pulseWidthString = WaveOnAStringStrings.pulseWidth;
-const referenceLineString = WaveOnAStringStrings.referenceLine;
-const rulersString = WaveOnAStringStrings.rulers;
-const tensionString = WaveOnAStringStrings.tension;
-const timerString = WaveOnAStringStrings.timer;
-
-class BottomControlPanel extends Panel {
-  /**
-   * @param {WOASModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
+export default class BottomControlPanel extends Panel {
+  public constructor( model: WOASModel, tandem: Tandem ) {
     const checkboxTextOptions = {
       font: new PhetFont( 15 ),
       maxWidth: 130
     };
     const checkboxTandem = tandem.createTandem( 'checkboxGroup' );
     const checkboxGroup = new VerticalCheckboxGroup( [ {
-      createNode: () => new Text( rulersString, checkboxTextOptions ),
+      createNode: () => new Text( WaveOnAStringStrings.rulersStringProperty, checkboxTextOptions ),
       property: model.rulersVisibleProperty,
       tandemName: 'rulersCheckbox'
     }, {
-      createNode: () => new Text( timerString, checkboxTextOptions ),
+      createNode: () => new Text( WaveOnAStringStrings.timerStringProperty, checkboxTextOptions ),
       property: model.stopwatch.isVisibleProperty,
       tandemName: 'stopwatchCheckbox'
     }, {
-      createNode: () => new Text( referenceLineString, checkboxTextOptions ),
+      createNode: () => new Text( WaveOnAStringStrings.referenceLineStringProperty, checkboxTextOptions ),
       property: model.referenceLineVisibleProperty,
       tandemName: 'referenceLineCheckbox'
     } ], {
@@ -64,66 +49,65 @@ class BottomControlPanel extends Panel {
 
     const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
 
-    const tensionProperty = new DynamicProperty( new Property( model.tensionProperty ), {
+    const tensionProperty = new RangedDynamicProperty( new Property( model.tensionProperty ), {
       bidirectional: true,
-      map: value => value * 100,
-      inverseMap: value => value / 100
+      map: ( value: number ) => value * 100,
+      inverseMap: ( value: number ) => value / 100,
+      range: new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 )
     } );
-    // TODO: how to support range on dynamic properties? https://github.com/phetsims/wave-on-a-string/issues/147
-    tensionProperty.range = new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 );
 
-    const tensionControl = new WOASNumberControl( tensionString, tensionProperty, {
+    const tensionControl = new WOASNumberControl( WaveOnAStringStrings.tensionStringProperty, tensionProperty, {
       delta: 1,
       numberDisplayOptions: {
         decimalPlaces: 0,
-        valuePattern: patternValueUnitPercentageString
+        valuePattern: WaveOnAStringStrings.patternValueUnitPercentageStringProperty
       },
       sliderOptions: {
-        constrainValue: value => tensionProperty.range.constrainValue( Utils.roundToInterval( value, 5 ) )
+        constrainValue: value => tensionProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
       tandem: tandem.createTandem( 'tensionControl' )
     } );
-    const dampingControl = new WOASNumberControl( dampingString, model.dampingProperty, {
+    const dampingControl = new WOASNumberControl( WaveOnAStringStrings.dampingStringProperty, model.dampingProperty, {
       delta: 1,
       numberDisplayOptions: {
         decimalPlaces: 0,
-        valuePattern: patternValueUnitPercentageString
+        valuePattern: WaveOnAStringStrings.patternValueUnitPercentageStringProperty
       },
       sliderOptions: {
-        constrainValue: value => model.dampingProperty.range.constrainValue( Utils.roundToInterval( value, 5 ) )
+        constrainValue: value => model.dampingProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
       tandem: tandem.createTandem( 'dampingControl' )
     } );
-    const frequencyControl = new WOASNumberControl( frequencyString, model.frequencyProperty, {
+    const frequencyControl = new WOASNumberControl( WaveOnAStringStrings.frequencyStringProperty, model.frequencyProperty, {
       delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
-        valuePattern: patternValueUnitHzString
+        valuePattern: WaveOnAStringStrings.patternValueUnitHzStringProperty
       },
       sliderOptions: {
-        constrainValue: value => model.frequencyProperty.range.constrainValue( Utils.roundToInterval( value, 0.1 ) )
+        constrainValue: value => model.frequencyProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'frequencyControl' )
     } );
-    const pulseWidthControl = new WOASNumberControl( pulseWidthString, model.pulseWidthProperty, {
+    const pulseWidthControl = new WOASNumberControl( WaveOnAStringStrings.pulseWidthStringProperty, model.pulseWidthProperty, {
       delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
-        valuePattern: patternValueUnitSString
+        valuePattern: WaveOnAStringStrings.patternValueUnitSStringProperty
       },
       sliderOptions: {
-        constrainValue: value => model.pulseWidthProperty.range.constrainValue( Utils.roundToInterval( value, 0.1 ) )
+        constrainValue: value => model.pulseWidthProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'pulseWidthControl' )
     } );
-    const amplitudeControl = new WOASNumberControl( amplitudeString, model.amplitudeProperty, {
+    const amplitudeControl = new WOASNumberControl( WaveOnAStringStrings.amplitudeStringProperty, model.amplitudeProperty, {
       delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
-        valuePattern: patternValueUnitCmString
+        valuePattern: WaveOnAStringStrings.patternValueUnitCmStringProperty
       },
       sliderOptions: {
-        constrainValue: value => model.amplitudeProperty.range.constrainValue( Utils.roundToInterval( value, 0.1 ) )
+        constrainValue: value => model.amplitudeProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'amplitudeControl' )
     } );
@@ -141,13 +125,13 @@ class BottomControlPanel extends Panel {
       spacing: 35
     } );
     model.waveModeProperty.link( mode => {
-      if ( mode === WOASModel.Mode.OSCILLATE ) {
+      if ( mode === WOASMode.OSCILLATE ) {
         controlBox.children = [ amplitudeControl, frequencyAlignBox, dampingControl, tensionControl ];
       }
-      else if ( mode === WOASModel.Mode.MANUAL ) {
+      else if ( mode === WOASMode.MANUAL ) {
         controlBox.children = [ dampingControl, tensionControl ];
       }
-      else if ( mode === WOASModel.Mode.PULSE ) {
+      else if ( mode === WOASMode.PULSE ) {
         controlBox.children = [ amplitudeControl, pulseWidthAlignBox, dampingControl, tensionControl ];
       }
       else {
@@ -175,4 +159,3 @@ class BottomControlPanel extends Panel {
 }
 
 waveOnAString.register( 'BottomControlPanel', BottomControlPanel );
-export default BottomControlPanel;

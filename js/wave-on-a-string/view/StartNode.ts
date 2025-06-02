@@ -6,19 +6,22 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
+import Emitter from '../../../../axon/js/Emitter.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3, { m3 } from '../../../../dot/js/Matrix3.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import platform from '../../../../phet-core/js/platform.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
@@ -27,19 +30,21 @@ import { toDataURLNodeSynchronous, toImageNodeAsynchronous } from '../../../../s
 import wrench_png from '../../../images/wrench_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import Constants from '../Constants.js';
-import WOASModel from '../model/WOASModel.js';
+import { WOASMode } from '../model/WOASMode.js';
+import type WOASModel from '../model/WOASModel.js';
 import PulseButton from './PulseButton.js';
 
-class StartNode extends Node {
-  /**
-   * @param {WOASModel} model
-   * @param {Emitter} frameEmitter
-   * @param {Object} [options]
-   */
-  constructor( model, frameEmitter, options ) {
-    options = merge( {
+type SelfOptions = {
+  range: Range;
+};
+
+export type StartNodeOptions = WithRequired<NodeOptions, 'tandem'> & SelfOptions;
+
+export default class StartNode extends Node {
+  public constructor( model: WOASModel, frameEmitter: Emitter, providedOptions?: StartNodeOptions ) {
+    const options = optionize<StartNodeOptions, SelfOptions, NodeOptions>()( {
       layerSplit: true
-    }, options );
+    }, providedOptions );
 
     const postNodeHeight = 158;
     const postScale = 3;
@@ -50,7 +55,7 @@ class StartNode extends Node {
      * Oscillation wheel
      *----------------------------------------------------------------------------*/
     const wheelRadius = 29.5;
-    let wheel = new Circle( wheelRadius, {
+    let wheel: Node = new Circle( wheelRadius, {
       stroke: '#333',
       lineWidth: 1.5,
       fill: new LinearGradient( -wheelRadius, 0, wheelRadius, 0 ).addColorStop( 0, 'rgb(215,210,210)' ).addColorStop( 1, 'rgb(215,210,210)' )
@@ -112,7 +117,7 @@ class StartNode extends Node {
     /*---------------------------------------------------------------------------*
      * Post
      *----------------------------------------------------------------------------*/
-    let post = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
+    let post: Node = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
       fill: Constants.postGradient
     } );
@@ -152,7 +157,10 @@ class StartNode extends Node {
     wrench.addInputListener( new DragListener( {
       tandem: options.tandem.createTandem( 'wrenchDragListener' ),
       start: event => {
-        clickOffset = wrench.globalToParentPoint( event.pointer.point ).minus( event.currentTarget.translation );
+        clickOffset = wrench.globalToParentPoint( event.pointer.point );
+        if ( event.currentTarget ) {
+          clickOffset = clickOffset.minus( event.currentTarget.translation );
+        }
 
         if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
           model.wrenchArrowsVisibleProperty.value = false;
@@ -211,25 +219,24 @@ class StartNode extends Node {
       wheel.matrix = Matrix3.rotation2( angle ).timesMatrix( wheelScaleMatrix ); // doesn't need to compute current transform, or do matrix multiplication
     } );
     model.waveModeProperty.link( mode => {
-      const wrenchIsVisible = mode === WOASModel.Mode.MANUAL;
+      const wrenchIsVisible = mode === WOASMode.MANUAL;
       if ( wrench.isVisible() !== wrenchIsVisible ) {
         wrench.visible = wrenchIsVisible;
 
         updateKey();
       }
 
-      const postIsVisible = mode !== WOASModel.Mode.MANUAL;
+      const postIsVisible = mode !== WOASMode.MANUAL;
       if ( post.isVisible() !== postIsVisible ) {
         post.visible = postIsVisible;
 
         updatePost();
       }
 
-      wheel.visible = mode === WOASModel.Mode.OSCILLATE;
-      pistonBox.visible = mode === WOASModel.Mode.PULSE;
+      wheel.visible = mode === WOASMode.OSCILLATE;
+      pistonBox.visible = mode === WOASMode.PULSE;
     } );
   }
 }
 
 waveOnAString.register( 'StartNode', StartNode );
-export default StartNode;

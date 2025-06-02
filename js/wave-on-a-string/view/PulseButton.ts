@@ -7,22 +7,19 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import RoundPushButton from '../../../../sun/js/buttons/RoundPushButton.js';
+import RoundPushButton, { RoundPushButtonOptions } from '../../../../sun/js/buttons/RoundPushButton.js';
 import waveOnAString from '../../waveOnAString.js';
-import WOASModel from '../model/WOASModel.js';
+import type WOASModel from '../model/WOASModel.js';
+import { WOASMode } from '../model/WOASMode.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 
-class PulseButton extends RoundPushButton {
-  /**
-   * @param {WOASModel} model
-   * @param {Object} [options]
-   */
-  constructor( model, options ) {
+export default class PulseButton extends RoundPushButton {
+  public constructor( model: WOASModel, providedOptions?: RoundPushButtonOptions ) {
     const pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
 
-    super( merge( {
+    super( optionize<RoundPushButtonOptions, EmptySelfOptions>()( {
       listener: () => {
         model.manualPulse();
         model.isPlayingProperty.value = true;
@@ -47,15 +44,14 @@ class PulseButton extends RoundPushButton {
       xMargin: 6,
       yMargin: 6,
       yContentOffset: -1
-    }, options ) );
+    }, providedOptions ) );
 
     this.touchArea = this.localBounds.dilatedXY( 5, 10 );
 
     model.waveModeProperty.link( mode => {
-      this.visible = mode === WOASModel.Mode.PULSE;
+      this.visible = mode === WOASMode.PULSE;
     } );
   }
 }
 
 waveOnAString.register( 'PulseButton', PulseButton );
-export default PulseButton;
