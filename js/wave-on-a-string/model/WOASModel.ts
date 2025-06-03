@@ -29,20 +29,18 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import waveOnAString from '../../waveOnAString.js';
 import { WOASEndType } from './WOASEndType.js';
 import { WOASMode } from './WOASMode.js';
+import { FRAMES_PER_SECOND, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, VIEW_ORIGIN_X } from '../WOASConstants.js';
 
 // constants
-const NUMBER_OF_SEGMENTS = 61;
-const LAST_INDEX = NUMBER_OF_SEGMENTS - 1;
-const NEXT_TO_LAST_INDEX = NUMBER_OF_SEGMENTS - 2;
-const AMPLITUDE_MULTIPLIER = 80; // the number of model units (vertically) per cm
-const FRAMES_PER_SECOND = 50;
+const LAST_INDEX = NUMBER_OF_BEADS - 1;
+const NEXT_TO_LAST_INDEX = NUMBER_OF_BEADS - 2;
 
 export default class WOASModel extends PhetioObject {
 
-  public yDraw: Float64Array = new Float64Array( NUMBER_OF_SEGMENTS );
-  public yNow: Float64Array = new Float64Array( NUMBER_OF_SEGMENTS );
-  public yLast: Float64Array = new Float64Array( NUMBER_OF_SEGMENTS );
-  public yNext: Float64Array = new Float64Array( NUMBER_OF_SEGMENTS );
+  public yDraw: Float64Array = new Float64Array( NUMBER_OF_BEADS );
+  public yNow: Float64Array = new Float64Array( NUMBER_OF_BEADS );
+  public yLast: Float64Array = new Float64Array( NUMBER_OF_BEADS );
+  public yNext: Float64Array = new Float64Array( NUMBER_OF_BEADS );
 
   public readonly waveModeProperty: Property<WOASMode>;
   public readonly endTypeProperty: Property<WOASEndType>;
@@ -129,7 +127,8 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'whether the up/down arrows on the wrench are visible'
     } );
 
-    this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( 54, 117 ), {
+    // NOTE: 14 is the insets for the ruler
+    this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( VIEW_ORIGIN_X - 14, 117 ), {
       tandem: tandem.createTandem( 'horizontalRulerPositionProperty' ),
       phetioDocumentation: 'position of the horizontal ruler in view coordinates (from the top-left of the ruler, initially 54,117)'
     } );
@@ -232,8 +231,8 @@ export default class WOASModel extends PhetioObject {
 
     this.waveStartPositionProperty = new RangedDynamicProperty( new Property( this.nextLeftYProperty ), {
       bidirectional: true,
-      map: ( y: number ) => -y / AMPLITUDE_MULTIPLIER,
-      inverseMap: ( y: number ) => -y * AMPLITUDE_MULTIPLIER,
+      map: ( y: number ) => -y / MODEL_UNITS_PER_CM,
+      inverseMap: ( y: number ) => -y * MODEL_UNITS_PER_CM,
       tandem: tandem.createTandem( 'waveStartPositionProperty' ),
       phetioDocumentation: 'the y-value of the 1st green dot measured with respect to the center line',
       units: 'cm',
@@ -389,7 +388,7 @@ export default class WOASModel extends PhetioObject {
       if ( this.waveModeProperty.value === WOASMode.OSCILLATE ) {
         this.angleProperty.value = ( this.angleProperty.value +
                                      Math.PI * 2 * this.frequencyProperty.value * fixDt * speedMultiplier ) % ( Math.PI * 2 );
-        this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * Math.sin( -this.angleProperty.value );
+        this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * MODEL_UNITS_PER_CM * Math.sin( -this.angleProperty.value );
       }
       if ( this.waveModeProperty.value === WOASMode.PULSE && this.pulsePendingProperty.value ) {
         this.pulsePendingProperty.value = false;
@@ -410,7 +409,7 @@ export default class WOASModel extends PhetioObject {
           this.pulseSignProperty.reset();
           this.pulseProperty.reset();
         }
-        this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * AMPLITUDE_MULTIPLIER * ( -this.angleProperty.value / ( Math.PI / 2 ) );
+        this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * MODEL_UNITS_PER_CM * ( -this.angleProperty.value / ( Math.PI / 2 ) );
       }
       if ( this.waveModeProperty.value === WOASMode.MANUAL ) {
         // interpolate the yNow across steps for manual (between frames)
@@ -419,12 +418,12 @@ export default class WOASModel extends PhetioObject {
       if ( this.timeElapsedProperty.value >= minDt ) {
         this.timeElapsedProperty.value = this.timeElapsedProperty.value % minDt;
         this.evolve();
-        for ( i = 0; i < NUMBER_OF_SEGMENTS; i++ ) {
+        for ( i = 0; i < NUMBER_OF_BEADS; i++ ) {
           this.yDraw[ i ] = this.yLast[ i ];
         }
       }
       else {
-        for ( i = 1; i < NUMBER_OF_SEGMENTS; i++ ) {
+        for ( i = 1; i < NUMBER_OF_BEADS; i++ ) {
           this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeElapsedProperty.value / minDt ) );
         }
       }

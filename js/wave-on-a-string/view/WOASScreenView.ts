@@ -9,7 +9,6 @@
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Utils from '../../../../dot/js/Utils.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -39,6 +38,12 @@ import StringNode from './StringNode.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
 import type WOASModel from '../model/WOASModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y } from '../WOASConstants.js';
+
+const MARGIN = 10;
 
 class WOASScreenView extends ScreenView {
 
@@ -47,9 +52,14 @@ class WOASScreenView extends ScreenView {
 
   public constructor( model: WOASModel, tandem: Tandem ) {
     super( {
-      layoutBounds: Constants.VIEW_BOUNDS,
       tandem: tandem
     } );
+
+    const modelViewTransform = ModelViewTransform2.createSinglePointScaleMapping(
+      Vector2.ZERO,
+      new Vector2( VIEW_ORIGIN_X, VIEW_ORIGIN_Y ),
+      SCALE_FROM_ORIGINAL
+    );
 
     const rulersTandem = tandem.createTandem( 'rulersNode' );
     const wavePlayAreaTandem = tandem.createTandem( 'wavePlayArea' );
@@ -57,11 +67,21 @@ class WOASScreenView extends ScreenView {
     const horizontalRulerTandem = rulersTandem.createTandem( 'horizontalRulerNode' );
     const verticalRulerTandem = rulersTandem.createTandem( 'verticalRulerNode' );
 
-    const rulerOptions = { minorTicksPerMajorTick: 4, unitsFont: new PhetFont( 16 ), cursor: 'pointer' };
-    const horizontalRulerNode = new RulerNode( 800, 50, 80, Utils.rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
+    const rulerOptions = {
+      minorTicksPerMajorTick: 9,
+      unitsFont: new PhetFont( 16 ),
+      cursor: 'pointer'
+    };
+
+    const viewUnitsPerCM = modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_CM );
+
+    const horizontalRulerWidth = 10 * viewUnitsPerCM;
+    const verticalRulerHeight = 5 * viewUnitsPerCM;
+
+    const horizontalRulerNode = new RulerNode( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
       tandem: horizontalRulerTandem
     }, rulerOptions ) );
-    const verticalRulerNode = new RulerNode( 400, 50, 80, Utils.rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
+    const verticalRulerNode = new RulerNode( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
       tandem: verticalRulerTandem
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
@@ -86,24 +106,57 @@ class WOASScreenView extends ScreenView {
     horizontalRulerNode.addInputListener( new DragListener( {
       tandem: horizontalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.horizontalRulerPositionProperty,
-      dragBoundsProperty: new Property( Constants.VIEW_BOUNDS.dilated( 30 ).shiftedX( -Constants.VIEW_BOUNDS.width / 2 ).dilatedX( Constants.VIEW_BOUNDS.width * 0.4 ) )
+      dragBoundsProperty: new Property( this.layoutBounds.dilated( 30 ).shiftedX( -this.layoutBounds.width / 2 ).dilatedX( this.layoutBounds.width * 0.4 ) )
     } ) );
 
     verticalRulerNode.addInputListener( new DragListener( {
       tandem: verticalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.verticalRulerPositionProperty,
-      dragBoundsProperty: new Property( Constants.VIEW_BOUNDS.withMaxX( Constants.VIEW_BOUNDS.maxX - 50 ).withMaxY( Constants.VIEW_BOUNDS.maxY * 1.8 ) )
+      dragBoundsProperty: new Property( this.layoutBounds.withMaxX( this.layoutBounds.maxX - 50 ).withMaxY( this.layoutBounds.maxY * 1.8 ) )
     } ) );
 
     const radioPanelOptions = {
       fill: '#D9FCC5',
       xMargin: 7,
       yMargin: 7,
-      lineWidth: 0.5
+      lineWidth: 2 / 3
     };
 
     const modePanelTandem = tandem.createTandem( 'waveModePanel' );
     const endTypePanelTandem = tandem.createTandem( 'endTypePanel' );
+
+    const stringNode = new StringNode( model, this.frameEmitter, modelViewTransform, {
+      tandem: wavePlayAreaTandem.createTandem( 'stringNode' ),
+      visiblePropertyOptions: { phetioReadOnly: true }
+    } );
+
+    const centerLine = new Line(
+      modelViewTransform.modelToViewX( 0 ),
+      modelViewTransform.modelToViewY( 0 ),
+      modelViewTransform.modelToViewX( MODEL_UNITS_PER_GAP * ( NUMBER_OF_BEADS - 1 ) ),
+      modelViewTransform.modelToViewY( 0 ), {
+      stroke: '#FFA91D',
+      lineDash: [ 8, 5 ],
+      lineWidth: 2,
+      tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
+    } );
+
+    const startNode = new StartNode( model, this.frameEmitter, {
+      scale: SCALE_FROM_ORIGINAL,
+      x: VIEW_ORIGIN_X,
+      y: VIEW_ORIGIN_Y,
+      range: Constants.yWrenchRange,
+      tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
+      visiblePropertyOptions: { phetioReadOnly: true }
+    } );
+
+    const endNode = new EndNode( model, this.frameEmitter, {
+      scale: SCALE_FROM_ORIGINAL,
+      x: VIEW_END_X,
+      y: VIEW_ORIGIN_Y,
+      tandem: wavePlayAreaTandem.createTandem( 'endNode' ),
+      visiblePropertyOptions: { phetioReadOnly: true }
+    } );
 
     this.addChild( new HBox( {
       children: [
@@ -131,8 +184,8 @@ class WOASScreenView extends ScreenView {
         } )
       ],
       spacing: 10,
-      left: 5,
-      y: 5,
+      left: this.layoutBounds.left + MARGIN,
+      top: this.layoutBounds.top + MARGIN,
       align: 'top'
     } ) );
 
@@ -151,11 +204,11 @@ class WOASScreenView extends ScreenView {
         'fixedEndRadioButton',
         'looseEndRadioButton',
         'noEndRadioButton'
-      ],
-      x: Constants.VIEW_BOUNDS.width - 100,
-      y: 5
+      ]
     } ), merge( {
-      right: Constants.VIEW_BOUNDS.width - 5,
+      // NOTE: alignbox?
+      right: this.layoutBounds.right - MARGIN,
+      top: this.layoutBounds.top + MARGIN,
       tandem: endTypePanelTandem
     }, radioPanelOptions ) ) );
 
@@ -173,20 +226,18 @@ class WOASScreenView extends ScreenView {
         }
       },
 
-      scale: 0.75,
-      centerX: Constants.VIEW_BOUNDS.width / 2,
-      centerY: Constants.VIEW_BOUNDS.height - 131,
+      centerX: this.layoutBounds.width / 2,
+      centerY: this.layoutBounds.height - 175,
 
       tandem: tandem.createTandem( 'timeControlNode' )
     } ) );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => model.reset(),
-      right: this.layoutBounds.maxX - 10,
-      bottom: this.layoutBounds.maxY - 10,
+      right: this.layoutBounds.right - MARGIN,
+      bottom: this.layoutBounds.bottom - MARGIN,
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
-    resetAllButton.scale( 0.924 );
     this.addChild( resetAllButton );
 
     this.addChild( new AlignBox( new BottomControlPanel( model, tandem.createTandem( 'controlPanel' ) ), {
@@ -206,44 +257,18 @@ class WOASScreenView extends ScreenView {
     this.addChild( stopwatchNode );
     let windowImage;
 
-    //center line
-    this.addChild( new Line( 0, 0, 605, 0, {
-      stroke: '#FFA91D',
-      lineDash: [ 8, 5 ],
-      lineWidth: 2,
-      x: Constants.startStringNode,
-      y: Constants.yStringNode,
-      tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
-    } ) );
-    const endNode = new EndNode( model, this.frameEmitter, {
-      x: Constants.endStringNode,
-      y: Constants.yStringNode,
-      tandem: wavePlayAreaTandem.createTandem( 'endNode' ),
-      visiblePropertyOptions: { phetioReadOnly: true }
-    } );
+    this.addChild( centerLine );
     this.addChild( endNode.windowNode );
-    this.addChild( new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ) ) );
+    this.addChild( new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ), this.layoutBounds ) );
     this.addChild( endNode );
-    this.addChild( new StringNode( model, this.frameEmitter, {
-      x: Constants.startStringNode,
-      y: Constants.yStringNode,
-      radius: Constants.segmentStringNodeRadius,
-      tandem: wavePlayAreaTandem.createTandem( 'stringNode' ),
-      visiblePropertyOptions: { phetioReadOnly: true }
-    } ) );
-    this.addChild( new StartNode( model, this.frameEmitter, {
-      x: Constants.startStringNode,
-      y: Constants.yStringNode,
-      range: Constants.yWrenchRange,
-      tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
-      visiblePropertyOptions: { phetioReadOnly: true }
-    } ) );
+    this.addChild( stringNode );
+    this.addChild( startNode );
     this.addChild( windowImage = new Node( {
       children: [ new Image( windowFront_png, {
         left: Constants.windowXOffset - 4 + Constants.windowShift,
         centerY: 0,
         scale: Constants.windowScale
-      } ) ], x: Constants.endStringNode, y: Constants.yStringNode
+      } ) ], x: VIEW_END_X, y: VIEW_ORIGIN_Y, scale: SCALE_FROM_ORIGINAL
     } ) );
 
     model.endTypeProperty.link( endType => {

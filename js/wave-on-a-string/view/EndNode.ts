@@ -19,6 +19,7 @@ import type WOASModel from '../model/WOASModel.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { WOASEndType } from '../model/WOASEndType.js';
+import { SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_Y } from '../WOASConstants.js';
 
 export default class EndNode extends Node {
 
@@ -44,12 +45,11 @@ export default class EndNode extends Node {
     this.windowNode = new Image( windowBack_png, {
       right: Constants.windowXOffset + Constants.windowShift,
       centerY: 0,
-      scale: Constants.windowScale
+      scale: Constants.windowScale * SCALE_FROM_ORIGINAL
     } );
 
-    // NOTE: Figure out better layout setup
-    this.windowNode.x += Constants.endStringNode;
-    this.windowNode.y += Constants.yStringNode;
+    this.windowNode.x += VIEW_END_X;
+    this.windowNode.y += VIEW_ORIGIN_Y;
 
     const options = combineOptions<NodeOptions>( {
       children: [

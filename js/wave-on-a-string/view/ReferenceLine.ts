@@ -20,7 +20,11 @@ import type WOASModel from '../model/WOASModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class ReferenceLine extends Node {
-  public constructor( model: WOASModel, tandem: Tandem ) {
+  public constructor(
+    model: WOASModel,
+    tandem: Tandem,
+    layoutBounds: Bounds2
+  ) {
     super( { cursor: 'pointer', tandem: tandem } );
 
     this.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
@@ -57,10 +61,10 @@ export default class ReferenceLine extends Node {
       positionProperty: model.referenceLinePositionProperty,
       tandem: tandem.createTandem( 'dragListener' ),
       dragBoundsProperty: new Property( new Bounds2(
-        Constants.VIEW_BOUNDS.minX + 30 - Constants.VIEW_BOUNDS.width,
-        Constants.VIEW_BOUNDS.minY + 30,
-        Constants.VIEW_BOUNDS.maxX - Constants.VIEW_BOUNDS.width,
-        Constants.VIEW_BOUNDS.maxY - 30
+        layoutBounds.minX + 30 - layoutBounds.width,
+        layoutBounds.minY + 30,
+        layoutBounds.maxX - layoutBounds.width,
+        layoutBounds.maxY - 30
       ) )
     } ) );
   }

@@ -35,7 +35,7 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
         radius: 12,
         selectedColor: Constants.radioColor.toCSS()
       },
-      scale: 0.5,
+      scale: 2 / 3,
       tandem: tandem
     }, providedOptions );
 

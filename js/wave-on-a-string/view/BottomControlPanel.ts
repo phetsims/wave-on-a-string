@@ -149,7 +149,7 @@ export default class BottomControlPanel extends Panel {
     } );
 
     super( contentBox, {
-      scale: 0.7,
+      scale: 0.9333,
       tandem: tandem,
       fill: '#D9FCC5',
       xMargin: 15,

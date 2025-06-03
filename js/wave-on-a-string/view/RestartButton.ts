@@ -17,7 +17,7 @@ export default class RestartButton extends TextPushButton {
 
     super( WaveOnAStringStrings.restartStringProperty, optionize<TextPushButtonOptions, EmptySelfOptions>()( {
       listener: callback,
-      font: new PhetFont( 12 ),
+      font: new PhetFont( 16 ),
       baseColor: 'hsl(210,0%,85%)',
       maxTextWidth: 250
     }, providedOptions ) );

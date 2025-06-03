@@ -9,26 +9,36 @@
 import Emitter from '../../../../axon/js/Emitter.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import waveOnAString from '../../waveOnAString.js';
 import type WOASModel from '../model/WOASModel.js';
+import { MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS } from '../WOASConstants.js';
 
 type SelfOptions = {
-  radius: number;
+  radius?: number;
 };
 
 export type StringNodeOptions = SelfOptions & NodeOptions;
 
 export default class StringNode extends Node {
-  public constructor( model: WOASModel, frameEmitter: Emitter, providedOptions?: StringNodeOptions ) {
+  public constructor(
+    model: WOASModel,
+    frameEmitter: Emitter,
+    modelViewTransform: ModelViewTransform2,
+    providedOptions?: StringNodeOptions
+  ) {
     super();
 
     const options = optionize<StringNodeOptions, SelfOptions, NodeOptions>()( {
-      layerSplit: true
+      layerSplit: true,
+      radius: modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_GAP / 2 )
     }, providedOptions );
+
+    const VIEW_X_VALUES = _.range( 0, NUMBER_OF_BEADS ).map( i => modelViewTransform.modelToViewX( i * MODEL_UNITS_PER_GAP ) );
 
     let stringShape = new Shape();
     const stringPath = new Path( stringShape, {
@@ -74,7 +84,10 @@ export default class StringNode extends Node {
 
     for ( let i = 0; i < model.yDraw.length; i++ ) {
       const bead = ( i % 10 === 0 ) ? limeNode : redNode;
-      beads.push( new Node( { x: i * options.radius * 2, children: [ bead ] } ) );
+      beads.push( new Node( {
+        x: VIEW_X_VALUES[ i ],
+        children: [ bead ]
+      } ) );
     }
     beads[ 0 ].scale( 1.2 );
     this.addChild( new Node( { children: beads } ) );
@@ -88,16 +101,18 @@ export default class StringNode extends Node {
     frameEmitter.addListener( () => {
       if ( dirty ) {
         stringShape = new Shape();
-        beads[ 0 ].y = model.nextLeftYProperty.value;
-        stringShape.lineTo( 0, model.nextLeftYProperty.value || 0 );
+
+        const y0 = modelViewTransform.modelToViewY( model.nextLeftYProperty.value );
+
+        beads[ 0 ].y = y0;
+        stringShape.lineTo( VIEW_X_VALUES[ 0 ], y0 );
         for ( let i = 1; i < model.yDraw.length; i++ ) {
-          beads[ i ].y = model.yDraw[ i ];
-          /*REVIEW:
-           * A lot of the performance issues relate to this shape drawing. There's nothing you can do here,
-           * I'll hopefully have speed improvements to Kite's Shape soon to make this much faster. Sorry!
-           */
-          stringShape.lineTo( i * options.radius * 2, model.yDraw[ i ] || 0 );
+          const y = modelViewTransform.modelToViewY( model.yDraw[ i ] );
+
+          beads[ i ].y = y;
+          stringShape.lineTo( VIEW_X_VALUES[ i ], y );
         }
+        stringShape.makeImmutable();
         stringPath.shape = stringShape;
 
         dirty = false;
