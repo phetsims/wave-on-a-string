@@ -9,6 +9,7 @@
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Range from '../../../../dot/js/Range.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -149,7 +150,7 @@ class WOASScreenView extends ScreenView {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_ORIGIN_X,
       y: VIEW_ORIGIN_Y,
-      range: Constants.yWrenchRange,
+      range: new Range( -100, 100 ),
       tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
       visiblePropertyOptions: { phetioReadOnly: true }
     } );

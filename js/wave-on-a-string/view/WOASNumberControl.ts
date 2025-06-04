@@ -31,13 +31,11 @@ class WOASNumberControl extends NumberControl {
       layoutFunction: ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
         return new VBox( {
           spacing: 5,
-          resize: false,
           align: 'center',
           children: [
             titleNode,
             new VBox( {
               spacing: 15,
-              resize: false,
               align: 'center',
               children: [
                 new HBox( {

@@ -12,7 +12,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
-import Constants from '../Constants.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
@@ -32,8 +31,7 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
       spacing: 16,
       touchAreaXDilation: 10,
       radioButtonOptions: {
-        radius: 12,
-        selectedColor: Constants.radioColor.toCSS()
+        radius: 12
       },
       scale: 2 / 3,
       tandem: tandem
