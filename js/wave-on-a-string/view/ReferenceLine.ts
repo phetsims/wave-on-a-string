@@ -9,7 +9,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -38,14 +37,13 @@ export default class ReferenceLine extends Node {
       stroke: '#000',
       lineWidth: 0.5
     } ) );
-    this.addChild( new Line( 0, 0, 750, 0, merge( {
+    this.addChild( new Line( 0, 0, 750, 0, {
       mouseArea: new Bounds2( 0, 0, 750, 0 ).dilated( 5 ),
-      touchArea: new Bounds2( 0, 0, 750, 0 ).dilated( 10 )
-    }, {
+      touchArea: new Bounds2( 0, 0, 750, 0 ).dilated( 10 ),
       stroke: '#F00',
       lineDash: [ 10, 6 ],
       lineWidth: 2
-    } ) ) );
+    } ) );
 
     model.referenceLineVisibleProperty.link( visible => {
       this.visible = visible;
@@ -61,10 +59,10 @@ export default class ReferenceLine extends Node {
       positionProperty: model.referenceLinePositionProperty,
       tandem: tandem.createTandem( 'dragListener' ),
       dragBoundsProperty: new Property( new Bounds2(
-        layoutBounds.minX + 30 - layoutBounds.width,
-        layoutBounds.minY + 30,
-        layoutBounds.maxX - layoutBounds.width,
-        layoutBounds.maxY - 30
+        layoutBounds.left + 30 - layoutBounds.width,
+        layoutBounds.top + 30,
+        layoutBounds.right - layoutBounds.width,
+        layoutBounds.bottom - 30
       ) )
     } ) );
   }

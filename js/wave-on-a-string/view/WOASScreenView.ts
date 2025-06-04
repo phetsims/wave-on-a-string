@@ -22,7 +22,7 @@ import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
@@ -42,6 +42,8 @@ import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y } from '../WOASConstants.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 
 const MARGIN = 10;
 
@@ -94,7 +96,7 @@ class WOASScreenView extends ScreenView {
       tandem: rulersTandem,
       visibleProperty: model.rulersVisibleProperty
     } );
-    this.addChild( rulersNode );
+
 
     model.horizontalRulerPositionProperty.link( position => {
       horizontalRulerNode.translation = position;
@@ -141,6 +143,8 @@ class WOASScreenView extends ScreenView {
       tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
     } );
 
+    const referenceLine = new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ), this.layoutBounds );
+
     const startNode = new StartNode( model, this.frameEmitter, {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_ORIGIN_X,
@@ -158,38 +162,46 @@ class WOASScreenView extends ScreenView {
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
-    this.addChild( new HBox( {
-      children: [
-        new Panel( new WOASRadioButtonGroup( model.waveModeProperty, modePanelTandem.createTandem( 'radioButtonGroup' ), {
-          radio: [
-            WOASMode.MANUAL,
-            WOASMode.OSCILLATE,
-            WOASMode.PULSE
-          ],
-          text: [
-            WaveOnAStringStrings.manualStringProperty,
-            WaveOnAStringStrings.oscillateStringProperty,
-            WaveOnAStringStrings.pulseStringProperty
-          ],
-          tandemNames: [
-            'manualRadioButton',
-            'oscillateRadioButton',
-            'pulseRadioButton'
-          ]
-        } ), merge( {
-          tandem: modePanelTandem
-        }, radioPanelOptions ) ),
-        new RestartButton( model.manualRestart.bind( model ), {
-          tandem: tandem.createTandem( 'restartButton' )
-        } )
-      ],
-      spacing: 10,
-      left: this.layoutBounds.left + MARGIN,
-      top: this.layoutBounds.top + MARGIN,
-      align: 'top'
-    } ) );
+    const windowImage = new Node( {
+      children: [ new Image( windowFront_png, {
+        left: Constants.windowXOffset - 4 + Constants.windowShift,
+        centerY: 0,
+        scale: Constants.windowScale
+      } ) ], x: VIEW_END_X, y: VIEW_ORIGIN_Y, scale: SCALE_FROM_ORIGINAL
+    } );
+    model.endTypeProperty.link( endType => {
+      windowImage.visible = endType === WOASEndType.NO_END;
+    } );
 
-    this.addChild( new Panel( new WOASRadioButtonGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'radioButtonGroup' ), {
+    const stopwatchNode = new StopwatchNode( model.stopwatch, {
+      dragBoundsProperty: this.visibleBoundsProperty,
+      tandem: tandem.createTandem( 'stopwatchNode' )
+    } );
+    stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
+
+    const bottomControlPanel = new BottomControlPanel( model, tandem.createTandem( 'controlPanel' ) );
+
+    const modePanel = new Panel( new WOASRadioButtonGroup( model.waveModeProperty, modePanelTandem.createTandem( 'radioButtonGroup' ), {
+      radio: [
+        WOASMode.MANUAL,
+        WOASMode.OSCILLATE,
+        WOASMode.PULSE
+      ],
+      text: [
+        WaveOnAStringStrings.manualStringProperty,
+        WaveOnAStringStrings.oscillateStringProperty,
+        WaveOnAStringStrings.pulseStringProperty
+      ],
+      tandemNames: [
+        'manualRadioButton',
+        'oscillateRadioButton',
+        'pulseRadioButton'
+      ]
+    } ), combineOptions<PanelOptions>( {
+      tandem: modePanelTandem
+    }, radioPanelOptions ) );
+
+    const endTypePanel = new Panel( new WOASRadioButtonGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'radioButtonGroup' ), {
       radio: [
         WOASEndType.FIXED_END,
         WOASEndType.LOOSE_END,
@@ -205,14 +217,20 @@ class WOASScreenView extends ScreenView {
         'looseEndRadioButton',
         'noEndRadioButton'
       ]
-    } ), merge( {
-      // NOTE: alignbox?
-      right: this.layoutBounds.right - MARGIN,
-      top: this.layoutBounds.top + MARGIN,
+    } ), combineOptions<PanelOptions>( {
       tandem: endTypePanelTandem
-    }, radioPanelOptions ) ) );
+    }, radioPanelOptions ) );
 
-    this.addChild( new TimeControlNode( model.isPlayingProperty, {
+    const restartButton = new RestartButton( model.manualRestart.bind( model ), {
+      tandem: tandem.createTandem( 'restartButton' )
+    } );
+
+    const resetAllButton = new ResetAllButton( {
+      listener: () => model.reset(),
+      tandem: tandem.createTandem( 'resetAllButton' )
+    } );
+
+    const timeControlNode = new TimeControlNode( model.isPlayingProperty, {
       timeSpeedProperty: model.timeSpeedProperty,
       playPauseStepButtonOptions: {
         playPauseButtonOptions: {
@@ -226,54 +244,57 @@ class WOASScreenView extends ScreenView {
         }
       },
 
-      centerX: this.layoutBounds.width / 2,
-      centerY: this.layoutBounds.height - 175,
-
       tandem: tandem.createTandem( 'timeControlNode' )
-    } ) );
-
-    const resetAllButton = new ResetAllButton( {
-      listener: () => model.reset(),
-      right: this.layoutBounds.right - MARGIN,
-      bottom: this.layoutBounds.bottom - MARGIN,
-      tandem: tandem.createTandem( 'resetAllButton' )
     } );
-    this.addChild( resetAllButton );
-
-    this.addChild( new AlignBox( new BottomControlPanel( model, tandem.createTandem( 'controlPanel' ) ), {
-      alignBounds: new Bounds2( 0, 0, resetAllButton.left - 10, resetAllButton.bottom ),
-      xAlign: 'right',
-      yAlign: 'bottom'
-    } ) );
-
-    /*---------------------------------------------------------------------------*
-     * StopwatchNode
-     *----------------------------------------------------------------------------*/
-    const stopwatchNode = new StopwatchNode( model.stopwatch, {
-      dragBoundsProperty: this.visibleBoundsProperty,
-      tandem: tandem.createTandem( 'stopwatchNode' )
+    ManualConstraint.create( this, [ timeControlNode ], timeControlProxy => {
+      timeControlProxy.centerX = this.layoutBounds.width / 2;
+      timeControlProxy.centerY = this.layoutBounds.height - 175;
     } );
-    stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
-    this.addChild( stopwatchNode );
-    let windowImage;
 
-    this.addChild( centerLine );
-    this.addChild( endNode.windowNode );
-    this.addChild( new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ), this.layoutBounds ) );
-    this.addChild( endNode );
-    this.addChild( stringNode );
-    this.addChild( startNode );
-    this.addChild( windowImage = new Node( {
-      children: [ new Image( windowFront_png, {
-        left: Constants.windowXOffset - 4 + Constants.windowShift,
-        centerY: 0,
-        scale: Constants.windowScale
-      } ) ], x: VIEW_END_X, y: VIEW_ORIGIN_Y, scale: SCALE_FROM_ORIGINAL
-    } ) );
-
-    model.endTypeProperty.link( endType => {
-      windowImage.visible = endType === WOASEndType.NO_END;
+    const upperLeftBox = new HBox( {
+      children: [
+        modePanel,
+        restartButton
+      ],
+      spacing: 10,
+      align: 'top'
     } );
+
+    this.children = [
+      rulersNode,
+      new AlignBox( upperLeftBox, {
+        alignBounds: this.layoutBounds,
+        xAlign: 'left',
+        yAlign: 'top',
+        margin: MARGIN
+      } ),
+      new AlignBox( endTypePanel, {
+        alignBounds: this.layoutBounds,
+        xAlign: 'right',
+        yAlign: 'top',
+        margin: MARGIN
+      } ),
+      timeControlNode,
+      new AlignBox( resetAllButton, {
+        alignBounds: this.layoutBounds,
+        xAlign: 'right',
+        yAlign: 'bottom',
+        margin: MARGIN
+      } ),
+      new AlignBox( bottomControlPanel, {
+        alignBounds: new Bounds2( 0, 0, resetAllButton.left - 10, resetAllButton.bottom ),
+        xAlign: 'right',
+        yAlign: 'bottom'
+      } ),
+      stopwatchNode,
+      centerLine,
+      endNode.windowNode,
+      referenceLine,
+      endNode,
+      stringNode,
+      startNode,
+      windowImage
+    ];
   }
 
   /**
