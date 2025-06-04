@@ -7,17 +7,17 @@
  */
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import TextPushButton, { TextPushButtonOptions } from '../../../../sun/js/buttons/TextPushButton.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
+import { NORMAL_FONT } from '../WOASConstants.js';
 
 export default class RestartButton extends TextPushButton {
   public constructor( callback: () => void, providedOptions?: TextPushButtonOptions ) {
 
     super( WaveOnAStringStrings.restartStringProperty, optionize<TextPushButtonOptions, EmptySelfOptions>()( {
       listener: callback,
-      font: new PhetFont( 16 ),
+      font: NORMAL_FONT,
       baseColor: 'hsl(210,0%,85%)',
       maxTextWidth: 250
     }, providedOptions ) );

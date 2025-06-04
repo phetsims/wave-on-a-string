@@ -30,7 +30,7 @@ const Constants = {
   // {number} - how much to horizontally shift the window (to center)
   windowShift: 1,
 
-  offsetWheel: new Vector2( 0, 156 )
+  offsetWheel: new Vector2( 0, 150 )
 };
 
 waveOnAString.register( 'Constants', Constants );

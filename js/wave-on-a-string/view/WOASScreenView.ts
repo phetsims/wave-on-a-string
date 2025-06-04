@@ -120,6 +120,7 @@ class WOASScreenView extends ScreenView {
 
     const radioPanelOptions = {
       fill: '#D9FCC5',
+      cornerRadius: 5,
       xMargin: 7,
       yMargin: 7,
       lineWidth: 2 / 3

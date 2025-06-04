@@ -9,7 +9,6 @@
 import RangedDynamicProperty from '../../../../axon/js/RangedDynamicProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
@@ -23,11 +22,12 @@ import type WOASModel from '../model/WOASModel.js';
 import WOASNumberControl from './WOASNumberControl.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { WOASMode } from '../model/WOASMode.js';
+import { NORMAL_FONT } from '../WOASConstants.js';
 
 export default class BottomControlPanel extends Panel {
   public constructor( model: WOASModel, tandem: Tandem ) {
     const checkboxTextOptions = {
-      font: new PhetFont( 15 ),
+      font: NORMAL_FONT,
       maxWidth: 130
     };
     const checkboxTandem = tandem.createTandem( 'checkboxGroup' );
@@ -149,9 +149,9 @@ export default class BottomControlPanel extends Panel {
     } );
 
     super( contentBox, {
-      scale: 0.9333,
       tandem: tandem,
       fill: '#D9FCC5',
+      cornerRadius: 5,
       xMargin: 15,
       yMargin: 5
     } );

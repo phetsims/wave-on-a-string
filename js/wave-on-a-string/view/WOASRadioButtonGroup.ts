@@ -7,13 +7,13 @@
  */
 
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { NORMAL_FONT } from '../WOASConstants.js';
 
 type SelfOptions<T> = {
   radio: T[];
@@ -28,12 +28,8 @@ export type WOASRadioButtonGroupOptions<T> = SelfOptions<T> & SuperOptions;
 export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGroup<T> {
   public constructor( property: PhetioProperty<T>, tandem: Tandem, providedOptions?: WOASRadioButtonGroupOptions<T> ) {
     const options = optionize<WOASRadioButtonGroupOptions<T>, SelfOptions<T>, SuperOptions>()( {
-      spacing: 16,
+      spacing: 10,
       touchAreaXDilation: 10,
-      radioButtonOptions: {
-        radius: 12
-      },
-      scale: 2 / 3,
       tandem: tandem
     }, providedOptions );
 
@@ -43,8 +39,8 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
     for ( let i = 0; i < length; i++ ) {
       group.push( {
         createNode: () => new Text( options.text[ i ], {
-          font: new PhetFont( 20 ),
-          maxWidth: 250
+          font: NORMAL_FONT,
+          maxWidth: 330
         } ),
         value: options.radio[ i ],
         tandemName: options.tandemNames[ i ]

@@ -8,7 +8,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import waveOnAString from '../../waveOnAString.js';
@@ -16,6 +15,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import TRangedProperty from '../../../../axon/js/TRangedProperty.js';
 import WOASColors from './WOASColors.js';
+import { HEADER_FONT, NORMAL_FONT } from '../WOASConstants.js';
 
 type SelfOptions = EmptySelfOptions;
 type SuperOptions = NumberControlOptions;
@@ -35,7 +35,7 @@ class WOASNumberControl extends NumberControl {
           children: [
             titleNode,
             new VBox( {
-              spacing: 15,
+              spacing: 10,
               align: 'center',
               children: [
                 new HBox( {
@@ -54,17 +54,17 @@ class WOASNumberControl extends NumberControl {
       },
 
       sliderOptions: {
-        trackSize: new Dimension2( 140, 2 ),
+        trackSize: new Dimension2( 135, 2 ),
         trackFillEnabled: WOASColors.sliderTrackFillProperty,
 
-        thumbSize: new Dimension2( 22, 38 ),
+        // thumbSize: new Dimension2( 22, 38 ),
         thumbFill: WOASColors.sliderThumbFillProperty,
         thumbFillHighlighted: WOASColors.sliderThumbHighlightedFillProperty
       },
 
       numberDisplayOptions: {
         textOptions: {
-          font: new PhetFont( 18 )
+          font: NORMAL_FONT
         },
         maxWidth: 120,
         xMargin: 20,
@@ -74,7 +74,7 @@ class WOASNumberControl extends NumberControl {
       },
 
       titleNodeOptions: {
-        font: new PhetFont( 18 ),
+        font: HEADER_FONT,
         maxWidth: 150
       }
     }, providedOptions );

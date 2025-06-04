@@ -57,33 +57,33 @@ export default class StringNode extends Node {
       y: -0.45 * options.radius
     } );
     const scale = 3;
-    const redBead = new Circle( options.radius, {
+    const regularBead = new Circle( options.radius, {
       fill: 'red',
       stroke: 'black',
       lineWidth: 0.5,
       children: [ highlightCircle ],
       scale: scale
     } );
-    const limeBead = new Circle( options.radius, {
-      fill: 'lime',
+    const referenceBead = new Circle( options.radius, {
+      fill: 'rgb(0,0,255)',
       stroke: 'black',
       lineWidth: 0.5,
       children: [ highlightCircle ],
       scale: scale
     } );
 
-    let redNode!: Image;
-    redBead.toDataURL( ( url, x, y ) => {
-      redNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
+    let regularBeadNode!: Image;
+    regularBead.toDataURL( ( url, x, y ) => {
+      regularBeadNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
-    let limeNode!: Image;
-    limeBead.toDataURL( ( url, x, y ) => {
-      limeNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
+    let referenceBeadNode!: Image;
+    referenceBead.toDataURL( ( url, x, y ) => {
+      referenceBeadNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
     } );
 
     for ( let i = 0; i < model.yDraw.length; i++ ) {
-      const bead = ( i % 10 === 0 ) ? limeNode : redNode;
+      const bead = ( i % 10 === 0 ) ? referenceBeadNode : regularBeadNode;
       beads.push( new Node( {
         x: VIEW_X_VALUES[ i ],
         children: [ bead ]
