@@ -6,7 +6,7 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
@@ -22,7 +22,7 @@ export default class ReferenceLine extends Node {
   public constructor(
     model: WOASModel,
     tandem: Tandem,
-    layoutBounds: Bounds2
+    dragBoundsProperty: TReadOnlyProperty<Bounds2>
   ) {
     super( { cursor: 'pointer', tandem: tandem } );
 
@@ -58,12 +58,7 @@ export default class ReferenceLine extends Node {
     this.addInputListener( new DragListener( {
       positionProperty: model.referenceLinePositionProperty,
       tandem: tandem.createTandem( 'dragListener' ),
-      dragBoundsProperty: new Property( new Bounds2(
-        layoutBounds.left + 30 - layoutBounds.width,
-        layoutBounds.top + 30,
-        layoutBounds.right - layoutBounds.width,
-        layoutBounds.bottom - 30
-      ) )
+      dragBoundsProperty: dragBoundsProperty
     } ) );
   }
 }

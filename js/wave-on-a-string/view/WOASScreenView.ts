@@ -6,6 +6,7 @@
  * @author Anton Ulyanov (Mlearner)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -43,6 +44,8 @@ import RestartButton from './RestartButton.js';
 import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
+import MatrixBetweenProperty from '../../../../scenery/js/util/MatrixBetweenProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const MARGIN = 10;
 
@@ -143,8 +146,6 @@ class WOASScreenView extends ScreenView {
         tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
       } );
 
-    const referenceLine = new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ), this.layoutBounds );
-
     const startNode = new StartNode( model, this.frameEmitter, {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_ORIGIN_X,
@@ -220,6 +221,62 @@ class WOASScreenView extends ScreenView {
     } ), combineOptions<PanelOptions>( {
       tandem: endTypePanelTandem
     }, radioPanelOptions ) );
+
+    // Don't let the reference line go below the bottom control panel
+    const lowerReferenceLineBoundaryProperty: TReadOnlyProperty<number> = new DerivedProperty( [
+      bottomControlPanel.localBoundsProperty,
+      new MatrixBetweenProperty( bottomControlPanel, this )
+    ], (
+      bottomControlPanelLocalBounds,
+      toScreenViewMatrix
+    ) => {
+      if ( toScreenViewMatrix ) {
+        return bottomControlPanelLocalBounds.transformed( toScreenViewMatrix ).top;
+      }
+      else {
+        // If they aren't connected yet, return the bottom of the screen
+        return this.layoutBounds.bottom;
+      }
+    } );
+
+    // Don't let the reference line go into the mode panel or end type panel
+    const upperReferenceLineBoundaryProperty: TReadOnlyProperty<number> = new DerivedProperty( [
+      modePanel.localBoundsProperty,
+      new MatrixBetweenProperty( modePanel, this ),
+      endTypePanel.localBoundsProperty,
+      new MatrixBetweenProperty( endTypePanel, this )
+    ], (
+      modePanelLocalBounds,
+      modePanelToScreenViewMatrix,
+      endTypePanelLocalBounds,
+      endTypePanelToScreenViewMatrix
+    ) => {
+      let top = this.layoutBounds.top;
+
+      if ( modePanelToScreenViewMatrix ) {
+        top = Math.max( top, modePanelLocalBounds.transformed( modePanelToScreenViewMatrix ).bottom );
+      }
+      if ( endTypePanelToScreenViewMatrix ) {
+        top = Math.max( top, endTypePanelLocalBounds.transformed( endTypePanelToScreenViewMatrix ).bottom );
+      }
+
+      return top;
+    } );
+
+    const referenceLineDragBoundsProperty = new DerivedProperty( [
+      lowerReferenceLineBoundaryProperty,
+      upperReferenceLineBoundaryProperty
+    ], ( lower, upper ) => {
+      console.log( lower, upper );
+      return new Bounds2(
+        this.layoutBounds.left + 30 - this.layoutBounds.width,
+        upper + 10,
+        this.layoutBounds.right - 30 + this.layoutBounds.width,
+        lower - 10
+      );
+    } );
+
+    const referenceLine = new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ), referenceLineDragBoundsProperty );
 
     const restartButton = new RestartButton( model.manualRestart.bind( model ), {
       tandem: tandem.createTandem( 'restartButton' )
