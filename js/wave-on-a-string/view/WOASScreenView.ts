@@ -10,13 +10,17 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
+import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
+import RulerNode, { RulerNodeOptions } from '../../../../scenery-phet/js/RulerNode.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
+import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
@@ -24,11 +28,14 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
 import { WOASEndType } from '../model/WOASEndType.js';
 import { WOASMode } from '../model/WOASMode.js';
+import type WOASModel from '../model/WOASModel.js';
+import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y, windowScale, windowShift, windowXOffset } from '../WOASConstants.js';
 import BottomControlPanel from './BottomControlPanel.js';
 import EndNode from './EndNode.js';
 import ReferenceLine from './ReferenceLine.js';
@@ -36,14 +43,6 @@ import RestartButton from './RestartButton.js';
 import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
-import type WOASModel from '../model/WOASModel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
-import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
-import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y, windowScale, windowShift, windowXOffset } from '../WOASConstants.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
-import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 
 const MARGIN = 10;
 
@@ -80,10 +79,10 @@ class WOASScreenView extends ScreenView {
     const horizontalRulerWidth = 10 * viewUnitsPerCM;
     const verticalRulerHeight = 5 * viewUnitsPerCM;
 
-    const horizontalRulerNode = new RulerNode( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
+    const horizontalRulerNode = new RulerNode( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: horizontalRulerTandem
     }, rulerOptions ) );
-    const verticalRulerNode = new RulerNode( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, merge( {
+    const verticalRulerNode = new RulerNode( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: verticalRulerTandem
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
@@ -138,11 +137,11 @@ class WOASScreenView extends ScreenView {
       modelViewTransform.modelToViewY( 0 ),
       modelViewTransform.modelToViewX( MODEL_UNITS_PER_GAP * ( NUMBER_OF_BEADS - 1 ) ),
       modelViewTransform.modelToViewY( 0 ), {
-      stroke: '#FFA91D',
-      lineDash: [ 8, 5 ],
-      lineWidth: 2,
-      tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
-    } );
+        stroke: '#FFA91D',
+        lineDash: [ 8, 5 ],
+        lineWidth: 2,
+        tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
+      } );
 
     const referenceLine = new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ), this.layoutBounds );
 
