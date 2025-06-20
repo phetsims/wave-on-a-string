@@ -6,7 +6,9 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
+import Vector2 from '../../../dot/js/Vector2.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
+import LinearGradient from '../../../scenery/js/util/LinearGradient.js';
 
 export const NUMBER_OF_BEADS = 61;
 export const MODEL_UNITS_PER_CM = 80;
@@ -22,3 +24,27 @@ export const HEADER_FONT = new PhetFont( {
   size: 16,
   weight: 'bold'
 } );
+
+export const dilatedTouchArea = 10;
+export const dilatedReferenceLineTouchArea = 20;
+
+export const postGradient = new LinearGradient( -5, 0, 5, 0 )
+  .addColorStop( 0, '#666' )
+  .addColorStop( 0.3, '#FFF' )
+  .addColorStop( 1, '#666' );
+
+export const referenceLineBlockGradient = new LinearGradient( 0, -10, 0, 20 )
+  .addColorStop( 0, '#78571C' )
+  .addColorStop( 0.3, '#D3B072' )
+  .addColorStop( 1, '#78571C' );
+
+// {number} - window image scale
+export const windowScale = 0.6;
+
+// {number} - how much the window front should overlap the window back
+export const windowXOffset = 5;
+
+// {number} - how much to horizontally shift the window (to center)
+export const windowShift = 1;
+
+export const offsetWheel = new Vector2( 0, 150 );

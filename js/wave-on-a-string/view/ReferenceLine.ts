@@ -13,10 +13,10 @@ import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import waveOnAString from '../../waveOnAString.js';
-import Constants from '../Constants.js';
-import type WOASModel from '../model/WOASModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import waveOnAString from '../../waveOnAString.js';
+import type WOASModel from '../model/WOASModel.js';
+import { dilatedReferenceLineTouchArea, referenceLineBlockGradient } from '../WOASConstants.js';
 
 export default class ReferenceLine extends Node {
   public constructor(
@@ -27,13 +27,13 @@ export default class ReferenceLine extends Node {
     super( { cursor: 'pointer', tandem: tandem } );
 
     this.addChild( new Rectangle( 740 * 2, -10, 40, 20, {
-      fill: Constants.referenceLineBlockGradient,
+      fill: referenceLineBlockGradient,
       scale: 0.5,
       stroke: '#000',
       lineWidth: 0.5
     } ) );
     this.addChild( new Rectangle( 750, -10, 20, 20, {
-      fill: Constants.referenceLineBlockGradient,
+      fill: referenceLineBlockGradient,
       stroke: '#000',
       lineWidth: 0.5
     } ) );
@@ -52,7 +52,7 @@ export default class ReferenceLine extends Node {
       this.translation = position;
     } );
 
-    this.touchArea = Shape.bounds( Bounds2.point( 755, 0 ).dilated( Constants.dilatedReferenceLineTouchArea ) );
+    this.touchArea = Shape.bounds( Bounds2.point( 755, 0 ).dilated( dilatedReferenceLineTouchArea ) );
     this.mouseArea = Shape.bounds( Bounds2.point( 755, 0 ).dilatedXY( 15, 10 ) );
 
     this.addInputListener( new DragListener( {

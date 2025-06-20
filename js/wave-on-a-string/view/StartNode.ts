@@ -29,9 +29,9 @@ import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import { toDataURLNodeSynchronous, toImageNodeAsynchronous } from '../../../../scenery/js/util/rasterizeNode.js';
 import wrench_png from '../../../images/wrench_png.js';
 import waveOnAString from '../../waveOnAString.js';
-import Constants from '../Constants.js';
 import { WOASMode } from '../model/WOASMode.js';
 import type WOASModel from '../model/WOASModel.js';
+import { dilatedTouchArea, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
 
 type SelfOptions = {
@@ -110,22 +110,22 @@ export default class StartNode extends Node {
 
     wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
     wrenchBottomArrow.touchArea = wrenchBottomArrow.localBounds.dilated( 6 );
-    wrench.touchArea = Shape.bounds( wrenchImageNode.bounds.dilated( Constants.dilatedTouchArea ) );
+    wrench.touchArea = Shape.bounds( wrenchImageNode.bounds.dilated( dilatedTouchArea ) );
     wrench.mouseArea = Shape.bounds( wrenchImageNode.bounds );
 
 
     /*---------------------------------------------------------------------------*
      * Post
      *----------------------------------------------------------------------------*/
-    let post: Node = new Rectangle( Constants.offsetWheel.x - 5, 0, 10, postNodeHeight, {
+    let post: Node = new Rectangle( offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
-      fill: Constants.postGradient
+      fill: postGradient
     } );
 
     /*---------------------------------------------------------------------------*
      * Piston Box
      *----------------------------------------------------------------------------*/
-    const pistonBox = new ShadedRectangle( Bounds2.point( Constants.offsetWheel.x, Constants.offsetWheel.y ).dilatedXY( 40, 25 ), {
+    const pistonBox = new ShadedRectangle( Bounds2.point( offsetWheel.x, offsetWheel.y ).dilatedXY( 40, 25 ), {
       baseColor: new Color( 200, 200, 200 ),
       lightFactor: 0.5,
       lighterFactor: 0.1,
@@ -150,7 +150,7 @@ export default class StartNode extends Node {
       post,
       pistonBox,
       wrench,
-      new Node( { children: [ wheel ], translation: Constants.offsetWheel } )
+      new Node( { children: [ wheel ], translation: offsetWheel } )
     ];
 
     let clickOffset = new Vector2( 0, 0 );
@@ -196,7 +196,7 @@ export default class StartNode extends Node {
       if ( post.isVisible() ) {
         post.matrix = m3(
           1, 0, 0,
-          0, ( Constants.offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
+          0, ( offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
           0, 0, 1
         );
       }

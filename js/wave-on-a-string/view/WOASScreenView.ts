@@ -27,7 +27,6 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
-import Constants from '../Constants.js';
 import { WOASEndType } from '../model/WOASEndType.js';
 import { WOASMode } from '../model/WOASMode.js';
 import BottomControlPanel from './BottomControlPanel.js';
@@ -42,7 +41,7 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y } from '../WOASConstants.js';
+import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y, windowScale, windowShift, windowXOffset } from '../WOASConstants.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 
@@ -166,9 +165,9 @@ class WOASScreenView extends ScreenView {
 
     const windowImage = new Node( {
       children: [ new Image( windowFront_png, {
-        left: Constants.windowXOffset - 4 + Constants.windowShift,
+        left: windowXOffset - 4 + windowShift,
         centerY: 0,
-        scale: Constants.windowScale
+        scale: windowScale
       } ) ], x: VIEW_END_X, y: VIEW_ORIGIN_Y, scale: SCALE_FROM_ORIGINAL
     } );
     model.endTypeProperty.link( endType => {

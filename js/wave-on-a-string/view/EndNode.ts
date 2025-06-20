@@ -14,12 +14,11 @@ import ringBack_png from '../../../images/ringBack_png.js';
 import ringFront_png from '../../../images/ringFront_png.js';
 import windowBack_png from '../../../images/windowBack_png.js';
 import waveOnAString from '../../waveOnAString.js';
-import Constants from '../Constants.js';
 import type WOASModel from '../model/WOASModel.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { WOASEndType } from '../model/WOASEndType.js';
-import { SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_Y } from '../WOASConstants.js';
+import { postGradient, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_Y, windowScale, windowShift, windowXOffset } from '../WOASConstants.js';
 
 export default class EndNode extends Node {
 
@@ -37,15 +36,15 @@ export default class EndNode extends Node {
     const ringFront = new Node( { children: [ new Image( ringFront_png, { x: 4.7, y: 0, scale: 0.5 } ) ] } );
     const post = new Rectangle( -5, -130, 10, 260, {
       stroke: '#000',
-      fill: Constants.postGradient,
+      fill: postGradient,
       x: 20
     } );
 
     // We need to visually stack this behind, so we can't add it as a child here
     this.windowNode = new Image( windowBack_png, {
-      right: Constants.windowXOffset + Constants.windowShift,
+      right: windowXOffset + windowShift,
       centerY: 0,
-      scale: Constants.windowScale * SCALE_FROM_ORIGINAL
+      scale: windowScale * SCALE_FROM_ORIGINAL
     } );
 
     this.windowNode.x += VIEW_END_X;
