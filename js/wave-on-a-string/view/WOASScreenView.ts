@@ -355,7 +355,8 @@ class WOASScreenView extends ScreenView {
 
     this.pdomPlayAreaNode.pdomOrder = [
       upperLeftBox,
-      endTypePanel
+      endTypePanel,
+      startNode
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
