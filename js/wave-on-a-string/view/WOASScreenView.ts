@@ -9,6 +9,7 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Range from '../../../../dot/js/Range.js';
 import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
@@ -28,6 +29,7 @@ import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import MatrixBetweenProperty from '../../../../scenery/js/util/MatrixBetweenProperty.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import windowFront_png from '../../../images/windowFront_png.js';
@@ -44,8 +46,6 @@ import RestartButton from './RestartButton.js';
 import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
-import MatrixBetweenProperty from '../../../../scenery/js/util/MatrixBetweenProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 const MARGIN = 10;
 
@@ -351,6 +351,17 @@ class WOASScreenView extends ScreenView {
       stringNode,
       startNode,
       windowImage
+    ];
+
+    this.pdomPlayAreaNode.pdomOrder = [
+      upperLeftBox,
+      endTypePanel
+    ];
+
+    this.pdomControlAreaNode.pdomOrder = [
+      timeControlNode,
+      bottomControlPanel,
+      resetAllButton
     ];
   }
 
