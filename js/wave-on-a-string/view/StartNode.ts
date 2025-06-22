@@ -111,6 +111,8 @@ export default class StartNode extends Node {
         else if ( keysPressed === 'arrowDown' || keysPressed === 's' ) {
           model.nextLeftYProperty.value = Math.min( model.nextLeftYProperty.value + KEY_MOVEMENT_AMOUNT, options.range.max );
         }
+
+        // TODO: There is more logic in wrench.addInputListener( new DragListener( {... that we need to replicate or factor out. https://github.com/phetsims/wave-on-a-string/issues/162
       }
     } );
 
