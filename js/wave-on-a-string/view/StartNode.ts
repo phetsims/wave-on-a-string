@@ -18,6 +18,7 @@ import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import KeyboardListener from '../../../../scenery/js/listeners/KeyboardListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
@@ -87,7 +88,34 @@ export default class StartNode extends Node {
     /*---------------------------------------------------------------------------*
      * Wrench
      *----------------------------------------------------------------------------*/
-    const wrenchImageNode = new Image( wrench_png, { x: -40, y: -24, scale: 0.9 / 4, pickable: false } );
+    const wrenchImageNode = new Image( wrench_png, {
+      x: -40,
+      y: -24,
+      scale: 0.9 / 4,
+      pickable: false,
+
+      // Will only be focusable when visible
+      focusable: true,
+      tagName: 'p'
+    } );
+
+    const wrenchKeyboardListener = new KeyboardListener( {
+      keys: [ 'arrowUp', 'arrowDown', 'w', 's' ],
+      fire: ( event, keysPressed, listener ) => {
+
+        // TODO: Decide the behavior of the wrench arrows when using the keyboard to move the wrench. See https://github.com/phetsims/wave-on-a-string/issues/162
+        const KEY_MOVEMENT_AMOUNT = options.range.getLength() / 4;
+        if ( keysPressed === 'arrowUp' || keysPressed === 'w' ) {
+          model.nextLeftYProperty.value = Math.max( model.nextLeftYProperty.value - KEY_MOVEMENT_AMOUNT, options.range.min );
+        }
+        else if ( keysPressed === 'arrowDown' || keysPressed === 's' ) {
+          model.nextLeftYProperty.value = Math.min( model.nextLeftYProperty.value + KEY_MOVEMENT_AMOUNT, options.range.max );
+        }
+      }
+    } );
+
+
+    wrenchImageNode.addInputListener( wrenchKeyboardListener );
     const wrenchArrowOptions = {
       fill: 'hsl(210,90%,60%)',
       tailWidth: 10,
@@ -105,7 +133,8 @@ export default class StartNode extends Node {
         wrenchImageNode,
         wrenchTopArrow,
         wrenchBottomArrow
-      ], cursor: 'pointer'
+      ],
+      cursor: 'pointer'
     } );
 
     wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
@@ -163,6 +192,8 @@ export default class StartNode extends Node {
         }
 
         if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
+
+          // TODO: Should the arrows be hidden if the user uses the keyboard to move the wrench? See https://github.com/phetsims/wave-on-a-string/issues/162
           model.wrenchArrowsVisibleProperty.value = false;
         }
       },
