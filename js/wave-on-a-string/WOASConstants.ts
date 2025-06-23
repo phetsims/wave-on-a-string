@@ -9,7 +9,6 @@
 import Vector2 from '../../../dot/js/Vector2.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import LinearGradient from '../../../scenery/js/util/LinearGradient.js';
-
 export const NUMBER_OF_BEADS = 61;
 export const MODEL_UNITS_PER_CM = 80;
 export const FRAMES_PER_SECOND = 50;

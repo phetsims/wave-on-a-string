@@ -30,6 +30,7 @@ import waveOnAString from '../../waveOnAString.js';
 import { WOASEndType } from './WOASEndType.js';
 import { WOASMode } from './WOASMode.js';
 import { FRAMES_PER_SECOND, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, VIEW_ORIGIN_X } from '../WOASConstants.js';
+import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 
 // constants
 const LAST_INDEX = NUMBER_OF_BEADS - 1;
@@ -61,20 +62,20 @@ export default class WOASModel extends PhetioObject {
   public readonly frequencyProperty: Property<number> & TRangedProperty;
   public readonly pulseWidthProperty: Property<number> & TRangedProperty;
   public readonly amplitudeProperty: Property<number> & TRangedProperty;
-  public readonly lastDtProperty: Property<number>;
+  private readonly lastDtProperty: Property<number>;
   public readonly timeElapsedProperty: Property<number>;
   public readonly angleProperty: Property<number> & TRangedProperty;
 
-  public readonly pulsePendingProperty: Property<boolean>;
-  public readonly pulseSignProperty: Property<number>;
-  public readonly pulseProperty: Property<boolean>;
+  private readonly pulsePendingProperty: Property<boolean>;
+  private readonly pulseSignProperty: Property<number>;
+  private readonly isPulseActiveProperty: Property<boolean>;
 
   public readonly stopwatch: Stopwatch;
 
   public readonly yNowChangedEmitter: Emitter;
 
   public readonly nextLeftYProperty: TProperty<number>;
-  public readonly waveStartPositionProperty: TRangedProperty;
+  private readonly leftMostBeadYProperty: TRangedProperty;
 
   private readonly stepDtProperty: TProperty<number>;
 
@@ -90,18 +91,18 @@ export default class WOASModel extends PhetioObject {
     this.waveModeProperty = new EnumerationProperty( WOASMode.MANUAL, {
       tandem: tandem.createTandem( 'waveModeProperty' ),
       phetioFeatured: true,
-      phetioDocumentation: 'what is on the left side of the string, controlling its motion'
+      phetioDocumentation: 'The type of attachment on the left side of the string, controlling its motion'
     } );
 
     this.endTypeProperty = new EnumerationProperty( WOASEndType.FIXED_END, {
       tandem: tandem.createTandem( 'endTypeProperty' ),
       phetioFeatured: true,
-      phetioDocumentation: 'what is on the right side of the string'
+      phetioDocumentation: 'The type of attachment to the end of the string'
     } );
 
     this.isPlayingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isPlayingProperty' ),
-      phetioDocumentation: 'whether time is moving forward in the simulation (paused if false)',
+      phetioDocumentation: 'Whether time is moving forward in the simulation (paused if false)',
       phetioFeatured: true
     } );
 
@@ -109,108 +110,97 @@ export default class WOASModel extends PhetioObject {
       tandem: tandem.createTandem( 'timeSpeedProperty' ),
       phetioFeatured: true,
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ],
-      phetioDocumentation: 'the play speed for the simulation as it moves through time'
+      phetioDocumentation: 'The play speed for the simulation as it moves through time'
     } );
 
     this.rulersVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'rulersVisibleProperty' ),
-      phetioDocumentation: 'whether the rulers are visible',
+      phetioDocumentation: 'Whether the rulers are visible',
       phetioFeatured: true
     } );
     this.referenceLineVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'referenceLineVisibleProperty' ),
-      phetioDocumentation: 'whether the reference line is visible',
+      phetioDocumentation: 'Whether the reference line is visible',
       phetioFeatured: true
     } );
     this.wrenchArrowsVisibleProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'wrenchArrowsVisibleProperty' ),
-      phetioDocumentation: 'whether the up/down arrows on the wrench are visible'
+      phetioDocumentation: 'Whether the up/down arrows on the wrench are visible'
     } );
 
     // NOTE: 14 is the insets for the ruler
     this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( VIEW_ORIGIN_X - 14, 117 ), {
       tandem: tandem.createTandem( 'horizontalRulerPositionProperty' ),
-      phetioDocumentation: 'position of the horizontal ruler in view coordinates (from the top-left of the ruler, initially 54,117)'
+      phetioDocumentation: 'Position of the horizontal ruler in view coordinates (from the top-left of the ruler)'
     } );
     this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ), {
       tandem: tandem.createTandem( 'verticalRulerPositionProperty' ),
-      phetioDocumentation: 'position of the vertical ruler in view coordinates (from the bottom-left of the ruler, initially 13,440)'
+      phetioDocumentation: 'Position of the vertical ruler in view coordinates (from the bottom-left of the ruler)'
     } );
     this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ), {
       tandem: tandem.createTandem( 'referenceLinePositionProperty' ),
-      phetioDocumentation: 'position of the reference line in view coordinates (from the left of the line, initially -10,120)'
+      phetioDocumentation: 'Position of the reference line in view coordinates (from the left of the line)'
     } );
 
     this.tensionProperty = new NumberProperty( 0.8, {
       range: new Range( 0.2, 0.8 ),
       tandem: tandem.createTandem( 'tensionProperty' ),
-      phetioDocumentation: 'the relative amount of tension on the string'
+      phetioDocumentation: 'The relative amount of tension on the string'
     } );
 
     this.dampingProperty = new NumberProperty( 20, {
       range: new Range( 0, 100 ),
       tandem: tandem.createTandem( 'dampingProperty' ),
-      phetioDocumentation: 'the relative amount of damping (percentage) for the string'
+      phetioDocumentation: 'The relative amount of damping (percentage) for the string'
     } );
 
     this.frequencyProperty = new NumberProperty( 1.50, {
       range: new Range( 0, 3 ),
       tandem: tandem.createTandem( 'frequencyProperty' ),
-      phetioDocumentation: 'the frequency of the oscillator, in hertz',
+      phetioDocumentation: 'The frequency of the oscillator, in hertz',
       units: 'Hz'
     } );
 
     this.pulseWidthProperty = new NumberProperty( 0.5, {
       range: new Range( 0.2, 1 ),
       tandem: tandem.createTandem( 'pulseWidthProperty' ),
-      phetioDocumentation: 'the width of a pulse (generated with the pulse mode) in seconds',
+      phetioDocumentation: 'The width of a pulse (generated with the pulse mode) in seconds',
       units: 's'
     } );
 
     this.amplitudeProperty = new NumberProperty( 0.75, {
       range: new Range( 0, 1.3 ),
       tandem: tandem.createTandem( 'amplitudeProperty' ),
-      phetioDocumentation: 'the amplitude of the oscillation or pulses in centimeters',
+      phetioDocumentation: 'The amplitude of the oscillation or pulses in centimeters',
       units: 'cm'
     } );
 
-    this.lastDtProperty = new NumberProperty( 0.03, {
-      phetioReadOnly: true,
-      tandem: tandem.createTandem( 'lastDtProperty' ),
-      phetioDocumentation: 'the amount of time since the last manual internal step, in seconds'
-    } );
+    this.lastDtProperty = new NumberProperty( 0.03 );
 
     this.timeElapsedProperty = new NumberProperty( 0, {
       phetioReadOnly: true,
       tandem: tandem.createTandem( 'timeElapsedProperty' ),
-      phetioDocumentation: 'the amount of time elapsed since the last evolution of the physics model, in seconds'
+      phetioDocumentation: 'The amount of time elapsed since the last evolution of the physics model, in seconds'
     } );
 
     this.angleProperty = new NumberProperty( 0, {
       phetioReadOnly: true,
       range: new Range( 0, 2 * Math.PI ),
       tandem: tandem.createTandem( 'angleProperty' ),
-      phetioDocumentation: 'the angle (in radians) of the oscillator or pulse',
+      phetioDocumentation: 'The angle (in radians) of the oscillator or pulse',
       units: 'radians'
     } );
 
-    this.pulsePendingProperty = new BooleanProperty( false, {
-      phetioReadOnly: true,
-      tandem: tandem.createTandem( 'pulsePendingProperty' ),
-      phetioDocumentation: 'whether a pulse will start at the next internal model step'
-    } );
+    this.pulsePendingProperty = new BooleanProperty( false );
 
     this.pulseSignProperty = new NumberProperty( 1, {
-      phetioReadOnly: true,
-      validValues: [ -1, 1 ],
-      tandem: tandem.createTandem( 'pulseSignProperty' ),
-      phetioDocumentation: 'which part of the pulse is being generated'
+      validValues: [ -1, 1 ]
     } );
 
-    this.pulseProperty = new BooleanProperty( false, {
+    this.isPulseActiveProperty = new BooleanProperty( false, {
       phetioReadOnly: true,
-      tandem: tandem.createTandem( 'pulseProperty' ),
-      phetioDocumentation: 'whether a pulse is currently active'
+      tandem: tandem.createTandem( 'isPulseActiveProperty' ),
+      phetioDocumentation: 'Whether a pulse is currently active'
     } );
 
     this.stopwatch = new Stopwatch( {
@@ -223,27 +213,20 @@ export default class WOASModel extends PhetioObject {
 
     this.yNowChangedEmitter = new Emitter();
 
-    this.nextLeftYProperty = new NumberProperty( 0, {
-      phetioReadOnly: true,
-      tandem: tandem.createTandem( 'nextLeftYProperty' ),
-      phetioDocumentation: 'internal property used to interpolate the left-most y value of the string while the wrench is moved in manual mode - for low-fps browsers'
-    } );
+    this.nextLeftYProperty = new NumberProperty( 0 );
 
-    this.waveStartPositionProperty = new RangedDynamicProperty( new Property( this.nextLeftYProperty ), {
+    this.leftMostBeadYProperty = new RangedDynamicProperty( new Property( this.nextLeftYProperty ), {
       bidirectional: true,
       map: ( y: number ) => -y / MODEL_UNITS_PER_CM,
       inverseMap: ( y: number ) => -y * MODEL_UNITS_PER_CM,
-      tandem: tandem.createTandem( 'waveStartPositionProperty' ),
-      phetioDocumentation: 'the y-value of the 1st green dot measured with respect to the center line',
+      tandem: tandem.createTandem( 'leftMostBeadYProperty' ),
+      phetioDocumentation: 'The y-value of the left-most bead measured with respect to the center line',
       units: 'cm',
       phetioValueType: NumberIO,
       range: new Range( -1.3, 1.3 )
     } );
 
-    this.stepDtProperty = new NumberProperty( 0, {
-      phetioReadOnly: true,
-      tandem: tandem.createTandem( 'stepDtProperty' )
-    } );
+    this.stepDtProperty = new NumberProperty( 0 );
 
     this.beta = 0.05;
     this.alpha = 1;
@@ -392,10 +375,10 @@ export default class WOASModel extends PhetioObject {
       }
       if ( this.waveModeProperty.value === WOASMode.PULSE && this.pulsePendingProperty.value ) {
         this.pulsePendingProperty.value = false;
-        this.pulseProperty.value = true;
+        this.isPulseActiveProperty.value = true;
         this.yNow[ 0 ] = 0;
       }
-      if ( this.waveModeProperty.value === WOASMode.PULSE && this.pulseProperty.value ) {
+      if ( this.waveModeProperty.value === WOASMode.PULSE && this.isPulseActiveProperty.value ) {
         const da = Math.PI * fixDt * speedMultiplier / this.pulseWidthProperty.value;
         if ( this.angleProperty.value + da >= Math.PI / 2 ) {
           this.pulseSignProperty.value = -1;
@@ -407,7 +390,7 @@ export default class WOASModel extends PhetioObject {
           //end pulse and reset
           this.angleProperty.reset();
           this.pulseSignProperty.reset();
-          this.pulseProperty.reset();
+          this.isPulseActiveProperty.reset();
         }
         this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * MODEL_UNITS_PER_CM * ( -this.angleProperty.value / ( Math.PI / 2 ) );
       }
@@ -461,7 +444,7 @@ export default class WOASModel extends PhetioObject {
     this.angleProperty.value = 0;
     this.pulseSignProperty.value = 1;
     this.pulsePendingProperty.value = true;
-    this.pulseProperty.value = false;
+    this.isPulseActiveProperty.value = false;
   }
 
   /**
@@ -470,7 +453,7 @@ export default class WOASModel extends PhetioObject {
   public manualRestart(): void {
     this.angleProperty.reset();
     this.timeElapsedProperty.reset();
-    this.pulseProperty.reset();
+    this.isPulseActiveProperty.reset();
     this.pulseSignProperty.reset();
     this.pulsePendingProperty.reset();
 
@@ -513,13 +496,23 @@ export default class WOASModel extends PhetioObject {
       _yDraw: Float64ArrayIO.toStateObject( model.yDraw ),
       _yNow: Float64ArrayIO.toStateObject( model.yNow ),
       _yLast: Float64ArrayIO.toStateObject( model.yLast ),
-      _yNext: Float64ArrayIO.toStateObject( model.yNext )
+      _yNext: Float64ArrayIO.toStateObject( model.yNext ),
+      _lastDt: model.lastDtProperty.value,
+      _pulsePending: model.pulsePendingProperty.value,
+      _pulseSign: model.pulseSignProperty.value,
+      _nextLeftY: model.nextLeftYProperty.value,
+      _stepDt: model.stepDtProperty.value
     } ),
     stateSchema: {
       _yDraw: Float64ArrayIO,
       _yNow: Float64ArrayIO,
       _yLast: Float64ArrayIO,
-      _yNext: Float64ArrayIO
+      _yNext: Float64ArrayIO,
+      _lastDt: NumberIO,
+      _pulsePending: BooleanIO,
+      _pulseSign: NumberIO,
+      _nextLeftY: NumberIO,
+      _stepDt: NumberIO
     },
     applyState: ( model: WOASModel, stateObject ) => {
 
@@ -529,6 +522,12 @@ export default class WOASModel extends PhetioObject {
       Float64ArrayIO.applyState( model.yNow, stateObject._yNow );
       Float64ArrayIO.applyState( model.yLast, stateObject._yLast );
       Float64ArrayIO.applyState( model.yNext, stateObject._yNext );
+
+      model.lastDtProperty.value = stateObject._lastDt;
+      model.pulsePendingProperty.value = stateObject._pulsePending;
+      model.pulseSignProperty.value = stateObject._pulseSign;
+      model.nextLeftYProperty.value = stateObject._nextLeftY;
+      model.stepDtProperty.value = stateObject._stepDt;
 
       model.yNowChangedEmitter.emit();
     }

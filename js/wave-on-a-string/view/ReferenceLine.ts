@@ -25,7 +25,11 @@ export default class ReferenceLine extends Node {
     tandem: Tandem,
     dragBoundsProperty: TReadOnlyProperty<Bounds2>
   ) {
-    super( { cursor: 'pointer', tandem: tandem } );
+    super( {
+      cursor: 'pointer',
+      tandem: tandem,
+      visibleProperty: model.referenceLineVisibleProperty
+    } );
 
     model.referenceLinePositionProperty.link( console.log );
 
@@ -50,9 +54,6 @@ export default class ReferenceLine extends Node {
       lineWidth: 2
     } ) );
 
-    model.referenceLineVisibleProperty.link( visible => {
-      this.visible = visible;
-    } );
     model.referenceLinePositionProperty.link( position => {
       this.translation = position;
     } );
