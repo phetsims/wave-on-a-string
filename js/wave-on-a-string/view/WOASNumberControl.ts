@@ -66,7 +66,7 @@ class WOASNumberControl extends NumberControl {
         textOptions: {
           font: NORMAL_FONT
         },
-        maxWidth: 120,
+        maxWidth: 83,
         xMargin: 20,
         yMargin: 5,
         backgroundStroke: WOASColors.numberDisplayBackgroundStrokeProperty,

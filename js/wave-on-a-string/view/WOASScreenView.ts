@@ -279,7 +279,8 @@ class WOASScreenView extends ScreenView {
     const referenceLine = new ReferenceLine( model, tandem.createTandem( 'referenceLineNode' ), referenceLineDragBoundsProperty );
 
     const restartButton = new RestartButton( model.manualRestart.bind( model ), {
-      tandem: tandem.createTandem( 'restartButton' )
+      tandem: tandem.createTandem( 'restartButton' ),
+      maxTextWidth: 230
     } );
 
     const resetAllButton = new ResetAllButton( {
