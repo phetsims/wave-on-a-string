@@ -525,10 +525,10 @@ export default class WOASModel extends PhetioObject {
 
       // We make an assumption about Float64ArrayIO's serialization here, so that we don't create temporary garbage
       // Float64Arrays. Instead we set the array values directly.
-      model.yDraw.set( stateObject._yDraw );
-      model.yNow.set( stateObject._yNow );
-      model.yLast.set( stateObject._yLast );
-      model.yNext.set( stateObject._yNext );
+      Float64ArrayIO.applyState( model.yDraw, stateObject._yDraw );
+      Float64ArrayIO.applyState( model.yNow, stateObject._yNow );
+      Float64ArrayIO.applyState( model.yLast, stateObject._yLast );
+      Float64ArrayIO.applyState( model.yNext, stateObject._yNext );
 
       model.yNowChangedEmitter.emit();
     }
