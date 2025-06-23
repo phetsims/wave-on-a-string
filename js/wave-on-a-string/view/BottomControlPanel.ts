@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
-import Line from '../../../../scenery/js/nodes/Line.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
@@ -24,6 +23,7 @@ import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { WOASMode } from '../model/WOASMode.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
 import WOASColors from './WOASColors.js';
+import Separator from '../../../../scenery/js/layout/nodes/Separator.js';
 
 export default class BottomControlPanel extends Panel {
   public constructor( model: WOASModel, tandem: Tandem ) {
@@ -48,7 +48,14 @@ export default class BottomControlPanel extends Panel {
       tandem: checkboxTandem
     } );
 
-    const separator = new Line( 0, 10, 0, 100, { stroke: 'gray', lineWidth: 1 } );
+    const separator = new Separator( {
+      x1: 0,
+      y1: 10,
+      x2: 0,
+      y2: 100,
+      // stroke: 'gray',
+      lineWidth: 1
+    } );
 
     const tensionProperty = new RangedDynamicProperty( new Property( model.tensionProperty ), {
       bidirectional: true,
@@ -88,7 +95,8 @@ export default class BottomControlPanel extends Panel {
       sliderOptions: {
         constrainValue: value => model.frequencyProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
-      tandem: tandem.createTandem( 'frequencyControl' )
+      tandem: tandem.createTandem( 'frequencyControl' ),
+      phetioDocumentation: 'Frequency control is only available in the Oscillate mode'
     } );
     const pulseWidthControl = new WOASNumberControl( WaveOnAStringStrings.pulseWidthStringProperty, model.pulseWidthProperty, {
       delta: 0.01,
@@ -99,7 +107,8 @@ export default class BottomControlPanel extends Panel {
       sliderOptions: {
         constrainValue: value => model.pulseWidthProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
-      tandem: tandem.createTandem( 'pulseWidthControl' )
+      tandem: tandem.createTandem( 'pulseWidthControl' ),
+      phetioDocumentation: 'Pulse width control is only available in the Pulse mode'
     } );
     const amplitudeControl = new WOASNumberControl( WaveOnAStringStrings.amplitudeStringProperty, model.amplitudeProperty, {
       delta: 0.01,
@@ -110,7 +119,8 @@ export default class BottomControlPanel extends Panel {
       sliderOptions: {
         constrainValue: value => model.amplitudeProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
-      tandem: tandem.createTandem( 'amplitudeControl' )
+      tandem: tandem.createTandem( 'amplitudeControl' ),
+      phetioDocumentation: 'Amplitude control is only available in the Oscillate/Pulse modes'
     } );
 
     // We want the pulse-width and frequency controls to have the same bounds
