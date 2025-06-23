@@ -34,6 +34,7 @@ import { WOASMode } from '../model/WOASMode.js';
 import type WOASModel from '../model/WOASModel.js';
 import { dilatedTouchArea, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
+import WOASColors from './WOASColors.js';
 
 type SelfOptions = {
   range: Range;
@@ -119,7 +120,7 @@ export default class StartNode extends Node {
 
     wrenchImageNode.addInputListener( wrenchKeyboardListener );
     const wrenchArrowOptions = {
-      fill: 'hsl(210,90%,60%)',
+      fill: WOASColors.wrenchArrowColorProperty,
       tailWidth: 10,
       headWidth: 22,
       headHeight: 18

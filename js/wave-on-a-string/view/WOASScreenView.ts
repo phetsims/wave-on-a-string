@@ -45,6 +45,7 @@ import ReferenceLine from './ReferenceLine.js';
 import RestartButton from './RestartButton.js';
 import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
+import WOASColors from './WOASColors.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
 
 const MARGIN = 10;
@@ -120,7 +121,7 @@ class WOASScreenView extends ScreenView {
     } ) );
 
     const radioPanelOptions = {
-      fill: '#D9FCC5',
+      fill: WOASColors.panelBackgroundColorProperty,
       cornerRadius: 5,
       xMargin: 7,
       yMargin: 7,

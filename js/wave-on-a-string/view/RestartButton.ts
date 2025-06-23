@@ -11,6 +11,7 @@ import TextPushButton, { TextPushButtonOptions } from '../../../../sun/js/button
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
+import WOASColors from './WOASColors.js';
 
 export default class RestartButton extends TextPushButton {
   public constructor( callback: () => void, providedOptions?: TextPushButtonOptions ) {
@@ -18,7 +19,7 @@ export default class RestartButton extends TextPushButton {
     super( WaveOnAStringStrings.restartStringProperty, optionize<TextPushButtonOptions, EmptySelfOptions>()( {
       listener: callback,
       font: NORMAL_FONT,
-      baseColor: 'hsl(210,0%,85%)',
+      baseColor: WOASColors.restartButtonColorProperty,
       maxTextWidth: 250
     }, providedOptions ) );
 

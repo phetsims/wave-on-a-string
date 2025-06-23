@@ -23,6 +23,7 @@ import WOASNumberControl from './WOASNumberControl.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { WOASMode } from '../model/WOASMode.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
+import WOASColors from './WOASColors.js';
 
 export default class BottomControlPanel extends Panel {
   public constructor( model: WOASModel, tandem: Tandem ) {
@@ -150,7 +151,7 @@ export default class BottomControlPanel extends Panel {
 
     super( contentBox, {
       tandem: tandem,
-      fill: '#D9FCC5',
+      fill: WOASColors.panelBackgroundColorProperty,
       cornerRadius: 5,
       xMargin: 15,
       yMargin: 5

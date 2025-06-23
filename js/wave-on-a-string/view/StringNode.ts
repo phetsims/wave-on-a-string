@@ -17,6 +17,8 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import waveOnAString from '../../waveOnAString.js';
 import type WOASModel from '../model/WOASModel.js';
 import { MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS } from '../WOASConstants.js';
+import WOASColors from './WOASColors.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 
 type SelfOptions = {
   radius?: number;
@@ -42,7 +44,7 @@ export default class StringNode extends Node {
 
     let stringShape = new Shape();
     const stringPath = new Path( stringShape, {
-      stroke: '#F00'
+      stroke: WOASColors.stringPathColorProperty
     } );
     const beads: Node[] = [];
     this.addChild( stringPath );
@@ -52,35 +54,44 @@ export default class StringNode extends Node {
     };
 
     const highlightCircle = new Circle( options.radius * 0.3, {
-      fill: '#fff',
+      fill: WOASColors.beadHighlightFillProperty,
       x: -0.45 * options.radius,
       y: -0.45 * options.radius
     } );
     const scale = 3;
     const regularBead = new Circle( options.radius, {
-      fill: 'red',
-      stroke: 'black',
+      fill: WOASColors.regularBeadFillProperty,
+      stroke: WOASColors.beadStrokeProperty,
       lineWidth: 0.5,
       children: [ highlightCircle ],
       scale: scale
     } );
     const referenceBead = new Circle( options.radius, {
-      fill: 'rgb(0,0,255)',
-      stroke: 'black',
+      fill: WOASColors.referenceBeadFillProperty,
+      stroke: WOASColors.beadStrokeProperty,
       lineWidth: 0.5,
       children: [ highlightCircle ],
       scale: scale
     } );
 
-    let regularBeadNode!: Image;
-    regularBead.toDataURL( ( url, x, y ) => {
-      regularBeadNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
+    const regularBeadNode = new Node();
+    const referenceBeadNode = new Node();
+
+    Multilink.multilink( [
+      WOASColors.beadHighlightFillProperty,
+      WOASColors.regularBeadFillProperty,
+      WOASColors.referenceBeadFillProperty,
+      WOASColors.beadStrokeProperty
+    ], () => {
+      regularBead.toDataURL( ( url, x, y ) => {
+        regularBeadNode.children = [ new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } ) ];
+      } );
+
+      referenceBead.toDataURL( ( url, x, y ) => {
+        referenceBeadNode.children = [ new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } ) ];
+      } );
     } );
 
-    let referenceBeadNode!: Image;
-    referenceBead.toDataURL( ( url, x, y ) => {
-      referenceBeadNode = new Image( url, { x: -x / scale, y: -y / scale, scale: 1 / scale } );
-    } );
 
     for ( let i = 0; i < model.yDraw.length; i++ ) {
       const bead = ( i % 10 === 0 ) ? referenceBeadNode : regularBeadNode;

@@ -14,6 +14,7 @@ import waveOnAString from '../../waveOnAString.js';
 import type WOASModel from '../model/WOASModel.js';
 import { WOASMode } from '../model/WOASMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import WOASColors from './WOASColors.js';
 
 export default class PulseButton extends RoundPushButton {
   public constructor( model: WOASModel, providedOptions?: RoundPushButtonOptions ) {
@@ -25,7 +26,7 @@ export default class PulseButton extends RoundPushButton {
         model.isPlayingProperty.value = true;
         model.yNowChangedEmitter.emit();
       },
-      baseColor: '#33dd33',
+      baseColor: WOASColors.pulseButtonColorProperty,
       content: new Node( {
         children: [
           new Path( pulseShape, {
