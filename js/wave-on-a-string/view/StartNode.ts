@@ -18,7 +18,6 @@ import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
-import KeyboardListener from '../../../../scenery/js/listeners/KeyboardListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
@@ -35,6 +34,9 @@ import type WOASModel from '../model/WOASModel.js';
 import { dilatedTouchArea, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
 import WOASColors from './WOASColors.js';
+import KeyboardDragListener from '../../../../scenery/js/listeners/KeyboardDragListener.js';
+import MappedProperty from '../../../../axon/js/MappedProperty.js';
+import TinyProperty from '../../../../axon/js/TinyProperty.js';
 
 type SelfOptions = {
   range: Range;
@@ -93,32 +95,9 @@ export default class StartNode extends Node {
       x: -40,
       y: -24,
       scale: 0.9 / 4,
-      pickable: false,
-
-      // Will only be focusable when visible
-      focusable: true,
-      tagName: 'p'
+      pickable: false
     } );
 
-    const wrenchKeyboardListener = new KeyboardListener( {
-      keys: [ 'arrowUp', 'arrowDown', 'w', 's' ],
-      fire: ( event, keysPressed, listener ) => {
-
-        // TODO: Decide the behavior of the wrench arrows when using the keyboard to move the wrench. See https://github.com/phetsims/wave-on-a-string/issues/162
-        const KEY_MOVEMENT_AMOUNT = options.range.getLength() / 4;
-        if ( keysPressed === 'arrowUp' || keysPressed === 'w' ) {
-          model.nextLeftYProperty.value = Math.max( model.nextLeftYProperty.value - KEY_MOVEMENT_AMOUNT, options.range.min );
-        }
-        else if ( keysPressed === 'arrowDown' || keysPressed === 's' ) {
-          model.nextLeftYProperty.value = Math.min( model.nextLeftYProperty.value + KEY_MOVEMENT_AMOUNT, options.range.max );
-        }
-
-        // TODO: There is more logic in wrench.addInputListener( new DragListener( {... that we need to replicate or factor out. https://github.com/phetsims/wave-on-a-string/issues/162
-      }
-    } );
-
-
-    wrenchImageNode.addInputListener( wrenchKeyboardListener );
     const wrenchArrowOptions = {
       fill: WOASColors.wrenchArrowColorProperty,
       tailWidth: 10,
@@ -137,7 +116,10 @@ export default class StartNode extends Node {
         wrenchTopArrow,
         wrenchBottomArrow
       ],
-      cursor: 'pointer'
+      cursor: 'pointer',
+
+      focusable: true,
+      tagName: 'p'
     } );
 
     wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
@@ -204,6 +186,29 @@ export default class StartNode extends Node {
         const point = wrench.globalToParentPoint( event.pointer.point ).minus( clickOffset );
 
         model.nextLeftYProperty.value = Math.max( Math.min( point.y, options.range.max ), options.range.min );
+        model.isPlayingProperty.value = true;
+        model.yNowChangedEmitter.emit();
+      },
+      end: () => {
+        model.wrenchArrowsVisibleProperty.value = false;
+      }
+    } ) );
+
+    wrench.addInputListener( new KeyboardDragListener( {
+      tandem: options.tandem.createTandem( 'wrenchKeyboardDragListener' ),
+      dragSpeed: 200,
+      positionProperty: new MappedProperty( model.nextLeftYProperty, {
+        bidirectional: true,
+        map: ( y: number ) => new Vector2( 0, y ),
+        // sanity check for the range, just in case the drag listener goes outside of it.
+        inverseMap: ( vector: Vector2 ) => Math.max( Math.min( vector.y, options.range.max ), options.range.min )
+      } ),
+      keyboardDragDirection: 'upDown',
+      dragBoundsProperty: new TinyProperty( new Bounds2( 0, options.range.min, 0, options.range.max ) ),
+      start: () => {
+        model.wrenchArrowsVisibleProperty.value = false;
+      },
+      drag: () => {
         model.isPlayingProperty.value = true;
         model.yNowChangedEmitter.emit();
       },
