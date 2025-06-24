@@ -34,9 +34,9 @@ import type WOASModel from '../model/WOASModel.js';
 import { dilatedTouchArea, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
 import WOASColors from './WOASColors.js';
-import KeyboardDragListener from '../../../../scenery/js/listeners/KeyboardDragListener.js';
 import MappedProperty from '../../../../axon/js/MappedProperty.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 
 type SelfOptions = {
   range: Range;
@@ -194,9 +194,10 @@ export default class StartNode extends Node {
       }
     } ) );
 
-    wrench.addInputListener( new KeyboardDragListener( {
+    wrench.addInputListener( new SoundKeyboardDragListener( {
       tandem: options.tandem.createTandem( 'wrenchKeyboardDragListener' ),
-      dragSpeed: 200,
+      dragSpeed: 300,
+      shiftDragSpeed: 50,
       positionProperty: new MappedProperty( model.nextLeftYProperty, {
         bidirectional: true,
         map: ( y: number ) => new Vector2( 0, y ),
