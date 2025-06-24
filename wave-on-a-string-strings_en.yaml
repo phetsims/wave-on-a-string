@@ -1,0 +1,28 @@
+# Strings for the Wave on a String simulation.
+# After changing this file, run `grunt modulify --targets=strings` to regenerate the appropriate files, including type definitions.
+
+wave-on-a-string.title:     Wave on a String
+rulers:                     Rulers
+timer:                      Stopwatch
+amplitude:                  Amplitude
+frequency:                  Frequency
+pulseWidth:                 Pulse Width
+damping:                    Damping
+tension:                    Tension
+low:                        Low
+high:                       High
+manual:                     Manual
+oscillate:                  Oscillate
+pulse:                      Pulse
+restart:                    Restart
+fixedEnd:                   Fixed End
+looseEnd:                   Loose End
+noEnd:                      No End
+speedNormal:                Normal
+speedSlow:                  Slow Motion
+referenceLine:              Reference Line
+unitCm:                     cm
+patternValueUnitHz:         "{0} Hz"
+patternValueUnitCm:         "{0} cm"
+patternValueUnitS:          "{0} s"
+patternValueUnitPercentage: "{0}%"

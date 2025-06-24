@@ -31,8 +31,6 @@ export default class ReferenceLine extends Node {
       visibleProperty: model.referenceLineVisibleProperty
     } );
 
-    model.referenceLinePositionProperty.link( console.log );
-
     const referenceX = ScreenView.DEFAULT_LAYOUT_BOUNDS.right - 28;
 
     this.addChild( new Rectangle( referenceX * 2, -10, 40, 20, {

@@ -34,7 +34,7 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
-import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
+import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import { WOASEndType } from '../model/WOASEndType.js';
 import { WOASMode } from '../model/WOASMode.js';
 import type WOASModel from '../model/WOASModel.js';
@@ -83,10 +83,10 @@ class WOASScreenView extends ScreenView {
     const horizontalRulerWidth = 10 * viewUnitsPerCM;
     const verticalRulerHeight = 5 * viewUnitsPerCM;
 
-    const horizontalRulerNode = new RulerNode( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
+    const horizontalRulerNode = new RulerNode( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: horizontalRulerTandem
     }, rulerOptions ) );
-    const verticalRulerNode = new RulerNode( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringStrings.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
+    const verticalRulerNode = new RulerNode( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: verticalRulerTandem
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
@@ -190,9 +190,9 @@ class WOASScreenView extends ScreenView {
         WOASMode.PULSE
       ],
       text: [
-        WaveOnAStringStrings.manualStringProperty,
-        WaveOnAStringStrings.oscillateStringProperty,
-        WaveOnAStringStrings.pulseStringProperty
+        WaveOnAStringFluent.manualStringProperty,
+        WaveOnAStringFluent.oscillateStringProperty,
+        WaveOnAStringFluent.pulseStringProperty
       ],
       tandemNames: [
         'manualRadioButton',
@@ -210,9 +210,9 @@ class WOASScreenView extends ScreenView {
         WOASEndType.NO_END
       ],
       text: [
-        WaveOnAStringStrings.fixedEndStringProperty,
-        WaveOnAStringStrings.looseEndStringProperty,
-        WaveOnAStringStrings.noEndStringProperty
+        WaveOnAStringFluent.fixedEndStringProperty,
+        WaveOnAStringFluent.looseEndStringProperty,
+        WaveOnAStringFluent.noEndStringProperty
       ],
       tandemNames: [
         'fixedEndRadioButton',
@@ -268,7 +268,6 @@ class WOASScreenView extends ScreenView {
       lowerReferenceLineBoundaryProperty,
       upperReferenceLineBoundaryProperty
     ], ( lower, upper ) => {
-      console.log( lower, upper );
       return new Bounds2(
         this.layoutBounds.left + 30 - this.layoutBounds.width,
         upper + 10,

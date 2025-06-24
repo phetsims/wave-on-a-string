@@ -9,14 +9,14 @@
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import TextPushButton, { TextPushButtonOptions } from '../../../../sun/js/buttons/TextPushButton.js';
 import waveOnAString from '../../waveOnAString.js';
-import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
+import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
 import WOASColors from './WOASColors.js';
 
 export default class RestartButton extends TextPushButton {
   public constructor( callback: () => void, providedOptions?: TextPushButtonOptions ) {
 
-    super( WaveOnAStringStrings.restartStringProperty, optionize<TextPushButtonOptions, EmptySelfOptions>()( {
+    super( WaveOnAStringFluent.restartStringProperty, optionize<TextPushButtonOptions, EmptySelfOptions>()( {
       listener: callback,
       font: NORMAL_FONT,
       baseColor: WOASColors.restartButtonColorProperty,

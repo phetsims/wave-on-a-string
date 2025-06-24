@@ -16,7 +16,7 @@ import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
-import WaveOnAStringStrings from '../../WaveOnAStringStrings.js';
+import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
 import WOASNumberControl from './WOASNumberControl.js';
 import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
@@ -33,15 +33,15 @@ export default class BottomControlPanel extends Panel {
     };
     const checkboxTandem = tandem.createTandem( 'checkboxGroup' );
     const checkboxGroup = new VerticalCheckboxGroup( [ {
-      createNode: () => new Text( WaveOnAStringStrings.rulersStringProperty, checkboxTextOptions ),
+      createNode: () => new Text( WaveOnAStringFluent.rulersStringProperty, checkboxTextOptions ),
       property: model.rulersVisibleProperty,
       tandemName: 'rulersCheckbox'
     }, {
-      createNode: () => new Text( WaveOnAStringStrings.timerStringProperty, checkboxTextOptions ),
+      createNode: () => new Text( WaveOnAStringFluent.timerStringProperty, checkboxTextOptions ),
       property: model.stopwatch.isVisibleProperty,
       tandemName: 'stopwatchCheckbox'
     }, {
-      createNode: () => new Text( WaveOnAStringStrings.referenceLineStringProperty, checkboxTextOptions ),
+      createNode: () => new Text( WaveOnAStringFluent.referenceLineStringProperty, checkboxTextOptions ),
       property: model.referenceLineVisibleProperty,
       tandemName: 'referenceLineCheckbox'
     } ], {
@@ -64,33 +64,33 @@ export default class BottomControlPanel extends Panel {
       range: new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 )
     } );
 
-    const tensionControl = new WOASNumberControl( WaveOnAStringStrings.tensionStringProperty, tensionProperty, {
+    const tensionControl = new WOASNumberControl( WaveOnAStringFluent.tensionStringProperty, tensionProperty, {
       delta: 1,
       numberDisplayOptions: {
         decimalPlaces: 0,
-        valuePattern: WaveOnAStringStrings.patternValueUnitPercentageStringProperty
+        valuePattern: WaveOnAStringFluent.patternValueUnitPercentageStringProperty
       },
       sliderOptions: {
         constrainValue: value => tensionProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
       tandem: tandem.createTandem( 'tensionControl' )
     } );
-    const dampingControl = new WOASNumberControl( WaveOnAStringStrings.dampingStringProperty, model.dampingProperty, {
+    const dampingControl = new WOASNumberControl( WaveOnAStringFluent.dampingStringProperty, model.dampingProperty, {
       delta: 1,
       numberDisplayOptions: {
         decimalPlaces: 0,
-        valuePattern: WaveOnAStringStrings.patternValueUnitPercentageStringProperty
+        valuePattern: WaveOnAStringFluent.patternValueUnitPercentageStringProperty
       },
       sliderOptions: {
         constrainValue: value => model.dampingProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
       tandem: tandem.createTandem( 'dampingControl' )
     } );
-    const frequencyControl = new WOASNumberControl( WaveOnAStringStrings.frequencyStringProperty, model.frequencyProperty, {
+    const frequencyControl = new WOASNumberControl( WaveOnAStringFluent.frequencyStringProperty, model.frequencyProperty, {
       delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
-        valuePattern: WaveOnAStringStrings.patternValueUnitHzStringProperty
+        valuePattern: WaveOnAStringFluent.patternValueUnitHzStringProperty
       },
       sliderOptions: {
         constrainValue: value => model.frequencyProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
@@ -98,11 +98,11 @@ export default class BottomControlPanel extends Panel {
       tandem: tandem.createTandem( 'frequencyControl' ),
       phetioDocumentation: 'Frequency control is only available in the Oscillate mode'
     } );
-    const pulseWidthControl = new WOASNumberControl( WaveOnAStringStrings.pulseWidthStringProperty, model.pulseWidthProperty, {
+    const pulseWidthControl = new WOASNumberControl( WaveOnAStringFluent.pulseWidthStringProperty, model.pulseWidthProperty, {
       delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
-        valuePattern: WaveOnAStringStrings.patternValueUnitSStringProperty
+        valuePattern: WaveOnAStringFluent.patternValueUnitSStringProperty
       },
       sliderOptions: {
         constrainValue: value => model.pulseWidthProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
@@ -110,11 +110,11 @@ export default class BottomControlPanel extends Panel {
       tandem: tandem.createTandem( 'pulseWidthControl' ),
       phetioDocumentation: 'Pulse width control is only available in the Pulse mode'
     } );
-    const amplitudeControl = new WOASNumberControl( WaveOnAStringStrings.amplitudeStringProperty, model.amplitudeProperty, {
+    const amplitudeControl = new WOASNumberControl( WaveOnAStringFluent.amplitudeStringProperty, model.amplitudeProperty, {
       delta: 0.01,
       numberDisplayOptions: {
         decimalPlaces: 2,
-        valuePattern: WaveOnAStringStrings.patternValueUnitCmStringProperty
+        valuePattern: WaveOnAStringFluent.patternValueUnitCmStringProperty
       },
       sliderOptions: {
         constrainValue: value => model.amplitudeProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
