@@ -106,7 +106,7 @@
           "value": "Wave and String Properties"
         },
         "waveAndStringPropertiesDescription": {
-          "value": "ajkfhaskjdfhkajsdf"
+          "value": "Controls to change the properties of the generated wave and the string."
         }
       },
       "controlArea": {
@@ -114,13 +114,13 @@
           "value": "Measurement Tools"
         },
         "measurementToolsDescription": {
-          "value": "\\[paragraph description to convey information\\]"
+          "value": "Tools to visually measure properties of waves. Pause the sim to help make precise measurements."
         }
       }
     },
     "waveMode": {
       "accessibleName": {
-        "value": "TODO no waveMode accessibleName"
+        "value": "Wave Generation Options"
       },
       "accessibleHelpText": {
         "value": "Create wave manually, continuously, or with individual pulses."
@@ -231,7 +231,7 @@
     },
     "dampingControl": {
       "accessibleHelpText": {
-        "value": "TODO"
+        "value": "How fast waves shrink over time."
       }
     },
     "tensionControl": {
