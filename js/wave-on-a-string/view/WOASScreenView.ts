@@ -20,6 +20,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode, { RulerNodeOptions } from '../../../../scenery-phet/js/RulerNode.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
@@ -99,6 +100,20 @@ class WOASScreenView extends ScreenView {
       accessibleHelpText: WaveOnAStringFluent.a11y.verticalRuler.accessibleHelpTextStringProperty
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
+
+    horizontalRulerNode.addInputListener( new SoundKeyboardDragListener( {
+      tandem: horizontalRulerTandem.createTandem( 'keyboardDragListener' ),
+      dragSpeed: 300,
+      shiftDragSpeed: 20,
+      positionProperty: model.horizontalRulerPositionProperty
+    } ) );
+
+    verticalRulerNode.addInputListener( new SoundKeyboardDragListener( {
+      tandem: verticalRulerTandem.createTandem( 'keyboardDragListener' ),
+      dragSpeed: 300,
+      shiftDragSpeed: 20,
+      positionProperty: model.verticalRulerPositionProperty
+    } ) );
 
     const rulersNode = new Node( {
       children: [
@@ -186,7 +201,8 @@ class WOASScreenView extends ScreenView {
 
     const stopwatchNode = new StopwatchNode( model.stopwatch, {
       dragBoundsProperty: this.visibleBoundsProperty,
-      tandem: tandem.createTandem( 'stopwatchNode' )
+      tandem: tandem.createTandem( 'stopwatchNode' ),
+      accessibleHelpText: WaveOnAStringFluent.a11y.stopwatch.accessibleHelpTextStringProperty
     } );
     stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
 

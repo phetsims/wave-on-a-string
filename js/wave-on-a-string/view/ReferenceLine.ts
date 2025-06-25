@@ -10,6 +10,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import Shape from '../../../../kite/js/Shape.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -69,6 +70,13 @@ export default class ReferenceLine extends Node {
       positionProperty: model.referenceLinePositionProperty,
       tandem: tandem.createTandem( 'dragListener' ),
       dragBoundsProperty: dragBoundsProperty
+    } ) );
+
+    this.addInputListener( new SoundKeyboardDragListener( {
+      tandem: tandem.createTandem( 'keyboardDragListener' ),
+      dragSpeed: 300,
+      shiftDragSpeed: 20,
+      positionProperty: model.referenceLinePositionProperty
     } ) );
   }
 }
