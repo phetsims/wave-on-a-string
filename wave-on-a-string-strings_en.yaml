@@ -26,3 +26,28 @@ patternValueUnitHz:         "{0} Hz"
 patternValueUnitCm:         "{0} cm"
 patternValueUnitS:          "{0} s"
 patternValueUnitPercentage: "{0}%"
+
+a11y:
+  screenSummary:
+    playArea:    >-
+                 Generate waves on a string that stretches across the play area manually or with oscillators. 
+                 Changing the way you generate waves changes the properties of the waves and the string in the control area. 
+                 Decide how the end of the string should be attached to the end of the play area or allow it to extend into infinity.
+    controlArea: Change the properties of the generated wave and of the string.
+    currentDetails:
+      start: |-
+             { $isPlaying ->
+               [false] The sim is paused while the
+               *[true] The
+             } wrench is near the { $wrenchPosition ->
+               [bottom] bottom
+               *[middle] middle
+               [top] top
+             } of the play area, and the string is flat.
+      end:   |-
+             The end of the string { $endPosition ->
+               *[fixed] is fixed to a clamp.
+               [loose] is attached to a ring that moves along a rod.
+               [no] extends out to infinity through a window outside.
+             }
+    interactionHint: Move the wrench to make a wave or choose another way to start making waves.

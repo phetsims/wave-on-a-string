@@ -47,6 +47,7 @@ import StartNode from './StartNode.js';
 import StringNode from './StringNode.js';
 import WOASColors from './WOASColors.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
+import WOASScreenSummaryContent from './WOASScreenSummaryContent.js';
 
 const MARGIN = 10;
 
@@ -57,7 +58,8 @@ class WOASScreenView extends ScreenView {
 
   public constructor( model: WOASModel, tandem: Tandem ) {
     super( {
-      tandem: tandem
+      tandem: tandem,
+      screenSummaryContent: new WOASScreenSummaryContent( model )
     } );
 
     const modelViewTransform = ModelViewTransform2.createSinglePointScaleMapping(

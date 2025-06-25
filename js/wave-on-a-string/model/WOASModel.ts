@@ -75,7 +75,7 @@ export default class WOASModel extends PhetioObject {
   public readonly yNowChangedEmitter: Emitter;
 
   public readonly nextLeftYProperty: TProperty<number>;
-  private readonly leftMostBeadYProperty: TRangedProperty;
+  public readonly leftMostBeadYProperty: TRangedProperty;
 
   private readonly stepDtProperty: TProperty<number>;
 

@@ -39,6 +39,17 @@ type StringsType = {
   'patternValueUnitCmStringProperty': LocalizedStringProperty;
   'patternValueUnitSStringProperty': LocalizedStringProperty;
   'patternValueUnitPercentageStringProperty': LocalizedStringProperty;
+  'a11y': {
+    'screenSummary': {
+      'playAreaStringProperty': LocalizedStringProperty;
+      'controlAreaStringProperty': LocalizedStringProperty;
+      'currentDetails': {
+        'startStringProperty': LocalizedStringProperty;
+        'endStringProperty': LocalizedStringProperty;
+      };
+      'interactionHintStringProperty': LocalizedStringProperty;
+    }
+  }
 };
 
 const WaveOnAStringStrings = getStringModule( 'WAVE_ON_A_STRING' ) as StringsType;

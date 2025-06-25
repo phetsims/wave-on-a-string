@@ -48,6 +48,11 @@ addToMapIfDefined( 'speedNormal', 'speedNormalStringProperty' );
 addToMapIfDefined( 'speedSlow', 'speedSlowStringProperty' );
 addToMapIfDefined( 'referenceLine', 'referenceLineStringProperty' );
 addToMapIfDefined( 'unitCm', 'unitCmStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_playArea', 'a11y.screenSummary.playAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_controlArea', 'a11y.screenSummary.controlAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_currentDetails_start', 'a11y.screenSummary.currentDetails.startStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_currentDetails_end', 'a11y.screenSummary.currentDetails.endStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_interactionHint', 'a11y.screenSummary.interactionHintStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -89,7 +94,18 @@ const WaveOnAStringFluent = {
   patternValueUnitHzStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitHzStringProperty' ),
   patternValueUnitCmStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitCmStringProperty' ),
   patternValueUnitSStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitSStringProperty' ),
-  patternValueUnitPercentageStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitPercentageStringProperty' )
+  patternValueUnitPercentageStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitPercentageStringProperty' ),
+  a11y: {
+    screenSummary: {
+      playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_playArea', _.get( WaveOnAStringStrings, 'a11y.screenSummary.playAreaStringProperty' ) ),
+      controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_controlArea', _.get( WaveOnAStringStrings, 'a11y.screenSummary.controlAreaStringProperty' ) ),
+      currentDetails: {
+        start: new FluentPattern<{ isPlaying: 'false' | 'true' | TReadOnlyProperty<'false' | 'true'>, wrenchPosition: 'bottom' | 'middle' | 'top' | TReadOnlyProperty<'bottom' | 'middle' | 'top'> }>( fluentSupport.bundleProperty, 'a11y_screenSummary_currentDetails_start', _.get( WaveOnAStringStrings, 'a11y.screenSummary.currentDetails.startStringProperty' ), [{"name":"isPlaying","variants":["false","true"]},{"name":"wrenchPosition","variants":["bottom","middle","top"]}] ),
+        end: new FluentPattern<{ endPosition: 'fixed' | 'loose' | 'no' | TReadOnlyProperty<'fixed' | 'loose' | 'no'> }>( fluentSupport.bundleProperty, 'a11y_screenSummary_currentDetails_end', _.get( WaveOnAStringStrings, 'a11y.screenSummary.currentDetails.endStringProperty' ), [{"name":"endPosition","variants":["fixed","loose","no"]}] )
+      },
+      interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_interactionHint', _.get( WaveOnAStringStrings, 'a11y.screenSummary.interactionHintStringProperty' ) )
+    }
+  }
 };
 
 export default WaveOnAStringFluent;
