@@ -57,13 +57,13 @@ a11y:
       activeMeasurementTools: Active Measurement Tools
       activeMeasurementToolsDescription: Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
       waveAndStringProperties: Wave and String Properties
-      waveAndStringPropertiesDescription: ajkfhaskjdfhkajsdf
+      waveAndStringPropertiesDescription: Controls to change the properties of the generated wave and the string.
     controlArea:
       measurementTools: Measurement Tools
-      measurementToolsDescription: \[paragraph description to convey information\]
+      measurementToolsDescription: Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
 
   waveMode:
-    accessibleName: TODO no waveMode accessibleName
+    accessibleName: Wave Generation Options
     accessibleHelpText: Create wave manually, continuously, or with individual pulses.
     manual:
       accessibleName: Manual
@@ -106,6 +106,6 @@ a11y:
   pulseWidthControl:
     accessibleHelpText: Width of the generated pulse in seconds.
   dampingControl:
-    accessibleHelpText: TODO
+    accessibleHelpText: How fast waves shrink over time.
   tensionControl:
     accessibleHelpText: Force pulling on the string.
