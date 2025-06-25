@@ -20,7 +20,8 @@ export default class RestartButton extends TextPushButton {
       listener: callback,
       font: NORMAL_FONT,
       baseColor: WOASColors.restartButtonColorProperty,
-      maxTextWidth: 250
+      maxTextWidth: 250,
+      accessibleHelpText: WaveOnAStringFluent.a11y.restartButton.accessibleHelpTextStringProperty
     }, providedOptions ) );
 
     // NOTE: get rid of this

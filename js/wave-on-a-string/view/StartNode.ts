@@ -37,6 +37,7 @@ import WOASColors from './WOASColors.js';
 import MappedProperty from '../../../../axon/js/MappedProperty.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
+import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 
 type SelfOptions = {
   range: Range;
@@ -45,6 +46,10 @@ type SelfOptions = {
 export type StartNodeOptions = WithRequired<NodeOptions, 'tandem'> & SelfOptions;
 
 export default class StartNode extends Node {
+  // Exposed for a11y ordering globally
+  public readonly wrench: Node;
+  public readonly pulseButton: Node;
+
   public constructor( model: WOASModel, frameEmitter: Emitter, providedOptions?: StartNodeOptions ) {
     const options = optionize<StartNodeOptions, SelfOptions, NodeOptions>()( {
       layerSplit: true
@@ -119,8 +124,13 @@ export default class StartNode extends Node {
       cursor: 'pointer',
 
       focusable: true,
-      tagName: 'p'
+      tagName: 'p',
+
+      labelTagName: 'p',
+      accessibleName: WaveOnAStringFluent.a11y.wrench.accessibleNameStringProperty,
+      accessibleHelpText: WaveOnAStringFluent.a11y.wrench.accessibleHelpTextStringProperty
     } );
+    this.wrench = wrench;
 
     wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
     wrenchBottomArrow.touchArea = wrenchBottomArrow.localBounds.dilated( 6 );
@@ -148,10 +158,13 @@ export default class StartNode extends Node {
       cornerRadius: 6
     } );
 
-    pistonBox.addChild( new PulseButton( model, {
+    const pulseButton = new PulseButton( model, {
       center: pistonBox.center,
       tandem: options.tandem.createTandem( 'pulseButton' )
-    } ) );
+    } );
+    this.pulseButton = pulseButton;
+
+    pistonBox.addChild( pulseButton );
 
     // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
     const postCache = new Node( { scale: 1 / postScale } );

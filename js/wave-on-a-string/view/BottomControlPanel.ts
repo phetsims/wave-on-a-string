@@ -11,6 +11,7 @@ import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
@@ -26,6 +27,14 @@ import WOASColors from './WOASColors.js';
 import Separator from '../../../../scenery/js/layout/nodes/Separator.js';
 
 export default class BottomControlPanel extends Panel {
+  // for global a11y ordering
+  public readonly tensionControl: WOASNumberControl;
+  public readonly dampingControl: WOASNumberControl;
+  public readonly frequencyControl: WOASNumberControl;
+  public readonly pulseWidthControl: WOASNumberControl;
+  public readonly amplitudeControl: WOASNumberControl;
+  public readonly checkboxGroup: Node;
+
   public constructor( model: WOASModel, tandem: Tandem ) {
     const checkboxTextOptions = {
       font: NORMAL_FONT,
@@ -73,7 +82,8 @@ export default class BottomControlPanel extends Panel {
       sliderOptions: {
         constrainValue: value => tensionProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
-      tandem: tandem.createTandem( 'tensionControl' )
+      tandem: tandem.createTandem( 'tensionControl' ),
+      accessibleHelpText: WaveOnAStringFluent.a11y.tensionControl.accessibleHelpTextStringProperty
     } );
     const dampingControl = new WOASNumberControl( WaveOnAStringFluent.dampingStringProperty, model.dampingProperty, {
       delta: 1,
@@ -84,7 +94,8 @@ export default class BottomControlPanel extends Panel {
       sliderOptions: {
         constrainValue: value => model.dampingProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
-      tandem: tandem.createTandem( 'dampingControl' )
+      tandem: tandem.createTandem( 'dampingControl' ),
+      accessibleHelpText: WaveOnAStringFluent.a11y.dampingControl.accessibleHelpTextStringProperty
     } );
     const frequencyControl = new WOASNumberControl( WaveOnAStringFluent.frequencyStringProperty, model.frequencyProperty, {
       delta: 0.01,
@@ -96,7 +107,8 @@ export default class BottomControlPanel extends Panel {
         constrainValue: value => model.frequencyProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'frequencyControl' ),
-      phetioDocumentation: 'Frequency control is only available in the Oscillate mode'
+      phetioDocumentation: 'Frequency control is only available in the Oscillate mode',
+      accessibleHelpText: WaveOnAStringFluent.a11y.frequencyControl.accessibleHelpTextStringProperty
     } );
     const pulseWidthControl = new WOASNumberControl( WaveOnAStringFluent.pulseWidthStringProperty, model.pulseWidthProperty, {
       delta: 0.01,
@@ -108,7 +120,8 @@ export default class BottomControlPanel extends Panel {
         constrainValue: value => model.pulseWidthProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'pulseWidthControl' ),
-      phetioDocumentation: 'Pulse width control is only available in the Pulse mode'
+      phetioDocumentation: 'Pulse width control is only available in the Pulse mode',
+      accessibleHelpText: WaveOnAStringFluent.a11y.pulseWidthControl.accessibleHelpTextStringProperty
     } );
     const amplitudeControl = new WOASNumberControl( WaveOnAStringFluent.amplitudeStringProperty, model.amplitudeProperty, {
       delta: 0.01,
@@ -120,7 +133,8 @@ export default class BottomControlPanel extends Panel {
         constrainValue: value => model.amplitudeProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
       tandem: tandem.createTandem( 'amplitudeControl' ),
-      phetioDocumentation: 'Amplitude control is only available in the Oscillate/Pulse modes'
+      phetioDocumentation: 'Amplitude control is only available in the Oscillate/Pulse modes',
+      accessibleHelpText: WaveOnAStringFluent.a11y.amplitudeControl.accessibleHelpTextStringProperty
     } );
 
     // We want the pulse-width and frequency controls to have the same bounds
@@ -166,6 +180,13 @@ export default class BottomControlPanel extends Panel {
       xMargin: 15,
       yMargin: 5
     } );
+
+    this.tensionControl = tensionControl;
+    this.dampingControl = dampingControl;
+    this.frequencyControl = frequencyControl;
+    this.pulseWidthControl = pulseWidthControl;
+    this.amplitudeControl = amplitudeControl;
+    this.checkboxGroup = checkboxGroup;
   }
 }
 

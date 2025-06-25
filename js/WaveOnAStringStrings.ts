@@ -48,6 +48,85 @@ type StringsType = {
         'endStringProperty': LocalizedStringProperty;
       };
       'interactionHintStringProperty': LocalizedStringProperty;
+    };
+    'headings': {
+      'playArea': {
+        'activeMeasurementToolsStringProperty': LocalizedStringProperty;
+        'activeMeasurementToolsDescriptionStringProperty': LocalizedStringProperty;
+        'waveAndStringPropertiesStringProperty': LocalizedStringProperty;
+        'waveAndStringPropertiesDescriptionStringProperty': LocalizedStringProperty;
+      };
+      'controlArea': {
+        'measurementToolsStringProperty': LocalizedStringProperty;
+        'measurementToolsDescriptionStringProperty': LocalizedStringProperty;
+      }
+    };
+    'waveMode': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      'manual': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+      };
+      'oscillate': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+      };
+      'pulse': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+      }
+    };
+    'endMode': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      'fixedEnd': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+      };
+      'looseEnd': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+      };
+      'noEnd': {
+        'accessibleNameStringProperty': LocalizedStringProperty;
+      }
+    };
+    'wrench': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'pulseGenerator': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'restartButton': {
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'horizontalRuler': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'verticalRuler': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'stopwatch': {
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'referenceLine': {
+      'accessibleNameStringProperty': LocalizedStringProperty;
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'amplitudeControl': {
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'frequencyControl': {
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'pulseWidthControl': {
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'dampingControl': {
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'tensionControl': {
+      'accessibleHelpTextStringProperty': LocalizedStringProperty;
     }
   }
 };

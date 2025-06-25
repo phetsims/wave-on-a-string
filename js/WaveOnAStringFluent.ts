@@ -53,6 +53,39 @@ addToMapIfDefined( 'a11y_screenSummary_controlArea', 'a11y.screenSummary.control
 addToMapIfDefined( 'a11y_screenSummary_currentDetails_start', 'a11y.screenSummary.currentDetails.startStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_currentDetails_end', 'a11y.screenSummary.currentDetails.endStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_interactionHint', 'a11y.screenSummary.interactionHintStringProperty' );
+addToMapIfDefined( 'a11y_headings_playArea_activeMeasurementTools', 'a11y.headings.playArea.activeMeasurementToolsStringProperty' );
+addToMapIfDefined( 'a11y_headings_playArea_activeMeasurementToolsDescription', 'a11y.headings.playArea.activeMeasurementToolsDescriptionStringProperty' );
+addToMapIfDefined( 'a11y_headings_playArea_waveAndStringProperties', 'a11y.headings.playArea.waveAndStringPropertiesStringProperty' );
+addToMapIfDefined( 'a11y_headings_playArea_waveAndStringPropertiesDescription', 'a11y.headings.playArea.waveAndStringPropertiesDescriptionStringProperty' );
+addToMapIfDefined( 'a11y_headings_controlArea_measurementTools', 'a11y.headings.controlArea.measurementToolsStringProperty' );
+addToMapIfDefined( 'a11y_headings_controlArea_measurementToolsDescription', 'a11y.headings.controlArea.measurementToolsDescriptionStringProperty' );
+addToMapIfDefined( 'a11y_waveMode_accessibleName', 'a11y.waveMode.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_waveMode_accessibleHelpText', 'a11y.waveMode.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_waveMode_manual_accessibleName', 'a11y.waveMode.manual.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_waveMode_oscillate_accessibleName', 'a11y.waveMode.oscillate.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_waveMode_pulse_accessibleName', 'a11y.waveMode.pulse.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_endMode_accessibleName', 'a11y.endMode.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_endMode_accessibleHelpText', 'a11y.endMode.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_endMode_fixedEnd_accessibleName', 'a11y.endMode.fixedEnd.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_endMode_looseEnd_accessibleName', 'a11y.endMode.looseEnd.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_endMode_noEnd_accessibleName', 'a11y.endMode.noEnd.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_wrench_accessibleName', 'a11y.wrench.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_wrench_accessibleHelpText', 'a11y.wrench.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_pulseGenerator_accessibleName', 'a11y.pulseGenerator.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_pulseGenerator_accessibleHelpText', 'a11y.pulseGenerator.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_restartButton_accessibleHelpText', 'a11y.restartButton.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_horizontalRuler_accessibleName', 'a11y.horizontalRuler.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_horizontalRuler_accessibleHelpText', 'a11y.horizontalRuler.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_verticalRuler_accessibleName', 'a11y.verticalRuler.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_verticalRuler_accessibleHelpText', 'a11y.verticalRuler.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_stopwatch_accessibleHelpText', 'a11y.stopwatch.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_referenceLine_accessibleName', 'a11y.referenceLine.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_referenceLine_accessibleHelpText', 'a11y.referenceLine.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_amplitudeControl_accessibleHelpText', 'a11y.amplitudeControl.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_frequencyControl_accessibleHelpText', 'a11y.frequencyControl.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_pulseWidthControl_accessibleHelpText', 'a11y.pulseWidthControl.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_dampingControl_accessibleHelpText', 'a11y.dampingControl.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_tensionControl_accessibleHelpText', 'a11y.tensionControl.accessibleHelpTextStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -104,6 +137,85 @@ const WaveOnAStringFluent = {
         end: new FluentPattern<{ endPosition: 'fixed' | 'loose' | 'no' | TReadOnlyProperty<'fixed' | 'loose' | 'no'> }>( fluentSupport.bundleProperty, 'a11y_screenSummary_currentDetails_end', _.get( WaveOnAStringStrings, 'a11y.screenSummary.currentDetails.endStringProperty' ), [{"name":"endPosition","variants":["fixed","loose","no"]}] )
       },
       interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_interactionHint', _.get( WaveOnAStringStrings, 'a11y.screenSummary.interactionHintStringProperty' ) )
+    },
+    headings: {
+      playArea: {
+        activeMeasurementToolsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_activeMeasurementTools', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.activeMeasurementToolsStringProperty' ) ),
+        activeMeasurementToolsDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_activeMeasurementToolsDescription', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.activeMeasurementToolsDescriptionStringProperty' ) ),
+        waveAndStringPropertiesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_waveAndStringProperties', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.waveAndStringPropertiesStringProperty' ) ),
+        waveAndStringPropertiesDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_waveAndStringPropertiesDescription', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.waveAndStringPropertiesDescriptionStringProperty' ) )
+      },
+      controlArea: {
+        measurementToolsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_controlArea_measurementTools', _.get( WaveOnAStringStrings, 'a11y.headings.controlArea.measurementToolsStringProperty' ) ),
+        measurementToolsDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_controlArea_measurementToolsDescription', _.get( WaveOnAStringStrings, 'a11y.headings.controlArea.measurementToolsDescriptionStringProperty' ) )
+      }
+    },
+    waveMode: {
+      accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_waveMode_accessibleName', _.get( WaveOnAStringStrings, 'a11y.waveMode.accessibleNameStringProperty' ) ),
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_waveMode_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.waveMode.accessibleHelpTextStringProperty' ) ),
+      manual: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_waveMode_manual_accessibleName', _.get( WaveOnAStringStrings, 'a11y.waveMode.manual.accessibleNameStringProperty' ) )
+      },
+      oscillate: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_waveMode_oscillate_accessibleName', _.get( WaveOnAStringStrings, 'a11y.waveMode.oscillate.accessibleNameStringProperty' ) )
+      },
+      pulse: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_waveMode_pulse_accessibleName', _.get( WaveOnAStringStrings, 'a11y.waveMode.pulse.accessibleNameStringProperty' ) )
+      }
+    },
+    endMode: {
+      accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_endMode_accessibleName', _.get( WaveOnAStringStrings, 'a11y.endMode.accessibleNameStringProperty' ) ),
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_endMode_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.endMode.accessibleHelpTextStringProperty' ) ),
+      fixedEnd: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_endMode_fixedEnd_accessibleName', _.get( WaveOnAStringStrings, 'a11y.endMode.fixedEnd.accessibleNameStringProperty' ) )
+      },
+      looseEnd: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_endMode_looseEnd_accessibleName', _.get( WaveOnAStringStrings, 'a11y.endMode.looseEnd.accessibleNameStringProperty' ) )
+      },
+      noEnd: {
+        accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_endMode_noEnd_accessibleName', _.get( WaveOnAStringStrings, 'a11y.endMode.noEnd.accessibleNameStringProperty' ) )
+      }
+    },
+    wrench: {
+      accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_wrench_accessibleName', _.get( WaveOnAStringStrings, 'a11y.wrench.accessibleNameStringProperty' ) ),
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_wrench_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.wrench.accessibleHelpTextStringProperty' ) )
+    },
+    pulseGenerator: {
+      accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_pulseGenerator_accessibleName', _.get( WaveOnAStringStrings, 'a11y.pulseGenerator.accessibleNameStringProperty' ) ),
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_pulseGenerator_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.pulseGenerator.accessibleHelpTextStringProperty' ) )
+    },
+    restartButton: {
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_restartButton_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.restartButton.accessibleHelpTextStringProperty' ) )
+    },
+    horizontalRuler: {
+      accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_horizontalRuler_accessibleName', _.get( WaveOnAStringStrings, 'a11y.horizontalRuler.accessibleNameStringProperty' ) ),
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_horizontalRuler_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.horizontalRuler.accessibleHelpTextStringProperty' ) )
+    },
+    verticalRuler: {
+      accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_verticalRuler_accessibleName', _.get( WaveOnAStringStrings, 'a11y.verticalRuler.accessibleNameStringProperty' ) ),
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_verticalRuler_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.verticalRuler.accessibleHelpTextStringProperty' ) )
+    },
+    stopwatch: {
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_stopwatch_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.stopwatch.accessibleHelpTextStringProperty' ) )
+    },
+    referenceLine: {
+      accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_referenceLine_accessibleName', _.get( WaveOnAStringStrings, 'a11y.referenceLine.accessibleNameStringProperty' ) ),
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_referenceLine_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.referenceLine.accessibleHelpTextStringProperty' ) )
+    },
+    amplitudeControl: {
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_amplitudeControl_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.amplitudeControl.accessibleHelpTextStringProperty' ) )
+    },
+    frequencyControl: {
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_frequencyControl_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.frequencyControl.accessibleHelpTextStringProperty' ) )
+    },
+    pulseWidthControl: {
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_pulseWidthControl_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.pulseWidthControl.accessibleHelpTextStringProperty' ) )
+    },
+    dampingControl: {
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_dampingControl_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.dampingControl.accessibleHelpTextStringProperty' ) )
+    },
+    tensionControl: {
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_tensionControl_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.tensionControl.accessibleHelpTextStringProperty' ) )
     }
   }
 };

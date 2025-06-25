@@ -93,6 +93,151 @@
       "interactionHint": {
         "value": "Move the wrench to make a wave or choose another way to start making waves."
       }
+    },
+    "headings": {
+      "playArea": {
+        "activeMeasurementTools": {
+          "value": "Active Measurement Tools"
+        },
+        "activeMeasurementToolsDescription": {
+          "value": "Tools to visually measure properties of waves. Pause the sim to help make precise measurements."
+        },
+        "waveAndStringProperties": {
+          "value": "Wave and String Properties"
+        },
+        "waveAndStringPropertiesDescription": {
+          "value": "ajkfhaskjdfhkajsdf"
+        }
+      },
+      "controlArea": {
+        "measurementTools": {
+          "value": "Measurement Tools"
+        },
+        "measurementToolsDescription": {
+          "value": "\\[paragraph description to convey information\\]"
+        }
+      }
+    },
+    "waveMode": {
+      "accessibleName": {
+        "value": "TODO no waveMode accessibleName"
+      },
+      "accessibleHelpText": {
+        "value": "Create wave manually, continuously, or with individual pulses."
+      },
+      "manual": {
+        "accessibleName": {
+          "value": "Manual"
+        }
+      },
+      "oscillate": {
+        "accessibleName": {
+          "value": "Oscillate"
+        }
+      },
+      "pulse": {
+        "accessibleName": {
+          "value": "Pulse"
+        }
+      }
+    },
+    "endMode": {
+      "accessibleName": {
+        "value": "String End Options"
+      },
+      "accessibleHelpText": {
+        "value": "Set attachment for the end of the string."
+      },
+      "fixedEnd": {
+        "accessibleName": {
+          "value": "Fixed End"
+        }
+      },
+      "looseEnd": {
+        "accessibleName": {
+          "value": "Loose End"
+        }
+      },
+      "noEnd": {
+        "accessibleName": {
+          "value": "No End"
+        }
+      }
+    },
+    "wrench": {
+      "accessibleName": {
+        "value": "Wrench"
+      },
+      "accessibleHelpText": {
+        "value": "Move the wrench up and down to drag the string and make a wave."
+      }
+    },
+    "pulseGenerator": {
+      "accessibleName": {
+        "value": "Pulse Generator"
+      },
+      "accessibleHelpText": {
+        "value": "Trigger a single wave pulse along the string."
+      }
+    },
+    "restartButton": {
+      "accessibleHelpText": {
+        "value": "Reset string position to flat."
+      }
+    },
+    "horizontalRuler": {
+      "accessibleName": {
+        "value": "Horizontal Ruler"
+      },
+      "accessibleHelpText": {
+        "value": "Drag to line up and visually measure wave length."
+      }
+    },
+    "verticalRuler": {
+      "accessibleName": {
+        "value": "Vertical Ruler"
+      },
+      "accessibleHelpText": {
+        "value": "Drag to line up and visually measure wave amplitude."
+      }
+    },
+    "stopwatch": {
+      "accessibleHelpText": {
+        "value": "Time wave motion"
+      }
+    },
+    "referenceLine": {
+      "accessibleName": {
+        "value": "Reference Line"
+      },
+      "accessibleHelpText": {
+        "value": "Move and visually line up with waves to compare amplitude changes."
+      }
+    },
+    "amplitudeControl": {
+      "accessibleHelpText": {
+        "value": "Amplitude of the wave (Crest to crest height of the wave)"
+      }
+    },
+    "frequencyControl": {
+      "accessibleHelpText": {
+        "value": "Complete wave cycles per second."
+      }
+    },
+    "pulseWidthControl": {
+      "accessibleHelpText": {
+        "value": "Width of the generated pulse in seconds."
+      }
+    },
+    "dampingControl": {
+      "accessibleHelpText": {
+        "value": "TODO"
+      }
+    },
+    "tensionControl": {
+      "accessibleHelpText": {
+        "value": "Force pulling on the string."
+      }
     }
   }
 }

@@ -51,3 +51,61 @@ a11y:
                [no] extends out to infinity through a window outside.
              }
     interactionHint: Move the wrench to make a wave or choose another way to start making waves.
+
+  headings:
+    playArea:
+      activeMeasurementTools: Active Measurement Tools
+      activeMeasurementToolsDescription: Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
+      waveAndStringProperties: Wave and String Properties
+      waveAndStringPropertiesDescription: ajkfhaskjdfhkajsdf
+    controlArea:
+      measurementTools: Measurement Tools
+      measurementToolsDescription: \[paragraph description to convey information\]
+
+  waveMode:
+    accessibleName: TODO no waveMode accessibleName
+    accessibleHelpText: Create wave manually, continuously, or with individual pulses.
+    manual:
+      accessibleName: Manual
+    oscillate:
+      accessibleName: Oscillate
+    pulse:
+      accessibleName: Pulse
+  endMode:
+    accessibleName: String End Options
+    accessibleHelpText: Set attachment for the end of the string.
+    fixedEnd:
+      accessibleName: Fixed End
+    looseEnd:
+      accessibleName: Loose End
+    noEnd:
+      accessibleName: No End
+  wrench:
+    accessibleName: Wrench
+    accessibleHelpText: Move the wrench up and down to drag the string and make a wave.
+  pulseGenerator:
+    accessibleName: Pulse Generator
+    accessibleHelpText: Trigger a single wave pulse along the string.
+  restartButton:
+    accessibleHelpText: Reset string position to flat.
+  horizontalRuler:
+    accessibleName: Horizontal Ruler
+    accessibleHelpText: Drag to line up and visually measure wave length.
+  verticalRuler:
+    accessibleName: Vertical Ruler
+    accessibleHelpText: Drag to line up and visually measure wave amplitude.
+  stopwatch:
+    accessibleHelpText: Time wave motion
+  referenceLine:
+    accessibleName: Reference Line
+    accessibleHelpText: Move and visually line up with waves to compare amplitude changes.
+  amplitudeControl:
+    accessibleHelpText: Amplitude of the wave (Crest to crest height of the wave)
+  frequencyControl:
+    accessibleHelpText: Complete wave cycles per second.
+  pulseWidthControl:
+    accessibleHelpText: Width of the generated pulse in seconds.
+  dampingControl:
+    accessibleHelpText: TODO
+  tensionControl:
+    accessibleHelpText: Force pulling on the string.

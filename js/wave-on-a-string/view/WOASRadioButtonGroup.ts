@@ -14,11 +14,13 @@ import waveOnAString from '../../waveOnAString.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
+import { PDOMValueType } from '../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 
 type SelfOptions<T> = {
   radio: T[];
   text: TReadOnlyProperty<string>[];
   tandemNames: string[];
+  accessibleNames: PDOMValueType[];
 };
 
 type SuperOptions = VerticalAquaRadioButtonGroupOptions;
@@ -43,7 +45,8 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
           maxWidth: 330
         } ),
         value: options.radio[ i ],
-        tandemName: options.tandemNames[ i ]
+        tandemName: options.tandemNames[ i ],
+        accessibleName: options.accessibleNames[ i ]
       } );
     }
 

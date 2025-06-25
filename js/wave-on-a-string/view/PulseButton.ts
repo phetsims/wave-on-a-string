@@ -15,6 +15,7 @@ import type WOASModel from '../model/WOASModel.js';
 import { WOASMode } from '../model/WOASMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WOASColors from './WOASColors.js';
+import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 
 export default class PulseButton extends RoundPushButton {
   public constructor( model: WOASModel, providedOptions?: RoundPushButtonOptions ) {
@@ -44,7 +45,9 @@ export default class PulseButton extends RoundPushButton {
       radius: 17,
       xMargin: 6,
       yMargin: 6,
-      yContentOffset: -1
+      yContentOffset: -1,
+      accessibleName: WaveOnAStringFluent.a11y.pulseGenerator.accessibleNameStringProperty,
+      accessibleHelpText: WaveOnAStringFluent.a11y.pulseGenerator.accessibleHelpTextStringProperty
     }, providedOptions ) );
 
     this.touchArea = this.localBounds.dilatedXY( 5, 10 );

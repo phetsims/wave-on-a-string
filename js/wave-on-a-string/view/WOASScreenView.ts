@@ -77,7 +77,10 @@ class WOASScreenView extends ScreenView {
     const rulerOptions = {
       minorTicksPerMajorTick: 9,
       unitsFont: new PhetFont( 16 ),
-      cursor: 'pointer'
+      cursor: 'pointer',
+      tagName: 'p',
+      labelTagName: 'p',
+      focusable: true
     };
 
     const viewUnitsPerCM = modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_CM );
@@ -86,10 +89,14 @@ class WOASScreenView extends ScreenView {
     const verticalRulerHeight = 5 * viewUnitsPerCM;
 
     const horizontalRulerNode = new RulerNode( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
-      tandem: horizontalRulerTandem
+      tandem: horizontalRulerTandem,
+      accessibleName: WaveOnAStringFluent.a11y.horizontalRuler.accessibleNameStringProperty,
+      accessibleHelpText: WaveOnAStringFluent.a11y.horizontalRuler.accessibleHelpTextStringProperty
     }, rulerOptions ) );
     const verticalRulerNode = new RulerNode( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
-      tandem: verticalRulerTandem
+      tandem: verticalRulerTandem,
+      accessibleName: WaveOnAStringFluent.a11y.verticalRuler.accessibleNameStringProperty,
+      accessibleHelpText: WaveOnAStringFluent.a11y.verticalRuler.accessibleHelpTextStringProperty
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
 
@@ -200,7 +207,14 @@ class WOASScreenView extends ScreenView {
         'manualRadioButton',
         'oscillateRadioButton',
         'pulseRadioButton'
-      ]
+      ],
+      accessibleNames: [
+        WaveOnAStringFluent.a11y.waveMode.manual.accessibleNameStringProperty,
+        WaveOnAStringFluent.a11y.waveMode.oscillate.accessibleNameStringProperty,
+        WaveOnAStringFluent.a11y.waveMode.pulse.accessibleNameStringProperty
+      ],
+      accessibleName: WaveOnAStringFluent.a11y.waveMode.accessibleNameStringProperty,
+      accessibleHelpText: WaveOnAStringFluent.a11y.waveMode.accessibleHelpTextStringProperty
     } ), combineOptions<PanelOptions>( {
       tandem: modePanelTandem
     }, radioPanelOptions ) );
@@ -220,7 +234,14 @@ class WOASScreenView extends ScreenView {
         'fixedEndRadioButton',
         'looseEndRadioButton',
         'noEndRadioButton'
-      ]
+      ],
+      accessibleNames: [
+        WaveOnAStringFluent.a11y.endMode.fixedEnd.accessibleNameStringProperty,
+        WaveOnAStringFluent.a11y.endMode.looseEnd.accessibleNameStringProperty,
+        WaveOnAStringFluent.a11y.endMode.noEnd.accessibleNameStringProperty
+      ],
+      accessibleName: WaveOnAStringFluent.a11y.endMode.accessibleNameStringProperty,
+      accessibleHelpText: WaveOnAStringFluent.a11y.endMode.accessibleHelpTextStringProperty
     } ), combineOptions<PanelOptions>( {
       tandem: endTypePanelTandem
     }, radioPanelOptions ) );
@@ -320,7 +341,48 @@ class WOASScreenView extends ScreenView {
       align: 'top'
     } );
 
+    const playAreaActiveMeasurementToolsNode = new Node( {
+      children: [],
+      accessibleHeading: WaveOnAStringFluent.a11y.headings.playArea.activeMeasurementToolsStringProperty,
+      descriptionTagName: 'p',
+      descriptionContent: WaveOnAStringFluent.a11y.headings.playArea.activeMeasurementToolsDescriptionStringProperty,
+      pdomOrder: [
+        horizontalRulerNode,
+        verticalRulerNode,
+        stopwatchNode,
+        referenceLine
+      ]
+    } );
+
+    const playAreaWaveAndStringPropertiesNode = new Node( {
+      children: [],
+      accessibleHeading: WaveOnAStringFluent.a11y.headings.playArea.waveAndStringPropertiesStringProperty,
+      descriptionTagName: 'p',
+      descriptionContent: WaveOnAStringFluent.a11y.headings.playArea.waveAndStringPropertiesDescriptionStringProperty,
+      pdomOrder: [
+        bottomControlPanel.amplitudeControl,
+        bottomControlPanel.frequencyControl,
+        bottomControlPanel.pulseWidthControl,
+        bottomControlPanel.dampingControl,
+        bottomControlPanel.tensionControl
+      ]
+    } );
+
+    const controlAreaMeasurementToolsNode = new Node( {
+      children: [],
+      accessibleHeading: WaveOnAStringFluent.a11y.headings.controlArea.measurementToolsStringProperty,
+      descriptionTagName: 'p',
+      descriptionContent: WaveOnAStringFluent.a11y.headings.controlArea.measurementToolsDescriptionStringProperty,
+      pdomOrder: [
+        bottomControlPanel.checkboxGroup,
+        resetAllButton
+      ]
+    } );
+
     this.children = [
+      playAreaActiveMeasurementToolsNode,
+      playAreaWaveAndStringPropertiesNode,
+      controlAreaMeasurementToolsNode,
       rulersNode,
       new AlignBox( upperLeftBox, {
         alignBounds: this.layoutBounds,
@@ -357,15 +419,18 @@ class WOASScreenView extends ScreenView {
     ];
 
     this.pdomPlayAreaNode.pdomOrder = [
-      upperLeftBox,
+      modePanel,
       endTypePanel,
-      startNode
+      startNode.wrench,
+      startNode.pulseButton,
+      restartButton,
+      timeControlNode,
+      playAreaActiveMeasurementToolsNode,
+      playAreaWaveAndStringPropertiesNode
     ];
 
     this.pdomControlAreaNode.pdomOrder = [
-      timeControlNode,
-      bottomControlPanel,
-      resetAllButton
+      controlAreaMeasurementToolsNode
     ];
   }
 

@@ -16,6 +16,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
+import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
 import { dilatedReferenceLineTouchArea, referenceLineBlockGradient } from '../WOASConstants.js';
 
@@ -28,7 +29,12 @@ export default class ReferenceLine extends Node {
     super( {
       cursor: 'pointer',
       tandem: tandem,
-      visibleProperty: model.referenceLineVisibleProperty
+      visibleProperty: model.referenceLineVisibleProperty,
+      tagName: 'p',
+      focusable: true,
+      labelTagName: 'p',
+      accessibleName: WaveOnAStringFluent.a11y.referenceLine.accessibleNameStringProperty,
+      accessibleHelpText: WaveOnAStringFluent.a11y.referenceLine.accessibleHelpTextStringProperty
     } );
 
     const referenceX = ScreenView.DEFAULT_LAYOUT_BOUNDS.right - 28;

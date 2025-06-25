@@ -76,7 +76,9 @@ class WOASNumberControl extends NumberControl {
       titleNodeOptions: {
         font: HEADER_FONT,
         maxWidth: 150
-      }
+      },
+
+      accessibleName: title
     }, providedOptions );
 
     super( title, numberProperty, numberProperty.range, options );
