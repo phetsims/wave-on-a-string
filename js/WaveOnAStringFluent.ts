@@ -10,6 +10,7 @@ import type { FluentVariable } from '../../chipper/js/browser/FluentPattern.js';
 import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
+import FluentComment from '../../chipper/js/browser/FluentComment.js';
 import waveOnAString from './waveOnAString.js';
 import WaveOnAStringStrings from './WaveOnAStringStrings.js';
 
@@ -61,6 +62,8 @@ const fluentSupport = new FluentContainer( createFluentFile, Array.from(fluentKe
 
 const WaveOnAStringFluent = {
   "wave-on-a-string": {
+    _comment_1: new FluentComment( {"comment":"Strings for the Wave on a String simulation.","lineNumber":1,"associatedKey":"wave-on-a-string.title"} ),
+    _comment_2: new FluentComment( {"comment":"After changing this file, run `grunt modulify --targets=strings` to regenerate the appropriate files, including type definitions.","lineNumber":2,"associatedKey":"wave-on-a-string.title"} ),
     titleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'wave_on_a_string_title', _.get( WaveOnAStringStrings, 'wave-on-a-string.titleStringProperty' ) )
   },
   rulersStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'rulers', _.get( WaveOnAStringStrings, 'rulersStringProperty' ) ),
@@ -83,10 +86,10 @@ const WaveOnAStringFluent = {
   speedSlowStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'speedSlow', _.get( WaveOnAStringStrings, 'speedSlowStringProperty' ) ),
   referenceLineStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'referenceLine', _.get( WaveOnAStringStrings, 'referenceLineStringProperty' ) ),
   unitCmStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'unitCm', _.get( WaveOnAStringStrings, 'unitCmStringProperty' ) ),
-  patternValueUnitHzStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitHzStringProperty' ) ,
-  patternValueUnitCmStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitCmStringProperty' ) ,
-  patternValueUnitSStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitSStringProperty' ) ,
-  patternValueUnitPercentageStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitPercentageStringProperty' ) 
+  patternValueUnitHzStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitHzStringProperty' ),
+  patternValueUnitCmStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitCmStringProperty' ),
+  patternValueUnitSStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitSStringProperty' ),
+  patternValueUnitPercentageStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitPercentageStringProperty' )
 };
 
 export default WaveOnAStringFluent;
