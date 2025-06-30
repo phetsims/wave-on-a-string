@@ -23,6 +23,7 @@ import RulerNode, { RulerNodeOptions } from '../../../../scenery-phet/js/RulerNo
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
+import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
@@ -88,12 +89,12 @@ class WOASScreenView extends ScreenView {
     const horizontalRulerWidth = 10 * viewUnitsPerCM;
     const verticalRulerHeight = 5 * viewUnitsPerCM;
 
-    const horizontalRulerNode = new RulerNode( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
+    const horizontalRulerNode = new ( InteractiveHighlighting( RulerNode ) )( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: horizontalRulerTandem,
       accessibleName: WaveOnAStringFluent.a11y.horizontalRuler.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.horizontalRuler.accessibleHelpTextStringProperty
     }, rulerOptions ) );
-    const verticalRulerNode = new RulerNode( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
+    const verticalRulerNode = new ( InteractiveHighlighting( RulerNode ) )( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: verticalRulerTandem,
       accessibleName: WaveOnAStringFluent.a11y.verticalRuler.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.verticalRuler.accessibleHelpTextStringProperty

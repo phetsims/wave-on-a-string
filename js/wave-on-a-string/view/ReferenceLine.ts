@@ -11,6 +11,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import Shape from '../../../../kite/js/Shape.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
+import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -21,7 +22,7 @@ import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
 import { dilatedReferenceLineTouchArea, referenceLineBlockGradient } from '../WOASConstants.js';
 
-export default class ReferenceLine extends Node {
+export default class ReferenceLine extends InteractiveHighlighting( Node ) {
   public constructor(
     model: WOASModel,
     tandem: Tandem,
