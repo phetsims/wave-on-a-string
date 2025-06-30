@@ -360,7 +360,13 @@ class WOASScreenView extends ScreenView {
         verticalRulerNode,
         stopwatchNode,
         referenceLine
-      ]
+      ],
+      // Hide section when none are visible, see https://github.com/phetsims/wave-on-a-string/issues/170
+      visibleProperty: DerivedProperty.or( [
+        model.rulersVisibleProperty,
+        model.stopwatch.isVisibleProperty,
+        model.referenceLineVisibleProperty
+      ] )
     } );
 
     const playAreaWaveAndStringPropertiesNode = new Node( {
