@@ -25,7 +25,6 @@ import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
-import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
@@ -320,6 +319,10 @@ class WOASScreenView extends ScreenView {
     const restartButton = new RestartButton( model.manualRestart.bind( model ), {
       tandem: tandem.createTandem( 'restartButton' )
     } );
+    ManualConstraint.create( this, [ restartButton ], restartButtonProxy => {
+      restartButtonProxy.centerX = 0.23 * this.layoutBounds.width;
+      restartButtonProxy.centerY = this.layoutBounds.height - 175;
+    } );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => model.reset(),
@@ -345,15 +348,6 @@ class WOASScreenView extends ScreenView {
     ManualConstraint.create( this, [ timeControlNode ], timeControlProxy => {
       timeControlProxy.centerX = this.layoutBounds.width / 2;
       timeControlProxy.centerY = this.layoutBounds.height - 175;
-    } );
-
-    const upperLeftBox = new HBox( {
-      children: [
-        modePanel,
-        restartButton
-      ],
-      spacing: 10,
-      align: 'top'
     } );
 
     const playAreaActiveMeasurementToolsNode = new Node( {
@@ -399,12 +393,13 @@ class WOASScreenView extends ScreenView {
       playAreaWaveAndStringPropertiesNode,
       controlAreaMeasurementToolsNode,
       rulersNode,
-      new AlignBox( upperLeftBox, {
+      new AlignBox( modePanel, {
         alignBounds: this.layoutBounds,
         xAlign: 'left',
         yAlign: 'top',
         margin: MARGIN
       } ),
+      restartButton,
       new AlignBox( endTypePanel, {
         alignBounds: this.layoutBounds,
         xAlign: 'right',
