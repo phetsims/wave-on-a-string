@@ -12,6 +12,7 @@ import WOASModel from '../model/WOASModel.js';
 import WOASScreenView from './WOASScreenView.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import WOASColors from './WOASColors.js';
+import WOASKeyboardHelpContent from './WOASKeyboardHelpContent.js';
 
 export default class WOASScreen extends Screen<WOASModel, WOASScreenView> {
   public constructor( tandem: Tandem ) {
@@ -19,7 +20,8 @@ export default class WOASScreen extends Screen<WOASModel, WOASScreenView> {
       () => new WOASModel( tandem.createTandem( 'model' ) ),
       model => new WOASScreenView( model, tandem.createTandem( 'view' ) ), {
         backgroundColorProperty: WOASColors.backgroundColorProperty,
-        tandem: tandem
+        tandem: tandem,
+        createKeyboardHelpNode: () => new WOASKeyboardHelpContent()
       } );
   }
 }

@@ -48,6 +48,7 @@ addToMapIfDefined( 'speedNormal', 'speedNormalStringProperty' );
 addToMapIfDefined( 'speedSlow', 'speedSlowStringProperty' );
 addToMapIfDefined( 'referenceLine', 'referenceLineStringProperty' );
 addToMapIfDefined( 'unitCm', 'unitCmStringProperty' );
+addToMapIfDefined( 'keyboardHelpDialog_simulationShortcuts', 'keyboardHelpDialog.simulationShortcutsStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_playArea', 'a11y.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_controlArea', 'a11y.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_currentDetails_start', 'a11y.screenSummary.currentDetails.startStringProperty' );
@@ -86,6 +87,7 @@ addToMapIfDefined( 'a11y_frequencyControl_accessibleHelpText', 'a11y.frequencyCo
 addToMapIfDefined( 'a11y_pulseWidthControl_accessibleHelpText', 'a11y.pulseWidthControl.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_dampingControl_accessibleHelpText', 'a11y.dampingControl.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_tensionControl_accessibleHelpText', 'a11y.tensionControl.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_keyboardHelpDialog_restartString_description', 'a11y.keyboardHelpDialog.restartString.descriptionStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -128,6 +130,9 @@ const WaveOnAStringFluent = {
   patternValueUnitCmStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitCmStringProperty' ),
   patternValueUnitSStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitSStringProperty' ),
   patternValueUnitPercentageStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitPercentageStringProperty' ),
+  keyboardHelpDialog: {
+    simulationShortcutsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'keyboardHelpDialog_simulationShortcuts', _.get( WaveOnAStringStrings, 'keyboardHelpDialog.simulationShortcutsStringProperty' ) )
+  },
   a11y: {
     screenSummary: {
       playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_playArea', _.get( WaveOnAStringStrings, 'a11y.screenSummary.playAreaStringProperty' ) ),
@@ -216,6 +221,11 @@ const WaveOnAStringFluent = {
     },
     tensionControl: {
       accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_tensionControl_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.tensionControl.accessibleHelpTextStringProperty' ) )
+    },
+    keyboardHelpDialog: {
+      restartString: {
+        description: new FluentPattern<{ altOrOption: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_keyboardHelpDialog_restartString_description', _.get( WaveOnAStringStrings, 'a11y.keyboardHelpDialog.restartString.descriptionStringProperty' ), [{"name":"altOrOption"}] )
+      }
     }
   }
 };

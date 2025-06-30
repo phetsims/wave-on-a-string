@@ -39,6 +39,9 @@ type StringsType = {
   'patternValueUnitCmStringProperty': LocalizedStringProperty;
   'patternValueUnitSStringProperty': LocalizedStringProperty;
   'patternValueUnitPercentageStringProperty': LocalizedStringProperty;
+  'keyboardHelpDialog': {
+    'simulationShortcutsStringProperty': LocalizedStringProperty;
+  };
   'a11y': {
     'screenSummary': {
       'playAreaStringProperty': LocalizedStringProperty;
@@ -127,6 +130,11 @@ type StringsType = {
     };
     'tensionControl': {
       'accessibleHelpTextStringProperty': LocalizedStringProperty;
+    };
+    'keyboardHelpDialog': {
+      'restartString': {
+        'descriptionStringProperty': LocalizedStringProperty;
+      }
     }
   }
 };

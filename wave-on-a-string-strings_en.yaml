@@ -14,7 +14,7 @@ high:                       High
 manual:                     Manual
 oscillate:                  Oscillate
 pulse:                      Pulse
-restart:                    Restart
+restart:                    Restart String
 fixedEnd:                   Fixed End
 looseEnd:                   Loose End
 noEnd:                      No End
@@ -26,6 +26,9 @@ patternValueUnitHz:         "{0} Hz"
 patternValueUnitCm:         "{0} cm"
 patternValueUnitS:          "{0} s"
 patternValueUnitPercentage: "{0}%"
+
+keyboardHelpDialog:
+  simulationShortcuts: Simulation Shortcuts
 
 a11y:
   screenSummary:
@@ -134,3 +137,6 @@ a11y:
     accessibleHelpText: How fast waves shrink over time.
   tensionControl:
     accessibleHelpText: Force pulling on the string.
+  keyboardHelpDialog:
+    restartString:
+      description: Reset Shape with { $altOrOption } plus Shift plus R.
