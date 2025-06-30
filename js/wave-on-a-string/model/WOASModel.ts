@@ -31,6 +31,7 @@ import { WOASEndType } from './WOASEndType.js';
 import { WOASMode } from './WOASMode.js';
 import { FRAMES_PER_SECOND, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, VIEW_ORIGIN_X } from '../WOASConstants.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
+import { linear } from '../../../../dot/js/util/linear.js';
 
 // constants
 const LAST_INDEX = NUMBER_OF_BEADS - 1;
@@ -68,11 +69,14 @@ export default class WOASModel extends PhetioObject {
 
   private readonly pulsePendingProperty: Property<boolean>;
   private readonly pulseSignProperty: Property<number>;
-  private readonly isPulseActiveProperty: Property<boolean>;
+  public readonly isPulseActiveProperty: Property<boolean>;
 
   public readonly stopwatch: Stopwatch;
 
   public readonly yNowChangedEmitter: Emitter;
+
+  // True when the string is approximately linear in shape
+  public readonly isStringFlatProperty: Property<boolean>;
 
   public readonly nextLeftYProperty: TProperty<number>;
   public readonly leftMostBeadYProperty: TRangedProperty;
@@ -203,6 +207,12 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'Whether a pulse is currently active'
     } );
 
+    this.isStringFlatProperty = new BooleanProperty( false, {
+      phetioReadOnly: true,
+      tandem: tandem.createTandem( 'isStringFlatProperty' ),
+      phetioDocumentation: 'Whether the string is flat (in a straight line)'
+    } );
+
     this.stopwatch = new Stopwatch( {
       position: new Vector2( 550, 330 ),
       tandem: tandem.createTandem( 'stopwatch' ),
@@ -232,6 +242,31 @@ export default class WOASModel extends PhetioObject {
     this.alpha = 1;
 
     this.reset();
+
+    // Update isStringFlatProperty
+    this.yNowChangedEmitter.addListener( () => {
+
+      const tolerance = 1e-2; // tolerance for flatness
+
+      const firstIndex = 0;
+      const lastIndex = LAST_INDEX;
+
+      const start = this.yNow[ firstIndex ];
+      const end = this.yNow[ lastIndex ];
+
+      let isFlat = true;
+
+      for ( let i = 1; i < lastIndex; i++ ) {
+        const flatY = linear( firstIndex, lastIndex, start, end, i );
+
+        if ( Math.abs( this.yNow[ i ] - flatY ) > tolerance ) {
+          isFlat = false;
+          break;
+        }
+      }
+
+      this.isStringFlatProperty.value = isFlat;
+    } );
 
     // set the string to 0 on mode changes
     this.waveModeProperty.lazyLink( () => {

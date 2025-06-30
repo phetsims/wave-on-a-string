@@ -12,6 +12,13 @@ import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import WOASModel from '../model/WOASModel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { WOASEndType } from '../model/WOASEndType.js';
+import { WOASMode } from '../model/WOASMode.js';
+
+const MODE_MAP = new Map<WOASMode, 'manual' | 'oscillate' | 'pulse'>( [
+  [ WOASMode.MANUAL, 'manual' ],
+  [ WOASMode.OSCILLATE, 'oscillate' ],
+  [ WOASMode.PULSE, 'pulse' ]
+] );
 
 export default class WOASScreenSummaryContent extends ScreenSummaryContent {
 
@@ -24,7 +31,42 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
       currentDetailsContent: [
         WaveOnAStringFluent.a11y.screenSummary.currentDetails.start.createProperty( {
           isPlaying: new DerivedProperty( [ model.isPlayingProperty ], isPlaying => isPlaying ? 'true' : 'false' ),
-          wrenchPosition: new DerivedProperty( [ model.leftMostBeadYProperty ], y => y > 0.5 ? 'top' : y < -0.5 ? 'bottom' : 'middle' )
+          wrenchPosition: new DerivedProperty( [ model.leftMostBeadYProperty ], y => y > 0.5 ? 'top' : y < -0.5 ? 'bottom' : 'middle' ),
+          mode: new DerivedProperty( [ model.waveModeProperty ], mode => MODE_MAP.get( mode )! ),
+          active: new DerivedProperty( [ model.waveModeProperty, model.isPulseActiveProperty ], ( mode, isPulseActive ) => {
+            return ( mode !== WOASMode.PULSE || isPulseActive ) ? 'true' : 'false';
+          } ),
+          amplitude: new DerivedProperty( [ model.amplitudeProperty ], amplitude => {
+            const magnitude = Math.abs( amplitude );
+            if ( magnitude < 1e-3 ) {
+              return 'zero';
+            }
+            else if ( magnitude < 0.4 ) {
+              return 'low';
+            }
+            else if ( magnitude > 0.9 ) {
+              return 'high';
+            }
+            else {
+              return 'medium';
+            }
+          } ),
+          frequency: new DerivedProperty( [ model.frequencyProperty ], frequency => {
+            const magnitude = Math.abs( frequency );
+            if ( magnitude < 1e-3 ) {
+              return 'zero';
+            }
+            else if ( magnitude < 1 ) {
+              return 'low';
+            }
+            else if ( magnitude > 2 ) {
+              return 'high';
+            }
+            else {
+              return 'medium';
+            }
+          } ),
+          isFlat: new DerivedProperty( [ model.isStringFlatProperty ], isFlat => isFlat ? 'true' : 'false' )
         } ),
         WaveOnAStringFluent.a11y.screenSummary.currentDetails.end.createProperty( {
           endPosition: new DerivedProperty( [ model.endTypeProperty ], endType => {

@@ -39,11 +39,36 @@ a11y:
              { $isPlaying ->
                [false] The sim is paused while the
                *[true] The
-             } wrench is near the { $wrenchPosition ->
-               [bottom] bottom
-               *[middle] middle
-               [top] top
-             } of the play area, and the string is flat.
+             } { $mode ->
+               [manual] wrench is near the { $wrenchPosition ->
+                   [bottom] bottom
+                   *[middle] middle
+                   [top] top
+                 } of the play area
+               *[other] { $mode ->
+                 [oscillate] oscillator
+                 *[pulse] pulse generator
+               } is { $active ->
+                 [true] generating a { $mode ->
+                   [oscillate] wave
+                   *[pulse] pulse
+                 } with { $amplitude ->
+                   [zero] zero
+                   [low] low
+                   [medium] medium
+                   *[high] high
+                 } amplitude and { $frequency ->
+                   [zero] zero
+                   [low] low
+                   [medium] medium
+                   *[high] high
+                 } frequency
+                 *[false] stationary 
+               } in the play area
+             }, and the string is { $isFlat ->
+               *[true] flat
+               [false] in motion
+             }.
       end:   |-
              The end of the string { $endPosition ->
                *[fixed] is fixed to a clamp.

@@ -84,7 +84,7 @@
       },
       "currentDetails": {
         "start": {
-          "value": "{ $isPlaying ->\n  [false] The sim is paused while the\n  *[true] The\n} wrench is near the { $wrenchPosition ->\n  [bottom] bottom\n  *[middle] middle\n  [top] top\n} of the play area, and the string is flat."
+          "value": "{ $isPlaying ->\n  [false] The sim is paused while the\n  *[true] The\n} { $mode ->\n  [manual] wrench is near the { $wrenchPosition ->\n      [bottom] bottom\n      *[middle] middle\n      [top] top\n    } of the play area\n  *[other] { $mode ->\n    [oscillate] oscillator\n    *[pulse] pulse generator\n  } is { $active ->\n    [true] generating a { $mode ->\n      [oscillate] wave\n      *[pulse] pulse\n    } with { $amplitude ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } amplitude and { $frequency ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } frequency\n    *[false] stationary \n  } in the play area\n}, and the string is { $isFlat ->\n  *[true] flat\n  [false] in motion\n}."
         },
         "end": {
           "value": "The end of the string { $endPosition ->\n  *[fixed] is fixed to a clamp.\n  [loose] is attached to a ring that moves along a rod.\n  [no] extends out to infinity through a window outside.\n}"
