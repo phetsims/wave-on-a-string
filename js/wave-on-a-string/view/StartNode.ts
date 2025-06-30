@@ -126,7 +126,6 @@ export default class StartNode extends Node {
       focusable: true,
       tagName: 'p',
 
-      labelTagName: 'p',
       accessibleName: WaveOnAStringFluent.a11y.wrench.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.wrench.accessibleHelpTextStringProperty
     } );

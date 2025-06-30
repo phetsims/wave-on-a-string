@@ -79,7 +79,6 @@ class WOASScreenView extends ScreenView {
       unitsFont: new PhetFont( 16 ),
       cursor: 'pointer',
       tagName: 'p',
-      labelTagName: 'p',
       focusable: true
     };
 

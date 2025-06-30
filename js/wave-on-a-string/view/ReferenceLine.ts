@@ -34,7 +34,6 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
       visibleProperty: model.referenceLineVisibleProperty,
       tagName: 'p',
       focusable: true,
-      labelTagName: 'p',
       accessibleName: WaveOnAStringFluent.a11y.referenceLine.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.referenceLine.accessibleHelpTextStringProperty
     } );
