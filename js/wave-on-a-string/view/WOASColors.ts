@@ -9,6 +9,7 @@
 import Color from '../../../../scenery/js/util/Color.js';
 import ProfileColorProperty from '../../../../scenery/js/util/ProfileColorProperty.js';
 import waveOnAString from '../../waveOnAString.js';
+import ColorConstants from '../../../../sun/js/ColorConstants.js';
 
 const WOASColors = {
   backgroundColorProperty: new ProfileColorProperty( waveOnAString, 'backgroundColor', { default: new Color( '#FFFFB7' ) } ),
@@ -27,7 +28,7 @@ const WOASColors = {
   beadHighlightFillProperty: new ProfileColorProperty( waveOnAString, 'beadHighlightFill', { default: new Color( 'white' ) } ),
 
   pulseButtonColorProperty: new ProfileColorProperty( waveOnAString, 'pulseButtonColor', { default: new Color( '#33dd33' ) } ),
-  restartButtonColorProperty: new ProfileColorProperty( waveOnAString, 'restartButtonColor', { default: new Color( 'hsl(210,0%,85%)' ) } ),
+  restartButtonColorProperty: new ProfileColorProperty( waveOnAString, 'restartButtonColor', { default: ColorConstants.LIGHT_BLUE } ),
 
   wrenchArrowColorProperty: new ProfileColorProperty( waveOnAString, 'wrenchArrowColor', { default: new Color( 'hsl(210,90%,60%)' ) } )
 };
