@@ -22,7 +22,7 @@ const WOASColors = {
 
   stringPathColorProperty: new ProfileColorProperty( waveOnAString, 'stringPathColor', { default: new Color( '#F00' ) } ),
   regularBeadFillProperty: new ProfileColorProperty( waveOnAString, 'regularBeadFill', { default: new Color( 'red' ) } ),
-  referenceBeadFillProperty: new ProfileColorProperty( waveOnAString, 'referenceBeadFill', { default: new Color( 'rgb(0,0,255)' ) } ),
+  referenceBeadFillProperty: new ProfileColorProperty( waveOnAString, 'referenceBeadFill', { default: new Color( 'rgb(0,255,255)' ) } ),
   beadStrokeProperty: new ProfileColorProperty( waveOnAString, 'beadStroke', { default: Color.BLACK } ),
   beadHighlightFillProperty: new ProfileColorProperty( waveOnAString, 'beadHighlightFill', { default: new Color( 'white' ) } ),
 
