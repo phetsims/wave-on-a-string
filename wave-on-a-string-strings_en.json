@@ -74,10 +74,8 @@
   "patternValueUnitPercentage": {
     "value": "{0}%"
   },
-  "keyboardHelpDialog": {
-    "simulationShortcuts": {
-      "value": "Simulation Shortcuts"
-    }
+  "keyboardHelpDialog.simulationShortcuts": {
+    "value": "Simulation Shortcuts"
   },
   "a11y": {
     "screenSummary": {

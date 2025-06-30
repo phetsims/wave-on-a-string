@@ -32,7 +32,7 @@ export default class RestartButton extends RestartUndoButton {
     KeyboardListener.createGlobal( this, {
       keyStringProperties: RestartButton.RESTART_HOTKEY_DATA.keyStringProperties,
       fire: () => {
-        callback();
+        this.pdomClick();
       }
     } );
   }
