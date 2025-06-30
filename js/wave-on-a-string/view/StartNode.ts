@@ -7,6 +7,8 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import MappedProperty from '../../../../axon/js/MappedProperty.js';
+import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3, { m3 } from '../../../../dot/js/Matrix3.js';
 import Range from '../../../../dot/js/Range.js';
@@ -17,6 +19,7 @@ import platform from '../../../../phet-core/js/platform.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
+import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -29,15 +32,12 @@ import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import { toDataURLNodeSynchronous, toImageNodeAsynchronous } from '../../../../scenery/js/util/rasterizeNode.js';
 import wrench_png from '../../../images/wrench_png.js';
 import waveOnAString from '../../waveOnAString.js';
+import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import { WOASMode } from '../model/WOASMode.js';
 import type WOASModel from '../model/WOASModel.js';
 import { dilatedTouchArea, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
 import WOASColors from './WOASColors.js';
-import MappedProperty from '../../../../axon/js/MappedProperty.js';
-import TinyProperty from '../../../../axon/js/TinyProperty.js';
-import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
-import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 
 type SelfOptions = {
   range: Range;
@@ -214,8 +214,7 @@ export default class StartNode extends Node {
       positionProperty: new MappedProperty( model.nextLeftYProperty, {
         bidirectional: true,
         map: ( y: number ) => new Vector2( 0, y ),
-        // sanity check for the range, just in case the drag listener goes outside of it.
-        inverseMap: ( vector: Vector2 ) => Math.max( Math.min( vector.y, options.range.max ), options.range.min )
+        inverseMap: ( vector: Vector2 ) => vector.y
       } ),
       keyboardDragDirection: 'upDown',
       dragBoundsProperty: new TinyProperty( new Bounds2( 0, options.range.min, 0, options.range.max ) ),
