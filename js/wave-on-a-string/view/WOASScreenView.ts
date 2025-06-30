@@ -11,7 +11,6 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Range from '../../../../dot/js/Range.js';
 import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -175,7 +174,6 @@ class WOASScreenView extends ScreenView {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_ORIGIN_X,
       y: VIEW_ORIGIN_Y,
-      range: new Range( -100, 100 ),
       tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
       visiblePropertyOptions: { phetioReadOnly: true }
     } );

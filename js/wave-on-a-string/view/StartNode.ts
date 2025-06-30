@@ -11,10 +11,10 @@ import MappedProperty from '../../../../axon/js/MappedProperty.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3, { m3 } from '../../../../dot/js/Matrix3.js';
-import Range from '../../../../dot/js/Range.js';
+import { clamp } from '../../../../dot/js/util/clamp.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import platform from '../../../../phet-core/js/platform.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -36,13 +36,11 @@ import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import { WOASMode } from '../model/WOASMode.js';
 import type WOASModel from '../model/WOASModel.js';
-import { dilatedTouchArea, offsetWheel, postGradient } from '../WOASConstants.js';
+import { dilatedTouchArea, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
 import WOASColors from './WOASColors.js';
 
-type SelfOptions = {
-  range: Range;
-};
+type SelfOptions = EmptySelfOptions;
 
 export type StartNodeOptions = WithRequired<NodeOptions, 'tandem'> & SelfOptions;
 
@@ -58,6 +56,7 @@ export default class StartNode extends Node {
 
     const postNodeHeight = 158;
     const postScale = 3;
+    const maxAmplitude = MAX_START_AMPLITUDE_CM * MODEL_UNITS_PER_CM;
 
     super();
 
@@ -199,7 +198,7 @@ export default class StartNode extends Node {
       drag: event => {
         const point = wrench.globalToParentPoint( event.pointer.point ).minus( clickOffset );
 
-        model.nextLeftYProperty.value = Math.max( Math.min( point.y, options.range.max ), options.range.min );
+        model.nextLeftYProperty.value = clamp( point.y, -maxAmplitude, maxAmplitude );
         model.isPlayingProperty.value = true;
         model.yNowChangedEmitter.emit();
       },
@@ -218,7 +217,7 @@ export default class StartNode extends Node {
         inverseMap: ( vector: Vector2 ) => vector.y
       } ),
       keyboardDragDirection: 'upDown',
-      dragBoundsProperty: new TinyProperty( new Bounds2( 0, options.range.min, 0, options.range.max ) ),
+      dragBoundsProperty: new TinyProperty( new Bounds2( 0, -maxAmplitude, 0, maxAmplitude ) ),
       start: () => {
         model.wrenchArrowsVisibleProperty.value = false;
       },

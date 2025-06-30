@@ -29,7 +29,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import waveOnAString from '../../waveOnAString.js';
 import { WOASEndType } from './WOASEndType.js';
 import { WOASMode } from './WOASMode.js';
-import { FRAMES_PER_SECOND, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, VIEW_ORIGIN_X } from '../WOASConstants.js';
+import { FRAMES_PER_SECOND, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, VIEW_ORIGIN_X } from '../WOASConstants.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { linear } from '../../../../dot/js/util/linear.js';
 
@@ -173,7 +173,7 @@ export default class WOASModel extends PhetioObject {
     } );
 
     this.amplitudeProperty = new NumberProperty( 0.75, {
-      range: new Range( 0, 1.3 ),
+      range: new Range( 0, MAX_START_AMPLITUDE_CM ),
       tandem: tandem.createTandem( 'amplitudeProperty' ),
       phetioDocumentation: 'The amplitude of the oscillation or pulses in centimeters',
       units: 'cm'
@@ -233,7 +233,7 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'The y-value of the left-most bead measured with respect to the center line',
       units: 'cm',
       phetioValueType: NumberIO,
-      range: new Range( -1.3, 1.3 )
+      range: new Range( -MAX_START_AMPLITUDE_CM, MAX_START_AMPLITUDE_CM )
     } );
 
     this.stepDtProperty = new NumberProperty( 0 );
