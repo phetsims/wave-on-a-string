@@ -1,4 +1,4 @@
-// Copyright 2022-2024, University of Colorado Boulder
+// Copyright 2025, University of Colorado Boulder
 
 /**
  * The keyboard help content for the Wave on a String sim.
