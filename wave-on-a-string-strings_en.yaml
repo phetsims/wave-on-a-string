@@ -27,7 +27,7 @@ patternValueUnitCm:         "{0} cm"
 patternValueUnitS:          "{0} s"
 patternValueUnitPercentage: "{0}%"
 
-keyboardHelpDialog.simulationShortcuts: Simulation Shortcuts
+keyboardHelpDialog.stringControls: String Controls
 
 a11y:
   screenSummary:

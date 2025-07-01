@@ -48,7 +48,8 @@ addToMapIfDefined( 'speedNormal', 'speedNormalStringProperty' );
 addToMapIfDefined( 'speedSlow', 'speedSlowStringProperty' );
 addToMapIfDefined( 'referenceLine', 'referenceLineStringProperty' );
 addToMapIfDefined( 'unitCm', 'unitCmStringProperty' );
-addToMapIfDefined( 'keyboardHelpDialog_simulationShortcuts', 'keyboardHelpDialog.simulationShortcutsStringProperty' );
+addToMapIfDefined( 'keyboardHelpDialog_wrenchControls', 'keyboardHelpDialog.wrenchControlsStringProperty' );
+addToMapIfDefined( 'keyboardHelpDialog_stringControls', 'keyboardHelpDialog.stringControlsStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_playArea', 'a11y.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_controlArea', 'a11y.screenSummary.controlAreaStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_currentDetails_start', 'a11y.screenSummary.currentDetails.startStringProperty' );
@@ -131,7 +132,8 @@ const WaveOnAStringFluent = {
   patternValueUnitSStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitSStringProperty' ),
   patternValueUnitPercentageStringProperty: _.get( WaveOnAStringStrings, 'patternValueUnitPercentageStringProperty' ),
   keyboardHelpDialog: {
-    simulationShortcutsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'keyboardHelpDialog_simulationShortcuts', _.get( WaveOnAStringStrings, 'keyboardHelpDialog.simulationShortcutsStringProperty' ) )
+    wrenchControlsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'keyboardHelpDialog_wrenchControls', _.get( WaveOnAStringStrings, 'keyboardHelpDialog.wrenchControlsStringProperty' ) ),
+    stringControlsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'keyboardHelpDialog_stringControls', _.get( WaveOnAStringStrings, 'keyboardHelpDialog.stringControlsStringProperty' ) )
   },
   a11y: {
     screenSummary: {

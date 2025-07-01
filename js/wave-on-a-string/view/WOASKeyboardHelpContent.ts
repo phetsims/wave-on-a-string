@@ -7,6 +7,9 @@
  */
 
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
+import MoveDraggableItemsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/MoveDraggableItemsKeyboardHelpSection.js';
+import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
+import TimeControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/TimeControlsKeyboardHelpSection.js';
 import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
@@ -16,15 +19,26 @@ import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 
 export default class WOASKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
 
-  // consistent line wrap for long text in sections of this content
-  public static readonly LABEL_LINE_WRAP = 175;
-
   public constructor() {
 
-    // sim-specific help content about how to interact with the shape
-    const moveShapeHelpSection = new WOASHelpSection();
-    // KeyboardHelpSection.alignHelpSectionIcons( [ moveShapeHelpSection, shapeShortcutsHelpSection ] );
-    const leftContent = [ moveShapeHelpSection ];
+    const LABEL_LINE_WRAP = 175;
+
+    const stringControlsSection = new KeyboardHelpSection( WaveOnAStringFluent.keyboardHelpDialog.stringControlsStringProperty, [
+      KeyboardHelpSectionRow.fromHotkeyData( RestartButton.RESTART_HOTKEY_DATA, {
+        labelWithIconOptions: {
+          labelOptions: {
+            lineWrap: LABEL_LINE_WRAP
+          }
+        }
+      } )
+    ] );
+
+    const leftContent = [
+      new TimeControlsKeyboardHelpSection(),
+      new MoveDraggableItemsKeyboardHelpSection(),
+      new SliderControlsKeyboardHelpSection(),
+      stringControlsSection
+    ];
 
     const rightContent = [ new BasicActionsKeyboardHelpSection( {
       withCheckboxContent: true
@@ -32,27 +46,6 @@ export default class WOASKeyboardHelpContent extends TwoColumnKeyboardHelpConten
 
     super( leftContent, rightContent );
   }
-}
-
-class WOASHelpSection extends KeyboardHelpSection {
-  public constructor() {
-
-    const restartStringRow = KeyboardHelpSectionRow.fromHotkeyData( RestartButton.RESTART_HOTKEY_DATA, {
-      labelWithIconOptions: {
-        labelOptions: {
-          lineWrap: WOASKeyboardHelpContent.LABEL_LINE_WRAP
-        }
-      }
-    } );
-
-    const contents: KeyboardHelpSectionRow[] = [
-      restartStringRow
-    ];
-
-    super( WaveOnAStringFluent.keyboardHelpDialog.simulationShortcutsStringProperty, contents );
-  }
-
-  public static readonly LABEL_LINE_WRAP = 175;
 }
 
 waveOnAString.register( 'WOASKeyboardHelpContent', WOASKeyboardHelpContent );

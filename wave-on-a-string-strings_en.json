@@ -74,8 +74,11 @@
   "patternValueUnitPercentage": {
     "value": "{0}%"
   },
-  "keyboardHelpDialog.simulationShortcuts": {
-    "value": "Simulation Shortcuts"
+  "keyboardHelpDialog.wrenchControls": {
+    "value": "Wrench Controls"
+  },
+  "keyboardHelpDialog.stringControls": {
+    "value": "String Controls"
   },
   "a11y": {
     "screenSummary": {
