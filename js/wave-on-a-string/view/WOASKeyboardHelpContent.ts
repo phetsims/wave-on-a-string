@@ -34,15 +34,17 @@ export default class WOASKeyboardHelpContent extends TwoColumnKeyboardHelpConten
     ] );
 
     const leftContent = [
-      new TimeControlsKeyboardHelpSection(),
+      stringControlsSection,
       new MoveDraggableItemsKeyboardHelpSection(),
-      new SliderControlsKeyboardHelpSection(),
-      stringControlsSection
+      new SliderControlsKeyboardHelpSection()
     ];
 
-    const rightContent = [ new BasicActionsKeyboardHelpSection( {
-      withCheckboxContent: true
-    } ) ];
+    const rightContent = [
+      new BasicActionsKeyboardHelpSection( {
+        withCheckboxContent: true
+      } ),
+      new TimeControlsKeyboardHelpSection()
+    ];
 
     super( leftContent, rightContent );
   }
