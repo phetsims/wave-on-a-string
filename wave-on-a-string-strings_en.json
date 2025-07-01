@@ -74,23 +74,20 @@
   "patternValueUnitPercentage": {
     "value": "{0}%"
   },
-  "keyboardHelpDialog.wrenchControls": {
-    "value": "Wrench Controls"
-  },
   "keyboardHelpDialog.stringControls": {
     "value": "String Controls"
   },
   "a11y": {
     "screenSummary": {
       "playArea": {
-        "value": "Generate waves on a string that stretches across the play area manually or with oscillators.  Changing the way you generate waves changes the properties of the waves and the string in the control area.  Decide how the end of the string should be attached to the end of the play area or allow it to extend into infinity."
+        "value": "Explore different ways to generate waves on a string that stretches across the play area.  The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose.  Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area.  Decide how the end of the string should be attached to the end of the play area or allow it to extend into infinity."
       },
       "controlArea": {
-        "value": "Change the properties of the generated wave and of the string."
+        "value": "Change the properties of the oscillators and of the string."
       },
       "currentDetails": {
         "start": {
-          "value": "{ $isPlaying ->\n  [false] The sim is paused while the\n  *[true] The\n} { $mode ->\n  [manual] wrench is near the { $wrenchPosition ->\n      [bottom] bottom\n      *[middle] middle\n      [top] top\n    } of the play area\n  *[other] { $mode ->\n    [oscillate] oscillator\n    *[pulse] pulse generator\n  } is { $active ->\n    [true] generating a { $mode ->\n      [oscillate] wave\n      *[pulse] pulse\n    } with { $amplitude ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } amplitude and { $frequency ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } frequency\n    *[false] stationary \n  } in the play area\n}, and the string is { $isFlat ->\n  *[true] flat\n  [false] in motion\n}."
+          "value": "{ $isPlaying ->\n  [false] The sim is paused while the\n  *[true] The\n} { $mode ->\n  [manual] wrench clamped to the string is near the { $wrenchPosition ->\n      [bottom] bottom\n      *[middle] middle\n      [top] top\n    } of the play area\n  *[other] { $mode ->\n    [oscillate] oscillator\n    *[pulse] pulse generator\n  } is { $active ->\n    [true] generating a { $mode ->\n      [oscillate] wave\n      *[pulse] pulse\n    } that begins with { $amplitude ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } amplitude and { $frequency ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } frequency\n    *[false] stationary \n  } in the play area\n}, and the string is { $isFlat ->\n  *[true] flat\n  [false] in motion\n}."
         },
         "end": {
           "value": "The end of the string { $endPosition ->\n  *[fixed] is fixed to a clamp.\n  [loose] is attached to a ring that moves along a rod.\n  [no] extends out to infinity through a window outside.\n}"
@@ -209,7 +206,7 @@
     },
     "stopwatch": {
       "accessibleHelpText": {
-        "value": "Time wave motion"
+        "value": "Measure elapsed time. Use the Pause button or tab to any stopwatch button for the latest time."
       }
     },
     "referenceLine": {
@@ -222,12 +219,12 @@
     },
     "amplitudeControl": {
       "accessibleHelpText": {
-        "value": "Amplitude of the wave (Crest to crest height of the wave)"
+        "value": "Crest to crest height of the wave."
       }
     },
     "frequencyControl": {
       "accessibleHelpText": {
-        "value": "Complete wave cycles per second."
+        "value": "Wave cycles per second."
       }
     },
     "pulseWidthControl": {
@@ -237,12 +234,12 @@
     },
     "dampingControl": {
       "accessibleHelpText": {
-        "value": "How fast waves shrink over time."
+        "value": "Amount of energy lost to the environment."
       }
     },
     "tensionControl": {
       "accessibleHelpText": {
-        "value": "Force pulling on the string."
+        "value": "Amount the string is stretched."
       }
     },
     "keyboardHelpDialog": {

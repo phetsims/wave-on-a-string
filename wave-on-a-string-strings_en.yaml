@@ -32,17 +32,18 @@ keyboardHelpDialog.stringControls: String Controls
 a11y:
   screenSummary:
     playArea:    >-
-                 Generate waves on a string that stretches across the play area manually or with oscillators. 
-                 Changing the way you generate waves changes the properties of the waves and the string in the control area. 
+                 Explore different ways to generate waves on a string that stretches across the play area. 
+                 The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose. 
+                 Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area. 
                  Decide how the end of the string should be attached to the end of the play area or allow it to extend into infinity.
-    controlArea: Change the properties of the generated wave and of the string.
+    controlArea: Change the properties of the oscillators and of the string.
     currentDetails:
       start: |-
              { $isPlaying ->
                [false] The sim is paused while the
                *[true] The
              } { $mode ->
-               [manual] wrench is near the { $wrenchPosition ->
+               [manual] wrench clamped to the string is near the { $wrenchPosition ->
                    [bottom] bottom
                    *[middle] middle
                    [top] top
@@ -54,7 +55,7 @@ a11y:
                  [true] generating a { $mode ->
                    [oscillate] wave
                    *[pulse] pulse
-                 } with { $amplitude ->
+                 } that begins with { $amplitude ->
                    [zero] zero
                    [low] low
                    [medium] medium
@@ -122,20 +123,20 @@ a11y:
     accessibleName: Vertical Ruler
     accessibleHelpText: Drag to line up and visually measure wave amplitude.
   stopwatch:
-    accessibleHelpText: Time wave motion
+    accessibleHelpText: Measure elapsed time. Use the Pause button or tab to any stopwatch button for the latest time.
   referenceLine:
     accessibleName: Reference Line
     accessibleHelpText: Move and visually line up with waves to compare amplitude changes.
   amplitudeControl:
-    accessibleHelpText: Amplitude of the wave (Crest to crest height of the wave)
+    accessibleHelpText: Crest to crest height of the wave.
   frequencyControl:
-    accessibleHelpText: Complete wave cycles per second.
+    accessibleHelpText: Wave cycles per second.
   pulseWidthControl:
     accessibleHelpText: Width of the generated pulse in seconds.
   dampingControl:
-    accessibleHelpText: How fast waves shrink over time.
+    accessibleHelpText: Amount of energy lost to the environment.
   tensionControl:
-    accessibleHelpText: Force pulling on the string.
+    accessibleHelpText: Amount the string is stretched.
   keyboardHelpDialog:
     restartString:
       description: Reset Shape with { $altOrOption } plus Shift plus R.

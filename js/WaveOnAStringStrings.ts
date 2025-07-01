@@ -40,7 +40,6 @@ type StringsType = {
   'patternValueUnitSStringProperty': LocalizedStringProperty;
   'patternValueUnitPercentageStringProperty': LocalizedStringProperty;
   'keyboardHelpDialog': {
-    'wrenchControlsStringProperty': LocalizedStringProperty;
     'stringControlsStringProperty': LocalizedStringProperty;
   };
   'a11y': {
