@@ -39,7 +39,9 @@ const NEXT_TO_LAST_INDEX = NUMBER_OF_BEADS - 2;
 
 export default class WOASModel extends PhetioObject {
 
-  public yDraw: Float64Array = new Float64Array( NUMBER_OF_BEADS );
+  // Interpolated view positions (based on time elapsed between model step times)
+  public readonly yDraw: Float64Array = new Float64Array( NUMBER_OF_BEADS );
+
   public yNow: Float64Array = new Float64Array( NUMBER_OF_BEADS );
   public yLast: Float64Array = new Float64Array( NUMBER_OF_BEADS );
   public yNext: Float64Array = new Float64Array( NUMBER_OF_BEADS );
@@ -314,6 +316,7 @@ export default class WOASModel extends PhetioObject {
     this.beta = b * dt / 2;
     this.alpha = v * dt / dx;
 
+    // TODO: How do we use nextLeftYProperty, instead of this? What does this do? https://github.com/phetsims/wave-on-a-string/issues/174
     this.yNext[ 0 ] = this.yNow[ 0 ];
 
     switch( this.endTypeProperty.value ) {
@@ -339,19 +342,17 @@ export default class WOASModel extends PhetioObject {
     }
 
     // store old values for the very last point
-    const oldLast = this.yLast[ LAST_INDEX ];
     const oldNow = this.yNow[ LAST_INDEX ];
     const oldNext = this.yNext[ LAST_INDEX ];
 
     // rotate arrays instead of copying elements (for speed)
-    const old = this.yLast;
+    const oldArray = this.yLast;
     this.yLast = this.yNow;
     this.yNow = this.yNext;
-    this.yNext = old;
+    this.yNext = oldArray;
 
     // restore the old values for the very last point for every array (potentially not needed for a few?)
-    this.yLast[ LAST_INDEX ] = oldLast;
-    this.yNow[ LAST_INDEX ] = oldNow;
+    // TODO: Is this actually used? https://github.com/phetsims/wave-on-a-string/issues/174
     this.yNext[ LAST_INDEX ] = oldNext;
 
     switch( this.endTypeProperty.value ) {
@@ -360,11 +361,11 @@ export default class WOASModel extends PhetioObject {
         this.yNow[ LAST_INDEX ] = 0;
         break;
       case WOASEndType.LOOSE_END:
-        this.yLast[ LAST_INDEX ] = this.yNow[ LAST_INDEX ];
+        this.yLast[ LAST_INDEX ] = oldNow;
         this.yNow[ LAST_INDEX ] = this.yNow[ NEXT_TO_LAST_INDEX ];
         break;
       case WOASEndType.NO_END:
-        this.yLast[ LAST_INDEX ] = this.yNow[ LAST_INDEX ];
+        this.yLast[ LAST_INDEX ] = oldNow;
         this.yNow[ LAST_INDEX ] = this.yLast[ NEXT_TO_LAST_INDEX ]; // from a comment in the old model code?
         // from the Flash model: this.yNow[ LAST_INDEX ] = this.yNow[ LAST_INDEX ]; //this.yLast[ NEXT_TO_LAST_INDEX ];
         break;
