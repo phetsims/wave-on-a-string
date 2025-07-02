@@ -16,6 +16,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode, { RulerNodeOptions } from '../../../../scenery-phet/js/RulerNode.js';
@@ -74,13 +75,11 @@ class WOASScreenView extends ScreenView {
     const horizontalRulerTandem = rulersTandem.createTandem( 'horizontalRulerNode' );
     const verticalRulerTandem = rulersTandem.createTandem( 'verticalRulerNode' );
 
-    const rulerOptions = {
+    const rulerOptions = combineOptions<RulerNodeOptions>( {
       minorTicksPerMajorTick: 9,
       unitsFont: new PhetFont( 16 ),
-      cursor: 'pointer',
-      tagName: 'p',
-      focusable: true
-    };
+      cursor: 'pointer'
+    }, AccessibleDraggableOptions );
 
     const viewUnitsPerCM = modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_CM );
 
@@ -199,7 +198,11 @@ class WOASScreenView extends ScreenView {
     const stopwatchNode = new StopwatchNode( model.stopwatch, {
       dragBoundsProperty: this.visibleBoundsProperty,
       tandem: tandem.createTandem( 'stopwatchNode' ),
-      accessibleHelpText: WaveOnAStringFluent.a11y.stopwatch.accessibleHelpTextStringProperty
+      accessibleHelpText: WaveOnAStringFluent.a11y.stopwatch.accessibleHelpTextStringProperty,
+      keyboardDragListenerOptions: {
+        dragSpeed: 300,
+        shiftDragSpeed: 20
+      }
     } );
     stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
 

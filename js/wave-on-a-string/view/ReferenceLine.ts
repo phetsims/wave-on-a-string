@@ -10,11 +10,13 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import Shape from '../../../../kite/js/Shape.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
@@ -28,15 +30,13 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
     tandem: Tandem,
     dragBoundsProperty: TReadOnlyProperty<Bounds2>
   ) {
-    super( {
+    super( combineOptions<NodeOptions>( {
       cursor: 'pointer',
       tandem: tandem,
       visibleProperty: model.referenceLineVisibleProperty,
-      tagName: 'p',
-      focusable: true,
       accessibleName: WaveOnAStringFluent.a11y.referenceLine.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.referenceLine.accessibleHelpTextStringProperty
-    } );
+    }, AccessibleDraggableOptions ) );
 
     const referenceX = ScreenView.DEFAULT_LAYOUT_BOUNDS.right - 28;
 

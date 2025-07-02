@@ -14,9 +14,10 @@ import Matrix3, { m3 } from '../../../../dot/js/Matrix3.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import platform from '../../../../phet-core/js/platform.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
+import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
@@ -115,7 +116,7 @@ export default class StartNode extends Node {
       wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
     const wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
       wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
-    const wrench = new ( InteractiveHighlighting( Node ) )( {
+    const wrench = new ( InteractiveHighlighting( Node ) )( combineOptions<NodeOptions>( {
       children: [
         wrenchImageNode,
         wrenchTopArrow,
@@ -123,12 +124,9 @@ export default class StartNode extends Node {
       ],
       cursor: 'pointer',
 
-      focusable: true,
-      tagName: 'p',
-
       accessibleName: WaveOnAStringFluent.a11y.wrench.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.wrench.accessibleHelpTextStringProperty
-    } );
+    }, AccessibleDraggableOptions ) );
     this.wrench = wrench;
 
     wrenchTopArrow.touchArea = wrenchTopArrow.localBounds.dilated( 6 );
