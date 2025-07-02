@@ -208,8 +208,8 @@ export default class StartNode extends Node {
 
     wrench.addInputListener( new SoundKeyboardDragListener( {
       tandem: options.tandem.createTandem( 'wrenchKeyboardDragListener' ),
-      dragSpeed: 300,
-      shiftDragSpeed: 50,
+      dragSpeed: 600,
+      shiftDragSpeed: 150,
       positionProperty: new MappedProperty( model.nextLeftYProperty, {
         bidirectional: true,
         map: ( y: number ) => new Vector2( 0, y ),
