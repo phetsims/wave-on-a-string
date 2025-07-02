@@ -14,6 +14,7 @@ export const MAX_START_AMPLITUDE_CM = 1.3;
 export const NUMBER_OF_BEADS = 61;
 export const MODEL_UNITS_PER_CM = 80;
 export const FRAMES_PER_SECOND = 50;
+export const FRAME_DURATION = 1 / FRAMES_PER_SECOND;
 export const VIEW_ORIGIN_X = 150;
 export const VIEW_ORIGIN_Y = 265;
 export const MODEL_UNITS_PER_GAP = 10;

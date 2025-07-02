@@ -29,7 +29,7 @@ import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import waveOnAString from '../../waveOnAString.js';
 import { WOASEndType } from './WOASEndType.js';
 import { WOASMode } from './WOASMode.js';
-import { FRAMES_PER_SECOND, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, VIEW_ORIGIN_X } from '../WOASConstants.js';
+import { FRAMES_PER_SECOND, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, FRAME_DURATION, VIEW_ORIGIN_X } from '../WOASConstants.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { linear } from '../../../../dot/js/util/linear.js';
 
@@ -39,15 +39,21 @@ const NEXT_TO_LAST_INDEX = NUMBER_OF_BEADS - 2;
 
 export default class WOASModel extends PhetioObject {
 
-  // Interpolated view positions (based on time elapsed between model step times)
+  // Interpolated string positions (based on time elapsed between model step times)
   public readonly yDraw: Float64Array = new Float64Array( NUMBER_OF_BEADS );
 
-  public yNow: Float64Array = new Float64Array( NUMBER_OF_BEADS );
+  // Rotated string buffers (interpolated should be pulled from between yLast and yNow). We need to persistently
+  // store two previous states to compute the next, to compute a third.
   public yLast: Float64Array = new Float64Array( NUMBER_OF_BEADS );
+  public yNow: Float64Array = new Float64Array( NUMBER_OF_BEADS );
   public yNext: Float64Array = new Float64Array( NUMBER_OF_BEADS );
 
+  // Mode for the "start", manual/oscillate/pulse
   public readonly waveModeProperty: Property<WOASMode>;
+
+  // Mode for the "end", fixed/loose/no end
   public readonly endTypeProperty: Property<WOASEndType>;
+
   public readonly isPlayingProperty: Property<boolean>;
   public readonly timeSpeedProperty: Property<TimeSpeed>;
 
@@ -56,17 +62,30 @@ export default class WOASModel extends PhetioObject {
   public readonly referenceLineVisibleProperty: Property<boolean>;
   public readonly wrenchArrowsVisibleProperty: Property<boolean>;
 
+  // Positions of 2D draggables (except stopwatch, that stores its own position)
   public readonly horizontalRulerPositionProperty: Property<Vector2>;
   public readonly verticalRulerPositionProperty: Property<Vector2>;
   public readonly referenceLinePositionProperty: Property<Vector2>;
 
+  // Inherent tension on the string (we map this in many ways, so it isn't like it has inherent units).
   public readonly tensionProperty: Property<number> & TRangedProperty;
+
+  // Amount of damping on the string (percentage, 0-100)
   public readonly dampingProperty: Property<number> & TRangedProperty;
+
+  // Frequency (for the oscillator), in hertz
   public readonly frequencyProperty: Property<number> & TRangedProperty;
+
+  // Pulse width (for the pulse generator), in seconds
   public readonly pulseWidthProperty: Property<number> & TRangedProperty;
+
+  // Amplitude of the oscillation or pulse, in centimeters
   public readonly amplitudeProperty: Property<number> & TRangedProperty;
-  private readonly lastDtProperty: Property<number>;
+
+  // The amount of time elapsed since the last evolution of the physics model, in seconds (for interpolation)
   public readonly timeElapsedProperty: Property<number>;
+
+  private readonly lastDtProperty: Property<number>;
   public readonly angleProperty: Property<number> & TRangedProperty;
 
   private readonly pulsePendingProperty: Property<boolean>;
@@ -283,8 +302,6 @@ export default class WOASModel extends PhetioObject {
    * Steps forward in time.
    */
   public step( dt: number ): void {
-    const fixDt = 1 / FRAMES_PER_SECOND;
-
     // limit changes dt
     const lastDt = this.lastDtProperty.value;
     if ( Math.abs( dt - lastDt ) > lastDt * 0.3 ) {
@@ -296,9 +313,9 @@ export default class WOASModel extends PhetioObject {
       this.stepDtProperty.value += dt;
 
       // limit min dt
-      if ( this.stepDtProperty.value >= fixDt ) {
+      if ( this.stepDtProperty.value >= FRAME_DURATION ) {
         this.manualStep( this.stepDtProperty.value );
-        this.stepDtProperty.value %= fixDt;
+        this.stepDtProperty.value %= FRAME_DURATION;
       }
     }
     this.nextLeftYProperty.value = this.yNow[ 0 ];
@@ -319,6 +336,7 @@ export default class WOASModel extends PhetioObject {
     // TODO: How do we use nextLeftYProperty, instead of this? What does this do? https://github.com/phetsims/wave-on-a-string/issues/174
     this.yNext[ 0 ] = this.yNow[ 0 ];
 
+    // Handle end type (particularly for if we SWITCHED to a different end type since the last evolve).
     switch( this.endTypeProperty.value ) {
       case WOASEndType.FIXED_END:
         this.yNow[ LAST_INDEX ] = 0;
@@ -379,8 +397,7 @@ export default class WOASModel extends PhetioObject {
    */
   public manualStep( dt?: number ): void {
     let i;
-    const fixDt = 1 / FRAMES_PER_SECOND;
-    dt = ( dt !== undefined && dt > 0 ) ? dt : fixDt;
+    dt = ( dt !== undefined && dt > 0 ) ? dt : FRAME_DURATION;
 
     const timeSpeed = this.timeSpeedProperty.value;
     assert && assert( timeSpeed === TimeSpeed.NORMAL || timeSpeed === TimeSpeed.SLOW, 'timeSpeedProperty has unsuported value' );
@@ -389,7 +406,7 @@ export default class WOASModel extends PhetioObject {
 
     // preparation to interpolate the yNow across individual evolve() steps to smooth the string on slow-FPS browsers
     const startingLeftY = this.yNow[ 0 ];
-    const numSteps = Math.floor( dt / fixDt );
+    const numSteps = Math.floor( dt / FRAME_DURATION );
     const perStepDelta = numSteps ? ( ( this.nextLeftYProperty.value - startingLeftY ) / numSteps ) : 0;
 
     //dt for tension effect
@@ -400,13 +417,13 @@ export default class WOASModel extends PhetioObject {
     );
     const minDt = ( 1 / ( FRAMES_PER_SECOND * tensionFactor * speedMultiplier ) );
     // limit max dt
-    while ( dt >= fixDt ) {
-      this.timeElapsedProperty.value = this.timeElapsedProperty.value + fixDt;
-      this.stopwatch.step( fixDt * speedMultiplier );
+    while ( dt >= FRAME_DURATION ) {
+      this.timeElapsedProperty.value += FRAME_DURATION;
+      this.stopwatch.step( FRAME_DURATION * speedMultiplier );
 
       if ( this.waveModeProperty.value === WOASMode.OSCILLATE ) {
         this.angleProperty.value = ( this.angleProperty.value +
-                                     Math.PI * 2 * this.frequencyProperty.value * fixDt * speedMultiplier ) % ( Math.PI * 2 );
+                                     Math.PI * 2 * this.frequencyProperty.value * FRAME_DURATION * speedMultiplier ) % ( Math.PI * 2 );
         this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.value * MODEL_UNITS_PER_CM * Math.sin( -this.angleProperty.value );
       }
       if ( this.waveModeProperty.value === WOASMode.PULSE && this.pulsePendingProperty.value ) {
@@ -415,7 +432,7 @@ export default class WOASModel extends PhetioObject {
         this.yNow[ 0 ] = 0;
       }
       if ( this.waveModeProperty.value === WOASMode.PULSE && this.isPulseActiveProperty.value ) {
-        const da = Math.PI * fixDt * speedMultiplier / this.pulseWidthProperty.value;
+        const da = Math.PI * FRAME_DURATION * speedMultiplier / this.pulseWidthProperty.value;
         if ( this.angleProperty.value + da >= Math.PI / 2 ) {
           this.pulseSignProperty.value = -1;
         }
@@ -446,7 +463,7 @@ export default class WOASModel extends PhetioObject {
           this.yDraw[ i ] = this.yLast[ i ] + ( ( this.yNow[ i ] - this.yLast[ i ] ) * ( this.timeElapsedProperty.value / minDt ) );
         }
       }
-      dt -= fixDt;
+      dt -= FRAME_DURATION;
     }
     if ( this.waveModeProperty.value === WOASMode.MANUAL ) {
       // sanity check for our yNow
