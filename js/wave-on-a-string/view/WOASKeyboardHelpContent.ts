@@ -40,10 +40,10 @@ export default class WOASKeyboardHelpContent extends TwoColumnKeyboardHelpConten
     ];
 
     const rightContent = [
+      new TimeControlsKeyboardHelpSection(),
       new BasicActionsKeyboardHelpSection( {
         withCheckboxContent: true
-      } ),
-      new TimeControlsKeyboardHelpSection()
+      } )
     ];
 
     super( leftContent, rightContent );
