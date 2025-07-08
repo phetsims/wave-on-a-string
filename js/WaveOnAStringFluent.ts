@@ -79,7 +79,6 @@ addToMapIfDefined( 'a11y_horizontalRuler_accessibleName', 'a11y.horizontalRuler.
 addToMapIfDefined( 'a11y_horizontalRuler_accessibleHelpText', 'a11y.horizontalRuler.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_verticalRuler_accessibleName', 'a11y.verticalRuler.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_verticalRuler_accessibleHelpText', 'a11y.verticalRuler.accessibleHelpTextStringProperty' );
-addToMapIfDefined( 'a11y_stopwatch_accessibleHelpText', 'a11y.stopwatch.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_referenceLine_accessibleName', 'a11y.referenceLine.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_referenceLine_accessibleHelpText', 'a11y.referenceLine.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_amplitudeControl_accessibleHelpText', 'a11y.amplitudeControl.accessibleHelpTextStringProperty' );
@@ -199,9 +198,6 @@ const WaveOnAStringFluent = {
     verticalRuler: {
       accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_verticalRuler_accessibleName', _.get( WaveOnAStringStrings, 'a11y.verticalRuler.accessibleNameStringProperty' ) ),
       accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_verticalRuler_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.verticalRuler.accessibleHelpTextStringProperty' ) )
-    },
-    stopwatch: {
-      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_stopwatch_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.stopwatch.accessibleHelpTextStringProperty' ) )
     },
     referenceLine: {
       accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_referenceLine_accessibleName', _.get( WaveOnAStringStrings, 'a11y.referenceLine.accessibleNameStringProperty' ) ),

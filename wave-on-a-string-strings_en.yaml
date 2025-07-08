@@ -122,8 +122,6 @@ a11y:
   verticalRuler:
     accessibleName: Vertical Ruler
     accessibleHelpText: Drag to line up and visually measure wave amplitude.
-  stopwatch:
-    accessibleHelpText: Measure elapsed time. Use the Pause button or tab to any stopwatch button for the latest time.
   referenceLine:
     accessibleName: Reference Line
     accessibleHelpText: Move and visually line up with waves to compare amplitude changes.

@@ -198,7 +198,6 @@ class WOASScreenView extends ScreenView {
     const stopwatchNode = new StopwatchNode( model.stopwatch, {
       dragBoundsProperty: this.visibleBoundsProperty,
       tandem: tandem.createTandem( 'stopwatchNode' ),
-      accessibleHelpText: WaveOnAStringFluent.a11y.stopwatch.accessibleHelpTextStringProperty,
       keyboardDragListenerOptions: {
         dragSpeed: 300,
         shiftDragSpeed: 20

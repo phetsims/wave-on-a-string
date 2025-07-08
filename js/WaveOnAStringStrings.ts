@@ -109,9 +109,6 @@ type StringsType = {
       'accessibleNameStringProperty': LocalizedStringProperty;
       'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
-    'stopwatch': {
-      'accessibleHelpTextStringProperty': LocalizedStringProperty;
-    };
     'referenceLine': {
       'accessibleNameStringProperty': LocalizedStringProperty;
       'accessibleHelpTextStringProperty': LocalizedStringProperty;
