@@ -113,20 +113,20 @@ a11y:
     accessibleHelpText: Move the wrench up and down to drag the string and make a wave.
   pulseGenerator:
     accessibleName: Pulse Generator
-    accessibleHelpText: Trigger a single wave pulse along the string.
+    accessibleHelpText: Create a single wave pulse along the string.
   restartButton:
     accessibleHelpText: Reset string position to flat.
   horizontalRuler:
     accessibleName: Horizontal Ruler
-    accessibleHelpText: Drag to line up and visually measure wave length.
+    accessibleHelpText: Drag ruler to line up and visually measure wave length.
   verticalRuler:
     accessibleName: Vertical Ruler
-    accessibleHelpText: Drag to line up and visually measure wave amplitude.
+    accessibleHelpText: Drag ruler to line up and visually measure wave amplitude.
   referenceLine:
     accessibleName: Reference Line
-    accessibleHelpText: Move and visually line up with waves to compare amplitude changes.
+    accessibleHelpText: Move handle and visually line up with waves to compare amplitude changes.
   amplitudeControl:
-    accessibleHelpText: Crest to crest height of the wave.
+    accessibleHelpText: Wave height from crest to trough.
   frequencyControl:
     accessibleHelpText: Wave cycles per second.
   pulseWidthControl:

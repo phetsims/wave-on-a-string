@@ -180,7 +180,7 @@
         "value": "Pulse Generator"
       },
       "accessibleHelpText": {
-        "value": "Trigger a single wave pulse along the string."
+        "value": "Create a single wave pulse along the string."
       }
     },
     "restartButton": {
@@ -193,7 +193,7 @@
         "value": "Horizontal Ruler"
       },
       "accessibleHelpText": {
-        "value": "Drag to line up and visually measure wave length."
+        "value": "Drag ruler to line up and visually measure wave length."
       }
     },
     "verticalRuler": {
@@ -201,7 +201,7 @@
         "value": "Vertical Ruler"
       },
       "accessibleHelpText": {
-        "value": "Drag to line up and visually measure wave amplitude."
+        "value": "Drag ruler to line up and visually measure wave amplitude."
       }
     },
     "referenceLine": {
@@ -209,12 +209,12 @@
         "value": "Reference Line"
       },
       "accessibleHelpText": {
-        "value": "Move and visually line up with waves to compare amplitude changes."
+        "value": "Move handle and visually line up with waves to compare amplitude changes."
       }
     },
     "amplitudeControl": {
       "accessibleHelpText": {
-        "value": "Crest to crest height of the wave."
+        "value": "Wave height from crest to trough."
       }
     },
     "frequencyControl": {
