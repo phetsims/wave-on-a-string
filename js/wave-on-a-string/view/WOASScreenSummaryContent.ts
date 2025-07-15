@@ -66,6 +66,17 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
               return 'medium';
             }
           } ),
+          pulseWidth: new DerivedProperty( [ model.pulseWidthProperty ], pulseWidth => {
+            if ( pulseWidth < 0.35 ) {
+              return 'low';
+            }
+            else if ( pulseWidth > 0.75 ) {
+              return 'high';
+            }
+            else {
+              return 'medium';
+            }
+          } ),
           isFlat: new DerivedProperty( [ model.isStringFlatProperty ], isFlat => isFlat ? 'true' : 'false' )
         } ),
         WaveOnAStringFluent.a11y.screenSummary.currentDetails.end.createProperty( {

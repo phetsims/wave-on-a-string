@@ -60,12 +60,20 @@ a11y:
                    [low] low
                    [medium] medium
                    *[high] high
-                 } amplitude and { $frequency ->
-                   [zero] zero
-                   [low] low
-                   [medium] medium
-                   *[high] high
-                 } frequency
+                 } amplitude and
+                 { $mode ->
+                   [oscillate] { $frequency ->
+                     [zero] zero
+                     [low] low
+                     [medium] medium
+                     *[high] high
+                   } frequency
+                   *[pulse] { $pulseWidth ->
+                     [low] low
+                     [medium] medium
+                     *[high] high
+                   } pulse width
+                 }
                  *[false] stationary 
                } in the play area
              }, and the string is { $isFlat ->
