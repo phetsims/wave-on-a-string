@@ -76,8 +76,8 @@ a11y:
                  }
                  *[false] stationary 
                } in the play area
-             }, and the string is { $isFlat ->
-               *[true] flat
+             }, and the string is { $isStill ->
+               *[true] still
                [false] in motion
              }.
       end:   |-

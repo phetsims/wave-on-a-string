@@ -97,7 +97,7 @@ export default class WOASModel extends PhetioObject {
   public readonly yNowChangedEmitter: Emitter;
 
   // True when the string is approximately linear in shape
-  public readonly isStringFlatProperty: Property<boolean>;
+  public readonly isStringStillProperty: Property<boolean>;
 
   public readonly nextLeftYProperty: TProperty<number>;
   public readonly leftMostBeadYProperty: TRangedProperty;
@@ -228,10 +228,10 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'Whether a pulse is currently active'
     } );
 
-    this.isStringFlatProperty = new BooleanProperty( false, {
+    this.isStringStillProperty = new BooleanProperty( false, {
       phetioReadOnly: true,
-      tandem: tandem.createTandem( 'isStringFlatProperty' ),
-      phetioDocumentation: 'Whether the string is flat (in a straight line)'
+      tandem: tandem.createTandem( 'isStringStillProperty' ),
+      phetioDocumentation: 'Whether the string is still (in a straight line)'
     } );
 
     this.stopwatch = new Stopwatch( {
@@ -264,7 +264,7 @@ export default class WOASModel extends PhetioObject {
 
     this.reset();
 
-    // Update isStringFlatProperty
+    // Update isStringStillProperty
     this.yNowChangedEmitter.addListener( () => {
 
       const tolerance = 1e-2; // tolerance for flatness
@@ -286,7 +286,7 @@ export default class WOASModel extends PhetioObject {
         }
       }
 
-      this.isStringFlatProperty.value = isFlat;
+      this.isStringStillProperty.value = isFlat;
     } );
 
     // set the string to 0 on mode changes

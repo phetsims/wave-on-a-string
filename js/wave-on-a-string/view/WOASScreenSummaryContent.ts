@@ -79,7 +79,7 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
               return 'medium';
             }
           } ),
-          isFlat: new DerivedProperty( [ model.isStringFlatProperty ], isFlat => isFlat ? 'true' : 'false' )
+          isStill: new DerivedProperty( [ model.isStringStillProperty ], isFlat => isFlat ? 'true' : 'false' )
         } ),
         WaveOnAStringFluent.a11y.screenSummary.currentDetails.end.createProperty( {
           endPosition: new DerivedProperty( [ model.endTypeProperty ], endType => {
