@@ -80,14 +80,14 @@
   "a11y": {
     "screenSummary": {
       "playArea": {
-        "value": "Explore different ways to generate waves on a string that stretches across the play area.  The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose.  Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area.  Decide how the end of the string should be attached to the end of the play area or allow it to extend into infinity."
+        "value": "Explore different ways to generate waves on a string that tightly stretches across the play area.  The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose.  Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area.  Decide how the end of the string should be attached to the end of the play area or allow it to extend infinitely."
       },
       "controlArea": {
         "value": "Change the properties of the oscillators and of the string."
       },
       "currentDetails": {
         "start": {
-          "value": "{ $isPlaying ->\n  [false] The sim is paused while the\n  *[true] The\n} { $mode ->\n  [manual] wrench clamped to the string is near the { $wrenchPosition ->\n      [bottom] bottom\n      *[middle] middle\n      [top] top\n    } of the play area\n  *[other] { $mode ->\n    [oscillate] oscillator\n    *[pulse] pulse generator\n  } is { $active ->\n    [true] generating a { $mode ->\n      [oscillate] wave\n      *[pulse] pulse\n    } that begins with { $amplitude ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } amplitude and\n    { $mode ->\n      [oscillate] { $frequency ->\n        [zero] zero\n        [low] low\n        [medium] medium\n        *[high] high\n      } frequency\n      *[pulse] { $pulseWidth ->\n        [low] low\n        [medium] medium\n        *[high] high\n      } pulse width\n    }\n    *[false] stationary \n  } in the play area\n}, and the string is { $isStill ->\n  *[true] still\n  [false] in motion\n}."
+          "value": "Currently,\n{ $isPlaying ->\n  [false] the sim is paused while the\n  *[true] the\n} { $mode ->\n  [manual] wrench clamped to the string is near the { $wrenchPosition ->\n      [bottom] bottom\n      *[middle] middle\n      [top] top\n    } of the play area\n  *[other] { $mode ->\n    [oscillate] oscillator\n    *[pulse] pulse generator\n  } is { $active ->\n    [true] generating a { $mode ->\n      [oscillate] wave\n      *[pulse] pulse\n    } that begins with { $amplitude ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } amplitude and\n    { $mode ->\n      [oscillate] { $frequency ->\n        [zero] zero\n        [low] low\n        [medium] medium\n        *[high] high\n      } frequency\n      *[pulse] { $pulseWidth ->\n        [low] narrow\n        [medium] medium\n        *[high] wide\n      } pulse width\n    }\n    *[false] stationary \n  } in the play area\n}, and the string is { $isStill ->\n  *[true] still\n  [false] in motion\n}."
         },
         "end": {
           "value": "The end of the string { $endPosition ->\n  *[fixed] is fixed to a clamp.\n  [loose] is attached to a ring that moves along a rod.\n  [no] extends out to infinity through a window outside.\n}"
@@ -185,7 +185,7 @@
     },
     "restartButton": {
       "accessibleHelpText": {
-        "value": "Reset string position to flat."
+        "value": "Reset string position to still and flat."
       }
     },
     "horizontalRuler": {

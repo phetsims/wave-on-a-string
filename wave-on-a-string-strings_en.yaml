@@ -32,16 +32,17 @@ keyboardHelpDialog.stringControls: String Controls
 a11y:
   screenSummary:
     playArea:    >-
-                 Explore different ways to generate waves on a string that stretches across the play area. 
+                 Explore different ways to generate waves on a string that tightly stretches across the play area. 
                  The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose. 
                  Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area. 
-                 Decide how the end of the string should be attached to the end of the play area or allow it to extend into infinity.
+                 Decide how the end of the string should be attached to the end of the play area or allow it to extend infinitely.
     controlArea: Change the properties of the oscillators and of the string.
     currentDetails:
       start: |-
+             Currently,
              { $isPlaying ->
-               [false] The sim is paused while the
-               *[true] The
+               [false] the sim is paused while the
+               *[true] the
              } { $mode ->
                [manual] wrench clamped to the string is near the { $wrenchPosition ->
                    [bottom] bottom
@@ -69,9 +70,9 @@ a11y:
                      *[high] high
                    } frequency
                    *[pulse] { $pulseWidth ->
-                     [low] low
+                     [low] narrow
                      [medium] medium
-                     *[high] high
+                     *[high] wide
                    } pulse width
                  }
                  *[false] stationary 
@@ -128,7 +129,7 @@ a11y:
     accessibleName: Pulse Generator
     accessibleHelpText: Create a single wave pulse along the string.
   restartButton:
-    accessibleHelpText: Reset string position to flat.
+    accessibleHelpText: Reset string position to still and flat.
   horizontalRuler:
     accessibleName: Horizontal Ruler
     accessibleHelpText: Drag ruler to line up and visually measure wave length.
