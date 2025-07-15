@@ -86,7 +86,12 @@ a11y:
                [loose] is attached to a ring that moves along a rod.
                [no] extends out to infinity through a window outside.
              }
-    interactionHint: Move the wrench to make a wave or choose another way to start making waves.
+    interactionHint: |-
+             { $mode ->
+               [manual] Move the wrench or choose another way to start making waves.
+               [oscillate] Start the oscillator or choose another way to start making waves.
+               *[pulse] Start a pulse or choose another way to start making waves.
+             }
 
   headings:
     playArea:

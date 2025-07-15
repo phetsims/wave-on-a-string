@@ -26,13 +26,15 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
    * @param model - This class is responsible for describing the entire model so it takes the entire model and is coupled to it.
    */
   public constructor( model: WOASModel ) {
+    const modeStringProperty = new DerivedProperty( [ model.waveModeProperty ], mode => MODE_MAP.get( mode )! );
+
     super( {
       playAreaContent: WaveOnAStringFluent.a11y.screenSummary.playAreaStringProperty,
       currentDetailsContent: [
         WaveOnAStringFluent.a11y.screenSummary.currentDetails.start.createProperty( {
           isPlaying: new DerivedProperty( [ model.isPlayingProperty ], isPlaying => isPlaying ? 'true' : 'false' ),
           wrenchPosition: new DerivedProperty( [ model.leftMostBeadYProperty ], y => y > 0.5 ? 'top' : y < -0.5 ? 'bottom' : 'middle' ),
-          mode: new DerivedProperty( [ model.waveModeProperty ], mode => MODE_MAP.get( mode )! ),
+          mode: modeStringProperty,
           active: new DerivedProperty( [ model.waveModeProperty, model.isPulseActiveProperty ], ( mode, isPulseActive ) => {
             return ( mode !== WOASMode.PULSE || isPulseActive ) ? 'true' : 'false';
           } ),
@@ -89,7 +91,9 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
           } )
         } )
       ],
-      interactionHintContent: WaveOnAStringFluent.a11y.screenSummary.interactionHintStringProperty
+      interactionHintContent: WaveOnAStringFluent.a11y.screenSummary.interactionHint.createProperty( {
+        mode: modeStringProperty
+      } )
     } );
   }
 }

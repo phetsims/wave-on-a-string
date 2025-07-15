@@ -94,7 +94,7 @@
         }
       },
       "interactionHint": {
-        "value": "Move the wrench to make a wave or choose another way to start making waves."
+        "value": "{ $mode ->\n  [manual] Move the wrench or choose another way to start making waves.\n  [oscillate] Start the oscillator or choose another way to start making waves.\n  *[pulse] Start a pulse or choose another way to start making waves.\n}"
       }
     },
     "headings": {
