@@ -148,6 +148,28 @@ a11y:
     accessibleHelpText: Amount of energy lost to the environment.
   tensionControl:
     accessibleHelpText: Amount the string is stretched.
+  visibilityControls:
+    rulers:
+      accessibleHelpText: Vertical and horizontal rulers to measure distance.
+      accessibleContextResponse: |-
+        Rulers { $isVisible ->
+          [true] added.
+          *[false] removed.
+        }
+    stopwatch:
+      accessibleHelpText: Measure elapsed time.
+      accessibleContextResponse: |-
+        Stopwatch { $isVisible ->
+          [true] added.
+          *[false] removed.
+        }
+    referenceLine:
+      accessibleHelpText: Movable dashed laser line to visually line up with waves to compare amplitude changes.
+      accessibleContextResponse: |-
+        Reference line { $isVisible ->
+          [true] added.
+          *[false] removed.
+        }
   keyboardHelpDialog:
     restartString:
       description: Reset Shape with { $altOrOption } plus Shift plus R.

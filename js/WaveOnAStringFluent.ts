@@ -86,6 +86,12 @@ addToMapIfDefined( 'a11y_frequencyControl_accessibleHelpText', 'a11y.frequencyCo
 addToMapIfDefined( 'a11y_pulseWidthControl_accessibleHelpText', 'a11y.pulseWidthControl.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_dampingControl_accessibleHelpText', 'a11y.dampingControl.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_tensionControl_accessibleHelpText', 'a11y.tensionControl.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_visibilityControls_rulers_accessibleHelpText', 'a11y.visibilityControls.rulers.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_visibilityControls_rulers_accessibleContextResponse', 'a11y.visibilityControls.rulers.accessibleContextResponseStringProperty' );
+addToMapIfDefined( 'a11y_visibilityControls_stopwatch_accessibleHelpText', 'a11y.visibilityControls.stopwatch.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_visibilityControls_stopwatch_accessibleContextResponse', 'a11y.visibilityControls.stopwatch.accessibleContextResponseStringProperty' );
+addToMapIfDefined( 'a11y_visibilityControls_referenceLine_accessibleHelpText', 'a11y.visibilityControls.referenceLine.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_visibilityControls_referenceLine_accessibleContextResponse', 'a11y.visibilityControls.referenceLine.accessibleContextResponseStringProperty' );
 addToMapIfDefined( 'a11y_keyboardHelpDialog_restartString_description', 'a11y.keyboardHelpDialog.restartString.descriptionStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
@@ -217,6 +223,20 @@ const WaveOnAStringFluent = {
     },
     tensionControl: {
       accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_tensionControl_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.tensionControl.accessibleHelpTextStringProperty' ) )
+    },
+    visibilityControls: {
+      rulers: {
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_visibilityControls_rulers_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.rulers.accessibleHelpTextStringProperty' ) ),
+        accessibleContextResponse: new FluentPattern<{ isVisible: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'> }>( fluentSupport.bundleProperty, 'a11y_visibilityControls_rulers_accessibleContextResponse', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.rulers.accessibleContextResponseStringProperty' ), [{"name":"isVisible","variants":["true","false"]}] )
+      },
+      stopwatch: {
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_visibilityControls_stopwatch_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.stopwatch.accessibleHelpTextStringProperty' ) ),
+        accessibleContextResponse: new FluentPattern<{ isVisible: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'> }>( fluentSupport.bundleProperty, 'a11y_visibilityControls_stopwatch_accessibleContextResponse', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.stopwatch.accessibleContextResponseStringProperty' ), [{"name":"isVisible","variants":["true","false"]}] )
+      },
+      referenceLine: {
+        accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_visibilityControls_referenceLine_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.referenceLine.accessibleHelpTextStringProperty' ) ),
+        accessibleContextResponse: new FluentPattern<{ isVisible: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'> }>( fluentSupport.bundleProperty, 'a11y_visibilityControls_referenceLine_accessibleContextResponse', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.referenceLine.accessibleContextResponseStringProperty' ), [{"name":"isVisible","variants":["true","false"]}] )
+      }
     },
     keyboardHelpDialog: {
       restartString: {

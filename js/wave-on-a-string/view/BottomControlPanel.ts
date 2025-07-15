@@ -44,15 +44,42 @@ export default class BottomControlPanel extends Panel {
     const checkboxGroup = new VerticalCheckboxGroup( [ {
       createNode: () => new Text( WaveOnAStringFluent.rulersStringProperty, checkboxTextOptions ),
       property: model.rulersVisibleProperty,
-      tandemName: 'rulersCheckbox'
+      tandemName: 'rulersCheckbox',
+      options: {
+        accessibleHelpText: WaveOnAStringFluent.a11y.visibilityControls.rulers.accessibleHelpTextStringProperty,
+        accessibleContextResponseChecked: WaveOnAStringFluent.a11y.visibilityControls.rulers.accessibleContextResponse.createProperty( {
+          isVisible: 'true'
+        } ),
+        accessibleContextResponseUnchecked: WaveOnAStringFluent.a11y.visibilityControls.rulers.accessibleContextResponse.createProperty( {
+          isVisible: 'false'
+        } )
+      }
     }, {
       createNode: () => new Text( WaveOnAStringFluent.timerStringProperty, checkboxTextOptions ),
       property: model.stopwatch.isVisibleProperty,
-      tandemName: 'stopwatchCheckbox'
+      tandemName: 'stopwatchCheckbox',
+      options: {
+        accessibleHelpText: WaveOnAStringFluent.a11y.visibilityControls.stopwatch.accessibleHelpTextStringProperty,
+        accessibleContextResponseChecked: WaveOnAStringFluent.a11y.visibilityControls.stopwatch.accessibleContextResponse.createProperty( {
+          isVisible: 'true'
+        } ),
+        accessibleContextResponseUnchecked: WaveOnAStringFluent.a11y.visibilityControls.stopwatch.accessibleContextResponse.createProperty( {
+          isVisible: 'false'
+        } )
+      }
     }, {
       createNode: () => new Text( WaveOnAStringFluent.referenceLineStringProperty, checkboxTextOptions ),
       property: model.referenceLineVisibleProperty,
-      tandemName: 'referenceLineCheckbox'
+      tandemName: 'referenceLineCheckbox',
+      options: {
+        accessibleHelpText: WaveOnAStringFluent.a11y.visibilityControls.referenceLine.accessibleHelpTextStringProperty,
+        accessibleContextResponseChecked: WaveOnAStringFluent.a11y.visibilityControls.referenceLine.accessibleContextResponse.createProperty( {
+          isVisible: 'true'
+        } ),
+        accessibleContextResponseUnchecked: WaveOnAStringFluent.a11y.visibilityControls.referenceLine.accessibleContextResponse.createProperty( {
+          isVisible: 'false'
+        } )
+      }
     } ], {
       tandem: checkboxTandem
     } );

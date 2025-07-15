@@ -128,6 +128,20 @@ type StringsType = {
     'tensionControl': {
       'accessibleHelpTextStringProperty': LocalizedStringProperty;
     };
+    'visibilityControls': {
+      'rulers': {
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'accessibleContextResponseStringProperty': LocalizedStringProperty;
+      };
+      'stopwatch': {
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'accessibleContextResponseStringProperty': LocalizedStringProperty;
+      };
+      'referenceLine': {
+        'accessibleHelpTextStringProperty': LocalizedStringProperty;
+        'accessibleContextResponseStringProperty': LocalizedStringProperty;
+      }
+    };
     'keyboardHelpDialog': {
       'restartString': {
         'descriptionStringProperty': LocalizedStringProperty;

@@ -237,6 +237,32 @@
         "value": "Amount the string is stretched."
       }
     },
+    "visibilityControls": {
+      "rulers": {
+        "accessibleHelpText": {
+          "value": "Vertical and horizontal rulers to measure distance."
+        },
+        "accessibleContextResponse": {
+          "value": "Rulers { $isVisible ->\n  [true] added.\n  *[false] removed.\n}"
+        }
+      },
+      "stopwatch": {
+        "accessibleHelpText": {
+          "value": "Measure elapsed time."
+        },
+        "accessibleContextResponse": {
+          "value": "Stopwatch { $isVisible ->\n  [true] added.\n  *[false] removed.\n}"
+        }
+      },
+      "referenceLine": {
+        "accessibleHelpText": {
+          "value": "Movable dashed laser line to visually line up with waves to compare amplitude changes."
+        },
+        "accessibleContextResponse": {
+          "value": "Reference line { $isVisible ->\n  [true] added.\n  *[false] removed.\n}"
+        }
+      }
+    },
     "keyboardHelpDialog": {
       "restartString": {
         "description": {
