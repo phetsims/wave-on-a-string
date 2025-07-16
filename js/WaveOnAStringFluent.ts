@@ -60,6 +60,10 @@ addToMapIfDefined( 'a11y_headings_playArea_waveAndStringProperties', 'a11y.headi
 addToMapIfDefined( 'a11y_headings_playArea_waveAndStringPropertiesDescription', 'a11y.headings.playArea.waveAndStringPropertiesDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_headings_controlArea_measurementTools', 'a11y.headings.controlArea.measurementToolsStringProperty' );
 addToMapIfDefined( 'a11y_headings_controlArea_measurementToolsDescription', 'a11y.headings.controlArea.measurementToolsDescriptionStringProperty' );
+addToMapIfDefined( 'a11y_valuePatterns_centimeters', 'a11y.valuePatterns.centimetersStringProperty' );
+addToMapIfDefined( 'a11y_valuePatterns_hertz', 'a11y.valuePatterns.hertzStringProperty' );
+addToMapIfDefined( 'a11y_valuePatterns_seconds', 'a11y.valuePatterns.secondsStringProperty' );
+addToMapIfDefined( 'a11y_valuePatterns_percentage', 'a11y.valuePatterns.percentageStringProperty' );
 addToMapIfDefined( 'a11y_waveMode_accessibleName', 'a11y.waveMode.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_waveMode_accessibleHelpText', 'a11y.waveMode.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_waveMode_manual_accessibleName', 'a11y.waveMode.manual.accessibleNameStringProperty' );
@@ -159,6 +163,12 @@ const WaveOnAStringFluent = {
         measurementToolsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_controlArea_measurementTools', _.get( WaveOnAStringStrings, 'a11y.headings.controlArea.measurementToolsStringProperty' ) ),
         measurementToolsDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_controlArea_measurementToolsDescription', _.get( WaveOnAStringStrings, 'a11y.headings.controlArea.measurementToolsDescriptionStringProperty' ) )
       }
+    },
+    valuePatterns: {
+      centimeters: new FluentPattern<{ value: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_valuePatterns_centimeters', _.get( WaveOnAStringStrings, 'a11y.valuePatterns.centimetersStringProperty' ), [{"name":"value"}] ),
+      hertz: new FluentPattern<{ value: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_valuePatterns_hertz', _.get( WaveOnAStringStrings, 'a11y.valuePatterns.hertzStringProperty' ), [{"name":"value"}] ),
+      seconds: new FluentPattern<{ value: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_valuePatterns_seconds', _.get( WaveOnAStringStrings, 'a11y.valuePatterns.secondsStringProperty' ), [{"name":"value"}] ),
+      percentage: new FluentPattern<{ value: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_valuePatterns_percentage', _.get( WaveOnAStringStrings, 'a11y.valuePatterns.percentageStringProperty' ), [{"name":"value"}] )
     },
     waveMode: {
       accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_waveMode_accessibleName', _.get( WaveOnAStringStrings, 'a11y.waveMode.accessibleNameStringProperty' ) ),

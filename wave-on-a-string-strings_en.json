@@ -121,6 +121,20 @@
         }
       }
     },
+    "valuePatterns": {
+      "centimeters": {
+        "value": "{ $value } centimeters"
+      },
+      "hertz": {
+        "value": "{ $value } hertz"
+      },
+      "seconds": {
+        "value": "{ $value } seconds"
+      },
+      "percentage": {
+        "value": "{ $value } percent"
+      }
+    },
     "waveMode": {
       "accessibleName": {
         "value": "Wave Generation Options"

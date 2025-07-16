@@ -25,6 +25,10 @@ import { WOASMode } from '../model/WOASMode.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
 import WOASColors from './WOASColors.js';
 import Separator from '../../../../scenery/js/layout/nodes/Separator.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import { NumberDisplayOptions } from '../../../../scenery-phet/js/NumberDisplay.js';
+import FluentPattern, { FluentVariable } from '../../../../chipper/js/browser/FluentPattern.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default class BottomControlPanel extends Panel {
   // for global a11y ordering
@@ -100,12 +104,36 @@ export default class BottomControlPanel extends Panel {
       range: new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 )
     } );
 
+    const getNumberDisplayOptions = (
+      valuePattern: TReadOnlyProperty<string>,
+      accessibleValuePattern: FluentPattern<{ value: FluentVariable }>,
+      decimalPlaces: number | null
+    ): NumberDisplayOptions => {
+      return {
+        numberFormatter: ( value: number ) => {
+          const valueString = decimalPlaces === null ? StringUtils.wrapLTR( `${value}` ) : StringUtils.toFixedLTR( value, decimalPlaces );
+
+          return {
+            valueString: StringUtils.format( valuePattern.value, valueString ),
+            accessibleValueString: accessibleValuePattern.format( {
+              value: valueString
+            } )
+          };
+        },
+        numberFormatterDependencies: [
+          valuePattern,
+          ...accessibleValuePattern.getDependentProperties()
+        ]
+      };
+    };
+
     const tensionControl = new WOASNumberControl( WaveOnAStringFluent.tensionStringProperty, tensionProperty, {
       delta: 1,
-      numberDisplayOptions: {
-        decimalPlaces: 0,
-        valuePattern: WaveOnAStringFluent.patternValueUnitPercentageStringProperty
-      },
+      numberDisplayOptions: getNumberDisplayOptions(
+        WaveOnAStringFluent.patternValueUnitPercentageStringProperty,
+        WaveOnAStringFluent.a11y.valuePatterns.percentage,
+        0
+      ),
       sliderOptions: {
         constrainValue: value => tensionProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
@@ -114,10 +142,11 @@ export default class BottomControlPanel extends Panel {
     } );
     const dampingControl = new WOASNumberControl( WaveOnAStringFluent.dampingStringProperty, model.dampingProperty, {
       delta: 1,
-      numberDisplayOptions: {
-        decimalPlaces: 0,
-        valuePattern: WaveOnAStringFluent.patternValueUnitPercentageStringProperty
-      },
+      numberDisplayOptions: getNumberDisplayOptions(
+        WaveOnAStringFluent.patternValueUnitPercentageStringProperty,
+        WaveOnAStringFluent.a11y.valuePatterns.percentage,
+        0
+      ),
       sliderOptions: {
         constrainValue: value => model.dampingProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
@@ -126,10 +155,11 @@ export default class BottomControlPanel extends Panel {
     } );
     const frequencyControl = new WOASNumberControl( WaveOnAStringFluent.frequencyStringProperty, model.frequencyProperty, {
       delta: 0.01,
-      numberDisplayOptions: {
-        decimalPlaces: 2,
-        valuePattern: WaveOnAStringFluent.patternValueUnitHzStringProperty
-      },
+      numberDisplayOptions: getNumberDisplayOptions(
+        WaveOnAStringFluent.patternValueUnitHzStringProperty,
+        WaveOnAStringFluent.a11y.valuePatterns.hertz,
+        2
+      ),
       sliderOptions: {
         constrainValue: value => model.frequencyProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
@@ -139,10 +169,11 @@ export default class BottomControlPanel extends Panel {
     } );
     const pulseWidthControl = new WOASNumberControl( WaveOnAStringFluent.pulseWidthStringProperty, model.pulseWidthProperty, {
       delta: 0.01,
-      numberDisplayOptions: {
-        decimalPlaces: 2,
-        valuePattern: WaveOnAStringFluent.patternValueUnitSStringProperty
-      },
+      numberDisplayOptions: getNumberDisplayOptions(
+        WaveOnAStringFluent.patternValueUnitSStringProperty,
+        WaveOnAStringFluent.a11y.valuePatterns.seconds,
+        2
+      ),
       sliderOptions: {
         constrainValue: value => model.pulseWidthProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },
@@ -152,10 +183,11 @@ export default class BottomControlPanel extends Panel {
     } );
     const amplitudeControl = new WOASNumberControl( WaveOnAStringFluent.amplitudeStringProperty, model.amplitudeProperty, {
       delta: 0.01,
-      numberDisplayOptions: {
-        decimalPlaces: 2,
-        valuePattern: WaveOnAStringFluent.patternValueUnitCmStringProperty
-      },
+      numberDisplayOptions: getNumberDisplayOptions(
+        WaveOnAStringFluent.patternValueUnitCmStringProperty,
+        WaveOnAStringFluent.a11y.valuePatterns.centimeters,
+        2
+      ),
       sliderOptions: {
         constrainValue: value => model.amplitudeProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
       },

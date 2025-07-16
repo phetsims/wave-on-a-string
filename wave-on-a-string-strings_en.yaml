@@ -104,6 +104,12 @@ a11y:
       measurementTools: Measurement Tools
       measurementToolsDescription: Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
 
+  valuePatterns:
+    centimeters: "{ $value } centimeters"
+    hertz: "{ $value } hertz"
+    seconds: "{ $value } seconds"
+    percentage: "{ $value } percent"
+
   waveMode:
     accessibleName: Wave Generation Options
     accessibleHelpText: Create wave manually, continuously, or with individual pulses.

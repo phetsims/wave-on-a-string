@@ -64,6 +64,12 @@ type StringsType = {
         'measurementToolsDescriptionStringProperty': LocalizedStringProperty;
       }
     };
+    'valuePatterns': {
+      'centimetersStringProperty': LocalizedStringProperty;
+      'hertzStringProperty': LocalizedStringProperty;
+      'secondsStringProperty': LocalizedStringProperty;
+      'percentageStringProperty': LocalizedStringProperty;
+    };
     'waveMode': {
       'accessibleNameStringProperty': LocalizedStringProperty;
       'accessibleHelpTextStringProperty': LocalizedStringProperty;
