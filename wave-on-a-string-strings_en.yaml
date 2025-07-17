@@ -164,7 +164,7 @@ a11y:
           *[false] removed.
         }
     stopwatch:
-      accessibleHelpText: Measure elapsed time.
+      accessibleHelpText: Stopwatch to measure elapsed time.
       accessibleContextResponse: |-
         Stopwatch { $isVisible ->
           [true] added.

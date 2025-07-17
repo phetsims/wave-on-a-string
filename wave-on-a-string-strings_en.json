@@ -262,7 +262,7 @@
       },
       "stopwatch": {
         "accessibleHelpText": {
-          "value": "Measure elapsed time."
+          "value": "Stopwatch to measure elapsed time."
         },
         "accessibleContextResponse": {
           "value": "Stopwatch { $isVisible ->\n  [true] added.\n  *[false] removed.\n}"
