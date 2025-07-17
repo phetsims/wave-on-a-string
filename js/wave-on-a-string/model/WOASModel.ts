@@ -36,6 +36,7 @@ import { linear } from '../../../../dot/js/util/linear.js';
 // constants
 const LAST_INDEX = NUMBER_OF_BEADS - 1;
 const NEXT_TO_LAST_INDEX = NUMBER_OF_BEADS - 2;
+const FLAT_IN_A_ROW_FOR_STILL = 4; // number of measurements where the string is flat in a row to be considered "still"
 
 export default class WOASModel extends PhetioObject {
 
@@ -265,9 +266,11 @@ export default class WOASModel extends PhetioObject {
     this.reset();
 
     // Update isStringStillProperty
+    let flatInARow = 0;
     this.yNowChangedEmitter.addListener( () => {
 
       const tolerance = 1e-2; // tolerance for flatness
+      const immediateTolerance = 1e-4; // tolerance to be immediately determined to be flat
 
       const firstIndex = 0;
       const lastIndex = LAST_INDEX;
@@ -276,17 +279,33 @@ export default class WOASModel extends PhetioObject {
       const end = this.yNow[ lastIndex ];
 
       let isFlat = true;
+      let isImmediateFlat = true;
 
       for ( let i = 1; i < lastIndex; i++ ) {
         const flatY = linear( firstIndex, lastIndex, start, end, i );
 
-        if ( Math.abs( this.yNow[ i ] - flatY ) > tolerance ) {
+        const delta = Math.abs( this.yNow[ i ] - flatY );
+
+        if ( delta > immediateTolerance ) {
+          isImmediateFlat = false;
+        }
+
+        if ( delta > tolerance ) {
           isFlat = false;
           break;
         }
       }
 
-      this.isStringStillProperty.value = isFlat;
+      if ( isFlat ) {
+        flatInARow++;
+      }
+      else {
+        flatInARow = 0;
+      }
+
+      const isStill = isImmediateFlat || ( isFlat && flatInARow >= FLAT_IN_A_ROW_FOR_STILL );
+
+      this.isStringStillProperty.value = isStill;
     } );
 
     // set the string to 0 on mode changes
