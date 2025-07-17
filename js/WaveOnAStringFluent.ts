@@ -74,6 +74,7 @@ addToMapIfDefined( 'a11y_endMode_accessibleHelpText', 'a11y.endMode.accessibleHe
 addToMapIfDefined( 'a11y_endMode_fixedEnd_accessibleName', 'a11y.endMode.fixedEnd.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_endMode_looseEnd_accessibleName', 'a11y.endMode.looseEnd.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_endMode_noEnd_accessibleName', 'a11y.endMode.noEnd.accessibleNameStringProperty' );
+addToMapIfDefined( 'a11y_string_stillContextResponse', 'a11y.string.stillContextResponseStringProperty' );
 addToMapIfDefined( 'a11y_wrench_accessibleName', 'a11y.wrench.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_wrench_accessibleHelpText', 'a11y.wrench.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_pulseGenerator_accessibleName', 'a11y.pulseGenerator.accessibleNameStringProperty' );
@@ -195,6 +196,9 @@ const WaveOnAStringFluent = {
       noEnd: {
         accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_endMode_noEnd_accessibleName', _.get( WaveOnAStringStrings, 'a11y.endMode.noEnd.accessibleNameStringProperty' ) )
       }
+    },
+    string: {
+      stillContextResponseStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_string_stillContextResponse', _.get( WaveOnAStringStrings, 'a11y.string.stillContextResponseStringProperty' ) )
     },
     wrench: {
       accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_wrench_accessibleName', _.get( WaveOnAStringStrings, 'a11y.wrench.accessibleNameStringProperty' ) ),

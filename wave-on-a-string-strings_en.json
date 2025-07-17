@@ -181,6 +181,11 @@
         }
       }
     },
+    "string": {
+      "stillContextResponse": {
+        "value": "String still."
+      }
+    },
     "wrench": {
       "accessibleName": {
         "value": "Wrench"

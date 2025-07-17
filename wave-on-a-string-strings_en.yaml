@@ -128,6 +128,8 @@ a11y:
       accessibleName: Loose End
     noEnd:
       accessibleName: No End
+  string:
+    stillContextResponse: String still.
   wrench:
     accessibleName: Wrench
     accessibleHelpText: Move the wrench up and down to drag the string and make a wave.

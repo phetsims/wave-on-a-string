@@ -229,7 +229,7 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'Whether a pulse is currently active'
     } );
 
-    this.isStringStillProperty = new BooleanProperty( false, {
+    this.isStringStillProperty = new BooleanProperty( true, {
       phetioReadOnly: true,
       tandem: tandem.createTandem( 'isStringStillProperty' ),
       phetioDocumentation: 'Whether the string is still (in a straight line)'

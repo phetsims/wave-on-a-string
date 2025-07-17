@@ -96,6 +96,9 @@ type StringsType = {
         'accessibleNameStringProperty': LocalizedStringProperty;
       }
     };
+    'string': {
+      'stillContextResponseStringProperty': LocalizedStringProperty;
+    };
     'wrench': {
       'accessibleNameStringProperty': LocalizedStringProperty;
       'accessibleHelpTextStringProperty': LocalizedStringProperty;

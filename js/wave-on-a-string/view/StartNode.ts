@@ -165,6 +165,20 @@ export default class StartNode extends Node {
 
     pistonBox.addChild( pulseButton );
 
+    model.isStringStillProperty.lazyLink( isStill => {
+      if ( isStill ) {
+        if ( model.waveModeProperty.value === WOASMode.MANUAL ) {
+          wrench.addAccessibleContextResponse( WaveOnAStringFluent.a11y.string.stillContextResponseStringProperty.value );
+        }
+        else if ( model.waveModeProperty.value === WOASMode.PULSE ) {
+          pulseButton.addAccessibleContextResponse( WaveOnAStringFluent.a11y.string.stillContextResponseStringProperty.value );
+        }
+        else {
+          // nothing desired for oscillation mode? https://github.com/phetsims/wave-on-a-string/issues/163#issuecomment-3075168872
+        }
+      }
+    } );
+
     // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
     const postCache = new Node( { scale: 1 / postScale } );
     toImageNodeAsynchronous( new Node( { children: [ post ], scale: postScale } ), image => {
