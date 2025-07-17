@@ -22,11 +22,14 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
-import { dilatedReferenceLineTouchArea, referenceLineBlockGradient } from '../WOASConstants.js';
+import { dilatedReferenceLineTouchArea, MODEL_UNITS_PER_CM, referenceLineBlockGradient } from '../WOASConstants.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 
 export default class ReferenceLine extends InteractiveHighlighting( Node ) {
   public constructor(
     model: WOASModel,
+    modelViewTransform: ModelViewTransform2,
     tandem: Tandem,
     dragBoundsProperty: TReadOnlyProperty<Bounds2>
   ) {
@@ -72,12 +75,25 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
       dragBoundsProperty: dragBoundsProperty
     } ) );
 
+    // Alert displacement on drag end or focus, see https://github.com/phetsims/wave-on-a-string/issues/163#issuecomment-3075168872
+    const alertDisplacement = () => {
+      // Alert the displacement in centimeters
+      this.addAccessibleObjectResponse( WaveOnAStringFluent.a11y.valuePatterns.centimeters.format( {
+        value: toFixed( -modelViewTransform.viewToModelY( model.referenceLinePositionProperty.value.y ) / MODEL_UNITS_PER_CM, 2 )
+      } ) );
+    };
+
     this.addInputListener( new SoundKeyboardDragListener( {
       tandem: tandem.createTandem( 'keyboardDragListener' ),
       dragSpeed: 300,
       shiftDragSpeed: 20,
-      positionProperty: model.referenceLinePositionProperty
+      positionProperty: model.referenceLinePositionProperty,
+      end: alertDisplacement
     } ) );
+
+    this.addInputListener( {
+      focus: alertDisplacement
+    } );
   }
 }
 

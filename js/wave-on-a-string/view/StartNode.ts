@@ -40,6 +40,7 @@ import type WOASModel from '../model/WOASModel.js';
 import { dilatedTouchArea, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
 import WOASColors from './WOASColors.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -116,6 +117,7 @@ export default class StartNode extends Node {
       wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.top - 30 - wrenchArrowYOffset, wrenchArrowOptions );
     const wrenchBottomArrow = new ArrowNode( wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + wrenchArrowYOffset,
       wrenchImageNode.centerX + wrenchArrowXOffset, wrenchImageNode.bottom + 30 + wrenchArrowYOffset, wrenchArrowOptions );
+
     const wrench = new ( InteractiveHighlighting( Node ) )( combineOptions<NodeOptions>( {
       children: [
         wrenchImageNode,
@@ -224,6 +226,11 @@ export default class StartNode extends Node {
       },
       end: () => {
         model.wrenchArrowsVisibleProperty.value = false;
+
+        // Alert displacement on drag end, see https://github.com/phetsims/wave-on-a-string/issues/163#issuecomment-3075168872
+        wrench.addAccessibleObjectResponse( WaveOnAStringFluent.a11y.valuePatterns.centimeters.format( {
+          value: toFixed( model.leftMostBeadYProperty.value, 2 )
+        } ) );
       }
     } ) );
 
