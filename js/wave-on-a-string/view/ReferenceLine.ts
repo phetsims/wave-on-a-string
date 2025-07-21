@@ -25,6 +25,7 @@ import type WOASModel from '../model/WOASModel.js';
 import { dilatedReferenceLineTouchArea, MODEL_UNITS_PER_CM, referenceLineBlockGradient } from '../WOASConstants.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import WOASColors from './WOASColors.js';
 
 export default class ReferenceLine extends InteractiveHighlighting( Node ) {
   public constructor(
@@ -43,6 +44,7 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
 
     const referenceX = ScreenView.DEFAULT_LAYOUT_BOUNDS.right - 28;
 
+    // The "handle"
     this.addChild( new Rectangle( referenceX * 2, -10, 40, 20, {
       fill: referenceLineBlockGradient,
       scale: 0.5,
@@ -54,10 +56,11 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
       stroke: '#000',
       lineWidth: 0.5
     } ) );
+
     this.addChild( new Line( 0, 0, referenceX + 10, 0, {
       mouseArea: new Bounds2( 0, 0, referenceX + 10, 0 ).dilated( 5 ),
       touchArea: new Bounds2( 0, 0, referenceX + 10, 0 ).dilated( 10 ),
-      stroke: '#F00',
+      stroke: WOASColors.referenceLineColorProperty,
       lineDash: [ 10, 6 ],
       lineWidth: 2
     } ) );

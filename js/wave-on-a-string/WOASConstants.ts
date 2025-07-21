@@ -9,6 +9,7 @@
 import Vector2 from '../../../dot/js/Vector2.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import LinearGradient from '../../../scenery/js/util/LinearGradient.js';
+import WOASColors from './view/WOASColors.js';
 
 export const MAX_START_AMPLITUDE_CM = 1.3;
 export const NUMBER_OF_BEADS = 61;
@@ -31,14 +32,14 @@ export const dilatedTouchArea = 10;
 export const dilatedReferenceLineTouchArea = 20;
 
 export const postGradient = new LinearGradient( -5, 0, 5, 0 )
-  .addColorStop( 0, '#666' )
-  .addColorStop( 0.3, '#FFF' )
-  .addColorStop( 1, '#666' );
+  .addColorStop( 0, WOASColors.postOutsideColorProperty )
+  .addColorStop( 0.3, WOASColors.postInsideColorProperty )
+  .addColorStop( 1, WOASColors.postOutsideColorProperty );
 
 export const referenceLineBlockGradient = new LinearGradient( 0, -10, 0, 20 )
-  .addColorStop( 0, '#78571C' )
-  .addColorStop( 0.3, '#D3B072' )
-  .addColorStop( 1, '#78571C' );
+  .addColorStop( 0, WOASColors.referenceLineHandleOutsideColorProperty )
+  .addColorStop( 0.3, WOASColors.referenceLineHandleInsideColorProperty )
+  .addColorStop( 1, WOASColors.referenceLineHandleOutsideColorProperty );
 
 // {number} - window image scale
 export const windowScale = 0.6;

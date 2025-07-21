@@ -30,7 +30,14 @@ const WOASColors = {
   pulseButtonColorProperty: new ProfileColorProperty( waveOnAString, 'pulseButtonColor', { default: new Color( '#33dd33' ) } ),
   restartButtonColorProperty: new ProfileColorProperty( waveOnAString, 'restartButtonColor', { default: ColorConstants.LIGHT_BLUE } ),
 
-  wrenchArrowColorProperty: new ProfileColorProperty( waveOnAString, 'wrenchArrowColor', { default: new Color( 'hsl(210,90%,60%)' ) } )
+  wrenchArrowColorProperty: new ProfileColorProperty( waveOnAString, 'wrenchArrowColor', { default: new Color( 'hsl(210,90%,60%)' ) } ),
+
+  referenceLineColorProperty: new ProfileColorProperty( waveOnAString, 'referenceLineColor', { default: new Color( '#F00' ) } ),
+  referenceLineHandleOutsideColorProperty: new ProfileColorProperty( waveOnAString, 'referenceLineHandleOutsideColor', { default: new Color( '#78571C' ) } ),
+  referenceLineHandleInsideColorProperty: new ProfileColorProperty( waveOnAString, 'referenceLineHandleInsideColor', { default: new Color( '#D3B072' ) } ),
+
+  postOutsideColorProperty: new ProfileColorProperty( waveOnAString, 'postOutsideColor', { default: new Color( '#666' ) } ),
+  postInsideColorProperty: new ProfileColorProperty( waveOnAString, 'postInsideColor', { default: new Color( '#FFF' ) } )
 };
 
 waveOnAString.register( 'WOASColors', WOASColors );
