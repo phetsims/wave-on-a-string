@@ -93,10 +93,10 @@ export default class BottomControlPanel extends Panel {
       y1: 10,
       x2: 0,
       y2: 100,
-      // stroke: 'gray',
       lineWidth: 1
     } );
 
+    // We convert from a ratio to a percentage (for the view)
     const tensionProperty = new RangedDynamicProperty( new Property( model.tensionProperty ), {
       bidirectional: true,
       map: ( value: number ) => value * 100,
@@ -104,6 +104,7 @@ export default class BottomControlPanel extends Panel {
       range: new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 )
     } );
 
+    // Number formatting for both visual and accessible strings.
     const getNumberDisplayOptions = (
       valuePattern: TReadOnlyProperty<string>,
       accessibleValuePattern: FluentPattern<{ value: FluentVariable }>,
@@ -196,7 +197,7 @@ export default class BottomControlPanel extends Panel {
       accessibleHelpText: WaveOnAStringFluent.a11y.amplitudeControl.accessibleHelpTextStringProperty
     } );
 
-    // We want the pulse-width and frequency controls to have the same bounds
+    // We want the pulse-width and frequency controls to have the same bounds (they replace each other in the UI)
     const frequencyPulseWidthAlignGroup = new AlignGroup();
     const frequencyAlignBox = frequencyPulseWidthAlignGroup.createBox( frequencyControl, {
       visibleProperty: frequencyControl.visibleProperty
@@ -205,6 +206,7 @@ export default class BottomControlPanel extends Panel {
       visibleProperty: pulseWidthControl.visibleProperty
     } );
 
+    // Contains the NumberControls, which are shown/hidden based on the mode
     const controlBox = new HBox( {
       spacing: 35
     } );

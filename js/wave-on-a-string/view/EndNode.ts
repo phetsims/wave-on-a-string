@@ -22,6 +22,7 @@ import { postGradient, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_Y, windowSca
 
 export default class EndNode extends Node {
 
+  // Not a child of EndNode, but a separate Node that is positioned relative to EndNode.
   public readonly windowNode: Node;
 
   public constructor(
@@ -61,11 +62,11 @@ export default class EndNode extends Node {
 
     this.mutate( options );
 
+    // Only update the ring on frames where it has changed
     let dirty = true;
     model.yNowChangedEmitter.addListener( () => {
       dirty = true;
     } );
-
     frameEmitter.addListener( () => {
       if ( dirty ) {
         ringFront.y = ringBack.y = model.getRingY();
@@ -73,11 +74,13 @@ export default class EndNode extends Node {
       }
     } );
 
+    // Update visibilities (on change)
     model.endTypeProperty.link( endType => {
       clamp.visible = endType === WOASEndType.FIXED_END;
       ringBack.visible = post.visible = ringFront.visible = endType === WOASEndType.LOOSE_END;
       this.windowNode.visible = endType === WOASEndType.NO_END;
 
+      // If we move to fixed end, we need to make model changes
       if ( endType === WOASEndType.FIXED_END ) {
         model.zeroOutEndPoint();
       }
