@@ -16,10 +16,16 @@ import { WOASMode } from '../model/WOASMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import WOASColors from './WOASColors.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 export default class PulseButton extends RoundPushButton {
   public constructor( model: WOASModel, providedOptions?: RoundPushButtonOptions ) {
-    const pulseShape = new Shape().moveTo( -9, 0 ).lineTo( -3.5, 0 ).lineTo( 0, -10 ).lineTo( 3.5, 0 ).lineTo( 9, 0 );
+    const pulseShape = new Shape()
+      .moveTo( -9, 0 )
+      .lineTo( -3.5, 0 )
+      .lineTo( 0, -10 )
+      .lineTo( 3.5, 0 )
+      .lineTo( 9, 0 );
 
     super( optionize<RoundPushButtonOptions, EmptySelfOptions>()( {
       listener: () => {
@@ -42,6 +48,8 @@ export default class PulseButton extends RoundPushButton {
           } )
         ]
       } ),
+      visibleProperty: new DerivedProperty( [ model.waveModeProperty ], mode => mode === WOASMode.PULSE ),
+      touchAreaDilation: 10,
       radius: 17,
       xMargin: 6,
       yMargin: 6,
@@ -49,12 +57,6 @@ export default class PulseButton extends RoundPushButton {
       accessibleName: WaveOnAStringFluent.a11y.pulseGenerator.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.pulseGenerator.accessibleHelpTextStringProperty
     }, providedOptions ) );
-
-    this.touchArea = this.localBounds.dilatedXY( 5, 10 );
-
-    model.waveModeProperty.link( mode => {
-      this.visible = mode === WOASMode.PULSE;
-    } );
   }
 }
 
