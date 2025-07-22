@@ -255,7 +255,8 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'The y-value of the left-most bead measured with respect to the center line',
       units: 'cm',
       phetioValueType: NumberIO,
-      range: new Range( -MAX_START_AMPLITUDE_CM, MAX_START_AMPLITUDE_CM )
+      range: new Range( -MAX_START_AMPLITUDE_CM, MAX_START_AMPLITUDE_CM ),
+      phetioReadOnly: true
     } );
 
     this.stepDtProperty = new NumberProperty( 0 );
