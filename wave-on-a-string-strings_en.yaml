@@ -111,7 +111,7 @@ a11y:
     percentage: "{ $value } percent"
 
   waveMode:
-    accessibleName: Wave Generation Options
+    accessibleName: Wave Mode
     accessibleHelpText: Create wave manually, continuously, or with individual pulses.
     manual:
       accessibleName: Manual
@@ -120,7 +120,7 @@ a11y:
     pulse:
       accessibleName: Pulse
   endMode:
-    accessibleName: String End Options
+    accessibleName: String End Type
     accessibleHelpText: Set attachment for the end of the string.
     fixedEnd:
       accessibleName: Fixed End

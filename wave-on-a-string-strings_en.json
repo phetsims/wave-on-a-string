@@ -137,7 +137,7 @@
     },
     "waveMode": {
       "accessibleName": {
-        "value": "Wave Generation Options"
+        "value": "Wave Mode"
       },
       "accessibleHelpText": {
         "value": "Create wave manually, continuously, or with individual pulses."
@@ -160,7 +160,7 @@
     },
     "endMode": {
       "accessibleName": {
-        "value": "String End Options"
+        "value": "String End Type"
       },
       "accessibleHelpText": {
         "value": "Set attachment for the end of the string."
