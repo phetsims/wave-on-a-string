@@ -319,6 +319,13 @@ export default class WOASModel extends PhetioObject {
         this.manualRestart();
       }
     } );
+
+    // If we switch to fixed end, we need to zero out the end point
+    this.endTypeProperty.lazyLink( endType => {
+      if ( endType === WOASEndType.FIXED_END ) {
+        this.zeroOutEndPoint();
+      }
+    } );
   }
 
   /**

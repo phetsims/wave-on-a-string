@@ -79,11 +79,6 @@ export default class EndNode extends Node {
       clamp.visible = endType === WOASEndType.FIXED_END;
       ringBack.visible = post.visible = ringFront.visible = endType === WOASEndType.LOOSE_END;
       this.windowNode.visible = endType === WOASEndType.NO_END;
-
-      // If we move to fixed end, we need to make model changes
-      if ( endType === WOASEndType.FIXED_END ) {
-        model.zeroOutEndPoint();
-      }
     } );
   }
 }
