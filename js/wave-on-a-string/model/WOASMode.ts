@@ -1,7 +1,7 @@
 // Copyright 2025, University of Colorado Boulder
 
 /**
- * Determines what mode the Wave on a String simulation is in.
+ * Determines what user-selectable mode the Wave on a String simulation is in.
  *
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */

@@ -1,7 +1,7 @@
 // Copyright 2013-2025, University of Colorado Boulder
 
 /**
- * Control panel on the bottom of the screen, with many controls in it
+ * Control panel at the bottom of the screen, with many controls in it
  *
  * @author Anton Ulyanov (Mlearner)
  */

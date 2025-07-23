@@ -105,7 +105,10 @@ export default class WOASModel extends PhetioObject {
 
   private readonly stepDtProperty: TProperty<number>;
 
+  // Wave propagation coefficient, calculated as v * dt / dx where v is wave speed
   private alpha: number;
+  
+  // Damping coefficient, calculated as b * dt / 2 where b is derived from dampingProperty
   private beta: number;
 
   public constructor( tandem: Tandem ) {

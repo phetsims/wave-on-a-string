@@ -7,14 +7,15 @@
  */
 
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import { PDOMValueType } from '../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import type { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
-import optionize from '../../../../phet-core/js/optionize.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
-import { PDOMValueType } from '../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 
 type SelfOptions<T> = {
   radio: T[];
@@ -36,7 +37,7 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
     }, providedOptions );
 
     const length = options.radio.length;
-    const group = [];
+    const group: AquaRadioButtonGroupItem<T>[] = [];
 
     for ( let i = 0; i < length; i++ ) {
       group.push( {
@@ -46,6 +47,9 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
         } ),
         value: options.radio[ i ],
         tandemName: options.tandemNames[ i ],
+
+        // TODO: this failed type checking when I made group of type AquaRadioButtonGroupItem<T> see https://github.com/phetsims/wave-on-a-string/issues/177
+        // @ts-expect-error see https://github.com/phetsims/wave-on-a-string/issues/177
         accessibleName: options.accessibleNames[ i ]
       } );
     }

@@ -6,16 +6,16 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
+import TRangedProperty from '../../../../axon/js/TRangedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import waveOnAString from '../../waveOnAString.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import TRangedProperty from '../../../../axon/js/TRangedProperty.js';
-import WOASColors from './WOASColors.js';
 import { HEADER_FONT, NORMAL_FONT } from '../WOASConstants.js';
+import WOASColors from './WOASColors.js';
 
 type SelfOptions = EmptySelfOptions;
 type SuperOptions = NumberControlOptions;
@@ -28,6 +28,8 @@ class WOASNumberControl extends NumberControl {
     providedOptions?: WOASNumberControlOptions
   ) {
     const options = optionize<WOASNumberControlOptions, SelfOptions, SuperOptions>()( {
+
+      // TODO: Please document the intent of this layout, or the design of it. https://github.com/phetsims/wave-on-a-string/issues/177
       layoutFunction: ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
         return new VBox( {
           spacing: 5,

@@ -36,6 +36,8 @@ export default class StringNode extends Node {
     super();
 
     const options = optionize<StringNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // TODO: Please add documentation or delete, see https://github.com/phetsims/wave-on-a-string/issues/177
       layerSplit: true,
       radius: modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_GAP / 2 )
     }, providedOptions );
@@ -46,7 +48,7 @@ export default class StringNode extends Node {
     const stringPath = new Path( stringShape, {
       stroke: WOASColors.stringPathColorProperty
     } );
-    const beads: Node[] = [];
+
     this.addChild( stringPath );
 
     stringPath.computeShapeBounds = function() {
@@ -92,7 +94,7 @@ export default class StringNode extends Node {
       } );
     } );
 
-
+    const beads: Node[] = [];
     for ( let i = 0; i < model.yDraw.length; i++ ) {
       const bead = ( i % 10 === 0 ) ? referenceBeadNode : regularBeadNode;
       beads.push( new Node( {

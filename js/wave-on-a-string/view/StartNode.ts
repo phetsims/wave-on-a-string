@@ -12,6 +12,7 @@ import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Matrix3, { m3 } from '../../../../dot/js/Matrix3.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -40,7 +41,6 @@ import type WOASModel from '../model/WOASModel.js';
 import { dilatedTouchArea, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, offsetWheel, postGradient } from '../WOASConstants.js';
 import PulseButton from './PulseButton.js';
 import WOASColors from './WOASColors.js';
-import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -255,17 +255,23 @@ export default class StartNode extends Node {
 
     this.mutate( options );
 
+    // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
     const updateKey = () => {
       if ( wrench.isVisible() ) {
         wrench.y = model.yNow[ 0 ];
       }
     };
 
+    // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
     const updatePost = () => {
       const y = model.yNow[ 0 ];
       if ( post.isVisible() ) {
+
+        // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177// TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
         post.matrix = m3(
           1, 0, 0,
+
+          // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
           0, ( offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
           0, 0, 1
         );
