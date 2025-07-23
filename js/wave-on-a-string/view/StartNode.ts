@@ -10,7 +10,7 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import MappedProperty from '../../../../axon/js/MappedProperty.js';
 import TinyProperty from '../../../../axon/js/TinyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Matrix3, { m3 } from '../../../../dot/js/Matrix3.js';
+import { m3 } from '../../../../dot/js/Matrix3.js';
 import { clamp } from '../../../../dot/js/util/clamp.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -32,7 +32,7 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
-import { toDataURLNodeSynchronous, toImageNodeAsynchronous } from '../../../../scenery/js/util/rasterizeNode.js';
+import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
 import wrench_png from '../../../images/wrench_png.js';
 import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
@@ -57,7 +57,6 @@ export default class StartNode extends Node {
     }, providedOptions );
 
     const postNodeHeight = 158;
-    const postScale = 3;
     const maxAmplitude = MAX_START_AMPLITUDE_CM * MODEL_UNITS_PER_CM;
 
     super();
@@ -86,11 +85,10 @@ export default class StartNode extends Node {
       fill: new RadialGradient( 0, 0, 0, 0, 0, innerWheelRadius ).addColorStop( 0.2, '#555' ).addColorStop( 1, '#555' )
     } ) );
 
-    // toImage* style conversion of the wheel if necessary for performance
-    const wheelImageScale = 3;
-    wheel.scale( wheelImageScale );
-    const wheelSize = Math.ceil( wheel.width / 2 ) + 2;
-    wheel = toDataURLNodeSynchronous( wheel, wheelSize, wheelSize, 2 * wheelSize, 2 * wheelSize );
+    // Rasterization of the wheel for performance
+    wheel = rasterizeNode( wheel, {
+      resolution: 3
+    } );
     if ( platform.firefox ) {
       wheel.renderer = 'canvas';
     }
@@ -140,7 +138,7 @@ export default class StartNode extends Node {
     /*---------------------------------------------------------------------------*
      * Post
      *----------------------------------------------------------------------------*/
-    let post: Node = new Rectangle( offsetWheel.x - 5, 0, 10, postNodeHeight, {
+    const post = new Rectangle( offsetWheel.x - 5, 0, 10, postNodeHeight, {
       stroke: '#000',
       fill: postGradient
     } );
@@ -178,13 +176,6 @@ export default class StartNode extends Node {
         }
       }
     } );
-
-    // cache the post as an image, since otherwise with the current Scenery its gradient is updated every frame in the defs (NOTE: remove this with Scenery 0.2?)
-    const postCache = new Node( { scale: 1 / postScale } );
-    toImageNodeAsynchronous( new Node( { children: [ post ], scale: postScale } ), image => {
-      postCache.addChild( image );
-    } );
-    post = new Node( { children: [ postCache ] } );
 
     this.children = [
       post,
@@ -290,9 +281,8 @@ export default class StartNode extends Node {
       }
     } );
 
-    const wheelScaleMatrix = Matrix3.scale( 1 / wheelImageScale );
     model.angleProperty.link( angle => {
-      wheel.matrix = Matrix3.rotation2( angle ).timesMatrix( wheelScaleMatrix ); // doesn't need to compute current transform, or do matrix multiplication
+      wheel.rotation = angle;
     } );
     model.waveModeProperty.link( mode => {
       const wrenchIsVisible = mode === WOASMode.MANUAL;
