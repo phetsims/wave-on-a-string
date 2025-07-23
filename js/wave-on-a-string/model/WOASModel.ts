@@ -423,7 +423,7 @@ export default class WOASModel extends PhetioObject {
     dt = ( dt !== undefined && dt > 0 ) ? dt : FRAME_DURATION;
 
     const timeSpeed = this.timeSpeedProperty.value;
-    assert && assert( timeSpeed === TimeSpeed.NORMAL || timeSpeed === TimeSpeed.SLOW, 'timeSpeedProperty has unsuported value' );
+    assert && assert( timeSpeed === TimeSpeed.NORMAL || timeSpeed === TimeSpeed.SLOW, 'timeSpeedProperty has an unsupported value' );
 
     const speedMultiplier = this.timeSpeedProperty.value === TimeSpeed.NORMAL ? 1 : 0.25;
 
