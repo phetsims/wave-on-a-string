@@ -4,6 +4,7 @@
  * Restart button
  *
  * @author Anton Ulyanov (Mlearner)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import Property from '../../../../axon/js/Property.js';

@@ -4,6 +4,7 @@
  * View of the right-side end
  *
  * @author Anton Ulyanov (Mlearner)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import Image from '../../../../scenery/js/nodes/Image.js';

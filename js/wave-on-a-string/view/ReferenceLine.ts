@@ -4,6 +4,7 @@
  * reference line Node.
  *
  * @author Anton Ulyanov (Mlearner)
+ * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
