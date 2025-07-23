@@ -4,6 +4,7 @@
  * Model object for Wave on a String
  *
  * @author Anton Ulyanov (Mlearner)
+ * @author Michael Dubson
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
