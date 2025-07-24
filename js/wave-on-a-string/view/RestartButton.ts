@@ -7,7 +7,6 @@
  * @author Jonathan Olson <jonathan.olson@colorado.edu>
  */
 
-import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import RestartUndoButton, { RestartUndoButtonOptions } from '../../../../scenery-phet/js/buttons/RestartUndoButton.js';
 import TextKeyNode from '../../../../scenery-phet/js/keyboard/TextKeyNode.js';
@@ -39,7 +38,7 @@ export default class RestartButton extends RestartUndoButton {
   }
 
   public static readonly RESTART_HOTKEY_DATA = new HotkeyData( {
-    keyStringProperties: [ new Property( 'alt+shift+r' ) ],
+    keys: [ 'alt+shift+r' ],
     keyboardHelpDialogLabelStringProperty: WaveOnAStringFluent.restartStringProperty,
     keyboardHelpDialogPDOMLabelStringProperty: WaveOnAStringFluent.a11y.keyboardHelpDialog.restartString.description.createProperty( {
       altOrOption: TextKeyNode.getAltKeyString()
