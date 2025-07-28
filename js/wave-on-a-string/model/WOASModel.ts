@@ -54,7 +54,7 @@ export default class WOASModel extends PhetioObject {
   public readonly waveModeProperty: Property<WOASMode>;
 
   // Mode for the "end", fixed/loose/no end
-  public readonly endTypeProperty: Property<WOASEndType>;
+  public readonly stringEndTypeProperty: Property<WOASEndType>;
 
   public readonly isPlayingProperty: Property<boolean>;
   public readonly timeSpeedProperty: Property<TimeSpeed>;
@@ -124,8 +124,8 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'The type of attachment on the left side of the string, controlling its motion'
     } );
 
-    this.endTypeProperty = new EnumerationProperty( WOASEndType.FIXED_END, {
-      tandem: tandem.createTandem( 'endTypeProperty' ),
+    this.stringEndTypeProperty = new EnumerationProperty( WOASEndType.FIXED_END, {
+      tandem: tandem.createTandem( 'stringEndTypeProperty' ),
       phetioFeatured: true,
       phetioDocumentation: 'The type of attachment to the end of the string'
     } );
@@ -322,7 +322,7 @@ export default class WOASModel extends PhetioObject {
     } );
 
     // If we switch to fixed end, we need to zero out the end point
-    this.endTypeProperty.lazyLink( endType => {
+    this.stringEndTypeProperty.lazyLink( endType => {
       if ( endType === WOASEndType.FIXED_END ) {
         this.zeroOutEndPoint();
       }
@@ -368,7 +368,7 @@ export default class WOASModel extends PhetioObject {
     this.yNext[ 0 ] = this.yNow[ 0 ];
 
     // Handle end type (particularly for if we SWITCHED to a different end type since the last evolve).
-    switch( this.endTypeProperty.value ) {
+    switch( this.stringEndTypeProperty.value ) {
       case WOASEndType.FIXED_END:
         this.yNow[ LAST_INDEX ] = 0;
         break;
@@ -379,7 +379,7 @@ export default class WOASModel extends PhetioObject {
         this.yNow[ LAST_INDEX ] = this.yLast[ NEXT_TO_LAST_INDEX ];
         break;
       default:
-        throw new Error( `unknown end type: ${this.endTypeProperty.value}` );
+        throw new Error( `unknown end type: ${this.stringEndTypeProperty.value}` );
     }
 
     // main formula for calculating
@@ -404,7 +404,7 @@ export default class WOASModel extends PhetioObject {
     // TODO: Is this actually used? https://github.com/phetsims/wave-on-a-string/issues/174
     this.yNext[ LAST_INDEX ] = oldNext;
 
-    switch( this.endTypeProperty.value ) {
+    switch( this.stringEndTypeProperty.value ) {
       case WOASEndType.FIXED_END:
         this.yLast[ LAST_INDEX ] = 0;
         this.yNow[ LAST_INDEX ] = 0;
@@ -419,7 +419,7 @@ export default class WOASModel extends PhetioObject {
         // from the Flash model: this.yNow[ LAST_INDEX ] = this.yNow[ LAST_INDEX ]; //this.yLast[ NEXT_TO_LAST_INDEX ];
         break;
       default:
-        throw new Error( `unknown end type: ${this.endTypeProperty.value}` );
+        throw new Error( `unknown end type: ${this.stringEndTypeProperty.value}` );
     }
   }
 
@@ -554,7 +554,7 @@ export default class WOASModel extends PhetioObject {
    */
   public reset(): void {
     this.waveModeProperty.reset();
-    this.endTypeProperty.reset();
+    this.stringEndTypeProperty.reset();
     this.timeSpeedProperty.reset();
     this.rulersVisibleProperty.reset();
     this.referenceLineVisibleProperty.reset();

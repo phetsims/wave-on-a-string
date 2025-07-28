@@ -82,7 +82,7 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
           isStill: new DerivedProperty( [ model.isStringStillProperty ], isFlat => isFlat ? 'true' : 'false' )
         } ),
         WaveOnAStringFluent.a11y.screenSummary.currentDetails.end.createProperty( {
-          endPosition: new DerivedProperty( [ model.endTypeProperty ], endType => {
+          endPosition: new DerivedProperty( [ model.stringEndTypeProperty ], endType => {
             return {
               [ WOASEndType.FIXED_END.toString() ]: 'fixed',
               [ WOASEndType.LOOSE_END.toString() ]: 'loose',

@@ -76,7 +76,7 @@ export default class EndNode extends Node {
     } );
 
     // Update visibilities (on change)
-    model.endTypeProperty.link( endType => {
+    model.stringEndTypeProperty.link( endType => {
       clamp.visible = endType === WOASEndType.FIXED_END;
       ringBack.visible = post.visible = ringFront.visible = endType === WOASEndType.LOOSE_END;
       this.windowNode.visible = endType === WOASEndType.NO_END;

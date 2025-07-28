@@ -32,7 +32,7 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import MatrixBetweenProperty from '../../../../scenery/js/util/MatrixBetweenProperty.js';
-import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
+import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import windowFront_png from '../../../images/windowFront_png.js';
 import waveOnAString from '../../waveOnAString.js';
@@ -79,7 +79,8 @@ class WOASScreenView extends ScreenView {
     const rulerOptions = combineOptions<RulerNodeOptions>( {
       minorTicksPerMajorTick: 9,
       unitsFont: new PhetFont( 16 ),
-      cursor: 'pointer'
+      cursor: 'pointer',
+      instrumentUnitsLabelText: false
     }, AccessibleDraggableOptions );
 
     const viewUnitsPerCM = modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_CM );
@@ -150,9 +151,6 @@ class WOASScreenView extends ScreenView {
       lineWidth: 2 / 3
     };
 
-    const modePanelTandem = tandem.createTandem( 'waveModePanel' );
-    const endTypePanelTandem = tandem.createTandem( 'endTypePanel' );
-
     const stringNode = new StringNode( model, this.frameEmitter, modelViewTransform, {
       tandem: wavePlayAreaTandem.createTandem( 'stringNode' ),
       visiblePropertyOptions: { phetioReadOnly: true }
@@ -192,7 +190,7 @@ class WOASScreenView extends ScreenView {
         scale: windowScale
       } ) ], x: VIEW_END_X, y: VIEW_ORIGIN_Y, scale: SCALE_FROM_ORIGINAL
     } );
-    model.endTypeProperty.link( endType => {
+    model.stringEndTypeProperty.link( endType => {
       windowImage.visible = endType === WOASEndType.NO_END;
     } );
 
@@ -208,7 +206,7 @@ class WOASScreenView extends ScreenView {
 
     const bottomControlPanel = new BottomControlPanel( model, tandem.createTandem( 'controlPanel' ) );
 
-    const modePanel = new Panel( new WOASRadioButtonGroup( model.waveModeProperty, modePanelTandem.createTandem( 'radioButtonGroup' ), {
+    const modePanel = new Panel( new WOASRadioButtonGroup( model.waveModeProperty, tandem.createTandem( 'waveModeRadioButtonGroup' ), {
       radio: [
         WOASMode.MANUAL,
         WOASMode.OSCILLATE,
@@ -231,11 +229,9 @@ class WOASScreenView extends ScreenView {
       ],
       accessibleName: WaveOnAStringFluent.a11y.waveMode.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.waveMode.accessibleHelpTextStringProperty
-    } ), combineOptions<PanelOptions>( {
-      tandem: modePanelTandem
-    }, radioPanelOptions ) );
+    } ), radioPanelOptions );
 
-    const endTypePanel = new Panel( new WOASRadioButtonGroup( model.endTypeProperty, endTypePanelTandem.createTandem( 'radioButtonGroup' ), {
+    const endTypePanel = new Panel( new WOASRadioButtonGroup( model.stringEndTypeProperty, tandem.createTandem( 'endTypeRadioButtonGroup' ), {
       radio: [
         WOASEndType.FIXED_END,
         WOASEndType.LOOSE_END,
@@ -258,9 +254,7 @@ class WOASScreenView extends ScreenView {
       ],
       accessibleName: WaveOnAStringFluent.a11y.endMode.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.endMode.accessibleHelpTextStringProperty
-    } ), combineOptions<PanelOptions>( {
-      tandem: endTypePanelTandem
-    }, radioPanelOptions ) );
+    } ), radioPanelOptions );
 
     // Don't let the reference line go below the bottom control panel
     const lowerReferenceLineBoundaryProperty: TReadOnlyProperty<number> = new DerivedProperty( [
