@@ -260,7 +260,8 @@ export default class WOASModel extends PhetioObject {
       units: 'cm',
       phetioValueType: NumberIO,
       range: new Range( -MAX_START_AMPLITUDE_CM, MAX_START_AMPLITUDE_CM ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioFeatured: false
     } );
 
     this.stepDtProperty = new NumberProperty( 0 );
