@@ -72,7 +72,6 @@ class WOASScreenView extends ScreenView {
 
     const toolsTandem = tandem.createTandem( 'tools' );
     const rulersTandem = toolsTandem.createTandem( 'rulersNode' );
-    const wavePlayAreaTandem = tandem.createTandem( 'wavePlayArea' );
 
     const horizontalRulerTandem = rulersTandem.createTandem( 'horizontalRulerNode' );
     const verticalRulerTandem = rulersTandem.createTandem( 'verticalRulerNode' );
@@ -170,7 +169,7 @@ class WOASScreenView extends ScreenView {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_ORIGIN_X,
       y: VIEW_ORIGIN_Y,
-      tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
+      tandem: tandem.createTandem( 'startNode' ),
       phetioVisiblePropertyInstrumented: false
     } );
 
