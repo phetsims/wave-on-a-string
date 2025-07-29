@@ -180,8 +180,8 @@ export default class WOASModel extends PhetioObject {
       phetioDocumentation: 'The relative amount of tension on the string'
     } );
 
-    this.dampingProperty = new NumberProperty( 20, {
-      range: new Range( 0, 100 ),
+    this.dampingProperty = new NumberProperty( 0.2, {
+      range: new Range( 0, 1 ),
       tandem: tandem.createTandem( 'dampingProperty' ),
       phetioDocumentation: 'The relative amount of damping (percentage) for the string'
     } );
@@ -362,7 +362,7 @@ export default class WOASModel extends PhetioObject {
     const dt = 1;
     const v = 1;
     const dx = dt * v;
-    const b = this.dampingProperty.value * 0.002;
+    const b = this.dampingProperty.value * 0.2;
 
     this.beta = b * dt / 2;
     this.alpha = v * dt / dx;

@@ -104,6 +104,12 @@ export default class BottomControlPanel extends Panel {
       inverseMap: ( value: number ) => value / 100,
       range: new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 )
     } );
+    const dampingProperty = new RangedDynamicProperty( new Property( model.dampingProperty ), {
+      bidirectional: true,
+      map: ( value: number ) => value * 100,
+      inverseMap: ( value: number ) => value / 100,
+      range: new Range( model.dampingProperty.range.min * 100, model.dampingProperty.range.max * 100 )
+    } );
 
     // Number formatting for both visual and accessible strings.
     const getNumberDisplayOptions = (
@@ -142,7 +148,7 @@ export default class BottomControlPanel extends Panel {
       tandem: tandem.createTandem( 'tensionControl' ),
       accessibleHelpText: WaveOnAStringFluent.a11y.tensionControl.accessibleHelpTextStringProperty
     } );
-    const dampingControl = new WOASNumberControl( WaveOnAStringFluent.dampingStringProperty, model.dampingProperty, {
+    const dampingControl = new WOASNumberControl( WaveOnAStringFluent.dampingStringProperty, dampingProperty, {
       delta: 1,
       numberDisplayOptions: getNumberDisplayOptions(
         WaveOnAStringFluent.patternValueUnitPercentageStringProperty,
@@ -150,7 +156,7 @@ export default class BottomControlPanel extends Panel {
         0
       ),
       sliderOptions: {
-        constrainValue: value => model.dampingProperty.range.constrainValue( roundToInterval( value, 5 ) )
+        constrainValue: value => dampingProperty.range.constrainValue( roundToInterval( value, 5 ) )
       },
       tandem: tandem.createTandem( 'dampingControl' ),
       accessibleHelpText: WaveOnAStringFluent.a11y.dampingControl.accessibleHelpTextStringProperty
