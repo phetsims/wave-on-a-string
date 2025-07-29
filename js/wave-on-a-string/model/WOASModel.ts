@@ -209,11 +209,7 @@ export default class WOASModel extends PhetioObject {
 
     this.lastDtProperty = new NumberProperty( 0.03 );
 
-    this.timeElapsedProperty = new NumberProperty( 0, {
-      phetioReadOnly: true,
-      tandem: tandem.createTandem( 'timeElapsedProperty' ),
-      phetioDocumentation: 'The amount of time elapsed since the last evolution of the physics model, in seconds'
-    } );
+    this.timeElapsedProperty = new NumberProperty( 0 );
 
     this.angleProperty = new NumberProperty( 0, {
       phetioReadOnly: true,
@@ -588,7 +584,8 @@ export default class WOASModel extends PhetioObject {
       _pulsePending: model.pulsePendingProperty.value,
       _pulseSign: model.pulseSignProperty.value,
       _nextLeftY: model.nextLeftYProperty.value,
-      _stepDt: model.stepDtProperty.value
+      _stepDt: model.stepDtProperty.value,
+      _timeElapsed: model.timeElapsedProperty.value
     } ),
     stateSchema: {
       _yDraw: Float64ArrayIO,
@@ -599,7 +596,8 @@ export default class WOASModel extends PhetioObject {
       _pulsePending: BooleanIO,
       _pulseSign: NumberIO,
       _nextLeftY: NumberIO,
-      _stepDt: NumberIO
+      _stepDt: NumberIO,
+      _timeElapsed: NumberIO
     },
     applyState: ( model: WOASModel, stateObject ) => {
 
@@ -615,6 +613,7 @@ export default class WOASModel extends PhetioObject {
       model.pulseSignProperty.value = stateObject._pulseSign;
       model.nextLeftYProperty.value = stateObject._nextLeftY;
       model.stepDtProperty.value = stateObject._stepDt;
+      model.timeElapsedProperty.value = stateObject._timeElapsed;
 
       model.yNowChangedEmitter.emit();
     }
