@@ -70,7 +70,8 @@ class WOASScreenView extends ScreenView {
       SCALE_FROM_ORIGINAL
     );
 
-    const rulersTandem = tandem.createTandem( 'rulersNode' );
+    const toolsTandem = tandem.createTandem( 'tools' );
+    const rulersTandem = toolsTandem.createTandem( 'rulersNode' );
     const wavePlayAreaTandem = tandem.createTandem( 'wavePlayArea' );
 
     const horizontalRulerTandem = rulersTandem.createTandem( 'horizontalRulerNode' );
@@ -152,7 +153,6 @@ class WOASScreenView extends ScreenView {
     };
 
     const stringNode = new StringNode( model, this.frameEmitter, modelViewTransform, {
-      tandem: wavePlayAreaTandem.createTandem( 'stringNode' ),
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
@@ -163,8 +163,7 @@ class WOASScreenView extends ScreenView {
       modelViewTransform.modelToViewY( 0 ), {
         stroke: '#FFA91D',
         lineDash: [ 8, 5 ],
-        lineWidth: 2,
-        tandem: wavePlayAreaTandem.createTandem( 'centerLine' )
+        lineWidth: 2
       } );
 
     const startNode = new StartNode( model, this.frameEmitter, {
@@ -172,14 +171,13 @@ class WOASScreenView extends ScreenView {
       x: VIEW_ORIGIN_X,
       y: VIEW_ORIGIN_Y,
       tandem: wavePlayAreaTandem.createTandem( 'startNode' ),
-      visiblePropertyOptions: { phetioReadOnly: true }
+      phetioVisiblePropertyInstrumented: false
     } );
 
     const endNode = new EndNode( model, this.frameEmitter, {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_END_X,
       y: VIEW_ORIGIN_Y,
-      tandem: wavePlayAreaTandem.createTandem( 'endNode' ),
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
@@ -196,7 +194,7 @@ class WOASScreenView extends ScreenView {
 
     const stopwatchNode = new StopwatchNode( model.stopwatch, {
       dragBoundsProperty: this.visibleBoundsProperty,
-      tandem: tandem.createTandem( 'stopwatchNode' ),
+      tandem: toolsTandem.createTandem( 'stopwatchNode' ),
       keyboardDragListenerOptions: {
         dragSpeed: 300,
         shiftDragSpeed: 20
@@ -309,7 +307,7 @@ class WOASScreenView extends ScreenView {
       );
     } );
 
-    const referenceLine = new ReferenceLine( model, modelViewTransform, tandem.createTandem( 'referenceLineNode' ), referenceLineDragBoundsProperty );
+    const referenceLine = new ReferenceLine( model, modelViewTransform, toolsTandem.createTandem( 'referenceLineNode' ), referenceLineDragBoundsProperty );
 
     const restartButton = new RestartButton( model.manualRestart.bind( model ), {
       tandem: tandem.createTandem( 'restartButton' )

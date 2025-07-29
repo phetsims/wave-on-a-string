@@ -13,6 +13,7 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import waveOnAString from '../../waveOnAString.js';
 import { HEADER_FONT, NORMAL_FONT } from '../WOASConstants.js';
 import WOASColors from './WOASColors.js';
@@ -77,7 +78,8 @@ class WOASNumberControl extends NumberControl {
 
       titleNodeOptions: {
         font: HEADER_FONT,
-        maxWidth: 150
+        maxWidth: 150,
+        tandem: Tandem.OPT_OUT
       },
 
       accessibleName: title

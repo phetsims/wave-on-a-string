@@ -118,6 +118,8 @@ export default class WOASModel extends PhetioObject {
       phetioType: WOASModel.WOASModelIO
     } );
 
+    const toolsTandem = tandem.createTandem( 'tools' );
+
     this.waveModeProperty = new EnumerationProperty( WOASMode.MANUAL, {
       tandem: tandem.createTandem( 'waveModeProperty' ),
       phetioFeatured: true,
@@ -144,12 +146,12 @@ export default class WOASModel extends PhetioObject {
     } );
 
     this.rulersVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'rulersVisibleProperty' ),
+      tandem: toolsTandem.createTandem( 'rulersVisibleProperty' ),
       phetioDocumentation: 'Whether the rulers are visible',
       phetioFeatured: true
     } );
     this.referenceLineVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'referenceLineVisibleProperty' ),
+      tandem: toolsTandem.createTandem( 'referenceLineVisibleProperty' ),
       phetioDocumentation: 'Whether the reference line is visible',
       phetioFeatured: true
     } );
@@ -160,15 +162,15 @@ export default class WOASModel extends PhetioObject {
 
     // NOTE: 14 is the insets for the ruler
     this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( VIEW_ORIGIN_X - 14, 117 ), {
-      tandem: tandem.createTandem( 'horizontalRulerPositionProperty' ),
+      tandem: toolsTandem.createTandem( 'horizontalRulerPositionProperty' ),
       phetioDocumentation: 'Position of the horizontal ruler in view coordinates (from the top-left of the ruler)'
     } );
     this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ), {
-      tandem: tandem.createTandem( 'verticalRulerPositionProperty' ),
+      tandem: toolsTandem.createTandem( 'verticalRulerPositionProperty' ),
       phetioDocumentation: 'Position of the vertical ruler in view coordinates (from the bottom-left of the ruler)'
     } );
     this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ), {
-      tandem: tandem.createTandem( 'referenceLinePositionProperty' ),
+      tandem: toolsTandem.createTandem( 'referenceLinePositionProperty' ),
       phetioDocumentation: 'Position of the reference line in view coordinates (from the left of the line)'
     } );
 
@@ -241,7 +243,7 @@ export default class WOASModel extends PhetioObject {
 
     this.stopwatch = new Stopwatch( {
       position: new Vector2( 550, 330 ),
-      tandem: tandem.createTandem( 'stopwatch' ),
+      tandem: toolsTandem.createTandem( 'stopwatch' ),
       timePropertyOptions: {
         range: Stopwatch.ZERO_TO_ALMOST_SIXTY
       }
