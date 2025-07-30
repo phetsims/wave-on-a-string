@@ -40,44 +40,19 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
           } ),
           amplitude: new DerivedProperty( [ model.amplitudeProperty ], amplitude => {
             const magnitude = Math.abs( amplitude );
-            if ( magnitude < 1e-3 ) {
-              return 'zero';
-            }
-            else if ( magnitude < 0.4 ) {
-              return 'low';
-            }
-            else if ( magnitude > 0.9 ) {
-              return 'high';
-            }
-            else {
-              return 'medium';
-            }
+            return magnitude < 1e-3 ? 'zero' :
+                   magnitude < 0.4 ? 'low' :
+                   magnitude > 0.9 ? 'high' : 'medium';
           } ),
           frequency: new DerivedProperty( [ model.frequencyProperty ], frequency => {
             const magnitude = Math.abs( frequency );
-            if ( magnitude < 1e-3 ) {
-              return 'zero';
-            }
-            else if ( magnitude < 1 ) {
-              return 'low';
-            }
-            else if ( magnitude > 2 ) {
-              return 'high';
-            }
-            else {
-              return 'medium';
-            }
+            return magnitude < 1e-3 ? 'zero' :
+                   magnitude < 1 ? 'low' :
+                   magnitude > 2 ? 'high' : 'medium';
           } ),
           pulseWidth: new DerivedProperty( [ model.pulseWidthProperty ], pulseWidth => {
-            if ( pulseWidth < 0.35 ) {
-              return 'low';
-            }
-            else if ( pulseWidth > 0.75 ) {
-              return 'high';
-            }
-            else {
-              return 'medium';
-            }
+            return pulseWidth < 0.35 ? 'low' :
+                   pulseWidth > 0.75 ? 'high' : 'medium';
           } ),
           isStill: new DerivedProperty( [ model.isStringStillProperty ], isFlat => isFlat ? 'true' : 'false' )
         } ),
