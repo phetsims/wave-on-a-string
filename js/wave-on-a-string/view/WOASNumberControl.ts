@@ -30,7 +30,8 @@ class WOASNumberControl extends NumberControl {
   ) {
     const options = optionize<WOASNumberControlOptions, SelfOptions, SuperOptions>()( {
 
-      // TODO: Please document the intent of this layout, or the design of it. https://github.com/phetsims/wave-on-a-string/issues/177
+      // NOTE: Different desired spacing needed between the title and the rest (vs the other vertical spacing).
+      // Otherwise, fairly similar to createLayoutFunction3
       layoutFunction: ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
         return new VBox( {
           spacing: 5,

@@ -137,24 +137,25 @@ export default class StartNode extends Node {
 
     this.mutate( options );
 
-    // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
-    const updateKey = () => {
+    // Moves the wrench to the location defined in the model
+    const updateWrenchPosition = () => {
       if ( this.wrench.isVisible() ) {
         this.wrench.y = model.yNow[ 0 ];
       }
     };
 
-    // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
-    const updatePost = () => {
+    // Moves and sizes the oscillator post to be between the offset wheel and the current y position of the model
+    const updatePostView = () => {
       const y = model.yNow[ 0 ];
       if ( post.isVisible() ) {
 
-        // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177// TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
+        // Set the y-scale and y-offset of the post in one call (more performant to scale it rather than resize it)
+        const beadPostOffset = 7; // we expand it by 7 pixels to account for the bead size
+        const yScale = ( offsetWheel.y - ( y + beadPostOffset ) ) / postNodeHeight;
+        const yOffset = y + beadPostOffset;
         post.matrix = m3(
           1, 0, 0,
-
-          // TODO: Please add documentation, see https://github.com/phetsims/wave-on-a-string/issues/177
-          0, ( offsetWheel.y - ( y + 7 ) ) / postNodeHeight, y + 7,
+          0, yScale, yOffset,
           0, 0, 1
         );
       }
@@ -166,8 +167,8 @@ export default class StartNode extends Node {
     } );
     frameEmitter.addListener( () => {
       if ( dirty ) {
-        updateKey();
-        updatePost();
+        updateWrenchPosition();
+        updatePostView();
         dirty = false;
       }
     } );
@@ -180,14 +181,14 @@ export default class StartNode extends Node {
       if ( this.wrench.isVisible() !== wrenchIsVisible ) {
         this.wrench.visible = wrenchIsVisible;
 
-        updateKey();
+        updateWrenchPosition();
       }
 
       const postIsVisible = mode !== WOASMode.MANUAL;
       if ( post.isVisible() !== postIsVisible ) {
         post.visible = postIsVisible;
 
-        updatePost();
+        updatePostView();
       }
 
       wheel.visible = mode === WOASMode.OSCILLATE;

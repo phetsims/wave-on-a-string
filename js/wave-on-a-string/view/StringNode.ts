@@ -37,9 +37,7 @@ export default class StringNode extends Node {
     super();
 
     const options = optionize<StringNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // TODO: Please add documentation or delete, see https://github.com/phetsims/wave-on-a-string/issues/177
-      layerSplit: true,
+      layerSplit: true, // Increases performance on iPad to have a layer split here
       radius: modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_GAP / 2 )
     }, providedOptions );
 
