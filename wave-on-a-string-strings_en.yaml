@@ -35,7 +35,7 @@ a11y:
                  Explore different ways to generate waves on a string that tightly stretches across the play area. 
                  The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose. 
                  Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area. 
-                 Decide how the end of the string should be attached to the end of the play area or allow it to extend infinitely.
+                 Explore the effect of changing how the end of the string attaches to the end of the play area or allow it to extend infinitely.
     controlArea: Change the properties of the oscillators and of the string.
     currentDetails:
       start: |-
@@ -54,8 +54,8 @@ a11y:
                  *[pulse] pulse generator
                } is { $active ->
                  [true] generating a { $mode ->
-                   [oscillate] wave
-                   *[pulse] pulse
+                   [oscillate] sinusoidal wave
+                   *[pulse] triangular pulse
                  } that begins with { $amplitude ->
                    [zero] zero
                    [low] low
@@ -78,7 +78,7 @@ a11y:
                  *[false] stationary 
                } in the play area
              }, and the string is { $isStill ->
-               *[true] still
+               *[true] still and flat
                [false] in motion
              }.
       end:   |-
@@ -135,7 +135,7 @@ a11y:
     accessibleHelpText: Move the wrench up and down to drag the string and make a wave.
   pulseGenerator:
     accessibleName: Pulse Generator
-    accessibleHelpText: Create a single wave pulse along the string.
+    accessibleHelpText: Create a single triangular wave pulse along the string.
   restartButton:
     accessibleHelpText: Reset string position to still and flat.
   horizontalRuler:
