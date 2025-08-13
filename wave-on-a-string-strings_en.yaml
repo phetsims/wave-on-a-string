@@ -39,11 +39,7 @@ a11y:
     controlArea: Change the properties of the oscillators and of the string.
     currentDetails:
       start: |-
-             Currently,
-             { $isPlaying ->
-               [false] the sim is paused while the
-               *[true] the
-             } { $mode ->
+             Currently, the { $mode ->
                [manual] wrench clamped to the string is near the { $wrenchPosition ->
                    [bottom] bottom
                    *[middle] middle

@@ -32,7 +32,6 @@ export default class WaveGenerationParagraphsNode extends Node {
       accessibleHeading: WaveOnAStringFluent.a11y.headings.playArea.waveGenerationStringProperty,
       children: [
         WaveOnAStringFluent.a11y.screenSummary.currentDetails.start.createProperty( {
-          isPlaying: new DerivedProperty( [ model.isPlayingProperty ], isPlaying => isPlaying ? 'true' : 'false' ),
           wrenchPosition: new DerivedProperty( [ model.leftMostBeadYProperty ], y => y > 0.5 ? 'top' : y < -0.5 ? 'bottom' : 'middle' ),
           mode: modeStringProperty,
           active: new DerivedProperty( [ model.waveModeProperty, model.isPulseActiveProperty ], ( mode, isPulseActive ) => {
