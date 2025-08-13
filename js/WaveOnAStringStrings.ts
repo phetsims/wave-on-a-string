@@ -46,10 +46,6 @@ type StringsType = {
     'screenSummary': {
       'playAreaStringProperty': LocalizedStringProperty;
       'controlAreaStringProperty': LocalizedStringProperty;
-      'currentDetails': {
-        'startStringProperty': LocalizedStringProperty;
-        'endStringProperty': LocalizedStringProperty;
-      };
       'interactionHintStringProperty': LocalizedStringProperty;
     };
     'headings': {
@@ -70,6 +66,10 @@ type StringsType = {
       'hertzStringProperty': LocalizedStringProperty;
       'secondsStringProperty': LocalizedStringProperty;
       'percentageStringProperty': LocalizedStringProperty;
+    };
+    'waveGeneration': {
+      'startStringProperty': LocalizedStringProperty;
+      'endStringProperty': LocalizedStringProperty;
     };
     'waveMode': {
       'accessibleNameStringProperty': LocalizedStringProperty;

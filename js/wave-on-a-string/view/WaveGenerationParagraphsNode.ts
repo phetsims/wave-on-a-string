@@ -31,7 +31,7 @@ export default class WaveGenerationParagraphsNode extends Node {
     super( {
       accessibleHeading: WaveOnAStringFluent.a11y.headings.playArea.waveGenerationStringProperty,
       children: [
-        WaveOnAStringFluent.a11y.screenSummary.currentDetails.start.createProperty( {
+        WaveOnAStringFluent.a11y.waveGeneration.start.createProperty( {
           wrenchPosition: new DerivedProperty( [ model.leftMostBeadYProperty ], y => y > 0.5 ? 'top' : y < -0.5 ? 'bottom' : 'middle' ),
           mode: modeStringProperty,
           active: new DerivedProperty( [ model.waveModeProperty, model.isPulseActiveProperty ], ( mode, isPulseActive ) => {
@@ -55,7 +55,7 @@ export default class WaveGenerationParagraphsNode extends Node {
           } ),
           isStill: new DerivedProperty( [ model.isStringStillProperty ], isFlat => isFlat ? 'true' : 'false' )
         } ),
-        WaveOnAStringFluent.a11y.screenSummary.currentDetails.end.createProperty( {
+        WaveOnAStringFluent.a11y.waveGeneration.end.createProperty( {
           endPosition: new DerivedProperty( [ model.stringEndTypeProperty ], endType => {
             return {
               [ WOASEndType.FIXED_END.toString() ]: 'fixed',

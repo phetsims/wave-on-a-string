@@ -51,8 +51,6 @@ addToMapIfDefined( 'unitCm', 'unitCmStringProperty' );
 addToMapIfDefined( 'keyboardHelpDialog_stringControls', 'keyboardHelpDialog.stringControlsStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_playArea', 'a11y.screenSummary.playAreaStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_controlArea', 'a11y.screenSummary.controlAreaStringProperty' );
-addToMapIfDefined( 'a11y_screenSummary_currentDetails_start', 'a11y.screenSummary.currentDetails.startStringProperty' );
-addToMapIfDefined( 'a11y_screenSummary_currentDetails_end', 'a11y.screenSummary.currentDetails.endStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_interactionHint', 'a11y.screenSummary.interactionHintStringProperty' );
 addToMapIfDefined( 'a11y_headings_playArea_waveGeneration', 'a11y.headings.playArea.waveGenerationStringProperty' );
 addToMapIfDefined( 'a11y_headings_playArea_activeMeasurementTools', 'a11y.headings.playArea.activeMeasurementToolsStringProperty' );
@@ -65,6 +63,8 @@ addToMapIfDefined( 'a11y_valuePatterns_centimeters', 'a11y.valuePatterns.centime
 addToMapIfDefined( 'a11y_valuePatterns_hertz', 'a11y.valuePatterns.hertzStringProperty' );
 addToMapIfDefined( 'a11y_valuePatterns_seconds', 'a11y.valuePatterns.secondsStringProperty' );
 addToMapIfDefined( 'a11y_valuePatterns_percentage', 'a11y.valuePatterns.percentageStringProperty' );
+addToMapIfDefined( 'a11y_waveGeneration_start', 'a11y.waveGeneration.startStringProperty' );
+addToMapIfDefined( 'a11y_waveGeneration_end', 'a11y.waveGeneration.endStringProperty' );
 addToMapIfDefined( 'a11y_waveMode_accessibleName', 'a11y.waveMode.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_waveMode_accessibleHelpText', 'a11y.waveMode.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_waveMode_manual_accessibleName', 'a11y.waveMode.manual.accessibleNameStringProperty' );
@@ -148,10 +148,6 @@ const WaveOnAStringFluent = {
     screenSummary: {
       playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_playArea', _.get( WaveOnAStringStrings, 'a11y.screenSummary.playAreaStringProperty' ) ),
       controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_controlArea', _.get( WaveOnAStringStrings, 'a11y.screenSummary.controlAreaStringProperty' ) ),
-      currentDetails: {
-        start: new FluentPattern<{ active: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'>, amplitude: number | 'zero' | 'low' | 'medium' | 'high' | TReadOnlyProperty<number | 'zero' | 'low' | 'medium' | 'high'>, frequency: number | 'zero' | 'low' | 'medium' | 'high' | TReadOnlyProperty<number | 'zero' | 'low' | 'medium' | 'high'>, isStill: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'>, mode: 'manual' | number | 'other' | 'oscillate' | 'pulse' | TReadOnlyProperty<'manual' | number | 'other' | 'oscillate' | 'pulse'>, pulseWidth: 'low' | 'medium' | 'high' | TReadOnlyProperty<'low' | 'medium' | 'high'>, wrenchPosition: 'bottom' | 'middle' | 'top' | TReadOnlyProperty<'bottom' | 'middle' | 'top'> }>( fluentSupport.bundleProperty, 'a11y_screenSummary_currentDetails_start', _.get( WaveOnAStringStrings, 'a11y.screenSummary.currentDetails.startStringProperty' ), [{"name":"active","variants":["true","false"]},{"name":"amplitude","variants":[{"type":"number","value":"zero"},"low","medium","high"]},{"name":"frequency","variants":[{"type":"number","value":"zero"},"low","medium","high"]},{"name":"isStill","variants":["true","false"]},{"name":"mode","variants":["manual",{"type":"number","value":"other"},"oscillate","pulse"]},{"name":"pulseWidth","variants":["low","medium","high"]},{"name":"wrenchPosition","variants":["bottom","middle","top"]}] ),
-        end: new FluentPattern<{ endPosition: 'fixed' | 'loose' | 'no' | TReadOnlyProperty<'fixed' | 'loose' | 'no'> }>( fluentSupport.bundleProperty, 'a11y_screenSummary_currentDetails_end', _.get( WaveOnAStringStrings, 'a11y.screenSummary.currentDetails.endStringProperty' ), [{"name":"endPosition","variants":["fixed","loose","no"]}] )
-      },
       interactionHint: new FluentPattern<{ mode: 'manual' | 'oscillate' | 'pulse' | TReadOnlyProperty<'manual' | 'oscillate' | 'pulse'> }>( fluentSupport.bundleProperty, 'a11y_screenSummary_interactionHint', _.get( WaveOnAStringStrings, 'a11y.screenSummary.interactionHintStringProperty' ), [{"name":"mode","variants":["manual","oscillate","pulse"]}] )
     },
     headings: {
@@ -172,6 +168,10 @@ const WaveOnAStringFluent = {
       hertz: new FluentPattern<{ value: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_valuePatterns_hertz', _.get( WaveOnAStringStrings, 'a11y.valuePatterns.hertzStringProperty' ), [{"name":"value"}] ),
       seconds: new FluentPattern<{ value: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_valuePatterns_seconds', _.get( WaveOnAStringStrings, 'a11y.valuePatterns.secondsStringProperty' ), [{"name":"value"}] ),
       percentage: new FluentPattern<{ value: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_valuePatterns_percentage', _.get( WaveOnAStringStrings, 'a11y.valuePatterns.percentageStringProperty' ), [{"name":"value"}] )
+    },
+    waveGeneration: {
+      start: new FluentPattern<{ active: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'>, amplitude: number | 'zero' | 'low' | 'medium' | 'high' | TReadOnlyProperty<number | 'zero' | 'low' | 'medium' | 'high'>, frequency: number | 'zero' | 'low' | 'medium' | 'high' | TReadOnlyProperty<number | 'zero' | 'low' | 'medium' | 'high'>, isStill: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'>, mode: 'manual' | number | 'other' | 'oscillate' | 'pulse' | TReadOnlyProperty<'manual' | number | 'other' | 'oscillate' | 'pulse'>, pulseWidth: 'low' | 'medium' | 'high' | TReadOnlyProperty<'low' | 'medium' | 'high'>, wrenchPosition: 'bottom' | 'middle' | 'top' | TReadOnlyProperty<'bottom' | 'middle' | 'top'> }>( fluentSupport.bundleProperty, 'a11y_waveGeneration_start', _.get( WaveOnAStringStrings, 'a11y.waveGeneration.startStringProperty' ), [{"name":"active","variants":["true","false"]},{"name":"amplitude","variants":[{"type":"number","value":"zero"},"low","medium","high"]},{"name":"frequency","variants":[{"type":"number","value":"zero"},"low","medium","high"]},{"name":"isStill","variants":["true","false"]},{"name":"mode","variants":["manual",{"type":"number","value":"other"},"oscillate","pulse"]},{"name":"pulseWidth","variants":["low","medium","high"]},{"name":"wrenchPosition","variants":["bottom","middle","top"]}] ),
+      end: new FluentPattern<{ endPosition: 'fixed' | 'loose' | 'no' | TReadOnlyProperty<'fixed' | 'loose' | 'no'> }>( fluentSupport.bundleProperty, 'a11y_waveGeneration_end', _.get( WaveOnAStringStrings, 'a11y.waveGeneration.endStringProperty' ), [{"name":"endPosition","variants":["fixed","loose","no"]}] )
     },
     waveMode: {
       accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_waveMode_accessibleName', _.get( WaveOnAStringStrings, 'a11y.waveMode.accessibleNameStringProperty' ) ),

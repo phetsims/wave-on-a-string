@@ -85,14 +85,6 @@
       "controlArea": {
         "value": "Change the properties of the oscillators and of the string."
       },
-      "currentDetails": {
-        "start": {
-          "value": "Currently, the { $mode ->\n  [manual] wrench clamped to the string is near the { $wrenchPosition ->\n      [bottom] bottom\n      *[middle] middle\n      [top] top\n    } of the play area\n  *[other] { $mode ->\n    [oscillate] oscillator\n    *[pulse] pulse generator\n  } is { $active ->\n    [true] generating a { $mode ->\n      [oscillate] sinusoidal wave\n      *[pulse] triangular pulse\n    } that begins with { $amplitude ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } amplitude and\n    { $mode ->\n      [oscillate] { $frequency ->\n        [zero] zero\n        [low] low\n        [medium] medium\n        *[high] high\n      } frequency\n      *[pulse] { $pulseWidth ->\n        [low] narrow\n        [medium] medium\n        *[high] wide\n      } pulse width\n    }\n    *[false] stationary \n  } in the play area\n}, and the string is { $isStill ->\n  *[true] still and flat\n  [false] in motion\n}."
-        },
-        "end": {
-          "value": "The end of the string { $endPosition ->\n  *[fixed] is fixed to a clamp.\n  [loose] is attached to a ring that moves along a rod.\n  [no] extends out to infinity through a window outside.\n}"
-        }
-      },
       "interactionHint": {
         "value": "{ $mode ->\n  [manual] Move the wrench or choose another way to start making waves.\n  [oscillate] Start the oscillator or choose another way to start making waves.\n  *[pulse] Start a pulse or choose another way to start making waves.\n}"
       }
@@ -136,6 +128,14 @@
       },
       "percentage": {
         "value": "{ $value } percent"
+      }
+    },
+    "waveGeneration": {
+      "start": {
+        "value": "Currently, the { $mode ->\n  [manual] wrench clamped to the string is near the { $wrenchPosition ->\n      [bottom] bottom\n      *[middle] middle\n      [top] top\n    } of the play area\n  *[other] { $mode ->\n    [oscillate] oscillator\n    *[pulse] pulse generator\n  } is { $active ->\n    [true] generating a { $mode ->\n      [oscillate] sinusoidal wave\n      *[pulse] triangular pulse\n    } that begins with { $amplitude ->\n      [zero] zero\n      [low] low\n      [medium] medium\n      *[high] high\n    } amplitude and\n    { $mode ->\n      [oscillate] { $frequency ->\n        [zero] zero\n        [low] low\n        [medium] medium\n        *[high] high\n      } frequency\n      *[pulse] { $pulseWidth ->\n        [low] narrow\n        [medium] medium\n        *[high] wide\n      } pulse width\n    }\n    *[false] stationary \n  } in the play area\n}, and the string is { $isStill ->\n  *[true] still and flat\n  [false] in motion\n}."
+      },
+      "end": {
+        "value": "The end of the string { $endPosition ->\n  *[fixed] is fixed to a clamp.\n  [loose] is attached to a ring that moves along a rod.\n  [no] extends out to infinity through a window outside.\n}"
       }
     },
     "waveMode": {

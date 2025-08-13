@@ -1,114 +1,115 @@
 # Strings for the Wave on a String simulation.
 # After changing this file, run `grunt modulify --targets=strings` to regenerate the appropriate files, including type definitions.
 
-wave-on-a-string.title:     Wave on a String
-rulers:                     Rulers
-timer:                      Stopwatch
-amplitude:                  Amplitude
-frequency:                  Frequency
-pulseWidth:                 Pulse Width
-damping:                    Damping
-tension:                    Tension
-low:                        Low
-high:                       High
-manual:                     Manual
-oscillate:                  Oscillate
-pulse:                      Pulse
-restart:                    Restart String
-fixedEnd:                   Fixed End
-looseEnd:                   Loose End
-noEnd:                      No End
-speedNormal:                Normal
-speedSlow:                  Slow Motion
-referenceLine:              Reference Line
-unitCm:                     cm
-patternValueUnitHz:         "{0} Hz"
-patternValueUnitCm:         "{0} cm"
-patternValueUnitS:          "{0} s"
-patternValueUnitPercentage: "{0}%"
+wave-on-a-string.title:            Wave on a String
+rulers:                            Rulers
+timer:                             Stopwatch
+amplitude:                         Amplitude
+frequency:                         Frequency
+pulseWidth:                        Pulse Width
+damping:                           Damping
+tension:                           Tension
+low:                               Low
+high:                              High
+manual:                            Manual
+oscillate:                         Oscillate
+pulse:                             Pulse
+restart:                           Restart String
+fixedEnd:                          Fixed End
+looseEnd:                          Loose End
+noEnd:                             No End
+speedNormal:                       Normal
+speedSlow:                         Slow Motion
+referenceLine:                     Reference Line
+unitCm:                            cm
+patternValueUnitHz:                "{0} Hz"
+patternValueUnitCm:                "{0} cm"
+patternValueUnitS:                 "{0} s"
+patternValueUnitPercentage:        "{0}%"
 
 keyboardHelpDialog.stringControls: String Controls
 
 a11y:
   screenSummary:
-    playArea:    >-
-                 Explore different ways to generate waves on a string that tightly stretches across the play area. 
-                 The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose. 
-                 Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area. 
-                 Explore the effect of changing how the end of the string attaches to the end of the play area or allow it to extend infinitely.
-    controlArea: Change the properties of the oscillators and of the string.
-    currentDetails:
-      start: |-
-             Currently, the { $mode ->
-               [manual] wrench clamped to the string is near the { $wrenchPosition ->
-                   [bottom] bottom
-                   *[middle] middle
-                   [top] top
-                 } of the play area
-               *[other] { $mode ->
-                 [oscillate] oscillator
-                 *[pulse] pulse generator
-               } is { $active ->
-                 [true] generating a { $mode ->
-                   [oscillate] sinusoidal wave
-                   *[pulse] triangular pulse
-                 } that begins with { $amplitude ->
-                   [zero] zero
-                   [low] low
-                   [medium] medium
-                   *[high] high
-                 } amplitude and
-                 { $mode ->
-                   [oscillate] { $frequency ->
-                     [zero] zero
-                     [low] low
-                     [medium] medium
-                     *[high] high
-                   } frequency
-                   *[pulse] { $pulseWidth ->
-                     [low] narrow
-                     [medium] medium
-                     *[high] wide
-                   } pulse width
-                 }
-                 *[false] stationary 
-               } in the play area
-             }, and the string is { $isStill ->
-               *[true] still and flat
-               [false] in motion
-             }.
-      end:   |-
-             The end of the string { $endPosition ->
-               *[fixed] is fixed to a clamp.
-               [loose] is attached to a ring that moves along a rod.
-               [no] extends out to infinity through a window outside.
-             }
+    playArea:        >-
+                     Explore different ways to generate waves on a string that tightly stretches across the play area. 
+                     The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose. 
+                     Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area. 
+                     Explore the effect of changing how the end of the string attaches to the end of the play area or allow it to extend infinitely.
+    controlArea:     Change the properties of the oscillators and of the string.
     interactionHint: |-
-             { $mode ->
-               [manual] Move the wrench or choose another way to start making waves.
-               [oscillate] Start the oscillator or choose another way to start making waves.
-               *[pulse] Start a pulse or choose another way to start making waves.
-             }
+                     { $mode ->
+                       [manual] Move the wrench or choose another way to start making waves.
+                       [oscillate] Start the oscillator or choose another way to start making waves.
+                       *[pulse] Start a pulse or choose another way to start making waves.
+                     }
 
   headings:
     playArea:
-      waveGeneration: Wave Generation
-      activeMeasurementTools: Active Measurement Tools
-      activeMeasurementToolsDescription: Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
-      waveAndStringProperties: Wave and String Properties
+      waveGeneration:                     Wave Generation
+      activeMeasurementTools:             Active Measurement Tools
+      activeMeasurementToolsDescription:  Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
+      waveAndStringProperties:            Wave and String Properties
       waveAndStringPropertiesDescription: Controls to change the properties of the generated wave and the string.
     controlArea:
-      measurementTools: Measurement Tools
+      measurementTools:            Measurement Tools
       measurementToolsDescription: Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
 
   valuePatterns:
     centimeters: "{ $value } centimeters"
-    hertz: "{ $value } hertz"
-    seconds: "{ $value } seconds"
-    percentage: "{ $value } percent"
+    hertz:       "{ $value } hertz"
+    seconds:     "{ $value } seconds"
+    percentage:  "{ $value } percent"
+
+  waveGeneration:
+    start: |-
+           Currently, the { $mode ->
+             [manual] wrench clamped to the string is near the { $wrenchPosition ->
+                 [bottom] bottom
+                 *[middle] middle
+                 [top] top
+               } of the play area
+             *[other] { $mode ->
+               [oscillate] oscillator
+               *[pulse] pulse generator
+             } is { $active ->
+               [true] generating a { $mode ->
+                 [oscillate] sinusoidal wave
+                 *[pulse] triangular pulse
+               } that begins with { $amplitude ->
+                 [zero] zero
+                 [low] low
+                 [medium] medium
+                 *[high] high
+               } amplitude and
+               { $mode ->
+                 [oscillate] { $frequency ->
+                   [zero] zero
+                   [low] low
+                   [medium] medium
+                   *[high] high
+                 } frequency
+                 *[pulse] { $pulseWidth ->
+                   [low] narrow
+                   [medium] medium
+                   *[high] wide
+                 } pulse width
+               }
+               *[false] stationary 
+             } in the play area
+           }, and the string is { $isStill ->
+             *[true] still and flat
+             [false] in motion
+           }.
+    end:   |-
+           The end of the string { $endPosition ->
+             *[fixed] is fixed to a clamp.
+             [loose] is attached to a ring that moves along a rod.
+             [no] extends out to infinity through a window outside.
+           }
 
   waveMode:
-    accessibleName: Wave Mode
+    accessibleName:     Wave Mode
     accessibleHelpText: Create wave manually, continuously, or with individual pulses.
     manual:
       accessibleName: Manual
@@ -117,7 +118,7 @@ a11y:
     pulse:
       accessibleName: Pulse
   endMode:
-    accessibleName: String End Type
+    accessibleName:     String End Type
     accessibleHelpText: Set attachment for the end of the string.
     fixedEnd:
       accessibleName: Fixed End
@@ -128,21 +129,21 @@ a11y:
   string:
     stillContextResponse: String still.
   wrench:
-    accessibleName: Wrench
+    accessibleName:     Wrench
     accessibleHelpText: Move the wrench up and down to drag the string and make a wave.
   pulseGenerator:
-    accessibleName: Pulse Generator
+    accessibleName:     Pulse Generator
     accessibleHelpText: Create a single triangular wave pulse along the string.
   restartButton:
     accessibleHelpText: Reset string position to still and flat.
   horizontalRuler:
-    accessibleName: Horizontal Ruler
+    accessibleName:     Horizontal Ruler
     accessibleHelpText: Drag ruler to line up and visually measure wave length.
   verticalRuler:
-    accessibleName: Vertical Ruler
+    accessibleName:     Vertical Ruler
     accessibleHelpText: Drag ruler to line up and visually measure wave amplitude.
   referenceLine:
-    accessibleName: Reference Line
+    accessibleName:     Reference Line
     accessibleHelpText: Move handle and visually line up with waves to compare amplitude changes.
   amplitudeControl:
     accessibleHelpText: Wave height from crest to trough.
@@ -156,26 +157,26 @@ a11y:
     accessibleHelpText: Amount the string is stretched.
   visibilityControls:
     rulers:
-      accessibleHelpText: Vertical and horizontal rulers to measure distance.
+      accessibleHelpText:        Vertical and horizontal rulers to measure distance.
       accessibleContextResponse: |-
-        Rulers { $isVisible ->
-          [true] added.
-          *[false] removed.
-        }
+                                 Rulers { $isVisible ->
+                                   [true] added.
+                                   *[false] removed.
+                                 }
     stopwatch:
-      accessibleHelpText: Stopwatch to measure elapsed time.
+      accessibleHelpText:        Stopwatch to measure elapsed time.
       accessibleContextResponse: |-
-        Stopwatch { $isVisible ->
-          [true] added.
-          *[false] removed.
-        }
+                                 Stopwatch { $isVisible ->
+                                   [true] added.
+                                   *[false] removed.
+                                 }
     referenceLine:
-      accessibleHelpText: Movable dashed laser line to visually line up with waves to compare amplitude changes.
+      accessibleHelpText:        Movable dashed laser line to visually line up with waves to compare amplitude changes.
       accessibleContextResponse: |-
-        Reference line { $isVisible ->
-          [true] added.
-          *[false] removed.
-        }
+                                 Reference line { $isVisible ->
+                                   [true] added.
+                                   *[false] removed.
+                                 }
   keyboardHelpDialog:
     restartString:
       description: Reset Shape with { $altOrOption } plus Shift plus R.
