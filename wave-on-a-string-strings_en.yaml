@@ -96,6 +96,7 @@ a11y:
 
   headings:
     playArea:
+      waveGeneration: Wave Generation
       activeMeasurementTools: Active Measurement Tools
       activeMeasurementToolsDescription: Tools to visually measure properties of waves. Pause the sim to help make precise measurements.
       waveAndStringProperties: Wave and String Properties

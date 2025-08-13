@@ -54,6 +54,7 @@ type StringsType = {
     };
     'headings': {
       'playArea': {
+        'waveGenerationStringProperty': LocalizedStringProperty;
         'activeMeasurementToolsStringProperty': LocalizedStringProperty;
         'activeMeasurementToolsDescriptionStringProperty': LocalizedStringProperty;
         'waveAndStringPropertiesStringProperty': LocalizedStringProperty;

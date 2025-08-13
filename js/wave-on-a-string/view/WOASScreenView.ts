@@ -50,6 +50,7 @@ import StringNode from './StringNode.js';
 import WOASColors from './WOASColors.js';
 import WOASRadioButtonGroup from './WOASRadioButtonGroup.js';
 import WOASScreenSummaryContent from './WOASScreenSummaryContent.js';
+import WaveGenerationParagraphsNode from './WaveGenerationParagraphsNode.js';
 
 const MARGIN = 10;
 
@@ -386,6 +387,8 @@ class WOASScreenView extends ScreenView {
       ]
     } );
 
+    const waveGenerationParagraphsNode = new WaveGenerationParagraphsNode( model );
+
     this.children = [
       playAreaActiveMeasurementToolsNode,
       playAreaWaveAndStringPropertiesNode,
@@ -404,6 +407,7 @@ class WOASScreenView extends ScreenView {
         yAlign: 'top',
         margin: MARGIN
       } ),
+      waveGenerationParagraphsNode,
       timeControlNode,
       new AlignBox( resetAllButton, {
         alignBounds: this.layoutBounds,
@@ -432,6 +436,7 @@ class WOASScreenView extends ScreenView {
       startNode.wrench,
       startNode.pulseButton,
       restartButton,
+      waveGenerationParagraphsNode,
       timeControlNode,
       playAreaActiveMeasurementToolsNode,
       playAreaWaveAndStringPropertiesNode

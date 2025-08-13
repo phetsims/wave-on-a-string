@@ -54,6 +54,7 @@ addToMapIfDefined( 'a11y_screenSummary_controlArea', 'a11y.screenSummary.control
 addToMapIfDefined( 'a11y_screenSummary_currentDetails_start', 'a11y.screenSummary.currentDetails.startStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_currentDetails_end', 'a11y.screenSummary.currentDetails.endStringProperty' );
 addToMapIfDefined( 'a11y_screenSummary_interactionHint', 'a11y.screenSummary.interactionHintStringProperty' );
+addToMapIfDefined( 'a11y_headings_playArea_waveGeneration', 'a11y.headings.playArea.waveGenerationStringProperty' );
 addToMapIfDefined( 'a11y_headings_playArea_activeMeasurementTools', 'a11y.headings.playArea.activeMeasurementToolsStringProperty' );
 addToMapIfDefined( 'a11y_headings_playArea_activeMeasurementToolsDescription', 'a11y.headings.playArea.activeMeasurementToolsDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_headings_playArea_waveAndStringProperties', 'a11y.headings.playArea.waveAndStringPropertiesStringProperty' );
@@ -155,6 +156,7 @@ const WaveOnAStringFluent = {
     },
     headings: {
       playArea: {
+        waveGenerationStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_waveGeneration', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.waveGenerationStringProperty' ) ),
         activeMeasurementToolsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_activeMeasurementTools', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.activeMeasurementToolsStringProperty' ) ),
         activeMeasurementToolsDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_activeMeasurementToolsDescription', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.activeMeasurementToolsDescriptionStringProperty' ) ),
         waveAndStringPropertiesStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_headings_playArea_waveAndStringProperties', _.get( WaveOnAStringStrings, 'a11y.headings.playArea.waveAndStringPropertiesStringProperty' ) ),

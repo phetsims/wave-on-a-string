@@ -99,6 +99,9 @@
     },
     "headings": {
       "playArea": {
+        "waveGeneration": {
+          "value": "Wave Generation"
+        },
         "activeMeasurementTools": {
           "value": "Active Measurement Tools"
         },

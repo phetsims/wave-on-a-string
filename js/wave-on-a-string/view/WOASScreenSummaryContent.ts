@@ -11,7 +11,6 @@ import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import WOASModel from '../model/WOASModel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import { WOASEndType } from '../model/WOASEndType.js';
 import { WOASMode } from '../model/WOASMode.js';
 
 const MODE_MAP = new Map<WOASMode, 'manual' | 'oscillate' | 'pulse'>( [
@@ -30,42 +29,6 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
 
     super( {
       playAreaContent: WaveOnAStringFluent.a11y.screenSummary.playAreaStringProperty,
-      currentDetailsContent: [
-        WaveOnAStringFluent.a11y.screenSummary.currentDetails.start.createProperty( {
-          isPlaying: new DerivedProperty( [ model.isPlayingProperty ], isPlaying => isPlaying ? 'true' : 'false' ),
-          wrenchPosition: new DerivedProperty( [ model.leftMostBeadYProperty ], y => y > 0.5 ? 'top' : y < -0.5 ? 'bottom' : 'middle' ),
-          mode: modeStringProperty,
-          active: new DerivedProperty( [ model.waveModeProperty, model.isPulseActiveProperty ], ( mode, isPulseActive ) => {
-            return ( mode !== WOASMode.PULSE || isPulseActive ) ? 'true' : 'false';
-          } ),
-          amplitude: new DerivedProperty( [ model.amplitudeProperty ], amplitude => {
-            const magnitude = Math.abs( amplitude );
-            return magnitude < 1e-3 ? 'zero' :
-                   magnitude < 0.4 ? 'low' :
-                   magnitude > 0.9 ? 'high' : 'medium';
-          } ),
-          frequency: new DerivedProperty( [ model.frequencyProperty ], frequency => {
-            const magnitude = Math.abs( frequency );
-            return magnitude < 1e-3 ? 'zero' :
-                   magnitude < 1 ? 'low' :
-                   magnitude > 2 ? 'high' : 'medium';
-          } ),
-          pulseWidth: new DerivedProperty( [ model.pulseWidthProperty ], pulseWidth => {
-            return pulseWidth < 0.35 ? 'low' :
-                   pulseWidth > 0.75 ? 'high' : 'medium';
-          } ),
-          isStill: new DerivedProperty( [ model.isStringStillProperty ], isFlat => isFlat ? 'true' : 'false' )
-        } ),
-        WaveOnAStringFluent.a11y.screenSummary.currentDetails.end.createProperty( {
-          endPosition: new DerivedProperty( [ model.stringEndTypeProperty ], endType => {
-            return {
-              [ WOASEndType.FIXED_END.toString() ]: 'fixed',
-              [ WOASEndType.LOOSE_END.toString() ]: 'loose',
-              [ WOASEndType.NO_END.toString() ]: 'no'
-            }[ endType.toString() ] as 'fixed' | 'loose' | 'no';
-          } )
-        } )
-      ],
       interactionHintContent: WaveOnAStringFluent.a11y.screenSummary.interactionHint.createProperty( {
         mode: modeStringProperty
       } )
