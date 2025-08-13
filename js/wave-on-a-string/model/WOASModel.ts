@@ -157,54 +157,63 @@ export default class WOASModel extends PhetioObject {
     } );
     this.wrenchArrowsVisibleProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'wrenchArrowsVisibleProperty' ),
-      phetioDocumentation: 'Whether the up/down arrows on the wrench are visible'
+      phetioDocumentation: 'Whether the up/down arrows on the wrench are visible',
+      phetioFeatured: true
     } );
 
     // NOTE: 14 is the insets for the ruler
     this.horizontalRulerPositionProperty = new Vector2Property( new Vector2( VIEW_ORIGIN_X - 14, 117 ), {
       tandem: toolsTandem.createTandem( 'horizontalRulerPositionProperty' ),
-      phetioDocumentation: 'Position of the horizontal ruler in view coordinates (from the top-left of the ruler)'
+      phetioDocumentation: 'Position of the horizontal ruler in view coordinates (from the top-left of the ruler)',
+      phetioFeatured: true
     } );
     this.verticalRulerPositionProperty = new Vector2Property( new Vector2( 13, 440 ), {
       tandem: toolsTandem.createTandem( 'verticalRulerPositionProperty' ),
-      phetioDocumentation: 'Position of the vertical ruler in view coordinates (from the bottom-left of the ruler)'
+      phetioDocumentation: 'Position of the vertical ruler in view coordinates (from the bottom-left of the ruler)',
+      phetioFeatured: true
     } );
     this.referenceLinePositionProperty = new Vector2Property( new Vector2( -10, 120 ), {
       tandem: toolsTandem.createTandem( 'referenceLinePositionProperty' ),
-      phetioDocumentation: 'Position of the reference line in view coordinates (from the left of the line)'
+      phetioDocumentation: 'Position of the reference line in view coordinates (from the left of the line)',
+      phetioFeatured: true
     } );
 
     this.tensionProperty = new NumberProperty( 0.8, {
       range: new Range( 0.2, 0.8 ),
       tandem: tandem.createTandem( 'tensionProperty' ),
-      phetioDocumentation: 'The relative amount of tension on the string'
+      phetioDocumentation: 'The relative amount of tension on the string',
+      phetioFeatured: true
     } );
 
     this.dampingProperty = new NumberProperty( 0.2, {
       range: new Range( 0, 1 ),
       tandem: tandem.createTandem( 'dampingProperty' ),
-      phetioDocumentation: 'The relative amount of damping (percentage) for the string'
+      phetioDocumentation: 'The relative amount of damping (percentage) for the string',
+      phetioFeatured: true
     } );
 
     this.frequencyProperty = new NumberProperty( 1.50, {
       range: new Range( 0, 3 ),
       tandem: tandem.createTandem( 'frequencyProperty' ),
       phetioDocumentation: 'The frequency of the oscillator, in hertz',
-      units: 'Hz'
+      units: 'Hz',
+      phetioFeatured: true
     } );
 
     this.pulseWidthProperty = new NumberProperty( 0.5, {
       range: new Range( 0.2, 1 ),
       tandem: tandem.createTandem( 'pulseWidthProperty' ),
       phetioDocumentation: 'The width of a pulse (generated with the pulse mode) in seconds',
-      units: 's'
+      units: 's',
+      phetioFeatured: true
     } );
 
     this.amplitudeProperty = new NumberProperty( 0.75, {
       range: new Range( 0, MAX_START_AMPLITUDE_CM ),
       tandem: tandem.createTandem( 'amplitudeProperty' ),
       phetioDocumentation: 'The amplitude of the oscillation or pulses in centimeters',
-      units: 'cm'
+      units: 'cm',
+      phetioFeatured: true
     } );
 
     this.lastDtProperty = new NumberProperty( 0.03 );
@@ -254,12 +263,12 @@ export default class WOASModel extends PhetioObject {
       map: ( y: number ) => -y / MODEL_UNITS_PER_CM,
       inverseMap: ( y: number ) => -y * MODEL_UNITS_PER_CM,
       tandem: tandem.createTandem( 'leftMostBeadYProperty' ),
-      phetioDocumentation: 'The y-value of the left-most bead measured with respect to the center line',
+      phetioDocumentation: 'The y-value of the left-most bead measured with respect to the center line, proxy for wrench y-value.',
       units: 'cm',
       phetioValueType: NumberIO,
       range: new Range( -MAX_START_AMPLITUDE_CM, MAX_START_AMPLITUDE_CM ),
       phetioReadOnly: true,
-      phetioFeatured: false
+      phetioFeatured: true
     } );
 
     this.stepDtProperty = new NumberProperty( 0 );

@@ -86,7 +86,10 @@ export default class BottomControlPanel extends Panel {
         } )
       }
     } ], {
-      tandem: checkboxTandem
+      tandem: checkboxTandem,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     const separator = new Separator( {
@@ -246,7 +249,10 @@ export default class BottomControlPanel extends Panel {
       fill: WOASColors.panelBackgroundColorProperty,
       cornerRadius: 5,
       xMargin: 15,
-      yMargin: 5
+      yMargin: 5,
+      visiblePropertyOptions: {
+        phetioFeatured: true
+      }
     } );
 
     this.tensionControl = tensionControl;
