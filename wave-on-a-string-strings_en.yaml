@@ -136,6 +136,7 @@ a11y:
     accessibleHelpText: Create a single triangular wave pulse along the string.
   restartButton:
     accessibleHelpText: Reset string position to still and flat.
+    accessibleContextResponse: String reset.
   horizontalRuler:
     accessibleName:     Horizontal Ruler
     accessibleHelpText: Drag ruler to line up and visually measure wave length.

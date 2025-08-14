@@ -81,6 +81,7 @@ addToMapIfDefined( 'a11y_wrench_accessibleHelpText', 'a11y.wrench.accessibleHelp
 addToMapIfDefined( 'a11y_pulseGenerator_accessibleName', 'a11y.pulseGenerator.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_pulseGenerator_accessibleHelpText', 'a11y.pulseGenerator.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_restartButton_accessibleHelpText', 'a11y.restartButton.accessibleHelpTextStringProperty' );
+addToMapIfDefined( 'a11y_restartButton_accessibleContextResponse', 'a11y.restartButton.accessibleContextResponseStringProperty' );
 addToMapIfDefined( 'a11y_horizontalRuler_accessibleName', 'a11y.horizontalRuler.accessibleNameStringProperty' );
 addToMapIfDefined( 'a11y_horizontalRuler_accessibleHelpText', 'a11y.horizontalRuler.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_verticalRuler_accessibleName', 'a11y.verticalRuler.accessibleNameStringProperty' );
@@ -211,7 +212,8 @@ const WaveOnAStringFluent = {
       accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_pulseGenerator_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.pulseGenerator.accessibleHelpTextStringProperty' ) )
     },
     restartButton: {
-      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_restartButton_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.restartButton.accessibleHelpTextStringProperty' ) )
+      accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_restartButton_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.restartButton.accessibleHelpTextStringProperty' ) ),
+      accessibleContextResponseStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_restartButton_accessibleContextResponse', _.get( WaveOnAStringStrings, 'a11y.restartButton.accessibleContextResponseStringProperty' ) )
     },
     horizontalRuler: {
       accessibleNameStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_horizontalRuler_accessibleName', _.get( WaveOnAStringStrings, 'a11y.horizontalRuler.accessibleNameStringProperty' ) ),

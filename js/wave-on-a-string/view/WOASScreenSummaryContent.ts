@@ -29,6 +29,7 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
 
     super( {
       playAreaContent: WaveOnAStringFluent.a11y.screenSummary.playAreaStringProperty,
+      controlAreaContent: WaveOnAStringFluent.a11y.screenSummary.controlAreaStringProperty,
       interactionHintContent: WaveOnAStringFluent.a11y.screenSummary.interactionHint.createProperty( {
         mode: modeStringProperty
       } )

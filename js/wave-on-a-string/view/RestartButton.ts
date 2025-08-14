@@ -24,6 +24,7 @@ export default class RestartButton extends RestartUndoButton {
       baseColor: WOASColors.restartButtonColorProperty,
       accessibleName: WaveOnAStringFluent.restartStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.restartButton.accessibleHelpTextStringProperty,
+      accessibleContextResponse: WaveOnAStringFluent.a11y.restartButton.accessibleContextResponseStringProperty,
       touchAreaXDilation: 15,
       touchAreaYDilation: 15
     }, providedOptions ) );

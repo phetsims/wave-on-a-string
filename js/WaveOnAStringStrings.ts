@@ -110,6 +110,7 @@ type StringsType = {
     };
     'restartButton': {
       'accessibleHelpTextStringProperty': LocalizedStringProperty;
+      'accessibleContextResponseStringProperty': LocalizedStringProperty;
     };
     'horizontalRuler': {
       'accessibleNameStringProperty': LocalizedStringProperty;

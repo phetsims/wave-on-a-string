@@ -208,6 +208,9 @@
     "restartButton": {
       "accessibleHelpText": {
         "value": "Reset string position to still and flat."
+      },
+      "accessibleContextResponse": {
+        "value": "String reset."
       }
     },
     "horizontalRuler": {
