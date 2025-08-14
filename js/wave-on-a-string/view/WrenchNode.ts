@@ -80,8 +80,6 @@ export default class WrenchNode extends InteractiveHighlighting( Node ) {
         }
 
         if ( event.target !== wrenchTopArrow && event.target !== wrenchBottomArrow ) {
-
-          // TODO: Should the arrows be hidden if the user uses the keyboard to move the wrench? See https://github.com/phetsims/wave-on-a-string/issues/162
           model.wrenchArrowsVisibleProperty.value = false;
         }
       },
