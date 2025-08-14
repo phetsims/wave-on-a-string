@@ -48,10 +48,9 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
         } ),
         value: options.radio[ i ],
         tandemName: options.tandemNames[ i ],
-
-        // TODO: this failed type checking when I made group of type AquaRadioButtonGroupItem<T> see https://github.com/phetsims/wave-on-a-string/issues/177
-        // @ts-expect-error see https://github.com/phetsims/wave-on-a-string/issues/177
-        accessibleName: options.accessibleNames[ i ]
+        options: {
+          accessibleName: options.accessibleNames[ i ]
+        }
       } );
     }
 
