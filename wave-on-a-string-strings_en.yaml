@@ -32,11 +32,11 @@ keyboardHelpDialog.stringControls: String Controls
 a11y:
   screenSummary:
     playArea:        >-
-                     Explore different ways to generate waves on a string that tightly stretches across the play area. 
-                     The string can be attached to a wrench to move manually or to oscillators that move continuously or pulse when you choose. 
-                     Changing the way you make waves provides different properties of the waves and the string for you to tune in the control area. 
-                     Explore the effect of changing how the end of the string attaches to the end of the play area or allow it to extend infinitely.
-    controlArea:     Change the properties of the oscillators and of the string.
+                     Explore the physical properties of waves by manipulating a string that tightly stretches across the play area.
+                     Move the string yourself with a wrench, use a continuous oscillator, or pulse the string to generate waves. 
+                     Every wave mode provides different options to tune the strings' properties and motion, which affects the waves you create and observe.
+                     Discover the effect of changing how the end of the string attaches to the end of the play area or allow it to extend infinitely.
+    controlArea:     Several tools are available to support measurements of different properties of the resulting waves.
     interactionHint: |-
                      { $mode ->
                        [manual] Move the wrench or choose another way to start making waves.
@@ -179,4 +179,4 @@ a11y:
                                  }
   keyboardHelpDialog:
     restartString:
-      description: Reset Shape with { $altOrOption } plus Shift plus R.
+      description: Reset String with { $altOrOption } plus Shift plus R.
