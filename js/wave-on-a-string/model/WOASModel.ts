@@ -33,6 +33,10 @@ import { WOASMode } from './WOASMode.js';
 import { FRAMES_PER_SECOND, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, FRAME_DURATION, VIEW_ORIGIN_X } from '../WOASConstants.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { linear } from '../../../../dot/js/util/linear.js';
+import { centimetersUnit } from '../../../../scenery-phet/js/units/centimetersUnit.js';
+import { hertzUnit } from '../../../../scenery-phet/js/units/hertzUnit.js';
+import { percentUnit } from '../../../../scenery-phet/js/units/percentUnit.js';
+import { secondsUnit } from '../../../../scenery-phet/js/units/secondsUnit.js';
 
 // constants
 const LAST_INDEX = NUMBER_OF_BEADS - 1;
@@ -182,21 +186,23 @@ export default class WOASModel extends PhetioObject {
       range: new Range( 0.2, 0.8 ),
       tandem: tandem.createTandem( 'tensionProperty' ),
       phetioDocumentation: 'The relative amount of tension on the string',
-      phetioFeatured: true
+      phetioFeatured: true,
+      units: percentUnit
     } );
 
     this.dampingProperty = new NumberProperty( 0.2, {
       range: new Range( 0, 1 ),
       tandem: tandem.createTandem( 'dampingProperty' ),
       phetioDocumentation: 'The relative amount of damping (percentage) for the string',
-      phetioFeatured: true
+      phetioFeatured: true,
+      units: percentUnit
     } );
 
     this.frequencyProperty = new NumberProperty( 1.50, {
       range: new Range( 0, 3 ),
       tandem: tandem.createTandem( 'frequencyProperty' ),
       phetioDocumentation: 'The frequency of the oscillator, in hertz',
-      units: 'Hz',
+      units: hertzUnit,
       phetioFeatured: true
     } );
 
@@ -204,7 +210,7 @@ export default class WOASModel extends PhetioObject {
       range: new Range( 0.2, 1 ),
       tandem: tandem.createTandem( 'pulseWidthProperty' ),
       phetioDocumentation: 'The width of a pulse (generated with the pulse mode) in seconds',
-      units: 's',
+      units: secondsUnit,
       phetioFeatured: true
     } );
 
@@ -212,7 +218,7 @@ export default class WOASModel extends PhetioObject {
       range: new Range( 0, MAX_START_AMPLITUDE_CM ),
       tandem: tandem.createTandem( 'amplitudeProperty' ),
       phetioDocumentation: 'The amplitude of the oscillation or pulses in centimeters',
-      units: 'cm',
+      units: centimetersUnit,
       phetioFeatured: true
     } );
 
