@@ -8,7 +8,7 @@
  */
 
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import { PDOMValueType } from '../../../../scenery/js/accessibility/pdom/ParallelDOM.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
