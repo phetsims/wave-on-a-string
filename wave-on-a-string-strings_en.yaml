@@ -35,7 +35,7 @@ a11y:
                      Explore the physical properties of waves by manipulating a string that tightly stretches across the play area.
                      Move the string yourself with a wrench, use a continuous oscillator, or pulse the string to generate waves. 
                      Every wave mode provides different options to tune the strings' properties and motion, which affects the waves you create and observe.
-                     Discover the effect of changing how the end of the string attaches to the end of the play area or allow it to extend infinitely.
+                     The end of the string can be fixed to the end of the play area, left loose, or removed entirely to extend infinitely.
     controlArea:     Several tools are available to support measurements of different properties of the resulting waves.
     interactionHint: |-
                      { $mode ->
