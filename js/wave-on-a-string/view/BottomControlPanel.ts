@@ -21,7 +21,6 @@ import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
 import WOASNumberControl from './WOASNumberControl.js';
-import { roundToInterval } from '../../../../dot/js/util/roundToInterval.js';
 import { WOASMode } from '../model/WOASMode.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
 import WOASColors from './WOASColors.js';
@@ -118,7 +117,8 @@ export default class BottomControlPanel extends Panel {
         decimalPlaces: 0
       },
       sliderOptions: {
-        constrainValue: value => tensionProperty.range.constrainValue( roundToInterval( value, 5 ) )
+        keyboardStep: 5,
+        shiftKeyboardStep: 1
       },
       tandem: tandem.createTandem( 'tensionControl' ),
       accessibleHelpText: WaveOnAStringFluent.a11y.tensionControl.accessibleHelpTextStringProperty
@@ -129,7 +129,8 @@ export default class BottomControlPanel extends Panel {
         decimalPlaces: 0
       },
       sliderOptions: {
-        constrainValue: value => dampingProperty.range.constrainValue( roundToInterval( value, 5 ) )
+        keyboardStep: 5,
+        shiftKeyboardStep: 1
       },
       tandem: tandem.createTandem( 'dampingControl' ),
       accessibleHelpText: WaveOnAStringFluent.a11y.dampingControl.accessibleHelpTextStringProperty
@@ -140,7 +141,8 @@ export default class BottomControlPanel extends Panel {
         decimalPlaces: 2
       },
       sliderOptions: {
-        constrainValue: value => model.frequencyProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
+        keyboardStep: 0.1,
+        shiftKeyboardStep: 0.01
       },
       tandem: tandem.createTandem( 'frequencyControl' ),
       phetioDocumentation: 'Frequency control is only available in the Oscillate mode',
@@ -152,7 +154,8 @@ export default class BottomControlPanel extends Panel {
         decimalPlaces: 2
       },
       sliderOptions: {
-        constrainValue: value => model.pulseWidthProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
+        keyboardStep: 0.1,
+        shiftKeyboardStep: 0.01
       },
       tandem: tandem.createTandem( 'pulseWidthControl' ),
       phetioDocumentation: 'Pulse width control is only available in the Pulse mode',
@@ -164,7 +167,8 @@ export default class BottomControlPanel extends Panel {
         decimalPlaces: 2
       },
       sliderOptions: {
-        constrainValue: value => model.amplitudeProperty.range.constrainValue( roundToInterval( value, 0.1 ) )
+        keyboardStep: 0.1,
+        shiftKeyboardStep: 0.01
       },
       tandem: tandem.createTandem( 'amplitudeControl' ),
       phetioDocumentation: 'Amplitude control is only available in the Oscillate/Pulse modes',
