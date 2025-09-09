@@ -172,7 +172,10 @@ export default class BottomControlPanel extends Panel {
     } );
 
     // We want the pulse-width and frequency controls to have the same bounds (they replace each other in the UI)
-    const frequencyPulseWidthAlignGroup = new AlignGroup();
+    const frequencyPulseWidthAlignGroup = new AlignGroup( {
+      // Allow these to vary vertically, since one might have the slider hidden see https://github.com/phetsims/wave-on-a-string/issues/204
+      matchVertical: false
+    } );
     const frequencyAlignBox = frequencyPulseWidthAlignGroup.createBox( frequencyControl, {
       visibleProperty: frequencyControl.visibleProperty
     } );
