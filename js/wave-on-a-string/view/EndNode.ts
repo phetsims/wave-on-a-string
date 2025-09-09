@@ -70,7 +70,7 @@ export default class EndNode extends Node {
     } );
     frameEmitter.addListener( () => {
       if ( dirty ) {
-        ringFront.y = ringBack.y = model.getRingY();
+        ringFront.y = ringBack.y = model.yDraw[ model.yDraw.length - 1 ];
         dirty = false;
       }
     } );

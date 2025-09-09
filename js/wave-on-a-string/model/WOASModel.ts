@@ -518,13 +518,6 @@ export default class WOASModel extends PhetioObject {
   }
 
   /**
-   * Returns the y position for the end of the string (position for the ring).
-   */
-  public getRingY(): number {
-    return this.yNow[ LAST_INDEX ] || 0;
-  }
-
-  /**
    * When we move to a fixed point, we want to zero out the very end.
    */
   public zeroOutEndPoint(): void {
