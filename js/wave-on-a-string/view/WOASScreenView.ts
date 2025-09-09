@@ -27,7 +27,7 @@ import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
-import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -132,13 +132,13 @@ class WOASScreenView extends ScreenView {
       verticalRulerNode.translation = position;
     } );
 
-    horizontalRulerNode.addInputListener( new DragListener( {
+    horizontalRulerNode.addInputListener( new SoundDragListener( {
       tandem: horizontalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.horizontalRulerPositionProperty,
       dragBoundsProperty: new Property( this.layoutBounds.dilated( 30 ).shiftedX( -this.layoutBounds.width / 2 ).dilatedX( this.layoutBounds.width * 0.4 ) )
     } ) );
 
-    verticalRulerNode.addInputListener( new DragListener( {
+    verticalRulerNode.addInputListener( new SoundDragListener( {
       tandem: verticalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.verticalRulerPositionProperty,
       dragBoundsProperty: new Property( this.layoutBounds.withMaxX( this.layoutBounds.maxX - 50 ).withMaxY( this.layoutBounds.maxY * 1.8 ) )

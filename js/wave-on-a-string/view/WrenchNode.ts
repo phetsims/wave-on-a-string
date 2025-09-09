@@ -18,7 +18,7 @@ import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibilit
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
-import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -71,7 +71,7 @@ export default class WrenchNode extends InteractiveHighlighting( Node ) {
     this.mouseArea = Shape.bounds( wrenchImageNode.bounds );
 
     let clickOffset = new Vector2( 0, 0 );
-    this.addInputListener( new DragListener( {
+    this.addInputListener( new SoundDragListener( {
       tandem: startNodeTandem.createTandem( 'wrenchDragListener' ),
       start: event => {
         clickOffset = this.globalToParentPoint( event.pointer.point );

@@ -15,7 +15,7 @@ import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import AccessibleDraggableOptions from '../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import SoundKeyboardDragListener from '../../../../scenery-phet/js/SoundKeyboardDragListener.js';
 import InteractiveHighlighting from '../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
-import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -73,7 +73,7 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
     this.touchArea = Shape.bounds( Bounds2.point( referenceX + 15, 0 ).dilated( dilatedReferenceLineTouchArea ) );
     this.mouseArea = Shape.bounds( Bounds2.point( referenceX + 15, 0 ).dilatedXY( 15, 10 ) );
 
-    this.addInputListener( new DragListener( {
+    this.addInputListener( new SoundDragListener( {
       positionProperty: model.referenceLinePositionProperty,
       tandem: tandem.createTandem( 'dragListener' ),
       dragBoundsProperty: dragBoundsProperty
