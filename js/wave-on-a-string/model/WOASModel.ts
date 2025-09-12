@@ -253,7 +253,7 @@ export default class WOASModel extends PhetioObject {
     } );
 
     this.stopwatch = new Stopwatch( {
-      position: new Vector2( 550, 330 ),
+      position: new Vector2( 774, 414 ),
       tandem: toolsTandem.createTandem( 'stopwatch' ),
       timePropertyOptions: {
         range: Stopwatch.ZERO_TO_ALMOST_SIXTY
