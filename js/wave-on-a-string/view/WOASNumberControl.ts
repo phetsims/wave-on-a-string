@@ -71,7 +71,7 @@ class WOASNumberControl extends NumberControl {
           font: NORMAL_FONT
         },
         maxWidth: 83,
-        xMargin: 20,
+        xMargin: 13,
         yMargin: 5,
         backgroundStroke: WOASColors.numberDisplayBackgroundStrokeProperty,
         cornerRadius: 5
