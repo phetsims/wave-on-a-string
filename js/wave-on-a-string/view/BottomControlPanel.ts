@@ -118,7 +118,8 @@ export default class BottomControlPanel extends Panel {
       },
       sliderOptions: {
         keyboardStep: 5,
-        shiftKeyboardStep: 1
+        shiftKeyboardStep: 1,
+        pageKeyboardStep: 10
       },
       tandem: tandem.createTandem( 'tensionControl' ),
       accessibleHelpText: WaveOnAStringFluent.a11y.tensionControl.accessibleHelpTextStringProperty
@@ -155,7 +156,8 @@ export default class BottomControlPanel extends Panel {
       },
       sliderOptions: {
         keyboardStep: 0.1,
-        shiftKeyboardStep: 0.01
+        shiftKeyboardStep: 0.01,
+        pageKeyboardStep: 0.2
       },
       tandem: tandem.createTandem( 'pulseWidthControl' ),
       phetioDocumentation: 'Pulse width control is only available in the Pulse mode',
@@ -168,7 +170,8 @@ export default class BottomControlPanel extends Panel {
       },
       sliderOptions: {
         keyboardStep: 0.1,
-        shiftKeyboardStep: 0.01
+        shiftKeyboardStep: 0.01,
+        pageKeyboardStep: 0.25
       },
       tandem: tandem.createTandem( 'amplitudeControl' ),
       phetioDocumentation: 'Amplitude control is only available in the Oscillate/Pulse modes',
