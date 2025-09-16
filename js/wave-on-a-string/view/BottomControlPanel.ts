@@ -25,6 +25,7 @@ import { WOASMode } from '../model/WOASMode.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
 import WOASColors from './WOASColors.js';
 import Separator from '../../../../scenery/js/layout/nodes/Separator.js';
+import { percentUnit } from '../../../../scenery-phet/js/units/percentUnit.js';
 
 export default class BottomControlPanel extends Panel {
   // for global a11y ordering
@@ -101,14 +102,14 @@ export default class BottomControlPanel extends Panel {
       map: ( value: number ) => value * 100,
       inverseMap: ( value: number ) => value / 100,
       range: new Range( model.tensionProperty.range.min * 100, model.tensionProperty.range.max * 100 ),
-      units: model.tensionProperty.units
+      units: percentUnit
     } );
     const dampingProperty = new RangedDynamicProperty( new Property( model.dampingProperty ), {
       bidirectional: true,
       map: ( value: number ) => value * 100,
       inverseMap: ( value: number ) => value / 100,
       range: new Range( model.dampingProperty.range.min * 100, model.dampingProperty.range.max * 100 ),
-      units: model.dampingProperty.units
+      units: percentUnit
     } );
 
     const tensionControl = new WOASNumberControl( WaveOnAStringFluent.tensionStringProperty, tensionProperty, {

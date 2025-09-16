@@ -35,7 +35,6 @@ import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import { linear } from '../../../../dot/js/util/linear.js';
 import { centimetersUnit } from '../../../../scenery-phet/js/units/centimetersUnit.js';
 import { hertzUnit } from '../../../../scenery-phet/js/units/hertzUnit.js';
-import { percentUnit } from '../../../../scenery-phet/js/units/percentUnit.js';
 import { secondsUnit } from '../../../../scenery-phet/js/units/secondsUnit.js';
 
 // constants
@@ -186,16 +185,14 @@ export default class WOASModel extends PhetioObject {
       range: new Range( 0.2, 0.8 ),
       tandem: tandem.createTandem( 'tensionProperty' ),
       phetioDocumentation: 'The relative amount of tension on the string',
-      phetioFeatured: true,
-      units: percentUnit
+      phetioFeatured: true
     } );
 
     this.dampingProperty = new NumberProperty( 0.2, {
       range: new Range( 0, 1 ),
       tandem: tandem.createTandem( 'dampingProperty' ),
       phetioDocumentation: 'The relative amount of damping (percentage) for the string',
-      phetioFeatured: true,
-      units: percentUnit
+      phetioFeatured: true
     } );
 
     this.frequencyProperty = new NumberProperty( 1.50, {
