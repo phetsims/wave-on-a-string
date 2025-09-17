@@ -70,9 +70,9 @@ class WOASScreenView extends ScreenView {
       SCALE_FROM_ORIGINAL
     );
 
+    // Tandems used in multiple places
     const toolsTandem = tandem.createTandem( 'tools' );
     const rulersTandem = toolsTandem.createTandem( 'rulersNode' );
-
     const horizontalRulerTandem = rulersTandem.createTandem( 'horizontalRulerNode' );
     const verticalRulerTandem = rulersTandem.createTandem( 'verticalRulerNode' );
 
@@ -85,61 +85,17 @@ class WOASScreenView extends ScreenView {
 
     const viewUnitsPerCM = modelViewTransform.modelToViewDeltaX( MODEL_UNITS_PER_CM );
 
-    const horizontalRulerWidth = 10 * viewUnitsPerCM;
-    const verticalRulerHeight = 5 * viewUnitsPerCM;
-
-    const horizontalRulerNode = new ( InteractiveHighlighting( RulerNode ) )( horizontalRulerWidth, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
+    const horizontalRulerNode = new ( InteractiveHighlighting( RulerNode ) )( 10 * viewUnitsPerCM, 50, viewUnitsPerCM, rangeInclusive( 0, 10 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: horizontalRulerTandem,
       accessibleName: WaveOnAStringFluent.a11y.horizontalRuler.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.horizontalRuler.accessibleHelpTextStringProperty
     }, rulerOptions ) );
-    const verticalRulerNode = new ( InteractiveHighlighting( RulerNode ) )( verticalRulerHeight, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
+    const verticalRulerNode = new ( InteractiveHighlighting( RulerNode ) )( 5 * viewUnitsPerCM, 50, viewUnitsPerCM, rangeInclusive( 0, 5 ).map( n => `${n}` ), WaveOnAStringFluent.unitCmStringProperty, combineOptions<RulerNodeOptions>( {
       tandem: verticalRulerTandem,
       accessibleName: WaveOnAStringFluent.a11y.verticalRuler.accessibleNameStringProperty,
       accessibleHelpText: WaveOnAStringFluent.a11y.verticalRuler.accessibleHelpTextStringProperty
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
-
-    const hRulerDragBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
-      return visibleBounds.withOffsets(
-        horizontalRulerNode.width - RULER_MIN_VISIBLE_PX,
-        0,
-        -RULER_MIN_VISIBLE_PX,
-        -horizontalRulerNode.height
-      );
-    } );
-    const vRulerDragBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
-      return visibleBounds.withOffsets(
-        0,
-        -RULER_MIN_VISIBLE_PX,
-        -verticalRulerNode.width,
-        -RULER_MIN_VISIBLE_PX + verticalRulerNode.height
-      );
-    } );
-
-    // Clamp ruler positions when bounds change
-    hRulerDragBoundsProperty.link( dragBounds => {
-      model.horizontalRulerPositionProperty.value = dragBounds.closestPointTo( model.horizontalRulerPositionProperty.value );
-    } );
-    vRulerDragBoundsProperty.link( dragBounds => {
-      model.verticalRulerPositionProperty.value = dragBounds.closestPointTo( model.verticalRulerPositionProperty.value );
-    } );
-
-    horizontalRulerNode.addInputListener( new SoundKeyboardDragListener( {
-      tandem: horizontalRulerTandem.createTandem( 'keyboardDragListener' ),
-      dragSpeed: 300,
-      shiftDragSpeed: 20,
-      positionProperty: model.horizontalRulerPositionProperty,
-      dragBoundsProperty: hRulerDragBoundsProperty
-    } ) );
-
-    verticalRulerNode.addInputListener( new SoundKeyboardDragListener( {
-      tandem: verticalRulerTandem.createTandem( 'keyboardDragListener' ),
-      dragSpeed: 300,
-      shiftDragSpeed: 20,
-      positionProperty: model.verticalRulerPositionProperty,
-      dragBoundsProperty: vRulerDragBoundsProperty
-    } ) );
 
     const rulersNode = new Node( {
       children: [
@@ -150,38 +106,76 @@ class WOASScreenView extends ScreenView {
       visibleProperty: model.rulersVisibleProperty
     } );
 
+    // Ruler input handling
+    {
+      // Drag bounds
+      const hRulerDragBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
+        return visibleBounds.withOffsets(
+          horizontalRulerNode.width - RULER_MIN_VISIBLE_PX,
+          0,
+          -RULER_MIN_VISIBLE_PX,
+          -horizontalRulerNode.height
+        );
+      } );
+      const vRulerDragBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
+        return visibleBounds.withOffsets(
+          0,
+          -RULER_MIN_VISIBLE_PX,
+          -verticalRulerNode.width,
+          -RULER_MIN_VISIBLE_PX + verticalRulerNode.height
+        );
+      } );
 
-    model.horizontalRulerPositionProperty.link( position => {
-      horizontalRulerNode.translation = position;
-    } );
-    model.verticalRulerPositionProperty.link( position => {
-      verticalRulerNode.translation = position;
-    } );
+      // Clamp ruler positions when bounds change
+      hRulerDragBoundsProperty.link( dragBounds => {
+        model.horizontalRulerPositionProperty.value = dragBounds.closestPointTo( model.horizontalRulerPositionProperty.value );
+      } );
+      vRulerDragBoundsProperty.link( dragBounds => {
+        model.verticalRulerPositionProperty.value = dragBounds.closestPointTo( model.verticalRulerPositionProperty.value );
+      } );
 
-    horizontalRulerNode.addInputListener( new SoundDragListener( {
-      tandem: horizontalRulerTandem.createTandem( 'dragListener' ),
-      positionProperty: model.horizontalRulerPositionProperty,
-      dragBoundsProperty: hRulerDragBoundsProperty
-    } ) );
+      model.horizontalRulerPositionProperty.link( position => {
+        horizontalRulerNode.translation = position;
+      } );
+      model.verticalRulerPositionProperty.link( position => {
+        verticalRulerNode.translation = position;
+      } );
 
-    verticalRulerNode.addInputListener( new SoundDragListener( {
-      tandem: verticalRulerTandem.createTandem( 'dragListener' ),
-      positionProperty: model.verticalRulerPositionProperty,
-      dragBoundsProperty: vRulerDragBoundsProperty
-    } ) );
+      // Keyboard input
+      horizontalRulerNode.addInputListener( new SoundKeyboardDragListener( {
+        tandem: horizontalRulerTandem.createTandem( 'keyboardDragListener' ),
+        dragSpeed: 300,
+        shiftDragSpeed: 20,
+        positionProperty: model.horizontalRulerPositionProperty,
+        dragBoundsProperty: hRulerDragBoundsProperty
+      } ) );
+      verticalRulerNode.addInputListener( new SoundKeyboardDragListener( {
+        tandem: verticalRulerTandem.createTandem( 'keyboardDragListener' ),
+        dragSpeed: 300,
+        shiftDragSpeed: 20,
+        positionProperty: model.verticalRulerPositionProperty,
+        dragBoundsProperty: vRulerDragBoundsProperty
+      } ) );
 
-    const radioPanelOptions = {
-      fill: WOASColors.panelBackgroundColorProperty,
-      cornerRadius: 5,
-      xMargin: 7,
-      yMargin: 7,
-      lineWidth: 2 / 3
-    };
+      // Pointer input
+      horizontalRulerNode.addInputListener( new SoundDragListener( {
+        tandem: horizontalRulerTandem.createTandem( 'dragListener' ),
+        positionProperty: model.horizontalRulerPositionProperty,
+        dragBoundsProperty: hRulerDragBoundsProperty
+      } ) );
+      verticalRulerNode.addInputListener( new SoundDragListener( {
+        tandem: verticalRulerTandem.createTandem( 'dragListener' ),
+        positionProperty: model.verticalRulerPositionProperty,
+        dragBoundsProperty: vRulerDragBoundsProperty
+      } ) );
+    }
 
+    // The string itself
     const stringNode = new StringNode( model, this.frameEmitter, modelViewTransform, {
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
+    // Dashed center line behind the string
     const centerLine = new Line(
       modelViewTransform.modelToViewX( 0 ),
       modelViewTransform.modelToViewY( 0 ),
@@ -192,6 +186,7 @@ class WOASScreenView extends ScreenView {
         lineWidth: 2
       } );
 
+    // The left-hand-side StartNode (wrench, oscillator, or pulse generator)
     const startNode = new StartNode( model, this.frameEmitter, {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_ORIGIN_X,
@@ -200,6 +195,7 @@ class WOASScreenView extends ScreenView {
       phetioVisiblePropertyInstrumented: false
     } );
 
+    // The right-hand-size EndNode (clamp, loose end pole, or no end window)
     const endNode = new EndNode( model, this.frameEmitter, {
       scale: SCALE_FROM_ORIGINAL,
       x: VIEW_END_X,
@@ -207,6 +203,7 @@ class WOASScreenView extends ScreenView {
       visiblePropertyOptions: { phetioReadOnly: true }
     } );
 
+    // We need to extract the window image so it can be layered separately from the EndNode (for in front and behind the string)
     const windowImage = new Node( {
       children: [ new Image( windowFront_png, {
         left: windowXOffset - 4 + windowShift,
@@ -228,7 +225,16 @@ class WOASScreenView extends ScreenView {
     } );
     stopwatchNode.touchArea = stopwatchNode.localBounds.dilated( 5 );
 
+    // The control panel with the wave property sliders and measurement tool checkboxes
     const bottomControlPanel = new BottomControlPanel( model, tandem.createTandem( 'controlPanel' ) );
+
+    const radioPanelOptions = {
+      fill: WOASColors.panelBackgroundColorProperty,
+      cornerRadius: 5,
+      xMargin: 7,
+      yMargin: 7,
+      lineWidth: 2 / 3
+    };
 
     const modePanel = new Panel( new WOASRadioButtonGroup( model.waveModeProperty, tandem.createTandem( 'waveModeRadioButtonGroup' ), {
       radio: [
@@ -369,6 +375,7 @@ class WOASScreenView extends ScreenView {
       timeControlProxy.centerY = this.layoutBounds.height - 175;
     } );
 
+    // A11y content for measurement tools (header, and content underneath)
     const playAreaActiveMeasurementToolsNode = new Node( {
       children: [],
       accessibleHeading: WaveOnAStringFluent.a11y.headings.playArea.activeMeasurementToolsStringProperty,
@@ -388,6 +395,7 @@ class WOASScreenView extends ScreenView {
       ] )
     } );
 
+    // A11y content for string and wave properties (header, and content underneath)
     const playAreaWaveAndStringPropertiesNode = new Node( {
       children: [],
       accessibleHeading: WaveOnAStringFluent.a11y.headings.playArea.waveAndStringPropertiesStringProperty,
@@ -402,6 +410,7 @@ class WOASScreenView extends ScreenView {
       ]
     } );
 
+    // A11y content for measurement tools in the control area (header, and content underneath)
     const controlAreaMeasurementToolsNode = new Node( {
       children: [],
       accessibleHeading: WaveOnAStringFluent.a11y.headings.controlArea.measurementToolsStringProperty,
