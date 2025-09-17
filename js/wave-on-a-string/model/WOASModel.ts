@@ -375,7 +375,6 @@ export default class WOASModel extends PhetioObject {
     this.beta = b * dt / 2;
     this.alpha = v * dt / dx;
 
-    // TODO: How do we use nextLeftYProperty, instead of this? What does this do? https://github.com/phetsims/wave-on-a-string/issues/174
     this.yNext[ 0 ] = this.yNow[ 0 ];
 
     // Handle end type (particularly for if we SWITCHED to a different end type since the last evolve).
@@ -412,7 +411,6 @@ export default class WOASModel extends PhetioObject {
     this.yNext = oldArray;
 
     // restore the old values for the very last point for every array (potentially not needed for a few?)
-    // TODO: Is this actually used? https://github.com/phetsims/wave-on-a-string/issues/174
     this.yNext[ LAST_INDEX ] = oldNext;
 
     switch( this.stringEndTypeProperty.value ) {
