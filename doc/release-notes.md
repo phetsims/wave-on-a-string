@@ -12,21 +12,28 @@ Instructions:
 For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/blob/main/doc/release-notes.md
 -->
 
-<!-- 
-## {{VERSION}} ({{PUBLICATION_DATE}})
+## 1.2.0 ({{PUBLICATION_DATE}})
 
 ### New Features
-* Describe a new feature.
-* 
+
+- UI Sound
+- Core Description
+- Interactive Highlights
+- Alternative Input (keyboard navigation, etc.)
+- Dynamic Locale
+- PhET-iO Support
 
 ### Bug Fixes
-* Describe a bug fix.
-* 
+
+- Fixed bugs related to draggable objects able to leave the sim bounds
+- Fix color contrast: <https://github.com/phetsims/wave-on-a-string/issues/151>
 
 ### Other Changes
-* Describe a change.
-* ⚠️ Use this icon for a change that is breaking, removes a feature, etc. 
-*
--->
 
-## 1.0 ({{PUBLICATION_DATE}})
+- User suggestion: Damping control precision increased <https://github.com/phetsims/wave-on-a-string/issues/116>
+- Changed button icon and moved Restart button
+- Added keyboard shortcut for restart button
+- Converted to TypeScript
+- Updated dependencies
+- Added documentation (model.md, implementation-notes.md, release-notes.md)
+
