@@ -9,7 +9,6 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
-import Property from '../../../../axon/js/Property.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { rangeInclusive } from '../../../../dot/js/util/rangeInclusive.js';
@@ -40,7 +39,7 @@ import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import { WOASEndType } from '../model/WOASEndType.js';
 import { WOASMode } from '../model/WOASMode.js';
 import type WOASModel from '../model/WOASModel.js';
-import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y, windowScale, windowShift, windowXOffset } from '../WOASConstants.js';
+import { MODEL_UNITS_PER_CM, MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS, SCALE_FROM_ORIGINAL, VIEW_END_X, VIEW_ORIGIN_X, VIEW_ORIGIN_Y, windowScale, windowShift, windowXOffset, RULER_MIN_VISIBLE_PX } from '../WOASConstants.js';
 import BottomControlPanel from './BottomControlPanel.js';
 import EndNode from './EndNode.js';
 import ReferenceLine from './ReferenceLine.js';
@@ -101,18 +100,45 @@ class WOASScreenView extends ScreenView {
     }, rulerOptions ) );
     verticalRulerNode.rotate( -Math.PI / 2 );
 
+    const hRulerDragBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
+      return visibleBounds.withOffsets(
+        horizontalRulerNode.width - RULER_MIN_VISIBLE_PX,
+        0,
+        -RULER_MIN_VISIBLE_PX,
+        -horizontalRulerNode.height
+      );
+    } );
+    const vRulerDragBoundsProperty = new DerivedProperty( [ this.visibleBoundsProperty ], visibleBounds => {
+      return visibleBounds.withOffsets(
+        0,
+        -RULER_MIN_VISIBLE_PX,
+        -verticalRulerNode.width,
+        -RULER_MIN_VISIBLE_PX + verticalRulerNode.height
+      );
+    } );
+
+    // Clamp ruler positions when bounds change
+    hRulerDragBoundsProperty.link( dragBounds => {
+      model.horizontalRulerPositionProperty.value = dragBounds.closestPointTo( model.horizontalRulerPositionProperty.value );
+    } );
+    vRulerDragBoundsProperty.link( dragBounds => {
+      model.verticalRulerPositionProperty.value = dragBounds.closestPointTo( model.verticalRulerPositionProperty.value );
+    } );
+
     horizontalRulerNode.addInputListener( new SoundKeyboardDragListener( {
       tandem: horizontalRulerTandem.createTandem( 'keyboardDragListener' ),
       dragSpeed: 300,
       shiftDragSpeed: 20,
-      positionProperty: model.horizontalRulerPositionProperty
+      positionProperty: model.horizontalRulerPositionProperty,
+      dragBoundsProperty: hRulerDragBoundsProperty
     } ) );
 
     verticalRulerNode.addInputListener( new SoundKeyboardDragListener( {
       tandem: verticalRulerTandem.createTandem( 'keyboardDragListener' ),
       dragSpeed: 300,
       shiftDragSpeed: 20,
-      positionProperty: model.verticalRulerPositionProperty
+      positionProperty: model.verticalRulerPositionProperty,
+      dragBoundsProperty: vRulerDragBoundsProperty
     } ) );
 
     const rulersNode = new Node( {
@@ -135,13 +161,13 @@ class WOASScreenView extends ScreenView {
     horizontalRulerNode.addInputListener( new SoundDragListener( {
       tandem: horizontalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.horizontalRulerPositionProperty,
-      dragBoundsProperty: new Property( this.layoutBounds.dilated( 30 ).shiftedX( -this.layoutBounds.width / 2 ).dilatedX( this.layoutBounds.width * 0.4 ) )
+      dragBoundsProperty: hRulerDragBoundsProperty
     } ) );
 
     verticalRulerNode.addInputListener( new SoundDragListener( {
       tandem: verticalRulerTandem.createTandem( 'dragListener' ),
       positionProperty: model.verticalRulerPositionProperty,
-      dragBoundsProperty: new Property( this.layoutBounds.withMaxX( this.layoutBounds.maxX - 50 ).withMaxY( this.layoutBounds.maxY * 1.8 ) )
+      dragBoundsProperty: vRulerDragBoundsProperty
     } ) );
 
     const radioPanelOptions = {

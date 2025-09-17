@@ -22,6 +22,9 @@ export const MODEL_UNITS_PER_GAP = 10;
 export const SCALE_FROM_ORIGINAL = 1.25;
 export const VIEW_END_X = VIEW_ORIGIN_X + SCALE_FROM_ORIGINAL * ( ( NUMBER_OF_BEADS - 1 ) * MODEL_UNITS_PER_GAP );
 
+// Minimum portion of a ruler that must remain visible inside the view (in pixels)
+export const RULER_MIN_VISIBLE_PX = 120;
+
 export const NORMAL_FONT = new PhetFont( 16 );
 export const HEADER_FONT = new PhetFont( {
   size: 16,
