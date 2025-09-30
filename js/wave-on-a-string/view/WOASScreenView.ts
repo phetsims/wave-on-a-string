@@ -334,7 +334,7 @@ class WOASScreenView extends ScreenView {
       return new Bounds2(
         this.layoutBounds.left + 30 - this.layoutBounds.width,
         upper + 10,
-        this.layoutBounds.right - 30 + this.layoutBounds.width,
+        this.layoutBounds.right - 10 - this.layoutBounds.width,
         lower - 10
       );
     } );
