@@ -181,7 +181,7 @@ class WOASScreenView extends ScreenView {
       modelViewTransform.modelToViewY( 0 ),
       modelViewTransform.modelToViewX( MODEL_UNITS_PER_GAP * ( NUMBER_OF_BEADS - 1 ) ),
       modelViewTransform.modelToViewY( 0 ), {
-        stroke: '#FFA91D',
+        stroke: '#6c4a1d',
         lineDash: [ 8, 5 ],
         lineWidth: 2
       } );
