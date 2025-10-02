@@ -63,7 +63,8 @@ class WOASNumberControl extends NumberControl {
 
         // thumbSize: new Dimension2( 22, 38 ),
         thumbFill: WOASColors.sliderThumbFillProperty,
-        thumbFillHighlighted: WOASColors.sliderThumbHighlightedFillProperty
+        thumbFillHighlighted: WOASColors.sliderThumbHighlightedFillProperty,
+        thumbTouchAreaYDilation: 3
       },
 
       numberDisplayOptions: {
