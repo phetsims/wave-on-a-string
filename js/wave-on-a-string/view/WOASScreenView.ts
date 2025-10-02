@@ -358,13 +358,11 @@ class WOASScreenView extends ScreenView {
       timeSpeedProperty: model.timeSpeedProperty,
       playPauseStepButtonOptions: {
         playPauseButtonOptions: {
-          scaleFactorWhenNotPlaying: 1.25,
-          touchAreaDilation: 12
+          scaleFactorWhenNotPlaying: 1.25
         },
 
         stepForwardButtonOptions: {
-          listener: model.manualStep.bind( model ),
-          touchAreaDilation: 12
+          listener: model.manualStep.bind( model )
         }
       },
 
