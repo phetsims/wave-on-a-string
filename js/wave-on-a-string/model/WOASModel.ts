@@ -191,7 +191,7 @@ export default class WOASModel extends PhetioObject {
     this.dampingProperty = new NumberProperty( 0.2, {
       range: new Range( 0, 1 ),
       tandem: tandem.createTandem( 'dampingProperty' ),
-      phetioDocumentation: 'The relative amount of damping (percentage) for the string',
+      phetioDocumentation: 'The relative amount of damping for the string',
       phetioFeatured: true
     } );
 
