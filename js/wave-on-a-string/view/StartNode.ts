@@ -116,15 +116,7 @@ export default class StartNode extends Node {
 
     model.isStringStillProperty.lazyLink( isStill => {
       if ( isStill ) {
-        if ( model.waveModeProperty.value === WOASMode.MANUAL ) {
-          this.addAccessibleContextResponse( WaveOnAStringFluent.a11y.string.stillContextResponseStringProperty.value );
-        }
-        else if ( model.waveModeProperty.value === WOASMode.PULSE ) {
-          this.addAccessibleContextResponse( WaveOnAStringFluent.a11y.string.stillContextResponseStringProperty.value );
-        }
-        else {
-          // nothing desired for oscillation mode? https://github.com/phetsims/wave-on-a-string/issues/163#issuecomment-3075168872
-        }
+        this.addAccessibleContextResponse( WaveOnAStringFluent.a11y.string.stillContextResponseStringProperty.value );
       }
     } );
 
