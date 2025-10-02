@@ -21,7 +21,7 @@ simLauncher.launch( () => {
     new WOASScreen( Tandem.ROOT.createTandem( 'waveOnAStringScreen' ) )
   ], {
     credits: {
-      leadDesign: 'Michael Dubson, Ariel Paul',
+      leadDesign: 'Michael Dubson, Ariel Paul, Brett Fiedler',
       softwareDevelopment: 'Jonathan Olson, Michael Dubson',
       team: 'Trish Loeblein, Ariel Paul, Kathy Perkins, Amy Rouinfar',
       graphicArts: 'Sharon Siman-Tov',
