@@ -199,7 +199,7 @@
     },
     "pulseGenerator": {
       "accessibleName": {
-        "value": "Pulse Generator"
+        "value": "Generate Triangular Pulse"
       },
       "accessibleHelpText": {
         "value": "Create a single triangular wave pulse along the string."

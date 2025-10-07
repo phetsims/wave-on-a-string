@@ -132,7 +132,7 @@ a11y:
     accessibleName:     Wrench
     accessibleHelpText: Move the wrench up and down to drag the string and make a wave.
   pulseGenerator:
-    accessibleName:     Pulse Generator
+    accessibleName:     Generate Triangular Pulse
     accessibleHelpText: Create a single triangular wave pulse along the string.
   restartButton:
     accessibleHelpText: Reset string position to still and flat.
