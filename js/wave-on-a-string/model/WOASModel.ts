@@ -36,6 +36,7 @@ import { linear } from '../../../../dot/js/util/linear.js';
 import { centimetersUnit } from '../../../../scenery-phet/js/units/centimetersUnit.js';
 import { hertzUnit } from '../../../../scenery-phet/js/units/hertzUnit.js';
 import { secondsUnit } from '../../../../scenery-phet/js/units/secondsUnit.js';
+import phetioStateSetEmitter from '../../../../tandem/js/phetioStateSetEmitter.js';
 
 // constants
 const LAST_INDEX = NUMBER_OF_BEADS - 1;
@@ -337,6 +338,11 @@ export default class WOASModel extends PhetioObject {
       if ( endType === WOASEndType.FIXED_END ) {
         this.zeroOutEndPoint();
       }
+    } );
+
+    // On state set, re-enable the arrows, see https://github.com/phetsims/wave-on-a-string/issues/222
+    phetioStateSetEmitter.addListener( () => {
+      this.wrenchArrowsVisibleProperty.value = true;
     } );
   }
 
