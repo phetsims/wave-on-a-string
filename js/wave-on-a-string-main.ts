@@ -25,6 +25,7 @@ simLauncher.launch( () => {
       softwareDevelopment: 'Jonathan Olson, Michael Dubson',
       team: 'Trish Loeblein, Kathy Perkins, Amy Rouinfar',
       graphicArts: 'Sharon Siman-Tov',
+      qualityAssurance: 'Matthew Moore, Elise Morgan, Nancy Salpepi, Oliver Orejola, Valentina Pérez, Kathryn Woessner',
       thanks: 'Thanks to Mobile Learner Labs for working with the PhET development team ' +
               'to convert this simulation to HTML5.'
     }
