@@ -1,5 +1,5 @@
 {
-  "comment": "# wave-on-a-string 1.2.0-rc.2 Fri Sep 26 2025 10:44:04 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# wave-on-a-string 1.2.0-rc.3 Thu Oct 09 2025 09:35:48 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "1a4637cfff70e7e8b0844dc43848a86ae89b4cf5",
     "branch": "HEAD"
@@ -97,7 +97,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "f89db064338dec9aff08a5160c4419180cf43adf",
+    "sha": "920ee479187e0881ad7c2a3e488e1ae8ae018530",
     "branch": "1.2"
   }
 }
