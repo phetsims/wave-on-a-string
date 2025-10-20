@@ -92,6 +92,7 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
       dragSpeed: 300,
       shiftDragSpeed: 20,
       positionProperty: model.referenceLinePositionProperty,
+      dragBoundsProperty: dragBoundsProperty,
       end: alertDisplacement
     } ) );
 
