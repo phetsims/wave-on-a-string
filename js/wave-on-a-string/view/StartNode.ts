@@ -114,9 +114,14 @@ export default class StartNode extends Node {
 
     pistonBox.addChild( pulseButton );
 
+    let lastNotifiedStillTime = 0;
     model.isStringStillProperty.lazyLink( isStill => {
       if ( isStill ) {
-        this.addAccessibleContextResponse( WaveOnAStringFluent.a11y.string.stillContextResponseStringProperty.value );
+        // Two-second delay between still notifications, see https://github.com/phetsims/wave-on-a-string/issues/225#issuecomment-3427348488
+        if ( Date.now() - lastNotifiedStillTime > 2000 ) {
+          this.addAccessibleContextResponse( WaveOnAStringFluent.a11y.string.stillContextResponseStringProperty.value );
+          lastNotifiedStillTime = Date.now();
+        }
       }
     } );
 
