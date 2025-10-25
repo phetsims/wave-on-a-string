@@ -465,12 +465,12 @@ class WOASScreenView extends ScreenView {
     ];
 
     this.pdomPlayAreaNode.pdomOrder = [
+      waveGenerationParagraphsNode,
       modePanel,
       endTypePanel,
       startNode.wrench,
       startNode.pulseButton,
       restartButton,
-      waveGenerationParagraphsNode,
       timeControlNode,
       playAreaActiveMeasurementToolsNode,
       playAreaWaveAndStringPropertiesNode
