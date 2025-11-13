@@ -12,7 +12,7 @@ tension:                           Tension
 low:                               Low
 high:                              High
 manual:                            Manual
-oscillate:                         Oscillate
+oscillate:                         Oscillation
 pulse:                             Pulse
 restart:                           Restart String
 fixedEnd:                          Fixed End
