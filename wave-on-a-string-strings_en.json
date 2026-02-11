@@ -287,13 +287,6 @@
           "value": "Reference line { $isVisible ->\n  [true] added.\n  *[false] removed.\n}"
         }
       }
-    },
-    "keyboardHelpDialog": {
-      "restartString": {
-        "description": {
-          "value": "Reset String with { $altOrOption } plus Shift plus R."
-        }
-      }
     }
   }
 }

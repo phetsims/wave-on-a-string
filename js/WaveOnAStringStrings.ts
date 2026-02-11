@@ -152,11 +152,6 @@ type StringsType = {
         'accessibleHelpTextStringProperty': LocalizedStringProperty;
         'accessibleContextResponseStringProperty': LocalizedStringProperty;
       }
-    };
-    'keyboardHelpDialog': {
-      'restartString': {
-        'descriptionStringProperty': LocalizedStringProperty;
-      }
     }
   }
 };

@@ -9,7 +9,6 @@
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import RestartUndoButton, { RestartUndoButtonOptions } from '../../../../scenery-phet/js/buttons/RestartUndoButton.js';
-import TextKeyNode from '../../../../scenery-phet/js/keyboard/TextKeyNode.js';
 import HotkeyData from '../../../../scenery/js/input/HotkeyData.js';
 import KeyboardListener from '../../../../scenery/js/listeners/KeyboardListener.js';
 import waveOnAString from '../../waveOnAString.js';
@@ -41,9 +40,6 @@ export default class RestartButton extends RestartUndoButton {
   public static readonly RESTART_HOTKEY_DATA = new HotkeyData( {
     keys: [ 'alt+shift+r' ],
     keyboardHelpDialogLabelStringProperty: WaveOnAStringFluent.restartStringProperty,
-    keyboardHelpDialogPDOMLabelStringProperty: WaveOnAStringFluent.a11y.keyboardHelpDialog.restartString.description.createProperty( {
-      altOrOption: TextKeyNode.getAltKeyString()
-    } ),
     global: true,
     repoName: waveOnAString.name
   } );

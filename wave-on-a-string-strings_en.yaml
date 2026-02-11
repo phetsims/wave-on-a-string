@@ -178,6 +178,3 @@ a11y:
                                    [true] added.
                                    *[false] removed.
                                  }
-  keyboardHelpDialog:
-    restartString:
-      description: Reset String with { $altOrOption } plus Shift plus R.

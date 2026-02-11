@@ -100,7 +100,6 @@ addToMapIfDefined( 'a11y_visibilityControls_stopwatch_accessibleHelpText', 'a11y
 addToMapIfDefined( 'a11y_visibilityControls_stopwatch_accessibleContextResponse', 'a11y.visibilityControls.stopwatch.accessibleContextResponseStringProperty' );
 addToMapIfDefined( 'a11y_visibilityControls_referenceLine_accessibleHelpText', 'a11y.visibilityControls.referenceLine.accessibleHelpTextStringProperty' );
 addToMapIfDefined( 'a11y_visibilityControls_referenceLine_accessibleContextResponse', 'a11y.visibilityControls.referenceLine.accessibleContextResponseStringProperty' );
-addToMapIfDefined( 'a11y_keyboardHelpDialog_restartString_description', 'a11y.keyboardHelpDialog.restartString.descriptionStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -255,11 +254,6 @@ const WaveOnAStringFluent = {
       referenceLine: {
         accessibleHelpTextStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_visibilityControls_referenceLine_accessibleHelpText', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.referenceLine.accessibleHelpTextStringProperty' ) ),
         accessibleContextResponse: new FluentPattern<{ isVisible: 'true' | 'false' | TReadOnlyProperty<'true' | 'false'> }>( fluentSupport.bundleProperty, 'a11y_visibilityControls_referenceLine_accessibleContextResponse', _.get( WaveOnAStringStrings, 'a11y.visibilityControls.referenceLine.accessibleContextResponseStringProperty' ), [{"name":"isVisible","variants":["true","false"]}] )
-      }
-    },
-    keyboardHelpDialog: {
-      restartString: {
-        description: new FluentPattern<{ altOrOption: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_keyboardHelpDialog_restartString_description', _.get( WaveOnAStringStrings, 'a11y.keyboardHelpDialog.restartString.descriptionStringProperty' ), [{"name":"altOrOption"}] )
       }
     }
   }
