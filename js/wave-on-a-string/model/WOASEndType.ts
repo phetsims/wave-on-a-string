@@ -3,7 +3,7 @@
 /**
  * Enumeration for the end type of the wave on a string simulation.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';

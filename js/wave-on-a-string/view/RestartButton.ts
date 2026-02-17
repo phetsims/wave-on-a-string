@@ -4,7 +4,7 @@
  * Restart button
  *
  * @author Anton Ulyanov (Mlearner)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';

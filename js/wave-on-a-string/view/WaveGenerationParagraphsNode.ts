@@ -3,7 +3,7 @@
 /**
  * Paragraphs (and header) describing the wave generation of the play area
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import waveOnAString from '../../waveOnAString.js';

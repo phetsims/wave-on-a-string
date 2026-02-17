@@ -4,7 +4,7 @@
  * Control panel at the bottom of the screen, with many controls in it
  *
  * @author Anton Ulyanov (Mlearner)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import RangedDynamicProperty from '../../../../axon/js/RangedDynamicProperty.js';

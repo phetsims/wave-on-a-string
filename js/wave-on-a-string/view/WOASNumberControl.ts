@@ -3,7 +3,7 @@
 /**
  * A customized-appearance NumberControl for Wave on a String
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import TRangedProperty from '../../../../axon/js/TRangedProperty.js';

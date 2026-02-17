@@ -3,7 +3,7 @@
 /**
  * Colors for the WOAS simulation.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import Color from '../../../../scenery/js/util/Color.js';

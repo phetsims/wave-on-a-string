@@ -3,7 +3,7 @@
 /**
  * Wrench on the "start"/left side of the simulation
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import MappedProperty from '../../../../axon/js/MappedProperty.js';

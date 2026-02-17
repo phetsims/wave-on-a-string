@@ -4,7 +4,7 @@
  * Control WOASRadioButtonGroup view
  *
  * @author Anton Ulyanov (Mlearner)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import PhetioProperty from '../../../../axon/js/PhetioProperty.js';

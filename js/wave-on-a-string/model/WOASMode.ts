@@ -3,7 +3,7 @@
 /**
  * Determines what user-selectable mode the Wave on a String simulation is in.
  *
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';

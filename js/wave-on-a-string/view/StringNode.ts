@@ -4,7 +4,7 @@
  * View for the string
  *
  * @author Anton Ulyanov (Mlearner)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';

@@ -4,7 +4,7 @@
  * View of the right-side end
  *
  * @author Anton Ulyanov (Mlearner)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import Image from '../../../../scenery/js/nodes/Image.js';

@@ -4,7 +4,7 @@
  * Main entry point for the 'Gravity Force Lab' sim.
  *
  * @author Anton Ulyanov (Mlearner)
- * @author Jonathan Olson <jonathan.olson@colorado.edu>
+ * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
 import Sim from '../../joist/js/Sim.js';
