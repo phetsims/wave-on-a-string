@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "perennial-alias": {
-    "sha": "eeff2e93cb68bde6c045822ad71aab8783315356",
+    "sha": "aaee1d324b3aec4055bad4b18e7bb52fdbe5237c",
     "branch": "HEAD"
   },
   "phet-core": {
@@ -97,7 +97,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "003683d5814199ee16e216a50cf3c6fbcdc0de13",
+    "sha": "c4e2b5ade03dc9a9aeea2510985fda80079c9d48",
     "branch": "1.2"
   }
 }
