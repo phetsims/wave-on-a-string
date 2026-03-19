@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "a05339804e26b5abf4e6e9fd9540daa5939cd6f2",
+    "sha": "e21c07db349d193884c86eca68b99bda7ca2c82f",
     "branch": "HEAD"
   },
   "kite": {
@@ -97,7 +97,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "7f4de02cf70bb76e5e627f60f393fe986fb1ca45",
+    "sha": "0f43d00604354376cefef111f71f8f96e406b6a2",
     "branch": "1.2"
   }
 }
