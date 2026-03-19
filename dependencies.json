@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "4892f9db4df6b020c3a52d135a9eabc54adc1282",
+    "sha": "dcfad740c78d49466efabf9f1c89347b65b39e90",
     "branch": "HEAD"
   },
   "chipper": {
@@ -97,7 +97,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "0f43d00604354376cefef111f71f8f96e406b6a2",
+    "sha": "b8b517e86ac56bc52b545f8991444ab31788e2c3",
     "branch": "1.2"
   }
 }
