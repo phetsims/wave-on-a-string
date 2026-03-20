@@ -14,7 +14,6 @@ import clamp_png from '../../../images/clamp_png.js';
 import ringBack_png from '../../../images/ringBack_png.js';
 import ringFront_png from '../../../images/ringFront_png.js';
 import windowBack_png from '../../../images/windowBack_png.js';
-import waveOnAString from '../../waveOnAString.js';
 import type WOASModel from '../model/WOASModel.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -83,5 +82,3 @@ export default class EndNode extends Node {
     } );
   }
 }
-
-waveOnAString.register( 'EndNode', EndNode );

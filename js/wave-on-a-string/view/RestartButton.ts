@@ -44,5 +44,3 @@ export default class RestartButton extends RestartUndoButton {
     repoName: waveOnAString.name
   } );
 }
-
-waveOnAString.register( 'RestartButton', RestartButton );

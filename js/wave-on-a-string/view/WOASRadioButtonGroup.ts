@@ -15,7 +15,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import type { AquaRadioButtonGroupItem } from '../../../../sun/js/AquaRadioButtonGroup.js';
 import VerticalAquaRadioButtonGroup, { VerticalAquaRadioButtonGroupOptions } from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import waveOnAString from '../../waveOnAString.js';
 import { NORMAL_FONT } from '../WOASConstants.js';
 
 type SelfOptions<T> = {
@@ -57,5 +56,3 @@ export default class WOASRadioButtonGroup<T> extends VerticalAquaRadioButtonGrou
     super( property, group, options );
   }
 }
-
-waveOnAString.register( 'WOASRadioButtonGroup', WOASRadioButtonGroup );

@@ -20,7 +20,6 @@ import Line from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
 import { dilatedReferenceLineTouchArea, MODEL_UNITS_PER_CM, referenceLineBlockGradient } from '../WOASConstants.js';
@@ -101,5 +100,3 @@ export default class ReferenceLine extends InteractiveHighlighting( Node ) {
     } );
   }
 }
-
-waveOnAString.register( 'ReferenceLine', ReferenceLine );

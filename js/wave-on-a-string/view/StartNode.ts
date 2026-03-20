@@ -22,7 +22,6 @@ import Color from '../../../../scenery/js/util/Color.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
-import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import { WOASMode } from '../model/WOASMode.js';
 import WrenchNode from './WrenchNode.js';
@@ -193,5 +192,3 @@ export default class StartNode extends Node {
     } );
   }
 }
-
-waveOnAString.register( 'StartNode', StartNode );

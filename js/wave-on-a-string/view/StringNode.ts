@@ -15,7 +15,6 @@ import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import waveOnAString from '../../waveOnAString.js';
 import type WOASModel from '../model/WOASModel.js';
 import { MODEL_UNITS_PER_GAP, NUMBER_OF_BEADS } from '../WOASConstants.js';
 import WOASColors from './WOASColors.js';
@@ -132,5 +131,3 @@ export default class StringNode extends Node {
     } );
   }
 }
-
-waveOnAString.register( 'StringNode', StringNode );

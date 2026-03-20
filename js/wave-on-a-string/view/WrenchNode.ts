@@ -23,7 +23,6 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import wrench_png from '../../../images/wrench_png.js';
-import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
 import { dilatedTouchArea, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM } from '../WOASConstants.js';
@@ -129,5 +128,3 @@ export default class WrenchNode extends InteractiveHighlighting( Node ) {
     } );
   }
 }
-
-waveOnAString.register( 'WrenchNode', WrenchNode );

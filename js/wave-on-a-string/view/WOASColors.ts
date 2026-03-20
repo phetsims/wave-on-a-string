@@ -40,6 +40,4 @@ const WOASColors = {
   postInsideColorProperty: new ProfileColorProperty( waveOnAString, 'postInsideColor', { default: new Color( '#FFF' ) } )
 };
 
-waveOnAString.register( 'WOASColors', WOASColors );
-
 export default WOASColors;

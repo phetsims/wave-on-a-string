@@ -7,7 +7,6 @@
  */
 
 import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
-import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import WOASModel from '../model/WOASModel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
@@ -36,5 +35,3 @@ export default class WOASScreenSummaryContent extends ScreenSummaryContent {
     } );
   }
 }
-
-waveOnAString.register( 'WOASScreenSummaryContent', WOASScreenSummaryContent );

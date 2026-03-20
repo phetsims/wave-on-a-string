@@ -17,7 +17,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import type WOASModel from '../model/WOASModel.js';
 import WOASNumberControl from './WOASNumberControl.js';
@@ -238,5 +237,3 @@ export default class BottomControlPanel extends Panel {
     this.checkboxGroup = checkboxGroup;
   }
 }
-
-waveOnAString.register( 'BottomControlPanel', BottomControlPanel );

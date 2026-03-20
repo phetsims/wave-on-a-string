@@ -7,7 +7,6 @@
  */
 
 import Screen from '../../../../joist/js/Screen.js';
-import waveOnAString from '../../waveOnAString.js';
 import WOASModel from '../model/WOASModel.js';
 import WOASScreenView from './WOASScreenView.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -25,5 +24,3 @@ export default class WOASScreen extends Screen<WOASModel, WOASScreenView> {
       } );
   }
 }
-
-waveOnAString.register( 'WOASScreen', WOASScreen );

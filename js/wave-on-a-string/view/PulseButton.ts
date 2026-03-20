@@ -11,7 +11,6 @@ import Shape from '../../../../kite/js/Shape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RoundPushButton, { RoundPushButtonOptions } from '../../../../sun/js/buttons/RoundPushButton.js';
-import waveOnAString from '../../waveOnAString.js';
 import type WOASModel from '../model/WOASModel.js';
 import { WOASMode } from '../model/WOASMode.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -60,5 +59,3 @@ export default class PulseButton extends RoundPushButton {
     }, providedOptions ) );
   }
 }
-
-waveOnAString.register( 'PulseButton', PulseButton );

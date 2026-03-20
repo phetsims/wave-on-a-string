@@ -34,7 +34,6 @@ import MatrixBetweenProperty from '../../../../scenery/js/util/MatrixBetweenProp
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import windowFront_png from '../../../images/windowFront_png.js';
-import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import { WOASEndType } from '../model/WOASEndType.js';
 import { WOASMode } from '../model/WOASMode.js';
@@ -489,5 +488,4 @@ class WOASScreenView extends ScreenView {
   }
 }
 
-waveOnAString.register( 'WOASScreenView', WOASScreenView );
 export default WOASScreenView;

@@ -27,7 +27,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import Float64ArrayIO from '../../../../tandem/js/types/Float64ArrayIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import waveOnAString from '../../waveOnAString.js';
 import { WOASEndType } from './WOASEndType.js';
 import { WOASMode } from './WOASMode.js';
 import { FRAMES_PER_SECOND, MAX_START_AMPLITUDE_CM, MODEL_UNITS_PER_CM, NUMBER_OF_BEADS, FRAME_DURATION, VIEW_ORIGIN_X } from '../WOASConstants.js';
@@ -628,5 +627,3 @@ export default class WOASModel extends PhetioObject {
     }
   } );
 }
-
-waveOnAString.register( 'WOASModel', WOASModel );

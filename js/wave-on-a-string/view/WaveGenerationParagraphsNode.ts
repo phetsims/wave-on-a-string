@@ -6,7 +6,6 @@
  * @author Jonathan Olson (PhET Interactive Simulations)
  */
 
-import waveOnAString from '../../waveOnAString.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 import WOASModel from '../model/WOASModel.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
@@ -68,5 +67,3 @@ export default class WaveGenerationParagraphsNode extends Node {
     } );
   }
 }
-
-waveOnAString.register( 'WaveGenerationParagraphsNode', WaveGenerationParagraphsNode );

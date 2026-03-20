@@ -158,6 +158,4 @@ type StringsType = {
 
 const WaveOnAStringStrings = getStringModule( 'WAVE_ON_A_STRING' ) as StringsType;
 
-waveOnAString.register( 'WaveOnAStringStrings', WaveOnAStringStrings );
-
 export default WaveOnAStringStrings;

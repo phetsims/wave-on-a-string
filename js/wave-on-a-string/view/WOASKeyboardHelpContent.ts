@@ -13,7 +13,6 @@ import TimeControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboar
 import KeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSection.js';
 import KeyboardHelpSectionRow from '../../../../scenery-phet/js/keyboard/help/KeyboardHelpSectionRow.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import waveOnAString from '../../waveOnAString.js';
 import RestartButton from './RestartButton.js';
 import WaveOnAStringFluent from '../../WaveOnAStringFluent.js';
 
@@ -49,5 +48,3 @@ export default class WOASKeyboardHelpContent extends TwoColumnKeyboardHelpConten
     super( leftContent, rightContent );
   }
 }
-
-waveOnAString.register( 'WOASKeyboardHelpContent', WOASKeyboardHelpContent );
