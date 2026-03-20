@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "f85d2432a879d01970a58701767207d0ccce852a",
+    "sha": "444b7918dd513815728100f7eb04261263b2ec94",
     "branch": "HEAD"
   },
   "dot": {
@@ -97,7 +97,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "b8b517e86ac56bc52b545f8991444ab31788e2c3",
+    "sha": "0e7f4bbcf230a9e849471beb9634aa90cbee5e84",
     "branch": "1.2"
   }
 }
