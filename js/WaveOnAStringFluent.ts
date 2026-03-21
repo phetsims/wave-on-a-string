@@ -260,3 +260,5 @@ const WaveOnAStringFluent = {
 };
 
 export default WaveOnAStringFluent;
+
+waveOnAString.register('WaveOnAStringFluent', WaveOnAStringFluent);
