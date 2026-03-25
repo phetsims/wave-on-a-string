@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "5db566b56d5a1fc04d5a9f4069422acfe8c5ebda",
+    "sha": "20082b6744919e2f8a7fd7e92707fbbcc1e4bc5b",
     "branch": "HEAD"
   },
   "scenery-phet": {
@@ -97,7 +97,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "36954a9f24fdc2a950d0b8559a13c5e0289905ff",
+    "sha": "1200cf99f1b4ca52082068365de03552aa869cf8",
     "branch": "1.2"
   }
 }
