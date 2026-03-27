@@ -45,7 +45,7 @@
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
-    "sha": "f48259a1d221831e2175eb1b3af2fcc8413069b1",
+    "sha": "1757e7618de02361a120151249e5b4347761bcf7",
     "branch": "HEAD"
   },
   "phetcommon": {
@@ -97,7 +97,7 @@
     "branch": "HEAD"
   },
   "wave-on-a-string": {
-    "sha": "5fd679d9dfe4afb0610dd0c183659cf910d5ed2c",
+    "sha": "f5519b09cf2c30ea331a55c7c13738bb0676ccbd",
     "branch": "1.2"
   }
 }
