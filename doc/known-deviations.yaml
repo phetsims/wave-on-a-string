@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../design-lab/schemas/known-deviations.schema.json
+#
+# Spec statements the SHIPPED Wave on a String implementation is known to fail where the design is right and the
+# sim is wrong. Each statement still runs on every spec run: its failure is reported WAIVED rather than FAIL, and
+# its pass is reported as a stale waiver to remove. This file describes only the shipped implementation, so
+# design-lab/scripts/create-sandbox.ts scrubs it and a re-inferred implementation is held to the full spec.
+
+wave-on-a-string/specs/wave-modes.spec.ts:
+  - statement: A wrench is attached to the left end of the string in Manual mode, and it is the only mode that shows one
+    reason: >-
+      The shipped model keeps its bead displacements in view units (scene pixels, with y growing downward) rather
+      than the centimeters the design states, so a bead raised by the wrench reads as a large negative number
+      instead of a small positive one.
+  - statement: The pulse button lays one finite pulse on the string and leaves the generator back at rest
+    reason: >-
+      The shipped model keeps its bead displacements in view units rather than centimeters, so a 1.3 cm pulse
+      measures roughly 100 units tall and fails the "no taller than it was driven with" ceiling.
+  - statement: 'Changing Pulse Width mid-pulse leaves the pulse in progress alone: it rises and falls on the width it was fired with, and the next pulse takes the new width'
+    reason: >-
+      The shipped generator advances the pulse by a step computed from the current Pulse Width on every physics
+      step, so narrowing the width mid-pulse speeds up the pulse in progress, which ends early. The design is right:
+      a pulse should keep the width it was fired with.
+  - statement: 'The pulse is a straight-sided triangle: the left end rises and falls at a constant rate, peaking at the Amplitude halfway through'
+    reason: >-
+      The shipped generator reverses one physics step before the top of the pulse and steps down in the same frame,
+      so the pulse peaks just short of the Amplitude and its whole descent runs two steps early. The design is
+      right: the drive should reach the full Amplitude at half the Pulse Width.
+
+wave-on-a-string/specs/wrench.spec.ts:
+  - statement: Holding an arrow key moves the wrench 7.5 cm per second, and 1.875 cm per second with Shift, with the left end following every frame
+    reason: >-
+      The shipped keyboard listener is set to those speeds, but the shipped model writes the string's left end back
+      over the wrench's drag target at the end of every animation frame, and one 60 Hz frame in six runs no 0.02 s
+      physics step to consume the target first. That frame's motion is lost, so a learner gets five sixths of the
+      speed: 6.25 cm/s and 1.5625 cm/s. The design is right: the left end should take up every frame of the glide.
+
+wave-on-a-string/specs/string-still.spec.ts:
+  - statement: Switching from Manual to Oscillate while the string is moving does not announce the string as still, because the oscillator drives it straight away
+    reason: >-
+      The shipped restart that accompanies a mode switch zeroes every bead and publishes the new shape at once, and
+      the shipped still tracker treats an exactly flat string as still on the spot. The still flag therefore flips
+      true for the one frame before the oscillator moves the left end, and the "String still." alert fires on that
+      flip. The design is right: a string the oscillator is already driving has not returned to stillness.
+
+design-lab/specs/joist/credits.spec.ts:
+  - statement: The About dialog credits exactly the people the design names, so a rewrite never drops, adds, or misspells a name
+    reason: >-
+      The design credits the people who worked on the rewrite (Sam Reid and Andy Sautins in software development,
+      Amanda McGarry on the team). The shipped legacy sim predates that work and keeps its original credits; only a
+      re-inferred implementation carries the new ones.
+
+design-lab/specs/joist/frame-rate.spec.ts:
+  - statement: The screen advances by the time that has passed, not by the number of frames that carried it, so a learner on a slower or faster display sees the same thing happen
+    reason: >-
+      The shipped model smooths the elapsed time it is given, letting each frame's duration differ from the last by
+      at most 30%, and keeps that smoothing in its PhET-iO state. A frame that suddenly takes longer is therefore cut
+      short and the sim time it carried is lost, so the smoothing's own bookkeeping, and after a longer interval the
+      wave's phase, depend on how the time was cut into frames. The design is right: the model should advance by
+      the time that has passed.

@@ -24,9 +24,10 @@ tension/damping change propagation, interference, and standing waves.
 
 ## Terminology, Units, and Symbols
 
-- y[i]: vertical displacement of bead i (model units).
+- y[i]: vertical displacement of bead i (centimeters).
 - i = 0...N-1: bead index from left (0) to right (N-1).
-- "Amplitude": centimeters at the left drive, mapped to model units internally.
+- "Amplitude": centimeters at the left drive. The model itself works in centimeters, so the amplitude is applied
+  directly with no internal unit conversion.
 - Frequency: hertz; Pulse width: seconds.
 - Tension and damping are unitless relative controls that scale speed / decay within the model.
 
@@ -46,14 +47,14 @@ Discretization overview:
 
 Notes:
 - With alpha = 1, c = 0 and the update reduces to a damped average of neighbors plus a contribution from the previous step.
-- Damping is effectively proportional to velocity; increasing the UI damping increases beta, reducing amplitude step-by-step.
-- Rendering interpolation: Between fixed physics updates, yDraw blends between yLast and yNow to provide smooth motion.
+- Damping is proportional to velocity; increasing the UI damping increases beta, reducing amplitude step-by-step.
+- Rendering interpolation: The update above is applied at fixed instants, but the string is drawn on every animation frame. Between updates, yDraw blends between yLast and yNow by how much of the interval has passed, so the motion is smooth at every speed rather than jumping from one update to the next.
 
 ### Driving the Left End (i = 0)
 
-- Wrench (manual): yNow[0] is set by the user; between model steps it is interpolated for smooth motion.
+- Wrench (manual): yNow[0] is set by the user, and the left end follows the wrench on every frame, between updates as well.
 - Oscillator: yNow[0] = A*sin(2*pi*f*t + phi) with adjustable frequency (f) and amplitude (A).
-- Pulse: a single triangular pulse at the left end with adjustable width; the drive rises then falls back to zero over the chosen duration.
+- Pulse: a single triangular pulse at the left end with adjustable width and amplitude; the drive rises linearly then falls linearly back to zero over the chosen duration. The pulse is a straight-sided triangle, not a smoothed or sinusoidal hump.
 
 ### Right End Boundary Conditions (i = N−1)
 
@@ -66,7 +67,7 @@ Notes:
 - 1D transverse motion only (no longitudinal motion, no gravity sag).
 - Uniform spacing and mass per bead; constant “effective” wave speed for given tension.
 - Simple linear damping (proportional to velocity) applied uniformly.
-- Fixed time step integration with per‑frame interpolation for smooth rendering.
+- The string update is applied at a fixed cadence, while the drive, the stopwatch and the drawn string follow continuous time on every frame, so motion is smooth in Normal speed and Slow Motion alike.
 - The left end is a prescribed displacement (Dirichlet) boundary y_0(t) set by the user mode (manual, oscillator, pulse).
 - The "no end" uses a first-order absorbing boundary approximation; small residual reflections depend on alpha and damping.
 
@@ -76,6 +77,8 @@ Notes:
 - Damping: increases amplitude decay rate and reduces the sharpness of reflections/standing waves.
 - Frequency/Amplitude (oscillator): set the sinusoidal drive at the left end.
 - Pulse width/Amplitude: set the duration and height of the finite pulse introduced at the left end.
+- Slow Motion: slows the drive, the stopwatch and the string together, so it changes only how fast the same wave is
+  seen, not its wavelength or the phase between beads.
 
 ## Observations and Learning Connections
 
